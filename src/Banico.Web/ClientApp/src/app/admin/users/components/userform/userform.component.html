@@ -1,0 +1,79 @@
+<h1>User</h1>
+
+<form [formGroup]="userForm" novalidate (ngSubmit)="save()">
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="FirstName">First Name</label>
+        <div class="col-md-10">
+            <input 
+                class="form-control" 
+                id="firstName" 
+                name="firstName"
+                type="text"
+                formControlName="firstName"
+                required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="LastName">Last Name</label>
+        <div class="col-md-10">
+            <input 
+                class="form-control" 
+                id="lastName" 
+                name="lastName"
+                type="text"
+                formControlName="lastName"
+                required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="Alias">Alias</label>
+        <div class="col-md-10">
+            <input 
+                class="form-control" 
+                id="alias" 
+                name="alias"
+                type="text"
+                formControlName="alias"
+                required />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Alias">Alias</label>
+            <div class="col-md-10">
+                <input 
+                    class="form-control" 
+                    id="alias" 
+                    name="alias"
+                    type="text"
+                    formControlName="alias"
+                    required />
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Email">Email</label>
+            <div class="col-md-10">
+                <input 
+                    class="form-control" 
+                    id="email" 
+                    name="email"
+                    type="text"
+                    formControlName="email"
+                    required />
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="form-group">
+        <label asp-for="ApplicationRoleId" class="control-label"></label>
+        <select asp-for="ApplicationRoleId" asp-items="@Model.ApplicationRoles" class="form-control">
+            <option>Please select</option>
+        </select>
+    </div>
+    -->
+    <div class="form-group row">
+        <button type="submit" class="btn btn-primary" (click)="save()" value="save">Save User</button>
+    </div>
+</form>

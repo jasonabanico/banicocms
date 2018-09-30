@@ -1,0 +1,36 @@
+<h1>
+    Roles
+</h1>
+
+<div class="btn-group">
+    <a href="/admin/roles/add" class="btn btn-primary">
+        <i class="glyphicon glyphicon-plus"></i> Add Role
+    </a>
+</div>
+<div class="top-buffer"></div>
+<table class="table table-bordered table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Users</th>                    
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let role of roles">
+            <td>{{role.RoleName}}</td>
+            <td>{{role.Description}}</td>  
+            <td>{{role.NumberOfUsers}}</td>                                              
+            <td>
+                <a href="/admin/roles/edit/{{role.id}}"
+                    class="btn btn-primary">
+                    <i class="glyphicon glyphicon-pencil"></i> Edit
+                </a>
+                <a href="/admin/roles/delete/{{role.id}}" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i> Delete
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>

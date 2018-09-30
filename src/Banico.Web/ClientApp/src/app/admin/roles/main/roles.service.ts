@@ -57,11 +57,9 @@ export class RolesService extends BaseService {
     }
 
     public addRole(
-        id: string,
         name: string
     ): Observable<boolean> {
         let body = JSON.stringify({ 
-            id,
             name
         });
         return this.http.post(this.baseUrl + "api/Roles/Add", body, this.jsonRequestOptions)
