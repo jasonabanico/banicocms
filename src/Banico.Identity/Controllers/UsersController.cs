@@ -40,7 +40,7 @@ namespace Banico.Web
         }
 
         [HttpGet]
-        public async Task<AppUser> GetUser(string id)
+        public async Task<AppUser> Get(string id)
         {
             if (!String.IsNullOrEmpty(id))
             {

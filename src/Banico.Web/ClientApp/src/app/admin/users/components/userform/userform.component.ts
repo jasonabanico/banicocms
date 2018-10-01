@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../../../entities/user';
 import { UsersService } from '../../main/users.service';
 
@@ -10,6 +10,7 @@ import { UsersService } from '../../main/users.service';
   styleUrls: []
 })
 export class UserFormComponent {
+  private sub: any;
   isSuccessful: boolean;
   isRequesting: boolean;
   errors: string;  
@@ -25,22 +26,39 @@ export class UserFormComponent {
   constructor(
     private usersService: UsersService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) { 
   }
 
-public save() {
-  this.isRequesting = true;
-  this.usersService.addUser(
-    this.userForm.value['firstName'],
-    this.userForm.value['lastName'],
-    this.userForm.value['alias'],
-    this.userForm.value['email']
-  )
-  .finally(() => this.isRequesting = false)
-  .subscribe(
-    result  => {
-      this.isSuccessful = true;
+  public ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      if (params['id']) {
+        var id = params['id'];
+        this.usersService.getUser(id)
+          .subscribe(user => {
+            this.setUser(user);
+          });
+      }
+    });
+  }
+
+  private setUser(user: User) {
+    this.user = user;
+  }
+
+  public save() {
+    this.isRequesting = true;
+    this.usersService.addUser(
+      this.userForm.value['firstName'],
+      this.userForm.value['lastName'],
+      this.userForm.value['alias'],
+      this.userForm.value['email']
+    )
+    .finally(() => this.isRequesting = false)
+    .subscribe(
+      result  => {
+        this.isSuccessful = true;
     },
     errors =>  this.errors = errors);
   }
