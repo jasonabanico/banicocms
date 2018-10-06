@@ -44,7 +44,12 @@ export class UserFormComponent {
   }
 
   private setUser(user: User) {
-    this.user = user;
+    this.userForm.patchValue({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      alias: user.alias,
+      email: user.email
+    });
   }
 
   public save() {

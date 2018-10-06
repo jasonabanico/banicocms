@@ -52,7 +52,7 @@ export class UsersService extends BaseService {
     }
 
     public getUser(id: string): Observable<User> {
-        return this.http.get<User>(this.baseUrl + "api/Users/Get", this.jsonAuthRequestOptions)
+        return this.http.get<User>(this.baseUrl + "api/Users/Get?id="+id, this.jsonAuthRequestOptions)
         .catch(this.handleError);
     }
 
