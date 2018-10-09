@@ -33,18 +33,18 @@ namespace Banico.Identity.Controllers
       // retrieve the user info
       //HttpContext.User
       var userId = _caller.Claims.Single(c => c.Type == "id");
-      var customer = await _appDbContext.Customers.Include(c => c.Identity).SingleAsync(c => c.Identity.Id == userId.Value);
+      // var customer = await _appDbContext.Customers.Include(c => c.Identity).SingleAsync(c => c.Identity.Id == userId.Value);
       
       return new OkObjectResult(new
       {
-        Message = "This is secure API and user data!",
-        customer.Identity.FirstName,
-        customer.Identity.LastName,
-        customer.Identity.PictureUrl,
-        customer.Identity.FacebookId,
-        customer.Location,
-        customer.Locale,
-        customer.Gender
+        Message = "This is secure API and user data!"
+        // customer.Identity.FirstName,
+        // customer.Identity.LastName,
+        // customer.Identity.PictureUrl,
+        // customer.Identity.FacebookId,
+        // customer.Location,
+        // customer.Locale,
+        // customer.Gender
       });
     }
   }

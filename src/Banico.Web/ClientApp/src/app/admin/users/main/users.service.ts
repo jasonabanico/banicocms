@@ -56,36 +56,70 @@ export class UsersService extends BaseService {
         .catch(this.handleError);
     }
 
+    public addOrUpdateUser(
+        id: string,
+        username: string,
+        firstName: string,
+        lastName: string,
+        alias: string,
+        email: string
+    ): Observable<boolean> {
+        if (!id) {
+            return this.addUser(
+                username,
+                firstName,
+                lastName,
+                alias,
+                email
+            );
+        } else {
+            return this.updateUser(
+                id,
+                username,
+                firstName,
+                lastName,
+                alias,
+                email
+            );
+        }
+    }
+
     public addUser(
-        email: string,
-        password: string,
-        confirmPassword: string,
-        invite: string
+        username: string,
+        firstName: string,
+        lastName: string,
+        alias: string,
+        email: string
     ): Observable<boolean> {
         let body = JSON.stringify({ 
-            email,
-            password,
-            confirmPassword ,
-            invite
+            username,
+            firstName,
+            lastName,
+            alias,
+            email
         });
-        return this.http.post(this.baseUrl + "api/Users/Add", body, this.jsonRequestOptions)
+        return this.http.post(this.baseUrl + "api/Users/Add", body, this.jsonAuthRequestOptions)
         .map(res => true)
         .catch(this.handleError);
     }
 
     public updateUser(
-        email: string,
-        password: string,
-        confirmPassword: string,
-        invite: string
+        id: string,
+        username: string,
+        firstName: string,
+        lastName: string,
+        alias: string,
+        email: string
     ): Observable<boolean> {
         let body = JSON.stringify({ 
-            email,
-            password,
-            confirmPassword ,
-            invite
+            id,
+            username,
+            firstName,
+            lastName,
+            alias,
+            email
         });
-        return this.http.post(this.baseUrl + "api/Users/Add", body, this.jsonRequestOptions)
+        return this.http.post(this.baseUrl + "api/Users/Update", body, this.jsonAuthRequestOptions)
         .map(res => true)
         .catch(this.handleError);
     }
@@ -93,7 +127,7 @@ export class UsersService extends BaseService {
     public deleteUser(
         id: string
     ): Observable<boolean> {
-        return this.http.post(this.baseUrl + "api/Users/Delete", id, this.jsonRequestOptions)
+        return this.http.post(this.baseUrl + "api/Users/Delete", id, this.jsonAuthRequestOptions)
         .map(res => true)
         .catch(this.handleError);
     }

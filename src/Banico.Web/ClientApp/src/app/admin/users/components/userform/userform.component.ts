@@ -17,6 +17,7 @@ export class UserFormComponent {
   user: User;
 
   userForm = this.fb.group({
+    id: [''],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     alias: ['', Validators.required],
@@ -44,7 +45,9 @@ export class UserFormComponent {
   }
 
   private setUser(user: User) {
+    alert(JSON.stringify(user));
     this.userForm.patchValue({
+      id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
       alias: user.alias,
@@ -54,7 +57,9 @@ export class UserFormComponent {
 
   public save() {
     this.isRequesting = true;
-    this.usersService.addUser(
+    this.usersService.addOrUpdateUser(
+      this.userForm.value['id'],
+      this.userForm.value['email'],
       this.userForm.value['firstName'],
       this.userForm.value['lastName'],
       this.userForm.value['alias'],

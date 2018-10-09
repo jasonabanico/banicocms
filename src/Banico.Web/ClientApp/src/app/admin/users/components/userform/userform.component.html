@@ -1,6 +1,12 @@
 <h1>User</h1>
 
 <form [formGroup]="userForm" novalidate (ngSubmit)="save()">
+    <input 
+        class="form-control" 
+        id="id" 
+        name="id"
+        type="hidden"
+        formControlName="id" />
     <div class="form-group">
         <label class="col-md-2 control-label" for="FirstName">First Name</label>
         <div class="col-md-10">

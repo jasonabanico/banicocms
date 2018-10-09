@@ -65,17 +65,16 @@ namespace Banico.Identity.Controllers
         {
           FirstName = userInfo.FirstName,
           LastName = userInfo.LastName,
-          FacebookId = userInfo.Id,
+          // FacebookId = userInfo.Id,
           Email = userInfo.Email,
-          UserName = userInfo.Email,
-          PictureUrl = userInfo.Picture.Data.Url
+          UserName = userInfo.Email
+          // PictureUrl = userInfo.Picture.Data.Url
         };
 
         var result = await _userManager.CreateAsync(appUser, Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Substring(0, 8));
 
         if (!result.Succeeded) return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
 
-        await _appDbContext.Customers.AddAsync(new Customer { IdentityId = appUser.Id, Location = "",Locale = userInfo.Locale,Gender = userInfo.Gender});
         await _appDbContext.SaveChangesAsync();
       }
 

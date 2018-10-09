@@ -29,7 +29,5 @@ namespace Banico.Identity.Data
                 optionsBuilder.UseSqlite(connectionString);
             }
         }
-
-        public DbSet<Customer> Customers { get; set; }
     }
 }

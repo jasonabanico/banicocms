@@ -50,7 +50,7 @@ namespace Banico.Web
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUser(AppUser user, string appRoleId)
+        public async Task<IActionResult> Add([FromBody] AppUser user, [FromBody] string appRoleId)
         {
             IdentityResult result = await userManager.CreateAsync(user);
             if (result.Succeeded)
@@ -63,13 +63,18 @@ namespace Banico.Web
                     {
                         return Ok(user);
                     }
+                } else {
+                    return Ok(user);
                 }
+            } else {
+                return BadRequest(result.Errors);
             }
-            return Ok(user);
+
+            return BadRequest("");
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditUser(string id, AppUser user, string appRoleId)
+        public async Task<IActionResult> Update([FromBody] AppUser user, [FromBody] string appRoleId)
         {
             if (ModelState.IsValid)
             {
@@ -106,6 +111,8 @@ namespace Banico.Web
                                     }
                                 }
                             }
+                        } else {
+                            return Ok(user);
                         }
                     }
                 }
@@ -115,7 +122,7 @@ namespace Banico.Web
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteUser(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (!string.IsNullOrEmpty(id))
             {
