@@ -86,6 +86,7 @@ namespace Banico.Web
                     existingRole = userManager.GetRolesAsync(user).Result.Single();
                     existingRoleId = roleManager.Roles.Single(r => r.Name == existingRole).Id;
                 }
+                user = await this.UpdateUser(user);
                 IdentityResult result = await userManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
@@ -125,6 +126,17 @@ namespace Banico.Web
             }
 
             return BadRequest(user);
+        }
+
+        private async Task<AppUser> UpdateUser(AppUser user)
+        {
+            AppUser storedUser = await userManager.FindByIdAsync(user.Id);
+            storedUser.FirstName = user.FirstName;
+            storedUser.LastName = user.LastName;
+            storedUser.Alias = user.Alias;
+            storedUser.Email = user.Email;
+
+            return storedUser;
         }
 
         [HttpPost]
