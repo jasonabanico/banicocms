@@ -45,7 +45,6 @@ export class UserFormComponent {
   }
 
   private setUser(user: User) {
-    alert(JSON.stringify(user));
     this.userForm.patchValue({
       id: user.id,
       firstName: user.firstName,
