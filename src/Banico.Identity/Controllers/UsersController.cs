@@ -76,45 +76,51 @@ namespace Banico.Web
         [HttpPost]
         public async Task<IActionResult> Update([FromBody] AppUser user, [FromBody] string appRoleId)
         {
-            if (ModelState.IsValid)
+            if (user != null)
             {
-                if (user != null)
+                var userRole = await userManager.GetRolesAsync(user);
+                string existingRole = string.Empty;
+                string existingRoleId = string.Empty;
+                if ((userRole != null) && (userRole.Count() > 0))
                 {
-                    var userRole = await userManager.GetRolesAsync(user);
-                    string existingRole = string.Empty;
-                    string existingRoleId = string.Empty;
-                    if ((userRole != null) && (userRole.Count() > 0))
+                    existingRole = userManager.GetRolesAsync(user).Result.Single();
+                    existingRoleId = roleManager.Roles.Single(r => r.Name == existingRole).Id;
+                }
+                IdentityResult result = await userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    if (existingRoleId != appRoleId)
                     {
-                        existingRole = userManager.GetRolesAsync(user).Result.Single();
-                        existingRoleId = roleManager.Roles.Single(r => r.Name == existingRole).Id;
-                    }
-                    IdentityResult result = await userManager.UpdateAsync(user);
-                    if (result.Succeeded)
-                    {
-                        if (existingRoleId != appRoleId)
+                        if (!string.IsNullOrEmpty(existingRole))
                         {
-                            bool existingRoleRemoved = true;
-                            if (!string.IsNullOrEmpty(existingRole))
-                            {
-                                IdentityResult roleResult = await userManager.RemoveFromRoleAsync(user, existingRole);
-                                existingRoleRemoved = roleResult.Succeeded;
+                            IdentityResult roleResult = await userManager.RemoveFromRoleAsync(user, existingRole);
+                            if (!roleResult.Succeeded) {
+                                return BadRequest(roleResult.Errors);
                             }
-                            if (existingRoleRemoved)
+                        }
+
+                        AppRole applicationRole = await roleManager.FindByIdAsync(appRoleId);
+                        if (applicationRole != null)
+                        {
+                            IdentityResult newRoleResult = await userManager.AddToRoleAsync(user, applicationRole.Name);
+                            if (newRoleResult.Succeeded)
                             {
-                                AppRole applicationRole = await roleManager.FindByIdAsync(appRoleId);
-                                if (applicationRole != null)
-                                {
-                                    IdentityResult newRoleResult = await userManager.AddToRoleAsync(user, applicationRole.Name);
-                                    if (newRoleResult.Succeeded)
-                                    {
-                                        return Ok(user);
-                                    }
-                                }
+                                return Ok(user);
+                            }
+                            else
+                            {
+                                return BadRequest(newRoleResult.Errors);
                             }
                         } else {
-                            return Ok(user);
+                            return BadRequest("Role ID is null - " + appRoleId);
                         }
+                    } else {
+                        return Ok(user);
                     }
+                }
+                else
+                {
+                    return BadRequest(result.Errors);
                 }
             }
 
