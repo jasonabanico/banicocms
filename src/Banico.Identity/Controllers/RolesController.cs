@@ -50,7 +50,11 @@ namespace Banico.Identity.Controllers
         {
             role.Id = Guid.NewGuid().ToString();
             role.CreatedDate = DateTime.UtcNow;
-            await roleManager.CreateAsync(role);
+            IdentityResult result = await roleManager.CreateAsync(role);
+
+            if (!result.Succeeded) {
+                return BadRequest(result.Errors);
+            }
 
             return Ok(role);
         }
@@ -58,21 +62,24 @@ namespace Banico.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(string id, [FromBody]AppRole role)
         {
-            if (string.IsNullOrEmpty(id)) 
-            {
-                role.CreatedDate = DateTime.UtcNow;
-                await roleManager.CreateAsync(role);
-            } else
+            if (!string.IsNullOrEmpty(id))
             {
                 var exists = await roleManager.FindByIdAsync(id);
                 if (exists != null) {
-                    await roleManager.UpdateAsync(role);
-                } else {
+                    IdentityResult result = await roleManager.UpdateAsync(role);
+
+                    if (!result.Succeeded) {
+                        return BadRequest(result.Errors);
+                    }
+
+                    return Ok(role);
+                } 
+                else 
+                {
                     return BadRequest(role);
                 }
             }
-
-            return Ok(role);
+            return BadRequest(id);
         }
 
         [HttpPost]
@@ -89,7 +96,7 @@ namespace Banico.Identity.Controllers
                         return Ok(id);
                     }
                 }
-                }
+            }
             return BadRequest(id);
         }
     }

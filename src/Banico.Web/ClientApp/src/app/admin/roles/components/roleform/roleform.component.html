@@ -1,14 +1,14 @@
 <h1>Role</h1>
 <form [formGroup]="roleForm" novalidate (ngSubmit)="save()">
     <div class="form-group">
-        <label class="col-md-2 control-label" for="RoleName">Role Name</label>
+        <label class="col-md-2 control-label" for="RoleName">Name</label>
         <div class="col-md-10">
             <input 
                 class="form-control" 
-                id="roleName" 
-                name="roleName"
+                id="name" 
+                name="name"
                 type="text"
-                formControlName="roleName"
+                formControlName="name"
                 required />
         </div>
     </div>
