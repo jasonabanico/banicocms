@@ -28,7 +28,7 @@ export class FaqDisplayComponent implements OnInit, OnDestroy {
         this.faq = new Faq(null);
         this.sub = this.route.params.subscribe(params => {
             var alias = params['alias'];
-            this.faqService.GetFaqByAlias(alias)
+            this.faqService.getByAlias(alias)
                 .subscribe(faq => this.setFaq(faq));
         });
 
@@ -63,7 +63,7 @@ export class FaqDisplayComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.button = "Delete";
         modalRef.result.then((result) => {
             if (result == 'success') {
-                this.faqService.DeleteFaq(this.faq)
+                this.faqService.delete(this.faq)
                     .subscribe(response => this.SaveResponse(response));
             }
         });

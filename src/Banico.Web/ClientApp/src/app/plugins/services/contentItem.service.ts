@@ -33,7 +33,7 @@ export class ContentItemService {
         // this.itemApiBaseUrl = `${this.baseUrl}/api/Item`;
     }
 
-    private AddResult(res: any) {
+    private addResult(res: any) {
         var id = '';
         var output;
         if (res.data.addContentItem) {
@@ -55,7 +55,33 @@ export class ContentItemService {
         return body || {};
     }
 
-    public GetContentItems(
+    public get(id: string): Observable<ContentItem> {
+        return this.getAll(id, '', '',
+        '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+        '', '', '', '', '', '', '', '', '', '')
+        .map(items => {
+            if (items.length >= 1) {
+                return items[0];
+            } else {
+                return null;
+            }
+        });
+    }
+
+    public getByAlias(alias: string): Observable<ContentItem> {
+        return this.getAll('', '', alias,
+        '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+        '', '', '', '', '', '', '', '', '', '')
+        .map(items => {
+            if (items.length >= 1) {
+                return items[0];
+            } else {
+                return null;
+            }
+        });
+    }
+
+    public getAll(
         id: string,
         name: string,
         alias: string,
@@ -141,7 +167,7 @@ export class ContentItemService {
             //});
     }
 
-    public AddContentItem(contentItem: ContentItem): Observable<any> {
+    public add(contentItem: ContentItem): Observable<any> {
         var result = this.apollo.mutate({
             mutation: AddContentItemMutation,
             variables: {
@@ -172,7 +198,7 @@ export class ContentItemService {
                 attribute19: contentItem.attribute19,
                 attribute20: contentItem.attribute20
             }
-        }).map(this.AddResult);
+        }).map(this.addResult);
 
         return result;
             //.subscribe({
@@ -182,7 +208,7 @@ export class ContentItemService {
             //});
     }
 
-    public UpdateContentItem(contentItem: ContentItem): Observable<any> {
+    public update(contentItem: ContentItem): Observable<any> {
         var result = this.apollo.mutate({
             mutation: UpdateContentItemMutation,
             variables: {
@@ -213,7 +239,7 @@ export class ContentItemService {
                 attribute19: contentItem.attribute19,
                 attribute20: contentItem.attribute20
             }
-        }).map(this.AddResult);
+        }).map(this.addResult);
 
         return result;
             //.subscribe({

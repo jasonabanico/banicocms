@@ -46,17 +46,17 @@ export class UsersService extends BaseService {
         return body || {};
     }
 
-    public getUsers(): Observable<User[]> {
+    public getAll(): Observable<User[]> {
         return this.http.get<User[]>(this.baseUrl + "api/Users/GetAll", this.jsonAuthRequestOptions)
         .catch(this.handleError);
     }
 
-    public getUser(id: string): Observable<User> {
+    public get(id: string): Observable<User> {
         return this.http.get<User>(this.baseUrl + "api/Users/Get?id="+id, this.jsonAuthRequestOptions)
         .catch(this.handleError);
     }
 
-    public addOrUpdateUser(
+    public addOrUpdate(
         id: string,
         username: string,
         firstName: string,
@@ -65,7 +65,7 @@ export class UsersService extends BaseService {
         email: string
     ): Observable<boolean> {
         if (!id) {
-            return this.addUser(
+            return this.add(
                 username,
                 firstName,
                 lastName,
@@ -73,7 +73,7 @@ export class UsersService extends BaseService {
                 email
             );
         } else {
-            return this.updateUser(
+            return this.update(
                 id,
                 username,
                 firstName,
@@ -84,7 +84,7 @@ export class UsersService extends BaseService {
         }
     }
 
-    public addUser(
+    public add(
         username: string,
         firstName: string,
         lastName: string,
@@ -103,7 +103,7 @@ export class UsersService extends BaseService {
         .catch(this.handleError);
     }
 
-    public updateUser(
+    public update(
         id: string,
         username: string,
         firstName: string,
@@ -124,7 +124,7 @@ export class UsersService extends BaseService {
         .catch(this.handleError);
     }
 
-    public deleteUser(
+    public delete(
         id: string
     ): Observable<boolean> {
         return this.http.post(this.baseUrl + "api/Users/Delete", id, this.jsonAuthRequestOptions)

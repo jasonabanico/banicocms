@@ -9,33 +9,21 @@ import { Qa } from './qa';
 @Injectable()
 export class FaqService extends PluginService {
 
-    public GetFaq(id: string): Observable<Faq> {
-        return this.contentItemService.GetContentItems(id, '', '',
-        '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '')
-        .map(items => {
-            if (items.length >= 1) {
-                return new Faq(items[0]);
-            } else {
-                return new Faq(null);
-            }
+    public get(id: string): Observable<Faq> {
+        return this.contentItemService.get(id)
+        .map(item => {
+            return new Faq(item);
         });
     }
     
-    public GetFaqByAlias(alias: string): Observable<Faq> {
-        return this.contentItemService.GetContentItems('', '', alias,
-        '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '')
-        .map(items => {
-            if (items.length >= 1) {
-                return new Faq(items[0]);
-            } else {
-                return new Faq(null);
-            }
+    public getByAlias(alias: string): Observable<Faq> {
+        return this.contentItemService.getByAlias(alias)
+        .map(item => {
+            return new Faq(item);
         });
     }
 
-    public SetQa(content: string): Qa[] {
+    public setQa(content: string): Qa[] {
         var output: Qa[] = Array<Qa>();
         var objects = eval('(' + content + ')');
         for (let object in objects) {
@@ -48,21 +36,21 @@ export class FaqService extends PluginService {
         return output;
     }
 
-    public AddFaq(faq: Faq): Observable<Faq> {
+    public add(faq: Faq): Observable<Faq> {
         let contentItem: ContentItem = faq.ToContentItem();
-        return this.contentItemService.AddContentItem(contentItem)
+        return this.contentItemService.add(contentItem)
             .map(contentItem => new Faq(contentItem))
             .catch(this.handleError);
     }
 
-    public UpdateFaq(faq: Faq): Observable<Faq> {
+    public update(faq: Faq): Observable<Faq> {
         let contentItem: ContentItem = faq.ToContentItem();
-        return this.contentItemService.UpdateContentItem(contentItem)
+        return this.contentItemService.update(contentItem)
             .map(contentItem => new Faq(contentItem))
             .catch(this.handleError);
     }
 
-    public DeleteFaq(faq: Faq): Observable<{}> {
+    public delete(faq: Faq): Observable<{}> {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'id=' + faq.id;

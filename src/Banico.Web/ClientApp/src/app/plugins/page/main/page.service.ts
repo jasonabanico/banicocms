@@ -8,47 +8,35 @@ import { Page } from './page';
 @Injectable()
 export class PageService extends PluginService {
     
-    public GetPage(id: string): Observable<Page> {
-        return this.contentItemService.GetContentItems(id, '', '',
-        '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '')
-        .map(items => {
-            if (items.length >= 1) {
-                return new Page(items[0]);
-            } else {
-                return new Page(null);
-            }
+    public get(id: string): Observable<Page> {
+        return this.contentItemService.get(id)
+        .map(item => {
+            return new Page(item);
         });
     }
     
-    public GetPageByAlias(alias: string): Observable<Page> {
-        return this.contentItemService.GetContentItems('', '', alias,
-        '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '')
-        .map(items => {
-            if (items.length >= 1) {
-                return new Page(items[0]);
-            } else {
-                return new Page(null);
-            }
+    public getByAlias(alias: string): Observable<Page> {
+        return this.contentItemService.getByAlias(alias)
+        .map(item => {
+            return new Page(item);
         });
     }
 
-    public AddPage(page: Page): Observable<Page> {
+    public add(page: Page): Observable<Page> {
         let contentItem: ContentItem = page.ToContentItem();
-        return this.contentItemService.AddContentItem(contentItem)
+        return this.contentItemService.add(contentItem)
             .map(contentItem => new Page(contentItem))
             .catch(this.handleError);
     }
 
-    public UpdatePage(page: Page): Observable<Page> {
+    public update(page: Page): Observable<Page> {
         let contentItem: ContentItem = page.ToContentItem();
-        return this.contentItemService.UpdateContentItem(contentItem)
+        return this.contentItemService.update(contentItem)
             .map(contentItem => new Page(contentItem))
             .catch(this.handleError);
     }
 
-    public DeletePage(page: Page): Observable<boolean> {
+    public delete(page: Page): Observable<boolean> {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'id=' + page.id;

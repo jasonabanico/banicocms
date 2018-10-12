@@ -26,7 +26,7 @@ export class PageFormComponent implements OnInit {
         this.sub = this.route.params.subscribe(async params => {
             var alias = params['alias'];
             if (alias) {
-                this.pageService.GetPageByAlias(alias)
+                this.pageService.getByAlias(alias)
                 .subscribe(page => this.setPage(page));
                 
             }
@@ -40,10 +40,10 @@ export class PageFormComponent implements OnInit {
 
     public save() {
         if (!this.isEdit) {
-            this.pageService.AddPage(this.page)
+            this.pageService.add(this.page)
                 .subscribe(result => this.savePageSuccess(this.page));
         } else {
-            this.pageService.UpdatePage(this.page)
+            this.pageService.update(this.page)
                 .subscribe(response => this.SaveResponse(this.page));
         }
     }

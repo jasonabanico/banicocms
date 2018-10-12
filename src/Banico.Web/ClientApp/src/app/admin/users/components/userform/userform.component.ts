@@ -36,15 +36,15 @@ export class UserFormComponent {
     this.sub = this.route.params.subscribe(params => {
       if (params['id']) {
         var id = params['id'];
-        this.usersService.getUser(id)
+        this.usersService.get(id)
           .subscribe(user => {
-            this.setUser(user);
+            this.set(user);
           });
       }
     });
   }
 
-  private setUser(user: User) {
+  private set(user: User) {
     this.userForm.patchValue({
       id: user.id,
       firstName: user.firstName,
@@ -56,7 +56,7 @@ export class UserFormComponent {
 
   public save() {
     this.isRequesting = true;
-    this.usersService.addOrUpdateUser(
+    this.usersService.addOrUpdate(
       this.userForm.value['id'],
       this.userForm.value['email'],
       this.userForm.value['firstName'],

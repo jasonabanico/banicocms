@@ -29,7 +29,7 @@ export class PageDisplayComponent implements OnInit, OnDestroy {
         this.page = new Page(null);
         this.sub = this.route.params.subscribe(params => {
             var alias = params['alias'];
-            this.pageService.GetPageByAlias(alias)
+            this.pageService.getByAlias(alias)
                 .subscribe(page => this.setPage(page));
         });
 
@@ -55,7 +55,7 @@ export class PageDisplayComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.button = "Delete";
         modalRef.result.then((result) => {
             if (result == 'success') {
-                this.pageService.DeletePage(this.page)
+                this.pageService.delete(this.page)
                     .subscribe(response => this.SaveResponse(response));
             }
         });

@@ -46,17 +46,33 @@ export class RolesService extends BaseService {
         return body || {};
     }
 
-    public getRoles(): Observable<Role[]> {
+    public getAll(): Observable<Role[]> {
         return this.http.get<Role[]>(this.baseUrl + "api/Roles/GetAll", this.jsonAuthRequestOptions)
         .catch(this.handleError);
     }
 
-    public getRole(id: string): Observable<Role> {
+    public get(id: string): Observable<Role> {
         return this.http.get<Role>(this.baseUrl + "api/Roles/Get", this.jsonAuthRequestOptions)
         .catch(this.handleError);
     }
 
-    public addRole(
+    public addOrUpdate(
+        id: string,
+        name: string
+    ): Observable<boolean> {
+        if (!id) {
+            return this.add(
+                name
+            );
+        } else {
+            return this.update(
+                id,
+                name
+            );
+        }
+    }
+
+    public add(
         name: string
     ): Observable<boolean> {
         let body = JSON.stringify({ 
@@ -67,7 +83,7 @@ export class RolesService extends BaseService {
         .catch(this.handleError);
     }
 
-    public updateRole(
+    public update(
         id: string,
         name: string
     ): Observable<boolean> {
@@ -80,7 +96,7 @@ export class RolesService extends BaseService {
         .catch(this.handleError);
     }
 
-    public deleteUser(
+    public delete(
         id: string
     ): Observable<boolean> {
         return this.http.post(this.baseUrl + "api/Roles/Delete", id, this.jsonRequestOptions)

@@ -35,7 +35,7 @@ export class FaqFormComponent implements OnInit {
         
         this.sub = this.route.params.subscribe(params => {
             var alias = params['alias'];
-            this.faqService.GetFaqByAlias(alias)
+            this.faqService.getByAlias(alias)
                 .subscribe(faq => this.setFaq(faq));
         });
     }
@@ -102,10 +102,10 @@ export class FaqFormComponent implements OnInit {
     public save() {
         this.faq.content = JSON.stringify(this.faq.qas);
         if (!this.isEdit) {
-            this.faqService.AddFaq(this.faq)
+            this.faqService.add(this.faq)
                 .subscribe(faq => this.saveFaqSuccess(faq));
         } else {
-            this.faqService.UpdateFaq(this.faq)
+            this.faqService.update(this.faq)
                 .subscribe(response => this.SaveResponse(response));
         }
     }

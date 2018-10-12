@@ -8,21 +8,15 @@ import { HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class DirectoryService extends PluginService {
 
-    public GetDirectoryItem(id: string): Observable<DirectoryItem> {
-        return this.contentItemService.GetContentItems(id, '', '',
-        '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '')
-        .map(items => {
-            if (items.length >= 1) {
-                return new DirectoryItem(items[0]);
-            } else {
-                return new DirectoryItem(null);
-            }
+    public get(id: string): Observable<DirectoryItem> {
+        return this.contentItemService.get(id)
+        .map(item => {
+            return new DirectoryItem(item);
         });
     }
     
-    public GetAllDirectoryItems(): Observable<DirectoryItem[]> {
-        return this.contentItemService.GetContentItems('', '', '',
+    public getAll(): Observable<DirectoryItem[]> {
+        return this.contentItemService.getAll('', '', '',
         'directory', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '')
         .map(items => {
@@ -36,7 +30,7 @@ export class DirectoryService extends PluginService {
     }
 
     public GetDirectoryItems(sectionItems: string): Observable<DirectoryItem[]> {
-        return this.contentItemService.GetContentItems('', '', '',
+        return this.contentItemService.getAll('', '', '',
         'directory', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '')
         .map(items => {
@@ -50,7 +44,7 @@ export class DirectoryService extends PluginService {
     }
 
     public GetWithTextSearch(text: string): Observable<DirectoryItem[]> {
-        return this.contentItemService.GetContentItems('', '', '',
+        return this.contentItemService.getAll('', '', '',
         'directory', '', '', '', text, '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '')
         .map(items => {
@@ -63,21 +57,21 @@ export class DirectoryService extends PluginService {
         });
     }
 
-    public AddDirectoryItem(directoryItem: DirectoryItem): Observable<DirectoryItem> {
+    public add(directoryItem: DirectoryItem): Observable<DirectoryItem> {
         let contentItem: ContentItem = directoryItem.ToContentItem();
-        return this.contentItemService.AddContentItem(contentItem)
+        return this.contentItemService.add(contentItem)
             .map(contentItem => new DirectoryItem(contentItem))
             .catch(this.handleError);
     }
 
-    public UpdateDirectoryItem(directoryItem: DirectoryItem): Observable<{}> {
+    public update(directoryItem: DirectoryItem): Observable<{}> {
         let contentItem: ContentItem = directoryItem.ToContentItem();
-        return this.contentItemService.UpdateContentItem(contentItem)
+        return this.contentItemService.update(contentItem)
             .map(contentItem => new DirectoryItem(contentItem))
             .catch(this.handleError);
     }
 
-    public DeleteDirectoryItem(directoryItem: DirectoryItem): Observable<{}> {
+    public delete(directoryItem: DirectoryItem): Observable<{}> {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'id=' + directoryItem.id;

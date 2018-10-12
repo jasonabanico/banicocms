@@ -31,7 +31,7 @@ export class ContactDisplayComponent implements OnInit, OnDestroy {
         this.contact = new Contact(null);
         this.sub = this.route.params.subscribe(params => {
             var alias = params['alias'];
-            this.contactService.GetContactByAlias(alias)
+            this.contactService.getByAlias(alias)
                 .subscribe(contact => this.setContact(contact));
         });
 

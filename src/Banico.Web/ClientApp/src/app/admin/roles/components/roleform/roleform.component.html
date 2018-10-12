@@ -1,19 +1,5 @@
 <h1>Role</h1>
-
-<a href="/admin/roles/edit/{{role.id}}"
-class="btn btn-primary">
-    <i class="glyphicon glyphicon-pencil"></i> Edit
-</a>
-<a href="/admin/roles/delete/{{role.id}}" class="btn btn-danger">
-    <i class="glyphicon glyphicon-trash"></i> Delete
-</a>
-
 <form [formGroup]="roleForm" novalidate (ngSubmit)="save()">
-    <div class="form-group row">
-        <label for="roleName">Role Name</label>
-        <input type="text" [(ngModel)]="role.name" name="name" class="form-control" />
-    </div>
-        
     <div class="form-group">
         <label class="col-md-2 control-label" for="RoleName">Role Name</label>
         <div class="col-md-10">
@@ -38,5 +24,9 @@ class="btn btn-primary">
                 formControlName="description"
                 required />
         </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" value="save">Save</button>
     </div>
 </form>

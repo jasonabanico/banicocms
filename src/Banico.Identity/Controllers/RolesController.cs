@@ -28,14 +28,14 @@ namespace Banico.Identity.Controllers
         }
 
         [HttpGet]
-        public async Task<List<AppRole>> GetRoles()
+        public async Task<List<AppRole>> GetAll()
         {
             var result = roleManager.Roles.ToList();
             return result;
         }
 
         [HttpGet]
-        public async Task<AppRole> GetRole(string id)
+        public async Task<AppRole> Get(string id)
         {
             if (!String.IsNullOrEmpty(id))
             {
@@ -45,7 +45,16 @@ namespace Banico.Identity.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEditRole(string id, [FromBody]AppRole role)
+        public async Task<IActionResult> Add([FromBody]AppRole role)
+        {
+                role.CreatedDate = DateTime.UtcNow;
+                await roleManager.CreateAsync(role);
+
+            return Ok(role);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(string id, [FromBody]AppRole role)
         {
             if (string.IsNullOrEmpty(id)) 
             {
@@ -65,7 +74,7 @@ namespace Banico.Identity.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteRole(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (!string.IsNullOrEmpty(id))
             {

@@ -35,7 +35,7 @@ export class DirectoryItemDisplayComponent implements OnInit, OnDestroy {
         this.directoryItem = new DirectoryItem(null);
         this.sub = this.route.params.subscribe(params => {
             this.id = params['id'];
-            this.directoryService.GetDirectoryItem(this.id)
+            this.directoryService.get(this.id)
                 .subscribe(directoryItem => this.SetDirectoryItem(directoryItem));
         });
 
@@ -77,7 +77,7 @@ export class DirectoryItemDisplayComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.button = "Delete";
         modalRef.result.then((result) => {
             if (result == 'success') {
-                this.directoryService.DeleteDirectoryItem(this.directoryItem)
+                this.directoryService.delete(this.directoryItem)
                     .subscribe(response => this.SaveResponse(response));
             }
         });

@@ -29,8 +29,8 @@ export class DirectoryFormComponent implements OnInit {
             var id = params['id'];
             var path = params['path'];
             if (id) {
-                this.directoryService.GetDirectoryItem(id)
-                    .subscribe(directoryItem => this.setDirectoryItem(directoryItem));
+                this.directoryService.get(id)
+                    .subscribe(directoryItem => this.set(directoryItem));
             }
             if (path) {
                 this.navBarService.initialize('directory', path, '', '/directory');
@@ -39,18 +39,18 @@ export class DirectoryFormComponent implements OnInit {
         });
     }
 
-    private setDirectoryItem(directoryItem: DirectoryItem) {
+    private set(directoryItem: DirectoryItem) {
         this.directoryItem = directoryItem;
         this.navBarService.initialize('directory', directoryItem.sectionItems, '', '/directory');
         this.isEdit = true;
     }
 
-    public saveDirectoryItem() {
+    public save() {
         if (!this.isEdit) {
-            this.directoryService.AddDirectoryItem(this.directoryItem)
+            this.directoryService.add(this.directoryItem)
                 .subscribe(directoryItem => this.saveDirectoryItemSuccess(directoryItem));
         } else {
-            this.directoryService.UpdateDirectoryItem(this.directoryItem)
+            this.directoryService.update(this.directoryItem)
                 .subscribe(response => this.SaveResponse(response));
         }
     }

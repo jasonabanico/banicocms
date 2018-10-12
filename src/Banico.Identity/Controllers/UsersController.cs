@@ -90,7 +90,7 @@ namespace Banico.Web
                 IdentityResult result = await userManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
-                    if (existingRoleId != appRoleId)
+                    if (!string.IsNullOrEmpty(appRoleId) && (existingRoleId != appRoleId))
                     {
                         if (!string.IsNullOrEmpty(existingRole))
                         {

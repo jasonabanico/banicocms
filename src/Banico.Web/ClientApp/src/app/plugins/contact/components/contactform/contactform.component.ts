@@ -35,7 +35,7 @@ export class ContactFormComponent implements OnInit {
         
         this.sub = this.route.params.subscribe(params => {
             var alias = params['alias'];
-            this.contactService.GetContactByAlias(alias)
+            this.contactService.getByAlias(alias)
                 .subscribe(contact => this.setContact(contact));
         });
     }
@@ -102,7 +102,7 @@ export class ContactFormComponent implements OnInit {
     public save() {
         this.contact.content = JSON.stringify(this.contact.fields);
         if (!this.isEdit) {
-            this.contactService.AddContact(this.contact)
+            this.contactService.add(this.contact)
                 .subscribe(contact => this.saveContactSuccess(contact));
         } else {
             this.contactService.UpdateContact(this.contact)

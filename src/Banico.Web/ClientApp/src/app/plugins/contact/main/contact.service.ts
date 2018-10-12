@@ -7,42 +7,30 @@ import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class ContactService extends PluginService {
-    public GetContact(id: string): Observable<Contact> {
-        return this.contentItemService.GetContentItems(id, '', '',
-        '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '')
-        .map(items => {
-            if (items.length >= 1) {
-                return new Contact(items[0]);
-            } else {
-                return new Contact(null);
-            }
+    public get(id: string): Observable<Contact> {
+        return this.contentItemService.get(id)
+        .map(item => {
+            return new Contact(item);
         });
     }
     
-    public GetContactByAlias(alias: string): Observable<Contact> {
-        return this.contentItemService.GetContentItems('', '', alias,
-        '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '')
-        .map(items => {
-            if (items.length >= 1) {
-                return new Contact(items[0]);
-            } else {
-                return new Contact(null);
-            }
+    public getByAlias(alias: string): Observable<Contact> {
+        return this.contentItemService.getByAlias(alias)
+        .map(item => {
+            return new Contact(item);
         });
     }
 
-    public AddContact(contact: Contact): Observable<Contact> {
+    public add(contact: Contact): Observable<Contact> {
         let contentItem: ContentItem = contact.ToContentItem();
-        return this.contentItemService.AddContentItem(contentItem)
+        return this.contentItemService.add(contentItem)
             .map(contentItem => new Contact(contentItem))
             .catch(this.handleError);
     }
 
     public UpdateContact(contact: Contact): Observable<Contact> {
         let contentItem: ContentItem = contact.ToContentItem();
-        return this.contentItemService.UpdateContentItem(contentItem)
+        return this.contentItemService.update(contentItem)
             .map(contentItem => new Contact(contentItem))
             .catch(this.handleError);
     }
