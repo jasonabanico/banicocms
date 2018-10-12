@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Banico.Identity.Controllers
 {
+    [Route("api/[controller]/[action]")]
     [Authorize(Policy="SuperAdmin")]
     public class RolesController : Controller
     {
@@ -47,8 +48,9 @@ namespace Banico.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody]AppRole role)
         {
-                role.CreatedDate = DateTime.UtcNow;
-                await roleManager.CreateAsync(role);
+            role.Id = Guid.NewGuid().ToString();
+            role.CreatedDate = DateTime.UtcNow;
+            await roleManager.CreateAsync(role);
 
             return Ok(role);
         }
