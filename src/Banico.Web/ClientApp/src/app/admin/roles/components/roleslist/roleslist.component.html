@@ -19,8 +19,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let role of roles">
-            <td>{{role.RoleName}}</td>
-            <td>{{role.Description}}</td>  
+            <td>{{role.name}}</td>
+            <td>{{role.description}}</td>  
             <td>{{role.NumberOfUsers}}</td>                                              
             <td>
                 <a href="/admin/roles/edit/{{role.id}}"
