@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ListRoutingModule } from './list.routing';
 import { ListComponent } from './list.component';
@@ -15,6 +15,7 @@ import { ListFrontComponent } from '../components/listfront/listfront.component'
     CommonModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     ListRoutingModule
   ],
   declarations: [
