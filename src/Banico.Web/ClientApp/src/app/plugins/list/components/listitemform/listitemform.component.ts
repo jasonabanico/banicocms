@@ -13,6 +13,7 @@ export class ListItemFormComponent implements OnInit {
   public listItem: ListItem;
 
   listItemForm = this.fb.group({
+    id: ['', Validators.required],
     name: ['', Validators.required],
     description: ['', Validators.required]
   });
@@ -28,16 +29,18 @@ export class ListItemFormComponent implements OnInit {
 
   public save() {
     // this.isRequesting = true;
-    // this.listItemService.addOrUpdate(
-    //   this.roleForm.value['id'],
-    //   this.roleForm.value['name']
-    // )
-    // .finally(() => this.isRequesting = false)
-    // .subscribe(
-    //   result  => {
-    //     this.isSuccessful = true;
-    //   },
-    //   errors =>  this.errors = errors);
+    this.listItemService.addOrUpdate(
+      this.listItemForm.value['id'],
+      this.listItemForm.value['name'],
+      this.listItemForm.value['description']
+    )
+    //.finally(() => this.isRequesting = false)
+    .subscribe(
+      result  => {
+        // this.isSuccessful = true;
+      },
+      //errors =>  this.errors = errors
+      );
   }
 
 }

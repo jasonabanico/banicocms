@@ -57,17 +57,25 @@ export class ListService extends PluginService {
         });
     }
 
-    public add(list: List): Observable<List> {
+    public addOrUpdate(list: List): Observable<boolean> {
+        if (!list.id) {
+            return this.add(list);
+        } else {
+            return this.update(list);
+        }
+    }
+
+    public add(list: List): Observable<boolean> {
         let contentItem: ContentItem = list.ToContentItem();
         return this.contentItemService.add(contentItem)
-            .map(contentItem => new List(contentItem))
+            .map(res => true)
             .catch(this.handleError);
     }
 
-    public update(list: List): Observable<{}> {
+    public update(list: List): Observable<boolean> {
         let contentItem: ContentItem = list.ToContentItem();
         return this.contentItemService.update(contentItem)
-            .map(contentItem => new List(contentItem))
+            .map(res => true)
             .catch(this.handleError);
     }
 
