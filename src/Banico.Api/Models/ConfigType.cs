@@ -4,9 +4,9 @@ using Banico.Core.Repositories;
 
 namespace Banico.Api.Models
 {
-    public class SectionType : ObjectGraphType<Section>
+    public class ConfigType : ObjectGraphType<Config>
     {
-        public SectionType(ISectionRepository sectionRepository)
+        public ConfigType(IConfigRepository configRepository)
         {
             Field(x => x.Tenant, nullable:true);
             Field(x => x.Id, nullable:true);
@@ -16,9 +16,8 @@ namespace Banico.Api.Models
             Field(x => x.UpdatedBy, nullable:true);
             Field(x => x.UpdatedDate, nullable:true);
             
-            Field(x => x.Modules, nullable:true);
-
-            //Field<StringGraphType>("modules", resolve: context => context.Source.Modules);
+            Field(x => x.Module, nullable:true);
+            Field(x => x.Value, nullable:true);
         }
     }
 }

@@ -57,16 +57,9 @@ export class DirectoryService extends PluginService {
         });
     }
 
-    public add(directoryItem: DirectoryItem): Observable<DirectoryItem> {
+    public addOrUpdate(directoryItem: DirectoryItem): Observable<DirectoryItem> {
         let contentItem: ContentItem = directoryItem.ToContentItem();
-        return this.contentItemService.add(contentItem)
-            .map(contentItem => new DirectoryItem(contentItem))
-            .catch(this.handleError);
-    }
-
-    public update(directoryItem: DirectoryItem): Observable<{}> {
-        let contentItem: ContentItem = directoryItem.ToContentItem();
-        return this.contentItemService.update(contentItem)
+        return this.contentItemService.addOrUpdate(contentItem)
             .map(contentItem => new DirectoryItem(contentItem))
             .catch(this.handleError);
     }

@@ -13,7 +13,9 @@ namespace Banico.Core.Repositories
             string id,
             string module,
             string name);
+        Task<Section> AddOrUpdate(Section section);
         Task<Section> Add(Section section);
+        Task<Section> Update(Section section);
         Task<Section> Delete(string name);
     }
 }

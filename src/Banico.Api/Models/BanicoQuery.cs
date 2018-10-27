@@ -9,7 +9,8 @@ namespace Banico.Api.Models
         public BanicoQuery(
             ISectionRepository sectionRepository,
             ISectionItemRepository sectionItemRepository,
-            IContentItemRepository contentItemRepository)
+            IContentItemRepository contentItemRepository,
+            IConfigRepository configRepository)
         {
             Field<ListGraphType<SectionType>>(
                 "sections",
@@ -185,6 +186,25 @@ namespace Banico.Api.Models
                     context.GetArgument<string>("attribute20")
                     )
                 );            
+
+            Field<ListGraphType<ConfigType>>(
+                "configs",
+                arguments: new QueryArguments(
+                    new QueryArgument<StringGraphType> { 
+                        Name = "id" 
+                    },
+                    new QueryArgument<StringGraphType> { 
+                        Name = "module" 
+                    },
+                    new QueryArgument<StringGraphType> { 
+                        Name = "name" 
+                    }
+                    ),
+                resolve: context =>  configRepository.Get(
+                    context.GetArgument<string>("id"),
+                    context.GetArgument<string>("module"),
+                    context.GetArgument<string>("name")
+                    ));
         }
     }
 }

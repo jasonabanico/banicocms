@@ -1,21 +1,29 @@
+using System.Linq;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 using GraphQL.Types;
 using Banico.Core.Entities;
 using Banico.Core.Repositories;
+using System;
 
 namespace Banico.Api.Models
 {
     public class BanicoMutation : ObjectGraphType
     {
+        private IHttpContextAccessor _httpContextAccessor { get; set; }
+
         public BanicoMutation(
+            IHttpContextAccessor httpContextAccessor,
             ISectionRepository sectionRepository,
             ISectionItemRepository sectionItemRepository,
-            IContentItemRepository contentItemRepository
+            IContentItemRepository contentItemRepository,
+            IConfigRepository configRepository
         )
         {
-            Name = "BanicoMutation";
+            _httpContextAccessor = httpContextAccessor;
 
             Field<SectionType>(
-                "addSection",
+                "addOrUpdateSection",
                 arguments: new QueryArguments(
                     // <SectionInputType>
                     new QueryArgument<NonNullGraphType<SectionInputType>> { Name = "section" }
@@ -23,11 +31,12 @@ namespace Banico.Api.Models
                 resolve: context =>
                 {
                     var section = context.GetArgument<Section>("section");
-                    return sectionRepository.Add(section);
+                    this.StampItem(section);
+                    return sectionRepository.AddOrUpdate(section);
                 });
 
             Field<SectionItemType>(
-                "addSectionItem",
+                "addOrUpdateSectionItem",
                 arguments: new QueryArguments(
                     // <SectionInputType>
                     new QueryArgument<NonNullGraphType<SectionItemInputType>> { Name = "sectionItem" }
@@ -35,30 +44,59 @@ namespace Banico.Api.Models
                 resolve: context =>
                 {
                     var sectionItem = context.GetArgument<SectionItem>("sectionItem");
-                    return sectionItemRepository.Add(sectionItem);
+                    this.StampItem(sectionItem);
+                    return sectionItemRepository.AddOrUpdate(sectionItem);
                 });
 
             Field<ContentItemType>(
-                "addContentItem",
+                "addOrUpdateContentItem",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<ContentItemInputType>> { Name = "contentItem" }
                 ),
                 resolve: context =>
                 {
                     var contentItem = context.GetArgument<ContentItem>("contentItem");
-                    return contentItemRepository.Add(contentItem);
+                    this.StampItem(contentItem);
+                    return contentItemRepository.AddOrUpdate(contentItem);
                 });
 
-            Field<ContentItemType>(
-                "updateContentItem",
+            Field<ConfigType>(
+                "addOrUpdateConfig",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<ContentItemInputType>> { Name = "contentItem" }
+                    new QueryArgument<NonNullGraphType<ConfigInputType>> { Name = "config" }
                 ),
                 resolve: context =>
                 {
-                    var contentItem = context.GetArgument<ContentItem>("contentItem");
-                    return contentItemRepository.Update(contentItem);
+                    var config = context.GetArgument<Config>("config");
+                    this.StampItem(config);
+                    return configRepository.AddOrUpdate(config);
                 });
+        }
+
+        private string GetCurrentUserId()
+        {
+            ClaimsPrincipal caller = _httpContextAccessor.HttpContext.User;
+
+            if (caller.Claims != null) {
+                var userIdClaim = caller.Claims.Single(c => c.Type == "id");
+                if (userIdClaim != null) {
+                    return userIdClaim.Value;
+                }
+            }
+
+            return string.Empty;
+        }
+
+        private void StampItem(Item item) {
+            string user = this.GetCurrentUserId();
+            
+            if (string.IsNullOrEmpty(item.Id)) {
+                item.CreatedBy = user;
+                item.CreatedDate = DateTimeOffset.UtcNow;
+            } else {
+                item.UpdatedBy = user;
+                item.UpdatedDate = DateTimeOffset.UtcNow;
+            }
         }
     }
 }

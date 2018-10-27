@@ -101,13 +101,8 @@ export class FaqFormComponent implements OnInit {
     
     public save() {
         this.faq.content = JSON.stringify(this.faq.qas);
-        if (!this.isEdit) {
-            this.faqService.add(this.faq)
-                .subscribe(faq => this.saveFaqSuccess(faq));
-        } else {
-            this.faqService.update(this.faq)
-                .subscribe(response => this.SaveResponse(response));
-        }
+        this.faqService.addOrUpdate(this.faq)
+            .subscribe(faq => this.saveFaqSuccess(faq));
     }
 
     private saveFaqSuccess(faq: Faq) {

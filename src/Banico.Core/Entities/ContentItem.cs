@@ -114,9 +114,10 @@ namespace Banico.Core.Entities
             this.SectionItems = item.SectionItems;
             this.Module = item.Module;
 
-            this.CreatedDate = item.CreatedDate;
-            this.LastUpdate = item.LastUpdate;
             this.CreatedBy = item.CreatedBy;
+            this.CreatedDate = item.CreatedDate;
+            this.UpdatedBy = item.UpdatedBy;
+            this.UpdatedDate = item.UpdatedDate;
             
             this.Name = item.Name;
             this.Content = item.Content;

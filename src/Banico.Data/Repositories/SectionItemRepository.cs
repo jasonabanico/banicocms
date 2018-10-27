@@ -87,10 +87,21 @@ namespace Banico.Data.Repositories
             return await sectionItems.ToListAsync();
         }
 
+        public async Task<SectionItem> AddOrUpdate(SectionItem sectionItem)
+        {
+            if (string.IsNullOrEmpty(sectionItem.Id)) 
+            {
+                return await this.Add(sectionItem);
+            }
+            else
+            {
+                return await this.Update(sectionItem);
+            }
+        }
+
         public async Task<SectionItem> Add(SectionItem sectionItem)
         {
             sectionItem.Id = Guid.NewGuid().ToString();
-            sectionItem.CreatedDate = DateTimeOffset.Now;
             this.DbContext.SectionItems.Add(sectionItem);
             var result = await this.DbContext.SaveChangesAsync();
 
@@ -111,17 +122,20 @@ namespace Banico.Data.Repositories
                 string.Empty, string.Empty, false))
                 .FirstOrDefault();
 
-            storedSectionItem.LastUpdate = DateTimeOffset.Now;
-
-            storedSectionItem.Name = sectionItem.Name;
-            storedSectionItem.Alias = sectionItem.Alias;
-            storedSectionItem.Description = sectionItem.Description;
-            
-            var result = await this.DbContext.SaveChangesAsync();
-
-            if (result > 0)
+            if (storedSectionItem != null)
             {
-                return sectionItem;
+                storedSectionItem.Name = sectionItem.Name;
+                storedSectionItem.Alias = sectionItem.Alias;
+                storedSectionItem.Description = sectionItem.Description;
+                storedSectionItem.UpdatedBy = sectionItem.UpdatedBy;
+                storedSectionItem.UpdatedDate = sectionItem.UpdatedDate;
+                
+                var result = await this.DbContext.SaveChangesAsync();
+
+                if (result > 0)
+                {
+                    return sectionItem;
+                }
             }
 
             return new SectionItem();

@@ -12,6 +12,7 @@ namespace Banico.Data
       services.AddScoped<ISectionRepository, SectionRepository>();
       services.AddScoped<ISectionItemRepository, SectionItemRepository>();
       services.AddScoped<IContentItemRepository, ContentItemRepository>();
+      services.AddScoped<IConfigRepository, ConfigRepository>();
     }
   }
 }

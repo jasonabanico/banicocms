@@ -101,13 +101,8 @@ export class ContactFormComponent implements OnInit {
     
     public save() {
         this.contact.content = JSON.stringify(this.contact.fields);
-        if (!this.isEdit) {
-            this.contactService.add(this.contact)
-                .subscribe(contact => this.saveContactSuccess(contact));
-        } else {
-            this.contactService.UpdateContact(this.contact)
-                .subscribe(response => this.SaveResponse(response));
-        }
+        this.contactService.addOrUpdate(this.contact)
+        .subscribe(contact => this.saveContactSuccess(contact));
     }
 
     private saveContactSuccess(contact: Contact) {

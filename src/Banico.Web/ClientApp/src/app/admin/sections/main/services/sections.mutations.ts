@@ -1,12 +1,14 @@
 import gql from 'graphql-tag';
 
-export const AddSectionMutation = gql`
+export const AddOrUpdateSectionMutation = gql`
     mutation (
+        $id: String!,
         $name: String!,
         $modules: String!
     ) {
-        addSection(
+        addOrUpdateSection(
             section: {
+                id: $id,
                 name: $name,
                 modules: $modules
             }
@@ -16,8 +18,9 @@ export const AddSectionMutation = gql`
     }
 `;
 
-export const AddSectionItemMutation = gql`
+export const AddOrUpdateSectionItemMutation = gql`
     mutation (
+        $id: String!,
         $section: String!,
         $parentId: String!,
         $pathUrl: String!,
@@ -25,8 +28,9 @@ export const AddSectionItemMutation = gql`
         $name: String!
         $alias: String!
     ) {
-        addSectionItem(
+        addOrUpdateSectionItem(
             sectionItem: {
+                id: $section,
                 section: $section,
                 parentId: $parentId,
                 pathUrl: $pathUrl,

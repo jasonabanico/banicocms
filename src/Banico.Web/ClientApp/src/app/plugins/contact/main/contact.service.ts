@@ -21,16 +21,9 @@ export class ContactService extends PluginService {
         });
     }
 
-    public add(contact: Contact): Observable<Contact> {
+    public addOrUpdate(contact: Contact): Observable<Contact> {
         let contentItem: ContentItem = contact.ToContentItem();
-        return this.contentItemService.add(contentItem)
-            .map(contentItem => new Contact(contentItem))
-            .catch(this.handleError);
-    }
-
-    public UpdateContact(contact: Contact): Observable<Contact> {
-        let contentItem: ContentItem = contact.ToContentItem();
-        return this.contentItemService.update(contentItem)
+        return this.contentItemService.addOrUpdate(contentItem)
             .map(contentItem => new Contact(contentItem))
             .catch(this.handleError);
     }

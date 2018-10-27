@@ -11,9 +11,6 @@ namespace Banico.Api.Models
             Field<StringGraphType>("tenant");
             Field<StringGraphType>("id");
             Field<StringGraphType>("name");
-            Field<StringGraphType>("createdBy");
-            Field<DateGraphType>("createdDate");
-            Field<DateGraphType>("lastUpdate");
             Field<StringGraphType>("parentId");
             
             Field<StringGraphType>("alias");

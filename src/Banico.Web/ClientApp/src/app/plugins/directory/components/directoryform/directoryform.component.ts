@@ -46,13 +46,8 @@ export class DirectoryFormComponent implements OnInit {
     }
 
     public save() {
-        if (!this.isEdit) {
-            this.directoryService.add(this.directoryItem)
-                .subscribe(directoryItem => this.saveDirectoryItemSuccess(directoryItem));
-        } else {
-            this.directoryService.update(this.directoryItem)
-                .subscribe(response => this.SaveResponse(response));
-        }
+        this.directoryService.addOrUpdate(this.directoryItem)
+            .subscribe(directoryItem => this.saveDirectoryItemSuccess(directoryItem));
     }
 
     private saveDirectoryItemSuccess(directoryItem: DirectoryItem) {

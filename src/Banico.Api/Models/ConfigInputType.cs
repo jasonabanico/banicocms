@@ -2,17 +2,18 @@ using GraphQL.Types;
 
 namespace Banico.Api.Models
 {
-    public class SectionInputType : InputObjectGraphType
+    public class ConfigInputType : InputObjectGraphType
     {
-        public SectionInputType()
+        public ConfigInputType()
         {
-            Name = "SectionInput";
+            Name = "ConfigInput";
 
             Field<StringGraphType>("tenant");
             Field<StringGraphType>("id");
             Field<StringGraphType>("name");
             
-            Field<StringGraphType>("modules");
+            Field<StringGraphType>("module");
+            Field<StringGraphType>("value");
         }
     }
 }

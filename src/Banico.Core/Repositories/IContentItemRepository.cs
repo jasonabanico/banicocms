@@ -39,6 +39,7 @@ namespace Banico.Core.Repositories
             string attribute19,
             string attribute20
         );
+        Task<ContentItem> AddOrUpdate(ContentItem item);
         Task<ContentItem> Add(ContentItem item);
         Task<ContentItem> Update(ContentItem item);
         Task<ContentItem> Delete(string id);

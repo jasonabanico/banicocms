@@ -37,16 +37,49 @@ namespace Banico.Data.Repositories
             return await sections.ToListAsync<Section>();
         }
 
+        public async Task<Section> AddOrUpdate(Section section)
+        {
+            if (string.IsNullOrEmpty(section.Id)) 
+            {
+                return await this.Add(section);
+            }
+            else
+            {
+                return await this.Update(section);
+            }
+        }
+
         public async Task<Section> Add(Section section)
         {
             section.Id = Guid.NewGuid().ToString();
-            section.CreatedDate = DateTimeOffset.Now;
             this.DbContext.Sections.Add(section);
             var result = await this.DbContext.SaveChangesAsync();
 
             if (result > 0)
             {
                 return section;
+            }
+
+            return new Section();
+        }
+
+        public async Task<Section> Update(Section section)
+        {
+            var storedSection = (await this.Get(section.Id,
+                string.Empty, string.Empty))
+                .FirstOrDefault();
+
+            if (storedSection != null)
+            {
+                storedSection.Name = section.Name;
+                storedSection.Modules = section.Modules;
+                
+                var result = await this.DbContext.SaveChangesAsync();
+
+                if (result > 0)
+                {
+                    return section;
+                }
             }
 
             return new Section();

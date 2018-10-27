@@ -22,6 +22,7 @@ namespace Banico.Core.Repositories
             string name,
             string parentId,
             bool isRoot);
+        Task<SectionItem> AddOrUpdate(SectionItem section);
         Task<SectionItem> Add(SectionItem section);
         Task<SectionItem> Update(SectionItem section);
         Task<SectionItem> Delete(string id);

@@ -74,6 +74,7 @@ namespace Banico.Data
         public DbSet<Section> Sections { get; set; }
         public DbSet<SectionItem> SectionItems { get; set; }
         public DbSet<ContentItem> ContentItems { get; set; }
+        public DbSet<Config> Configs { get; set; }
         public DbSet<Invite> Invites { get; set; }
     }
 }

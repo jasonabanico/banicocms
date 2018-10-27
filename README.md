@@ -1,4 +1,4 @@
-# Banico is a lean modular content engine for building content, collaboration, and community platforms. Built with ASP.Net Core, Angular, and Bootstrap.
+# Banico is a lean modular content management framework (CMF) for building content, collaboration, and community platforms. Built with ASP.Net Core, Angular, and Bootstrap.
 
 http://banico.org
 

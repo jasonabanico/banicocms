@@ -36,16 +36,9 @@ export class FaqService extends PluginService {
         return output;
     }
 
-    public add(faq: Faq): Observable<Faq> {
+    public addOrUpdate(faq: Faq): Observable<Faq> {
         let contentItem: ContentItem = faq.ToContentItem();
-        return this.contentItemService.add(contentItem)
-            .map(contentItem => new Faq(contentItem))
-            .catch(this.handleError);
-    }
-
-    public update(faq: Faq): Observable<Faq> {
-        let contentItem: ContentItem = faq.ToContentItem();
-        return this.contentItemService.update(contentItem)
+        return this.contentItemService.addOrUpdate(contentItem)
             .map(contentItem => new Faq(contentItem))
             .catch(this.handleError);
     }
