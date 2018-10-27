@@ -12,7 +12,7 @@ export class Contact {
   recipientEmail: string;
   senderName: string;
   senderEmail: string;
-  lastUpdate: string;
+  updatedDate: string;
 
   constructor(private contentItem: ContentItem) {
     if ((contentItem) && (contentItem.module == 'contact')) {
@@ -22,7 +22,7 @@ export class Contact {
       this.subject = contentItem.attribute01;
       this.recipientName = contentItem.attribute02;
       this.recipientEmail = contentItem.attribute03;      
-      this.lastUpdate = contentItem.lastUpdate;
+      this.updatedDate = contentItem.updatedDate;
       this.alias = contentItem.alias;
     }
   }
@@ -37,7 +37,7 @@ export class Contact {
     output.attribute01 = this.subject;
     output.attribute02 = this.recipientName;
     output.attribute03 = this.recipientEmail;
-    output.lastUpdate = this.lastUpdate;
+    output.updatedDate = this.updatedDate;
     output.alias = this.alias;
 
     return output;

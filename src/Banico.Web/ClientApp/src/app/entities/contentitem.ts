@@ -5,7 +5,8 @@ export class ContentItem {
   module: string;
   createdBy: string;
   createdDate: string;
-  lastUpdate: string;
+  updatedBy: string;
+  updatedDate: string;
   name: string;
   content: string;
   htmlContent: string;

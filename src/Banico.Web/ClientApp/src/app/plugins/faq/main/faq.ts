@@ -7,7 +7,7 @@ export class Faq {
   content: string;
   qas: Qa[];
   alias: string;
-  lastUpdate: string;
+  updatedDate: string;
 
   constructor(private contentItem: ContentItem) {
     if ((contentItem) && (contentItem.module == 'faq')) {
@@ -15,7 +15,7 @@ export class Faq {
       this.title = contentItem.name;
       this.content = contentItem.content;
       this.alias = contentItem.alias;
-      this.lastUpdate = contentItem.lastUpdate;
+      this.updatedDate = contentItem.updatedDate;
     }
   }
 

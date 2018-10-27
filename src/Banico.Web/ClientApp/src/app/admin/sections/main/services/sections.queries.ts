@@ -14,7 +14,8 @@ export const SectionsQuery = gql`
             id,
             createdBy,
             createdDate,
-            lastUpdate,
+            updatedBy,
+            updatedDate,
             name
         }
     }
@@ -42,7 +43,8 @@ export const SectionItemsQuery = gql`
             id,
             createdBy,
             createdDate,
-            lastUpdate,
+            updatedBy,
+            updatedDate,
             name,
             parentId,
             section,

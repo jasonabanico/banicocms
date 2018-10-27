@@ -6,7 +6,7 @@ export class Page {
   content: string;
   htmlContent: string;
   createdDate: string;
-  lastUpdate: string;
+  updatedDate: string;
   alias: string;
 
   constructor(private contentItem: ContentItem) {
@@ -16,7 +16,7 @@ export class Page {
       this.content = contentItem.content;
       this.htmlContent = contentItem.htmlContent;
       this.createdDate = contentItem.createdDate;
-      this.lastUpdate = contentItem.lastUpdate;
+      this.updatedDate = contentItem.updatedDate;
       this.alias = contentItem.alias;
     }
   }
@@ -29,7 +29,7 @@ export class Page {
     output.name = this.title;
     output.content = this.content;
     output.createdDate = this.createdDate;
-    output.lastUpdate = this.lastUpdate;
+    output.updatedDate = this.updatedDate;
     output.alias = this.alias;
 
     return output;

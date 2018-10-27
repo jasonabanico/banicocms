@@ -9,4 +9,4 @@
 
 <h1>{{profile.firstName}} {{profile.lastName}} ({{profile.alias}})</h1>
 <div [innerHtml]="profile.htmlContent"></div>
-<p class="text-muted">Last Update: {{ profile.lastUpdate | date }}</p>
+<p class="text-muted">Last Update: {{ profile.updatedDate | date }}</p>

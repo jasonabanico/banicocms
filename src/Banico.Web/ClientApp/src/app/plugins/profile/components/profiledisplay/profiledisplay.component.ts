@@ -55,7 +55,7 @@ export class ProfileDisplayComponent implements OnInit, OnDestroy {
     }
 
     public setProfile(profile: Profile) {
-        this.profile.lastUpdate = profile.lastUpdate;
+        this.profile.updatedDate = profile.updatedDate;
         this.profile.content = profile.content;
         this.profile.htmlContent = profile.htmlContent;
     }

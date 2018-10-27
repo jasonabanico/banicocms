@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const AddOrUpdateSectionMutation = gql`
     mutation (
-        $id: String!,
+        $id: String,
         $name: String!,
         $modules: String!
     ) {
@@ -20,7 +20,7 @@ export const AddOrUpdateSectionMutation = gql`
 
 export const AddOrUpdateSectionItemMutation = gql`
     mutation (
-        $id: String!,
+        $id: String,
         $section: String!,
         $parentId: String!,
         $pathUrl: String!,

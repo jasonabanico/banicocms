@@ -6,5 +6,5 @@ export class Profile {
   content: string;
   htmlContent: string;
   createdDate: string;
-  lastUpdate: string;
+  updatedDate: string;
 }
