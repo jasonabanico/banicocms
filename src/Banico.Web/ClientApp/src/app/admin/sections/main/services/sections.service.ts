@@ -6,8 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { SectionsQuery } from './sections.queries';
 import { SectionItemsQuery } from './sections.queries';
-import { AddSectionMutation } from './sections.mutations';
-import { AddSectionItemMutation } from './sections.mutations';
+import { AddOrUpdateSectionMutation, AddOrUpdateSectionItemMutation } from './sections.mutations';
 import { SectionsQueryResult } from './sections.queryresults';
 import { SectionItemsQueryResult } from './sections.queryresults';
 
@@ -84,9 +83,9 @@ export class SectionsService {
         return result;
     }
 
-    public AddSection(section: Section): Observable<any> {
+    public AddOrUpdateSection(section: Section): Observable<any> {
         var result = this.apollo.mutate({
-            mutation: AddSectionMutation,
+            mutation: AddOrUpdateSectionMutation,
             variables: {
                 name: section.name,
                 modules: section.modules
@@ -207,9 +206,9 @@ export class SectionsService {
             //});
     }
 
-    public AddSectionItem(sectionItem: SectionItem): Observable<any> {
+    public AddOrUpdateSectionItem(sectionItem: SectionItem): Observable<any> {
         var result = this.apollo.mutate({
-            mutation: AddSectionItemMutation,
+            mutation: AddOrUpdateSectionItemMutation,
             variables: {
                 section: sectionItem.section,
                 parentId: sectionItem.parentId,
@@ -221,26 +220,6 @@ export class SectionsService {
         }).map(this.AddResult);
 
         return result;
-            //.subscribe({
-                //next: x => console.log('Observer got a next value: ' + x),
-                //error: err => alert(JSON.stringify(err)),
-                //complete: () => console.log('Saved completed.'),
-            //});
-    }
-
-    // Observable<Response>
-    public UpdateSectionItem(sectionItem: SectionItem): Observable<{}> {
-        let headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        let data = 'id=' + sectionItem.id + 
-            '&name=' + encodeURIComponent(sectionItem.name) + 
-            '&alias=' + sectionItem.alias + 
-            '&description=' + encodeURIComponent(sectionItem.description);
-        return this.http
-            .post(this.sectionApiBaseUrl + '/Update', data, {
-                headers: headers
-            })
-            .map(this.ExtractData);
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),

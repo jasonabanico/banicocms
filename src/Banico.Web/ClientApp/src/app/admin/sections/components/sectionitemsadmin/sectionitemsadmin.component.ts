@@ -101,17 +101,17 @@ export class SectionItemsAdminComponent implements OnInit {
         this.navBarService.setNavBarItem(null, parentSectionItem);
     }
 
-    public addSectionItem() {
+    public saveSectionItem() {
         var alias: string = this.newSectionItem.name.toLowerCase();
         alias = alias.replace(/ /g, "-");
         alias = alias.replace(/\W/g, "");
         this.newSectionItem.alias = alias;
 
-        this.sectionsService.AddSectionItem(this.newSectionItem)
-            .subscribe(sectionItem => this.addSectionItemSuccess(sectionItem));
+        this.sectionsService.AddOrUpdateSectionItem(this.newSectionItem)
+            .subscribe(sectionItem => this.saveSectionItemSuccess(sectionItem));
     }
 
-    private addSectionItemSuccess(sectionItem: SectionItem) {
+    private saveSectionItemSuccess(sectionItem: SectionItem) {
         if (sectionItem.id != '') {
             alert('Saved.');
             this.navBarService.addSectionItem(0, sectionItem);
@@ -138,11 +138,6 @@ export class SectionItemsAdminComponent implements OnInit {
         this.newSectionItem.parentId = this.parentSectionItem.id;
     }
     
-    private updateSectionItem() {
-        this.sectionsService.UpdateSectionItem(this.parentSectionItem)
-            .subscribe(data => this.SaveResponse(data));
-    }
-
     private SaveResponse(data: any) {
         if (data != null) {
             if (data.value != null) {

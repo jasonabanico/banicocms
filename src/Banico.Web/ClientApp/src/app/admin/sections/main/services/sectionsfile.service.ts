@@ -95,7 +95,7 @@ export class SectionsFileService {
                     path = section.pathUrl + this.PATH_DELIM;
                 }
 
-                this.sectionService.AddSectionItem(section)
+                this.sectionService.AddOrUpdateSectionItem(section)
                     .subscribe(newSection => this.ProcessPair(newSection,
                         sectionType, 
                         newSection.id, 

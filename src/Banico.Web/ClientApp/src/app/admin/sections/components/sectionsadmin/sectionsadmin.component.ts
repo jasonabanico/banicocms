@@ -30,12 +30,12 @@ export class SectionsAdminComponent implements OnInit {
         this.sections = sections;
     }
 
-    public addSection() {
-        this.sectionService.AddSection(this.section)
-            .subscribe(section => this.addSectionSuccess(section));
+    public saveSection() {
+        this.sectionService.AddOrUpdateSection(this.section)
+            .subscribe(section => this.saveSectionSuccess(section));
     }
 
-    private addSectionSuccess(section: Section) {
+    private saveSectionSuccess(section: Section) {
         if (section.id != '0') {
             alert('Saved.');
             this.section = section;

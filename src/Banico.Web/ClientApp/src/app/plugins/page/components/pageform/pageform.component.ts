@@ -39,13 +39,8 @@ export class PageFormComponent implements OnInit {
     }
 
     public save() {
-        if (!this.isEdit) {
-            this.pageService.add(this.page)
-                .subscribe(result => this.savePageSuccess(this.page));
-        } else {
-            this.pageService.update(this.page)
-                .subscribe(response => this.SaveResponse(this.page));
-        }
+        this.pageService.addOrUpdate(this.page)
+            .subscribe(result => this.savePageSuccess(this.page));
     }
 
     private savePageSuccess(page: Page) {

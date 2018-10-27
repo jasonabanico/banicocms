@@ -22,16 +22,9 @@ export class PageService extends PluginService {
         });
     }
 
-    public add(page: Page): Observable<Page> {
+    public addOrUpdate(page: Page): Observable<Page> {
         let contentItem: ContentItem = page.ToContentItem();
-        return this.contentItemService.add(contentItem)
-            .map(contentItem => new Page(contentItem))
-            .catch(this.handleError);
-    }
-
-    public update(page: Page): Observable<Page> {
-        let contentItem: ContentItem = page.ToContentItem();
-        return this.contentItemService.update(contentItem)
+        return this.contentItemService.addOrUpdate(contentItem)
             .map(contentItem => new Page(contentItem))
             .catch(this.handleError);
     }
