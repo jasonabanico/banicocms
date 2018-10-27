@@ -20,8 +20,7 @@ export class SectionsAdminComponent implements OnInit {
     ngOnInit() {
         this.sections = new Array();
         this.section = new Section();
-        this.section.initialize();
-        this.sectionService.GetSections('', '', '')
+        this.sectionService.getSections('', '', '')
             .subscribe(sections => this.setSections(sections));
     }
 
@@ -31,7 +30,7 @@ export class SectionsAdminComponent implements OnInit {
     }
 
     public saveSection() {
-        this.sectionService.AddOrUpdateSection(this.section)
+        this.sectionService.addOrUpdateSection(this.section)
             .subscribe(section => this.saveSectionSuccess(section));
     }
 

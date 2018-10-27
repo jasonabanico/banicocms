@@ -38,7 +38,7 @@ export class NavBarService {
             section.name = adminSection;
             sections.push(section);
         } else {
-            sections = await this.sectionsService.GetSections('', module, '').first().toPromise();
+            sections = await this.sectionsService.getSections('', module, '').first().toPromise();
         }
 
         this.initializeNavBarItems(sections);

@@ -37,7 +37,7 @@ export class SectionsService {
         // this.itemApiBaseUrl = `${this.baseUrl}/api/Item`;
     }
 
-    private AddResult(res: any) {
+    private saveResult(res: any) {
         var id = 0;
         var output;
         if (res.data.addSection) {
@@ -55,7 +55,7 @@ export class SectionsService {
         return output || {};
     }
 
-    private ExtractData(res: Response) {
+    private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Response status: ' + res.status);
         }
@@ -63,7 +63,7 @@ export class SectionsService {
         return body || {};
     }
 
-    public GetSections(
+    public getSections(
         id: string,
         module: string,
         name: string
@@ -83,14 +83,15 @@ export class SectionsService {
         return result;
     }
 
-    public AddOrUpdateSection(section: Section): Observable<any> {
+    public addOrUpdateSection(section: Section): Observable<any> {
         var result = this.apollo.mutate({
             mutation: AddOrUpdateSectionMutation,
             variables: {
+                id: section.id,
                 name: section.name,
                 modules: section.modules
             }
-        }).map(this.AddResult);
+        }).map(this.saveResult);
 
         return result;
             //.subscribe({
@@ -206,7 +207,7 @@ export class SectionsService {
             //});
     }
 
-    public AddOrUpdateSectionItem(sectionItem: SectionItem): Observable<any> {
+    public addOrUpdateSectionItem(sectionItem: SectionItem): Observable<any> {
         var result = this.apollo.mutate({
             mutation: AddOrUpdateSectionItemMutation,
             variables: {
@@ -217,7 +218,7 @@ export class SectionsService {
                 name: encodeURIComponent(sectionItem.name),
                 alias: sectionItem.alias
             }
-        }).map(this.AddResult);
+        }).map(this.saveResult);
 
         return result;
             //.subscribe({

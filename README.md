@@ -15,7 +15,7 @@ http://banico.org
 
 ```bash
 # clone repository
-git clone https://github.com/jasebanico/banico
+git clone https://github.com/jasebanico/banicocms
 
 # get server dependencies
 cd banico/src/Banico.Web

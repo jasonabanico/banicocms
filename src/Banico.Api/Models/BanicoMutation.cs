@@ -77,7 +77,7 @@ namespace Banico.Api.Models
         {
             ClaimsPrincipal caller = _httpContextAccessor.HttpContext.User;
 
-            if (caller.Claims != null) {
+            if ((caller != null) && (caller.Claims != null)) {
                 var userIdClaim = caller.Claims.Single(c => c.Type == "id");
                 if (userIdClaim != null) {
                     return userIdClaim.Value;

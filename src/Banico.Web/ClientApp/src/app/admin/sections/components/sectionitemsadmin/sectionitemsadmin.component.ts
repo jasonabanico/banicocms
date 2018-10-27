@@ -107,7 +107,7 @@ export class SectionItemsAdminComponent implements OnInit {
         alias = alias.replace(/\W/g, "");
         this.newSectionItem.alias = alias;
 
-        this.sectionsService.AddOrUpdateSectionItem(this.newSectionItem)
+        this.sectionsService.addOrUpdateSectionItem(this.newSectionItem)
             .subscribe(sectionItem => this.saveSectionItemSuccess(sectionItem));
     }
 
