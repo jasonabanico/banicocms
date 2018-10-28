@@ -30,7 +30,7 @@ export const AddOrUpdateSectionItemMutation = gql`
     ) {
         addOrUpdateSectionItem(
             sectionItem: {
-                id: $section,
+                id: $id,
                 section: $section,
                 parentId: $parentId,
                 pathUrl: $pathUrl,

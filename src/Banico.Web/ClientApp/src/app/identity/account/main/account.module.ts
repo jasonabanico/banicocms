@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientXsrfModule } from '@angular/common/http';
-import { FormsModule }  from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule }  from '@angular/forms';
 
 import { SharedModule }   from '../../../shared/modules/shared.module';
 import { AccountService }  from './account.service';

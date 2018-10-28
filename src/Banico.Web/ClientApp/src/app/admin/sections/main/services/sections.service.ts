@@ -83,13 +83,17 @@ export class SectionsService {
         return result;
     }
 
-    public addOrUpdateSection(section: Section): Observable<any> {
+    public addOrUpdateSection(
+        id: string,
+        name: string,
+        modules: string
+    ): Observable<any> {
         var result = this.apollo.mutate({
             mutation: AddOrUpdateSectionMutation,
             variables: {
-                id: section.id,
-                name: section.name,
-                modules: section.modules
+                id: id,
+                name: name,
+                modules: modules
             }
         }).map(this.saveResult);
 
@@ -101,14 +105,14 @@ export class SectionsService {
             //});
     }
 
-    public GetSectionItemByPath(
+    public getSectionItemByPath(
         pathUrl: string
     ): Observable<SectionItem[]> {
         var section = this.getSection(pathUrl);
         var parentPathUrl = this.getParentPathUrl(pathUrl);
         var alias = this.getAlias(pathUrl);
 
-        return this.GetSectionItems('', section, parentPathUrl, alias, '', '', false)
+        return this.getSectionItems('', section, parentPathUrl, alias, '', '', false)
     }
 
     private getSection(pathUrl: string): string {
@@ -147,7 +151,7 @@ export class SectionsService {
         return '';
     }
 
-    public GetSectionItems(
+    public getSectionItems(
         id: string,
         section: string,
         pathUrl: string,
@@ -178,7 +182,7 @@ export class SectionsService {
     }
     
     // Observable<Item[]>
-    public GetItemsByPathUrl(pathUrl: string): Observable<ContentItem[]> {
+    public getItemsByPathUrl(pathUrl: string): Observable<ContentItem[]> {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'pathUrl=' + pathUrl;
@@ -192,7 +196,7 @@ export class SectionsService {
     }
     
     // Observable<string>
-    public IsLoggedIn(): Observable<string> {
+    public isLoggedIn(): Observable<string> {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         return this.http
@@ -207,16 +211,25 @@ export class SectionsService {
             //});
     }
 
-    public addOrUpdateSectionItem(sectionItem: SectionItem): Observable<any> {
+    public addOrUpdateSectionItem(
+        id: string,
+        section: string,
+        parentId: string,
+        pathUrl: string,
+        pathName: string,
+        name: string,
+        alias: string
+    ): Observable<any> {
         var result = this.apollo.mutate({
             mutation: AddOrUpdateSectionItemMutation,
             variables: {
-                section: sectionItem.section,
-                parentId: sectionItem.parentId,
-                pathUrl: sectionItem.pathUrl,
-                pathName: encodeURIComponent(sectionItem.pathName),
-                name: encodeURIComponent(sectionItem.name),
-                alias: sectionItem.alias
+                id: id,
+                section: section,
+                parentId: parentId,
+                pathUrl: pathUrl,
+                pathName: encodeURIComponent(pathName),
+                name: encodeURIComponent(name),
+                alias: alias
             }
         }).map(this.saveResult);
 

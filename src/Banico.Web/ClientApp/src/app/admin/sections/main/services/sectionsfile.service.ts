@@ -40,7 +40,7 @@ export class SectionsFileService {
                 var alias: string = remainingFields[1].replace(/(\r\n|\n|\r)/gm,"");;
                 remainingFields.splice(0, 2);
 
-                this.sectionService.GetSectionItems(
+                this.sectionService.getSectionItems(
                     '', '', '', '', name, parentId, false
                 )
                     .subscribe(sectionItem => this.ProcessSectionItem(
@@ -69,7 +69,7 @@ export class SectionsFileService {
     }
 
     public ProcessSectionItem(
-        section: SectionItem, 
+        sectionItem: SectionItem, 
         sectionType: string, 
         name: string, 
         alias: string, 
@@ -78,28 +78,36 @@ export class SectionsFileService {
         path: string, 
         remainingFields: string[], 
         lines: string[]) {
-        if (isNaN(Number(section.id)) || (Number(section.id) == 0)) {
+        if (isNaN(Number(sectionItem.id)) || (Number(sectionItem.id) == 0)) {
             if (name != '') {
-                section.name = name;
-                section.alias = alias;
-                section.section = sectionType;
-                section.pathName = pathName;
-                section.pathUrl = path;
-                section.parentId = parentId;
+                sectionItem.name = name;
+                sectionItem.alias = alias;
+                sectionItem.section = sectionType;
+                sectionItem.pathName = pathName;
+                sectionItem.pathUrl = path;
+                sectionItem.parentId = parentId;
 
                 if (pathName) {
-                    pathName = section.pathName + this.PATH_DELIM;
+                    pathName = sectionItem.pathName + this.PATH_DELIM;
                 }
 
                 if (path) {
-                    path = section.pathUrl + this.PATH_DELIM;
+                    path = sectionItem.pathUrl + this.PATH_DELIM;
                 }
 
-                this.sectionService.addOrUpdateSectionItem(section)
+                this.sectionService.addOrUpdateSectionItem(
+                    sectionItem.id,
+                    sectionItem.section,
+                    sectionItem.parentId,
+                    sectionItem.pathUrl,
+                    sectionItem.pathName,
+                    sectionItem.name,
+                    sectionItem.alias
+                    )
                     .subscribe(newSection => this.ProcessPair(newSection,
                         sectionType, 
                         newSection.id, 
-                        pathName + section.name, 
+                        pathName + sectionItem.name, 
                         path + newSection.alias, 
                         remainingFields,
                         lines));
@@ -114,11 +122,11 @@ export class SectionsFileService {
                 path = path + this.PATH_DELIM;
             }
 
-            this.ProcessPair(section,
+            this.ProcessPair(sectionItem,
                 sectionType, 
-                section.id, 
-                pathName + section.name, 
-                path + section.alias, 
+                sectionItem.id, 
+                pathName + sectionItem.name, 
+                path + sectionItem.alias, 
                 remainingFields,
                 lines);
         }

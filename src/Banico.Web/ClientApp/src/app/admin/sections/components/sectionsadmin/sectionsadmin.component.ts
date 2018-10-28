@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Section } from '../../../../entities/section';
+import { Validators, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SectionsService } from '../../main/services/sections.service';
+import { Section } from '../../../../entities/section';
 
 @Component({
     selector: 'sectionsadmin',
@@ -9,18 +10,30 @@ import { SectionsService } from '../../main/services/sections.service';
     providers: [SectionsService]
 })
 export class SectionsAdminComponent implements OnInit {
+    isSuccessful: boolean;
+    isRequesting: boolean;
+    errors: string;  
     public sections: Section[];
     public section: Section;
 
+    sectionForm = this.fb.group({
+        id: [''],
+        name: ['', Validators.required],
+        modules: ['', Validators.required]
+      });
+
     constructor(
-        @Inject(SectionsService) public sectionService: SectionsService
-    ) {
+        private sectionsService: SectionsService,
+        private router: Router,
+        private fb: FormBuilder,
+        private route: ActivatedRoute
+        ) {
     }
 
     ngOnInit() {
         this.sections = new Array();
         this.section = new Section();
-        this.sectionService.getSections('', '', '')
+        this.sectionsService.getSections('', '', '')
             .subscribe(sections => this.setSections(sections));
     }
 
@@ -29,12 +42,21 @@ export class SectionsAdminComponent implements OnInit {
         this.sections = sections;
     }
 
-    public saveSection() {
-        this.sectionService.addOrUpdateSection(this.section)
-            .subscribe(section => this.saveSectionSuccess(section));
+    public save() {
+        this.sectionsService.addOrUpdateSection(
+            this.sectionForm.value['id'],
+            this.sectionForm.value['name'],
+            this.sectionForm.value['modules']
+        )
+        .finally(() => this.isRequesting = false)
+        .subscribe(
+        result  => {
+            this.isSuccessful = true;
+        },
+        errors =>  this.errors = errors);
     }
 
-    private saveSectionSuccess(section: Section) {
+    private saveSuccess(section: Section) {
         if (section.id != '0') {
             alert('Saved.');
             this.section = section;

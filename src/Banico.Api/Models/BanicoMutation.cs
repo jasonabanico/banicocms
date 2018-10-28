@@ -1,10 +1,10 @@
+using System;
 using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using GraphQL.Types;
 using Banico.Core.Entities;
 using Banico.Core.Repositories;
-using System;
 
 namespace Banico.Api.Models
 {
@@ -75,25 +75,20 @@ namespace Banico.Api.Models
 
         private string GetCurrentUserId()
         {
-            ClaimsPrincipal caller = _httpContextAccessor.HttpContext.User;
-
-            if ((caller != null) && (caller.Claims != null)) {
-                var userIdClaim = caller.Claims.Single(c => c.Type == "id");
-                if (userIdClaim != null) {
-                    return userIdClaim.Value;
-                }
-            }
-
-            return string.Empty;
+            return _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
 
-        private void StampItem(Item item) {
+        private void StampItem(Item item) 
+        {
             string user = this.GetCurrentUserId();
-            
-            if (string.IsNullOrEmpty(item.Id)) {
+
+            if (string.IsNullOrEmpty(item.Id)) 
+            {
                 item.CreatedBy = user;
                 item.CreatedDate = DateTimeOffset.UtcNow;
-            } else {
+            } 
+            else 
+            {
                 item.UpdatedBy = user;
                 item.UpdatedDate = DateTimeOffset.UtcNow;
             }

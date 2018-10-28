@@ -68,13 +68,13 @@ export class NavBarService {
         var sectionPathUrl: string = this.pathUrlSegmentBySection(sectionName);
 
         if (sectionPathUrl) {
-            var sectionItems = await this.sectionsService.GetSectionItemByPath(sectionName + this.TYPE_DELIM + 
+            var sectionItems = await this.sectionsService.getSectionItemByPath(sectionName + this.TYPE_DELIM + 
                 sectionPathUrl).first().toPromise();
             await this.setNavBarItem(navBarItem, sectionItems[0]);
         }
 
         if (!sectionPathUrl) {
-            sectionItems = await this.sectionsService.GetSectionItems('', sectionName, 
+            sectionItems = await this.sectionsService.getSectionItems('', sectionName, 
                 '', '', '', '', true).first().toPromise();
             navBarItem.childSectionItems = this.cleanChildSectionItems(navBarItem, sectionItems);
         }
@@ -102,7 +102,7 @@ export class NavBarService {
         this.setPathUrls(navBarItem, sectionPathUrl);
 
         // set child section items
-        var sectionItems = await this.sectionsService.GetSectionItems('', '', '', '', '', navBarItem.sectionItem.id, false).first().toPromise();
+        var sectionItems = await this.sectionsService.getSectionItems('', '', '', '', '', navBarItem.sectionItem.id, false).first().toPromise();
         navBarItem.childSectionItems = this.cleanChildSectionItems(navBarItem, sectionItems);
     }
 

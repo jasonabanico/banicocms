@@ -6,17 +6,36 @@
     </li>
 </ul>
 
-<div class="container">
-    <input type="hidden" [(ngModel)]="section.id" name="id" />
-    <div class="form-group row">
-        <label for="name">Name</label>
-        <input type="text" [(ngModel)]="section.name" name="name" class="form-control" />
+<form [formGroup]="sectionForm" novalidate (ngSubmit)="save()">
+    <input type="hidden"
+        id="id" 
+        name="id"
+        formControlName="id" />
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="name">Name</label>
+        <div class="col-md-10">
+            <input 
+                class="form-control" 
+                id="name" 
+                name="name"
+                type="text"
+                formControlName="name"
+                required />
+        </div>
+    </div>    
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="modules">Modules (leave blank for primary section)</label>
+        <div class="col-md-10">
+            <input 
+                class="form-control" 
+                id="modules" 
+                name="modules"
+                type="text"
+                formControlName="modules"
+                required />
+        </div>
     </div>
     <div class="form-group row">
-        <label for="name">Modules (leave blank for primary section)</label>
-        <input type="text" [(ngModel)]="section.modules" name="modules" class="form-control" />
+        <button type="submit" class="btn btn-primary" value="save">Save</button>
     </div>
-    <div class="form-group row">
-        <button type="submit" class="btn btn-primary" (click)="saveSection()" value="add">Add</button>
-    </div>
-</div>
+</form>

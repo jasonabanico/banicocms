@@ -1,9 +1,10 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SectionItem } from '../../../../entities/sectionitem';
 import { NavBarService } from '../../../../shell/navbar/navbar.service';
 import { SectionsService } from '../../main/services/sections.service';
 import { SectionsFileService } from '../../main/services/sectionsfile.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'sectionitemsadmin',
@@ -24,10 +25,17 @@ export class SectionItemsAdminComponent implements OnInit {
     readonly TYPE_DELIM: string = '~';
     readonly SECTION_DELIM: string = '*';
 
+    sectionItemForm = this.fb.group({
+        id: [''],
+        name: ['', Validators.required]
+      });
+
     public constructor(
-        @Inject(NavBarService) private navBarService: NavBarService,
-        @Inject(SectionsService) private sectionsService: SectionsService,
-        @Inject(SectionsFileService) private sectionFileService: SectionsFileService,
+        private navBarService: NavBarService,
+        private sectionsService: SectionsService,
+        private sectionFileService: SectionsFileService,
+        private router: Router,
+        private fb: FormBuilder,
         private route: ActivatedRoute
     ) {
     }
@@ -48,7 +56,7 @@ export class SectionItemsAdminComponent implements OnInit {
             if (params['path']) {
                 pathUrl = params['path'];
                 section = pathUrl.split(this.TYPE_DELIM)[0];
-                this.sectionsService.GetSectionItemByPath(pathUrl)
+                this.sectionsService.getSectionItemByPath(pathUrl)
                     .subscribe(sectionItems => {
                         if (sectionItems.length > 0) {
                             this.setParentSectionItem(sectionItems[0], pathUrl);
@@ -101,13 +109,22 @@ export class SectionItemsAdminComponent implements OnInit {
         this.navBarService.setNavBarItem(null, parentSectionItem);
     }
 
-    public saveSectionItem() {
-        var alias: string = this.newSectionItem.name.toLowerCase();
+    public save() {
+        this.newSectionItem.name = this.sectionItemForm.value['name'];
+        let alias: string = this.newSectionItem.name.toLowerCase();
         alias = alias.replace(/ /g, "-");
         alias = alias.replace(/\W/g, "");
         this.newSectionItem.alias = alias;
 
-        this.sectionsService.addOrUpdateSectionItem(this.newSectionItem)
+        this.sectionsService.addOrUpdateSectionItem(
+            this.newSectionItem.id,
+            this.newSectionItem.section,
+            this.newSectionItem.parentId,
+            this.newSectionItem.pathUrl,
+            this.newSectionItem.pathName,
+            this.newSectionItem.name,
+            this.newSectionItem.alias
+        )
             .subscribe(sectionItem => this.saveSectionItemSuccess(sectionItem));
     }
 
