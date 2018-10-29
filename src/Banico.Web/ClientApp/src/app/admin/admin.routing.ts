@@ -8,6 +8,7 @@ import { RoleFormComponent } from './roles/components/roleform/roleform.componen
 import { RolesListComponent } from './roles/components/roleslist/roleslist.component';
 import { UserFormComponent } from './users/components/userform/userform.component';
 import { UsersListComponent } from './users/components/userslist/userslist.component';
+import { ConfigFormComponent } from './configs/components/configform/configform.component';
 
 const ADMIN_ROUTES: Routes = [
     { path: 'admin', component: AdminComponent },
@@ -19,7 +20,8 @@ const ADMIN_ROUTES: Routes = [
     { path: 'admin/roles', component: RolesListComponent},
     { path: 'admin/users/add', component: UserFormComponent},
     { path: 'admin/users/edit/:id', component: UserFormComponent},
-    { path: 'admin/users', component: UsersListComponent}];
+    { path: 'admin/users', component: UsersListComponent},
+    { path: 'admin/configs/add', component: ConfigFormComponent}];
 
 @NgModule({
     imports: [

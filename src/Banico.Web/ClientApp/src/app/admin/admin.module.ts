@@ -9,6 +9,7 @@ import { AdminComponent } from './admin/admin.component';
 import { RolesModule } from './roles/main/roles.module';
 import { SectionsModule } from './sections/main/sections.module';
 import { UsersModule } from './users/main/users.module';
+import { ConfigsModule } from './configs/main/configs.module';
 
 @NgModule({
     imports: [ 
@@ -18,7 +19,8 @@ import { UsersModule } from './users/main/users.module';
         AdminRoutingModule,
         RolesModule,
         SectionsModule,
-        UsersModule
+        UsersModule,
+        ConfigsModule
     ],
     declarations: [ 
         AdminComponent
