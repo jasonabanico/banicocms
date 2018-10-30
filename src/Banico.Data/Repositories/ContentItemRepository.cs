@@ -244,6 +244,8 @@ namespace Banico.Data.Repositories
                 updateItem.Attribute18 = item.Attribute18;
                 updateItem.Attribute19 = item.Attribute19;
                 updateItem.Attribute20 = item.Attribute20;
+                updateItem.UpdatedBy = item.UpdatedBy;
+                updateItem.UpdatedDate = item.UpdatedDate;
                 var result = await this.DbContext.SaveChangesAsync();
 
                 if (result > 0)

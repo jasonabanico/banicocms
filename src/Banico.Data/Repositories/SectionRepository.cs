@@ -73,6 +73,8 @@ namespace Banico.Data.Repositories
             {
                 storedSection.Name = section.Name;
                 storedSection.Modules = section.Modules;
+                storedSection.UpdatedBy = section.UpdatedBy;
+                storedSection.UpdatedDate = section.UpdatedDate;
                 
                 var result = await this.DbContext.SaveChangesAsync();
 

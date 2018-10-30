@@ -75,6 +75,8 @@ namespace Banico.Data.Repositories
                 Config storedConfig = storedConfigs[0];
                 storedConfig.Name = config.Name;
                 storedConfig.Value = config.Value;
+                storedConfig.UpdatedBy = config.UpdatedBy;
+                storedConfig.UpdatedDate = config.UpdatedDate;
                 
                 var result = await this.DbContext.SaveChangesAsync();
 
