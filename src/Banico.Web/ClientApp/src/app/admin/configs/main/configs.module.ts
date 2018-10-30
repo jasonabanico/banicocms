@@ -4,7 +4,7 @@ import { HttpClientXsrfModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule }  from '@angular/forms';
 import { ConfigsService } from './configs.service';
 import { ConfigFormComponent } from '../components/configform/configform.component';
-import { ConfigListComponent } from '../components/configlist/configlist.component';
+import { ConfigsListComponent } from '../components/configslist/configslist.component';
 
 @NgModule({
   imports: [
@@ -18,7 +18,7 @@ import { ConfigListComponent } from '../components/configlist/configlist.compone
   ],
   declarations: [
     ConfigFormComponent,
-    ConfigListComponent
+    ConfigsListComponent
   ],
   providers: [ 
     ConfigsService

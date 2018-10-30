@@ -1,0 +1,36 @@
+<h1>
+  Configs
+</h1>
+
+<div class="btn-group">
+  <a href="/admin/configs/add" class="btn btn-primary">
+      <i class="glyphicon glyphicon-plus"></i> Add Config
+  </a>
+</div>
+<div class="top-buffer"></div>
+<table class="table table-bordered table-striped table-condensed">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Module</th>
+          <th>Value</th>                    
+          <th>Action</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let config of configs">
+          <td>{{config.name}}</td>
+          <td>{{config.module}}</td>  
+          <td>{{config.value}}</td>                                              
+          <td>
+              <a href="/admin/config/edit/{{config.id}}"
+                  class="btn btn-primary">
+                  <i class="glyphicon glyphicon-pencil"></i> Edit
+              </a>
+              <a href="/admin/roles/delete/{{config.id}}" class="btn btn-danger">
+                  <i class="glyphicon glyphicon-trash"></i> Delete
+              </a>
+          </td>
+      </tr>
+  </tbody>
+</table>

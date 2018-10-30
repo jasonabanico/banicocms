@@ -9,8 +9,7 @@ namespace Banico.Core.Repositories
 {
     public interface IConfigRepository
     {
-        Task<Config> Get(string id, string module, string name);
-        Task<List<Config>> GetAll();
+        Task<List<Config>> Get(string id, string module, string name);
         Task<Config> AddOrUpdate(Config config);
         Task<Config> Add(Config config);
         Task<Config> Update(Config config);

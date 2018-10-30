@@ -6,7 +6,7 @@ export const ConfigsQuery = gql`
         $name: String,
         $module: String
     ) {
-        sections(
+        configs(
             id: $id,
             name: $name,
             module: $module

@@ -21,7 +21,7 @@ namespace Banico.Data.Repositories
             this.DbContext = dbContext;
         }
 
-        public async Task<Config> Get(
+        public async Task<List<Config>> Get(
             string id,
             string module,
             string name)
@@ -35,16 +35,8 @@ namespace Banico.Data.Repositories
                     (config.Name == name ||
                         string.IsNullOrEmpty(name))
                 select config;
- 
-            return await configs.FirstOrDefaultAsync();
-        }
 
-        public async Task<List<Config>> GetAll()
-        {
-            var configs = from config in this.DbContext.Configs
-                select config;
- 
-            return await configs.ToListAsync<Config>();
+            return await configs.ToListAsync();
         }
 
         public async Task<Config> AddOrUpdate(Config config)
@@ -75,11 +67,12 @@ namespace Banico.Data.Repositories
 
         public async Task<Config> Update(Config config)
         {
-            var storedConfig = (await this.Get(config.Id,
+            var storedConfigs = (await this.Get(config.Id,
                 string.Empty, string.Empty));
 
-            if (storedConfig != null)
+            if (storedConfigs.Count() > 0)
             {
+                Config storedConfig = storedConfigs[0];
                 storedConfig.Name = config.Name;
                 storedConfig.Value = config.Value;
                 
@@ -96,13 +89,17 @@ namespace Banico.Data.Repositories
 
         public async Task<Config> Delete(string id)
         {
-            var config = await this.Get(id, string.Empty, string.Empty);
-            this.DbContext.Remove(config);
-            var result = await this.DbContext.SaveChangesAsync();
-
-            if (result > 0)
+            var configs = await this.Get(id, string.Empty, string.Empty);
+            if (configs.Count() > 0)
             {
-                return config;
+                Config config = configs[0];
+                this.DbContext.Remove(config);
+                var result = await this.DbContext.SaveChangesAsync();
+
+                if (result > 0)
+                {
+                    return config;
+                }
             }
 
             return new Config();

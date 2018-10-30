@@ -13,9 +13,6 @@ import { Config } from '../../../entities/config';
 @Injectable()
 export class ConfigsService {
     accountUrl: string;
-    sectionApiBaseUrl: string;
-    sectionTypeApiBaseUrl: string;
-    itemApiBaseUrl: string;
 
     constructor(
         private http: HttpClient,
@@ -31,9 +28,9 @@ export class ConfigsService {
     private addResult(res: any) {
         var id = '';
         var output;
-        if (res.data.addContentItem) {
-            id = res.data.addContentItem.id;
-            output = res.data.addContentItem;
+        if (res.data.addConfig) {
+            id = res.data.addConfig.id;
+            output = res.data.addConfig;
         }
 
         if (id == ''){
