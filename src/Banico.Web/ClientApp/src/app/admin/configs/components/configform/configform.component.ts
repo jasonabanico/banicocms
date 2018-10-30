@@ -10,6 +10,7 @@ import { Config } from '../../../../entities/config';
     providers: [ConfigsService]
 })
 export class ConfigFormComponent implements OnInit {
+    private sub: any;
     isSuccessful: boolean;
     isRequesting: boolean;
     errors: string;  
@@ -31,7 +32,25 @@ export class ConfigFormComponent implements OnInit {
         ) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            if (params['id']) {
+            var id = params['id'];
+            this.configsService.get(id, '', '')
+                .subscribe(config => {
+                this.set(config);
+                });
+            }
+        });
+    }
+    
+    private set(config: Config) {
+        this.configForm.patchValue({
+            id: config.id,
+            name: config.name,
+            module: config.module,
+            value: config.value
+        });
     }
 
     public save() {

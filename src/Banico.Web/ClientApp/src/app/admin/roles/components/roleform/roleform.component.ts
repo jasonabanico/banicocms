@@ -47,17 +47,18 @@ export class RoleFormComponent {
       name: role.name
     });
   }
-    public save() {
-      this.isRequesting = true;
-      this.rolesService.addOrUpdate(
-        this.roleForm.value['id'],
-        this.roleForm.value['name']
-      )
-      .finally(() => this.isRequesting = false)
-      .subscribe(
-        result  => {
-          this.isSuccessful = true;
-        },
-        errors =>  this.errors = errors);
-    }
+
+  public save() {
+    this.isRequesting = true;
+    this.rolesService.addOrUpdate(
+      this.roleForm.value['id'],
+      this.roleForm.value['name']
+    )
+    .finally(() => this.isRequesting = false)
+    .subscribe(
+      result  => {
+        this.isSuccessful = true;
+      },
+      errors =>  this.errors = errors);
+  }
 }
