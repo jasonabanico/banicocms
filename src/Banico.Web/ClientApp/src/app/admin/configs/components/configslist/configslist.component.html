@@ -11,16 +11,16 @@
 <table class="table table-bordered table-striped table-condensed">
   <thead>
       <tr>
-          <th>Name</th>
-          <th>Module</th>
-          <th>Value</th>                    
-          <th>Action</th>
+        <th>Module</th>
+        <th>Name</th>
+        <th>Value</th>                    
+        <th>Action</th>
       </tr>
   </thead>
   <tbody>
       <tr *ngFor="let config of configs">
-          <td>{{config.name}}</td>
-          <td>{{config.module}}</td>  
+        <td>{{config.module}}</td>  
+        <td>{{config.name}}</td>
           <td>{{config.value}}</td>                                              
           <td>
               <a href="/admin/configs/edit/{{config.id}}"
