@@ -7,13 +7,13 @@ import { ManageComponent } from './manage.component';
 import { ManageLoginsComponent } from '../components/manage-logins/manage-logins.component';
 import { SetPasswordComponent } from '../components/set-password/set-password.component';
 
-import { AuthGuard } from '../../../shared/services/auth.guard';
+import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 export const ROUTES: Routes = [
   { path: 'manage', component: ManageComponent, children: [
     { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard] },
-    { path: 'manage-logins', component: ManageLoginsComponent},
-    { path: 'set-password', component: SetPasswordComponent}
+    { path: 'manage-logins', component: ManageLoginsComponent, canActivate: [AuthGuard] },
+    { path: 'set-password', component: SetPasswordComponent, canActivate: [AuthGuard] }
   ] }
 ];
 

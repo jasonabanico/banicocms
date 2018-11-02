@@ -8,6 +8,7 @@ import { NavBarComponent } from './navbar/navbar.component';
 import { NavMenuComponent } from './navmenu/navmenu.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { NavBarService } from './navbar/navbar.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @NgModule({
     imports: [ 
@@ -26,7 +27,8 @@ import { NavBarService } from './navbar/navbar.service';
         NavMenuComponent
     ],
     providers: [
-        NavBarService
+        NavBarService,
+        AuthService
     ]
 })
 export class ShellModule { }

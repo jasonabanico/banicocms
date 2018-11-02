@@ -2,9 +2,9 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Page } from '../../main/page';
+import { AuthService } from '../../../../shared/services/auth.service';
 import { PageService } from '../../main/page.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
-import { AccountService } from '../../../../identity/account/main/account.service';
 
 @Component({
     selector: 'pagedisplay',
@@ -18,7 +18,7 @@ export class PageDisplayComponent implements OnInit, OnDestroy {
 
     constructor(
         @Inject(PageService) private pageService: PageService,
-        @Inject(AccountService) private accountService: AccountService,
+        @Inject(AuthService) private authService: AuthService,
         private route: ActivatedRoute,
         private router: Router,
         private modalService: NgbModal
@@ -34,7 +34,7 @@ export class PageDisplayComponent implements OnInit, OnDestroy {
         });
 
         this.isAdmin = false;
-        this.accountService.isLoggedIn()
+        this.authService.isLoggedIn()
             .subscribe(result => this.setAdmin('True'));
     }
 

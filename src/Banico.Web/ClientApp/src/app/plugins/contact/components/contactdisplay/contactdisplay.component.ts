@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Contact } from '../../main/contact';
 import { Field } from '../../main/field';
-import { AccountService } from '../../../../identity/account/main/account.service';
+import { AuthService } from '../../../../shared/services/auth.service';
 import { ContactService } from '../../main/contact.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
@@ -19,7 +19,7 @@ export class ContactDisplayComponent implements OnInit, OnDestroy {
     public fieldValue: string[];
 
     constructor(
-        @Inject(AccountService) private accountService: AccountService,
+        @Inject(AuthService) private authService: AuthService,
         @Inject(ContactService) private contactService: ContactService,
         private route: ActivatedRoute,
         private router: Router,
@@ -36,7 +36,7 @@ export class ContactDisplayComponent implements OnInit, OnDestroy {
         });
 
         this.isAdmin = false;
-        this.accountService.isLoggedIn()
+        this.authService.isLoggedIn()
             .subscribe(result => this.setAdmin(result));
     }
 

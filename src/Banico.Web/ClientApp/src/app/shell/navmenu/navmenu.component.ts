@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { AccountService } from '../../identity/account/main/account.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'navmenu',
@@ -13,15 +13,15 @@ export class NavMenuComponent implements OnInit {
   loggedInAs: string = '';
 
   constructor(
-    @Inject(AccountService) private accountService: AccountService,
+    @Inject(AuthService) private authService: AuthService,
     private location: Location
   ) {
   }
 
   ngOnInit() {
-    this.accountService.isLoggedIn()
+    this.authService.isLoggedIn()
       .subscribe(result => this.isLoggedIn = result);
-    this.accountService.loggedInAs()
+    this.authService.loggedInAs()
       .subscribe(data => this.loggedInAs = data);
   }
 

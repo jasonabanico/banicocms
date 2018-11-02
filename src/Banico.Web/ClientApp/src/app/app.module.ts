@@ -16,6 +16,9 @@ import { PipesModule } from './pipes/pipes.module';
 import { PluginsModule } from './plugins/plugins.module';
 import { SharedModule } from './shared/shared.module';
 import { ShellModule } from './shell/shell.module';
+import { AuthService } from './shared/services/auth.service';
+import { AuthGuard } from './shared/auth/auth.guard';
+import { ConfigsService } from './shared/services/configs.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { ShellModule } from './shell/shell.module';
     ShellModule
   ],
   providers: [
-    Location, {
+    Location, 
+    AuthService,
+    ConfigsService,
+    AuthGuard, {
       provide: LocationStrategy, 
       useClass: PathLocationStrategy
     }

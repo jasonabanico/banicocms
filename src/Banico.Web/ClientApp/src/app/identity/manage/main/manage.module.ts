@@ -7,7 +7,6 @@ import { SharedModule }   from '../../../shared/modules/shared.module';
 import { ManageService }  from './manage.service';
 import { UserService }  from '../../../shared/services/user.service';
 import { EmailValidator } from '../../../directives/email.validator.directive';
-import { AuthGuard } from '../../../shared/services/auth.guard';
 
 import { ManageRoutingModule }  from './manage.routing';
 import { ManageComponent } from './manage.component';
@@ -37,8 +36,7 @@ import { SetPasswordComponent } from '../components/set-password/set-password.co
   ],
   providers: [ 
     ManageService,
-    UserService,
-    AuthGuard
+    UserService
   ],
     bootstrap: [ 
       ManageComponent 

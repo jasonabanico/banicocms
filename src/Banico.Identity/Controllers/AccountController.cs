@@ -44,7 +44,7 @@ namespace Banico.Identity.Controllers
         private readonly IConfiguration _configuration;
         private readonly IJwtFactory _jwtFactory;
         private readonly JwtIssuerOptions _jwtOptions;
-        private readonly ClaimsPrincipal _caller;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserClaimsPrincipalFactory<AppUser> _userClaimsPrincipalFactory;
         private readonly IAntiforgery _antiforgery;
 
@@ -75,7 +75,7 @@ namespace Banico.Identity.Controllers
             _configuration = configuration;
             _jwtFactory = jwtFactory;
             _jwtOptions = jwtOptions.Value;
-            _caller = httpContextAccessor.HttpContext.User;
+            _httpContextAccessor = httpContextAccessor;
             _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
             _antiforgery = antiforgery;
 
@@ -85,12 +85,15 @@ namespace Banico.Identity.Controllers
             }
         }
 
+        [AllowAnonymous]
         private string GetCurrentUserId()
         {
-            if (_caller.Claims != null) {
-                var userIdClaim = _caller.Claims.Single(c => c.Type == "id");
-                if (userIdClaim != null) {
-                    return userIdClaim.Value;
+            if (_httpContextAccessor.HttpContext.User != null)
+            {
+                var id = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+                if (id != null)
+                {
+                    return id.Value;
                 }
             }
 
@@ -107,6 +110,28 @@ namespace Banico.Identity.Controllers
         public async Task<JsonResult> LoggedInAs()
         {
             return new JsonResult(_userManager.FindByIdAsync(this.GetCurrentUserId()));
+        }
+
+        public async Task<JsonResult> IsSuperAdmin()
+        {
+            bool result = false;
+            AppUser user = await _userManager.FindByIdAsync(this.GetCurrentUserId());
+
+            if (user != null)
+            {
+                string email = user.Email;            
+                string superAdminConfig = _configuration["SuperAdmins"];
+                string[] superAdmins = superAdminConfig.Split(',');
+                foreach (string superAdmin in superAdmins)
+                {
+                    if (email == superAdmin)
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+            return new JsonResult(result);
         }
 
         //

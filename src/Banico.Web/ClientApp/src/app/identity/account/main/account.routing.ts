@@ -10,8 +10,6 @@ import { RegisterComponent } from '../components/register/register.component';
 import { ResendConfirmationComponent } from '../components/resend-confirmation/resend-confirmation.component';
 import { ResetPasswordComponent } from '../components/reset-password/reset-password.component';
 
-import { AuthGuard } from '../../../shared/services/auth.guard';
-
 export const ROUTES: Routes = [
   { path: 'account', component: AccountComponent, children: [
     { path: 'confirm-email', component: ConfirmEmailComponent},

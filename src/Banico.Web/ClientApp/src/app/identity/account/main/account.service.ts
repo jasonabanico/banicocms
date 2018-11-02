@@ -23,25 +23,6 @@ export class AccountService extends BaseService {
         }
     }
 
-    public isLoggedIn(): Observable<boolean> {
-        return this.http.get<boolean>(this.baseUrl + "api/Account/IsLoggedIn", this.jsonAuthRequestOptions )
-        .catch(this.handleError);
-    }
-
-    public loggedInAs(): Observable<string> {
-        return this.http.post<any>(this.baseUrl + "api/Account/LoggedInAs", { } , this.jsonAuthRequestOptions)
-        .map(data => {
-            if (data.result) {
-                if (data.result.userName) {
-                return data.result.userName;
-                }
-            }
-
-            return '';
-        })
-        .catch(this.handleError);
-    }
-
     public login(
         email: string,
         password: string
