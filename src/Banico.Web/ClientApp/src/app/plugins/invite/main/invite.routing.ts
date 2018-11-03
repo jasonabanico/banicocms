@@ -6,7 +6,7 @@ import { InviteFormComponent } from '../components/inviteform/inviteform.compone
 
 const INVITE_ROUTES: Routes = [
   { path: 'invite', component: InviteComponent, children: [
-    { path: '', component: InviteFormComponent }
+    { path: '', component: InviteFormComponent, canActivate: [AuthGuard] }
   ] }
 ];
 

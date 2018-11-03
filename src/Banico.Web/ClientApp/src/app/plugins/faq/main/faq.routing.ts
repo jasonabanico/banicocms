@@ -4,12 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { FaqComponent } from './faq.component';
 import { FaqDisplayComponent } from '../components/faqdisplay/faqdisplay.component';
 import { FaqFormComponent } from '../components//faqform/faqform.component';
+import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const FAQ_ROUTES: Routes = [
   { path: 'faq', component: FaqComponent, children: [
-    { path: 'new', component: FaqFormComponent },
-    { path: 'edit/:alias', component: FaqFormComponent },
-    { path: ':alias', component: FaqDisplayComponent }
+    { path: 'new', component: FaqFormComponent, canActivate: [AuthGuard] },
+    { path: 'edit/:alias', component: FaqFormComponent, canActivate: [AuthGuard] },
+    { path: ':alias', component: FaqDisplayComponent, canActivate: [AuthGuard] }
   ] }
 ];
 

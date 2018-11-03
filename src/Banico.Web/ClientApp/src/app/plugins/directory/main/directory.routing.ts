@@ -7,16 +7,17 @@ import { DirectoryDisplayComponent } from '../components/directorydisplay/direct
 import { DirectoryItemDisplayComponent } from '../components/directoryitemdisplay/directoryitemdisplay.component';
 import { DirectoryFormComponent } from '../components/directoryform/directoryform.component';
 import { DirectoryFrontComponent } from '../components/directoryfront/directoryfront.component';
+import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const LIST_ROUTES: Routes = [
   { path: 'directory', component: DirectoryComponent, children: [
-    { path: 'new/:path', component: DirectoryFormComponent },
-    { path: 'search/:search', component: DirectorySearchComponent },
-    { path: 'item/:id', component: DirectoryItemDisplayComponent },
-    { path: 'edit/:id', component: DirectoryFormComponent },
-    { path: ':path', component: DirectoryDisplayComponent },
-    { path: '', component: DirectoryFrontComponent }, 
-    { path: '**', component: DirectoryDisplayComponent }
+    { path: 'new/:path', component: DirectoryFormComponent, canActivate: [AuthGuard] },
+    { path: 'search/:search', component: DirectorySearchComponent, canActivate: [AuthGuard] },
+    { path: 'item/:id', component: DirectoryItemDisplayComponent, canActivate: [AuthGuard] },
+    { path: 'edit/:id', component: DirectoryFormComponent, canActivate: [AuthGuard] },
+    { path: ':path', component: DirectoryDisplayComponent, canActivate: [AuthGuard] },
+    { path: '', component: DirectoryFrontComponent, canActivate: [AuthGuard] }, 
+    { path: '**', component: DirectoryDisplayComponent, canActivate: [AuthGuard] }
 ] }
 ];
 

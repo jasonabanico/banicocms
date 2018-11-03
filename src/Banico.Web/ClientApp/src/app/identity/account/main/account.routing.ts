@@ -9,15 +9,16 @@ import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
 import { ResendConfirmationComponent } from '../components/resend-confirmation/resend-confirmation.component';
 import { ResetPasswordComponent } from '../components/reset-password/reset-password.component';
+import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 export const ROUTES: Routes = [
   { path: 'account', component: AccountComponent, children: [
-    { path: 'confirm-email', component: ConfirmEmailComponent},
-    { path: 'forgot-password', component: ForgotPasswordComponent},
-    { path: 'login', component: LoginComponent},
-    { path: 'register', component: RegisterComponent},
-    { path: 'resend-confirmation', component: ResendConfirmationComponent},
-    { path: 'reset-password', component: ResetPasswordComponent}
+    { path: 'confirm-email', component: ConfirmEmailComponent, canActivate: [AuthGuard] },
+    { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+    { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
+    { path: 'resend-confirmation', component: ResendConfirmationComponent, canActivate: [AuthGuard] },
+    { path: 'reset-password', component: ResetPasswordComponent, canActivate: [AuthGuard] }
   ] }
 ];
 
