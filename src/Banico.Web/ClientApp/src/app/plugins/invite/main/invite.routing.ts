@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { InviteComponent } from './invite.component';
 import { InviteFormComponent } from '../components/inviteform/inviteform.component';
+import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const INVITE_ROUTES: Routes = [
   { path: 'invite', component: InviteComponent, children: [
