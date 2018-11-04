@@ -36,10 +36,8 @@ export class AuthService extends BaseService {
     public loggedInAs(): Observable<string> {
         return this.http.post<any>(this.baseUrl + "api/Account/LoggedInAs", { } , this.jsonAuthRequestOptions)
         .map(data => {
-            if (data.result) {
-                if (data.result.userName) {
-                return data.result.userName;
-                }
+            if (data) {
+                return data;
             }
 
             return '';

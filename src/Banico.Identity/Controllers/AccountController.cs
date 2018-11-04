@@ -109,7 +109,7 @@ namespace Banico.Identity.Controllers
         [AllowAnonymous]
         public async Task<JsonResult> LoggedInAs()
         {
-            return new JsonResult(_userManager.FindByIdAsync(this.GetCurrentUserId()));
+            return new JsonResult(this.GetCurrentUserId());
         }
 
         public async Task<JsonResult> IsSuperAdmin()
@@ -139,9 +139,8 @@ namespace Banico.Identity.Controllers
         [HttpPost]
         [AllowAnonymous]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login([FromBody]LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login([FromBody]LoginViewModel model)
         {
-            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
                 // Require the user to have a confirmed email before they can log on.
@@ -173,7 +172,7 @@ namespace Banico.Identity.Controllers
 
                 if (result.RequiresTwoFactor)
                 {
-                    return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    //return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 }
 
                 if (result.IsLockedOut)
