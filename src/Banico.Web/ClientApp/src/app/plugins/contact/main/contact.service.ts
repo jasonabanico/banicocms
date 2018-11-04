@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Contact } from './contact';
 import { Observable } from 'rxjs/Observable';
 import { PluginService } from '../../services/plugin.service';
-import { ContentItem } from '../../../entities/contentitem';
+import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()

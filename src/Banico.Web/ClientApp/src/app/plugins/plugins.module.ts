@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ContentItemService } from './services/contentItem.service';
+import { ContentItemService } from './services/content-item.service';
 
 import { ContactModule } from './contact/main/contact.module';
 import { DirectoryModule } from './directory/main/directory.module';

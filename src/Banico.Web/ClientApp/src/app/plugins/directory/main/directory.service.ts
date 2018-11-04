@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { PluginService } from "../../services/plugin.service";
-import { ContentItem } from '../../../entities/contentitem';
-import { DirectoryItem } from './directoryitem';
+import { ContentItem } from '../../../entities/content-item';
+import { DirectoryItem } from './directory-item';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()

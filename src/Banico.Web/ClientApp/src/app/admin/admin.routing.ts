@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent } from './admin/admin.component';
-import { SectionsAdminComponent } from './sections/components/sectionsadmin/sectionsadmin.component';
-import { SectionItemsAdminComponent } from './sections/components/sectionitemsadmin/sectionitemsadmin.component';
-import { RoleFormComponent } from './roles/components/roleform/roleform.component';
-import { RolesListComponent } from './roles/components/roleslist/roleslist.component';
-import { UserFormComponent } from './users/components/userform/userform.component';
-import { UsersListComponent } from './users/components/userslist/userslist.component';
-import { ConfigFormComponent } from './configs/components/configform/configform.component';
-import { ConfigsListComponent } from './configs/components/configslist/configslist.component';
+import { SectionsAdminComponent } from './sections/components/sections-admin/sections-admin.component';
+import { SectionItemsAdminComponent } from './sections/components/section-items-admin/section-items-admin.component';
+import { RoleFormComponent } from './roles/components/role-form/role-form.component';
+import { RolesListComponent } from './roles/components/roles-list/roles-list.component';
+import { UserFormComponent } from './users/components/user-form/user-form.component';
+import { UsersListComponent } from './users/components/users-list/users-list.component';
+import { ConfigFormComponent } from './configs/components/config-form/config-form.component';
+import { ConfigsListComponent } from './configs/components/configs-list/configs-list.component';
 import { AuthGuard } from '../shared/auth/auth.guard';
 
 const ADMIN_ROUTES: Routes = [

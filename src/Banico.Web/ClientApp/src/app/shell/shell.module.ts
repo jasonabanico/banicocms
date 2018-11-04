@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { PipesModule } from '../pipes/pipes.module';
 import { FrontComponent } from './front/front.component';
 import { ModalComponent } from './modal/modal.component';
-import { NavBarComponent } from './navbar/navbar.component';
-import { NavMenuComponent } from './navmenu/navmenu.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { SpinnerComponent } from './spinner/spinner.component';
-import { NavBarService } from './navbar/navbar.service';
+import { NavBarService } from './nav-bar/nav-bar.service';
 import { AuthService } from '../shared/services/auth.service';
 
 @NgModule({

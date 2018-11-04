@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { ProfileRoutingModule } from './profile.routing';
 import { ProfileComponent }  from './profile.component';
-import { ProfileDisplayComponent } from '../components/profiledisplay/profiledisplay.component';
-import { ProfileFormComponent } from '../components/profileform/profileform.component';
+import { ProfileDisplayComponent } from '../components/profile-display/profile-display.component';
+import { ProfileFormComponent } from '../components/profile-form/profile-form.component';
 
 @NgModule({
   imports: [ 

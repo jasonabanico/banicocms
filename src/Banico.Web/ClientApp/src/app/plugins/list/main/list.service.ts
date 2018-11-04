@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { PluginService } from "../../services/plugin.service";
-import { ContentItem } from '../../../entities/contentitem';
+import { ContentItem } from '../../../entities/content-item';
 import { List } from './list';
 import { HttpHeaders } from '@angular/common/http';
 

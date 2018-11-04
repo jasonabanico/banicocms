@@ -11,8 +11,8 @@ import { SectionsQueryResult } from './sections.queryresults';
 import { SectionItemsQueryResult } from './sections.queryresults';
 
 import { Section } from '../../../../entities/section';
-import { SectionItem } from '../../../../entities/sectionitem';
-import { ContentItem } from '../../../../entities/contentitem';
+import { SectionItem } from '../../../../entities/section-item';
+import { ContentItem } from '../../../../entities/content-item';
 //import { status, json } from '../../../shared/fetch';
 
 @Injectable()

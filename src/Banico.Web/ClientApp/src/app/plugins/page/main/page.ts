@@ -1,4 +1,4 @@
-import { ContentItem } from '../../../entities/contentitem';
+import { ContentItem } from '../../../entities/content-item';
 
 export class Page {
   id: string;

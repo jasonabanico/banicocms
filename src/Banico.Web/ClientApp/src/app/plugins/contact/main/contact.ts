@@ -1,4 +1,4 @@
-import { ContentItem } from '../../../entities/contentitem';
+import { ContentItem } from '../../../entities/content-item';
 import { Field } from './field';
 
 export class Contact {

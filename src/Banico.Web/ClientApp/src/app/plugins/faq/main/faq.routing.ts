@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FaqComponent } from './faq.component';
-import { FaqDisplayComponent } from '../components/faqdisplay/faqdisplay.component';
-import { FaqFormComponent } from '../components//faqform/faqform.component';
+import { FaqDisplayComponent } from '../components/faq-display/faq-display.component';
+import { FaqFormComponent } from '../components//faq-form/faq-form.component';
 import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const FAQ_ROUTES: Routes = [

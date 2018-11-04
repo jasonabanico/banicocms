@@ -1,4 +1,4 @@
-import { ContentItem } from '../../../entities/contentitem';
+import { ContentItem } from '../../../entities/content-item';
 import { Qa } from './qa';
 
 export class Faq {

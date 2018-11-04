@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DirectoryComponent } from './directory.component';
-import { DirectorySearchComponent } from '../components/directorysearch/directorysearch.component';
-import { DirectoryDisplayComponent } from '../components/directorydisplay/directorydisplay.component';
-import { DirectoryItemDisplayComponent } from '../components/directoryitemdisplay/directoryitemdisplay.component';
-import { DirectoryFormComponent } from '../components/directoryform/directoryform.component';
-import { DirectoryFrontComponent } from '../components/directoryfront/directoryfront.component';
+import { DirectorySearchComponent } from '../components/directory-search/directory-search.component';
+import { DirectoryDisplayComponent } from '../components/directory-display/directory-display.component';
+import { DirectoryItemDisplayComponent } from '../components/directory-item-display/directory-item-display.component';
+import { DirectoryFormComponent } from '../components/directory-form/directory-form.component';
+import { DirectoryFrontComponent } from '../components/directory-front/directory-front.component';
 import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const LIST_ROUTES: Routes = [
