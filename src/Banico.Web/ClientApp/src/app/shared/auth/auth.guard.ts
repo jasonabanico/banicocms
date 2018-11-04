@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
       case '': return true;
       case 'public': return true;
       case 'user': return this.checkLogin(url);
-      case 'admin': return await this.checkAdmin();
+      case 'admin': return await this.checkAdmin(url);
     }
 
     return true;
@@ -53,8 +53,11 @@ export class AuthGuard implements CanActivate {
     return false;
   }
 
-  private async checkAdmin(): Promise<boolean> {
-    let result: boolean = await this.authService.isSuperAdmin().first().toPromise();
+  private async checkAdmin(url: string): Promise<boolean> {
+    let result: boolean = this.checkLogin(url);
+    if (result) {
+      result = await this.authService.isSuperAdmin().first().toPromise();
+    }
     return result;
   }
 }

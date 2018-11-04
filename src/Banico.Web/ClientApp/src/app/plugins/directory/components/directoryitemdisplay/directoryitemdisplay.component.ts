@@ -38,16 +38,6 @@ export class DirectoryItemDisplayComponent implements OnInit, OnDestroy {
             this.directoryService.get(this.id)
                 .subscribe(directoryItem => this.SetDirectoryItem(directoryItem));
         });
-
-        this.isAdmin = false;
-        this.directoryService.IsLoggedIn()
-            .subscribe(result => this.setAdmin(result));
-    }
-
-    public setAdmin(isLoggedIn: string) {
-        if (isLoggedIn == 'True') {
-            this.isAdmin = true;
-        }
     }
 
     private SetDirectoryItem(directoryItem: DirectoryItem) {

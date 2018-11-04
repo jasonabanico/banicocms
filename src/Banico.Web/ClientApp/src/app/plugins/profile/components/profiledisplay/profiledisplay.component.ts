@@ -24,7 +24,6 @@ export class ProfileDisplayComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.profile = new Profile();
-        this.isAdmin = false;
         this.sub = this.route.params.subscribe(params => {
             var alias = params['alias'];
             if (alias) {
@@ -35,17 +34,9 @@ export class ProfileDisplayComponent implements OnInit, OnDestroy {
                 .subscribe(profile => this.setProfile(profile));
                 this.profileService.GetUser()
                 .subscribe(profile => this.setUser(profile));
-                this.profileService.IsLoggedIn()
-                .subscribe(result => this.setAdmin(result));
             }
         });
 
-    }
-
-    public setAdmin(isLoggedIn: string) {
-        if (isLoggedIn == 'True') {
-            this.isAdmin = true;
-        }
     }
 
     public setUser(profile: Profile) {

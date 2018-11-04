@@ -31,9 +31,6 @@ export class DirectorySearchComponent implements OnInit, OnDestroy {
         //         .subscribe(item => this.item = item);
         // });
 
-        this.isAdmin = false;
-        this.directoryService.IsLoggedIn()
-            .subscribe(result => this.setAdmin(result));
         this.sub = this.route.params.subscribe(params => {
             var search = params['search'];
             this.navBarService.initialize('directory', '', '', '/directory');
@@ -44,12 +41,6 @@ export class DirectorySearchComponent implements OnInit, OnDestroy {
                 .subscribe(directoryItems => this.setDirectoryItems(directoryItems));
             }
         });
-    }
-
-    public setAdmin(isLoggedIn: string) {
-        if (isLoggedIn == 'True') {
-            this.isAdmin = true;
-        }
     }
     
     ngOnDestroy() {

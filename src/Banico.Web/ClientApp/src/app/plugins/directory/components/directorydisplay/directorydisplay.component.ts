@@ -40,18 +40,6 @@ export class DirectoryDisplayComponent implements OnInit, OnDestroy {
                 .subscribe(directoryItems => this.setDirectoryItems(directoryItems));
             }
         });
-
-        this.isAdmin = false;
-        this.directoryService.IsLoggedIn()
-            .subscribe(result => this.setAdmin('True'));
-    }
-
-    public setAdmin(isLoggedIn: string) {
-        if (this.path) {
-            if (isLoggedIn == 'True') {
-                this.isAdmin = true;
-            }
-        }
     }
     
     ngOnDestroy() {

@@ -31,16 +31,6 @@ export class FaqDisplayComponent implements OnInit, OnDestroy {
             this.faqService.getByAlias(alias)
                 .subscribe(faq => this.setFaq(faq));
         });
-
-        this.isAdmin = false;
-        this.faqService.IsLoggedIn()
-            .subscribe(result => this.setAdmin(result));
-    }
-
-    public setAdmin(isLoggedIn: string) {
-        if (isLoggedIn == 'True') {
-            this.isAdmin = true;
-        }
     }
 
     private setFaq(faq: Faq) {

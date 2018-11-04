@@ -32,16 +32,6 @@ export class PageDisplayComponent implements OnInit, OnDestroy {
             this.pageService.getByAlias(alias)
                 .subscribe(page => this.setPage(page));
         });
-
-        this.isAdmin = false;
-        this.authService.isLoggedIn()
-            .subscribe(result => this.setAdmin('True'));
-    }
-
-    public setAdmin(isLoggedIn: string) {
-        if (isLoggedIn == 'True') {
-            this.isAdmin = true;
-        }
     }
 
     public setPage(page: Page) {

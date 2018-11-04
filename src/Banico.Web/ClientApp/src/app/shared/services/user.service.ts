@@ -91,10 +91,6 @@ export class UserService extends BaseService {
     this.loggedIn = false;
   }
 
-  public isLoggedIn() {
-    return this.loggedIn;
-  }
-
   public facebookLogin(
     accessToken: string
   ) {

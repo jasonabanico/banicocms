@@ -82,22 +82,6 @@ export class ConfigsService {
         return result;
     }
 
-    // Observable<string>
-    public IsLoggedIn(): Observable<string> {
-        let headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        return this.http
-            .post<string>(this.accountUrl + '/IsLoggedIn', '', {
-                headers: headers
-            });
-            //.map(this.ExtractData);
-            //.subscribe({
-                //next: x => console.log('Observer got a next value: ' + x),
-                //error: err => alert(JSON.stringify(err)),
-                //complete: () => console.log('Saved completed.'),
-            //});
-    }
-
     public addOrUpdate(
         id: string,
         name: string,

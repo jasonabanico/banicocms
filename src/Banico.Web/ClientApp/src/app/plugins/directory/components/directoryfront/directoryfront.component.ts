@@ -34,18 +34,6 @@ export class DirectoryFrontComponent implements OnInit, OnDestroy {
             this.directoryService.getAll()
                 .subscribe(directoryItems => this.setDirectoryItems(directoryItems));
         });
-
-        this.isAdmin = false;
-        this.directoryService.IsLoggedIn()
-            .subscribe(result => this.setAdmin(result));
-    }
-
-    public setAdmin(isLoggedIn: string) {
-        if (this.path) {
-            if (isLoggedIn == 'True') {
-                this.isAdmin = true;
-            }
-        }
     }
     
     ngOnDestroy() {

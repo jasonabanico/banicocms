@@ -194,22 +194,6 @@ export class SectionsService {
             //.map(this.ExtractData);
             //.catch(this.handleError);
     }
-    
-    // Observable<string>
-    public isLoggedIn(): Observable<string> {
-        let headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        return this.http
-            .post<string>(this.accountUrl + '/IsLoggedIn', '', {
-                headers: headers
-            });
-            //.map(this.ExtractData);
-            //.subscribe({
-                //next: x => console.log('Observer got a next value: ' + x),
-                //error: err => alert(JSON.stringify(err)),
-                //complete: () => console.log('Saved completed.'),
-            //});
-    }
 
     public addOrUpdateSectionItem(
         id: string,

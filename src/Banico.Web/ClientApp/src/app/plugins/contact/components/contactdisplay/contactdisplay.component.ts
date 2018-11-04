@@ -34,16 +34,6 @@ export class ContactDisplayComponent implements OnInit, OnDestroy {
             this.contactService.getByAlias(alias)
                 .subscribe(contact => this.setContact(contact));
         });
-
-        this.isAdmin = false;
-        this.authService.isLoggedIn()
-            .subscribe(result => this.setAdmin(result));
-    }
-
-    public setAdmin(isLoggedIn: any) {
-        if (isLoggedIn == 'True') {
-            this.isAdmin = true;
-        }
     }
 
     private setContact(contact: Contact) {
