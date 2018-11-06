@@ -112,6 +112,7 @@ namespace Banico.Identity.Controllers
             return new JsonResult(this.GetCurrentUserId());
         }
 
+        [AllowAnonymous]
         public async Task<JsonResult> IsSuperAdmin()
         {
             bool result = false;
