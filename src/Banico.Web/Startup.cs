@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
 using Banico.Core.Entities;
 using Banico.Data;
+using Banico.Data.Settings;
 using Banico.Api;
 using Banico.Identity;
 using Banico.Identity.Extensions;
@@ -59,7 +60,9 @@ namespace Banico.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
+
+            services.AddSingleton<IConfiguration>(Configuration);
+
             // Add framework services.
             string appDbContextConnectionString = Configuration.GetConnectionString("AppDbContext");
 
@@ -88,10 +91,8 @@ namespace Banico.Web
                 }
             );
 
-            services.AddSingleton<IConfiguration>(Configuration);
-
             identityStartup.ConfigureServices(services);
-            dataStartup.ConfigureServices(services);
+            dataStartup.ConfigureServices(Configuration, services);
             apiStartup.ConfigureServices(services);
             servicesStartup.ConfigureServices(services);
 

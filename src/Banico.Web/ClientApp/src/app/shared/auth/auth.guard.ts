@@ -16,12 +16,13 @@ export class AuthGuard implements CanActivate {
   }
 
   public async canActivate(
-    next: ActivatedRouteSnapshot,
+    route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean> {
+    let module = route.data["module"] as string;
     let url: string = state.url;
-
-    let configValue: string = await this.getConfig(url).first().toPromise();
+    
+    let configValue: string = await this.getConfig(module).first().toPromise();
 
     switch (configValue) {
       case '': return true;

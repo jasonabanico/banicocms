@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 
-namespace Banico.Web
+namespace Banico.Web.Filters
 {
     public class AngularAntiforgeryCookieResultFilter: ResultFilterAttribute
     {

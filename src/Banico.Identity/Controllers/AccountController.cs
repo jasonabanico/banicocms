@@ -193,7 +193,7 @@ namespace Banico.Identity.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return BadRequest(Errors.AddErrorToModelState("", "", ModelState));
+            return BadRequest(Errors.AddErrorToModelState("", "", ModelState));            
         }
 
         private async Task SendConfirmationEmail(AppUser user)
