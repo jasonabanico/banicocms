@@ -73,8 +73,11 @@ namespace Banico.Data
             //     .IsRequired()
             //     .OnDelete(DeleteBehavior.Cascade);
 
-            string[] configs = _configDefaultSettings.Configs;
-            this.InsertConfigs(builder, configs);
+            if (_isMigration)
+            {
+                string[] configs = _configDefaultSettings.Configs;
+                this.InsertConfigs(builder, configs);
+            }
         }
 
         public void InsertConfigs(ModelBuilder builder, string[] configs)

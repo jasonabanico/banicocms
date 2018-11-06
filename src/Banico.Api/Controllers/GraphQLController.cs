@@ -4,6 +4,7 @@ using GraphQL;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Mvc;
 using Banico.Api.Models;
+using System.Collections.Generic;
 
 namespace Banico.Api.Controllers
 {

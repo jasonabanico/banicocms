@@ -200,7 +200,7 @@ namespace Banico.Api.Models
                         Name = "name" 
                     }
                     ),
-                resolve: context =>  configRepository.Get(
+                resolve: context => configRepository.Get(
                     context.GetArgument<string>("id"),
                     context.GetArgument<string>("module"),
                     context.GetArgument<string>("name")

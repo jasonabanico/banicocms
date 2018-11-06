@@ -14,9 +14,7 @@ namespace Banico.Data.Repositories
     {
         public AppDbContext DbContext { get; set; }
 
-        public ConfigRepository(
-            AppDbContext dbContext
-        )
+        public ConfigRepository(AppDbContext dbContext)
         {
             this.DbContext = dbContext;
         }

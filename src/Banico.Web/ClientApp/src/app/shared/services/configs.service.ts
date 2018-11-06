@@ -22,10 +22,10 @@ export class ConfigsService {
 
     public get(
         id: string,
-        name: string,
-        module: string
+        module: string,
+        name: string
     ): Observable<Config> {
-        return this.getAll(id, name, module)
+        return this.getAll(id, module, name)
         .map(items => {
             if (items.length >= 1) {
                 return items[0];
@@ -37,15 +37,15 @@ export class ConfigsService {
 
     public getAll(
         id: string,
-        name: string,
-        module: string    
+        module: string,
+        name: string    
     ): Observable<Config[]> {
         var result = this.apollo.watchQuery<ConfigsQueryResult>({
             query: ConfigsQuery,
             variables: {
                 id: id,
-                name: name,
-                module: module
+                module: module,
+                name: name
             }
         })
             .valueChanges

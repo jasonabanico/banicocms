@@ -35,7 +35,7 @@ export class AuthGuard implements CanActivate {
   }
 
   private getConfig(module: string): Observable<string> {
-    return this.configsService.get('', 'canActivate', module)
+    return this.configsService.get('', module, 'canActivate')
       .map(config => {if (config) {
         return config.value
       } else {
