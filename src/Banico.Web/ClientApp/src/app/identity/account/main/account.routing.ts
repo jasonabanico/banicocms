@@ -13,12 +13,12 @@ import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 export const ROUTES: Routes = [
   { path: 'account', component: AccountComponent, children: [
-    { path: 'confirm-email', component: ConfirmEmailComponent, canActivate: [AuthGuard] },
-    { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-    { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
-    { path: 'resend-confirmation', component: ResendConfirmationComponent, canActivate: [AuthGuard] },
-    { path: 'reset-password', component: ResetPasswordComponent, canActivate: [AuthGuard] }
+    { path: 'confirm-email', component: ConfirmEmailComponent },
+    { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
+    { path: 'resend-confirmation', component: ResendConfirmationComponent },
+    { path: 'reset-password', component: ResetPasswordComponent }
   ] }
 ];
 

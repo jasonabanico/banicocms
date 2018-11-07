@@ -21,19 +21,19 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> {
     let module = route.data["module"] as string;
     let url: string = state.url;
-    
+
     return this.getConfig(module)
-      .switchMap(
+      .map(
         configValue => {
           console.log(configValue);
           switch (configValue) {
-            case '': return Observable.create(true);
-            case 'public': return Observable.create(true);
+            case '': return true;
+            case 'public': return true;
             case 'user': return this.checkLogin(url);
-            case 'admin': return this.checkLogin(url);
+            case 'admin': return this.checkAdmin(url);
           }
 
-          return Observable.create(true);
+          return true;
         }
       );
   }
@@ -49,26 +49,21 @@ export class AuthGuard implements CanActivate {
       });
   }
 
-  private checkLogin(url: string): Observable<boolean> {
-    return this.authService.isLoggedIn()
-      .map(result => {
-        if (result) {
-          return true;
-        } else {
-          //this.router.navigate(['/account/login'], { queryParams: { returnUrl: url } });
-          return false;
-        }
-      });
+  private checkLogin(url: string): boolean {
+    var result = this.authService.hasAuthToken();
+    if (!result) {
+      this.router.navigate(['/account/login'], { queryParams: { returnUrl: url } });
+    }
+
+    return result;
   }
 
-  private checkAdmin(url: string): Observable<boolean> {
-    return this.checkLogin(url)
-      .switchMap(result => {
-        if (result) {
-          return this.authService.isSuperAdmin();
-        }
+  private checkAdmin(url: string): boolean {
+    var result = this.checkLogin(url);
+    if (result) {
+      result = this.authService.isAdmin;
+    }
 
-        return Observable.create(false);
-      });
+    return result;
   }
 }

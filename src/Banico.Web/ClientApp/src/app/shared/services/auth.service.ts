@@ -7,8 +7,8 @@ import { JSONP_ERR_NO_CALLBACK } from '@angular/common/http/src/jsonp';
 import { WindowRefService } from './windowref.service';
 
 export class AuthService extends BaseService {
-    public loggedIn: boolean;
-    public redirectUrl: string;
+    public isAdmin: boolean;
+    private userId: string;
 
     constructor(
         private http: HttpClient,
@@ -17,31 +17,30 @@ export class AuthService extends BaseService {
         @Inject('BASE_URL') private baseUrl: string
     ) {
         super(windowRefService, platformId);
-
-        if (isPlatformBrowser(this.platformId)) {
-            this.loggedIn = !!this.windowRefService.nativeWindow.localStorage.getItem('auth_token');
-        }
+        this.isAdmin = false;
     }
 
-    public isLoggedIn(): Observable<boolean> {
-        return this.http.get<boolean>(this.baseUrl + "api/Account/IsLoggedIn", this.jsonAuthRequestOptions )
-        .catch(this.handleError);
+    public setAuthToken(token: any) {
+        window.localStorage.setItem('auth_token', token);
     }
 
-    public isSuperAdmin(): Observable<boolean> {
-        return this.http.get<boolean>(this.baseUrl + "api/Account/IsSuperAdmin", this.jsonAuthRequestOptions )
-        .catch(this.handleError);
+    public setLogin(userId: string) {
+        this.userId = userId;
+    }
+    
+    public loggedInAs(): string {
+        return this.userId;
     }
 
-    public loggedInAs(): Observable<string> {
-        return this.http.post<any>(this.baseUrl + "api/Account/LoggedInAs", { } , this.jsonAuthRequestOptions)
-        .map(data => {
-            if (data) {
-                return data;
-            }
+    public removeAuthToken() {
+        this.windowRefService.nativeWindow.localStorage.removeItem('auth_token');
+    }
 
-            return '';
-        })
-        .catch(this.handleError);
+    public hasAuthToken(): boolean {
+        return !!this.windowRefService.nativeWindow.localStorage.getItem('auth_token');
+    }
+
+    public setIsAdmin(isAdmin: boolean) {
+        this.isAdmin = isAdmin;
     }
 }

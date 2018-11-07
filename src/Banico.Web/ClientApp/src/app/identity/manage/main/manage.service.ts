@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { isPlatformBrowser } from '@angular/common';
 import { JSONP_ERR_NO_CALLBACK } from '@angular/common/http/src/jsonp';
 import { WindowRefService } from '../../../shared/services/windowref.service';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Injectable()
 export class ManageService extends BaseService {
@@ -14,12 +15,13 @@ export class ManageService extends BaseService {
         private http: HttpClient,
         @Inject(WindowRefService) windowRefService: WindowRefService,
         @Inject(PLATFORM_ID) platformId: Object,
-        @Inject('BASE_URL') private baseUrl: string
+        @Inject('BASE_URL') private baseUrl: string,
+        private authService: AuthService
     ) {
         super(windowRefService, platformId);
 
         if (isPlatformBrowser(this.platformId)) {
-            this.loggedIn = !!window.localStorage.getItem('auth_token');
+            this.loggedIn = this.authService.hasAuthToken();
         }
     }
 

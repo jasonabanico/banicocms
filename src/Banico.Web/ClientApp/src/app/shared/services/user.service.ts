@@ -13,6 +13,7 @@ import { BehaviorSubject } from 'rxjs/Rx';
 import '../../rxjs-operators';
 import { isPlatformBrowser } from '@angular/common';
 import { WindowRefService } from './windowref.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 
@@ -31,12 +32,13 @@ export class UserService extends BaseService {
     private http: HttpClient, 
     private configService: ConfigService,
     @Inject(WindowRefService) windowRefService: WindowRefService,
-    @Inject(PLATFORM_ID) platformId: Object
+    @Inject(PLATFORM_ID) platformId: Object,
+    private authService: AuthService
   ) {
     super(windowRefService, platformId);
 
     if (isPlatformBrowser(platformId)) {
-      this.loggedIn = !!localStorage.getItem('auth_token');
+      this.loggedIn = this.authService.hasAuthToken();
     }
     this.baseUrl = configService.getApiURI();
   }
@@ -76,7 +78,7 @@ export class UserService extends BaseService {
       .map(res => {
         var result: any = res;
         if (isPlatformBrowser(this.platformId)) {
-          this.windowRefService.nativeWindow.localStorage.setItem('auth_token', result.auth_token);
+          this.authService.setAuthToken(result.auth_token);
         }
         this.loggedIn = true;
         return true;
@@ -86,7 +88,7 @@ export class UserService extends BaseService {
 
   public logout() {
     if (isPlatformBrowser(this.platformId)) {
-      this.windowRefService.nativeWindow.localStorage.removeItem('auth_token');
+      this.authService.removeAuthToken();
     }
     this.loggedIn = false;
   }
@@ -104,7 +106,7 @@ export class UserService extends BaseService {
       .map(res => {
         var result: any = res;
         if (isPlatformBrowser(this.platformId)) {
-          window.localStorage.setItem('auth_token', result.auth_token);
+          this.authService.setAuthToken(result.auth_token);
         }
         this.loggedIn = true;
 

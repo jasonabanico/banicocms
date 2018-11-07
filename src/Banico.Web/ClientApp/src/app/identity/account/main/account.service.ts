@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { isPlatformBrowser } from '@angular/common';
 import { JSONP_ERR_NO_CALLBACK } from '@angular/common/http/src/jsonp';
 import { WindowRefService } from '../../../shared/services/windowref.service';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Injectable()
 export class AccountService extends BaseService {
@@ -14,12 +15,13 @@ export class AccountService extends BaseService {
         private http: HttpClient,
         @Inject(WindowRefService) windowRefService: WindowRefService,
         @Inject(PLATFORM_ID) platformId: Object,
-        @Inject('BASE_URL') private baseUrl: string
+        @Inject('BASE_URL') private baseUrl: string,
+        private authService: AuthService
     ) {
         super(windowRefService, platformId);
 
         if (isPlatformBrowser(this.platformId)) {
-            this.loggedIn = !!this.windowRefService.nativeWindow.localStorage.getItem('auth_token');
+            this.loggedIn = this.authService.hasAuthToken();
         }
     }
 
@@ -35,11 +37,28 @@ export class AccountService extends BaseService {
         .catch(this.handleError);
     }
 
+    public isSuperAdmin(): Observable<boolean> {
+        return this.http.get<boolean>(this.baseUrl + "api/Account/IsSuperAdmin", this.jsonAuthRequestOptions )
+        .catch(this.handleError);
+    }
+
+    public loggedInAs(): Observable<string> {
+        return this.http.post<any>(this.baseUrl + "api/Account/LoggedInAs", { } , this.jsonAuthRequestOptions)
+        .map(data => {
+            if (data) {
+                return data;
+            }
+
+            return '';
+        })
+        .catch(this.handleError);
+    }
+
     public logout() {
         this.http.post(this.baseUrl + "api/Account/Logout", {}, this.jsonAuthRequestOptions)
         .subscribe(data => {
             if (isPlatformBrowser(this.platformId)) {
-                this.windowRefService.nativeWindow.localStorage.removeItem('auth_token');
+                this.authService.removeAuthToken();
                 this.windowRefService.nativeWindow.location.reload();
             }
         });
