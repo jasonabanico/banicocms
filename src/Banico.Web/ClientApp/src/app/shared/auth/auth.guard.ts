@@ -25,15 +25,16 @@ export class AuthGuard implements CanActivate {
     return this.getConfig(module)
       .map(
         configValue => {
-          console.log(configValue);
+          var result = false;
           switch (configValue) {
-            case '': return true;
-            case 'public': return true;
-            case 'user': return this.checkLogin(url);
-            case 'admin': return this.checkAdmin(url);
+            case '': result = true;
+            case 'public': result = true;
+            case 'user': result = this.checkLogin(url);
+            case 'admin': result = this.checkAdmin(url);
           }
 
-          return true;
+          alert(result);
+          return result;
         }
       );
   }
@@ -50,12 +51,12 @@ export class AuthGuard implements CanActivate {
   }
 
   private checkLogin(url: string): boolean {
-    var result = this.authService.hasAuthToken();
-    if (!result) {
+    var result = this.authService.isTokenExpired();
+    if (result) {
       this.router.navigate(['/account/login'], { queryParams: { returnUrl: url } });
     }
 
-    return result;
+    return !result;
   }
 
   private checkAdmin(url: string): boolean {

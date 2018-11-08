@@ -20,9 +20,7 @@ export class AccountService extends BaseService {
     ) {
         super(windowRefService, platformId);
 
-        if (isPlatformBrowser(this.platformId)) {
-            this.loggedIn = this.authService.hasAuthToken();
-        }
+        this.loggedIn = this.authService.hasToken();
     }
 
     public login(
@@ -58,7 +56,7 @@ export class AccountService extends BaseService {
         this.http.post(this.baseUrl + "api/Account/Logout", {}, this.jsonAuthRequestOptions)
         .subscribe(data => {
             if (isPlatformBrowser(this.platformId)) {
-                this.authService.removeAuthToken();
+                this.authService.removeToken();
                 this.windowRefService.nativeWindow.location.reload();
             }
         });

@@ -2,7 +2,6 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { BaseService } from "../../../shared/services/base.service";
 import { Observable } from 'rxjs/Rx';
-import { isPlatformBrowser } from '@angular/common';
 import { JSONP_ERR_NO_CALLBACK } from '@angular/common/http/src/jsonp';
 import { WindowRefService } from '../../../shared/services/windowref.service';
 import { AuthService } from '../../../shared/services/auth.service';
@@ -19,10 +18,7 @@ export class ManageService extends BaseService {
         private authService: AuthService
     ) {
         super(windowRefService, platformId);
-
-        if (isPlatformBrowser(this.platformId)) {
-            this.loggedIn = this.authService.hasAuthToken();
-        }
+        this.loggedIn = this.authService.hasToken();
     }
 
     public changePassword(

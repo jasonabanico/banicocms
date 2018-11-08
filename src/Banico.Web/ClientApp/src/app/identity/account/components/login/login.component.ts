@@ -58,7 +58,7 @@ export class LoginComponent {
       result  => {
         if (result) {
           var myResult: any = result;
-          this.authService.setAuthToken(myResult.auth_token);
+          this.authService.setToken(myResult.auth_token);
           this.setUserId();
           this.setIsAdmin();
           this.isSuccessful = true;

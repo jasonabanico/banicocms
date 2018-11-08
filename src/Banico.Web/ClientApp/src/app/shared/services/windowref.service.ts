@@ -1,8 +1,17 @@
 import { Injectable } from '@angular/core';
 
 function _window() : any {
-   // return the global native browser window object
-   return window;
+    var global: any;
+    
+    // return the global native browser window object
+    if (window !== undefined) {
+        return window;
+    }
+    if (global.window  !== undefined) {
+        return global.window;
+    }
+
+    return null;
 }
 
 @Injectable()

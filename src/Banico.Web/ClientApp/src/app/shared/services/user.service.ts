@@ -11,7 +11,6 @@ import { BehaviorSubject } from 'rxjs/Rx';
 
 // Add the RxJS Observable operators we need in this app.
 import '../../rxjs-operators';
-import { isPlatformBrowser } from '@angular/common';
 import { WindowRefService } from './windowref.service';
 import { AuthService } from './auth.service';
 
@@ -37,9 +36,7 @@ export class UserService extends BaseService {
   ) {
     super(windowRefService, platformId);
 
-    if (isPlatformBrowser(platformId)) {
-      this.loggedIn = this.authService.hasAuthToken();
-    }
+    this.loggedIn = this.authService.hasToken();
     this.baseUrl = configService.getApiURI();
   }
 
@@ -77,9 +74,7 @@ export class UserService extends BaseService {
       //.map(res => res.json())
       .map(res => {
         var result: any = res;
-        if (isPlatformBrowser(this.platformId)) {
-          this.authService.setAuthToken(result.auth_token);
-        }
+        this.authService.setToken(result.auth_token);
         this.loggedIn = true;
         return true;
       })
@@ -87,9 +82,7 @@ export class UserService extends BaseService {
   }
 
   public logout() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.authService.removeAuthToken();
-    }
+    this.authService.removeToken();
     this.loggedIn = false;
   }
 
@@ -105,9 +98,7 @@ export class UserService extends BaseService {
       //.map(res => res.json())
       .map(res => {
         var result: any = res;
-        if (isPlatformBrowser(this.platformId)) {
-          this.authService.setAuthToken(result.auth_token);
-        }
+        this.authService.setToken(result.auth_token);
         this.loggedIn = true;
 
         return true;
