@@ -1,4 +1,4 @@
-# Banico CMS is a lean modular content management system for building content, collaboration, and community platforms. Built with ASP.Net Core, Angular, and Bootstrap.
+# Banico CMS is a lean modular content management system for building content, communication, collaboration, commerce, and community platforms. Built with ASP.Net Core, Angular, and Bootstrap.
 
 http://banico.org
 
