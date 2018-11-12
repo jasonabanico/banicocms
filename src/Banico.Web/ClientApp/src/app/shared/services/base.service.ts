@@ -5,14 +5,19 @@ import { Observable } from 'rxjs/Rx';
 import { WindowRefService } from './windowref.service';
 
 export abstract class BaseService {  
-    public jsonHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
-    public jsonRequestOptions = { headers: this.jsonHeader };
-    public jsonAuthRequestOptions = { headers: this.authHeader() };
+  protected localStorage: any;
+  protected jsonHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
+  protected jsonRequestOptions = { headers: this.jsonHeader };
+  protected jsonAuthRequestOptions = { headers: this.authHeader() };
 
   constructor(
     protected windowRefService: WindowRefService,
     protected platformId: Object
-    ) { }
+    ) { 
+      if (isPlatformBrowser(this.platformId)) {
+        this.localStorage = windowRefService.nativeWindow.localStorage;
+    }
+  }
   
   protected handleError(error: any) {
       var applicationError = error.headers.get('Application-Error');

@@ -33,7 +33,6 @@ export class AuthGuard implements CanActivate {
             case 'admin': result = this.checkAdmin(url);
           }
 
-          alert(result);
           return result;
         }
       );
@@ -62,7 +61,7 @@ export class AuthGuard implements CanActivate {
   private checkAdmin(url: string): boolean {
     var result = this.checkLogin(url);
     if (result) {
-      result = this.authService.isAdmin;
+      result = this.authService.getIsAdmin();
     }
 
     return result;

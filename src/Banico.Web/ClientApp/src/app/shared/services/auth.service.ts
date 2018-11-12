@@ -8,10 +8,9 @@ import { WindowRefService } from './windowref.service';
 import * as jwt_decode from 'jwt-decode';
 
 export class AuthService extends BaseService {
-    public isAdmin: boolean;
-    private userId: string;
-    private localStorage: any;
     private readonly TOKEN_NAME = 'auth_token';
+    private readonly USER_ID = 'user_id';
+    private readonly IS_ADMIN = 'is_admin';
 
     constructor(
         private http: HttpClient,
@@ -20,18 +19,17 @@ export class AuthService extends BaseService {
         @Inject('BASE_URL') private baseUrl: string
     ) {
         super(windowRefService, platformId);
-        this.isAdmin = false;
-        if (isPlatformBrowser(this.platformId)) {
-            this.localStorage = windowRefService.nativeWindow.localStorage;
-        }
     }
 
-    public setLogin(userId: string) {
-        this.userId = userId;
+    public setUserId(userId: string) {
+        if (this.localStorage) {
+            return this.localStorage.setItem(this.USER_ID, userId);
+        }
     }
     
-    public loggedInAs(): string {
-        return this.userId;
+    public getUserId(): string {
+        if (!this.localStorage) return '';
+        return this.localStorage.getItem(this.USER_ID);
     }
 
     public getToken(): string {
@@ -65,17 +63,33 @@ export class AuthService extends BaseService {
       
     public removeToken() {
         if (this.localStorage) {
-            this.localStorage.removeItem('auth_token');
+            this.localStorage.removeItem(this.TOKEN_NAME);
+            this.localStorage.removeItem(this.USER_ID);
+            this.localStorage.removeItem(this.IS_ADMIN);
         }
     }
 
     public hasToken(): boolean {
         if (!this.localStorage) return false;
-        var authToken = this.localStorage.getItem('auth_token');
+        var authToken = this.localStorage.getItem(this.TOKEN_NAME);
         return !!authToken;
     }
 
     public setIsAdmin(isAdmin: boolean) {
-        this.isAdmin = isAdmin;
+        var isAdminStr = "n";
+        if (isAdmin) {
+            isAdminStr = "y";
+        }
+        this.localStorage.setItem(this.IS_ADMIN, isAdminStr);
+    }
+
+    public getIsAdmin(): boolean {
+        if (!this.localStorage) return false;
+        var isAdminStr: string = this.localStorage.getItem(this.IS_ADMIN);
+        var isAdmin: boolean = false;
+        if (isAdminStr == "y") {
+            isAdmin = true;
+        }
+        return isAdmin;
     }
 }

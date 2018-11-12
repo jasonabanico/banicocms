@@ -5,6 +5,8 @@ import * as toastr from 'toastr';
 import { AccountService } from '../../main/account.service';
 import { WindowRefService } from '../../../../shared/services/windowref.service';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { Observable } from 'rxjs/internal/Observable';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'login',
@@ -59,12 +61,16 @@ export class LoginComponent {
         if (result) {
           var myResult: any = result;
           this.authService.setToken(myResult.auth_token);
-          this.setUserId();
-          this.setIsAdmin();
+          var result1 = this.setUserId();
+          var result2 = this.setIsAdmin();
           this.isSuccessful = true;
-          this.router.navigate([this.returnUrl]);
-          this.windowRefService.nativeWindow.location.reload();                       
-        } else {
+          combineLatest(result1, result2)
+          .subscribe(
+            result => {
+              this.router.navigate([this.returnUrl]);
+              this.windowRefService.nativeWindow.location.reload();                       
+            }
+          );
         }
       },
       errors => {
@@ -72,21 +78,23 @@ export class LoginComponent {
       });
   }
 
-  public setIsAdmin() {
-    this.accountService.isSuperAdmin()
-    .subscribe(
+  public setIsAdmin(): Observable<boolean> {
+    var result = this.accountService.isSuperAdmin();
+    result.subscribe(
       result => {
         this.authService.setIsAdmin(result);
       }
-    )    
+    );
+    return result.map(result => true);
   }
 
-  public setUserId() {
-    this.accountService.loggedInAs()
-    .subscribe(
+  public setUserId(): Observable<boolean> {
+    var result = this.accountService.loggedInAs();
+    result.subscribe(
       result => {
-        this.authService.setLogin(result);
+        this.authService.setUserId(result);
       }
     );
+    return result.map(result => true);
   }
 }

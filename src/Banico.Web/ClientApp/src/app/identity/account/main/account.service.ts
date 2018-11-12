@@ -52,14 +52,10 @@ export class AccountService extends BaseService {
         .catch(this.handleError);
     }
 
-    public logout() {
-        this.http.post(this.baseUrl + "api/Account/Logout", {}, this.jsonAuthRequestOptions)
-        .subscribe(data => {
-            if (isPlatformBrowser(this.platformId)) {
-                this.authService.removeToken();
-                this.windowRefService.nativeWindow.location.reload();
-            }
-        });
+    public logout(): Observable<boolean> {
+        return this.http.post(this.baseUrl + "api/Account/Logout", {}, this.jsonAuthRequestOptions)
+        .map(res => true)
+        .catch(this.handleError);
     }
 
     public register(

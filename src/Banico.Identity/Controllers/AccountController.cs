@@ -85,54 +85,44 @@ namespace Banico.Identity.Controllers
             }
         }
 
-        [AllowAnonymous]
-        private string GetCurrentUserId()
+        private string GetUsername()
         {
-            if (_httpContextAccessor.HttpContext.User != null)
-            {
-                var id = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-                if (id != null)
-                {
-                    return id.Value;
-                }
-            }
+            string username = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            return string.Empty;
+            return username;
         }
 
         [AllowAnonymous]
-        public async Task<JsonResult> IsLoggedIn()
+        public JsonResult IsLoggedIn()
         {
-            return new JsonResult(!string.IsNullOrEmpty(this.GetCurrentUserId()));
+            return new JsonResult(!string.IsNullOrEmpty(this.GetUsername()));
         }
 
-        [AllowAnonymous]
-        public async Task<JsonResult> LoggedInAs()
+        public JsonResult LoggedInAs()
         {
-            return new JsonResult(this.GetCurrentUserId());
+            string username = this.GetUsername();
+            return new JsonResult(username);
         }
 
-        [AllowAnonymous]
-        public async Task<JsonResult> IsSuperAdmin()
+        public bool IsSuperAdmin()
         {
             bool result = false;
-            AppUser user = await _userManager.FindByIdAsync(this.GetCurrentUserId());
+            string username = this.GetUsername();
 
-            if (user != null)
+            if (!string.IsNullOrEmpty(username))
             {
-                string email = user.Email;            
                 string superAdminConfig = _configuration["SuperAdmins"];
                 string[] superAdmins = superAdminConfig.Split(',');
                 foreach (string superAdmin in superAdmins)
                 {
-                    if (email == superAdmin)
+                    if (username == superAdmin)
                     {
                         result = true;
                     }
                 }
             }
 
-            return new JsonResult(result);
+            return result;
         }
 
         //

@@ -112,10 +112,10 @@ namespace Banico.Identity
       });
 
       // api user claim policy
-      services.AddAuthorization(options =>
-      {
-        options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
-      });
+      // services.AddAuthorization(options =>
+      // {
+      //   options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
+      // });
 
       // add identity
       var builder = services.AddIdentity<AppUser, AppRole>(o =>
