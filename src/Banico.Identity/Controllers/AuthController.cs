@@ -43,7 +43,7 @@ namespace Banico.Identity.Controllers
                 return BadRequest(Errors.AddErrorToModelState("login_failure", "Invalid username or password.", ModelState));
             }
 
-          var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, credentials.UserName, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
+          var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, credentials.UserName, false, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
           return new OkObjectResult(jwt);
         }
 

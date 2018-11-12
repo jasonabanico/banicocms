@@ -156,8 +156,9 @@ namespace Banico.Identity.Controllers
                     var tokens = _antiforgery.GetAndStoreTokens(HttpContext);
 
                     var identity = _jwtFactory.GenerateClaimsIdentity(model.Email, user.Id);
+                    var isAdmin = this.IsSuperAdmin();
                     _logger.LogInformation(1, "User logged in.");
-                    var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, model.Email, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
+                    var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, model.Email, isAdmin, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
                     return new OkObjectResult(jwt);
                 }
 

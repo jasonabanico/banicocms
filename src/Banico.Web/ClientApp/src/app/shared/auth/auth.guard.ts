@@ -63,7 +63,6 @@ export class AuthGuard implements CanActivate {
     if (result) {
       result = this.authService.getIsAdmin();
     }
-
     return result;
   }
 }

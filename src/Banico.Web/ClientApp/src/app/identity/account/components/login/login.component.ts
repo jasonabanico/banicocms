@@ -49,52 +49,24 @@ export class LoginComponent {
       });
   }
   
-  public login() {
+  public async login() {
     this.isRequesting = true;
-    this.accountService.login(
-      this.loginForm.value['email'],
-      this.loginForm.value['password']
-    )
-    .finally(() => this.isRequesting = false)
-    .subscribe(
-      result  => {
-        if (result) {
-          var myResult: any = result;
-          this.authService.setToken(myResult.auth_token);
-          var result1 = this.setUserId();
-          var result2 = this.setIsAdmin();
-          this.isSuccessful = true;
-          combineLatest(result1, result2)
-          .subscribe(
-            result => {
-              this.router.navigate([this.returnUrl]);
-              this.windowRefService.nativeWindow.location.reload();                       
-            }
-          );
-        }
-      },
-      errors => {
-        errors[''].forEach(error => toastr.error(error));
-      });
-  }
-
-  public setIsAdmin(): Observable<boolean> {
-    var result = this.accountService.isSuperAdmin();
-    result.subscribe(
-      result => {
-        this.authService.setIsAdmin(result);
+    try {
+      var result = await this.accountService.login(
+        this.loginForm.value['email'],
+        this.loginForm.value['password']
+        ).first().toPromise();
+      if (result) {
+        var myResult: any = result;
+        this.authService.setToken(myResult.auth_token);
+        this.authService.setUserId(myResult.id);
+        this.authService.setIsAdmin(myResult.is_admin);
+        this.router.navigate([this.returnUrl]);
       }
-    );
-    return result.map(result => true);
-  }
-
-  public setUserId(): Observable<boolean> {
-    var result = this.accountService.loggedInAs();
-    result.subscribe(
-      result => {
-        this.authService.setUserId(result);
-      }
-    );
-    return result.map(result => true);
+    }
+    catch (errors) {
+      errors[''].forEach(error => toastr.error(error));
+    }
+    this.isRequesting = false;
   }
 }

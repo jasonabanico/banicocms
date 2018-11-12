@@ -8,10 +8,6 @@ import { WindowRefService } from './windowref.service';
 import * as jwt_decode from 'jwt-decode';
 
 export class AuthService extends BaseService {
-    private readonly TOKEN_NAME = 'auth_token';
-    private readonly USER_ID = 'user_id';
-    private readonly IS_ADMIN = 'is_admin';
-
     constructor(
         private http: HttpClient,
         @Inject(WindowRefService) windowRefService: WindowRefService,

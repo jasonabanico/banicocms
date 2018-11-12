@@ -30,9 +30,13 @@ export class NavMenuComponent implements OnInit {
   logout() {
     this.accountService.logout()
     .subscribe(data => {
-          this.authService.removeToken();
-          this.windowRefService.nativeWindow.location.reload();
-  });
+      this.authService.removeToken();
+      this.windowRefService.nativeWindow.location.reload();
+    },
+    error => {
+      this.authService.removeToken();
+      this.windowRefService.nativeWindow.location.reload();
+    });
 }
 
   collapse() {

@@ -5,6 +5,10 @@ import { Observable } from 'rxjs/Rx';
 import { WindowRefService } from './windowref.service';
 
 export abstract class BaseService {  
+  protected readonly TOKEN_NAME = 'auth_token';
+  protected readonly USER_ID = 'user_id';
+  protected readonly IS_ADMIN = 'is_admin';
+
   protected localStorage: any;
   protected jsonHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
   protected jsonRequestOptions = { headers: this.jsonHeader };
@@ -60,7 +64,7 @@ export abstract class BaseService {
       let headers = new HttpHeaders();
       if (isPlatformBrowser(this.platformId)) {
         headers = headers.set('Content-Type', 'application/json');
-        let authToken = this.windowRefService.nativeWindow.localStorage.getItem('auth_token');
+        let authToken = this.windowRefService.nativeWindow.localStorage.getItem(this.TOKEN_NAME);
         headers = headers.set('Authorization', 'Bearer ' + authToken);
         headers = headers.set('X-XSRF-TOKEN', this.getCookie('XSRF-TOKEN'));
       }
