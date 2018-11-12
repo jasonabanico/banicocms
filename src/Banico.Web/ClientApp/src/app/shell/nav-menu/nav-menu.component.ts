@@ -24,7 +24,7 @@ export class NavMenuComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = this.authService.hasToken();
-    this.loggedInAs = this.authService.getUserId();
+    this.loggedInAs = this.authService.getUserName();
   }
 
   logout() {
