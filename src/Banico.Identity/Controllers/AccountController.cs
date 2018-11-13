@@ -85,29 +85,31 @@ namespace Banico.Identity.Controllers
             }
         }
 
-        private string GetUsername()
+        private async Task<string> GetUsername()
         {
-            string username = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var user = await _userManager.FindByIdAsync(userId);
 
-            return username;
+            return user.UserName;
         }
 
         [AllowAnonymous]
-        public JsonResult IsLoggedIn()
+        public async Task<JsonResult> IsLoggedIn()
         {
-            return new JsonResult(!string.IsNullOrEmpty(this.GetUsername()));
+            string username = await this.GetUsername();
+            return new JsonResult(!string.IsNullOrEmpty(username));
         }
 
-        public JsonResult LoggedInAs()
+        public async Task<JsonResult> LoggedInAs()
         {
-            string username = this.GetUsername();
+            string username = await this.GetUsername();
             return new JsonResult(username);
         }
 
-        public bool IsSuperAdmin()
+        public async Task<bool> IsSuperAdmin()
         {
             bool result = false;
-            string username = this.GetUsername();
+            string username = await this.GetUsername();
 
             if (!string.IsNullOrEmpty(username))
             {
@@ -156,9 +158,10 @@ namespace Banico.Identity.Controllers
                     var tokens = _antiforgery.GetAndStoreTokens(HttpContext);
 
                     var identity = _jwtFactory.GenerateClaimsIdentity(model.Email, user.Id);
-                    var isAdmin = this.IsSuperAdmin();
+                    string username = await this.GetUsername();
+                    bool isAdmin = await this.IsSuperAdmin();
                     _logger.LogInformation(1, "User logged in.");
-                    var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, model.Email, isAdmin, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
+                    var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, username, isAdmin, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
                     return new OkObjectResult(jwt);
                 }
 
