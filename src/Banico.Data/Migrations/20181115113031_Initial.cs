@@ -141,27 +141,7 @@ namespace Banico.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Configs",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
-                values: new object[] { "f6a87034-cd33-4ca2-849f-0cc3c8e0f823", null, new DateTimeOffset(new DateTime(2018, 11, 6, 6, 47, 39, 10, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin", "canActivate", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin" });
-
-            migrationBuilder.InsertData(
-                table: "Configs",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
-                values: new object[] { "3b4606f8-d7c0-4d2c-912a-a2cce008ffd3", null, new DateTimeOffset(new DateTime(2018, 11, 6, 6, 47, 39, 13, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin/sections", "canActivate", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin" });
-
-            migrationBuilder.InsertData(
-                table: "Configs",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
-                values: new object[] { "86d4ef09-9389-4657-9646-0fac0549931c", null, new DateTimeOffset(new DateTime(2018, 11, 6, 6, 47, 39, 13, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin/roles'", "canActivate", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin" });
-
-            migrationBuilder.InsertData(
-                table: "Configs",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
-                values: new object[] { "b9feabfb-35f5-4b08-924a-4637749edf86", null, new DateTimeOffset(new DateTime(2018, 11, 6, 6, 47, 39, 13, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin/users", "canActivate", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin" });
-
-            migrationBuilder.InsertData(
-                table: "Configs",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
-                values: new object[] { "46647318-404c-4965-be5b-fdf3ff8866f3", null, new DateTimeOffset(new DateTime(2018, 11, 6, 6, 47, 39, 13, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin/configs", "canActivate", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin" });
+                values: new object[] { "ecbc6605-37d7-40ec-b1bf-cec6b768748c", null, new DateTimeOffset(new DateTime(2018, 11, 15, 11, 30, 30, 793, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "", "initialized", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "n" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

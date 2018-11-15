@@ -5,18 +5,89 @@ using System.Linq.Expressions;
 using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Banico.Core.Entities;
 using Banico.Core.Repositories;
+using Banico.Data.Settings;
 
 namespace Banico.Data.Repositories
 {
     public class ConfigRepository : IConfigRepository
     {
+        public IConfiguration Configuration { get; set; }
         public AppDbContext DbContext { get; set; }
 
-        public ConfigRepository(AppDbContext dbContext)
+        public ConfigRepository(IConfiguration configuration, AppDbContext dbContext)
         {
+            this.Configuration = configuration;
             this.DbContext = dbContext;
+        }
+
+        private async Task<Config> GetIsInitialized()
+        {
+            List<Config> initConfigs = await this.Get(string.Empty, string.Empty, "initialized");
+
+            Config initConfig = new Config();
+            if (initConfigs.Count > 0)
+            {
+                return initConfigs[0];
+            }
+
+            return new Config();
+        }
+
+        public async Task<bool> IsInitialized()
+        {
+            Config isInitialized = await this.GetIsInitialized();
+
+             if ((string.IsNullOrEmpty(isInitialized.Value)) || (isInitialized.Value == "n"))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private List<Config> GetInitialSettings()
+        {
+            var configInitialSettings = new ConfigInitialSettings();
+            this.Configuration.Bind(nameof(ConfigInitialSettings), configInitialSettings);
+            string[] configs = configInitialSettings.Configs;
+
+            List<Config> output = new List<Config>();
+
+            foreach (string config in configs)
+            {
+                string[] configElements = config.Split(","[0]);
+                Config initialConfig = new Config();
+                initialConfig.Module = configElements[0];
+                initialConfig.Name = configElements[1];
+                initialConfig.Value = configElements[2];
+                output.Add(initialConfig);
+            }
+
+            return output;
+        }
+
+        public async Task<bool> SetInitialSettings() 
+        {
+            bool initialized = await this.IsInitialized();
+
+            if (!initialized)
+            {
+                List<Config> initialConfigs = this.GetInitialSettings();
+
+                foreach (Config initialConfig in initialConfigs)
+                {
+                    await this.AddOrUpdate(initialConfig);
+                }
+
+                Config initConfig = await this.GetIsInitialized();
+                initConfig.Value = "y";
+                await this.AddOrUpdate(initConfig);
+            }
+
+            return true;
         }
 
         public async Task<List<Config>> Get(

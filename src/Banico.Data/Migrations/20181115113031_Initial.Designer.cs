@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Banico.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20181106064740_Initial")]
+    [Migration("20181115113031_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,11 +44,7 @@ namespace Banico.Data.Migrations
                     b.ToTable("Configs");
 
                     b.HasData(
-                        new { Id = "f6a87034-cd33-4ca2-849f-0cc3c8e0f823", CreatedDate = new DateTimeOffset(new DateTime(2018, 11, 6, 6, 47, 39, 10, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "admin", Name = "canActivate", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "admin" },
-                        new { Id = "3b4606f8-d7c0-4d2c-912a-a2cce008ffd3", CreatedDate = new DateTimeOffset(new DateTime(2018, 11, 6, 6, 47, 39, 13, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "admin/sections", Name = "canActivate", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "admin" },
-                        new { Id = "86d4ef09-9389-4657-9646-0fac0549931c", CreatedDate = new DateTimeOffset(new DateTime(2018, 11, 6, 6, 47, 39, 13, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "admin/roles'", Name = "canActivate", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "admin" },
-                        new { Id = "b9feabfb-35f5-4b08-924a-4637749edf86", CreatedDate = new DateTimeOffset(new DateTime(2018, 11, 6, 6, 47, 39, 13, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "admin/users", Name = "canActivate", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "admin" },
-                        new { Id = "46647318-404c-4965-be5b-fdf3ff8866f3", CreatedDate = new DateTimeOffset(new DateTime(2018, 11, 6, 6, 47, 39, 13, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "admin/configs", Name = "canActivate", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "admin" }
+                        new { Id = "ecbc6605-37d7-40ec-b1bf-cec6b768748c", CreatedDate = new DateTimeOffset(new DateTime(2018, 11, 15, 11, 30, 30, 793, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "", Name = "initialized", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "n" }
                     );
                 });
 
