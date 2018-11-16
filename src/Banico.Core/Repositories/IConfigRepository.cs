@@ -9,6 +9,8 @@ namespace Banico.Core.Repositories
 {
     public interface IConfigRepository
     {
+        Task<bool> IsInitialized();
+        Task<bool> SetInitialSettings();
         Task<List<Config>> Get(string id, string module, string name);
         Task<Config> AddOrUpdate(Config config);
         Task<Config> Add(Config config);

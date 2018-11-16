@@ -1,9 +1,11 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
+import { WindowRefService } from '../../../shared/services/windowref.service';
+import { BaseService } from '../../../shared/services/base.service';
 import { ConfigsQuery } from './configs.queries';
 import { AddOrUpdateConfigMutation } from './configs.mutations';
 import { ConfigsQueryResult } from './configs.queryresults';
@@ -11,14 +13,17 @@ import { Config } from '../../../entities/config';
 //import { status, json } from '../../../shared/fetch';
 
 @Injectable()
-export class ConfigsService {
+export class ConfigsService extends BaseService {
     accountUrl: string;
 
     constructor(
         private http: HttpClient,
+        @Inject(WindowRefService) windowRefService: WindowRefService,
+        @Inject(PLATFORM_ID) platformId: Object,
         private apollo: Apollo,
         @Inject('BASE_URL') private baseUrl: string
     ) {
+        super(windowRefService, platformId);
         // this.accountUrl = `${this.baseUrl}/api/Account`;
         // this.sectionApiBaseUrl = `${this.baseUrl}/api/Section`;
         // this.sectionTypeApiBaseUrl = `${this.baseUrl}/api/SectionType`;
@@ -45,6 +50,17 @@ export class ConfigsService {
         }
         let body = res.json();
         return body || {};
+    }
+
+    public initialized(): Observable<boolean> {
+        return this.get('', 'initialized', '')
+        .map(item => item.value === 'n');
+    }
+
+    public setInitialSettings(): Observable<boolean> {
+        return this.http.post(this.baseUrl + "api/Config/SetInitialSettings", {}, this.jsonAuthRequestOptions)
+        .map(res => true)
+        .catch(this.handleError);
     }
 
     public get(
@@ -104,12 +120,5 @@ export class ConfigsService {
                 //error: err => alert(JSON.stringify(err)),
                 //complete: () => console.log('Saved completed.'),
             //});
-    }
-
-    private handleError(error: Response) {
-        // in a real world app, we may send the server to some remote logging infrastructure
-        // instead of just logging it to the console
-        console.error(error);
-        return Observable.throw(error.json() || 'Server error');
     }
 }

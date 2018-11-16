@@ -1,6 +1,12 @@
 <h1>Administration</h1>
 
-<p><a href="/admin/configs">Configs</a></p>
-<p><a href="/admin/sections">Sections</a></p>
-<p><a href="/admin/roles">Roles</a></p>
-<p><a href="/admin/users">Users</a></p>
+<div *ngIf="!isInitialized">
+    <button type="button" class="btn btn-primary" (click)="initialize()">Initialize</button>
+</div>
+
+<div *ngIf="isInitialized">
+    <p><a href="/admin/configs">Configs</a></p>
+    <p><a href="/admin/sections">Sections</a></p>
+    <p><a href="/admin/roles">Roles</a></p>
+    <p><a href="/admin/users">Users</a></p>
+</div>
