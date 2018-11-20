@@ -11,13 +11,13 @@ import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const LIST_ROUTES: Routes = [
   { path: 'directory', component: DirectoryComponent, children: [
-    { path: 'new/:path', component: DirectoryFormComponent, canActivate: [AuthGuard] },
-    { path: 'search/:search', component: DirectorySearchComponent, canActivate: [AuthGuard] },
-    { path: 'item/:id', component: DirectoryItemDisplayComponent, canActivate: [AuthGuard] },
-    { path: 'edit/:id', component: DirectoryFormComponent, canActivate: [AuthGuard] },
-    { path: ':path', component: DirectoryDisplayComponent, canActivate: [AuthGuard] },
-    { path: '', component: DirectoryFrontComponent, canActivate: [AuthGuard] }, 
-    { path: '**', component: DirectoryDisplayComponent, canActivate: [AuthGuard] }
+    { path: 'new/:path', component: DirectoryFormComponent, canActivate: [AuthGuard], data: { module: 'directory/manage' } },
+    { path: 'search/:search', component: DirectorySearchComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
+    { path: 'item/:id', component: DirectoryItemDisplayComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
+    { path: 'edit/:id', component: DirectoryFormComponent, canActivate: [AuthGuard], data: { module: 'directory/manage' } },
+    { path: ':path', component: DirectoryDisplayComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
+    { path: '', component: DirectoryFrontComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } }, 
+    { path: '**', component: DirectoryDisplayComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } }
 ] }
 ];
 

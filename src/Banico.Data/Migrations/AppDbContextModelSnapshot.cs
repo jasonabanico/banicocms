@@ -42,7 +42,8 @@ namespace Banico.Data.Migrations
                     b.ToTable("Configs");
 
                     b.HasData(
-                        new { Id = "ecbc6605-37d7-40ec-b1bf-cec6b768748c", CreatedDate = new DateTimeOffset(new DateTime(2018, 11, 15, 11, 30, 30, 793, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "", Name = "initialized", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "n" }
+                        new { Id = "6b875216-0d9b-443c-89b1-b9b1b9b2c18e", CreatedDate = new DateTimeOffset(new DateTime(2018, 11, 20, 10, 0, 36, 775, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "", Name = "initialized", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "n" },
+                        new { Id = "038bb43f-09b0-4095-83b6-23e574c019bf", CreatedDate = new DateTimeOffset(new DateTime(2018, 11, 20, 10, 0, 36, 778, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "admin", Name = "canActivate", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "admin" }
                     );
                 });
 

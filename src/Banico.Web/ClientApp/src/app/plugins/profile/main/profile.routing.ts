@@ -8,9 +8,9 @@ import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const PROFILE_ROUTES: Routes = [
   { path: 'profile', component: ProfileComponent, children: [
-    { path: 'edit', component: ProfileFormComponent, canActivate: [AuthGuard] },
-    { path: ':alias', component: ProfileDisplayComponent, canActivate: [AuthGuard] },
-    { path: '', component: ProfileDisplayComponent, canActivate: [AuthGuard] }
+    { path: 'edit', component: ProfileFormComponent, canActivate: [AuthGuard], data: { module: 'profile/manage' } },
+    { path: ':alias', component: ProfileDisplayComponent, canActivate: [AuthGuard], data: { module: 'profile/manage' } },
+    { path: '', component: ProfileDisplayComponent, canActivate: [AuthGuard], data: { module: 'profile/view' } }
 ] }
 ];
 

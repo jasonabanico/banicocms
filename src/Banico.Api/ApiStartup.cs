@@ -4,6 +4,7 @@ using GraphQL.Types;
 using Banico.Core.Repositories;
 using Banico.Data.Repositories;
 using Banico.Api.Models;
+using Banico.Api.Services;
 
 namespace Banico.Api
 {
@@ -14,6 +15,7 @@ namespace Banico.Api
       //services.AddSingleton<IDocumentWriter, DocumentWriter>();
       services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
       
+      services.AddSingleton<IAccessService, AccessService>();
       services.AddSingleton<BanicoQuery>();
       services.AddSingleton<BanicoMutation>();
       services.AddSingleton<SectionType>();

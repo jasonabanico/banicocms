@@ -54,7 +54,7 @@ export class ConfigsService extends BaseService {
 
     public initialized(): Observable<boolean> {
         return this.get('', 'initialized', '')
-        .map(item => item.value === 'n');
+        .map(item => item.value === 'y');
     }
 
     public setInitialSettings(): Observable<boolean> {

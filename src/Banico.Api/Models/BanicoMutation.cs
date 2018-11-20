@@ -1,26 +1,33 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using GraphQL.Types;
 using Banico.Core.Entities;
 using Banico.Core.Repositories;
+using Banico.Api.Services;
 
 namespace Banico.Api.Models
 {
     public class BanicoMutation : ObjectGraphType
     {
-        private IHttpContextAccessor _httpContextAccessor { get; set; }
+        private IConfigRepository _configRepository;
+        private IAccessService _accessService;
 
         public BanicoMutation(
-            IHttpContextAccessor httpContextAccessor,
             ISectionRepository sectionRepository,
             ISectionItemRepository sectionItemRepository,
             IContentItemRepository contentItemRepository,
-            IConfigRepository configRepository
+            IConfigRepository configRepository,
+            IAccessService accessService
         )
         {
-            _httpContextAccessor = httpContextAccessor;
+            _configRepository = configRepository;
+            _accessService = accessService;
 
             Field<SectionType>(
                 "addOrUpdateSection",
@@ -56,8 +63,17 @@ namespace Banico.Api.Models
                 resolve: context =>
                 {
                     var contentItem = context.GetArgument<ContentItem>("contentItem");
-                    this.StampItem(contentItem);
-                    return contentItemRepository.AddOrUpdate(contentItem);
+                    if (_accessService.Allowed(contentItem).Result)
+                    {
+                        this.StampItem(contentItem);
+                        var userId = _accessService.GetCurrentUserId();
+                        var isAdmin = _accessService.IsAdmin();
+                        return contentItemRepository.AddOrUpdate(contentItem, userId, isAdmin);
+                    }
+                    else
+                    {
+                        return new ContentItem();
+                    }
                 });
 
             Field<ConfigType>(
@@ -73,14 +89,9 @@ namespace Banico.Api.Models
                 });
         }
 
-        private string GetCurrentUserId()
-        {
-            return _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        }
-
         private void StampItem(Item item) 
         {
-            string user = this.GetCurrentUserId();
+            string user = _accessService.GetCurrentUserId();
 
             if (string.IsNullOrEmpty(item.Id)) 
             {
@@ -93,5 +104,18 @@ namespace Banico.Api.Models
                 item.UpdatedDate = DateTimeOffset.UtcNow;
             }
         }
-    }
+
+
+        private async Task<bool> Active(ContentItem contentItem)
+        {
+            List<Config> config = await _configRepository.Get("", contentItem.Module, "isActive");
+
+            if (config.Count > 0)
+            {
+                return config[0].Value == "y";
+            }
+
+            return false;
+        }
+     }
 }

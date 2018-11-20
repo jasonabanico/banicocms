@@ -141,7 +141,12 @@ namespace Banico.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Configs",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
-                values: new object[] { "ecbc6605-37d7-40ec-b1bf-cec6b768748c", null, new DateTimeOffset(new DateTime(2018, 11, 15, 11, 30, 30, 793, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "", "initialized", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "n" });
+                values: new object[] { "6b875216-0d9b-443c-89b1-b9b1b9b2c18e", null, new DateTimeOffset(new DateTime(2018, 11, 20, 10, 0, 36, 775, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "", "initialized", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "n" });
+
+            migrationBuilder.InsertData(
+                table: "Configs",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
+                values: new object[] { "038bb43f-09b0-4095-83b6-23e574c019bf", null, new DateTimeOffset(new DateTime(2018, 11, 20, 10, 0, 36, 778, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin", "canActivate", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

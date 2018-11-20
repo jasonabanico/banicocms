@@ -185,7 +185,7 @@ namespace Banico.Data.Repositories
             return await contentItems.ToListAsync();
         }
 
-        public async Task<ContentItem> AddOrUpdate(ContentItem contentItem)
+        public async Task<ContentItem> AddOrUpdate(ContentItem contentItem, string userID, bool isAdmin)
         {
             if (string.IsNullOrEmpty(contentItem.Id)) 
             {
@@ -193,7 +193,7 @@ namespace Banico.Data.Repositories
             }
             else
             {
-                return await this.Update(contentItem);
+                return await this.Update(contentItem, userID, isAdmin);
             }
         }
 
@@ -212,7 +212,7 @@ namespace Banico.Data.Repositories
             return new ContentItem();
         }
 
-        public async Task<ContentItem> Update(ContentItem item)
+        public async Task<ContentItem> Update(ContentItem item, string userID, bool isAdmin)
         {
             var updateItem = (await this.Get(item.Id, "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""))
@@ -220,37 +220,40 @@ namespace Banico.Data.Repositories
 
             if (updateItem != null)
             {
-                updateItem.Name = item.Name;
-                updateItem.Content = item.Content;
-                updateItem.Alias = item.Alias;
-                updateItem.SectionItems = item.SectionItems;
-                updateItem.Attribute01 = item.Attribute01;
-                updateItem.Attribute02 = item.Attribute02;
-                updateItem.Attribute03 = item.Attribute03;
-                updateItem.Attribute04 = item.Attribute04;
-                updateItem.Attribute05 = item.Attribute05;
-                updateItem.Attribute06 = item.Attribute06;
-                updateItem.Attribute07 = item.Attribute07;
-                updateItem.Attribute08 = item.Attribute08;
-                updateItem.Attribute09 = item.Attribute09;
-                updateItem.Attribute10 = item.Attribute10;
-                updateItem.Attribute11 = item.Attribute11;
-                updateItem.Attribute12 = item.Attribute12;
-                updateItem.Attribute13 = item.Attribute13;
-                updateItem.Attribute14 = item.Attribute14;
-                updateItem.Attribute15 = item.Attribute15;
-                updateItem.Attribute16 = item.Attribute16;
-                updateItem.Attribute17 = item.Attribute17;
-                updateItem.Attribute18 = item.Attribute18;
-                updateItem.Attribute19 = item.Attribute19;
-                updateItem.Attribute20 = item.Attribute20;
-                updateItem.UpdatedBy = item.UpdatedBy;
-                updateItem.UpdatedDate = item.UpdatedDate;
-                var result = await this.DbContext.SaveChangesAsync();
-
-                if (result > 0)
+                if ((updateItem.CreatedBy == userID) || (isAdmin))
                 {
-                    return item;
+                    updateItem.Name = item.Name;
+                    updateItem.Content = item.Content;
+                    updateItem.Alias = item.Alias;
+                    updateItem.SectionItems = item.SectionItems;
+                    updateItem.Attribute01 = item.Attribute01;
+                    updateItem.Attribute02 = item.Attribute02;
+                    updateItem.Attribute03 = item.Attribute03;
+                    updateItem.Attribute04 = item.Attribute04;
+                    updateItem.Attribute05 = item.Attribute05;
+                    updateItem.Attribute06 = item.Attribute06;
+                    updateItem.Attribute07 = item.Attribute07;
+                    updateItem.Attribute08 = item.Attribute08;
+                    updateItem.Attribute09 = item.Attribute09;
+                    updateItem.Attribute10 = item.Attribute10;
+                    updateItem.Attribute11 = item.Attribute11;
+                    updateItem.Attribute12 = item.Attribute12;
+                    updateItem.Attribute13 = item.Attribute13;
+                    updateItem.Attribute14 = item.Attribute14;
+                    updateItem.Attribute15 = item.Attribute15;
+                    updateItem.Attribute16 = item.Attribute16;
+                    updateItem.Attribute17 = item.Attribute17;
+                    updateItem.Attribute18 = item.Attribute18;
+                    updateItem.Attribute19 = item.Attribute19;
+                    updateItem.Attribute20 = item.Attribute20;
+                    updateItem.UpdatedBy = item.UpdatedBy;
+                    updateItem.UpdatedDate = item.UpdatedDate;
+                    var result = await this.DbContext.SaveChangesAsync();
+
+                    if (result > 0)
+                    {
+                        return item;
+                    }
                 }
             }
 

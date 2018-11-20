@@ -8,9 +8,9 @@ import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const CONTACT_ROUTES: Routes = [
   { path: 'contact', component: ContactComponent, children: [
-    { path: 'new', component: ContactFormComponent, canActivate: [AuthGuard] },
-    { path: 'edit/:alias', component: ContactFormComponent, canActivate: [AuthGuard] },
-    { path: ':alias', component: ContactDisplayComponent, canActivate: [AuthGuard] }
+    { path: 'new', component: ContactFormComponent, canActivate: [AuthGuard], data: { module: 'contact/manage' } },
+    { path: 'edit/:alias', component: ContactFormComponent, canActivate: [AuthGuard], data: { module: 'contact/manage' } },
+    { path: ':alias', component: ContactDisplayComponent, canActivate: [AuthGuard], data: { module: 'contact/view' } }
   ] }
 ];
 

@@ -8,9 +8,9 @@ import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const PAGE_ROUTES: Routes = [
   { path: 'page', component: PageComponent, children: [
-    { path: 'new', component: PageFormComponent, canActivate: [AuthGuard] },
-    { path: 'edit/:alias', component: PageFormComponent, canActivate: [AuthGuard] },
-    { path: ':alias', component: PageDisplayComponent, canActivate: [AuthGuard] }
+    { path: 'new', component: PageFormComponent, canActivate: [AuthGuard], data: { module: 'page/manage' } },
+    { path: 'edit/:alias', component: PageFormComponent, canActivate: [AuthGuard], data: { module: 'page/manage' } },
+    { path: ':alias', component: PageDisplayComponent, canActivate: [AuthGuard], data: { module: 'page/view' } }
   ] }
 ];
 

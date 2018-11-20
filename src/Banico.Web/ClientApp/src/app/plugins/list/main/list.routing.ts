@@ -9,12 +9,12 @@ import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const FAQ_ROUTES: Routes = [
   { path: 'list', component: ListComponent, children: [
-    { path: 'list-item/new', component: ListItemFormComponent, canActivate: [AuthGuard] },
-    { path: 'list-item/edit/:alias', component: ListItemFormComponent, canActivate: [AuthGuard] },
-    { path: 'list-item/:alias', component: ListItemDisplayComponent, canActivate: [AuthGuard] },
-    { path: 'list/new', component: ListFormComponent, canActivate: [AuthGuard] },
-    { path: 'list/edit/:alias', component: ListFormComponent, canActivate: [AuthGuard] },
-    { path: 'list/:alias', component: ListDisplayComponent, canActivate: [AuthGuard] },
+    { path: 'list-item/new', component: ListItemFormComponent, canActivate: [AuthGuard], data: { module: 'list-item/manage' } },
+    { path: 'list-item/edit/:alias', component: ListItemFormComponent, canActivate: [AuthGuard], data: { module: 'list-item/manage' } },
+    { path: 'list-item/:alias', component: ListItemDisplayComponent, canActivate: [AuthGuard], data: { module: 'list-item/view' } },
+    { path: 'list/new', component: ListFormComponent, canActivate: [AuthGuard], data: { module: 'list/manage' } },
+    { path: 'list/edit/:alias', component: ListFormComponent, canActivate: [AuthGuard], data: { module: 'list/manage' } },
+    { path: 'list/:alias', component: ListDisplayComponent, canActivate: [AuthGuard], data: { module: 'list/view' } },
   ] }
 ];
 

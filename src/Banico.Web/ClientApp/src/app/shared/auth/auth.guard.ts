@@ -27,10 +27,22 @@ export class AuthGuard implements CanActivate {
         configValue => {
           var result = false;
           switch (configValue) {
-            case '': result = true;
-            case 'public': result = true;
-            case 'user': result = this.checkLogin(url);
-            case 'admin': result = this.checkAdmin(url);
+            case '': {
+              result = false; // secure by default
+              break;
+            }
+            case 'public': {
+              result = true;
+              break;
+            }
+            case 'user': {
+              result = this.checkLogin(url);
+              break;
+            }
+            case 'admin': {
+              result = this.checkAdmin(url);
+              break;
+            }
           }
 
           return result;

@@ -8,9 +8,9 @@ import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const FAQ_ROUTES: Routes = [
   { path: 'faq', component: FaqComponent, children: [
-    { path: 'new', component: FaqFormComponent, canActivate: [AuthGuard] },
-    { path: 'edit/:alias', component: FaqFormComponent, canActivate: [AuthGuard] },
-    { path: ':alias', component: FaqDisplayComponent, canActivate: [AuthGuard] }
+    { path: 'new', component: FaqFormComponent, canActivate: [AuthGuard], data: { module: 'faq/manage' } },
+    { path: 'edit/:alias', component: FaqFormComponent, canActivate: [AuthGuard], data: { module: 'faq/manage' } },
+    { path: ':alias', component: FaqDisplayComponent, canActivate: [AuthGuard], data: { module: 'faq/view' } }
   ] }
 ];
 

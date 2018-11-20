@@ -7,7 +7,7 @@ import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const INVITE_ROUTES: Routes = [
   { path: 'invite', component: InviteComponent, children: [
-    { path: '', component: InviteFormComponent, canActivate: [AuthGuard] }
+    { path: '', component: InviteFormComponent, canActivate: [AuthGuard], data: { module: 'invite' } }
   ] }
 ];
 
