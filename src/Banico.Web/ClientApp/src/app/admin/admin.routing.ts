@@ -13,7 +13,7 @@ import { ConfigsListComponent } from './configs/components/configs-list/configs-
 import { AuthGuard } from '../shared/auth/auth.guard';
 
 const ADMIN_ROUTES: Routes = [
-    { path: 'admin/sections/section/:section', 
+    { path: 'admin/sections/section-item/:section', 
         component: SectionItemsAdminComponent, 
         canActivate: [AuthGuard],
         data: { module: 'admin/sections' } 

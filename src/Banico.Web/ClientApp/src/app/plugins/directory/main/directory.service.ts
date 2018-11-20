@@ -29,7 +29,7 @@ export class DirectoryService extends PluginService {
         });
     }
 
-    public GetDirectoryItems(sectionItems: string): Observable<DirectoryItem[]> {
+    public getDirectoryItems(sectionItems: string): Observable<DirectoryItem[]> {
         return this.contentItemService.getAll('', '', '',
         'directory', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '')
@@ -43,7 +43,7 @@ export class DirectoryService extends PluginService {
         });
     }
 
-    public GetWithTextSearch(text: string): Observable<DirectoryItem[]> {
+    public getWithTextSearch(text: string): Observable<DirectoryItem[]> {
         return this.contentItemService.getAll('', '', '',
         'directory', '', '', '', text, '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '')

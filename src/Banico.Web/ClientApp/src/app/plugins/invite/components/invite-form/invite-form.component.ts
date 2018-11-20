@@ -24,7 +24,7 @@ export class InviteFormComponent implements OnInit {
     }
 
     public submit() {
-        this.inviteService.AddInvite(this.invite)
+        this.inviteService.addInvite(this.invite)
             .subscribe(invite => this.submitInviteSuccess(invite));
     }
 

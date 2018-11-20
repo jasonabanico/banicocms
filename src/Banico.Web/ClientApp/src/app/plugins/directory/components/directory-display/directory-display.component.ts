@@ -36,7 +36,7 @@ export class DirectoryDisplayComponent implements OnInit, OnDestroy {
             this.navBarService.initialize('directory', this.path, '', '/directory');
 
             if (this.path) {
-                this.directoryService.GetDirectoryItems(this.path)
+                this.directoryService.getDirectoryItems(this.path)
                 .subscribe(directoryItems => this.setDirectoryItems(directoryItems));
             }
         });

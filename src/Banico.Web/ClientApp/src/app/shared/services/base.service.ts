@@ -72,4 +72,14 @@ export abstract class BaseService {
 
       return headers;
     }
+
+    public isAdmin(): boolean {
+      if (!this.localStorage) return false;
+      var isAdminStr: string = this.localStorage.getItem(this.IS_ADMIN);
+      var isAdmin: boolean = false;
+      if (isAdminStr == "y") {
+          isAdmin = true;
+      }
+      return isAdmin;
+  }
 }

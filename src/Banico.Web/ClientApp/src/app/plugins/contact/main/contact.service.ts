@@ -28,7 +28,7 @@ export class ContactService extends PluginService {
             .catch(this.handleError);
     }
 
-    public DeleteContact(contact: Contact): Observable<{}> {
+    public deleteContact(contact: Contact): Observable<{}> {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'id=' + contact.id;
@@ -44,7 +44,7 @@ export class ContactService extends PluginService {
             //});
     }
 
-    public SendContactEmail(contact: Contact, message: string): Observable<{}> {
+    public sendContactEmail(contact: Contact, message: string): Observable<{}> {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'id=' + contact.id + '&message=' + message;

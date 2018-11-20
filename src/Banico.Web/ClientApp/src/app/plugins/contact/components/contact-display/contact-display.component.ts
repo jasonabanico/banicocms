@@ -58,7 +58,7 @@ export class ContactDisplayComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.button = "Delete";
         modalRef.result.then((result) => {
             if (result == 'success') {
-                this.contactService.DeleteContact(this.contact)
+                this.contactService.deleteContact(this.contact)
                     .subscribe(response => this.SaveResponse(response));
             }
         });
@@ -73,7 +73,7 @@ export class ContactDisplayComponent implements OnInit, OnDestroy {
             message = message + fieldItem.name + ": " + this.fieldValue[i] + "\n";
         }        
 
-        this.contactService.SendContactEmail(this.contact, message)
+        this.contactService.sendContactEmail(this.contact, message)
             .subscribe(response => alert(JSON.stringify(response)));
     }
 

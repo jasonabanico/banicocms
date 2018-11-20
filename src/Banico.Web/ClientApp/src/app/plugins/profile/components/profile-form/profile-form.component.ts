@@ -22,9 +22,9 @@ export class ProfileFormComponent implements OnInit {
 
     public ngOnInit() {
         this.profile = new Profile();
-        this.profileService.GetProfile()
+        this.profileService.getProfile()
             .subscribe(profile => this.setProfile(profile));
-        this.profileService.GetUser()
+        this.profileService.getUser()
             .subscribe(profile => this.setUser(profile));
     }
 
@@ -47,12 +47,12 @@ export class ProfileFormComponent implements OnInit {
     }
 
     public saveProfile() {
-        this.profileService.AddOrUpdateProfile(this.profile)
+        this.profileService.addOrUpdateProfile(this.profile)
         .subscribe(response => this.SaveResponse(response));
     }
 
     public saveUser() {
-        this.profileService.UpdateUser(this.profile)
+        this.profileService.updateUser(this.profile)
         .subscribe(response => this.SaveResponse(response));
     }
 

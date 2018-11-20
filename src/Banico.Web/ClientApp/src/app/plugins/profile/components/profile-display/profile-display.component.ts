@@ -27,12 +27,12 @@ export class ProfileDisplayComponent implements OnInit, OnDestroy {
         this.sub = this.route.params.subscribe(params => {
             var alias = params['alias'];
             if (alias) {
-                this.profileService.GetProfileByAlias(alias)
+                this.profileService.getProfileByAlias(alias)
                 .subscribe(profile => this.setProfile(profile));
             } else {
-                this.profileService.GetProfile()
+                this.profileService.getProfile()
                 .subscribe(profile => this.setProfile(profile));
-                this.profileService.GetUser()
+                this.profileService.getUser()
                 .subscribe(profile => this.setUser(profile));
             }
         });

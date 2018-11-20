@@ -73,7 +73,7 @@ export class AuthGuard implements CanActivate {
   private checkAdmin(url: string): boolean {
     var result = this.checkLogin(url);
     if (result) {
-      result = this.authService.getIsAdmin();
+      result = this.authService.isAdmin();
     }
     return result;
   }

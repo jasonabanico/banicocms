@@ -15,7 +15,7 @@ export class InviteService {
         this.inviteUrl = `${this.baseUrl}api/Invite`;
     }
 
-    private ExtractData(res: Response) {
+    private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Response status: ' + res.status);
         }
@@ -23,7 +23,7 @@ export class InviteService {
         return body || {};
     }
 
-    public AddInvite(invite: Invite): Observable<Invite> {
+    public addInvite(invite: Invite): Observable<Invite> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'emails=' + invite.emails;
@@ -31,7 +31,7 @@ export class InviteService {
             .post(this.inviteUrl + '/Add', data, {
                 headers: headers
             })
-            .map(this.ExtractData);
+            .map(this.extractData);
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),

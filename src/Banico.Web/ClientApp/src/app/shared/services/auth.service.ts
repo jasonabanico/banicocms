@@ -89,14 +89,4 @@ export class AuthService extends BaseService {
         }
         this.localStorage.setItem(this.IS_ADMIN, isAdminStr);
     }
-
-    public getIsAdmin(): boolean {
-        if (!this.localStorage) return false;
-        var isAdminStr: string = this.localStorage.getItem(this.IS_ADMIN);
-        var isAdmin: boolean = false;
-        if (isAdminStr == "y") {
-            isAdmin = true;
-        }
-        return isAdmin;
-    }
 }

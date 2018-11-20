@@ -17,7 +17,7 @@ export class ProfileService {
         this.appBaseUrl = `${this.baseUrl}api/Profile`;
     }
 
-    private ExtractData(res: Response) {
+    private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Response status: ' + res.status);
         }
@@ -25,7 +25,7 @@ export class ProfileService {
         return body || {};
     }
 
-    public GetUser(): Observable<Profile> {
+    public getUser(): Observable<Profile> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = '';
@@ -34,11 +34,11 @@ export class ProfileService {
             .post(this.accountUrl + '/GetProfile', data, {
                 headers: headers
             })
-            .map(this.ExtractData);
+            .map(this.extractData);
             //.catch(this.handleError);
     }
 
-    public GetProfile(): Observable<Profile> {
+    public getProfile(): Observable<Profile> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = '';
@@ -47,11 +47,11 @@ export class ProfileService {
             .post(this.appBaseUrl + '/Get', data, {
                 headers: headers
             })
-            .map(this.ExtractData);
+            .map(this.extractData);
             //.catch(this.handleError);
     }
     
-    public GetProfileByAlias(alias: string): Observable<Profile> {
+    public getProfileByAlias(alias: string): Observable<Profile> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'alias=' + alias;
@@ -60,11 +60,11 @@ export class ProfileService {
             .post(this.appBaseUrl + '/GetByAlias', data, {
                 headers: headers
             })
-            .map(this.ExtractData);
+            .map(this.extractData);
             //.catch(this.handleError);
     }
 
-    public UpdateUser(profile: Profile): Observable<Response> {
+    public updateUser(profile: Profile): Observable<Response> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'firstName=' + profile.firstName + 
@@ -73,7 +73,7 @@ export class ProfileService {
             .post(this.accountUrl + '/SetProfile', data, {
                 headers: headers
             })
-            .map(this.ExtractData);
+            .map(this.extractData);
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),
@@ -81,7 +81,7 @@ export class ProfileService {
             //});
     }
 
-    public AddOrUpdateProfile(profile: Profile): Observable<Response> {
+    public addOrUpdateProfile(profile: Profile): Observable<Response> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'content=' + profile.content;
@@ -89,7 +89,7 @@ export class ProfileService {
             .post(this.appBaseUrl + '/AddOrUpdate', data, {
                 headers: headers
             })
-            .map(this.ExtractData);
+            .map(this.extractData);
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),

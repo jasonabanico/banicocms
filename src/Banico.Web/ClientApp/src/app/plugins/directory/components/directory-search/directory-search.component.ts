@@ -37,7 +37,7 @@ export class DirectorySearchComponent implements OnInit, OnDestroy {
 
         if (search)
             {
-                this.directoryService.GetWithTextSearch(search)
+                this.directoryService.getWithTextSearch(search)
                 .subscribe(directoryItems => this.setDirectoryItems(directoryItems));
             }
         });
