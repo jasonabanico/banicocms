@@ -82,7 +82,7 @@ export class ListItemService extends PluginService {
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers
             })
-            .map(this.ExtractData);
+            .map(this.extractData);
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),

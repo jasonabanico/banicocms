@@ -19,7 +19,7 @@ export class DirectoryDisplayComponent implements OnInit, OnDestroy {
 
     constructor(
         @Inject(NavBarService) private navBarService: NavBarService,
-        @Inject(DirectoryService) private directoryService: DirectoryService,
+        @Inject(DirectoryService) public directoryService: DirectoryService,
         private route: ActivatedRoute
     ) {
     }

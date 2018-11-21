@@ -23,7 +23,7 @@ export class PluginService extends BaseService {
         this.appBaseUrl = `${this.baseUrl}api/Page`;
     }
 
-    protected ExtractData(res: Response) {
+    protected extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Response status: ' + res.status);
         }

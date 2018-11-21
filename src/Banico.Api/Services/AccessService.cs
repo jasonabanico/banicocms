@@ -26,7 +26,7 @@ namespace Banico.Api.Services
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
             _configuration = configuration;
-            _configRepository = _configRepository;
+            _configRepository = configRepository;
         }
 
         public string GetCurrentUserId()
