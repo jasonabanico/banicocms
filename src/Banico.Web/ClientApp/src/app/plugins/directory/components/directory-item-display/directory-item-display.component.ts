@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 import { ContentItem } from '../../../../entities/content-item';
 import { DirectoryItem } from '../../main/directory-item';
@@ -26,7 +25,6 @@ export class DirectoryItemDisplayComponent implements OnInit, OnDestroy {
         @Inject(DirectoryService) private directoryService: DirectoryService,
         private route: ActivatedRoute,
         private router: Router,
-        private modalService: NgbModal,
         private sanitizer: DomSanitizer
     ) {
     }
@@ -61,16 +59,16 @@ export class DirectoryItemDisplayComponent implements OnInit, OnDestroy {
     }
 
     public delete() {
-        const modalRef = this.modalService.open(ModalComponent)
-        modalRef.componentInstance.title = "Delete Confirmation"
-        modalRef.componentInstance.body = "Delete this item?";
-        modalRef.componentInstance.button = "Delete";
-        modalRef.result.then((result) => {
-            if (result == 'success') {
-                this.directoryService.delete(this.directoryItem)
-                    .subscribe(response => this.SaveResponse(response));
-            }
-        });
+        // const modalRef = this.modalService.open(ModalComponent)
+        // modalRef.componentInstance.title = "Delete Confirmation"
+        // modalRef.componentInstance.body = "Delete this item?";
+        // modalRef.componentInstance.button = "Delete";
+        // modalRef.result.then((result) => {
+        //     if (result == 'success') {
+        //         this.directoryService.delete(this.directoryItem)
+        //             .subscribe(response => this.SaveResponse(response));
+        //     }
+        // });
     }
 
     private SaveResponse(data: any) {

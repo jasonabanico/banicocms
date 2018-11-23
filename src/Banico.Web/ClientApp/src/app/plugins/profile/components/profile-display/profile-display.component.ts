@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Profile } from '../../main/profile';
 import { ProfileService } from '../../main/profile.service';
 
@@ -17,8 +16,7 @@ export class ProfileDisplayComponent implements OnInit, OnDestroy {
     constructor(
         @Inject(ProfileService) private profileService: ProfileService,
         private route: ActivatedRoute,
-        private router: Router,
-        private modalService: NgbModal
+        private router: Router
     ) {
     }
 

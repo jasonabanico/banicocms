@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Contact } from '../../main/contact';
 import { Field } from '../../main/field';
 import { AuthService } from '../../../../shared/services/auth.service';
@@ -22,8 +21,7 @@ export class ContactDisplayComponent implements OnInit, OnDestroy {
         @Inject(AuthService) private authService: AuthService,
         @Inject(ContactService) private contactService: ContactService,
         private route: ActivatedRoute,
-        private router: Router,
-        private modalService: NgbModal
+        private router: Router
     ) {
     }
 
@@ -52,16 +50,16 @@ export class ContactDisplayComponent implements OnInit, OnDestroy {
     }
 
     public delete() {
-        const modalRef = this.modalService.open(ModalComponent)
-        modalRef.componentInstance.title = "Delete Confirmation"
-        modalRef.componentInstance.body = "Delete this item?";
-        modalRef.componentInstance.button = "Delete";
-        modalRef.result.then((result) => {
-            if (result == 'success') {
-                this.contactService.deleteContact(this.contact)
-                    .subscribe(response => this.SaveResponse(response));
-            }
-        });
+        // const modalRef = this.modalService.open(ModalComponent)
+        // modalRef.componentInstance.title = "Delete Confirmation"
+        // modalRef.componentInstance.body = "Delete this item?";
+        // modalRef.componentInstance.button = "Delete";
+        // modalRef.result.then((result) => {
+        //     if (result == 'success') {
+        //         this.contactService.deleteContact(this.contact)
+        //             .subscribe(response => this.SaveResponse(response));
+        //     }
+        // });
     }
 
     public send() {

@@ -3,7 +3,6 @@ import { Inject, NgModule } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { AuthenticateXHRBackend } from './authenticate-xhr.backend';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
@@ -19,6 +18,7 @@ import { ShellModule } from './shell/shell.module';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/auth/auth.guard';
 import { ConfigsService } from './shared/services/configs.service';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { ConfigsService } from './shared/services/configs.service';
     FormsModule,
     ApolloModule,
     HttpLinkModule,
-    NgbModule.forRoot(),
+    MDBBootstrapModule.forRoot(),
     AppRoutingModule,
     AdminModule,
     IdentityModule,

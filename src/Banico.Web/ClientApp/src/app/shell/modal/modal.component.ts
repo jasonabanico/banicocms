@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'modal',
@@ -11,6 +10,6 @@ export class ModalComponent  {
     @Input() body;
     @Input() button;
     
-    constructor (public activeModal: NgbActiveModal) {
-    }
+    //constructor (public activeModal: NgbActiveModal) {
+    //}
 }

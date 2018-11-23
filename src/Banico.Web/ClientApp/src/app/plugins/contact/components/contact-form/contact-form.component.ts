@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Contact } from '../../main/contact';
 import { Field } from '../../main/field';
 import { ContactService } from '../../main/contact.service';
@@ -23,8 +22,7 @@ export class ContactFormComponent implements OnInit {
     public constructor(
         @Inject(ContactService) private contactService: ContactService,
         private router: Router,
-        private route: ActivatedRoute,
-        private modalService: NgbModal        
+        private route: ActivatedRoute       
     ) {
     }
 
@@ -87,16 +85,16 @@ export class ContactFormComponent implements OnInit {
     }
 
     public delete(fieldId: number) {
-        const modalRef = this.modalService.open(ModalComponent)
-        modalRef.componentInstance.title = "Delete Confirmation"
-        modalRef.componentInstance.body = "Delete this item?";
-        modalRef.componentInstance.button = "Delete";
-        modalRef.result.then((result) => {
-            if (result == 'success') {
-                this.contact.fields.splice(fieldId, 1);
-                this.contact.content = JSON.stringify(this.contact.fields);
-            }
-        });
+        // const modalRef = this.modalService.open(ModalComponent)
+        // modalRef.componentInstance.title = "Delete Confirmation"
+        // modalRef.componentInstance.body = "Delete this item?";
+        // modalRef.componentInstance.button = "Delete";
+        // modalRef.result.then((result) => {
+        //     if (result == 'success') {
+        //         this.contact.fields.splice(fieldId, 1);
+        //         this.contact.content = JSON.stringify(this.contact.fields);
+        //     }
+        // });
     }
     
     public save() {

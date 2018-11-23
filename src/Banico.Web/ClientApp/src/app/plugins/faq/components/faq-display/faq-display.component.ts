@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Faq } from '../../main/faq';
 import { Qa } from '../../main/qa';
 import { FaqService } from '../../main/faq.service';
@@ -19,8 +18,7 @@ export class FaqDisplayComponent implements OnInit, OnDestroy {
     constructor(
         @Inject(FaqService) private faqService: FaqService,
         private route: ActivatedRoute,
-        private router: Router,
-        private modalService: NgbModal
+        private router: Router
     ) {
     }
 
@@ -47,16 +45,16 @@ export class FaqDisplayComponent implements OnInit, OnDestroy {
     }
 
     delete() {
-        const modalRef = this.modalService.open(ModalComponent)
-        modalRef.componentInstance.title = "Delete Confirmation"
-        modalRef.componentInstance.body = "Delete this item?";
-        modalRef.componentInstance.button = "Delete";
-        modalRef.result.then((result) => {
-            if (result == 'success') {
-                this.faqService.delete(this.faq)
-                    .subscribe(response => this.SaveResponse(response));
-            }
-        });
+        // const modalRef = this.modalService.open(ModalComponent)
+        // modalRef.componentInstance.title = "Delete Confirmation"
+        // modalRef.componentInstance.body = "Delete this item?";
+        // modalRef.componentInstance.button = "Delete";
+        // modalRef.result.then((result) => {
+        //     if (result == 'success') {
+        //         this.faqService.delete(this.faq)
+        //             .subscribe(response => this.SaveResponse(response));
+        //     }
+        // });
     }
 
     private SaveResponse(data: any) {

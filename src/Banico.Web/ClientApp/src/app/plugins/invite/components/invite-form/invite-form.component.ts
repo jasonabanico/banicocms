@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Invite } from '../../main/invite';
 import { InviteService } from '../../main/invite.service';
 

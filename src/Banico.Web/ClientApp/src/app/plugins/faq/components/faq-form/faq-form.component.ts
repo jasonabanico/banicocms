@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Faq } from '../../main/faq';
 import { Qa } from '../../main/qa';
 import { FaqService } from '../../main/faq.service';
@@ -23,8 +22,7 @@ export class FaqFormComponent implements OnInit {
     public constructor(
         @Inject(FaqService) private faqService: FaqService,
         private router: Router,
-        private route: ActivatedRoute,
-        private modalService: NgbModal        
+        private route: ActivatedRoute       
     ) {
     }
 
@@ -87,16 +85,16 @@ export class FaqFormComponent implements OnInit {
     }
 
     public delete(qaId: number) {
-        const modalRef = this.modalService.open(ModalComponent)
-        modalRef.componentInstance.title = "Delete Confirmation"
-        modalRef.componentInstance.body = "Delete this item?";
-        modalRef.componentInstance.button = "Delete";
-        modalRef.result.then((result) => {
-            if (result == 'success') {
-                this.faq.qas.splice(qaId, 1);
-                this.faq.content = JSON.stringify(this.faq.qas);
-            }
-        });
+        // const modalRef = this.modalService.open(ModalComponent)
+        // modalRef.componentInstance.title = "Delete Confirmation"
+        // modalRef.componentInstance.body = "Delete this item?";
+        // modalRef.componentInstance.button = "Delete";
+        // modalRef.result.then((result) => {
+        //     if (result == 'success') {
+        //         this.faq.qas.splice(qaId, 1);
+        //         this.faq.content = JSON.stringify(this.faq.qas);
+        //     }
+        // });
     }
     
     public save() {
