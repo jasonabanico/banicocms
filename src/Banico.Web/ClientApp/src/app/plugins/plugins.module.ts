@@ -7,7 +7,7 @@ import { ContactModule } from './contact/main/contact.module';
 import { DirectoryModule } from './directory/main/directory.module';
 import { FaqModule } from './faq/main/faq.module';
 import { InviteModule } from './invite/main/invite.module';
-import { ListModule } from './list/main/list.module';
+import { ListModule } from './list/list.module';
 import { PageModule } from './page/main/page.module';
 import { ProfileModule } from './profile/main/profile.module';
 

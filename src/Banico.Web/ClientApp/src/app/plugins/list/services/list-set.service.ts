@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { PluginService } from "../../services/plugin.service";
 import { ContentItem } from '../../../entities/content-item';
-import { ListSet } from './list-set';
+import { ListSet } from '../entities/list-set';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
@@ -31,12 +31,14 @@ export class ListSetService extends PluginService {
 
     public addOrUpdate(
         id: string,
+        sectionItems: string,
         name: string,
         description: string
     ): Observable<boolean> {
         let listSet: ListSet = new ListSet(null);
 
         listSet.id = id;
+        listSet.sectionItems = sectionItems;
         listSet.name = name;
         listSet.description = description;
 

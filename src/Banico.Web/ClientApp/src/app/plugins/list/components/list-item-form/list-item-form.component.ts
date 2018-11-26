@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ListItem } from '../../main/list-item';
-import { ListItemService } from '../../main/list-item.service';
+import { ListItem } from '../../entities/list-item';
+import { ListItemService } from '../../services/list-item.service';
 
 @Component({
   selector: 'list-item-form',
@@ -14,6 +14,7 @@ export class ListItemFormComponent implements OnInit {
 
   listItemForm = this.fb.group({
     id: ['', Validators.required],
+    listSetId: ['', Validators.required],
     name: ['', Validators.required],
     description: ['', Validators.required]
   });
@@ -31,6 +32,7 @@ export class ListItemFormComponent implements OnInit {
     // this.isRequesting = true;
     this.listItemService.addOrUpdate(
       this.listItemForm.value['id'],
+      this.listItemForm.value['listSetId'],
       this.listItemForm.value['name'],
       this.listItemForm.value['description']
     )
