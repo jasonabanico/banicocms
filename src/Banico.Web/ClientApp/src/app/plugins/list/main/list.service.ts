@@ -10,18 +10,18 @@ export class ListService extends PluginService {
 
     public get(id: string): Observable<List> {
         return this.contentItemService.get(id)
-        .map(item => {
-            return new List(item);
+        .map(listItem => {
+            return new List(listItem);
         });
     }
     
-    public getAll(): Observable<List[]> {
+    public getAll(listSetId: string): Observable<List[]> {
         return this.contentItemService.getAll('', '', '',
-        'list', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+        'list', listSetId, '', '', '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '')
-        .map(items => {
+        .map(listItems => {
             var lists: List[] = new Array<List>();
-            items.forEach(function(item: ContentItem) {
+            listItems.forEach(function(item: ContentItem) {
                 lists.push(new List(item));                
             });
 
@@ -29,27 +29,13 @@ export class ListService extends PluginService {
         });
     }
 
-    public getLists(sectionItems: string): Observable<List[]> {
+    public getByUser(userId: string): Observable<List[]> {
         return this.contentItemService.getAll('', '', '',
-        'list', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
+        'list', '', userId, '', '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '')
-        .map(items => {
+        .map(listItems => {
             var lists: List[] = new Array<List>();
-            items.forEach(function(item: ContentItem) {
-                lists.push(new List(item));                
-            });
-
-            return lists;
-        });
-    }
-
-    public getWitTextSearch(text: string): Observable<List[]> {
-        return this.contentItemService.getAll('', '', '',
-        'list', '', '', '', text, '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '')
-        .map(items => {
-            var lists: List[] = new Array<List>();
-            items.forEach(function(item: ContentItem) {
+            listItems.forEach(function(item: ContentItem) {
                 lists.push(new List(item));                
             });
 

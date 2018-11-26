@@ -2,53 +2,51 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { PluginService } from "../../services/plugin.service";
 import { ContentItem } from '../../../entities/content-item';
-import { ListItem } from './list-item';
+import { ListSet } from './list-set';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
-export class ListItemService extends PluginService {
+export class ListSetService extends PluginService {
 
-    public get(id: string): Observable<ListItem> {
+    public get(id: string): Observable<ListSet> {
         return this.contentItemService.get(id)
         .map(item => {
-            return new ListItem(item);
+            return new ListSet(item);
         });
     }
     
-    public getListItems(listSetId: string): Observable<ListItem[]> {
+    public getListSets(sectionItems: string): Observable<ListSet[]> {
         return this.contentItemService.getAll('', '', '',
-        'list-item', listSetId, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '')
+        'list-set', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
+        '', '', '', '', '', '', '', '', '', '')
         .map(items => {
-            var listItems: ListItem[] = new Array<ListItem>();
+            var listSets: ListSet[] = new Array<ListSet>();
             items.forEach(function(item: ContentItem) {
-                listItems.push(new ListItem(item));                
+                listSets.push(new ListSet(item));                
             });
 
-            return listItems;
+            return listSets;
         });
     }
 
     public addOrUpdate(
         id: string,
         name: string,
-        description: string,
-        listSetId: string
+        description: string
     ): Observable<boolean> {
-        let listItem: ListItem = new ListItem(null);
+        let listSet: ListSet = new ListSet(null);
 
-        listItem.id = id;
-        listItem.name = name;
-        listItem.description = description;
-        listItem.listSet = listSetId;
+        listSet.id = id;
+        listSet.name = name;
+        listSet.description = description;
 
-        let contentItem: ContentItem = listItem.ToContentItem();
+        let contentItem: ContentItem = listSet.ToContentItem();
         return this.contentItemService.addOrUpdate(contentItem)
             .map(res => true)
             .catch(this.handleError);
     }
 
-    public delete(listItem: ListItem): Observable<{}> {
+    public delete(listItem: ListSet): Observable<{}> {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'id=' + listItem.id;

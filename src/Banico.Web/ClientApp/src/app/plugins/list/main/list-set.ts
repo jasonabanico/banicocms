@@ -1,31 +1,28 @@
 import { ContentItem } from "../../../entities/content-item";
 
-export class List {
+export class ListSet {
   id: string;
   name: string;
   description: string;
-  listSet: string;
-  listItems: string;
+  sectionItems: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module == 'list')) {
+    if ((contentItem) && (contentItem.module == 'list-set')) {
       this.id = contentItem.id;
       this.name = contentItem.name;
       this.description = contentItem.content;
-      this.listSet = contentItem.parentId;
-      this.listItems = contentItem.attribute01;
+      this.sectionItems = contentItem.sectionItems;
     }
   }
 
   public ToContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = "list";
+    output.module = "list-set";
     output.id = this.id;
     output.name = this.name;
     output.content = this.description;
-    output.parentId = this.listSet;
-    output.attribute01 = this.listItems;
+    output.sectionItems = this.sectionItems;
     
     return output;
   }

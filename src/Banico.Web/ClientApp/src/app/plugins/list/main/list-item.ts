@@ -4,25 +4,25 @@ export class ListItem {
   id: string;
   name: string;
   description: string;
-  sectionItems: string;
+  listSet: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module == 'listitem')) {
+    if ((contentItem) && (contentItem.module == 'list-item')) {
       this.id = contentItem.id;
       this.name = contentItem.name;
       this.description = contentItem.content;
-      this.sectionItems = contentItem.sectionItems;
+      this.listSet = contentItem.parentId;
     }
   }
 
   public ToContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = 'listitem';
+    output.module = 'list-item';
     output.id = this.id;
     output.name = this.name;
     output.content = this.description;
-    output.sectionItems = this.sectionItems;
+    output.parentId = this.listSet;
     
     return output;
   }
