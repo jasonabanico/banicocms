@@ -21,12 +21,10 @@ export class ListSetDisplayComponent implements OnInit {
 
   public ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      if (params['id']) {
-        var id = params['id'];
-        alert(id);
-        this.listSetService.get(id)
-          .subscribe(listSet => {
-            alert(JSON.stringify(listSet));
+      if (params['alias']) {
+        var alias = params['alias'];
+        this.listSetService.getByAlias(alias)
+          .subscribe(listSet => {            
             this.set(listSet);
           });
         }

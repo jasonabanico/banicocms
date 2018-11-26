@@ -15,6 +15,13 @@ export class ListSetService extends PluginService {
         });
     }
     
+    public getByAlias(alias: string): Observable<ListSet> {
+        return this.contentItemService.getByAlias(alias)
+        .map(item => {
+            return new ListSet(item);
+        });
+    }
+    
     public getListSets(sectionItems: string): Observable<ListSet[]> {
         return this.contentItemService.getAll('', '', '',
         'list-set', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
@@ -33,6 +40,7 @@ export class ListSetService extends PluginService {
         id: string,
         sectionItems: string,
         name: string,
+        alias: string,
         description: string
     ): Observable<boolean> {
         let listSet: ListSet = new ListSet(null);
@@ -40,6 +48,7 @@ export class ListSetService extends PluginService {
         listSet.id = id;
         listSet.sectionItems = sectionItems;
         listSet.name = name;
+        listSet.alias = alias;
         listSet.description = description;
 
         let contentItem: ContentItem = listSet.ToContentItem();

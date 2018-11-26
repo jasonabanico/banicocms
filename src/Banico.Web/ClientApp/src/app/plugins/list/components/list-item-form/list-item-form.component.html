@@ -1,16 +1,49 @@
 <h1>List Item</h1>
+
 <form [formGroup]="listItemForm" novalidate (ngSubmit)="save()">
-    <div class="form-group row">
-        <label for="name">Name</label>
-        <input type="text" [(ngModel)]="listItem.name" name="name" class="form-control" />
+    <input type="hidden"
+      id="id" 
+      name="id"
+      formControlName="id" />
+    <input type="hidden"
+      id="listSetId" 
+      name="listSetId"
+      formControlName="listSetId" />
+    <div class="form-group">
+      <label class="col-md-2 control-label" for="name">Name</label>
+      <div class="col-md-10">
+          <input 
+              class="form-control" 
+              id="name" 
+              name="name"
+              type="text"
+              formControlName="name" />
     </div>
-    <div class="form-group row">
-        <label for="name">Description</label>
-        <input type="text" [(ngModel)]="listItem.description" name="description" class="form-control" />
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-primary">Submit</button>
+        <label class="col-md-2 control-label" for="alias">Alias</label>
+        <div class="col-md-10">
+            <input 
+                class="form-control" 
+                id="alias" 
+                name="alias"
+                type="text"
+                formControlName="alias" />
         </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label" for="description">Description</label>
+      <div class="col-md-10">
+          <input 
+              class="form-control" 
+              id="description" 
+              name="description"
+              type="text"
+              formControlName="description"
+              required />
+      </div>
+    </div>    
+    <div class="form-group row">
+        <button type="submit" class="btn btn-primary" value="save">Save</button>
     </div>
 </form>

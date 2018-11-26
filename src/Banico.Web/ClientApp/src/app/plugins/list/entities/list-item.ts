@@ -2,16 +2,18 @@ import { ContentItem } from "../../../entities/content-item";
 
 export class ListItem {
   id: string;
+  listSetId: string;
   name: string;
+  alias: string;
   description: string;
-  listSet: string;
 
   constructor(private contentItem: ContentItem) {
     if ((contentItem) && (contentItem.module == 'list-item')) {
       this.id = contentItem.id;
+      this.listSetId = contentItem.parentId;
       this.name = contentItem.name;
+      this.alias = contentItem.alias;
       this.description = contentItem.content;
-      this.listSet = contentItem.parentId;
     }
   }
 
@@ -20,9 +22,10 @@ export class ListItem {
 
     output.module = 'list-item';
     output.id = this.id;
+    output.parentId = this.listSetId;
     output.name = this.name;
+    output.alias = this.alias;
     output.content = this.description;
-    output.parentId = this.listSet;
     
     return output;
   }

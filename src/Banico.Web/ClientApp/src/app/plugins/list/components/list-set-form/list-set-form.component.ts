@@ -19,6 +19,7 @@ export class ListSetFormComponent implements OnInit {
         id: [''],
         sectionItems: ['', Validators.required],
         name: ['', Validators.required],
+        alias: ['', Validators.required],
         description: ['', Validators.required]
       });
 
@@ -32,9 +33,9 @@ export class ListSetFormComponent implements OnInit {
 
     public ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            if (params['id']) {
-            var id = params['id'];
-            this.listSetService.get(id)
+            if (params['alias']) {
+            var alias = params['alias'];
+            this.listSetService.getByAlias(alias)
                 .subscribe(listSet => {
                 this.set(listSet);
                 });
@@ -47,6 +48,7 @@ export class ListSetFormComponent implements OnInit {
             id: listSet.id,
             sectionItems: listSet.sectionItems,
             name: listSet.name,
+            alias: listSet.alias,
             description: listSet.description
         });
     }
@@ -56,6 +58,7 @@ export class ListSetFormComponent implements OnInit {
             this.listSetForm.value['id'],
             this.listSetForm.value['sectionItems'],
             this.listSetForm.value['name'],
+            this.listSetForm.value['alias'],
             this.listSetForm.value['description']
         )
         .finally(() => this.isRequesting = false)
