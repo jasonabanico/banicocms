@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AccountService } from '../../main/account.service';
  
 @Component({
@@ -9,11 +9,11 @@ import { AccountService } from '../../main/account.service';
   styleUrls: []
 })
 export class ResendConfirmationComponent {
-  isRequesting: boolean = false;
-  isSuccessful: boolean = false;
-  errors: string;  
+  public isRequesting: boolean = false;
+  public isSuccessful: boolean = false;
+  public errors: string;  
 
-  resendConfirmationForm = this.fb.group({
+  public resendConfirmationForm: FormGroup = this.fb.group({
     email: ['', Validators.required],
   });
 

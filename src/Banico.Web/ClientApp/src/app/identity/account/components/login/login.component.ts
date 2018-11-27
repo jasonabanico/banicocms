@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as toastr from 'toastr';
 import { AccountService } from '../../main/account.service';
@@ -14,12 +14,12 @@ import { combineLatest } from 'rxjs';
   styleUrls: []
 })
 export class LoginComponent {
-  isRequesting: boolean = false;
-  isSuccessful: boolean = false;
-  errors: string[] = new Array<string>();  
-  returnUrl: string = '/';
+  public isRequesting: boolean = false;
+  public isSuccessful: boolean = false;
+  public errors: string[] = new Array<string>();  
+  public returnUrl: string = '/';
 
-  loginForm = this.fb.group({
+  public loginForm: FormGroup = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required]
   });

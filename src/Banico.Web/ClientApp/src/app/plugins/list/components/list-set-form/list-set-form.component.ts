@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListSetService } from '../../services/list-set.service';
 import { ListSet } from '../../entities/list-set';
@@ -11,11 +11,11 @@ import { ListSet } from '../../entities/list-set';
 })
 export class ListSetFormComponent implements OnInit {
     private sub: any;
-    isSuccessful: boolean;
-    isRequesting: boolean;
-    errors: string;  
+    public isSuccessful: boolean;
+    public isRequesting: boolean;
+    public errors: string;  
 
-    listSetForm = this.fb.group({
+    public listSetForm: FormGroup = this.fb.group({
         id: [''],
         sectionItems: ['', Validators.required],
         name: ['', Validators.required],

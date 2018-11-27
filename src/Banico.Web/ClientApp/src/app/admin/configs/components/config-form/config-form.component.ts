@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigsService } from '../../main/configs.service';
 import { Config } from '../../../../entities/config';
@@ -17,12 +17,12 @@ export class ConfigFormComponent implements OnInit {
     public configs: Config[];
     public config: Config;
 
-    configForm = this.fb.group({
+    public configForm: FormGroup = this.fb.group({
         id: [''],
         name: ['', Validators.required],
         module: [''],
         value: ['', Validators.required]
-      });
+    });
 
     constructor(
         private configsService: ConfigsService,

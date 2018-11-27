@@ -4,7 +4,7 @@ import { SectionItem } from '../../../../entities/section-item';
 import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
 import { SectionsService } from '../../main/services/sections.service';
 import { SectionsFileService } from '../../main/services/sections-file.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'section-items-admin',
@@ -21,11 +21,11 @@ export class SectionItemsAdminComponent implements OnInit {
     private sub: any;
     private file: any;
 
-    readonly PATH_DELIM: string = '_';
-    readonly TYPE_DELIM: string = '~';
-    readonly SECTION_DELIM: string = '*';
+    private readonly PATH_DELIM: string = '_';
+    private readonly TYPE_DELIM: string = '~';
+    private readonly SECTION_DELIM: string = '*';
 
-    sectionItemForm = this.fb.group({
+    public sectionItemForm: FormGroup = this.fb.group({
         id: [''],
         name: ['', Validators.required]
       });

@@ -4,7 +4,7 @@ export class List {
   id: string;
   name: string;
   description: string;
-  listSet: string;
+  listSetId: string;
   listItems: string;
 
   constructor(private contentItem: ContentItem) {
@@ -12,7 +12,7 @@ export class List {
       this.id = contentItem.id;
       this.name = contentItem.name;
       this.description = contentItem.content;
-      this.listSet = contentItem.parentId;
+      this.listSetId = contentItem.parentId;
       this.listItems = contentItem.attribute01;
     }
   }
@@ -24,7 +24,7 @@ export class List {
     output.id = this.id;
     output.name = this.name;
     output.content = this.description;
-    output.parentId = this.listSet;
+    output.parentId = this.listSetId;
     output.attribute01 = this.listItems;
     
     return output;

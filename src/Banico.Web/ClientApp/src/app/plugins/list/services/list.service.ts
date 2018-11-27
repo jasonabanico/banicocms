@@ -43,7 +43,20 @@ export class ListService extends PluginService {
         });
     }
 
-    public addOrUpdate(list: List): Observable<boolean> {
+    public addOrUpdate(
+        id: string,
+        listSetId: string,
+        name: string,
+        description: string,
+        listItems: string
+    ): Observable<boolean> {
+        var list: List = new List(null);
+        list.id = id;
+        list.listSetId = listSetId;
+        list.name = name;
+        list.description = description;
+        list.listItems = listItems;
+        
         let contentItem: ContentItem = list.ToContentItem();
         return this.contentItemService.addOrUpdate(contentItem)
             .map(res => true)

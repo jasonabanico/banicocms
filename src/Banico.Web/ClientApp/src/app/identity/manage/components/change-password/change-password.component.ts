@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ManageService } from '../../main/manage.service';
 
@@ -9,11 +9,11 @@ import { ManageService } from '../../main/manage.service';
   styleUrls: []
 })
 export class ChangePasswordComponent {
-  isSuccessful: boolean;
-  isRequesting: boolean;
-  errors: string;  
+  public isSuccessful: boolean;
+  public isRequesting: boolean;
+  public errors: string;  
 
-  changePasswordForm = this.fb.group({
+  public changePasswordForm: FormGroup = this.fb.group({
     oldPassword: ['', Validators.required],
     newPassword: ['', Validators.required],
     confirmPassword: ['', Validators.required]

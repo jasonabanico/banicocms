@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as toastr from 'toastr';
 
@@ -11,12 +11,12 @@ import { AccountService } from '../../main/account.service';
   styleUrls: []
 })
 export class RegisterComponent implements OnInit {
-    isRequesting: boolean = false;
-    isSuccessful: boolean = false;
-    errors: string[][] = [,];
-    submitted: boolean = false;
+    public isRequesting: boolean = false;
+    public isSuccessful: boolean = false;
+    public errors: string[][] = [,];
+    public submitted: boolean = false;
 
-    registerForm = this.fb.group({
+    public registerForm: FormGroup = this.fb.group({
         email: ['', Validators.required],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],

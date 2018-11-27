@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Role } from "../../../../entities/role";
 import { RolesService } from "../../main/roles.service";
@@ -11,12 +11,12 @@ import { RolesService } from "../../main/roles.service";
 })
 export class RoleFormComponent {
   private sub: any;
-  isSuccessful: boolean;
-  isRequesting: boolean;
-  errors: string;
-  role: Role;
+  public isSuccessful: boolean;
+  public isRequesting: boolean;
+  public errors: string;
+  public role: Role;
   
-  roleForm = this.fb.group({
+  public roleForm: FormGroup = this.fb.group({
     id: ['', Validators.required],
     name: ['', Validators.required]
   });

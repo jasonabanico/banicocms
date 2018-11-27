@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AccountService } from '../../main/account.service';
  
 @Component({
@@ -10,11 +10,11 @@ import { AccountService } from '../../main/account.service';
 })
 export class ResetPasswordComponent {
   private sub: any;
-  isRequesting: boolean;
-  isSuccessful: boolean;
-  errors: string;
+  public isRequesting: boolean;
+  public isSuccessful: boolean;
+  public errors: string;
 
-  resetPasswordForm = this.fb.group({
+  public resetPasswordForm: FormGroup = this.fb.group({
     email: ['', Validators.required],
     code: ['', Validators.required],
     password: ['', Validators.required],

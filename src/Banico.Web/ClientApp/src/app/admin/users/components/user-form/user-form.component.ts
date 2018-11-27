@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../../../entities/user';
 import { UsersService } from '../../main/users.service';
@@ -11,12 +11,12 @@ import { UsersService } from '../../main/users.service';
 })
 export class UserFormComponent {
   private sub: any;
-  isSuccessful: boolean;
-  isRequesting: boolean;
-  errors: string;  
-  user: User;
+  public isSuccessful: boolean;
+  public isRequesting: boolean;
+  public errors: string;  
+  public user: User;
 
-  userForm = this.fb.group({
+  public userForm: FormGroup = this.fb.group({
     id: [''],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],

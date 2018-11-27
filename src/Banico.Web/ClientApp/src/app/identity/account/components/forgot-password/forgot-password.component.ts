@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from '../../main/account.service';
 
@@ -9,11 +9,11 @@ import { AccountService } from '../../main/account.service';
   styleUrls: []
 })
 export class ForgotPasswordComponent {
-  isSuccessful: boolean;
-  isRequesting: boolean;
-  errors: string;  
+  public isSuccessful: boolean;
+  public isRequesting: boolean;
+  public errors: string;  
 
-  forgotPasswordForm = this.fb.group({
+  public forgotPasswordForm: FormGroup = this.fb.group({
     email: ['', Validators.required],
   });
 

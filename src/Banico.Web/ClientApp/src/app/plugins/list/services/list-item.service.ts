@@ -41,7 +41,7 @@ export class ListItemService extends PluginService {
         listSetId: string,
         name: string,
         alias: string,
-        description: string,
+        description: string
     ): Observable<boolean> {
         let listItem: ListItem = new ListItem(null);
 

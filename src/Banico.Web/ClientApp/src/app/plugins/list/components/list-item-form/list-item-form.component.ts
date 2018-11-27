@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm, FormBuilder, Validators } from '@angular/forms';
+import { FormsModule, NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ListItem } from '../../entities/list-item';
 import { ListItemService } from '../../services/list-item.service';
@@ -13,7 +13,7 @@ import { Identifiers } from '@angular/compiler';
 export class ListItemFormComponent implements OnInit {
   public listItem: ListItem;
 
-  listItemForm = this.fb.group({
+  public listItemForm: FormGroup = this.fb.group({
     id: ['', Validators.required],
     listSetId: ['', Validators.required],
     name: ['', Validators.required],

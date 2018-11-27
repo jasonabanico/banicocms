@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SectionsService } from '../../main/services/sections.service';
 import { Section } from '../../../../entities/section';
@@ -10,13 +10,13 @@ import { Section } from '../../../../entities/section';
     providers: [SectionsService]
 })
 export class SectionsAdminComponent implements OnInit {
-    isSuccessful: boolean;
-    isRequesting: boolean;
-    errors: string;  
+    public isSuccessful: boolean;
+    public isRequesting: boolean;
+    public errors: string;  
     public sections: Section[];
     public section: Section;
 
-    sectionForm = this.fb.group({
+    public sectionForm: FormGroup = this.fb.group({
         id: [''],
         name: ['', Validators.required],
         modules: ['', Validators.required]
