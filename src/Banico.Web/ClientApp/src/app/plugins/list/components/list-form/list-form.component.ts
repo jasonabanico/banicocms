@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Identifiers } from '@angular/compiler';
-import { FormsModule, NgForm, FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { FormsModule, NgForm, FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ListService } from '../../services/list.service';
 import { ListItemService } from '../../services/list-item.service';
@@ -42,14 +42,13 @@ export class ListFormComponent implements OnInit {
           .subscribe(list => {
            this.set(list);
           });
-      }
-  });
+        }
+    });
 
-  this.route.queryParams
-    .subscribe(params => {
-      if (params.listSetId) {
+    this.route.queryParams
+      .subscribe(params => {
+        var listSetId = params['listSetId'];
         this.setListSetId(params.listSetId);
-      }
     });
   }
 
@@ -76,32 +75,39 @@ export class ListFormComponent implements OnInit {
       .subscribe(
         listItems => {
           this.listItems = listItems;
-          this.listForm.addControl('listItems', this.buildListItems(listItems, listItemStringArray));
+          this.buildListItems(listItems, listItemStringArray);
         }
       )
   }
 
-  private buildListItems(listItems: ListItem[], listItemStringArray: string[]): FormArray {
+  private buildListItems(listItems: ListItem[], listItemStringArray: string[]) {
+    var i = 0;
     const listItemArray = listItems.map(listItem => {
       var toggle: boolean = false;
       if (listItemStringArray.indexOf(listItem.id) > -1) {
         toggle = true;
       }
-      return this.fb.control(toggle);
+      this.listForm.addControl('checkbox-'+i.toString(), new FormControl(toggle));
+      i++;
     });
-
-    return this.fb.array(listItemArray);
   }
 
   private getListItems(): string {
-    var selectedItemsArray: string[] = this.listForm.value['listItems'].map((selected, i) => {
+    var i = 0;
+    var result: string = '';
+    for (let listItem of this.listItems) {
+      var selected: boolean = this.listForm.value['checkbox-'+i.toString()];
       if (selected) {
-        return this.listItems[i].name;
-      } else {
-        return '';
+        if (result.length > 0) {
+          result = result + ',';
+        }
+        result = result + listItem.id;
       }
-    });
-    return selectedItemsArray.join(',');
+
+      i++;
+    }
+
+    return result;
   }
 
   public save() {

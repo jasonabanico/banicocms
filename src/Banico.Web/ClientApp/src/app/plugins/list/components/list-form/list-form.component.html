@@ -1,5 +1,5 @@
 <p>
-  {{listSet.name}}
+  {{listSet?.name}}
 </p>
 
 <form [formGroup]="listForm" novalidate (ngSubmit)="save()">
@@ -33,10 +33,17 @@
             formControlName="description"
             required />
     </div>
-  </div>    
-  <div *ngFor=”let listItem of listItems; let i=index”>
-    <input type=”checkbox” [formControl]=”listItem”/> {{listItem.name}}
-  </div>
+  </div>  
+  <div class="custom-control custom-checkbox" *ngFor="let listItem of listItems; index as i">
+    <input 
+      type="checkbox"
+      class="custom-control-input"
+      id="checkbox-{{i}}"
+      name="checkbox-{{i}}" 
+      formControlName="checkbox-{{i}}"
+    />
+    <label class="custom-control-label" for="checkbox-{{i}}">{{listItem.name}}</label>
+  </div>  
   <div class="form-group row">
     <button type="submit" class="btn btn-primary" value="save">Save</button>
   </div>
