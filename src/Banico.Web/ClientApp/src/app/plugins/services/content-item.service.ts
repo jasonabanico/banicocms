@@ -154,6 +154,7 @@ export class ContentItemService {
         var result = this.apollo.mutate({
             mutation: AddOrUpdateContentItemMutation,
             variables: {
+                id: contentItem.id,
                 name: contentItem.name,
                 alias: contentItem.alias,
                 module: contentItem.module,

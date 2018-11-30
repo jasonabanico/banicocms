@@ -33,9 +33,9 @@ export class ListSetFormComponent implements OnInit {
 
     public ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            if (params['alias']) {
-            var alias = params['alias'];
-            this.listSetService.getByAlias(alias)
+            if (params['id']) {
+            var id = params['id'];
+            this.listSetService.get(id)
                 .subscribe(listSet => {
                 this.set(listSet);
                 });
