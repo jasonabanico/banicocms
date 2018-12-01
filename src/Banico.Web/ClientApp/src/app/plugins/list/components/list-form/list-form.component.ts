@@ -112,14 +112,17 @@ export class ListFormComponent implements OnInit {
 
   public save() {
     // this.isRequesting = true;
+    var id = this.listForm.value['id'];
     this.listService.addOrUpdate(
-      this.listForm.value['id'],
+      id,
       this.listForm.value['listSetId'],
       this.listForm.value['name'],
       this.listForm.value['description'],
       this.getListItems()
     )
-    //.finally(() => this.isRequesting = false)
+    .finally(() => {
+      //this.router.navigate(['/list/list/' + id]);
+    })
     .subscribe(
       result  => {
         // this.isSuccessful = true;

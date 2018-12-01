@@ -54,19 +54,25 @@ export class ListSetFormComponent implements OnInit {
     }
 
     public save() {
+        var alias: string = this.listSetForm.value['alias'];
         this.listSetService.addOrUpdate(
             this.listSetForm.value['id'],
             this.listSetForm.value['sectionItems'],
             this.listSetForm.value['name'],
-            this.listSetForm.value['alias'],
+            alias,
             this.listSetForm.value['description']
         )
-        .finally(() => this.isRequesting = false)
-        .subscribe(
-        result  => {
+        .finally(() => {
             this.isSuccessful = true;
-        },
-        errors =>  this.errors = errors);
+            this.router.navigate(['/list/list-set/' + alias]);
+        })
+        .subscribe(
+            result  => {
+                this.isSuccessful = true;
+            },
+            errors =>  {
+                this.errors = errors
+            });        
     }
 
     private saveSuccess(listSet: ListSet) {

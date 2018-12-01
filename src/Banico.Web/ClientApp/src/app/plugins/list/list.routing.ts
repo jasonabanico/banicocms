@@ -18,8 +18,8 @@ const FAQ_ROUTES: Routes = [
     { path: 'list-item/edit/:id', component: ListItemFormComponent, canActivate: [AuthGuard], data: { module: 'list-item/manage' } },
     { path: 'list-item/:alias', component: ListItemDisplayComponent, canActivate: [AuthGuard], data: { module: 'list-item/view' } },
     { path: 'list/new/:listSetId', component: ListFormComponent, canActivate: [AuthGuard], data: { module: 'list/manage' } },
-    { path: 'list/edit/:alias', component: ListFormComponent, canActivate: [AuthGuard], data: { module: 'list/manage' } },
-    { path: 'list/:alias', component: ListDisplayComponent, canActivate: [AuthGuard], data: { module: 'list/view' } },
+    { path: 'list/edit/:id', component: ListFormComponent, canActivate: [AuthGuard], data: { module: 'list/manage' } },
+    { path: 'list/:id', component: ListDisplayComponent, canActivate: [AuthGuard], data: { module: 'list/view' } },
   ] }
 ];
 

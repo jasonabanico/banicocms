@@ -5,3 +5,8 @@
 <p>
   {{list?.description}}
 </p>
+
+<p *ngFor="let listItem of listItems; index as i">
+  {{listItem.name}}
+</p>  
+

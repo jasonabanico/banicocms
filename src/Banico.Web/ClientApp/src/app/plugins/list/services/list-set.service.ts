@@ -53,7 +53,9 @@ export class ListSetService extends PluginService {
 
         let contentItem: ContentItem = listSet.ToContentItem();
         return this.contentItemService.addOrUpdate(contentItem)
-            .map(res => true)
+            .map(res => {
+                return true;
+            })
             .catch(this.handleError);
     }
 

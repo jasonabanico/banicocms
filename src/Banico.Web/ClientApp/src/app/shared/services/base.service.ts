@@ -25,26 +25,30 @@ export abstract class BaseService {
   }
   
   protected handleError(error: any) {
-      var applicationError = error.headers.get('Application-Error');
+      if (error) {
+        if (error.headers) {
+          var applicationError = error.headers.get('Application-Error');
 
-      // either applicationError in header or model error in body
-      if (applicationError) {
-        return Observable.throw(applicationError);
+          // either applicationError in header or model error in body
+          if (applicationError) {
+            return Observable.throw(applicationError);
+          }
+    
+          var modelStateErrors: string = '';
+          var serverError = error.error;
+    
+          return Observable.throw(serverError);
+          // if (!serverError.type) {
+          //   for (var key in serverError) {
+          //     if (serverError[key])
+          //       modelStateErrors += serverError[key] + '\n';
+          //   }
+          // }
+    
+          // modelStateErrors = modelStateErrors = '' ? null : modelStateErrors;
+          // return Observable.throw(modelStateErrors || 'Server error');
+        }
       }
-
-      var modelStateErrors: string = '';
-      var serverError = error.error;
-
-      return Observable.throw(serverError);
-      // if (!serverError.type) {
-      //   for (var key in serverError) {
-      //     if (serverError[key])
-      //       modelStateErrors += serverError[key] + '\n';
-      //   }
-      // }
-
-      // modelStateErrors = modelStateErrors = '' ? null : modelStateErrors;
-      // return Observable.throw(modelStateErrors || 'Server error');
     }
 
     private getCookie(name): string {
