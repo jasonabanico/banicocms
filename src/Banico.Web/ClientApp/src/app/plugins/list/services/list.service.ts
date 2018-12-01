@@ -49,7 +49,7 @@ export class ListService extends PluginService {
         name: string,
         description: string,
         listItems: string
-    ): Observable<boolean> {
+    ): Observable<any> {
         var list: List = new List(null);
         list.id = id;
         list.listSetId = listSetId;
@@ -59,8 +59,10 @@ export class ListService extends PluginService {
         
         let contentItem: ContentItem = list.ToContentItem();
         return this.contentItemService.addOrUpdate(contentItem)
-            .map(res => true)
-            .catch(this.handleError);
+            .catch(error => {
+                this.handleError(error);
+                return new Observable<boolean>();
+            });
     }
 
     public delete(list: List): Observable<{}> {

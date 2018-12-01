@@ -32,20 +32,6 @@ export class ContentItemService {
         // this.itemApiBaseUrl = `${this.baseUrl}/api/Item`;
     }
 
-    private addResult(res: any) {
-        var id = '';
-        var output;
-        if (res.data.addContentItem) {
-            id = res.data.addContentItem.id;
-            output = res.data.addContentItem;
-        }
-
-        if (id == ''){
-            throw new Error('Unable to create object.');
-        }
-        return output || {};
-    }
-
     private ExtractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Response status: ' + res.status);
@@ -182,7 +168,8 @@ export class ContentItemService {
                 attribute19: contentItem.attribute19,
                 attribute20: contentItem.attribute20
             }
-        }).map(this.addResult);
+        })
+        .map(result => result.data.addOrUpdateContentItem.id);
 
         return result;
             //.subscribe({
