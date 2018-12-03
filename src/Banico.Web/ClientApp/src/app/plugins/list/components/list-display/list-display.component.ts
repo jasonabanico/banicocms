@@ -22,6 +22,7 @@ export class ListDisplayComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute
     ) {
+      this.listItems = new Array<ListItem>();
   }
 
   ngOnInit() {

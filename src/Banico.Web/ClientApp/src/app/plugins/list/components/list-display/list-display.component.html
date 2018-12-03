@@ -1,12 +1,12 @@
 <h3>
-  {{list?.name}}
+  {{list.name}}
 </h3>
 
 <p>
-  {{list?.description}}
+  {{list.description}}
 </p>
 
 <p *ngFor="let listItem of listItems; index as i">
-  {{listItem.name}}
+  <a href="/list/list-item/{{listItem.alias}}/?list={{list.id}}">{{listItem.name}}</a>
 </p>  
 
