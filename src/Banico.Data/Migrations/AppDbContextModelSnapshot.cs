@@ -42,8 +42,8 @@ namespace Banico.Data.Migrations
                     b.ToTable("Configs");
 
                     b.HasData(
-                        new { Id = "6b875216-0d9b-443c-89b1-b9b1b9b2c18e", CreatedDate = new DateTimeOffset(new DateTime(2018, 11, 20, 10, 0, 36, 775, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "", Name = "initialized", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "n" },
-                        new { Id = "038bb43f-09b0-4095-83b6-23e574c019bf", CreatedDate = new DateTimeOffset(new DateTime(2018, 11, 20, 10, 0, 36, 778, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "admin", Name = "canActivate", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "admin" }
+                        new { Id = "21165d70-36be-4d3d-81a8-b7004d44e047", CreatedDate = new DateTimeOffset(new DateTime(2018, 12, 7, 23, 30, 33, 882, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "", Name = "initialized", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "n" },
+                        new { Id = "51fcbf56-7197-40fa-aec0-7b6aba3287da", CreatedDate = new DateTimeOffset(new DateTime(2018, 12, 7, 23, 30, 33, 886, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Module = "admin", Name = "canActivate", UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), Value = "admin" }
                     );
                 });
 
@@ -106,8 +106,6 @@ namespace Banico.Data.Migrations
 
                     b.Property<string>("ParentId");
 
-                    b.Property<string>("SectionItems");
-
                     b.Property<string>("Tenant");
 
                     b.Property<string>("UpdatedBy");
@@ -117,6 +115,24 @@ namespace Banico.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContentItems");
+                });
+
+            modelBuilder.Entity("Banico.Core.Entities.ContentSectionItem", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ContentItemId");
+
+                    b.Property<string>("SectionItemId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContentItemId");
+
+                    b.HasIndex("SectionItemId");
+
+                    b.ToTable("ContentSectionItems");
                 });
 
             modelBuilder.Entity("Banico.Core.Entities.Invite", b =>
@@ -205,6 +221,17 @@ namespace Banico.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("Banico.Core.Entities.ContentSectionItem", b =>
+                {
+                    b.HasOne("Banico.Core.Entities.ContentItem")
+                        .WithMany("ContentSectionItems")
+                        .HasForeignKey("ContentItemId");
+
+                    b.HasOne("Banico.Core.Entities.SectionItem", "SectionItem")
+                        .WithMany()
+                        .HasForeignKey("SectionItemId");
                 });
 #pragma warning restore 612, 618
         }

@@ -41,7 +41,8 @@ export class DirectoryItemDisplayComponent implements OnInit, OnDestroy {
     private SetDirectoryItem(directoryItem: DirectoryItem) {
         this.directoryItem = directoryItem;
         this.uriEncodeAddress = encodeURIComponent(directoryItem.address);
-        this.navBarService.initialize('directory', directoryItem.sectionItems, '', '/directory');
+        var sectionItems = this.directoryService.toSectionItems(directoryItem.ToContentItem());
+        this.navBarService.initialize('directory', sectionItems, '', '/directory');
     }
 
     public mapUrl(): SafeUrl {
@@ -76,7 +77,8 @@ export class DirectoryItemDisplayComponent implements OnInit, OnDestroy {
             if (data.value != null) {
                 if (data.value == '1') {
                     alert('Saved.');
-                    this.router.navigateByUrl('directory/' + this.directoryItem.sectionItems);
+                    var sectionItems = this.directoryService.toSectionItems(this.directoryItem.ToContentItem());
+                    this.router.navigateByUrl('directory/' + sectionItems);
                 } else {
                     alert('Save failed.');
                 }

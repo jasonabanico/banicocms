@@ -67,7 +67,6 @@ export const ContentItemsQuery = gql`
                 module,
                 parentId,
                 createdBy,
-                sectionItems,
                 content,
                 htmlContent,
                 snippet,
@@ -90,7 +89,13 @@ export const ContentItemsQuery = gql`
                 attribute17,
                 attribute18,
                 attribute19,
-                attribute20
+                attribute20,
+                contentSectionItems {
+                    sectionItem {
+                        section,
+                        alias
+                    }
+                }
             }
     }
 `;

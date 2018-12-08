@@ -12,6 +12,7 @@ import { DirectoryService } from '../../main/directory.service';
 })
 export class DirectoryFormComponent implements OnInit {
     public directoryItem: DirectoryItem;
+    public contentSectionItems: string;
     private sub: any;
     private isEdit: boolean = false;
 
@@ -34,19 +35,20 @@ export class DirectoryFormComponent implements OnInit {
             }
             if (path) {
                 this.navBarService.initialize('directory', path, '', '/directory');
-                this.directoryItem.sectionItems = path;
+                this.contentSectionItems = path;
             }
         });
     }
 
     private set(directoryItem: DirectoryItem) {
         this.directoryItem = directoryItem;
-        this.navBarService.initialize('directory', directoryItem.sectionItems, '', '/directory');
+        var sectionItems = this.directoryService.toSectionItems(directoryItem.ToContentItem());
+        this.navBarService.initialize('directory', sectionItems, '', '/directory');
         this.isEdit = true;
     }
 
     public save() {
-        this.directoryService.addOrUpdate(this.directoryItem)
+        this.directoryService.addOrUpdate(this.directoryItem, this.contentSectionItems)
             .subscribe(directoryItem => this.saveDirectoryItemSuccess(directoryItem));
     }
 

@@ -1,6 +1,7 @@
 using GraphQL.Types;
 using Banico.Core.Entities;
 using Banico.Core.Repositories;
+using System.Collections.Generic;
 
 namespace Banico.Api.Models
 {
@@ -19,7 +20,6 @@ namespace Banico.Api.Models
 
             Field(x => x.Alias, nullable:true);
             Field(x => x.Module, nullable:true);
-            Field(x => x.SectionItems, nullable:true);
             Field(x => x.Content, nullable:true);
             Field(x => x.HtmlContent, nullable:true);
             Field(x => x.Snippet, nullable:true);
@@ -43,6 +43,19 @@ namespace Banico.Api.Models
             Field(x => x.Attribute18, nullable:true);
             Field(x => x.Attribute19, nullable:true);
             Field(x => x.Attribute20, nullable:true);
+
+            Field<ListGraphType<ContentSectionItemType>, IEnumerable<ContentSectionItem>> ()
+                .Name("ContentSectionItems")
+                .ResolveAsync(async x => {
+                    if (x != null)
+                    {
+                        return await contentItemRepository.GetContentSectionItemsByContentItemId(x.Source.Id);
+                    }
+                    else
+                    {
+                        return new List<ContentSectionItem>();
+                    }
+                });        
         }
     }
 }

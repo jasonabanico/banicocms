@@ -99,7 +99,7 @@ export class FaqFormComponent implements OnInit {
     
     public save() {
         this.faq.content = JSON.stringify(this.faq.qas);
-        this.faqService.addOrUpdate(this.faq)
+        this.faqService.addOrUpdate(this.faq, '')
             .subscribe(faq => this.saveFaqSuccess(faq));
     }
 

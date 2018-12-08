@@ -1,4 +1,5 @@
 import { ContentItem } from "../../../entities/content-item";
+import { ContentSectionItem } from "../../../entities/content-section-item";
 
 export class DirectoryItem {
   id: string;
@@ -10,8 +11,8 @@ export class DirectoryItem {
   phone: string;
   website: string;
   email: string;
-  sectionItems: string;
   sectionOrderKey: string;
+  contentSectionItems: ContentSectionItem[];
 
   constructor(private contentItem: ContentItem) {
     if ((contentItem) && (contentItem.module == 'directory')) {
@@ -23,8 +24,8 @@ export class DirectoryItem {
       this.phone = contentItem.attribute02;
       this.website = contentItem.attribute03;
       this.email = contentItem.attribute04;
-      this.sectionItems = contentItem.sectionItems;
       this.sectionOrderKey = contentItem.attribute05;
+      this.contentSectionItems = contentItem.contentSectionItems;
     }
   }
 
@@ -35,11 +36,11 @@ export class DirectoryItem {
     output.id = this.id;
     output.name = this.name;
     output.content = this.description;
-    output.sectionItems = this.sectionItems;
     output.attribute01 = this.address;
     output.attribute02 = this.phone;
     output.attribute03 = this.website;
     output.attribute04 = this.email;
+    output.contentSectionItems = this.contentSectionItems;
     
     return output;
   }

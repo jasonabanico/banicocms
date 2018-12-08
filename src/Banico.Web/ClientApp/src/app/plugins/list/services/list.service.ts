@@ -58,7 +58,7 @@ export class ListService extends PluginService {
         list.listItems = listItems;
         
         let contentItem: ContentItem = list.ToContentItem();
-        return this.contentItemService.addOrUpdate(contentItem)
+        return this.contentItemService.addOrUpdate(contentItem, '')
             .catch(error => {
                 this.handleError(error);
                 return new Observable<boolean>();

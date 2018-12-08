@@ -12,10 +12,7 @@ namespace Banico.Core.Entities
         public string Alias { get; set; }
         public string Module { get; private set; }
 
-        public string SectionItems { get; set; }
-
-        [NotMapped]
-        public List<SectionItem> SectionItemList { get; set; }
+        public IEnumerable<ContentSectionItem> ContentSectionItems { get; set; }
 
         public string Content { get; set; }
 
@@ -111,7 +108,7 @@ namespace Banico.Core.Entities
             this.Tenant = item.Tenant;
             this.Id = item.Id;
             this.ParentId = item.ParentId;
-            this.SectionItems = item.SectionItems;
+            this.ContentSectionItems = item.ContentSectionItems;
             this.Module = item.Module;
 
             this.CreatedBy = item.CreatedBy;

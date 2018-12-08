@@ -38,21 +38,20 @@ export class ListSetService extends PluginService {
 
     public addOrUpdate(
         id: string,
-        sectionItems: string,
         name: string,
         alias: string,
-        description: string
+        description: string,
+        sectionItems: string
     ): Observable<boolean> {
         let listSet: ListSet = new ListSet(null);
 
         listSet.id = id;
-        listSet.sectionItems = sectionItems;
         listSet.name = name;
         listSet.alias = alias;
         listSet.description = description;
 
         let contentItem: ContentItem = listSet.ToContentItem();
-        return this.contentItemService.addOrUpdate(contentItem)
+        return this.contentItemService.addOrUpdate(contentItem, sectionItems)
             .map(res => {
                 return true;
             })

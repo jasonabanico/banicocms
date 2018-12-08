@@ -58,17 +58,19 @@ namespace Banico.Api.Models
             Field<ContentItemType>(
                 "addOrUpdateContentItem",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<ContentItemInputType>> { Name = "contentItem" }
+                    new QueryArgument<NonNullGraphType<ContentItemInputType>> { Name = "contentItem" },
+                    new QueryArgument<StringGraphType> { Name = "sectionItems" }
                 ),
                 resolve: context =>
                 {
                     var contentItem = context.GetArgument<ContentItem>("contentItem");
+                    var sectionItems = context.GetArgument<String>("sectionItems");
                     if (_accessService.Allowed(contentItem).Result)
                     {
                         this.StampItem(contentItem);
                         var userId = _accessService.GetCurrentUserId();
                         var isAdmin = _accessService.IsAdmin();
-                        return contentItemRepository.AddOrUpdate(contentItem, userId, isAdmin);
+                        return contentItemRepository.AddOrUpdate(contentItem, sectionItems, userId, isAdmin);
                     }
                     else
                     {

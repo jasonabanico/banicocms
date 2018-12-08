@@ -23,6 +23,7 @@ namespace Banico.Api
       services.AddSingleton<SectionItemType>();
       services.AddSingleton<SectionItemInputType>();
       services.AddSingleton<ContentItemType>();
+      services.AddSingleton<ContentSectionItemType>();
       services.AddSingleton<ContentItemInputType>();
       services.AddSingleton<ConfigType>();
       services.AddSingleton<ConfigInputType>();

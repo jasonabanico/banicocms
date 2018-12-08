@@ -50,7 +50,9 @@ namespace Banico.Data.Repositories
             string attribute17,
             string attribute18,
             string attribute19,
-            string attribute20
+            string attribute20,
+            bool includeChildren,
+            bool includeParents
         ) {
             var contentItems = from c in this.DbContext.ContentItems
                 where 
@@ -61,16 +63,6 @@ namespace Banico.Data.Repositories
                     (c.Name == name || string.IsNullOrEmpty(name)) && 
                     (c.CreatedBy == createdBy || string.IsNullOrEmpty(createdBy))
                 select c;
-
-            var sectionItemsArray = sectionItems.Split(SECTION_DELIM);
-            for (int i = 0; i < sectionItemsArray.Length; i++)
-            {
-                if (!string.IsNullOrEmpty(sectionItemsArray[i]))
-                {
-                    var sectionItem = sectionItemsArray[i];
-                    contentItems = contentItems.Where(item => item.SectionItems.Contains(sectionItem));
-                }
-            }
 
             if (!string.IsNullOrEmpty(name))
             {
@@ -182,25 +174,168 @@ namespace Banico.Data.Repositories
                 contentItems = contentItems.Where(item => item.Attribute20.Contains(attribute20));
             }
 
+            if (!string.IsNullOrEmpty(sectionItems))
+            {
+                Predicate<ContentSectionItem> sectionItemPredicate = this.MatchSectionItems(sectionItems, includeChildren);
+
+                if (includeParents)
+                {
+                    Predicate<ContentSectionItem> parentPredicate = this.MatchParentSectionItems(sectionItems);
+                    sectionItemPredicate = Helpers.Or(sectionItemPredicate, parentPredicate);
+                }
+
+                contentItems = contentItems.Join(
+                    this.DbContext.ContentSectionItems.AsEnumerable(),
+                    ci => ci.Id,
+                    csi => csi.ContentItemId,
+                    (ci, csi) => new { 
+                        ContentItem = ci, 
+                        ContentSectionItem = csi 
+                    })
+                    .Where((item) => sectionItemPredicate(item.ContentSectionItem))
+                    .Select((item) => item.ContentItem);
+            }
+
             return await contentItems.ToListAsync();
         }
 
-        public async Task<ContentItem> AddOrUpdate(ContentItem contentItem, string userID, bool isAdmin)
+        private Predicate<ContentSectionItem> MatchSectionItems(string allSectionItems, bool includeChildren)
         {
-            if (string.IsNullOrEmpty(contentItem.Id)) 
+            Predicate<ContentSectionItem> outputPredicate = null;
+
+            var sectionItemsArray = allSectionItems.Split(SECTION_DELIM);
+            for (int i = 0; i < sectionItemsArray.Length; i++)
             {
-                return await this.Add(contentItem);
+                if (!string.IsNullOrEmpty(sectionItemsArray[i]))
+                {
+                    Predicate<ContentSectionItem> sectionPredicate = null;
+                    var sectionFields = sectionItemsArray[i].Split(TYPE_DELIM);
+                    var section = sectionFields[0];
+                    var sectionValue = sectionFields[1];
+                    if (!includeChildren)
+                    {
+                        sectionPredicate = (contentSectionItem => SectionItemEquals(contentSectionItem, section, sectionValue));
+                    } 
+                    else
+                    {
+                        sectionPredicate = (contentSectionItem => SectionItemContains(contentSectionItem, section, sectionValue));
+                    }
+
+                    if (outputPredicate == null)
+                    {
+                        outputPredicate = sectionPredicate;
+                    }
+                    else
+                    {
+                        outputPredicate = Helpers.And(outputPredicate, sectionPredicate);
+                    }
+                }
+            }
+
+            return outputPredicate;
+        }
+
+        private Predicate<ContentSectionItem> MatchParentSectionItems(string allSectionItems)
+        {
+            Predicate<ContentSectionItem> outputPredicate = null;
+
+            var allSectionItemsArray = allSectionItems.Split(SECTION_DELIM);
+            for (int i = 0; i < allSectionItemsArray.Length; i++)
+            {
+                Predicate<ContentSectionItem> sectionPredicate = null;
+                var typeAndSection = allSectionItemsArray[i].Split(TYPE_DELIM);
+                List<string> innerList = new List<string>();
+                var section = typeAndSection[0];
+                var sectionItems = typeAndSection[1].Split(SECTION_DELIM);
+                string sectionString = section + TYPE_DELIM;
+                for (int j = 0; j < sectionItems.Length; j++)
+                {
+                    if (j > 0)
+                    {
+                        sectionString = sectionString + PATH_DELIM;
+                    }
+                    sectionString = sectionString + sectionItems[j];
+
+                    if (sectionPredicate == null)
+                    {
+                        sectionPredicate = (contentSectionItem => SectionItemEquals(contentSectionItem, section, sectionString));
+                    }
+                    else
+                    {
+                        sectionPredicate = Helpers.Or<ContentSectionItem>(sectionPredicate, contentSectionItem => SectionItemEquals(contentSectionItem, section, sectionString));
+                    }
+                }
+
+                if (outputPredicate == null)
+                {
+                    outputPredicate = sectionPredicate;
+                }
+                else
+                {
+                    outputPredicate = Helpers.And<ContentSectionItem>(outputPredicate, sectionPredicate);
+                }
+            }
+
+            return outputPredicate;
+        }
+
+        static bool SectionItemEquals(ContentSectionItem contentSectionItem, string section, string pathUrl)
+        {
+            if ((contentSectionItem.SectionItem.Section == section) &&
+                (contentSectionItem.SectionItem.PathUrl == pathUrl))
+            {
+                return true;
             }
             else
             {
-                return await this.Update(contentItem, userID, isAdmin);
+                return false;
+            }
+        }
+
+        static bool SectionItemContains(ContentSectionItem contentSectionItem, string section, string pathUrl)
+        {
+            if ((contentSectionItem.SectionItem.Section == section) &&
+                (contentSectionItem.SectionItem.PathUrl.Contains(pathUrl)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<IEnumerable<ContentSectionItem>> GetContentSectionItemsByContentItemId(string id)
+        {
+            if (!string.IsNullOrEmpty(id))
+            {
+                var contentSectionItems = from contentSectionItem in this.DbContext.ContentSectionItems
+                                            where contentSectionItem.ContentItemId == id
+                                            select contentSectionItem;
+
+                return await contentSectionItems.ToListAsync();
+            }
+
+            return new List<ContentSectionItem>();
+        }
+
+        public async Task<ContentItem> AddOrUpdate(ContentItem contentItem, string sectionItem, string userID, bool isAdmin)
+        {
+            if (string.IsNullOrEmpty(contentItem.Id)) 
+            {
+                return await this.Add(contentItem, sectionItem);
+            }
+            else
+            {
+                return await this.Update(contentItem, sectionItem, userID, isAdmin);
             }
         }
 
         // Returns no. of objects saved, ie., 1
-        public async Task<ContentItem> Add(ContentItem item)
+        public async Task<ContentItem> Add(ContentItem item, string sectionItems)
         {
             item.Id = Guid.NewGuid().ToString();
+            item.ContentSectionItems = await this.ToContentSectionItems(sectionItems);
             this.DbContext.ContentItems.Add(item);
             var result = await this.DbContext.SaveChangesAsync();
 
@@ -212,10 +347,38 @@ namespace Banico.Data.Repositories
             return new ContentItem();
         }
 
-        public async Task<ContentItem> Update(ContentItem item, string userID, bool isAdmin)
+        private async Task<List<ContentSectionItem>> ToContentSectionItems(string sectionItems)
+        {
+            List<ContentSectionItem> output = new List<ContentSectionItem>();
+            var sections = sectionItems.Split(SECTION_DELIM);
+            for (int i = 0; i < sections.Count(); i ++)
+            {
+                var sectionFields = sections[i].Split(TYPE_DELIM);
+                var sectionType = sectionFields[0];
+                var sectionItemString = sectionFields[1];
+
+                var sectionItem = await (from si in this.DbContext.SectionItems
+                                    where si.Section == sectionType &&
+                                        si.PathUrl == sectionItemString
+                                    select si).ToListAsync();
+
+                ContentSectionItem contentSectionItem = new ContentSectionItem();
+
+                if (sectionItem.Count() > 0)
+                {
+                    contentSectionItem.Id = Guid.NewGuid().ToString();
+                    contentSectionItem.SectionItem = sectionItem.First();
+                    output.Add(contentSectionItem);
+                }
+            }
+
+            return output;
+        }
+
+        public async Task<ContentItem> Update(ContentItem item, string sectionItems, string userID, bool isAdmin)
         {
             var updateItem = (await this.Get(item.Id, "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""))
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false))
                 .FirstOrDefault();
 
             if (updateItem != null)
@@ -225,7 +388,7 @@ namespace Banico.Data.Repositories
                     updateItem.Name = item.Name;
                     updateItem.Content = item.Content;
                     updateItem.Alias = item.Alias;
-                    updateItem.SectionItems = item.SectionItems;
+                    updateItem.ContentSectionItems = await this.ToContentSectionItems(sectionItems);
                     updateItem.Attribute01 = item.Attribute01;
                     updateItem.Attribute02 = item.Attribute02;
                     updateItem.Attribute03 = item.Attribute03;
@@ -263,7 +426,7 @@ namespace Banico.Data.Repositories
         public async Task<ContentItem> Delete(string id)
         {
             var item = (await this.Get(id, "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""))
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false))
                 .FirstOrDefault();
             this.DbContext.Remove(item);
             var result = await this.DbContext.SaveChangesAsync();

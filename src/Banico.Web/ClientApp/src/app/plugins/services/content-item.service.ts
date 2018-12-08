@@ -136,7 +136,7 @@ export class ContentItemService {
         return result;
     }
 
-    public addOrUpdate(contentItem: ContentItem): Observable<any> {
+    public addOrUpdate(contentItem: ContentItem, sectionItems: string): Observable<any> {
         var result = this.apollo.mutate({
             mutation: AddOrUpdateContentItemMutation,
             variables: {
@@ -145,7 +145,7 @@ export class ContentItemService {
                 alias: contentItem.alias,
                 module: contentItem.module,
                 parentId: contentItem.parentId,
-                sectionItems: contentItem.sectionItems,
+                sectionItems: sectionItems,
                 content: contentItem.content,
                 attribute01: contentItem.attribute01,
                 attribute02: contentItem.attribute02,

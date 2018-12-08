@@ -1,3 +1,5 @@
+import { ContentSectionItem } from "./content-section-item";
+
 export class ContentItem {
   parentId: string;
   id: string;
@@ -31,5 +33,5 @@ export class ContentItem {
   attribute18: string;
   attribute19: string;
   attribute20: string;
-  sectionItems: string;
+  contentSectionItems: ContentSectionItem[];
 }

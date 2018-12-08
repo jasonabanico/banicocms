@@ -40,7 +40,6 @@ namespace Banico.Data.Migrations
                     ParentId = table.Column<string>(nullable: true),
                     Alias = table.Column<string>(nullable: true),
                     Module = table.Column<string>(nullable: true),
-                    SectionItems = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
                     Attribute01 = table.Column<string>(nullable: true),
                     Attribute02 = table.Column<string>(nullable: true),
@@ -138,15 +137,50 @@ namespace Banico.Data.Migrations
                     table.PrimaryKey("PK_User", x => x.ID);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Configs",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
-                values: new object[] { "6b875216-0d9b-443c-89b1-b9b1b9b2c18e", null, new DateTimeOffset(new DateTime(2018, 11, 20, 10, 0, 36, 775, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "", "initialized", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "n" });
+            migrationBuilder.CreateTable(
+                name: "ContentSectionItems",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    ContentItemId = table.Column<string>(nullable: true),
+                    SectionItemId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContentSectionItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ContentSectionItems_ContentItems_ContentItemId",
+                        column: x => x.ContentItemId,
+                        principalTable: "ContentItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ContentSectionItems_SectionItems_SectionItemId",
+                        column: x => x.SectionItemId,
+                        principalTable: "SectionItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
 
             migrationBuilder.InsertData(
                 table: "Configs",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
-                values: new object[] { "038bb43f-09b0-4095-83b6-23e574c019bf", null, new DateTimeOffset(new DateTime(2018, 11, 20, 10, 0, 36, 778, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin", "canActivate", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin" });
+                values: new object[] { "21165d70-36be-4d3d-81a8-b7004d44e047", null, new DateTimeOffset(new DateTime(2018, 12, 7, 23, 30, 33, 882, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "", "initialized", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "n" });
+
+            migrationBuilder.InsertData(
+                table: "Configs",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
+                values: new object[] { "51fcbf56-7197-40fa-aec0-7b6aba3287da", null, new DateTimeOffset(new DateTime(2018, 12, 7, 23, 30, 33, 886, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin", "canActivate", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContentSectionItems_ContentItemId",
+                table: "ContentSectionItems",
+                column: "ContentItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContentSectionItems_SectionItemId",
+                table: "ContentSectionItems",
+                column: "SectionItemId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -155,19 +189,22 @@ namespace Banico.Data.Migrations
                 name: "Configs");
 
             migrationBuilder.DropTable(
-                name: "ContentItems");
+                name: "ContentSectionItems");
 
             migrationBuilder.DropTable(
                 name: "Invites");
-
-            migrationBuilder.DropTable(
-                name: "SectionItems");
 
             migrationBuilder.DropTable(
                 name: "Sections");
 
             migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "ContentItems");
+
+            migrationBuilder.DropTable(
+                name: "SectionItems");
         }
     }
 }

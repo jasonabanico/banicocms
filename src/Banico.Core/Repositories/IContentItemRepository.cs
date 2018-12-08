@@ -37,11 +37,15 @@ namespace Banico.Core.Repositories
             string attribute17,
             string attribute18,
             string attribute19,
-            string attribute20
+            string attribute20,
+            bool includeChildren,
+            bool includeParents
         );
-        Task<ContentItem> AddOrUpdate(ContentItem item, string userId, bool isAdmin);
-        Task<ContentItem> Add(ContentItem item);
-        Task<ContentItem> Update(ContentItem item, string userId, bool isAdmin);
+
+        Task<IEnumerable<ContentSectionItem>> GetContentSectionItemsByContentItemId(string id);
+        Task<ContentItem> AddOrUpdate(ContentItem item, string sectionItems, string userId, bool isAdmin);
+        Task<ContentItem> Add(ContentItem item, string sectionItems);
+        Task<ContentItem> Update(ContentItem item, string sectionItems, string userId, bool isAdmin);
         Task<ContentItem> Delete(string id);
     }
 }

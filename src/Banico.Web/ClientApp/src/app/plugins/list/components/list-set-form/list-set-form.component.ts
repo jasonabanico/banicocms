@@ -44,9 +44,10 @@ export class ListSetFormComponent implements OnInit {
     }
     
     private set(listSet: ListSet) {
+        var sectionItems = this.listSetService.toSectionItems(listSet.ToContentItem());
         this.listSetForm.patchValue({
             id: listSet.id,
-            sectionItems: listSet.sectionItems,
+            sectionItems: sectionItems,
             name: listSet.name,
             alias: listSet.alias,
             description: listSet.description
@@ -57,10 +58,10 @@ export class ListSetFormComponent implements OnInit {
         var alias: string = this.listSetForm.value['alias'];
         this.listSetService.addOrUpdate(
             this.listSetForm.value['id'],
-            this.listSetForm.value['sectionItems'],
             this.listSetForm.value['name'],
             alias,
-            this.listSetForm.value['description']
+            this.listSetForm.value['description'],
+            this.listSetForm.value['sectionItems'],
         )
         .finally(() => {
             this.isSuccessful = true;
