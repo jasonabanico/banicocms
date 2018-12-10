@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System;
 using Banico.Core.Entities;
 using Banico.Core.Repositories;
+using System.Diagnostics;
 
 namespace Banico.Data.Repositories
 {
@@ -176,94 +177,117 @@ namespace Banico.Data.Repositories
 
             if (!string.IsNullOrEmpty(sectionItems))
             {
-                Predicate<ContentSectionItem> sectionItemPredicate = this.MatchSectionItems(sectionItems, includeChildren);
+                contentItems = this.MatchSectionItems(contentItems, sectionItems, includeChildren);
 
                 if (includeParents)
                 {
-                    Predicate<ContentSectionItem> parentPredicate = this.MatchParentSectionItems(sectionItems);
-                    sectionItemPredicate = Helpers.Or(sectionItemPredicate, parentPredicate);
+                    //contentItems = this.MatchParentSectionItems(contentItems, sectionItems);
                 }
-
-                contentItems = contentItems.Join(
-                    this.DbContext.ContentSectionItems.AsEnumerable(),
-                    ci => ci.Id,
-                    csi => csi.ContentItemId,
-                    (ci, csi) => new { 
-                        ContentItem = ci, 
-                        ContentSectionItem = csi 
-                    })
-                    .Where((item) => sectionItemPredicate(item.ContentSectionItem))
-                    .Select((item) => item.ContentItem);
             }
 
             return await contentItems.ToListAsync();
         }
 
-        private Predicate<ContentSectionItem> MatchSectionItems(string allSectionItems, bool includeChildren)
+        private IQueryable<ContentItem> MatchSectionItems(
+            IQueryable<ContentItem> contentItems,
+            string allSectionItems, 
+            bool includeChildren)
         {
-            Predicate<ContentSectionItem> outputPredicate = null;
-
             var sectionItemsArray = allSectionItems.Split(SECTION_DELIM);
             for (int i = 0; i < sectionItemsArray.Length; i++)
             {
                 if (!string.IsNullOrEmpty(sectionItemsArray[i]))
                 {
-                    Predicate<ContentSectionItem> sectionPredicate = null;
+                    IQueryable<SectionItem> sectionQuery = null;
                     var sectionFields = sectionItemsArray[i].Split(TYPE_DELIM);
                     var section = sectionFields[0];
                     var sectionValue = sectionFields[1];
-                    if (!includeChildren)
+                    var pathFields = sectionValue.Split(PATH_DELIM);
+                    string pathUrl = string.Empty;
+                    string alias = pathFields[pathFields.Count() - 1];
+                    if (pathFields.Count() > 1)
                     {
-                        sectionPredicate = (contentSectionItem => SectionItemEquals(contentSectionItem, section, sectionValue));
-                    } 
-                    else
-                    {
-                        sectionPredicate = (contentSectionItem => SectionItemContains(contentSectionItem, section, sectionValue));
+                        pathUrl = sectionValue.Substring(0, sectionValue.Length - alias.Length - 1);
                     }
 
-                    if (outputPredicate == null)
+                    if (!string.IsNullOrEmpty(alias))
                     {
-                        outputPredicate = sectionPredicate;
-                    }
-                    else
-                    {
-                        outputPredicate = Helpers.And(outputPredicate, sectionPredicate);
+                        if (!includeChildren)
+                        {
+                            contentItems = from ci in contentItems
+                                join csi in this.DbContext.ContentSectionItems
+                                    on ci.Id equals csi.ContentItemId
+                                join si in this.DbContext.SectionItems
+                                    on csi.SectionItemId equals si.Id
+                                where 
+                                    si.Section == section &&
+                                    si.PathUrl == pathUrl &&
+                                    si.Alias == alias
+                                select ci;
+                        } 
+                        else
+                        {
+                            var childrenPathUrl = "";
+                            if (pathUrl != "")
+                            {
+                                childrenPathUrl = pathUrl + PATH_DELIM + alias;
+                            }
+                            else
+                            {
+                                childrenPathUrl = alias;
+                            }
+                            contentItems = from ci in contentItems
+                                join csi in this.DbContext.ContentSectionItems
+                                    on ci.Id equals csi.ContentItemId
+                                join si in this.DbContext.SectionItems
+                                    on csi.SectionItemId equals si.Id
+                                where 
+                                    si.Section == section &&
+                                    ((si.PathUrl == pathUrl &&
+                                        si.Alias == alias) ||
+                                    (si.PathUrl.Contains(childrenPathUrl)))
+                                select ci;
+                        }
                     }
                 }
             }
 
-            return outputPredicate;
+            return contentItems;
         }
 
-        private Predicate<ContentSectionItem> MatchParentSectionItems(string allSectionItems)
+        private Predicate<SectionItem> MatchParentSectionItems(
+            IQueryable<ContentItem> contentItems, 
+            string allSectionItems)
         {
-            Predicate<ContentSectionItem> outputPredicate = null;
+            Predicate<SectionItem> outputPredicate = null;
 
             var allSectionItemsArray = allSectionItems.Split(SECTION_DELIM);
             for (int i = 0; i < allSectionItemsArray.Length; i++)
             {
-                Predicate<ContentSectionItem> sectionPredicate = null;
+                Predicate<SectionItem> sectionPredicate = null;
                 var typeAndSection = allSectionItemsArray[i].Split(TYPE_DELIM);
                 List<string> innerList = new List<string>();
                 var section = typeAndSection[0];
                 var sectionItems = typeAndSection[1].Split(SECTION_DELIM);
-                string sectionString = section + TYPE_DELIM;
+                var pathUrl = "";
                 for (int j = 0; j < sectionItems.Length; j++)
                 {
-                    if (j > 0)
-                    {
-                        sectionString = sectionString + PATH_DELIM;
-                    }
-                    sectionString = sectionString + sectionItems[j];
-
                     if (sectionPredicate == null)
                     {
-                        sectionPredicate = (contentSectionItem => SectionItemEquals(contentSectionItem, section, sectionString));
+                        sectionPredicate = (sectionItem => 
+                            SectionItemEquals(sectionItem, section, pathUrl, sectionItems[j]));
                     }
                     else
                     {
-                        sectionPredicate = Helpers.Or<ContentSectionItem>(sectionPredicate, contentSectionItem => SectionItemEquals(contentSectionItem, section, sectionString));
+                        sectionPredicate = Helpers.Or<SectionItem>(sectionPredicate, sectionItem => 
+                            SectionItemEquals(sectionItem, section, pathUrl, sectionItems[j]));
                     }
+
+                    if (j > 0)
+                    {
+                        pathUrl = pathUrl + PATH_DELIM;
+                    }
+                    pathUrl = pathUrl + sectionItems[j];
                 }
 
                 if (outputPredicate == null)
@@ -272,38 +296,21 @@ namespace Banico.Data.Repositories
                 }
                 else
                 {
-                    outputPredicate = Helpers.And<ContentSectionItem>(outputPredicate, sectionPredicate);
+                    outputPredicate = Helpers.And<SectionItem>(outputPredicate, sectionPredicate);
                 }
             }
 
             return outputPredicate;
         }
 
-        static bool SectionItemEquals(ContentSectionItem contentSectionItem, string section, string pathUrl)
-        {
-            if ((contentSectionItem.SectionItem.Section == section) &&
-                (contentSectionItem.SectionItem.PathUrl == pathUrl))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        static bool SectionItemEquals(SectionItem sectionItem, string section, string pathUrl, string alias)
+            => ((sectionItem.Section == section) && 
+            (sectionItem.PathUrl == pathUrl) &&
+            (sectionItem.Alias == alias));
 
-        static bool SectionItemContains(ContentSectionItem contentSectionItem, string section, string pathUrl)
-        {
-            if ((contentSectionItem.SectionItem.Section == section) &&
-                (contentSectionItem.SectionItem.PathUrl.Contains(pathUrl)))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        static bool SectionItemContains(SectionItem sectionItem, string section, string pathUrl, string alias)
+            => ((sectionItem.Section == section) && 
+            (sectionItem.PathUrl.Contains(pathUrl)));
 
         public async Task<IEnumerable<ContentSectionItem>> GetContentSectionItemsByContentItemId(string id)
         {

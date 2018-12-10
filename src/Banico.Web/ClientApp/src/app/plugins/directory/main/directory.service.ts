@@ -18,7 +18,7 @@ export class DirectoryService extends PluginService {
     public getAll(): Observable<DirectoryItem[]> {
         return this.contentItemService.getAll('', '', '',
         'directory', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '')
+        '', '', '', '', '', '', '', '', '', '', false, false)
         .map(items => {
             var directoryItems: DirectoryItem[] = new Array<DirectoryItem>();
             items.forEach(function(item: ContentItem) {
@@ -32,7 +32,7 @@ export class DirectoryService extends PluginService {
     public getDirectoryItems(sectionItems: string): Observable<DirectoryItem[]> {
         return this.contentItemService.getAll('', '', '',
         'directory', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '')
+        '', '', '', '', '', '', '', '', '', '', true, true)
         .map(items => {
             var directoryItems: DirectoryItem[] = new Array<DirectoryItem>();
             items.forEach(function(item: ContentItem) {
@@ -46,7 +46,7 @@ export class DirectoryService extends PluginService {
     public getWithTextSearch(text: string): Observable<DirectoryItem[]> {
         return this.contentItemService.getAll('', '', '',
         'directory', '', '', '', text, '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '')
+        '', '', '', '', '', '', '', '', '', '', false, false)
         .map(items => {
             var directoryItems: DirectoryItem[] = new Array<DirectoryItem>();
             items.forEach(function(item: ContentItem) {
