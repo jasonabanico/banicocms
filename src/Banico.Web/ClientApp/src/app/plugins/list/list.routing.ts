@@ -9,7 +9,7 @@ import { ListFormComponent } from './components/list-form/list-form.component';
 import { ListDisplayComponent } from './components/list-display/list-display.component';
 import { AuthGuard } from '../../shared/auth/auth.guard';
 
-const FAQ_ROUTES: Routes = [
+const LIST_ROUTES: Routes = [
   { path: 'list', component: ListComponent, children: [
     { path: 'list-set/new', component: ListSetFormComponent, canActivate: [AuthGuard], data: { module: 'list-set/manage' } },
     { path: 'list-set/edit/:id', component: ListSetFormComponent, canActivate: [AuthGuard], data: { module: 'list-set/manage' } },
@@ -25,7 +25,7 @@ const FAQ_ROUTES: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(FAQ_ROUTES)
+        RouterModule.forChild(LIST_ROUTES)
     ],
     exports: [
         RouterModule
