@@ -14,7 +14,7 @@ function validateEmailFactory() {
 }
 
 @Directive({
-  selector: '[validateEmail][ngModel],[validateEmail][formControl]',
+  selector: 'app-[validateEmail][ngModel],[validateEmail][formControl]',
   providers: [
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => EmailValidator), multi: true }
   ]

@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
-    selector: 'front',
+    selector: 'app-front',
     templateUrl: '../../../../../config/front.component.html'
 })
 export class FrontComponent implements OnInit {

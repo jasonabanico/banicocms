@@ -6,7 +6,7 @@ import { ListItem } from '../../entities/list-item';
 import { List } from '../../entities/list';
 
 @Component({
-  selector: 'list-item-display',
+  selector: 'app-list-item-display',
   templateUrl: './list-item-display.component.html',
   styleUrls: ['./list-item-display.component.css']
 })

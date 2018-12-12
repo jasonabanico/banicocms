@@ -3,7 +3,7 @@ import { Role } from "../../../../entities/role";
 import { RolesService } from "../../main/roles.service";
 
 @Component({
-    selector: 'rolelist',
+    selector: 'app-rolelist',
     templateUrl: './roles-list.component.html',
     providers: []
 })

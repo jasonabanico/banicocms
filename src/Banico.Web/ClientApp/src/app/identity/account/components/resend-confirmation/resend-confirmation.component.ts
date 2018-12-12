@@ -4,7 +4,7 @@ import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AccountService } from '../../main/account.service';
  
 @Component({
-  selector: 'resend-confirmation',
+  selector: 'app-resend-confirmation',
   templateUrl: './resend-confirmation.component.html',
   styleUrls: []
 })

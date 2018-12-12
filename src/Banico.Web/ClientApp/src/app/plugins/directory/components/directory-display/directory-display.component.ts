@@ -6,7 +6,7 @@ import { SectionsService } from '../../../../admin/sections/main/services/sectio
 import { DirectoryService } from '../../main/directory.service';
 
 @Component({
-    selector: 'directory-display',
+    selector: 'app-directory-display',
     templateUrl: './directory-display.component.html',
     providers: [DirectoryService]
 })

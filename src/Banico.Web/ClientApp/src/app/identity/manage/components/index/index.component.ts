@@ -4,7 +4,7 @@ import { UserService } from '../../../../shared/services/user.service';
 import { Router } from '@angular/router';
  
 @Component({
-  selector: 'index',
+  selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: []
 })

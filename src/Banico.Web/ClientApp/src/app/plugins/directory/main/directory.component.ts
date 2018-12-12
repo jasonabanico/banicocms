@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
-    selector: 'directory',
+    selector: 'app-directory',
     templateUrl: './directory.component.html'
 })
 export class DirectoryComponent implements OnInit {

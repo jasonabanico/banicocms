@@ -6,7 +6,7 @@ import { ListItemService } from '../../services/list-item.service';
 import { Identifiers } from '@angular/compiler';
 
 @Component({
-  selector: 'list-item-form',
+  selector: 'app-list-item-form',
   templateUrl: './list-item-form.component.html',
   styleUrls: ['./list-item-form.component.css']
 })

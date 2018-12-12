@@ -7,7 +7,7 @@ import { ContactService } from '../../main/contact.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({
-    selector: 'contact-display',
+    selector: 'app-contact-display',
     templateUrl: './contact-display.component.html',
     providers: [ContactService]
 })

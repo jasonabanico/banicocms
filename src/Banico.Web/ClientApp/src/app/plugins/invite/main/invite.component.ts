@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
-    selector: 'invite',
+    selector: 'app-invite',
     templateUrl: './invite.component.html'
 })
 export class InviteComponent implements OnInit {

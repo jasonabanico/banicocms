@@ -7,7 +7,7 @@ import { SectionsFileService } from '../../main/services/sections-file.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
-    selector: 'section-items-admin',
+    selector: 'app-section-items-admin',
     templateUrl: './section-items-admin.component.html',
     providers: [SectionsFileService]
 })

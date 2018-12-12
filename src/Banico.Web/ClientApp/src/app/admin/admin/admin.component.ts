@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { ConfigsService } from "../configs/main/configs.service";
 
 @Component({
-    selector: 'admin',
+    selector: 'app-admin',
     templateUrl: './admin.component.html',
     providers: []
 })

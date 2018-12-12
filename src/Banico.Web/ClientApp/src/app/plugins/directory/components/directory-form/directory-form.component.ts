@@ -6,7 +6,7 @@ import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
 import { DirectoryService } from '../../main/directory.service';
 
 @Component({
-    selector: 'directory-form',
+    selector: 'app-directory-form',
     templateUrl: './directory-form.component.html',
     providers: [DirectoryService]
 })

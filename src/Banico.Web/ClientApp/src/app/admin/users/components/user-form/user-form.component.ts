@@ -5,7 +5,7 @@ import { User } from '../../../../entities/user';
 import { UsersService } from '../../main/users.service';
 
 @Component({
-  selector: 'user-form',
+  selector: 'app-user-form',
   templateUrl: './user-form.component.html',
   styleUrls: []
 })

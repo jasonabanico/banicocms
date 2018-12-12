@@ -4,7 +4,7 @@ import { User } from '../../../../entities/user';
 import { UsersService } from '../../main/users.service';
 
 @Component({
-    selector: 'users-list',
+    selector: 'app-users-list',
     templateUrl: './users-list.component.html',
     providers: [UsersService]
 })

@@ -9,7 +9,7 @@ import { ModalComponent } from '../../../../shell/modal/modal.component';
 import { AppConfig } from '../../../../../../../config/app.config';
 
 @Component({
-    selector: 'directory-item-display',
+    selector: 'app-directory-item-display',
     templateUrl: './directory-item-display.component.html',
     providers: [DirectoryService]
 })

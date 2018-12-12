@@ -5,7 +5,7 @@ import { SectionsService } from '../../main/services/sections.service';
 import { Section } from '../../../../entities/section';
 
 @Component({
-    selector: 'sections-admin',
+    selector: 'app-sections-admin',
     templateUrl: './sections-admin.component.html',
     providers: [SectionsService]
 })

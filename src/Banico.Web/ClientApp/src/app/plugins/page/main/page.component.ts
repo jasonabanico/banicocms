@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
-    selector: 'page',
+    selector: 'app-page',
     templateUrl: './page.component.html'
 })
 export class PageComponent implements OnInit {

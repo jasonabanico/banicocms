@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
-    selector: 'faq',
+    selector: 'app-faq',
     templateUrl: './faq.component.html'
 })
 export class FaqComponent implements OnInit {

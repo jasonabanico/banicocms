@@ -4,7 +4,7 @@ import { Invite } from '../../main/invite';
 import { InviteService } from '../../main/invite.service';
 
 @Component({
-    selector: 'invite-form',
+    selector: 'app-invite-form',
     templateUrl: './invite-form.component.html',
     providers: [InviteService]
 })

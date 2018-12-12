@@ -5,7 +5,7 @@ import { Role } from "../../../../entities/role";
 import { RolesService } from "../../main/roles.service";
 
 @Component({
-    selector: 'role-form',
+    selector: 'app-role-form',
     templateUrl: './role-form.component.html',
     providers: []
 })

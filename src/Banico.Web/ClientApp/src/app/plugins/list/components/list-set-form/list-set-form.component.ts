@@ -5,7 +5,7 @@ import { ListSetService } from '../../services/list-set.service';
 import { ListSet } from '../../entities/list-set';
 
 @Component({
-    selector: 'list-set-form',
+    selector: 'app-list-set-form',
     templateUrl: './list-set-form.component.html',
     providers: [ListSetService]
 })

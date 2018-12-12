@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'listfront',
+  selector: 'app-list-front',
   templateUrl: './list-front.component.html',
   styleUrls: ['./list-front.component.css']
 })

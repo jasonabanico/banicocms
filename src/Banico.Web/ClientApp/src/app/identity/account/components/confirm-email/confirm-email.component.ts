@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../../main/account.service';
 
 @Component({
-  selector: 'confirm-email',
+  selector: 'app-confirm-email',
   templateUrl: './confirm-email.component.html',
   styleUrls: []
 })

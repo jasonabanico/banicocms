@@ -5,7 +5,7 @@ import { ConfigsService } from '../../main/configs.service';
 import { Config } from '../../../../entities/config';
 
 @Component({
-    selector: 'config-form',
+    selector: 'app-config-form',
     templateUrl: './config-form.component.html',
     providers: [ConfigsService]
 })

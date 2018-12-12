@@ -5,7 +5,7 @@ import { NavBarService } from './nav-bar.service';
 import { SectionsService } from '../../admin/sections/main/services/sections.service';
 
 @Component({
-    selector: 'nav-bar',
+    selector: 'app-nav-bar',
     templateUrl: './nav-bar.component.html'
 })
 export class NavBarComponent implements OnInit {
