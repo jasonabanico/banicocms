@@ -1,3 +1,37 @@
 <p>
-  topic-form works!
+  {{subforum.name}}
+  {{subforum.alias}}
 </p>
+
+<form [formGroup]="topicForm" novalidate (ngSubmit)="save()">
+  <input type="hidden"
+    id="id" 
+    name="id"
+    formControlName="id" />
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="title">Title</label>
+    <div class="col-md-10">
+        <input 
+            class="form-control" 
+            id="title" 
+            name="title"
+            type="text"
+            formControlName="title" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="text">Text</label>
+    <div class="col-md-10">
+        <input 
+            class="form-control" 
+            id="text" 
+            name="text"
+            type="text"
+            formControlName="text"
+            required />
+    </div>
+  </div>  
+  <div class="form-group row">
+    <button type="submit" class="btn btn-primary" value="save">Save</button>
+  </div>
+</form>

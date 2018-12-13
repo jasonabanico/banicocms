@@ -1,6 +1,6 @@
 import { ContentItem } from "../../../entities/content-item";
 
-export class Subforum {
+export class Topic {
   id: string;
   title: string;
   text: string;

@@ -1,19 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../../shared/auth/auth.guard';
+import { ForumComponent } from './components/forum.component';
+import { SubforumFormComponent } from './components/subforum-form/subforum-form.component';
+import { SubforumDisplayComponent } from './components/subforum-display/subforum-display.component';
+import { TopicFormComponent } from './components/topic-form/topic-form.component';
+import { TopicDisplayComponent } from './components/topic-display/topic-display.component';
 
 const FORUM_ROUTES: Routes = [
-//   { path: 'forum', component: ForumComponent, children: [
-//     { path: 'list-set/new', component: ListSetFormComponent, canActivate: [AuthGuard], data: { module: 'list-set/manage' } },
-//     { path: 'list-set/edit/:id', component: ListSetFormComponent, canActivate: [AuthGuard], data: { module: 'list-set/manage' } },
-//     { path: 'list-set/:alias', component: ListSetDisplayComponent, canActivate: [AuthGuard], data: { module: 'list-set/view' } },
-//     { path: 'list-item/new/:listSetId', component: ListItemFormComponent, canActivate: [AuthGuard], data: { module: 'list-item/manage' } },
-//     { path: 'list-item/edit/:id', component: ListItemFormComponent, canActivate: [AuthGuard], data: { module: 'list-item/manage' } },
-//     { path: 'list-item/:alias', component: ListItemDisplayComponent, canActivate: [AuthGuard], data: { module: 'list-item/view' } },
+   { path: 'forum', component: ForumComponent, children: [
+     { path: 'subforum/new/', component: SubforumFormComponent, canActivate: [AuthGuard], data: { module: 'forum/subforum/manage' } },
+     { path: 'subforum/edit/:id', component: SubforumFormComponent, canActivate: [AuthGuard], data: { module: 'forum/subforum/manage' } },
+     { path: 'subforum/:alias', component: SubforumDisplayComponent, canActivate: [AuthGuard], data: { module: 'forum/subforum/view' } },
+     { path: 'topic/new/:subforumId', component: TopicFormComponent, canActivate: [AuthGuard], data: { module: 'forum/topic/manage' } },
+     { path: 'topic/edit/:id', component: TopicFormComponent, canActivate: [AuthGuard], data: { module: 'forum/topic/manage' } },
+     { path: 'topic/:id', component: TopicDisplayComponent, canActivate: [AuthGuard], data: { module: 'forum/topic/view' } },
 //     { path: 'list/new/:listSetId', component: ListFormComponent, canActivate: [AuthGuard], data: { module: 'list/manage' } },
 //     { path: 'list/edit/:id', component: ListFormComponent, canActivate: [AuthGuard], data: { module: 'list/manage' } },
 //     { path: 'list/:id', component: ListDisplayComponent, canActivate: [AuthGuard], data: { module: 'list/view' } },
-//   ] }
+   ] }
 ];
 
 @NgModule({

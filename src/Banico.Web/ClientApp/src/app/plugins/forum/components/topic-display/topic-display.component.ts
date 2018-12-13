@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Topic } from '../../entities/topic';
 
 @Component({
   selector: 'app-topic-display',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./topic-display.component.scss']
 })
 export class TopicDisplayComponent implements OnInit {
-
+  public topic: Topic;
+  
   constructor() { }
 
   ngOnInit() {
