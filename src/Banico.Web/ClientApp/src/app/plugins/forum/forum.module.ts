@@ -8,6 +8,8 @@ import { SubforumDisplayComponent } from './components/subforum-display/subforum
 import { SubforumFormComponent } from './components/subforum-form/subforum-form.component';
 import { TopicDisplayComponent } from './components/topic-display/topic-display.component';
 import { TopicFormComponent } from './components/topic-form/topic-form.component';
+import { SubforumService } from './services/subforum.service';
+import { TopicService } from './services/topic.service';
 
 @NgModule({
   imports: [
@@ -22,8 +24,11 @@ import { TopicFormComponent } from './components/topic-form/topic-form.component
     SubforumDisplayComponent,
     SubforumFormComponent,
     TopicDisplayComponent,
-    TopicFormComponent],
+    TopicFormComponent
+  ],
   providers: [ 
+    SubforumService,
+    TopicService,
   ]
 })
 export class ForumModule { }

@@ -9,15 +9,12 @@ import { TopicDisplayComponent } from './components/topic-display/topic-display.
 
 const FORUM_ROUTES: Routes = [
    { path: 'forum', component: ForumComponent, children: [
-     { path: 'subforum/new/', component: SubforumFormComponent, canActivate: [AuthGuard], data: { module: 'forum/subforum/manage' } },
+     { path: 'subforum/new', component: SubforumFormComponent, canActivate: [AuthGuard], data: { module: 'forum/subforum/manage' } },
      { path: 'subforum/edit/:id', component: SubforumFormComponent, canActivate: [AuthGuard], data: { module: 'forum/subforum/manage' } },
      { path: 'subforum/:alias', component: SubforumDisplayComponent, canActivate: [AuthGuard], data: { module: 'forum/subforum/view' } },
      { path: 'topic/new/:subforumId', component: TopicFormComponent, canActivate: [AuthGuard], data: { module: 'forum/topic/manage' } },
      { path: 'topic/edit/:id', component: TopicFormComponent, canActivate: [AuthGuard], data: { module: 'forum/topic/manage' } },
-     { path: 'topic/:id', component: TopicDisplayComponent, canActivate: [AuthGuard], data: { module: 'forum/topic/view' } },
-//     { path: 'list/new/:listSetId', component: ListFormComponent, canActivate: [AuthGuard], data: { module: 'list/manage' } },
-//     { path: 'list/edit/:id', component: ListFormComponent, canActivate: [AuthGuard], data: { module: 'list/manage' } },
-//     { path: 'list/:id', component: ListDisplayComponent, canActivate: [AuthGuard], data: { module: 'list/view' } },
+     { path: 'topic/:id', component: TopicDisplayComponent, canActivate: [AuthGuard], data: { module: 'forum/topic/view' } }
    ] }
 ];
 

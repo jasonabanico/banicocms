@@ -1,0 +1,8 @@
+{
+  "ConfigDefaultSettings": {
+    "Configs": [
+      ",initialized,n",
+      "admin,canActivate,admin"
+      ]
+  }
+}
