@@ -12,6 +12,8 @@ namespace Banico.Api.Models
             IContentItemRepository contentItemRepository,
             IConfigRepository configRepository)
         {
+            Name = "Query";
+
             Field<ListGraphType<SectionType>>(
                 "sections",
                 arguments: new QueryArguments(

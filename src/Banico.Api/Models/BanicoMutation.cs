@@ -29,6 +29,8 @@ namespace Banico.Api.Models
             _configRepository = configRepository;
             _accessService = accessService;
 
+            Name = "Mutation";
+            
             Field<SectionType>(
                 "addOrUpdateSection",
                 arguments: new QueryArguments(

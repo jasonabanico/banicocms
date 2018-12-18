@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="graphiql" Version="1.1.0" />
-    <PackageReference Include="GraphQL" Version="2.0.0-alpha-912" />
-    <PackageReference Include="GraphQL.Authorization" Version="1.0.16-alpha-16" />
-    <PackageReference Include="GraphQL.Conventions" Version="1.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="GraphQL" Version="2.0.0" />
+    <PackageReference Include="GraphQL.Authorization" Version="1.0.20" />
+    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.1.0" />
+    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -22,6 +22,7 @@ using Banico.Identity;
 using Banico.Identity.Extensions;
 using Banico.Services;
 using Banico.Services.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Banico.Web
 {
@@ -116,7 +117,8 @@ namespace Banico.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery, 
+            ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -142,6 +144,10 @@ namespace Banico.Web
                         });
                     });
             }
+
+            loggerFactory.AddConsole();
+
+            apiStartup.Configure(app, env);
 
             app.UseAuthentication();
             
@@ -200,8 +206,10 @@ namespace Banico.Web
 
                 if (env.IsDevelopment())
                 {
+                    spa.Options.StartupTimeout = new TimeSpan(0, 0, 600);
                     spa.UseAngularCliServer(npmScript: "start");
                 }
+
             });
         }
     }

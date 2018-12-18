@@ -16,7 +16,7 @@ export class SubforumFormComponent implements OnInit {
     name: ['', Validators.required],
     alias: ['', Validators.required],
     description: ['', Validators.required],
-    sectionItems: ['', Validators.required]
+    sectionItems: ['']
   });
 
   constructor(
@@ -29,12 +29,20 @@ export class SubforumFormComponent implements OnInit {
 
   public ngOnInit() {
     this.route.params.subscribe(params => {
-      if (params['id']) {
-        var id = params['id'];
+      var id = params['id'];
+      if (id) {
         this.subforumService.get(id)
-          .subscribe(subforum => {
-           this.set(subforum);
-          });
+        .subscribe(subforum => {
+          this.set(subforum);
+        });
+      }
+    });
+
+    this.route.queryParams
+      .subscribe(params => {
+        var contentSectionItems = params['section'];
+        if (contentSectionItems) {
+          this.setSection(contentSectionItems);
         }
     });
   }
@@ -44,22 +52,30 @@ export class SubforumFormComponent implements OnInit {
       id: subforum.id,
       name: subforum.name,
       alias: subforum.alias,
-      description: subforum.description
+      description: subforum.description,
+      sectionItems: ''
+    });
+  }
+
+  private setSection(contentSectionItems: string) {
+    this.subforumForm.patchValue({
+      sectionItems: contentSectionItems
     });
   }
 
   public save() {
     // this.isRequesting = true;
+    var id = this.subforumForm.value['id'];
     var alias = this.subforumForm.value['alias'];
     this.subforumService.addOrUpdate(
-      this.subforumForm.value['id'],
+      id,
       this.subforumForm.value['name'],
       alias,
       this.subforumForm.value['description'],
       this.subforumForm.value['sectionItems']
     )
     .subscribe(
-      id => {
+      result => {
         this.router.navigate(['/forum/subforum/' + alias]);
       },
       //errors =>  this.errors = errors
