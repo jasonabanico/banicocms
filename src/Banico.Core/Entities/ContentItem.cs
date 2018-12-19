@@ -12,6 +12,8 @@ namespace Banico.Core.Entities
         public string Alias { get; set; }
         public string Module { get; private set; }
 
+        [NotMapped]
+        public string SectionItems { get; set; }
         public IEnumerable<ContentSectionItem> ContentSectionItems { get; set; }
 
         public string Content { get; set; }

@@ -49,10 +49,11 @@ namespace Banico.Api.Controllers
             var result = await _executer.ExecuteAsync(_ =>
             {
                 _.Schema = _schema;
+                _.ExposeExceptions = true;
                 _.Query = queryToExecute;
                 _.OperationName = query.OperationName;
                 _.Inputs = inputs;
-
+                //_.UserContext = _settings.BuildUserContext?.Invoke(context);
                 _.ComplexityConfiguration = new ComplexityConfiguration { MaxDepth = 15 };
                 _.FieldMiddleware.Use<InstrumentFieldsMiddleware>();
 

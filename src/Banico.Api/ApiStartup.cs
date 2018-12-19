@@ -52,13 +52,13 @@ namespace Banico.Api
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
       // add http for Schema at default url /graphql
-      //app.UseGraphQL<ISchema>("/graphql");
+      app.UseGraphQL<ISchema>("/graphql");
 
       // use graphql-playground at default url /ui/playground
-      //app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
-      //{
-          //Path = "/ui/playground"
-      //});
+      app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
+      {
+          Path = "/ui/playground"
+      });
     }
   }
 }

@@ -12,6 +12,7 @@ namespace Banico.Api.Models
             Field<StringGraphType>("id");
             Field<StringGraphType>("name");
             Field<StringGraphType>("parentId");
+            Field<StringGraphType>("sectionItems");
             
             Field<StringGraphType>("alias");
             Field<StringGraphType>("module");

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const AddOrUpdateContentItemMutation = gql`
-    mutation (
+    mutation addOrUpdateContentItem(
         $id: String,
         $name: String,
         $alias: String,
@@ -37,6 +37,7 @@ export const AddOrUpdateContentItemMutation = gql`
                 alias: $alias,
                 module: $module,
                 parentId: $parentId,
+                sectionItems: $sectionItems,
                 content: $content,
                 attribute01: $attribute01,
                 attribute02: $attribute02,
@@ -58,8 +59,7 @@ export const AddOrUpdateContentItemMutation = gql`
                 attribute18: $attribute18,
                 attribute19: $attribute19,
                 attribute20: $attribute20
-                },
-            sectionItems: $sectionItems
+                }
         ){
             id
         }

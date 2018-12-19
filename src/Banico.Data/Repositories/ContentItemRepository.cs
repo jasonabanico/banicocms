@@ -316,23 +316,23 @@ namespace Banico.Data.Repositories
             return new List<ContentSectionItem>();
         }
 
-        public async Task<ContentItem> AddOrUpdate(ContentItem contentItem, string sectionItem, string userID, bool isAdmin)
+        public async Task<ContentItem> AddOrUpdate(ContentItem contentItem, string userID, bool isAdmin)
         {
             if (string.IsNullOrEmpty(contentItem.Id)) 
             {
-                return await this.Add(contentItem, sectionItem);
+                return await this.Add(contentItem);
             }
             else
             {
-                return await this.Update(contentItem, sectionItem, userID, isAdmin);
+                return await this.Update(contentItem, userID, isAdmin);
             }
         }
 
         // Returns no. of objects saved, ie., 1
-        public async Task<ContentItem> Add(ContentItem item, string sectionItems)
+        public async Task<ContentItem> Add(ContentItem item)
         {
             item.Id = Guid.NewGuid().ToString();
-            item.ContentSectionItems = await this.ToContentSectionItems(sectionItems);
+            item.ContentSectionItems = await this.ToContentSectionItems(item.SectionItems);
             this.DbContext.ContentItems.Add(item);
             var result = await this.DbContext.SaveChangesAsync();
 
@@ -348,7 +348,7 @@ namespace Banico.Data.Repositories
         {
             List<ContentSectionItem> output = new List<ContentSectionItem>();
             var sections = sectionItems.Split(SECTION_DELIM);
-            for (int i = 0; i < sections.Count(); i ++)
+            for (int i = 0; i < (sections.Count() - 1); i ++)
             {
                 var sectionFields = sections[i].Split(TYPE_DELIM);
                 var sectionType = sectionFields[0];
@@ -372,7 +372,7 @@ namespace Banico.Data.Repositories
             return output;
         }
 
-        public async Task<ContentItem> Update(ContentItem item, string sectionItems, string userID, bool isAdmin)
+        public async Task<ContentItem> Update(ContentItem item, string userID, bool isAdmin)
         {
             var updateItem = (await this.Get(item.Id, "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false))
@@ -385,7 +385,7 @@ namespace Banico.Data.Repositories
                     updateItem.Name = item.Name;
                     updateItem.Content = item.Content;
                     updateItem.Alias = item.Alias;
-                    updateItem.ContentSectionItems = await this.ToContentSectionItems(sectionItems);
+                    updateItem.ContentSectionItems = await this.ToContentSectionItems(item.SectionItems);
                     updateItem.Attribute01 = item.Attribute01;
                     updateItem.Attribute02 = item.Attribute02;
                     updateItem.Attribute03 = item.Attribute03;

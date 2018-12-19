@@ -20,6 +20,7 @@ namespace Banico.Api.Models
 
             Field(x => x.Alias, nullable:true);
             Field(x => x.Module, nullable:true);
+            Field(x => x.SectionItems, nullable:true);
             Field(x => x.Content, nullable:true);
             Field(x => x.HtmlContent, nullable:true);
             Field(x => x.Snippet, nullable:true);
