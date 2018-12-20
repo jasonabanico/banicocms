@@ -3,54 +3,52 @@ import { Observable } from 'rxjs/Observable';
 import { PluginService } from "../../services/plugin.service";
 import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
-import { Topic } from '../entities/topic';
+import { ReplyComment } from '../entities/reply-comment';
 
 @Injectable()
-export class TopicService extends PluginService {
+export class ReplyCommentService extends PluginService {
 
-    public get(id: string): Observable<Topic> {
+    public get(id: string): Observable<ReplyComment> {
         return this.contentItemService.get(id)
         .map(item => {
-            return new Topic(item);
+            return new ReplyComment(item);
         });
     }
     
-    public getTopics(subforumId: string): Observable<Topic[]> {
+    public getReplyComments(replyId: string): Observable<ReplyComment[]> {
         return this.contentItemService.getAll('', '', '',
-        'topic', subforumId, '', '', '', '', '', '', '', '', '', '', '', '', '',
+        'reply-comment', replyId, '', '', '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '', true, true)
         .map(items => {
-            var topics: Topic[] = new Array<Topic>();
+            var replyComments: ReplyComment[] = new Array<ReplyComment>();
             items.forEach(function(item: ContentItem) {
-                topics.push(new Topic(item));                
+                replyComments.push(new ReplyComment(item));                
             });
 
-            return topics;
+            return replyComments;
         });
     }
 
     public addOrUpdate(
         id: string,
-        subforumId: string,
-        title: string,
+        replyId: string,
         text: string
     ): Observable<boolean> {
-        let topic: Topic = new Topic(null);
+        let replyComment: ReplyComment = new ReplyComment(null);
 
-        topic.id = id;
-        topic.subForumId = subforumId;
-        topic.title = title;
-        topic.text = text;
+        replyComment.id = id;
+        replyComment.replyId = replyId;
+        replyComment.text = text;
 
-        let contentItem: ContentItem = topic.ToContentItem();
+        let contentItem: ContentItem = replyComment.ToContentItem();
         return this.contentItemService.addOrUpdate(contentItem, '')
             .catch(this.handleError);
     }
 
-    public delete(topic: Topic): Observable<{}> {
+    public delete(replyComment: ReplyComment): Observable<{}> {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        let data = 'id=' + topic.id;
+        let data = 'id=' + replyComment.id;
         return this.http
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers

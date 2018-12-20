@@ -1,6 +1,6 @@
 <p>
-  {{subforum.name}}
-  {{subforum.alias}}
+  {{subforum?.name}}
+  {{subforum?.alias}}
 </p>
 
 <form [formGroup]="topicForm" novalidate (ngSubmit)="save()">

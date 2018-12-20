@@ -1,7 +1,11 @@
+<a href="/forum/subforum/{{subforum?.alias}}">{{subforum?.alias}}</a>
+
 <h3>
-  {{topic.title}}
+  {{topic?.title}}
 </h3>
 
+<a href="/forum/topic/edit/{{topic?.id}}">Edit</a>
+
 <p>
-  {{topic.text}}
+  {{topic?.text}}
 </p>

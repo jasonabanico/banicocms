@@ -1,8 +1,16 @@
 <h3>
-  {{subforum.name}}
-  {{subforum.alias}}
+  {{subforum?.name}}
+  {{subforum?.alias}}
 </h3>
 
 <p>
-  {{subforum.description}}
+  {{subforum?.description}}
 </p>
+
+<p>
+  <a href="/forum/topic/new/{{subforum?.id}}">New Topic</a>
+</p>
+
+<div *ngFor="let topic of topics">
+  <a href="/forum/topic/{{topic.id}}">{{topic.title}}</a>
+</div>

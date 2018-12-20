@@ -1,0 +1,23 @@
+<form [formGroup]="replyForm" novalidate (ngSubmit)="save()">
+  <input type="hidden"
+    id="id" 
+    name="id"
+    formControlName="id" />
+  <input type="hidden"
+    id="topicId" 
+    name="topicId"
+    formControlName="topicId" />
+  <div class="form-group">
+    <div class="col-md-10">
+        <input 
+            class="form-control" 
+            id="text" 
+            name="text"
+            type="text"
+            formControlName="text" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <button type="submit" class="btn btn-primary" value="save">Post</button>
+  </div>
+</form>
