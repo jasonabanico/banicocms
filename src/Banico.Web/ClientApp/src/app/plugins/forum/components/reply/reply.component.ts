@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { Reply } from '../../entities/reply';
 import { ReplyService } from '../../services/reply.service';
 
 @Component({
@@ -8,23 +9,11 @@ import { ReplyService } from '../../services/reply.service';
   templateUrl: './reply.component.html',
   styleUrls: ['./reply.component.scss']
 })
-export class ReplyComponent implements OnInit {
-
-  public replyForm: FormGroup = this.fb.group({
-    id: ['', Validators.required],
-    topicId: ['', Validators.required],
-    text: ['', Validators.required]
-  });
-
+export class ReplyComponent {
+  public reply: Reply;
+  
   constructor(
-    private replyService: ReplyService,
-    private router: Router,
-    private fb: FormBuilder,
-    private route: ActivatedRoute
+    private replyService: ReplyService
     ) {
   }
-
-  ngOnInit() {
-  }
-
 }

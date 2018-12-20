@@ -5,14 +5,16 @@ import { FormBuilder } from '@angular/forms';
 import { TopicService } from '../../services/topic.service';
 import { SubforumService } from '../../services/subforum.service';
 import { Subforum } from '../../entities/subforum';
+import { Reply } from '../../entities/reply';
 
 @Component({
-  selector: 'app-topic-display',
-  templateUrl: './topic-display.component.html',
-  styleUrls: ['./topic-display.component.scss']
+  selector: 'app-topic',
+  templateUrl: './topic.component.html',
+  styleUrls: ['./topic.component.scss']
 })
-export class TopicDisplayComponent implements OnInit {
+export class TopicComponent implements OnInit {
   public topic: Topic;
+  public replies: Reply[];
   public subforum: Subforum;
   
   constructor(

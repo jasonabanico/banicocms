@@ -9,3 +9,7 @@
 <p>
   {{topic?.text}}
 </p>
+
+<div *ngFor="let reply of replies">
+  <app-reply></app-reply>
+</div>

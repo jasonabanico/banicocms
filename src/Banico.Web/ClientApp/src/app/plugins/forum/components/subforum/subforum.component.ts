@@ -6,11 +6,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Topic } from '../../entities/topic';
 
 @Component({
-  selector: 'app-subforum-display',
-  templateUrl: './subforum-display.component.html',
-  styleUrls: ['./subforum-display.component.scss']
+  selector: 'app-subforum',
+  templateUrl: './subforum.component.html',
+  styleUrls: ['./subforum.component.scss']
 })
-export class SubforumDisplayComponent implements OnInit {
+export class SubforumComponent implements OnInit {
   public subforum: Subforum;
   public topics: Topic[];
 
