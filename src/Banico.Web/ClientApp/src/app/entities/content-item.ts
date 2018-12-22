@@ -10,6 +10,7 @@ export class ContentItem {
   updatedBy: string;
   updatedDate: string;
   name: string;
+  sectionItems: string;
   content: string;
   htmlContent: string;
   snippet: string;

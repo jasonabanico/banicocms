@@ -6,6 +6,7 @@ export class ListSet {
   name: string;
   alias: string;
   description: string;
+  sectionItems: string;
   contentSectionItems: ContentSectionItem[];
 
   constructor(private contentItem: ContentItem) {
@@ -14,6 +15,7 @@ export class ListSet {
       this.name = contentItem.name;
       this.alias = contentItem.alias;
       this.description = contentItem.content;
+      this.sectionItems = contentItem.sectionItems;
       this.contentSectionItems = contentItem.contentSectionItems;
     }
   }
@@ -26,6 +28,7 @@ export class ListSet {
     output.name = this.name;
     output.alias = this.alias;
     output.content = this.description;
+    output.sectionItems = this.sectionItems;
     output.contentSectionItems = this.contentSectionItems;
     
     return output;

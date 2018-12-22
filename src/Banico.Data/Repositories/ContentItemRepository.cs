@@ -347,25 +347,28 @@ namespace Banico.Data.Repositories
         private async Task<List<ContentSectionItem>> ToContentSectionItems(string sectionItems)
         {
             List<ContentSectionItem> output = new List<ContentSectionItem>();
-            var sections = sectionItems.Split(SECTION_DELIM);
-            for (int i = 0; i < (sections.Count() - 1); i ++)
+            if (!string.IsNullOrEmpty(sectionItems))
             {
-                var sectionFields = sections[i].Split(TYPE_DELIM);
-                var sectionType = sectionFields[0];
-                var sectionItemString = sectionFields[1];
-
-                var sectionItem = await (from si in this.DbContext.SectionItems
-                                    where si.Section == sectionType &&
-                                        si.PathUrl == sectionItemString
-                                    select si).ToListAsync();
-
-                ContentSectionItem contentSectionItem = new ContentSectionItem();
-
-                if (sectionItem.Count() > 0)
+                var sections = sectionItems.Split(SECTION_DELIM);
+                for (int i = 0; i < (sections.Count() - 1); i ++)
                 {
-                    contentSectionItem.Id = Guid.NewGuid().ToString();
-                    contentSectionItem.SectionItem = sectionItem.First();
-                    output.Add(contentSectionItem);
+                    var sectionFields = sections[i].Split(TYPE_DELIM);
+                    var sectionType = sectionFields[0];
+                    var sectionItemString = sectionFields[1];
+
+                    var sectionItem = await (from si in this.DbContext.SectionItems
+                                        where si.Section == sectionType &&
+                                            si.PathUrl == sectionItemString
+                                        select si).ToListAsync();
+
+                    ContentSectionItem contentSectionItem = new ContentSectionItem();
+
+                    if (sectionItem.Count() > 0)
+                    {
+                        contentSectionItem.Id = Guid.NewGuid().ToString();
+                        contentSectionItem.SectionItem = sectionItem.First();
+                        output.Add(contentSectionItem);
+                    }
                 }
             }
 
@@ -385,7 +388,10 @@ namespace Banico.Data.Repositories
                     updateItem.Name = item.Name;
                     updateItem.Content = item.Content;
                     updateItem.Alias = item.Alias;
-                    updateItem.ContentSectionItems = await this.ToContentSectionItems(item.SectionItems);
+                    if (!string.IsNullOrEmpty(item.SectionItems))
+                    {
+                        updateItem.ContentSectionItems = await this.ToContentSectionItems(item.SectionItems);
+                    }
                     updateItem.Attribute01 = item.Attribute01;
                     updateItem.Attribute02 = item.Attribute02;
                     updateItem.Attribute03 = item.Attribute03;

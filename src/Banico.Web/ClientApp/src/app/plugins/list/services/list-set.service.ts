@@ -49,9 +49,10 @@ export class ListSetService extends PluginService {
         listSet.name = name;
         listSet.alias = alias;
         listSet.description = description;
+        listSet.sectionItems = sectionItems;
 
         let contentItem: ContentItem = listSet.ToContentItem();
-        return this.contentItemService.addOrUpdate(contentItem, sectionItems)
+        return this.contentItemService.addOrUpdate(contentItem)
             .map(res => {
                 return true;
             })

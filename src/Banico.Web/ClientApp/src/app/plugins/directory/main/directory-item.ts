@@ -12,6 +12,7 @@ export class DirectoryItem {
   website: string;
   email: string;
   sectionOrderKey: string;
+  sectionItems: string;
   contentSectionItems: ContentSectionItem[];
 
   constructor(private contentItem: ContentItem) {
@@ -25,6 +26,7 @@ export class DirectoryItem {
       this.website = contentItem.attribute03;
       this.email = contentItem.attribute04;
       this.sectionOrderKey = contentItem.attribute05;
+      this.sectionItems = contentItem.sectionItems;
       this.contentSectionItems = contentItem.contentSectionItems;
     }
   }
@@ -40,6 +42,7 @@ export class DirectoryItem {
     output.attribute02 = this.phone;
     output.attribute03 = this.website;
     output.attribute04 = this.email;
+    output.sectionItems = this.sectionItems;
     output.contentSectionItems = this.contentSectionItems;
     
     return output;

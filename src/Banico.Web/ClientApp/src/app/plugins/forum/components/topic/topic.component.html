@@ -10,6 +10,8 @@
   {{topic?.text}}
 </p>
 
+<app-reply-form [topicId]="topic?.id"></app-reply-form>
+
 <div *ngFor="let reply of replies">
-  <app-reply></app-reply>
+  <app-reply [id]="reply.id"></app-reply>
 </div>

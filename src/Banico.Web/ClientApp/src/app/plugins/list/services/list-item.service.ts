@@ -52,7 +52,7 @@ export class ListItemService extends PluginService {
         listItem.description = description;
 
         let contentItem: ContentItem = listItem.ToContentItem();
-        return this.contentItemService.addOrUpdate(contentItem, '')
+        return this.contentItemService.addOrUpdate(contentItem)
             .map(res => true)
             .catch(this.handleError);
     }

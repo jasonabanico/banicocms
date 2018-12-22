@@ -41,7 +41,7 @@ export class ReplyService extends PluginService {
         reply.text = text;
 
         let contentItem: ContentItem = reply.ToContentItem();
-        return this.contentItemService.addOrUpdate(contentItem, '')
+        return this.contentItemService.addOrUpdate(contentItem)
             .catch(this.handleError);
     }
 

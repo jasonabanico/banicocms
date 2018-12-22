@@ -43,7 +43,7 @@ export class TopicService extends PluginService {
         topic.text = text;
 
         let contentItem: ContentItem = topic.ToContentItem();
-        return this.contentItemService.addOrUpdate(contentItem, '')
+        return this.contentItemService.addOrUpdate(contentItem)
             .catch(this.handleError);
     }
 

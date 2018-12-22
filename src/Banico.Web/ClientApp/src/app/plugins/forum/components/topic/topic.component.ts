@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { TopicService } from '../../services/topic.service';
 import { SubforumService } from '../../services/subforum.service';
+import { ReplyService } from '../../services/reply.service';
 import { Subforum } from '../../entities/subforum';
 import { Reply } from '../../entities/reply';
 
@@ -20,6 +21,7 @@ export class TopicComponent implements OnInit {
   constructor(
     private topicService: TopicService,
     private subforumService: SubforumService,
+    private replyService: ReplyService,
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute
@@ -43,5 +45,8 @@ export class TopicComponent implements OnInit {
 
     this.subforumService.get(topic.subForumId)
     .subscribe(subforum => this.subforum = subforum);
+
+    this.replyService.getReplies(topic.id)
+    .subscribe(replies => this.replies = replies);
   }
 }

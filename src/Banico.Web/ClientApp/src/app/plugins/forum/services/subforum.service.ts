@@ -35,9 +35,10 @@ export class SubforumService extends PluginService {
         subforum.name = name;
         subforum.alias = alias;
         subforum.description = description;
+        subforum.sectionItems = sectionItems;
 
         let contentItem: ContentItem = subforum.ToContentItem();
-        return this.contentItemService.addOrUpdate(contentItem, sectionItems)
+        return this.contentItemService.addOrUpdate(contentItem)
             .map(res => {
                 return true;
             })

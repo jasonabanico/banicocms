@@ -12,7 +12,6 @@ import { DirectoryService } from '../../main/directory.service';
 })
 export class DirectoryFormComponent implements OnInit {
     public directoryItem: DirectoryItem;
-    public contentSectionItems: string;
     private sub: any;
     private isEdit: boolean = false;
 
@@ -35,7 +34,7 @@ export class DirectoryFormComponent implements OnInit {
             }
             if (path) {
                 this.navBarService.initialize('directory', path, '', '/directory');
-                this.contentSectionItems = path;
+                this.directoryItem.sectionItems = path;
             }
         });
     }
@@ -48,7 +47,7 @@ export class DirectoryFormComponent implements OnInit {
     }
 
     public save() {
-        this.directoryService.addOrUpdate(this.directoryItem, this.contentSectionItems)
+        this.directoryService.addOrUpdate(this.directoryItem)
             .subscribe(directoryItem => this.saveDirectoryItemSuccess(directoryItem));
     }
 
