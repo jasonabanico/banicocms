@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-import { Reply } from '../../entities/reply';
 import { ReplyService } from '../../services/reply.service';
+import { ReplyCommentService } from '../../services/reply-comment.service';
+import { Reply } from '../../entities/reply';
+import { ReplyComment } from '../../entities/reply-comment';
 
 @Component({
   selector: 'app-reply',
@@ -11,10 +13,12 @@ import { ReplyService } from '../../services/reply.service';
 })
 export class ReplyComponent {
   public reply: Reply;
+  public replyComments: ReplyComment[];
   private _id: string;
   
   constructor(
-    private replyService: ReplyService
+    private replyService: ReplyService,
+    private replyCommentService: ReplyCommentService
     ) {
   }
 
@@ -22,6 +26,13 @@ export class ReplyComponent {
   set id(id: string) {
     this._id = id;
     this.replyService.get(id)
-    .subscribe(reply => this.reply = reply);
+    .subscribe(reply => this.set(reply));
+  }
+
+  private set(reply: Reply) {
+    this.reply = reply;
+
+    this.replyCommentService.getReplyComments(reply.id)
+    .subscribe(replyComments => this.replyComments = replyComments);
   }
 }

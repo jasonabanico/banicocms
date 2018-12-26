@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReplyCommentService } from '../../services/reply-comment.service';
@@ -21,13 +21,31 @@ export class ReplyCommentFormComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute
-    ) {
+  ) {
+  }
+
+  @Input()
+  set replyId(replyId: string) {
+    this.replyCommentForm.patchValue({
+      replyId: replyId
+    });
   }
 
   ngOnInit() {
   }
 
   public save() {
-    
+    var id = this.replyCommentForm.value['id'];
+    this.replyCommentService.addOrUpdate(
+      id,
+      this.replyCommentForm.value['replyId'],
+      this.replyCommentForm.value['text']
+    )
+    .subscribe(
+      //id => {
+        //this.router.navigate(['/forum/topic/' + id]);
+      //},
+      //errors =>  this.errors = errors
+    );
   }
 }
