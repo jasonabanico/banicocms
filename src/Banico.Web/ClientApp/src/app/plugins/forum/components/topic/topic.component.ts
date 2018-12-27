@@ -42,10 +42,9 @@ export class TopicComponent implements OnInit {
 
   private set(topic: Topic) {
     this.topic = topic;
-
+    this.topicService.setTopicUser(topic);
     this.subforumService.get(topic.subForumId)
     .subscribe(subforum => this.subforum = subforum);
-
     this.replyService.getReplies(topic.id)
     .subscribe(replies => this.replies = replies);
   }

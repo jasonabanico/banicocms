@@ -29,6 +29,14 @@ export class ReplyCommentService extends PluginService {
         });
     }
 
+    public setReplyCommentUser(replyComment: ReplyComment) {
+        var user = this.contentItemService.getProfileById(replyComment.userId)
+        .subscribe(user => {
+            replyComment.username = user.alias;
+            replyComment.avatarHash = user.attribute01;
+        });
+    }
+
     public addOrUpdate(
         id: string,
         replyId: string,

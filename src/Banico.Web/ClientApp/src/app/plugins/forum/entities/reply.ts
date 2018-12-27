@@ -4,12 +4,16 @@ export class Reply {
   id: string;
   text: string;
   topicId: string;
+  userId: string;
+  username: string;
+  avatarHash: string;
 
   constructor(private contentItem: ContentItem) {
     if ((contentItem) && (contentItem.module == 'reply')) {
       this.id = contentItem.id;
       this.text = contentItem.content;
       this.topicId = contentItem.parentId;
+      this.userId = contentItem.createdBy;
     }
   }
 

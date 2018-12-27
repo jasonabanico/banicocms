@@ -14,15 +14,30 @@ export class TopicService extends PluginService {
             return new Topic(item);
         });
     }
-    
+
+    public setTopicUser(topic: Topic) {
+        var user = this.contentItemService.getProfileById(topic.userId)
+        .subscribe(user => {
+            topic.username = user.alias;
+            topic.avatarHash = user.attribute01;
+        });
+    }
+
     public getTopics(subforumId: string): Observable<Topic[]> {
         return this.contentItemService.getAll('', '', '',
         'topic', subforumId, '', '', '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '', true, true)
         .map(items => {
             var topics: Topic[] = new Array<Topic>();
-            items.forEach(function(item: ContentItem) {
-                topics.push(new Topic(item));                
+            items.forEach(item => {
+                var topic = new Topic(item);
+
+                var user = this.contentItemService.getProfileById(item.createdBy)
+                    .subscribe(user => {
+                        topic.username = user.alias;
+                        topic.avatarHash = user.attribute01;
+                        topics.push(topic);                
+                    });
             });
 
             return topics;

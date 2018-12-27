@@ -5,12 +5,16 @@ export class Topic {
   title: string;
   text: string;
   subForumId: string;
+  userId: string;
+  username: string;
+  avatarHash: string;
 
   constructor(private contentItem: ContentItem) {
     if ((contentItem) && (contentItem.module == 'topic')) {
       this.id = contentItem.id;
       this.title = contentItem.name;
       this.text = contentItem.content;
+      this.userId = contentItem.createdBy;
       this.subForumId = contentItem.parentId;
     }
   }

@@ -22,6 +22,11 @@ export class ReplyCommentComponent {
   set id(id: string) {
     this._id = id;
     this.replyCommentService.get(id)
-    .subscribe(replyComment => this.replyComment = replyComment);
+    .subscribe(replyComment => this.set(replyComment));
+  }
+
+  private set(replyComment: ReplyComment) {
+    this.replyComment = replyComment;
+    this.replyCommentService.setReplyCommentUser(replyComment);
   }
 }

@@ -66,6 +66,32 @@ export class ContentItemService {
         });
     }
 
+    public getProfileById(userId: string): Observable<ContentItem> {
+        return this.getAll('', '', '',
+        'profile', '', userId, '', '', '', '', '', '', '', '', '', '', '', '',
+        '', '', '', '', '', '', '', '', '', '', false, false)
+        .map(items => {
+            if (items.length >= 1) {
+                return items[0];
+            } else {
+                return null;
+            }
+        });
+    }
+
+    public getProfileByUsername(alias: string): Observable<ContentItem> {
+        return this.getAll('', '', alias,
+        'profile', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+        '', '', '', '', '', '', '', '', '', '', false, false)
+        .map(items => {
+            if (items.length >= 1) {
+                return items[0];
+            } else {
+                return null;
+            }
+        });
+    }
+
     public getAll(
         id: string,
         name: string,

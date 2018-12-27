@@ -31,7 +31,7 @@ export class ReplyComponent {
 
   private set(reply: Reply) {
     this.reply = reply;
-
+    this.replyService.setReplyUser(reply);
     this.replyCommentService.getReplyComments(reply.id)
     .subscribe(replyComments => this.replyComments = replyComments);
   }

@@ -22,10 +22,18 @@ export class ReplyService extends PluginService {
         .map(items => {
             var replies: Reply[] = new Array<Reply>();
             items.forEach(function(item: ContentItem) {
-                replies.push(new Reply(item));                
+                replies.push(new Reply(item));
             });
 
             return replies;
+        });
+    }
+
+    public setReplyUser(reply: Reply) {
+        var user = this.contentItemService.getProfileById(reply.userId)
+        .subscribe(user => {
+            reply.username = user.alias;
+            reply.avatarHash = user.attribute01;
         });
     }
 
