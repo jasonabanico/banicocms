@@ -59,12 +59,14 @@ export class AccountService extends BaseService {
     }
 
     public register(
+        username: string,
         email: string,
         password: string,
         confirmPassword: string,
         invite: string
     ): Observable<boolean> {
         let body = JSON.stringify({ 
+            username,
             email,
             password,
             confirmPassword ,

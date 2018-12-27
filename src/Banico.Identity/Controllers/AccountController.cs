@@ -47,7 +47,7 @@ namespace Banico.Identity.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserClaimsPrincipalFactory<AppUser> _userClaimsPrincipalFactory;
         private readonly IAntiforgery _antiforgery;
-
+        private readonly IContentItemRepository _contentItemRepository;
         private bool _InviteOnly = false;
 
         public AccountController(
@@ -63,7 +63,8 @@ namespace Banico.Identity.Controllers
             IOptions<JwtIssuerOptions> jwtOptions,
             IHttpContextAccessor httpContextAccessor,
             IUserClaimsPrincipalFactory<AppUser> userClaimsPrincipalFactory,
-            IAntiforgery antiforgery)
+            IAntiforgery antiforgery,
+            IContentItemRepository contentItemRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -78,6 +79,7 @@ namespace Banico.Identity.Controllers
             _httpContextAccessor = httpContextAccessor;
             _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
             _antiforgery = antiforgery;
+            _contentItemRepository = contentItemRepository;
 
             if (_configuration["InviteOnly"] == "true")
             {
@@ -127,6 +129,12 @@ namespace Banico.Identity.Controllers
             return result;
         }
 
+        private async Task<bool> UserExists(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            return user != null;
+        }
+
         //
         // POST: /api/Account/Login
         [HttpPost]
@@ -158,6 +166,7 @@ namespace Banico.Identity.Controllers
                     var tokens = _antiforgery.GetAndStoreTokens(HttpContext);
 
                     var identity = _jwtFactory.GenerateClaimsIdentity(model.Email, user.Id);
+                    var profile = await _contentItemRepository.CreateProfileIfNotExists(user.Id, user.UserName, user.Email);
                     string username = await this.GetUsername();
                     bool isAdmin = await this.IsSuperAdmin();
                     _logger.LogInformation(1, "User logged in.");
@@ -251,6 +260,11 @@ namespace Banico.Identity.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
 
+            if (await this.UserExists(model.Username))
+            {
+                return BadRequest(Errors.AddErrorToModelState("Username", "Username already exists.", ModelState));
+            }
+
             string inviter = string.Empty;
             if ((_InviteOnly) && (!_superAdminService.IsSuperAdminEmail(model.Email)))
             {
@@ -270,7 +284,12 @@ namespace Banico.Identity.Controllers
             
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = model.Email, Email = model.Email, Inviter = inviter };
+                if (string.IsNullOrEmpty(model.Username))
+                {
+                    model.Username = model.Email;
+                }
+
+                var user = new AppUser { UserName = model.Username, Email = model.Email, Inviter = inviter };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

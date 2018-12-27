@@ -47,5 +47,6 @@ namespace Banico.Core.Repositories
         Task<ContentItem> Add(ContentItem item);
         Task<ContentItem> Update(ContentItem item, string userId, bool isAdmin);
         Task<ContentItem> Delete(string id);
+        Task<ContentItem> CreateProfileIfNotExists(string userId, string alias, string email);
     }
 }

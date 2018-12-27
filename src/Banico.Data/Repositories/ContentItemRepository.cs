@@ -7,6 +7,8 @@ using System;
 using Banico.Core.Entities;
 using Banico.Core.Repositories;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Banico.Data.Repositories
 {
@@ -18,7 +20,9 @@ namespace Banico.Data.Repositories
 
         public AppDbContext DbContext { get; set; }
 
-        public ContentItemRepository(AppDbContext dbContext)
+        public ContentItemRepository(
+            AppDbContext dbContext
+        )
         {
             this.DbContext = dbContext;
         }
@@ -440,6 +444,37 @@ namespace Banico.Data.Repositories
             }
 
             return new ContentItem();
+        }
+
+        public async Task<ContentItem> CreateProfileIfNotExists(string userId, string alias, string email)
+        {
+            var profileItems = await this.Get("", "", alias, "profile", "", userId, "",
+                "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", false, false);
+
+            if (profileItems.Count == 0)
+            {
+                ContentItem profileItem = new ContentItem("profile");
+                profileItem.Id = Guid.NewGuid().ToString();
+                profileItem.Alias = alias;
+
+                profileItem.CreatedBy = userId;
+                profileItem.CreatedDate = DateTimeOffset.UtcNow;
+
+                using (var md5 = MD5.Create())
+                {
+                    var result = md5.ComputeHash(Encoding.ASCII.GetBytes(email));
+                    profileItem.Attribute01 = BitConverter.ToString(result).Replace("-", "").ToLower();
+                }
+
+                profileItem = await this.Add(profileItem);
+
+                return profileItem;
+            }
+            else
+            {
+                return profileItems[0];
+            }
         }
     }
 }

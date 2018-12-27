@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
     public submitted: boolean = false;
 
     public registerForm: FormGroup = this.fb.group({
+        username: ['', Validators.required],
         email: ['', Validators.required],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],
@@ -72,6 +73,7 @@ export class RegisterComponent implements OnInit {
         //if (valid) {
             this.isRequesting = true;
             this.accountService.register(
+                this.registerForm.value['username'],
                 this.registerForm.value['email'],
                 this.registerForm.value['password'],
                 this.registerForm.value['confirmPassword'],
