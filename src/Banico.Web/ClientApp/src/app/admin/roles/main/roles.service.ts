@@ -1,7 +1,7 @@
+import {catchError,  map } from 'rxjs/operators';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { BaseService } from '../../../shared/services/base.service';
 import { WindowRefService } from '../../../shared/services/windowref.service';
 import { Role } from '../../../entities/role';
@@ -47,13 +47,13 @@ export class RolesService extends BaseService {
     }
 
     public getAll(): Observable<Role[]> {
-        return this.http.get<Role[]>(this.baseUrl + "api/Roles/GetAll", this.jsonAuthRequestOptions)
-        .catch(this.handleError);
+        return this.http.get<Role[]>(this.baseUrl + "api/Roles/GetAll", this.jsonAuthRequestOptions).pipe(
+        catchError(this.handleError));
     }
 
     public get(id: string): Observable<Role> {
-        return this.http.get<Role>(this.baseUrl + "api/Roles/Get", this.jsonAuthRequestOptions)
-        .catch(this.handleError);
+        return this.http.get<Role>(this.baseUrl + "api/Roles/Get", this.jsonAuthRequestOptions).pipe(
+        catchError(this.handleError));
     }
 
     public addOrUpdate(
@@ -78,9 +78,9 @@ export class RolesService extends BaseService {
         let body = JSON.stringify({ 
             name
         });
-        return this.http.post(this.baseUrl + "api/Roles/Add", body, this.jsonRequestOptions)
-        .map(res => true)
-        .catch(this.handleError);
+        return this.http.post(this.baseUrl + "api/Roles/Add", body, this.jsonRequestOptions).pipe(
+        map(res => true),
+        catchError(this.handleError),);
     }
 
     public update(
@@ -91,16 +91,16 @@ export class RolesService extends BaseService {
             id,
             name
         });
-        return this.http.post(this.baseUrl + "api/Roles/Update", body, this.jsonRequestOptions)
-        .map(res => true)
-        .catch(this.handleError);
+        return this.http.post(this.baseUrl + "api/Roles/Update", body, this.jsonRequestOptions).pipe(
+        map(res => true),
+        catchError(this.handleError),);
     }
 
     public delete(
         id: string
     ): Observable<boolean> {
-        return this.http.post(this.baseUrl + "api/Roles/Delete", id, this.jsonRequestOptions)
-        .map(res => true)
-        .catch(this.handleError);
+        return this.http.post(this.baseUrl + "api/Roles/Delete", id, this.jsonRequestOptions).pipe(
+        map(res => true),
+        catchError(this.handleError),);
     }
 }

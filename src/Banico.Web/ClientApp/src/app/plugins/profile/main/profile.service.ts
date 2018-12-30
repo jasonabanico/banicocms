@@ -1,7 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Profile } from './profile';
-import { Observable } from 'rxjs/Observable';
 import { ORIGIN_URL } from '../../../shared/constants/baseurl.constants';
 
 @Injectable()
@@ -33,8 +34,8 @@ export class ProfileService {
         return this.http
             .post(this.accountUrl + '/GetProfile', data, {
                 headers: headers
-            })
-            .map(this.extractData);
+            }).pipe(
+            map(this.extractData));
             //.catch(this.handleError);
     }
 
@@ -46,8 +47,8 @@ export class ProfileService {
         return this.http
             .post(this.appBaseUrl + '/Get', data, {
                 headers: headers
-            })
-            .map(this.extractData);
+            }).pipe(
+            map(this.extractData));
             //.catch(this.handleError);
     }
     
@@ -59,8 +60,8 @@ export class ProfileService {
         return this.http
             .post(this.appBaseUrl + '/GetByAlias', data, {
                 headers: headers
-            })
-            .map(this.extractData);
+            }).pipe(
+            map(this.extractData));
             //.catch(this.handleError);
     }
 
@@ -72,8 +73,8 @@ export class ProfileService {
         return this.http
             .post(this.accountUrl + '/SetProfile', data, {
                 headers: headers
-            })
-            .map(this.extractData);
+            }).pipe(
+            map(this.extractData));
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),
@@ -88,8 +89,8 @@ export class ProfileService {
         return this.http
             .post(this.appBaseUrl + '/AddOrUpdate', data, {
                 headers: headers
-            })
-            .map(this.extractData);
+            }).pipe(
+            map(this.extractData));
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),

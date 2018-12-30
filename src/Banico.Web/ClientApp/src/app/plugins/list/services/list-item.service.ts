@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { PluginService } from "../../services/plugin.service";
 import { ContentItem } from '../../../entities/content-item';
 import { ListItem } from '../entities/list-item';
@@ -9,31 +10,31 @@ import { HttpHeaders } from '@angular/common/http';
 export class ListItemService extends PluginService {
 
     public get(id: string): Observable<ListItem> {
-        return this.contentItemService.get(id)
-        .map(item => {
+        return this.contentItemService.get(id).pipe(
+        map(item => {
             return new ListItem(item);
-        });
+        }));
     }
     
     public getByAlias(alias: string): Observable<ListItem> {
-        return this.contentItemService.getByAlias(alias)
-        .map(item => {
+        return this.contentItemService.getByAlias(alias).pipe(
+        map(item => {
             return new ListItem(item);
-        });
+        }));
     }
 
     public getListItems(listSetId: string): Observable<ListItem[]> {
         return this.contentItemService.getAll('', '', '',
         'list-item', listSetId, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', false, false)
-        .map(items => {
+        '', '', '', '', '', '', '', '', false, false).pipe(
+        map(items => {
             var listItems: ListItem[] = new Array<ListItem>();
             items.forEach(function(item: ContentItem) {
                 listItems.push(new ListItem(item));                
             });
 
             return listItems;
-        });
+        }));
     }
 
     public addOrUpdate(
@@ -52,9 +53,9 @@ export class ListItemService extends PluginService {
         listItem.description = description;
 
         let contentItem: ContentItem = listItem.ToContentItem();
-        return this.contentItemService.addOrUpdate(contentItem)
-            .map(res => true)
-            .catch(this.handleError);
+        return this.contentItemService.addOrUpdate(contentItem).pipe(
+            map(res => true),
+            catchError(this.handleError));
     }
 
     public delete(listItem: ListItem): Observable<{}> {
@@ -64,8 +65,8 @@ export class ListItemService extends PluginService {
         return this.http
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers
-            })
-            .map(this.extractData);
+            }).pipe(
+            map(this.extractData));
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),

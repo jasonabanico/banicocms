@@ -1,3 +1,4 @@
+import {finalize} from 'rxjs/operators';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -27,8 +28,8 @@ export class ResendConfirmationComponent {
     this.isRequesting = true;
     this.accountService.resendConfirmation(
       this.resendConfirmationForm.value['email']
-    )
-    .finally(() => this.isRequesting = false)
+    ).pipe(
+    finalize(() => this.isRequesting = false))
     .subscribe(
       result  => {
         if (result) {

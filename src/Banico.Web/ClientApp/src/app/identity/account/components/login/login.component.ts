@@ -1,3 +1,4 @@
+import {first} from 'rxjs/operators';
 import { Component, Inject } from '@angular/core';
 import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -55,7 +56,7 @@ export class LoginComponent {
       var result = await this.accountService.login(
         this.loginForm.value['email'],
         this.loginForm.value['password']
-        ).first().toPromise();
+        ).pipe(first()).toPromise();
       if (result) {
         var myResult: any = result;
         this.authService.setToken(myResult.auth_token);

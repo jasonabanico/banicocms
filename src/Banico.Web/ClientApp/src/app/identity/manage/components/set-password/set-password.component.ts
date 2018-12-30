@@ -24,7 +24,7 @@ export class SetPasswordComponent {
         value.newPassword,
         value.confirmPassword
     )
-    .finally(() => this.isRequesting = false)
+    //.finally(() => this.isRequesting = false)
     .subscribe(
       result  => {if (result) {
         this.isSuccessful = true;

@@ -1,7 +1,7 @@
+import {catchError,  map } from 'rxjs/operators';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { BaseService } from '../../../shared/services/base.service';
 import { WindowRefService } from '../../../shared/services/windowref.service';
 import { User } from '../../../entities/user';
@@ -47,13 +47,13 @@ export class UsersService extends BaseService {
     }
 
     public getAll(): Observable<User[]> {
-        return this.http.get<User[]>(this.baseUrl + "api/Users/GetAll", this.jsonAuthRequestOptions)
-        .catch(this.handleError);
+        return this.http.get<User[]>(this.baseUrl + "api/Users/GetAll", this.jsonAuthRequestOptions).pipe(
+        catchError(this.handleError));
     }
 
     public get(id: string): Observable<User> {
-        return this.http.get<User>(this.baseUrl + "api/Users/Get?id="+id, this.jsonAuthRequestOptions)
-        .catch(this.handleError);
+        return this.http.get<User>(this.baseUrl + "api/Users/Get?id="+id, this.jsonAuthRequestOptions).pipe(
+        catchError(this.handleError));
     }
 
     public addOrUpdate(
@@ -98,9 +98,9 @@ export class UsersService extends BaseService {
             alias,
             email
         });
-        return this.http.post(this.baseUrl + "api/Users/Add", body, this.jsonAuthRequestOptions)
-        .map(res => true)
-        .catch(this.handleError);
+        return this.http.post(this.baseUrl + "api/Users/Add", body, this.jsonAuthRequestOptions).pipe(
+        map(res => true),
+        catchError(this.handleError),);
     }
 
     public update(
@@ -119,16 +119,16 @@ export class UsersService extends BaseService {
             alias,
             email
         });
-        return this.http.post(this.baseUrl + "api/Users/Update", body, this.jsonAuthRequestOptions)
-        .map(res => true)
-        .catch(this.handleError);
+        return this.http.post(this.baseUrl + "api/Users/Update", body, this.jsonAuthRequestOptions).pipe(
+        map(res => true),
+        catchError(this.handleError),);
     }
 
     public delete(
         id: string
     ): Observable<boolean> {
-        return this.http.post(this.baseUrl + "api/Users/Delete", id, this.jsonAuthRequestOptions)
-        .map(res => true)
-        .catch(this.handleError);
+        return this.http.post(this.baseUrl + "api/Users/Delete", id, this.jsonAuthRequestOptions).pipe(
+        map(res => true),
+        catchError(this.handleError),);
     }
 }

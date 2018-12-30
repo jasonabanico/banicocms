@@ -40,7 +40,7 @@ public changePassword() {
     this.changePasswordForm.value['newPassword'],
     this.changePasswordForm.value['confirmPassword']
   )
-  .finally(() => this.isRequesting = false)
+  //.finally(() => this.isRequesting = false)
   .subscribe(
     result  => {
       this.isSuccessful = true;

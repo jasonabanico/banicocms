@@ -1,7 +1,7 @@
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
 import { ContentItemsQuery } from './content-item.queries';
@@ -43,53 +43,53 @@ export class ContentItemService {
     public get(id: string): Observable<ContentItem> {
         return this.getAll(id, '', '',
         '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false)
-        .map(items => {
+        '', '', '', '', '', '', '', '', '', '', false, false).pipe(
+        map(items => {
             if (items.length >= 1) {
                 return items[0];
             } else {
                 return null;
             }
-        });
+        }));
     }
 
     public getByAlias(alias: string): Observable<ContentItem> {
         return this.getAll('', '', alias,
         '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false)
-        .map(items => {
+        '', '', '', '', '', '', '', '', '', '', false, false).pipe(
+        map(items => {
             if (items.length >= 1) {
                 return items[0];
             } else {
                 return null;
             }
-        });
+        }));
     }
 
     public getProfileById(userId: string): Observable<ContentItem> {
         return this.getAll('', '', '',
         'profile', '', userId, '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false)
-        .map(items => {
+        '', '', '', '', '', '', '', '', '', '', false, false).pipe(
+        map(items => {
             if (items.length >= 1) {
                 return items[0];
             } else {
                 return null;
             }
-        });
+        }));
     }
 
     public getProfileByUsername(alias: string): Observable<ContentItem> {
         return this.getAll('', '', alias,
         'profile', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false)
-        .map(items => {
+        '', '', '', '', '', '', '', '', '', '', false, false).pipe(
+        map(items => {
             if (items.length >= 1) {
                 return items[0];
             } else {
                 return null;
             }
-        });
+        }));
     }
 
     public getAll(
@@ -198,8 +198,8 @@ export class ContentItemService {
                 attribute19: contentItem.attribute19,
                 attribute20: contentItem.attribute20
             }
-        })
-        .map(result => result.data.addOrUpdateContentItem.id);
+        }).pipe(
+        map(result => result.data.addOrUpdateContentItem.id));
 
         return result;
             //.subscribe({
@@ -213,6 +213,6 @@ export class ContentItemService {
         // in a real world app, we may send the server to some remote logging infrastructure
         // instead of just logging it to the console
         console.error(error);
-        return Observable.throw(error.json() || 'Server error');
+        return observableThrowError(error.json() || 'Server error');
     }
 }

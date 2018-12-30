@@ -1,6 +1,6 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { BaseService } from '../../shared/services/base.service';
 import { ContentItemService } from './content-item.service';
 import { WindowRefService } from '../../shared/services/windowref.service';

@@ -1,3 +1,5 @@
+
+import {first} from 'rxjs/operators';
 import { Injectable, Inject } from '@angular/core';
 import { NavBarItem } from '../../entities/nav-bar-item';
 import { SectionItem } from '../../entities/section-item';
@@ -38,7 +40,7 @@ export class NavBarService {
             section.name = adminSection;
             sections.push(section);
         } else {
-            sections = await this.sectionsService.getSections('', module, '').first().toPromise();
+            sections = await this.sectionsService.getSections('', module, '').pipe(first()).toPromise();
         }
 
         this.initializeNavBarItems(sections);
@@ -69,13 +71,13 @@ export class NavBarService {
 
         if (sectionPathUrl) {
             var sectionItems = await this.sectionsService.getSectionItemByPath(sectionName + this.TYPE_DELIM + 
-                sectionPathUrl).first().toPromise();
+                sectionPathUrl).pipe(first()).toPromise();
             await this.setNavBarItem(navBarItem, sectionItems[0]);
         }
 
         if (!sectionPathUrl) {
             sectionItems = await this.sectionsService.getSectionItems('', sectionName, 
-                '', '', '', '', true).first().toPromise();
+                '', '', '', '', true).pipe(first()).toPromise();
             navBarItem.childSectionItems = this.cleanChildSectionItems(navBarItem, sectionItems);
         }
 
@@ -102,7 +104,7 @@ export class NavBarService {
         this.setPathUrls(navBarItem, sectionPathUrl);
 
         // set child section items
-        var sectionItems = await this.sectionsService.getSectionItems('', '', '', '', '', navBarItem.sectionItem.id, false).first().toPromise();
+        var sectionItems = await this.sectionsService.getSectionItems('', '', '', '', '', navBarItem.sectionItem.id, false).pipe(first()).toPromise();
         navBarItem.childSectionItems = this.cleanChildSectionItems(navBarItem, sectionItems);
     }
 

@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Contact } from './contact';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { PluginService } from '../../services/plugin.service';
 import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
@@ -8,24 +9,24 @@ import { HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class ContactService extends PluginService {
     public get(id: string): Observable<Contact> {
-        return this.contentItemService.get(id)
-        .map(item => {
+        return this.contentItemService.get(id).pipe(
+        map(item => {
             return new Contact(item);
-        });
+        }));
     }
     
     public getByAlias(alias: string): Observable<Contact> {
-        return this.contentItemService.getByAlias(alias)
-        .map(item => {
+        return this.contentItemService.getByAlias(alias).pipe(
+        map(item => {
             return new Contact(item);
-        });
+        }));
     }
 
     public addOrUpdate(contact: Contact): Observable<Contact> {
         let contentItem: ContentItem = contact.ToContentItem();
-        return this.contentItemService.addOrUpdate(contentItem)
-            .map(contentItem => new Contact(contentItem))
-            .catch(this.handleError);
+        return this.contentItemService.addOrUpdate(contentItem).pipe(
+            map(contentItem => new Contact(contentItem)),
+            catchError(this.handleError));
     }
 
     public deleteContact(contact: Contact): Observable<{}> {
@@ -35,8 +36,8 @@ export class ContactService extends PluginService {
         return this.http
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers
-            })
-            .map(this.extractData);
+            }).pipe(
+            map(this.extractData));
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),
@@ -51,8 +52,8 @@ export class ContactService extends PluginService {
         return this.http
             .post(this.appBaseUrl + '/SendContactEmail', data, {
                 headers: headers
-            })
-            .map(this.extractData);
+            }).pipe(
+            map(this.extractData));
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),

@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ConfigsQuery } from './configs.queries';
@@ -25,14 +25,14 @@ export class ConfigsService {
         module: string,
         name: string
     ): Observable<Config> {
-        return this.getAll(id, module, name)
-        .map(items => {
+        return this.getAll(id, module, name).pipe(
+        map(items => {
             if (items.length >= 1) {
                 return items[0];
             } else {
                 return null;
             }
-        });
+        }));
     }
 
     public getAll(

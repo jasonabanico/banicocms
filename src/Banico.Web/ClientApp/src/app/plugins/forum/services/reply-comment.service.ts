@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { PluginService } from "../../services/plugin.service";
 import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
@@ -9,24 +10,24 @@ import { ReplyComment } from '../entities/reply-comment';
 export class ReplyCommentService extends PluginService {
 
     public get(id: string): Observable<ReplyComment> {
-        return this.contentItemService.get(id)
-        .map(item => {
+        return this.contentItemService.get(id).pipe(
+        map(item => {
             return new ReplyComment(item);
-        });
+        }));
     }
     
     public getReplyComments(replyId: string): Observable<ReplyComment[]> {
         return this.contentItemService.getAll('', '', '',
         'reply-comment', replyId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true)
-        .map(items => {
+        '', '', '', '', '', '', '', '', '', '', true, true).pipe(
+        map(items => {
             var replyComments: ReplyComment[] = new Array<ReplyComment>();
             items.forEach(function(item: ContentItem) {
                 replyComments.push(new ReplyComment(item));                
             });
 
             return replyComments;
-        });
+        }));
     }
 
     public setReplyCommentUser(replyComment: ReplyComment) {
@@ -49,8 +50,8 @@ export class ReplyCommentService extends PluginService {
         replyComment.text = text;
 
         let contentItem: ContentItem = replyComment.ToContentItem();
-        return this.contentItemService.addOrUpdate(contentItem)
-            .catch(this.handleError);
+        return this.contentItemService.addOrUpdate(contentItem).pipe(
+            catchError(this.handleError));
     }
 
     public delete(replyComment: ReplyComment): Observable<{}> {
@@ -60,8 +61,8 @@ export class ReplyCommentService extends PluginService {
         return this.http
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers
-            })
-            .map(this.extractData);
+            }).pipe(
+            map(this.extractData));
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),

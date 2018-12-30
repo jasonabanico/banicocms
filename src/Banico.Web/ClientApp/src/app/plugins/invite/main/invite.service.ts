@@ -1,7 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Invite } from './invite';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ORIGIN_URL } from '../../../shared/constants/baseurl.constants';
 
 @Injectable()
@@ -30,8 +31,8 @@ export class InviteService {
         return this.http
             .post(this.inviteUrl + '/Add', data, {
                 headers: headers
-            })
-            .map(this.extractData);
+            }).pipe(
+            map(this.extractData));
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),

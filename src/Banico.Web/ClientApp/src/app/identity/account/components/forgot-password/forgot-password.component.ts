@@ -1,3 +1,4 @@
+import {finalize} from 'rxjs/operators';
 import { Component } from '@angular/core';
 import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -27,8 +28,8 @@ export class ForgotPasswordComponent {
     this.isRequesting = true;
     this.accountService.forgotPassword(
       this.forgotPasswordForm.value['email']
-    )
-    .finally(() => this.isRequesting = false)
+    ).pipe(
+    finalize(() => this.isRequesting = false))
     .subscribe(
       result  => {
         this.isSuccessful = true;

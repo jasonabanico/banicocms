@@ -1,3 +1,4 @@
+import {finalize, filter} from 'rxjs/operators';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../../main/account.service';
@@ -20,8 +21,8 @@ export class ConfirmEmailComponent {
   ) { }
 
   ngOnInit() {
-    this.sub = this.route.queryParams
-      .filter(params => params.userId)
+    this.sub = this.route.queryParams.pipe(
+      filter(params => params.userId))
       .subscribe(params => {
         var userId = params.userId;
         var code = params.code;
@@ -38,8 +39,8 @@ export class ConfirmEmailComponent {
     this.accountService.confirmEmail(
       userId,
       code
-    )
-    .finally(() => this.isRequesting = false)
+    ).pipe(
+    finalize(() => this.isRequesting = false))
     .subscribe(
       result  => {
         if (result){

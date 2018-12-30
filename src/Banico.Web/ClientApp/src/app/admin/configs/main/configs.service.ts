@@ -1,8 +1,8 @@
+import {catchError,  map } from 'rxjs/operators';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { WindowRefService } from '../../../shared/services/windowref.service';
 import { BaseService } from '../../../shared/services/base.service';
@@ -53,14 +53,14 @@ export class ConfigsService extends BaseService {
     }
 
     public initialized(): Observable<boolean> {
-        return this.get('', 'initialized', '')
-        .map(item => item.value === 'y');
+        return this.get('', 'initialized', '').pipe(
+        map(item => item.value === 'y'));
     }
 
     public setInitialSettings(): Observable<boolean> {
-        return this.http.post(this.baseUrl + "api/Config/SetInitialSettings", {}, this.jsonAuthRequestOptions)
-        .map(res => true)
-        .catch(this.handleError);
+        return this.http.post(this.baseUrl + "api/Config/SetInitialSettings", {}, this.jsonAuthRequestOptions).pipe(
+        map(res => true),
+        catchError(this.handleError),);
     }
 
     public get(
@@ -68,14 +68,14 @@ export class ConfigsService extends BaseService {
         name: string,
         module: string
     ): Observable<Config> {
-        return this.getAll(id, name, module)
-        .map(items => {
+        return this.getAll(id, name, module).pipe(
+        map(items => {
             if (items.length >= 1) {
                 return items[0];
             } else {
                 return null;
             }
-        });
+        }));
     }
 
     public getAll(
@@ -112,7 +112,7 @@ export class ConfigsService extends BaseService {
                 module: module,
                 value: value
             }
-        }).map(this.addResult);
+        }).pipe(map(this.addResult));
 
         return result;
             //.subscribe({

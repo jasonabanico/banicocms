@@ -1,3 +1,4 @@
+import {finalize} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -78,8 +79,8 @@ export class RegisterComponent implements OnInit {
                 this.registerForm.value['password'],
                 this.registerForm.value['confirmPassword'],
                 this.registerForm.value['code']
-            )
-            .finally(() => this.isRequesting = false)
+            ).pipe(
+            finalize(() => this.isRequesting = false))
             .subscribe(
                 result  => {
                     this.isRequesting = false;

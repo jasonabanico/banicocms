@@ -63,13 +63,14 @@ export class ListSetFormComponent implements OnInit {
             this.listSetForm.value['description'],
             this.listSetForm.value['sectionItems'],
         )
-        .finally(() => {
-            this.isSuccessful = true;
-            this.router.navigate(['/list/list-set/' + alias]);
-        })
+        //.finally(() => {
+        //    this.isSuccessful = true;
+        //    this.router.navigate(['/list/list-set/' + alias]);
+        //})
         .subscribe(
             result  => {
                 this.isSuccessful = true;
+                this.router.navigate(['/list/list-set/' + alias]);
             },
             errors =>  {
                 this.errors = errors

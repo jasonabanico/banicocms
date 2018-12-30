@@ -1,3 +1,4 @@
+import {finalize} from 'rxjs/operators';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -47,8 +48,8 @@ export class ResetPasswordComponent {
       this.resetPasswordForm.value['code'],
       this.resetPasswordForm.value['password'],
       this.resetPasswordForm.value['confirmPassword']
-    )
-    .finally(() => this.isRequesting = false)
+    ).pipe(
+    finalize(() => this.isRequesting = false))
     .subscribe(
       result  => {if (result){
           this.router.navigate(

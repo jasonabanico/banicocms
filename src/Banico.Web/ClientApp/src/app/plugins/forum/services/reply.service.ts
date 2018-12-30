@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { PluginService } from "../../services/plugin.service";
 import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
@@ -9,24 +10,24 @@ import { Reply } from '../entities/reply';
 export class ReplyService extends PluginService {
 
     public get(id: string): Observable<Reply> {
-        return this.contentItemService.get(id)
-        .map(item => {
+        return this.contentItemService.get(id).pipe(
+        map(item => {
             return new Reply(item);
-        });
+        }));
     }
     
     public getReplies(topicId: string): Observable<Reply[]> {
         return this.contentItemService.getAll('', '', '',
         'reply', topicId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true)
-        .map(items => {
+        '', '', '', '', '', '', '', '', '', '', true, true).pipe(
+        map(items => {
             var replies: Reply[] = new Array<Reply>();
             items.forEach(function(item: ContentItem) {
                 replies.push(new Reply(item));
             });
 
             return replies;
-        });
+        }));
     }
 
     public setReplyUser(reply: Reply) {
@@ -49,8 +50,8 @@ export class ReplyService extends PluginService {
         reply.text = text;
 
         let contentItem: ContentItem = reply.ToContentItem();
-        return this.contentItemService.addOrUpdate(contentItem)
-            .catch(this.handleError);
+        return this.contentItemService.addOrUpdate(contentItem).pipe(
+            catchError(this.handleError));
     }
 
     public delete(reply: Reply): Observable<{}> {
@@ -60,8 +61,8 @@ export class ReplyService extends PluginService {
         return this.http
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers
-            })
-            .map(this.extractData);
+            }).pipe(
+            map(this.extractData));
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),

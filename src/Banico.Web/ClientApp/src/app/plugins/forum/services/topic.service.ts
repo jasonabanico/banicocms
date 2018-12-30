@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { PluginService } from "../../services/plugin.service";
 import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
@@ -9,10 +10,10 @@ import { Topic } from '../entities/topic';
 export class TopicService extends PluginService {
 
     public get(id: string): Observable<Topic> {
-        return this.contentItemService.get(id)
-        .map(item => {
+        return this.contentItemService.get(id).pipe(
+        map(item => {
             return new Topic(item);
-        });
+        }));
     }
 
     public setTopicUser(topic: Topic) {
@@ -26,8 +27,8 @@ export class TopicService extends PluginService {
     public getTopics(subforumId: string): Observable<Topic[]> {
         return this.contentItemService.getAll('', '', '',
         'topic', subforumId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true)
-        .map(items => {
+        '', '', '', '', '', '', '', '', '', '', true, true).pipe(
+        map(items => {
             var topics: Topic[] = new Array<Topic>();
             items.forEach(item => {
                 var topic = new Topic(item);
@@ -41,7 +42,7 @@ export class TopicService extends PluginService {
             });
 
             return topics;
-        });
+        }));
     }
 
     public addOrUpdate(
@@ -58,8 +59,8 @@ export class TopicService extends PluginService {
         topic.text = text;
 
         let contentItem: ContentItem = topic.ToContentItem();
-        return this.contentItemService.addOrUpdate(contentItem)
-            .catch(this.handleError);
+        return this.contentItemService.addOrUpdate(contentItem).pipe(
+            catchError(this.handleError));
     }
 
     public delete(topic: Topic): Observable<{}> {
@@ -69,8 +70,8 @@ export class TopicService extends PluginService {
         return this.http
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers
-            })
-            .map(this.extractData);
+            }).pipe(
+            map(this.extractData));
             //.subscribe({
                 //next: x => console.log('Observer got a next value: ' + x),
                 //error: err => alert(JSON.stringify(err)),

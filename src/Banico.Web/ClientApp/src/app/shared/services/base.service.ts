@@ -1,7 +1,7 @@
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Rx';
 import { WindowRefService } from './windowref.service';
 
 export abstract class BaseService {  
@@ -31,13 +31,13 @@ export abstract class BaseService {
 
           // either applicationError in header or model error in body
           if (applicationError) {
-            return Observable.throw(applicationError);
+            return observableThrowError(applicationError);
           }
     
           var modelStateErrors: string = '';
           var serverError = error.error;
     
-          return Observable.throw(serverError);
+          return observableThrowError(serverError);
           // if (!serverError.type) {
           //   for (var key in serverError) {
           //     if (serverError[key])

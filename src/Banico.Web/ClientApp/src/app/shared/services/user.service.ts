@@ -1,3 +1,4 @@
+import {map, catchError} from 'rxjs/operators';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 
@@ -6,8 +7,7 @@ import { ConfigService } from '../utils/config.service';
 
 import {BaseService} from "./base.service";
 
-import { Observable } from 'rxjs/Rx';
-import { BehaviorSubject } from 'rxjs/Rx'; 
+import { Observable ,  BehaviorSubject } from 'rxjs'; 
 
 // Add the RxJS Observable operators we need in this app.
 import '../../rxjs-operators';
@@ -51,9 +51,9 @@ export class UserService extends BaseService {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     let options = { headers: headers };
 
-    return this.http.post(this.baseUrl + "/accounts", body, options)
-      .map(res => true)
-      .catch(this.handleError);
+    return this.http.post(this.baseUrl + "/accounts", body, options).pipe(
+      map(res => true),
+      catchError(this.handleError),);
   }  
 
   public login(
@@ -70,15 +70,15 @@ export class UserService extends BaseService {
         password 
       }),{ 
         headers 
-      })
+      }).pipe(
       //.map(res => res.json())
-      .map(res => {
+      map(res => {
         var result: any = res;
         this.authService.setToken(result.auth_token);
         this.loggedIn = true;
         return true;
-      })
-      .catch(this.handleError);
+      }),
+      catchError(this.handleError),);
   }
 
   public logout() {
@@ -94,16 +94,16 @@ export class UserService extends BaseService {
     let body = JSON.stringify({ accessToken });  
     return this.http
       .post(
-      this.baseUrl + '/externalauth/facebook', body, { headers })
+      this.baseUrl + '/externalauth/facebook', body, { headers }).pipe(
       //.map(res => res.json())
-      .map(res => {
+      map(res => {
         var result: any = res;
         this.authService.setToken(result.auth_token);
         this.loggedIn = true;
 
         return true;
-      })
-      .catch(this.handleError);
+      }),
+      catchError(this.handleError),);
   }
 }
 

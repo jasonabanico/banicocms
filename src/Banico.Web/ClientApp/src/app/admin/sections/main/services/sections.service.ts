@@ -1,7 +1,7 @@
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
 import { SectionsQuery } from './sections.queries';
@@ -95,7 +95,7 @@ export class SectionsService {
                 name: name,
                 modules: modules
             }
-        }).map(this.saveResult);
+        }).pipe(map(this.saveResult));
 
         return result;
             //.subscribe({
@@ -215,7 +215,7 @@ export class SectionsService {
                 name: encodeURIComponent(name),
                 alias: alias
             }
-        }).map(this.saveResult);
+        }).pipe(map(this.saveResult));
 
         return result;
             //.subscribe({
@@ -229,6 +229,6 @@ export class SectionsService {
         // in a real world app, we may send the server to some remote logging infrastructure
         // instead of just logging it to the console
         console.error(error);
-        return Observable.throw(error.json() || 'Server error');
+        return observableThrowError(error.json() || 'Server error');
     }
 }

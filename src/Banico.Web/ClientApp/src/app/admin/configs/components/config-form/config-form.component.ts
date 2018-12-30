@@ -1,3 +1,4 @@
+import {finalize} from 'rxjs/operators';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -59,8 +60,8 @@ export class ConfigFormComponent implements OnInit {
             this.configForm.value['name'],
             this.configForm.value['module'],
             this.configForm.value['value']
-        )
-        .finally(() => this.isRequesting = false)
+        ).pipe(
+        finalize(() => this.isRequesting = false))
         .subscribe(
         result  => {
             this.isSuccessful = true;

@@ -1,3 +1,4 @@
+import {finalize} from 'rxjs/operators';
 import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -53,8 +54,8 @@ export class RoleFormComponent {
     this.rolesService.addOrUpdate(
       this.roleForm.value['id'],
       this.roleForm.value['name']
-    )
-    .finally(() => this.isRequesting = false)
+    ).pipe(
+    finalize(() => this.isRequesting = false))
     .subscribe(
       result  => {
         this.isSuccessful = true;

@@ -1,3 +1,4 @@
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -22,8 +23,8 @@ export class AuthGuard implements CanActivate {
     let module = route.data["module"] as string;
     let url: string = state.url;
 
-    return this.getConfig(module)
-      .map(
+    return this.getConfig(module).pipe(
+      map(
         configValue => {
           var result = false;
           switch (configValue) {
@@ -47,18 +48,18 @@ export class AuthGuard implements CanActivate {
 
           return result;
         }
-      );
+      ));
   }
 
   private getConfig(module: string): Observable<string> {
-    return this.configsService.get('', module, 'canActivate')
-      .map(config => {
+    return this.configsService.get('', module, 'canActivate').pipe(
+      map(config => {
         if (config) {
           return config.value
         } else {
           return '';
         }
-      });
+      }));
   }
 
   private checkLogin(url: string): boolean {

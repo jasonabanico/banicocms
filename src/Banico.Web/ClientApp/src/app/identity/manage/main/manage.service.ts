@@ -1,7 +1,8 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { BaseService } from "../../../shared/services/base.service";
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { JSONP_ERR_NO_CALLBACK } from '@angular/common/http/src/jsonp';
 import { WindowRefService } from '../../../shared/services/windowref.service';
 import { AuthService } from '../../../shared/services/auth.service';
@@ -31,9 +32,9 @@ export class ManageService extends BaseService {
             newPassword,
             confirmPassword 
         });
-        return this.http.post(this.baseUrl + "api/Manage/ChangePassword", body, this.jsonAuthRequestOptions)
-        .map(res => true)
-        .catch(this.handleError);
+        return this.http.post(this.baseUrl + "api/Manage/ChangePassword", body, this.jsonAuthRequestOptions).pipe(
+        map(res => true),
+        catchError(this.handleError));
     }
 
     public setPassword(
@@ -44,8 +45,8 @@ export class ManageService extends BaseService {
             newPassword,
             confirmPassword 
         });
-        return this.http.post(this.baseUrl + "api/Account/SetPassword", body, this.jsonRequestOptions)
-        .map(res => true)
-        .catch(this.handleError);
+        return this.http.post(this.baseUrl + "api/Account/SetPassword", body, this.jsonRequestOptions).pipe(
+        map(res => true),
+        catchError(this.handleError));
     }
 }

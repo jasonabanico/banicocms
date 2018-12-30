@@ -1,4 +1,5 @@
-﻿import { Component, OnInit, Inject } from '@angular/core';
+import {finalize} from 'rxjs/operators';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SectionsService } from '../../main/services/sections.service';
@@ -47,8 +48,8 @@ export class SectionsAdminComponent implements OnInit {
             this.sectionForm.value['id'],
             this.sectionForm.value['name'],
             this.sectionForm.value['modules']
-        )
-        .finally(() => this.isRequesting = false)
+        ).pipe(
+        finalize(() => this.isRequesting = false))
         .subscribe(
         result  => {
             this.isSuccessful = true;
