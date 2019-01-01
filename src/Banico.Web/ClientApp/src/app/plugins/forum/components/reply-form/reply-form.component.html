@@ -1,26 +1,46 @@
 <form [formGroup]="replyForm" novalidate (ngSubmit)="save()">
-  <input type="hidden"
-    id="id" 
-    name="id"
-    formControlName="id" />
-  <input type="hidden"
-    id="topicId" 
-    name="topicId"
-    formControlName="topicId" />
-  <div class="form-group">
-    <div class="col-md-10">
-        <input 
+  <div class="card">
+    <div class="card-header">
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item px-2">
+          <img src="https://www.gravatar.com/avatar/{{avatarHash}}?size=40&d=mp" />
+        </li>
+        <li class="nav-item">
+          <div class="h5 m-0">@{{username}}</div>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <input type="hidden"
+        id="id" 
+        name="id"
+        formControlName="id" />
+      <input type="hidden"
+        id="topicId" 
+        name="topicId"
+        formControlName="topicId" />
+      <div class="form-group">
+        <div class="col-md-10">
+          <input 
             class="form-control" 
             id="text" 
             name="text"
             type="text"
             formControlName="text"
             value="text" />
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <button type="submit" class="btn btn-primary" value="save">Post Reply</button>
-    <button *ngIf="isEdit" type="button" class="btn btn-warning" (click)="cancel()">Cancel</button>
+    <div class="card-footer">
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item">
+          <button type="submit" class="btn btn-primary btn-sm" value="save">Save</button>
+        </li>
+        <li class="nav-item">
+          <button *ngIf="isEdit" type="button" class="btn btn-danger btn-sm" (click)="cancel()">Cancel</button>
+        </li>
+      </ul>
+    </div>
   </div>
 </form>
 

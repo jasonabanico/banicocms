@@ -6,6 +6,7 @@ import * as toastr from 'toastr';
 import { AccountService } from '../../main/account.service';
 import { WindowRefService } from '../../../../shared/services/windowref.service';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { ContentItemService } from '../../../../plugins/services/content-item.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { combineLatest } from 'rxjs';
 
@@ -27,6 +28,7 @@ export class LoginComponent {
 
   constructor(
     @Inject(WindowRefService) private windowRefService: WindowRefService,
+    private contentItemService: ContentItemService,
     private authService: AuthService,
     private accountService: AccountService,
     private router: Router,
@@ -61,8 +63,8 @@ export class LoginComponent {
         var myResult: any = result;
         this.authService.setToken(myResult.auth_token);
         this.authService.setUserId(myResult.id);
-        this.authService.setUserName(myResult.username);
         this.authService.setIsAdmin(myResult.is_admin);
+        this.getProfile(myResult.id);
         this.router.navigate([this.returnUrl]);
       }
     }
@@ -71,4 +73,12 @@ export class LoginComponent {
     }
     this.isRequesting = false;
   }
+
+  private getProfile(id: string) {
+    this.contentItemService.getProfileById(id)
+    .subscribe(user => {
+      this.authService.setUserName(user.alias);
+      this.authService.setAvatarHash(user.attribute01);
+  });
+}
 }

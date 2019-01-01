@@ -8,6 +8,7 @@ export abstract class BaseService {
   protected readonly TOKEN_NAME = 'auth_token';
   protected readonly USER_ID = 'user_id';
   protected readonly USER_NAME = 'username';
+  protected readonly AVATAR_HASH = 'avatar_hash';
   protected readonly IS_ADMIN = 'is_admin';
 
   protected localStorage: any;

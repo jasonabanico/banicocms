@@ -1,9 +1,28 @@
-<img src="https://www.gravatar.com/avatar/{{reply?.avatarHash}}?size=80&d=mp" />
 <ng-container *ngIf="!isEdit">
-    {{reply?.text}}
-    <br />
-    by {{reply?.username}}
-  <a href="javascript:;" (click)="edit()">Edit</a> | 
+  <div class="card">
+    <div class="card-header">
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item px-2">
+          <img src="https://www.gravatar.com/avatar/{{reply?.avatarHash}}?size=40&d=mp" />
+        </li>
+        <li class="nav-item">
+            <div class="h5 m-0">@{{reply?.username}}</div>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <p clss="card-text">
+        {{reply?.text}}
+      </p>
+    </div>
+    <div class="card-footer">
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item">
+          <button class="btn btn-primary btn-sm" (click)="edit()">Edit</button>
+        </li>
+      </ul>
+    </div>
+  </div>
 </ng-container>
 <app-reply-form *ngIf="isEdit" [id]="reply?.id" (saved)="onSave($event)" (cancelled)="onCancel($event)"></app-reply-form>
 <a href="javascript:;">Comments</a>

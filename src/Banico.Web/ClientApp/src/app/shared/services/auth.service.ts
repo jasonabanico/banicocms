@@ -39,6 +39,17 @@ export class AuthService extends BaseService {
         return this.localStorage.getItem(this.USER_NAME);
     }
 
+    public setAvatarHash(avatarHash: string) {
+        if (this.localStorage) {
+            return this.localStorage.setItem(this.AVATAR_HASH, avatarHash);
+        }
+    }
+    
+    public getAvatarHash(): string {
+        if (!this.localStorage) return '';
+        return this.localStorage.getItem(this.AVATAR_HASH);
+    }
+
     public getToken(): string {
         if (!this.localStorage) return '';
         return this.localStorage.getItem(this.TOKEN_NAME);

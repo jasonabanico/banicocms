@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../../../shared/services/auth.service';
 import { ReplyService } from '../../services/reply.service';
 import { Reply } from '../../entities/reply';
 
@@ -11,6 +12,8 @@ import { Reply } from '../../entities/reply';
 })
 export class ReplyFormComponent implements OnInit {
   public isEdit: boolean = false;
+  public username: string;
+  public avatarHash: string;
 
   public replyForm: FormGroup = this.fb.group({
     id: ['', Validators.required],
@@ -20,6 +23,7 @@ export class ReplyFormComponent implements OnInit {
 
   constructor(
     private replyService: ReplyService,
+    private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute
@@ -27,6 +31,8 @@ export class ReplyFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.username = this.authService.getUserName();
+    this.avatarHash = this.authService.getAvatarHash();
   }
 
   @Input()
