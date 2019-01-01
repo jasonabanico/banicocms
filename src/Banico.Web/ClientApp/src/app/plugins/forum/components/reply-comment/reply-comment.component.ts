@@ -12,7 +12,8 @@ import { ReplyCommentService } from '../../services/reply-comment.service';
 export class ReplyCommentComponent {
   public replyComment: ReplyComment;
   private _id: string;
-  
+  public isEdit: boolean;
+
   constructor(
     private replyCommentService: ReplyCommentService
     ) {
@@ -28,5 +29,19 @@ export class ReplyCommentComponent {
   private set(replyComment: ReplyComment) {
     this.replyComment = replyComment;
     this.replyCommentService.setReplyCommentUser(replyComment);
+    this.isEdit = false;
+  }
+
+  public edit() {
+    this.isEdit = true;
+  }
+
+  public onSave(text: string) {
+    this.replyComment.text = text;
+    this.isEdit = false;
+  }
+
+  public onCancel() {
+    this.isEdit = false;
   }
 }

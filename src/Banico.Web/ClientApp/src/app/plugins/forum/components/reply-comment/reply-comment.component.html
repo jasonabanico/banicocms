@@ -1,5 +1,8 @@
-<p>
+<img src="https://www.gravatar.com/avatar/{{replyComment?.avatarHash}}?size=40&d=mp" />
+<ng-container *ngIf="!isEdit">
   {{replyComment?.text}}
   <br />
   by {{replyComment?.username}}
-</p>
+  <a href="javascript:;" (click)="edit()">Edit</a>
+</ng-container>
+<app-reply-comment-form *ngIf="isEdit" [id]="replyComment?.id" (saved)="onSave($event)" (cancelled)="onCancel($event)"></app-reply-comment-form>
