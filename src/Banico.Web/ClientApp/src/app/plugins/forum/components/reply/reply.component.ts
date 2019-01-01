@@ -15,6 +15,7 @@ export class ReplyComponent {
   public reply: Reply;
   public replyComments: ReplyComment[];
   private _id: string;
+  public isEdit: boolean;
   
   constructor(
     private replyService: ReplyService,
@@ -34,5 +35,19 @@ export class ReplyComponent {
     this.replyService.setReplyUser(reply);
     this.replyCommentService.getReplyComments(reply.id)
     .subscribe(replyComments => this.replyComments = replyComments);
+    this.isEdit = false;
+  }
+
+  public edit() {
+    this.isEdit = true;
+  }
+
+  public onSave(text: string) {
+    this.reply.text = text;
+    this.isEdit = false;
+  }
+
+  public onCancel() {
+    this.isEdit = false;
   }
 }

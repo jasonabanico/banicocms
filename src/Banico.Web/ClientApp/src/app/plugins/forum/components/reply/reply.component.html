@@ -1,8 +1,10 @@
-<p>
-  {{reply?.text}}
-  <br />
-  by {{reply?.username}}
-</p>
+<ng-container *ngIf="!isEdit">
+    {{reply?.text}}
+    <br />
+    by {{reply?.username}}
+  <a href="javascript:;" (click)="edit()">Edit</a> | 
+</ng-container>
+<app-reply-form *ngIf="isEdit" [id]="reply?.id" (saved)="onSave($event)" (cancelled)="onCancel($event)"></app-reply-form>
 <a href="javascript:;">Comments</a>
 
 <app-reply-comment-form [replyId]="reply?.id"></app-reply-comment-form>
