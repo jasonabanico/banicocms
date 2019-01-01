@@ -3,7 +3,9 @@ import { Subforum } from '../../entities/subforum';
 import { SubforumService } from '../../services/subforum.service';
 import { TopicService } from '../../services/topic.service';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Topic } from '../../entities/topic';
+import { SubforumEntityService } from '../../services/subforum-entity.service';
 
 @Component({
   selector: 'app-subforum',
@@ -11,10 +13,12 @@ import { Topic } from '../../entities/topic';
   styleUrls: ['./subforum.component.scss']
 })
 export class SubforumComponent implements OnInit {
+  //public subforum$: Observable<Subforum>;
   public subforum: Subforum;
   public topics: Topic[];
 
   constructor(
+    //private subforumEntityService: SubforumEntityService,
     private subforumService: SubforumService,
     private topicService: TopicService,
     private route: ActivatedRoute

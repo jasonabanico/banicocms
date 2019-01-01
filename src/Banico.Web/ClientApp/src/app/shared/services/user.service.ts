@@ -10,7 +10,7 @@ import {BaseService} from "./base.service";
 import { Observable ,  BehaviorSubject } from 'rxjs'; 
 
 // Add the RxJS Observable operators we need in this app.
-import '../../rxjs-operators';
+//import '../../rxjs-operators';
 import { WindowRefService } from './windowref.service';
 import { AuthService } from './auth.service';
 

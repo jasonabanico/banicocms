@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subforum } from '../../entities/subforum';
+import { SubforumEntityService } from '../../services/subforum-entity.service';
 import { SubforumService } from '../../services/subforum.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class SubforumFormComponent implements OnInit {
   });
 
   constructor(
+    //private subforumEntityService: SubforumEntityService,
     private subforumService: SubforumService,
     private router: Router,
     private fb: FormBuilder,

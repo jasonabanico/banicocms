@@ -16,6 +16,7 @@ import { SubforumService } from './services/subforum.service';
 import { TopicService } from './services/topic.service';
 import { ReplyService } from './services/reply.service';
 import { ReplyCommentService } from './services/reply-comment.service';
+//import { ForumStoreModule } from './store/forum-store.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { ReplyCommentService } from './services/reply-comment.service';
     FormsModule,
     ReactiveFormsModule,
     ForumRoutingModule
+    //ForumStoreModule
   ],
   declarations: [
     ForumComponent,
