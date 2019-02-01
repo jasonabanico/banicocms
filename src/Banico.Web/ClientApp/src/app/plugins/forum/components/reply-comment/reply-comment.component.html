@@ -1,11 +1,11 @@
 <ng-container *ngIf="!isEdit">
   <div class="media d-block d-md-flex">
     <img class="rounded-circle" width="30" src="https://www.gravatar.com/avatar/{{replyComment?.avatarHash}}?size=30&d=mp" alt="">
-    <div class="media-body text-center text-md-left ml-md-3 ml-0">
+    <div class="media-body text-md-left ml-md-3 ml-0">
       <p class="small">
         <a href="">@{{replyComment?.username}}</a>
         {{replyComment?.text}}<br />
-        <a href="javascript:;" (click)="edit()">Edit</a> {{momentRelative}}
+        <a href="javascript:;" (click)="edit()">Edit</a> &bull; {{moment}} ({{momentRelative}})
       </p>
     </div>
   </div>  
