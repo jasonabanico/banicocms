@@ -49,10 +49,10 @@
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <app-reply-comment-form [replyId]="reply?.id"></app-reply-comment-form>
-        </li>
-        <li class="list-group-item" *ngFor="let replyComment of replyComments">
-          <app-reply-comment [id]="replyComment.id"></app-reply-comment>
+            <ng-container class="list-group-item" *ngFor="let replyComment of replyComments">
+                <app-reply-comment [id]="replyComment.id"></app-reply-comment>
+            </ng-container>
+            <app-reply-comment-form [replyId]="reply?.id"></app-reply-comment-form>
         </li>
       </ul>
   </div>      

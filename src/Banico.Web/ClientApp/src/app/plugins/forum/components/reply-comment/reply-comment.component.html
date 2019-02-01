@@ -1,8 +1,13 @@
-<img src="https://www.gravatar.com/avatar/{{replyComment?.avatarHash}}?size=40&d=mp" />
 <ng-container *ngIf="!isEdit">
-  {{replyComment?.text}}
-  <br />
-  by {{replyComment?.username}}
-  <a href="javascript:;" (click)="edit()">Edit</a>
+  <div class="media d-block d-md-flex">
+    <img class="rounded-circle" width="30" src="https://www.gravatar.com/avatar/{{replyComment?.avatarHash}}?size=30&d=mp" alt="">
+    <div class="media-body text-center text-md-left ml-md-3 ml-0">
+      <p class="small">
+        <a href="">@{{replyComment?.username}}</a>
+        {{replyComment?.text}}<br />
+        <a href="javascript:;" (click)="edit()">Edit</a> {{momentRelative}}
+      </p>
+    </div>
+  </div>  
 </ng-container>
 <app-reply-comment-form *ngIf="isEdit" [id]="replyComment?.id" (saved)="onSave($event)" (cancelled)="onCancel($event)"></app-reply-comment-form>
