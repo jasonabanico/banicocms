@@ -7,6 +7,7 @@ export class Reply {
   userId: string;
   username: string;
   avatarHash: string;
+  createdDate: string;
 
   constructor(private contentItem: ContentItem) {
     if ((contentItem) && (contentItem.module == 'reply')) {
@@ -14,6 +15,7 @@ export class Reply {
       this.text = contentItem.content;
       this.topicId = contentItem.parentId;
       this.userId = contentItem.createdBy;
+      this.createdDate = contentItem.createdDate;
     }
   }
 

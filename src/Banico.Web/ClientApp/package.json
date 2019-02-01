@@ -61,6 +61,7 @@
     "hammerjs": "^2.0.8",
     "jquery": "^3.3.1",
     "jwt-decode": "^2.2.0",
+    "moment": "^2.24.0",
     "ngrx-data": "^6.1.0-beta.3",
     "ngx-gravatar": "^7.2.0",
     "primeicons": "^1.0.0-beta.10",

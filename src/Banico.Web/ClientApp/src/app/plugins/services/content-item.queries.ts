@@ -71,6 +71,7 @@ export const ContentItemsQuery = gql`
                 module,
                 parentId,
                 createdBy,
+                createdDate,
                 content,
                 htmlContent,
                 snippet,

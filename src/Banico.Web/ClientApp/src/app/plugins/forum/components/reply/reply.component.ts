@@ -5,6 +5,7 @@ import { ReplyService } from '../../services/reply.service';
 import { ReplyCommentService } from '../../services/reply-comment.service';
 import { Reply } from '../../entities/reply';
 import { ReplyComment } from '../../entities/reply-comment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-reply',
@@ -16,6 +17,8 @@ export class ReplyComponent {
   public replyComments: ReplyComment[];
   private _id: string;
   public isEdit: boolean;
+  public moment: string;
+  public momentRelative: string;
   
   constructor(
     private replyService: ReplyService,
@@ -32,6 +35,8 @@ export class ReplyComponent {
 
   private set(reply: Reply) {
     this.reply = reply;
+    this.moment = moment(reply.createdDate).format('MMMM Do YYYY, h:mm:ss a');
+    this.momentRelative = moment(reply.createdDate).fromNow();
     this.replyService.setReplyUser(reply);
     this.replyCommentService.getReplyComments(reply.id)
     .subscribe(replyComments => this.replyComments = replyComments);

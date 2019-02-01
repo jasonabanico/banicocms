@@ -8,6 +8,7 @@ export class Topic {
   userId: string;
   username: string;
   avatarHash: string;
+  createdDate: string;
 
   constructor(private contentItem: ContentItem) {
     if ((contentItem) && (contentItem.module == 'topic')) {
@@ -16,6 +17,7 @@ export class Topic {
       this.text = contentItem.content;
       this.userId = contentItem.createdBy;
       this.subForumId = contentItem.parentId;
+      this.createdDate = contentItem.createdDate;
     }
   }
 

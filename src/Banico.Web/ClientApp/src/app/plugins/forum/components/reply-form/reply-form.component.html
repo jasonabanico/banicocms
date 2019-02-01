@@ -1,15 +1,15 @@
 <form [formGroup]="replyForm" novalidate (ngSubmit)="save()">
-  <div class="card">
+  <div class="card mb-3">
     <div class="card-header">
-      <ul class="nav nav-pills card-header-pills">
-        <li class="nav-item px-2">
-          <img src="https://www.gravatar.com/avatar/{{avatarHash}}?size=40&d=mp" />
-        </li>
-        <li class="nav-item">
-          <div class="h5 m-0">@{{username}}</div>
-        </li>
-      </ul>
+      <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="ml-2">
+              <div class="h5 m-0">Your Reply</div>
+            </div>
+          </div>
+      </div>  
     </div>
+
     <div class="card-body">
       <input type="hidden"
         id="id" 
@@ -32,15 +32,9 @@
       </div>
     </div>
     <div class="card-footer">
-      <ul class="nav nav-pills card-header-pills">
-        <li class="nav-item">
-          <button type="submit" class="btn btn-primary btn-sm" value="save">Save</button>
-        </li>
-        <li class="nav-item">
-          <button *ngIf="isEdit" type="button" class="btn btn-danger btn-sm" (click)="cancel()">Cancel</button>
-        </li>
-      </ul>
+      <button class="card-link" type="submit" class="btn btn-primary btn-sm" value="save">Save</button>
+      <button class="card-link" *ngIf="isEdit" type="button" class="btn btn-danger btn-sm" (click)="cancel()">Cancel</button>
     </div>
-  </div>
+  </div>      
 </form>
 
