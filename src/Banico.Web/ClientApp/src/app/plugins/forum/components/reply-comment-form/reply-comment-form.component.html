@@ -15,11 +15,11 @@
             name="text"
             type="text"
             formControlName="text" 
-            value="text" />
+            value="text"
+            (keyup.enter)="save()" />
     </div>
-  </div>
-  <div class="form-group row">
-    <button type="submit" class="btn btn-primary btn-sm" value="save">Save</button>
-    <button *ngIf="isEdit" type="button" class="btn btn-danger btn-sm" (click)="cancel()">Cancel</button>
+    <p class="small">
+      <a href="javascript:;" (click)="cancel()">Cancel</a>
+    </p>
   </div>
 </form>
