@@ -33,7 +33,7 @@
             formControlName="text" 
             (keyup.enter)="save()" />
     </div>
-    <p class="small">
+    <p class="small" *ngIf="isEdit">
       <a href="javascript:;" (click)="cancel()">Cancel</a>
     </p>
   </div>
