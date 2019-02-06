@@ -11,7 +11,9 @@ import { ReplyComment } from '../../entities/reply-comment';
 })
 export class ReplyCommentFormComponent implements OnInit {
   public isEdit: boolean = false;
-
+  private delta = 500;
+  private lastKeypressTime = 0;
+  
   public replyCommentForm: FormGroup = this.fb.group({
     id: ['', Validators.required],
     replyId: ['', Validators.required],
@@ -39,6 +41,13 @@ export class ReplyCommentFormComponent implements OnInit {
     .subscribe(replyComment => this.set(replyComment));
   }
 
+  @Input()
+  set text(text: string) {
+    this.replyCommentForm.patchValue({
+      text: text
+    });
+  }
+
   @Output() saved: EventEmitter<string> = new EventEmitter<string>();
   @Output() cancelled: EventEmitter<null> = new EventEmitter<null>();
 
@@ -48,26 +57,31 @@ export class ReplyCommentFormComponent implements OnInit {
   private set(replyComment: ReplyComment) {
     this.replyCommentForm.patchValue({
       id: replyComment.id,
-      replyId: replyComment.replyId,
-      text: replyComment.text
+      replyId: replyComment.replyId
     });
     this.isEdit = true;
   }
 
   public save() {
-    var id = this.replyCommentForm.value['id'];
-    var text = this.replyCommentForm.value['text'];
-    this.replyCommentService.addOrUpdate(
-      id,
-      this.replyCommentForm.value['replyId'],
-      text
-    )
-    .subscribe(
-      id => {
-        this.saved.emit(text);
-      }
-      //errors =>  this.errors = errors
-    );
+    var thisKeypressTime: any = new Date();
+    if ( thisKeypressTime - this.lastKeypressTime <= this.delta )
+    {
+      var id = this.replyCommentForm.value['id'];
+      var text = this.replyCommentForm.value['text'];
+      this.replyCommentService.addOrUpdate(
+        id,
+        this.replyCommentForm.value['replyId'],
+        text
+      )
+      .subscribe(
+        id => {
+          this.saved.emit(id);
+        }
+        //errors =>  this.errors = errors
+      );
+    }
+
+    this.lastKeypressTime = thisKeypressTime;
   }
 
   public cancel() {

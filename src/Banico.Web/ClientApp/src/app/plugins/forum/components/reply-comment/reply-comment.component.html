@@ -12,4 +12,4 @@
     </div>
   </div>  
 </ng-container>
-<app-reply-comment-form *ngIf="isEdit" [id]="replyComment?.id" (saved)="onSave($event)" (cancelled)="onCancel($event)"></app-reply-comment-form>
+<app-reply-comment-form *ngIf="isEdit" [id]="replyComment?.id" [text]="replyComment?.text" (saved)="onSave($event)" (cancelled)="onCancel($event)"></app-reply-comment-form>

@@ -42,7 +42,7 @@ export class ReplyCommentService extends PluginService {
         id: string,
         replyId: string,
         text: string
-    ): Observable<boolean> {
+    ): Observable<string> {
         let replyComment: ReplyComment = new ReplyComment(null);
 
         replyComment.id = id;

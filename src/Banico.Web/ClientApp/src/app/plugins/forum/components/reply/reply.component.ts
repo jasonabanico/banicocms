@@ -55,4 +55,11 @@ export class ReplyComponent {
   public onCancel() {
     this.isEdit = false;
   }
+
+  public onCommentSave(id: string) {
+    this.replyCommentService.get(id)
+    .subscribe(replyComment => {
+      this.replyComments.push(replyComment)
+    });
+  }
 }
