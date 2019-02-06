@@ -17,6 +17,10 @@ export class ReplyCommentFormComponent implements OnInit {
   public replyCommentForm: FormGroup = this.fb.group({
     id: ['', Validators.required],
     replyId: ['', Validators.required],
+    userId: ['', Validators.required],
+    username: ['', Validators.required],
+    avatarHash: ['', Validators.required],
+    createdDate: ['', Validators.required],
     text: ['', Validators.required]
   });
 
@@ -48,7 +52,35 @@ export class ReplyCommentFormComponent implements OnInit {
     });
   }
 
-  @Output() saved: EventEmitter<string> = new EventEmitter<string>();
+  @Input()
+  set userId(userId: string) {
+    this.replyCommentForm.patchValue({
+      userId: userId
+    });
+  }
+
+  @Input()
+  set username(username: string) {
+    this.replyCommentForm.patchValue({
+      username: username
+    });
+  }
+
+  @Input()
+  set avatarHash(avatarHash: string) {
+    this.replyCommentForm.patchValue({
+      avatarHash: avatarHash
+    });
+  }
+
+  @Input()
+  set createdDate(createdDate: string) {
+    this.replyCommentForm.patchValue({
+      createdDate: createdDate
+    });
+  }
+
+  @Output() saved: EventEmitter<ReplyComment> = new EventEmitter<ReplyComment>();
   @Output() cancelled: EventEmitter<null> = new EventEmitter<null>();
 
   ngOnInit() {
@@ -66,19 +98,30 @@ export class ReplyCommentFormComponent implements OnInit {
     var thisKeypressTime: any = new Date();
     if ( thisKeypressTime - this.lastKeypressTime <= this.delta )
     {
-      var id = this.replyCommentForm.value['id'];
-      var text = this.replyCommentForm.value['text'];
+      var replyComment: ReplyComment = new ReplyComment(null);
+      replyComment.id = this.replyCommentForm.value['id'];
+      replyComment.text = this.replyCommentForm.value['text'];
+      replyComment.replyId = this.replyCommentForm.value['replyId'];
+      replyComment.userId = this.replyCommentForm.value['userId'];
+      replyComment.username = this.replyCommentForm.value['username'];
+      replyComment.avatarHash = this.replyCommentForm.value['avatarHash'];
+      replyComment.createdDate = this.replyCommentForm.value['createdDate'];
+    
       this.replyCommentService.addOrUpdate(
-        id,
+        replyComment.id,
         this.replyCommentForm.value['replyId'],
-        text
+        replyComment.text
       )
       .subscribe(
         id => {
-          this.saved.emit(id);
+          replyComment.id = id;
+          this.saved.emit(replyComment);          
         }
         //errors =>  this.errors = errors
       );
+      this.replyCommentForm.patchValue({
+        text: ''
+      });
     }
 
     this.lastKeypressTime = thisKeypressTime;

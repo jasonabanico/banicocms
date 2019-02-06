@@ -7,6 +7,22 @@
     id="replyId" 
     name="replyId"
     formControlName="replyId" />
+  <input type="hidden"
+    id="userId" 
+    name="userId"
+    formControlName="userId" />
+  <input type="hidden"
+    id="username" 
+    name="username"
+    formControlName="username" />
+  <input type="hidden"
+    id="avatarHash" 
+    name="avatarHash"
+    formControlName="avatarHash" />
+  <input type="hidden"
+    id="createdDate" 
+    name="createdDate"
+    formControlName="createdDate" />
   <div class="form-group">
     <div class="col-md-10">
         <input 
@@ -15,7 +31,6 @@
             name="text"
             type="text"
             formControlName="text" 
-            value="text"
             (keyup.enter)="save()" />
     </div>
     <p class="small">

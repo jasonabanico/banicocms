@@ -56,8 +56,8 @@ export class ReplyComponent {
     this.isEdit = false;
   }
 
-  public onCommentSave(id: string) {
-    this.replyCommentService.get(id)
+  public onCommentSave(replyComment: ReplyComment) {
+    this.replyCommentService.get(replyComment.id)
     .subscribe(replyComment => {
       this.replyComments.push(replyComment)
     });

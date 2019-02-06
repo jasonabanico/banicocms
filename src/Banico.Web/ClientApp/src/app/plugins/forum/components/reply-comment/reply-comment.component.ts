@@ -41,11 +41,8 @@ export class ReplyCommentComponent {
     this.isEdit = true;
   }
 
-  public onSave(id: string) {
-    this.replyCommentService.get(id)
-    .subscribe(replyComment => {
-      this.set(replyComment)
-    });
+  public onSave(replyComment: ReplyComment) {
+    this.set(replyComment);
     this.isEdit = false;
   }
 
