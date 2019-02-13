@@ -16,10 +16,10 @@ export class ReplyCommentService extends PluginService {
         }));
     }
     
-    public getReplyComments(replyId: string): Observable<ReplyComment[]> {
+    public getReplyComments(replyId: string, page: number, pageSize: number): Observable<ReplyComment[]> {
         return this.contentItemService.getAll('', '', '',
         'reply-comment', replyId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true).pipe(
+        '', '', '', '', '', '', '', '', '', '', true, true, '', page, pageSize).pipe(
         map(items => {
             var replyComments: ReplyComment[] = new Array<ReplyComment>();
             items.forEach(function(item: ContentItem) {

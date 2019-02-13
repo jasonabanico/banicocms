@@ -16,10 +16,10 @@ export class ReplyService extends PluginService {
         }));
     }
     
-    public getReplies(topicId: string): Observable<Reply[]> {
+    public getReplies(topicId: string, page: number, pageSize: number): Observable<Reply[]> {
         return this.contentItemService.getAll('', '', '',
         'reply', topicId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true).pipe(
+        '', '', '', '', '', '', '', '', '', '', true, true, '', page, pageSize).pipe(
         map(items => {
             var replies: Reply[] = new Array<Reply>();
             items.forEach(function(item: ContentItem) {

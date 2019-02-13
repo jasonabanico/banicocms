@@ -38,7 +38,7 @@ export class ReplyComponent {
     this.moment = moment(reply.createdDate).format('MMMM Do YYYY, h:mm:ss a');
     this.momentRelative = moment(reply.createdDate).fromNow();
     this.replyService.setReplyUser(reply);
-    this.replyCommentService.getReplyComments(reply.id)
+    this.replyCommentService.getReplyComments(reply.id, 0, 0)
     .subscribe(replyComments => this.replyComments = replyComments);
     this.isEdit = false;
   }

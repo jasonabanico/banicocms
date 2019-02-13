@@ -1,14 +1,15 @@
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using System;
-using Banico.Core.Entities;
-using Banico.Core.Repositories;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Banico.Core.Entities;
+using Banico.Core.Repositories;
 
 namespace Banico.Data.Repositories
 {
@@ -18,13 +19,21 @@ namespace Banico.Data.Repositories
         private const char TYPE_DELIM = '~';
         private const char SECTION_DELIM = '*';
 
-        public AppDbContext DbContext { get; set; }
+        public readonly AppDbContext _dbContext;
+        private readonly IConfiguration _configuration;
+
+        private int _maxPageSize = 0;
 
         public ContentItemRepository(
-            AppDbContext dbContext
+            AppDbContext dbContext,
+            IConfiguration configuration
         )
         {
-            this.DbContext = dbContext;
+            _dbContext = dbContext;
+            _configuration = configuration;
+
+            string maxPageSize = _configuration["Content:MaxPageSize"];
+            int.TryParse(maxPageSize, out _maxPageSize);
         }
 
         public async Task<List<ContentItem>> Get(
@@ -57,9 +66,12 @@ namespace Banico.Data.Repositories
             string attribute19,
             string attribute20,
             bool includeChildren,
-            bool includeParents
+            bool includeParents,
+            string orderBy,
+            int page,
+            int pageSize
         ) {
-            var contentItems = from c in this.DbContext.ContentItems
+            var contentItems = from c in _dbContext.ContentItems
                 where 
                     (c.Id == id || string.IsNullOrEmpty(id)) &&
                     (c.Module == module || string.IsNullOrEmpty(module)) && 
@@ -189,6 +201,35 @@ namespace Banico.Data.Repositories
                 // }
             }
 
+            Expression<Func<ContentItem, object>> sort = null;
+
+            switch(orderBy) 
+            {
+                case "name":
+                    sort = c => c.Name;
+                    break;
+                case "createdDate":
+                    sort = c => c.CreatedDate;
+                    break;
+            }
+
+            if (sort != null) 
+            {
+                contentItems = contentItems.OrderBy(sort);
+            }
+
+            if ((pageSize == 0) || (pageSize > _maxPageSize))
+            {
+                pageSize = _maxPageSize;
+            }
+
+            int skipRows = 0;
+            if (page > 0)
+            {
+                skipRows = (page - 1) * pageSize;
+            }
+            contentItems = contentItems.Skip(skipRows).Take(pageSize);
+
             return await contentItems.ToListAsync();
         }
 
@@ -219,9 +260,9 @@ namespace Banico.Data.Repositories
                         if (!includeChildren)
                         {
                             contentItems = from ci in contentItems
-                                join csi in this.DbContext.ContentSectionItems
+                                join csi in _dbContext.ContentSectionItems
                                     on ci.Id equals csi.ContentItemId
-                                join si in this.DbContext.SectionItems
+                                join si in _dbContext.SectionItems
                                     on csi.SectionItemId equals si.Id
                                 where 
                                     si.Section == section &&
@@ -241,9 +282,9 @@ namespace Banico.Data.Repositories
                                 childrenPathUrl = alias;
                             }
                             contentItems = from ci in contentItems
-                                join csi in this.DbContext.ContentSectionItems
+                                join csi in _dbContext.ContentSectionItems
                                     on ci.Id equals csi.ContentItemId
-                                join si in this.DbContext.SectionItems
+                                join si in _dbContext.SectionItems
                                     on csi.SectionItemId equals si.Id
                                 where 
                                     si.Section == section &&
@@ -310,7 +351,7 @@ namespace Banico.Data.Repositories
         {
             if (!string.IsNullOrEmpty(id))
             {
-                var contentSectionItems = from contentSectionItem in this.DbContext.ContentSectionItems
+                var contentSectionItems = from contentSectionItem in _dbContext.ContentSectionItems
                                             where contentSectionItem.ContentItemId == id
                                             select contentSectionItem;
 
@@ -337,8 +378,8 @@ namespace Banico.Data.Repositories
         {
             item.Id = Guid.NewGuid().ToString();
             item.ContentSectionItems = await this.ToContentSectionItems(item.SectionItems);
-            this.DbContext.ContentItems.Add(item);
-            var result = await this.DbContext.SaveChangesAsync();
+            _dbContext.ContentItems.Add(item);
+            var result = await _dbContext.SaveChangesAsync();
 
             if (result > 0)
             {
@@ -360,7 +401,7 @@ namespace Banico.Data.Repositories
                     var sectionType = sectionFields[0];
                     var sectionItemString = sectionFields[1];
 
-                    var sectionItem = await (from si in this.DbContext.SectionItems
+                    var sectionItem = await (from si in _dbContext.SectionItems
                                         where si.Section == sectionType &&
                                             si.PathUrl == sectionItemString
                                         select si).ToListAsync();
@@ -382,7 +423,8 @@ namespace Banico.Data.Repositories
         public async Task<ContentItem> Update(ContentItem item, string userID, bool isAdmin)
         {
             var updateItem = (await this.Get(item.Id, "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false))
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
+            "", 0, 1))
                 .FirstOrDefault();
 
             if (updateItem != null)
@@ -418,7 +460,7 @@ namespace Banico.Data.Repositories
                     updateItem.Attribute20 = item.Attribute20;
                     updateItem.UpdatedBy = item.UpdatedBy;
                     updateItem.UpdatedDate = item.UpdatedDate;
-                    var result = await this.DbContext.SaveChangesAsync();
+                    var result = await _dbContext.SaveChangesAsync();
 
                     if (result > 0)
                     {
@@ -433,10 +475,11 @@ namespace Banico.Data.Repositories
         public async Task<ContentItem> Delete(string id)
         {
             var item = (await this.Get(id, "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false))
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
+            "", 0, 1))
                 .FirstOrDefault();
-            this.DbContext.Remove(item);
-            var result = await this.DbContext.SaveChangesAsync();
+            _dbContext.Remove(item);
+            var result = await _dbContext.SaveChangesAsync();
 
             if (result > 0)
             {
@@ -450,7 +493,7 @@ namespace Banico.Data.Repositories
         {
             var profileItems = await this.Get("", "", alias, "profile", "", userId, "",
                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", false, false);
+                "", "", "", "", "", false, false, "", 0, 1);
 
             if (profileItems.Count == 0)
             {

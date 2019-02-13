@@ -161,6 +161,15 @@ namespace Banico.Api.Models
                     },
                     new QueryArgument<BooleanGraphType> { 
                         Name = "includeParents" 
+                    },
+                    new QueryArgument<StringGraphType> { 
+                        Name = "orderBy" 
+                    },
+                    new QueryArgument<IntGraphType> { 
+                        Name = "page" 
+                    },
+                    new QueryArgument<IntGraphType> { 
+                        Name = "pageSize" 
                     }
                     ),
                 resolve: context =>  contentItemRepository.Get(
@@ -193,7 +202,10 @@ namespace Banico.Api.Models
                     context.GetArgument<string>("attribute19"),
                     context.GetArgument<string>("attribute20"),
                     context.GetArgument<bool>("includeChildren"),
-                    context.GetArgument<bool>("includeParents")
+                    context.GetArgument<bool>("includeParents"),
+                    context.GetArgument<string>("orderBy"),
+                    context.GetArgument<int>("page"),
+                    context.GetArgument<int>("pageSize")
                     )
                 );            
 

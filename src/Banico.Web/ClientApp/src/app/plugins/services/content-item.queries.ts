@@ -31,7 +31,9 @@ export const ContentItemsQuery = gql`
         $attribute19: String,
         $attribute20: String,
         $includeChildren: Boolean,
-        $includeParents: Boolean
+        $includeParents: Boolean,
+        $page: Int,
+        $pageSize: Int
     ) {
         contentItems(
             id: $id,
@@ -63,7 +65,9 @@ export const ContentItemsQuery = gql`
             attribute19: $attribute19,
             attribute20: $attribute20,
             includeChildren: $includeChildren,
-            includeParents: $includeParents
+            includeParents: $includeParents,
+            page: $page,
+            pageSize: $pageSize
             ) {
                 id,
                 name,

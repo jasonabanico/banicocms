@@ -50,7 +50,7 @@ export class TopicComponent implements OnInit {
     this.topicService.setTopicUser(topic);
     this.subforumService.get(topic.subForumId)
     .subscribe(subforum => this.subforum = subforum);
-    this.replyService.getReplies(topic.id)
+    this.replyService.getReplies(topic.id, 0, 0)
     .subscribe(replies => this.replies = replies);
   }
 }

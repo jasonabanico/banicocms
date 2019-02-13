@@ -26,7 +26,7 @@ export class ListSetService extends PluginService {
     public getListSets(sectionItems: string): Observable<ListSet[]> {
         return this.contentItemService.getAll('', '', '',
         'list-set', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true).pipe(
+        '', '', '', '', '', '', '', '', '', '', true, true, '', 0, 0).pipe(
         map(items => {
             var listSets: ListSet[] = new Array<ListSet>();
             items.forEach(function(item: ContentItem) {

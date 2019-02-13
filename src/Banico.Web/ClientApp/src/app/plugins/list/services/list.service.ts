@@ -19,7 +19,7 @@ export class ListService extends PluginService {
     public getAll(listSetId: string): Observable<List[]> {
         return this.contentItemService.getAll('', '', '',
         'list', listSetId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false).pipe(
+        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0).pipe(
         map(listItems => {
             var lists: List[] = new Array<List>();
             listItems.forEach(function(item: ContentItem) {
@@ -33,7 +33,7 @@ export class ListService extends PluginService {
     public getByUser(userId: string): Observable<List[]> {
         return this.contentItemService.getAll('', '', '',
         'list', '', userId, '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false).pipe(
+        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0).pipe(
         map(listItems => {
             var lists: List[] = new Array<List>();
             listItems.forEach(function(item: ContentItem) {

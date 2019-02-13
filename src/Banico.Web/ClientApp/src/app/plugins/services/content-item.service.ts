@@ -43,7 +43,7 @@ export class ContentItemService {
     public get(id: string): Observable<ContentItem> {
         return this.getAll(id, '', '',
         '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false).pipe(
+        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0).pipe(
         map(items => {
             if (items.length >= 1) {
                 return items[0];
@@ -56,7 +56,7 @@ export class ContentItemService {
     public getByAlias(alias: string): Observable<ContentItem> {
         return this.getAll('', '', alias,
         '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false).pipe(
+        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0).pipe(
         map(items => {
             if (items.length >= 1) {
                 return items[0];
@@ -69,7 +69,7 @@ export class ContentItemService {
     public getProfileById(userId: string): Observable<ContentItem> {
         return this.getAll('', '', '',
         'profile', '', userId, '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false).pipe(
+        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0).pipe(
         map(items => {
             if (items.length >= 1) {
                 return items[0];
@@ -82,7 +82,7 @@ export class ContentItemService {
     public getProfileByUsername(alias: string): Observable<ContentItem> {
         return this.getAll('', '', alias,
         'profile', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false).pipe(
+        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0).pipe(
         map(items => {
             if (items.length >= 1) {
                 return items[0];
@@ -122,7 +122,10 @@ export class ContentItemService {
         attribute19: string,
         attribute20: string,
         includeChildren: boolean,
-        includeParents: boolean
+        includeParents: boolean,
+        orderBy: string,
+        page: number,
+        pageSize: number
     ): Observable<ContentItem[]> {
         var result = this.apollo.watchQuery<ContentItemsQueryResult>({
             query: ContentItemsQuery,
@@ -156,7 +159,10 @@ export class ContentItemService {
                 attribute19: attribute19,
                 attribute20: attribute20,
                 includeChildren: includeChildren,
-                includeParents: includeParents
+                includeParents: includeParents,
+                orderBy: orderBy,
+                page: page,
+                pageSize: pageSize
             }
         })
             .valueChanges
