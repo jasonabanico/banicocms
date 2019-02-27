@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <PreserveCompilationContext>false</PreserveCompilationContext>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
@@ -9,7 +10,7 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
 
     <!-- Set this to true if you enable server-side prerendering -->
-    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <BuildServerSideRenderer>true</BuildServerSideRenderer>
   </PropertyGroup>
 
   <!-- https://github.com/dotnet/corefx/issues/29820 -->
@@ -20,20 +21,22 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="7.3.3" />
     <PackageReference Include="graphiql" Version="1.1.0" />
-    <PackageReference Include="GraphQL" Version="2.0.0" />
+    <PackageReference Include="GraphQL" Version="2.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.1.0" />
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="2.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="2.2.0" />
     <!--<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.0" />-->
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="System.Reactive" Version="4.1.2" />
+    <PackageReference Include="System.Reactive.Linq" Version="4.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <!--<ProjectReference Include="..\..\vendor\AspNet.Security.OAuth.Providers\src\AspNet.Security.OAuth.Linkedin\AspNet.Security.OAuth.LinkedIn.csproj" />-->
-    <ProjectReference Include="..\..\vendor\markdig\src\Markdig\Markdig.csproj" />
-    <ProjectReference Include="..\..\vendor\HtmlSanitizer\src\HtmlSanitizer\HtmlSanitizer.csproj" />
+    <!--ProjectReference Include="..\..\vendor\markdig\src\Markdig\Markdig.csproj" -->
+    <!-- ProjectReference Include="..\..\vendor\HtmlSanitizer\src\HtmlSanitizer\HtmlSanitizer.csproj" -->
     <ProjectReference Include="..\Banico.Core\Banico.Core.csproj" Version="1.0.0" />
     <ProjectReference Include="..\Banico.Data\Banico.Data.csproj" Version="1.0.0" />
     <ProjectReference Include="..\Banico.Api\Banico.Api.csproj" Version="1.0.0" />
@@ -67,7 +70,7 @@
     <ItemGroup>
       <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
       <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
-      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+      <ResolvedFileToPublish Include="@(DistFiles-&gt;'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       </ResolvedFileToPublish>

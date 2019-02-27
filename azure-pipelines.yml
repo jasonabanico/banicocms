@@ -1,0 +1,24 @@
+# Build ASP.NET Core project using Azure Pipelines
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core?view=vsts
+
+pool:
+  vmImage: 'windows-2019'
+  
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@0
+  displayName: "NuGet use 4.9.3"
+  inputs:
+    versionSpec: 4.9.3
+
+- task: DotNetCoreInstaller@0
+  inputs:
+    version: '2.2.104'
+    
+- script: |
+    dotnet build --configuration $(buildConfiguration)
+    dotnet publish --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY
+
+- task: PublishBuildArtifacts@1

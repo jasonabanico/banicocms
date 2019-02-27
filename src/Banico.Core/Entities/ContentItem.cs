@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
-using Markdig;
+// using Markdig;
 
 namespace Banico.Core.Entities
 {
@@ -52,7 +52,7 @@ namespace Banico.Core.Entities
                     output = Regex.Replace(output, @"\t|\n|\r", " ");
                 
                     // strip tags
-                    output = Markdown.ToHtml(output);
+                    // output = Markdown.ToHtml(output);
                     output = Regex.Replace(output, @"<[^>]+>|&nbsp;", "").Trim();
 
                     // strip extra whitespace
@@ -77,7 +77,7 @@ namespace Banico.Core.Entities
                 
                 if (!String.IsNullOrEmpty(this.Content))
                 {
-                    output = Markdown.ToHtml(this.Content);
+                    // output = Markdown.ToHtml(this.Content);
 
                     //var sanitizer = new HtmlSanitizer();
                     //output = sanitizer.Sanitize(output, "");

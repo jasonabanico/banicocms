@@ -12,10 +12,11 @@ import { AccountService } from '../../main/account.service';
   styleUrls: []
 })
 export class RegisterComponent implements OnInit {
-    public isRequesting: boolean = false;
-    public isSuccessful: boolean = false;
+    public isRequesting = false;
+    public isSuccessful = false;
     public errors: string[][] = [,];
-    public submitted: boolean = false;
+    public submitted = false;
+    public inviteOnly = true;
 
     public registerForm: FormGroup = this.fb.group({
         username: ['', Validators.required],
@@ -29,7 +30,7 @@ export class RegisterComponent implements OnInit {
         private accountService: AccountService,
         private router: Router,
         private fb: FormBuilder
-    ) { 
+    ) {
     }
 
     ngOnInit() {
@@ -38,15 +39,15 @@ export class RegisterComponent implements OnInit {
             timeOut: 0,
             extendedTimeOut: 0,
             closeButton: true
-          };    
+          };
     }
-  
+
     public cleanStringify(object) {
         if (object && typeof object === 'object') {
             object = copyWithoutCircularReferences([object], object);
         }
         return JSON.stringify(object);
-    
+
         function copyWithoutCircularReferences(references, object) {
             var cleanObject = {};
             Object.keys(object).forEach(function(key) {
@@ -87,16 +88,16 @@ export class RegisterComponent implements OnInit {
                     this.isSuccessful = true;
                 },
                 err => {
-                    let validationErrorDictionary = err;
+                    const validationErrorDictionary = err;
                     //JSON.parse(err);
-                    for (var fieldName in validationErrorDictionary) {
+                    for (const fieldName in validationErrorDictionary) {
                         if (validationErrorDictionary.hasOwnProperty(fieldName)) {
                             //if (form.controls[fieldName]) {
                                 // integrate into angular's validation if we have field validation
                                 //form.controls[fieldName].setErrors({ invalid: true });
                             //}
                             // if we have cross field validation then show the validation error at the top of the screen
-                            var error: string[] = [];
+                            const error: string[] = [];
                             error.push(validationErrorDictionary[fieldName]);
                             this.errors[fieldName] = [];
                             this.errors[fieldName].push(error);

@@ -16,6 +16,7 @@ import { RegisterComponent } from '../components/register/register.component';
 import { ResendConfirmationComponent } from '../components/resend-confirmation/resend-confirmation.component';
 import { ResetPasswordComponent } from '../components/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from '../components/forgot-password/forgot-password.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ForgotPasswordComponent } from '../components/forgot-password/forgot-pa
     HttpClientXsrfModule.withOptions({
       cookieName: 'XSRF-TOKEN',
       headerName: 'X-XSRF-Token'
-    })  
+    }),
+    MDBBootstrapModule.forRoot()
   ],
   declarations: [
     AccountComponent,

@@ -1,34 +1,40 @@
-<h1>Sign Up</h1>
 
 <span *ngIf="!isSuccessful">
 
-    <form [formGroup]="registerForm" novalidate (ngSubmit)="register()">
+    <form 
+        class="text-center border border-light p-5 mt-4"
+        [formGroup]="registerForm" 
+        novalidate 
+        (ngSubmit)="register()">
+
+        <p class="h4 mt-4">Sign up</p>
+
         <div class="text-danger"></div>
 
-        <div class="form-group">
-            <label class="col-md-2 control-label" for="Username">Username</label>
-            <div class="col-md-10">
+        <div class="form-row">
+            <div class="col">
                 <input 
-                    class="form-control" 
+                    class="form-control mt-4" 
                     id="username"
                     name="username"
                     type="username" 
                     formControlName="username"
+                    placeholder="Username"
                     />
                 <span class="text-danger field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="col-md-2 control-label" for="Email">Email</label>
-            <div class="col-md-10">
+        <div class="form-row">
+            <div class="col">
                 <input 
-                    class="form-control" 
+                    class="form-control mt-4" 
                     id="email"
                     name="email"
                     type="email" 
                     validateEmail
                     formControlName="email"
+                    placeholder="Email"
                     />
                     <!--
                     data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." id="Email" name="Email" value="" 
@@ -45,15 +51,15 @@
             </ul>
         </div>
 
-        <div class="form-group">
-            <label class="col-md-2 control-label" for="Password">Password</label>
-            <div class="col-md-10">
+        <div class="form-row">
+            <div class="col">
                 <input 
-                    class="form-control"
+                    class="form-control mt-4"
                     id="password"
                     name="password"
                     type="password" 
                     formControlName="password"
+                    placeholder="Password"
                     />
                 <!-- 
                     data-val="true" data-val-length="The Password must be at least 6 and at max 100 characters long." data-val-length-max="100" data-val-length-min="6" data-val-required="The Password field is required." id="Password" name="Password" 
@@ -70,15 +76,18 @@
             </ul>
         </div>
 
-        <div class="form-group">
-            <label class="col-md-2 control-label" for="ConfirmPassword">Confirm password</label>
-            <div class="col-md-10">
+        <div class="form-row">
+            <!--
+                <label class="col-md-2 control-label" for="ConfirmPassword">Confirm password</label>
+            -->
+            <div class="col">
                 <input 
-                    class="form-control" 
+                    class="form-control mt-4" 
                     id="confirmPassword"
                     name="confirmPassword"
                     type="password" 
                     formControlName="confirmPassword"
+                    placeholder="Confirm password"
                 />
                 <!-- 
                     data-val="true" data-val-equalto="The password and confirmation password do not match." data-val-equalto-other="*.Password" id="ConfirmPassword" name="ConfirmPassword"
@@ -95,30 +104,39 @@
             </ul>
         </div>
 
-        <div *ngIf="inviteOnly" class="form-group">
-            <label class="col-md-2 control-label" for="Code">Invite Code</label>
-            <div class="col-md-10">
+        <div *ngIf="inviteOnly" class="form-row">
+            <!--
+                <label class="col-md-2 control-label" for="Code">Invite Code</label>
+            -->
+            <div class="col">
                 <input 
-                    class="form-control" 
+                    class="form-control mt-4" 
                     id="code" 
                     name="code" 
                     type="text" 
                     formControlName="code"
-                    value="" />
+                    value=""
+                    placeholder="Invite Code" />
                 <span class="text-danger field-validation-valid" data-valmsg-for="Code" data-valmsg-replace="true"></span>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+        <div class="form-row mt-4">
+            <div class="col">
                 <button type="submit" class="btn btn-primary">Register</button>
             </div>
         </div>
 
         <input data-val="true" data-val-required="The InviteOnly field is required." id="InviteOnly" name="InviteOnly" type="hidden" value="{{inviteOnly}}" />
-    </form>
+
+        <hr>
+
+        <!-- Terms of service -->
+        <p>By clicking <em>Register</em> you agree to our
+            <a href="" target="_blank">terms of service</a>
+        </form>
 </span>
 
 <span *ngIf="isSuccessful">
-    Thank You!
+    <p class="h4 mt-4">Thank you!</p>
 </span>

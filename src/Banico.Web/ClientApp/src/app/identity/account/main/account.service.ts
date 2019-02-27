@@ -66,16 +66,16 @@ export class AccountService extends BaseService {
         confirmPassword: string,
         invite: string
     ): Observable<boolean> {
-        let body = JSON.stringify({ 
+        const body = JSON.stringify({
             username,
             email,
             password,
             confirmPassword ,
             invite
         });
-        return this.http.post(this.baseUrl + "api/Account/Register", body, this.jsonRequestOptions).pipe(
+        return this.http.post(this.baseUrl + 'api/Account/Register', body, this.jsonRequestOptions).pipe(
         map(res => true),
-        catchError(this.handleError),);
+        catchError(this.handleError), );
     }
 
     public confirmEmail(

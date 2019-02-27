@@ -270,15 +270,13 @@ namespace Banico.Identity.Controllers
             {
                 if (string.IsNullOrEmpty(model.Code))
                 {
-                    //ModelState.AddModelError("Code", "Please provide an Invite Code.");
-                    return BadRequest(Errors.AddErrorToModelState("", "", ModelState));
+                    return BadRequest(Errors.AddErrorToModelState("Code", "Please provide an Invite Code.", ModelState));
                 }
 
                 inviter = await _inviteService.IsInvited(model.Email, model.Code);
                 if (string.IsNullOrEmpty(inviter))
                 {
-                    //ModelState.AddModelError("Code", "Invalid Invite Code.");
-                    return BadRequest(Errors.AddErrorToModelState("", "", ModelState));
+                    return BadRequest(Errors.AddErrorToModelState("Code", "Invalid Invite Code.", ModelState));
                 }
             }
             
