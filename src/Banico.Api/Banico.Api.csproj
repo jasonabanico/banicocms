@@ -12,7 +12,7 @@
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\Banico.Core\Banico.Core.csproj" Version="1.0.0" />
     <ProjectReference Include="..\Banico.Data\Banico.Data.csproj" Version="1.0.0" />
