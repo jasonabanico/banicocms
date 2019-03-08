@@ -179,6 +179,8 @@ namespace Banico.Web
             app.UseCookiePolicy();
             app.UseGraphiQl();
             
+            identityStartup.Configure(app, env);
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

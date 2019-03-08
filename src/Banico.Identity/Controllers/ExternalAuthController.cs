@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 
 namespace Banico.Identity.Controllers
 {
+  [ApiController]
   [Route("api/[controller]/[action]")]
   public class ExternalAuthController : Controller
   {

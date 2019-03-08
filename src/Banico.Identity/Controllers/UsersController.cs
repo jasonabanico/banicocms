@@ -13,6 +13,7 @@ using Banico.Core.Entities;
 
 namespace Banico.Web
 {
+    [ApiController]
     [Route("api/[controller]/[action]")]
     [Authorize(Policy="SuperAdmin")]
     public class UsersController : Controller

@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 
 namespace Banico.Identity.Controllers
 {
+    [ApiController]
     [ValidateAntiForgeryToken]
     [Route("api/[controller]")]
     public class AuthController : Controller

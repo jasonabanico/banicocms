@@ -23,6 +23,7 @@ using Banico.Services.Interfaces;
 
 namespace Banico.Identity.Controllers
 {
+    [ApiController]
     [Route("api/[controller]/[action]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ManageController : Controller

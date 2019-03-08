@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Banico.Identity.Controllers
 {
+    [ApiController]
     [Route("api/[controller]/[action]")]
     [Authorize(Policy="SuperAdmin")]
     public class RolesController : Controller

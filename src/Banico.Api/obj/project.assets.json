@@ -4765,9 +4765,6 @@
       "Banico.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
-        "dependencies": {
-          "Microsoft.AspNetCore.App": "2.2.0"
-        },
         "compile": {
           "bin/placeholder/Banico.Core.dll": {}
         },
@@ -12800,11 +12797,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jasonbanico/OneDrive/PHElections/src/Banico.Api/Banico.Api.csproj",
+      "projectUniqueName": "/Users/jasonbanico/Dropbox/Workspace/Banico/src/Banico.Api/Banico.Api.csproj",
       "projectName": "Banico.Api",
-      "projectPath": "/Users/jasonbanico/OneDrive/PHElections/src/Banico.Api/Banico.Api.csproj",
+      "projectPath": "/Users/jasonbanico/Dropbox/Workspace/Banico/src/Banico.Api/Banico.Api.csproj",
       "packagesPath": "/Users/jasonbanico/.nuget/packages/",
-      "outputPath": "/Users/jasonbanico/OneDrive/PHElections/src/Banico.Api/obj/",
+      "outputPath": "/Users/jasonbanico/Dropbox/Workspace/Banico/src/Banico.Api/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -12822,11 +12819,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "/Users/jasonbanico/OneDrive/PHElections/src/Banico.Core/Banico.Core.csproj": {
-              "projectPath": "/Users/jasonbanico/OneDrive/PHElections/src/Banico.Core/Banico.Core.csproj"
+            "/Users/jasonbanico/Dropbox/Workspace/Banico/src/Banico.Core/Banico.Core.csproj": {
+              "projectPath": "/Users/jasonbanico/Dropbox/Workspace/Banico/src/Banico.Core/Banico.Core.csproj"
             },
-            "/Users/jasonbanico/OneDrive/PHElections/src/Banico.Data/Banico.Data.csproj": {
-              "projectPath": "/Users/jasonbanico/OneDrive/PHElections/src/Banico.Data/Banico.Data.csproj"
+            "/Users/jasonbanico/Dropbox/Workspace/Banico/src/Banico.Data/Banico.Data.csproj": {
+              "projectPath": "/Users/jasonbanico/Dropbox/Workspace/Banico/src/Banico.Data/Banico.Data.csproj"
             }
           }
         }

@@ -29,6 +29,7 @@ using Banico.Identity.ViewModels.Account;
 
 namespace Banico.Identity.Controllers
 {
+    [ApiController]
     [Route("api/[controller]/[action]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AccountController : Controller
