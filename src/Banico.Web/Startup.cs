@@ -13,7 +13,9 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using FluentValidation.AspNetCore;
+using AspNetCore.RouteAnalyzer;
 using Banico.Core.Entities;
 using Banico.Data;
 using Banico.Data.Settings;
@@ -22,7 +24,6 @@ using Banico.Identity;
 using Banico.Identity.Extensions;
 using Banico.Services;
 using Banico.Services.Interfaces;
-using Microsoft.Extensions.Logging;
 
 namespace Banico.Web
 {
@@ -102,11 +103,11 @@ namespace Banico.Web
             //     opts.Filters.AddService(typeof(AngularAntiforgeryCookieResultFilter));
             // })
             services.AddMvc()
-            .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>())
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-            .AddJsonOptions(
-                options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            );
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(
+                    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
             // services.AddTransient<AngularAntiforgeryCookieResultFilter>();
             
             // In production, the Angular files will be served from this directory
@@ -114,11 +115,18 @@ namespace Banico.Web
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddRouteAnalyzer();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery, 
-            ILoggerFactory loggerFactory)
+        public void Configure(
+            IApplicationBuilder app, 
+            IHostingEnvironment env, 
+            IAntiforgery antiforgery, 
+            ILoggerFactory loggerFactory,
+            IApplicationLifetime applicationLifetime, // Add
+            IRouteAnalyzer routeAnalyzer)
         {
             if (env.IsDevelopment())
             {
@@ -179,13 +187,23 @@ namespace Banico.Web
             app.UseCookiePolicy();
             app.UseGraphiQl();
             
-            identityStartup.Configure(app, env);
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
+            });
+
+            applicationLifetime.ApplicationStarted.Register(() =>
+            {
+                var infos = routeAnalyzer.GetAllRouteInformations();
+                Console.WriteLine("======== ALL ROUTE INFORMATION ========");
+                foreach (var info in infos)
+                {
+                    Console.WriteLine(info.ToString());
+                }
+                Console.WriteLine("");
+                Console.WriteLine("");
             });
 
             app.UseSpa(spa =>
