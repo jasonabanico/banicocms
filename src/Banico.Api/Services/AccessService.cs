@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Banico.Core.Entities;
 using Banico.Core.Repositories;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Banico.Api.Services
 {
@@ -31,7 +32,12 @@ namespace Banico.Api.Services
 
         public string GetCurrentUserId()
         {
-            return _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var currentUser = string.Empty;
+            if (_httpContextAccessor.HttpContext.User != null) 
+            {
+                currentUser = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            }
+            return currentUser;
         }
 
         public bool IsUser()
