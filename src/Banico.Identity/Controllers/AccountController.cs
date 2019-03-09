@@ -384,20 +384,20 @@ namespace Banico.Identity.Controllers
             return string.Empty;
         }
 
-        public async Task<bool> RegisterUserAsync(AppUser user, ExternalLoginInfo info, string name)
-        {
-            // create in Account DB
-            var result = await _userManager.CreateAsync(user);
+        // public async Task<bool> RegisterUserAsync(AppUser user, ExternalLoginInfo info, string name)
+        // {
+        //     // create in Account DB
+        //     var result = await _userManager.CreateAsync(user);
 
-            if (!result.Succeeded)
-            {
-                return result.Succeeded;
-            }
+        //     if (!result.Succeeded)
+        //     {
+        //         return result.Succeeded;
+        //     }
 
-            result = await _userManager.AddLoginAsync(user, info);
+        //     result = await _userManager.AddLoginAsync(user, info);
 
-            return result.Succeeded;
-        }
+        //     return result.Succeeded;
+        // }
 
         //
         // POST: /api/Account/ExternalLoginConfirmation

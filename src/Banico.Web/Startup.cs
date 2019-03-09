@@ -107,7 +107,9 @@ namespace Banico.Web
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(
                     options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                );
+                )
+                .AddApplicationPart(typeof(ApiStartup).Assembly)
+                .AddApplicationPart(typeof(IdentityStartup).Assembly);
             // services.AddTransient<AngularAntiforgeryCookieResultFilter>();
             
             // In production, the Angular files will be served from this directory

@@ -51,22 +51,23 @@ namespace Banico.Web
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] AppUser user, [FromBody] string appRoleId)
+        public async Task<IActionResult> Add([FromBody] AppUser user)
+            //, [FromBody] string appRoleId)
         {
             IdentityResult result = await userManager.CreateAsync(user);
             if (result.Succeeded)
             {
-                AppRole role = await roleManager.FindByIdAsync(appRoleId);
-                if (role != null)
-                {
-                    IdentityResult roleResult = await userManager.AddToRoleAsync(user, role.Name);
-                    if (roleResult.Succeeded)
-                    {
-                        return Ok(user);
-                    }
-                } else {
+                // AppRole role = await roleManager.FindByIdAsync(appRoleId);
+                // if (role != null)
+                // {
+                //     IdentityResult roleResult = await userManager.AddToRoleAsync(user, role.Name);
+                //     if (roleResult.Succeeded)
+                //     {
+                //         return Ok(user);
+                //     }
+                // } else {
                     return Ok(user);
-                }
+                // }
             } else {
                 return BadRequest(result.Errors);
             }
@@ -75,7 +76,8 @@ namespace Banico.Web
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update([FromBody] AppUser user, [FromBody] string appRoleId)
+        public async Task<IActionResult> Update([FromBody] AppUser user)
+        //, [FromBody] string appRoleId)
         {
             if (user != null)
             {
@@ -91,34 +93,34 @@ namespace Banico.Web
                 IdentityResult result = await userManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(appRoleId) && (existingRoleId != appRoleId))
-                    {
-                        if (!string.IsNullOrEmpty(existingRole))
-                        {
-                            IdentityResult roleResult = await userManager.RemoveFromRoleAsync(user, existingRole);
-                            if (!roleResult.Succeeded) {
-                                return BadRequest(roleResult.Errors);
-                            }
-                        }
+                    // if (!string.IsNullOrEmpty(appRoleId) && (existingRoleId != appRoleId))
+                    // {
+                    //     if (!string.IsNullOrEmpty(existingRole))
+                    //     {
+                    //         IdentityResult roleResult = await userManager.RemoveFromRoleAsync(user, existingRole);
+                    //         if (!roleResult.Succeeded) {
+                    //             return BadRequest(roleResult.Errors);
+                    //         }
+                    //     }
 
-                        AppRole applicationRole = await roleManager.FindByIdAsync(appRoleId);
-                        if (applicationRole != null)
-                        {
-                            IdentityResult newRoleResult = await userManager.AddToRoleAsync(user, applicationRole.Name);
-                            if (newRoleResult.Succeeded)
-                            {
-                                return Ok(user);
-                            }
-                            else
-                            {
-                                return BadRequest(newRoleResult.Errors);
-                            }
-                        } else {
-                            return BadRequest("Role ID is null - " + appRoleId);
-                        }
-                    } else {
+                    //     AppRole applicationRole = await roleManager.FindByIdAsync(appRoleId);
+                    //     if (applicationRole != null)
+                    //     {
+                    //         IdentityResult newRoleResult = await userManager.AddToRoleAsync(user, applicationRole.Name);
+                    //         if (newRoleResult.Succeeded)
+                    //         {
+                    //             return Ok(user);
+                    //         }
+                    //         else
+                    //         {
+                    //             return BadRequest(newRoleResult.Errors);
+                    //         }
+                    //     } else {
+                    //         return BadRequest("Role ID is null - " + appRoleId);
+                    //     }
+                    // } else {
                         return Ok(user);
-                    }
+                    // }
                 }
                 else
                 {
