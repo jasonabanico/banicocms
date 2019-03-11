@@ -16,10 +16,10 @@ import { combineLatest } from 'rxjs';
   styleUrls: []
 })
 export class LoginComponent {
-  public isRequesting: boolean = false;
-  public isSuccessful: boolean = false;
-  public errors: string[] = new Array<string>();  
-  public returnUrl: string = '/';
+  public isRequesting = false;
+  public isSuccessful = false;
+  public errors: string[] = new Array<string>();
+  public returnUrl = '/';
 
   public loginForm: FormGroup = this.fb.group({
     email: ['', Validators.required],
@@ -35,14 +35,14 @@ export class LoginComponent {
     private route: ActivatedRoute,
     private fb: FormBuilder
   ) { }
-  
+
   ngOnInit() {
     toastr.options = {
       preventDuplicates: true,
       timeOut: 0,
       extendedTimeOut: 0,
       closeButton: true
-    };    
+    };
 
     this.route.queryParams
       .subscribe(params => {
@@ -51,24 +51,23 @@ export class LoginComponent {
         }
       });
   }
-  
+
   public async login() {
     this.isRequesting = true;
     try {
-      var result = await this.accountService.login(
+      const result = await this.accountService.login(
         this.loginForm.value['email'],
         this.loginForm.value['password']
         ).pipe(first()).toPromise();
       if (result) {
-        var myResult: any = result;
+        const myResult: any = result;
         this.authService.setToken(myResult.auth_token);
         this.authService.setUserId(myResult.id);
         this.authService.setIsAdmin(myResult.is_admin);
         this.getProfile(myResult.id);
         this.router.navigate([this.returnUrl]);
       }
-    }
-    catch (errors) {
+    } catch (errors) {
       errors[''].forEach(error => toastr.error(error));
     }
     this.isRequesting = false;
@@ -79,6 +78,6 @@ export class LoginComponent {
     .subscribe(user => {
       this.authService.setUserName(user.alias);
       this.authService.setAvatarHash(user.attribute01);
-  });
-}
+    });
+  }
 }

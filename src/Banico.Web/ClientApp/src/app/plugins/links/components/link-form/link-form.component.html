@@ -1,0 +1,56 @@
+<form [formGroup]="linkForm" novalidate (ngSubmit)="save()">
+  <input type="hidden"
+    id="id" 
+    name="id"
+    formControlName="id" />
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="name">Name</label>
+    <div class="col-md-10">
+        <input 
+            class="form-control" 
+            id="name" 
+            name="name"
+            type="text"
+            formControlName="name" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="sectionItems">Section Items</label>
+    <div class="col-md-10">
+        <input 
+            class="form-control" 
+            id="sectionItems" 
+            name="sectionItems"
+            type="text"
+            formControlName="sectionItems" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="description">Description</label>
+    <div class="col-md-10">
+        <input 
+            class="form-control" 
+            id="description" 
+            name="description"
+            type="text"
+            formControlName="description"
+            required />
+    </div>
+  </div>  
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="url">URL</label>
+    <div class="col-md-10">
+        <input 
+            class="form-control" 
+            id="url" 
+            name="url"
+            type="text"
+            formControlName="url"
+            required />
+    </div>
+  </div>  
+  <div class="form-group row">
+    <button type="submit" class="btn btn-primary" value="save">Save</button>
+  </div>
+</form>
+

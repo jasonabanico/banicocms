@@ -8,6 +8,7 @@ import { DirectoryModule } from './directory/main/directory.module';
 import { FaqModule } from './faq/main/faq.module';
 import { ForumModule } from './forum/forum.module';
 import { InviteModule } from './invite/main/invite.module';
+import { LinksModule } from './links/links.module';
 import { ListModule } from './list/list.module';
 import { PageModule } from './page/main/page.module';
 import { ProfileModule } from './profile/main/profile.module';
@@ -20,6 +21,7 @@ import { ProfileModule } from './profile/main/profile.module';
         FaqModule,
         ForumModule,
         InviteModule,
+        LinksModule,
         ListModule,
         PageModule,
         ProfileModule

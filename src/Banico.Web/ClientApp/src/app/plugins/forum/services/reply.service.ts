@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { PluginService } from "../../services/plugin.service";
+import { PluginService } from '../../services/plugin.service';
 import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
 import { Reply } from '../entities/reply';
@@ -15,13 +15,13 @@ export class ReplyService extends PluginService {
             return new Reply(item);
         }));
     }
-    
+
     public getReplies(topicId: string, page: number, pageSize: number): Observable<Reply[]> {
         return this.contentItemService.getAll('', '', '',
         'reply', topicId, '', '', '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '', true, true, '', page, pageSize).pipe(
         map(items => {
-            var replies: Reply[] = new Array<Reply>();
+            const replies: Reply[] = new Array<Reply>();
             items.forEach(function(item: ContentItem) {
                 replies.push(new Reply(item));
             });
@@ -31,7 +31,7 @@ export class ReplyService extends PluginService {
     }
 
     public setReplyUser(reply: Reply) {
-        var user = this.contentItemService.getProfileById(reply.userId)
+        this.contentItemService.getProfileById(reply.userId)
         .subscribe(user => {
             reply.username = user.alias;
             reply.avatarHash = user.attribute01;
@@ -42,22 +42,22 @@ export class ReplyService extends PluginService {
         id: string,
         topicId: string,
         text: string
-    ): Observable<boolean> {
-        let reply: Reply = new Reply(null);
+    ): Observable<string> {
+        const reply: Reply = new Reply(null);
 
         reply.id = id;
         reply.topicId = topicId;
         reply.text = text;
 
-        let contentItem: ContentItem = reply.ToContentItem();
+        const contentItem: ContentItem = reply.ToContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             catchError(this.handleError));
     }
 
     public delete(reply: Reply): Observable<{}> {
-        let headers = new HttpHeaders();
+        const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        let data = 'id=' + reply.id;
+        const data = 'id=' + reply.id;
         return this.http
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers

@@ -23,9 +23,9 @@ export class NavBarService {
     }
 
     public async initialize(
-        module: string, 
-        inputPathUrl: string, 
-        adminSection: string, 
+        module: string,
+        inputPathUrl: string,
+        adminSection: string,
         pathRoot: string
     ) {
         this.isAdmin = false;
@@ -33,10 +33,10 @@ export class NavBarService {
         this.pathUrlRoot = pathRoot;
         this.navBarItems = new Array<NavBarItem>();
 
-        var sections = new Array<Section>();
+        let sections = new Array<Section>();
         if (adminSection) {
             this.isAdmin = true;
-            var section = new Section();
+            const section = new Section();
             section.name = adminSection;
             sections.push(section);
         } else {
@@ -45,7 +45,7 @@ export class NavBarService {
 
         this.initializeNavBarItems(sections);
 
-        for (var i: number = 0; i < sections.length; i++) {
+        for (let i = 0; i < sections.length; i++) {
             this.setup(this.navBarItems[i]);
         }
     }

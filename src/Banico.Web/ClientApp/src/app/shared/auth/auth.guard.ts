@@ -1,4 +1,5 @@
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -10,6 +11,8 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
+  private debug = false;
+
   constructor(
     private authService: AuthService, 
     private configsService: ConfigsService,
@@ -20,13 +23,28 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    let module = route.data["module"] as string;
-    let url: string = state.url;
+    const module = route.data['module'] as string;
+    const url: string = state.url;
+
+    let result = false;
+
+    if (this.debug) {
+      alert(module);
+      alert(url);
+    }
+
+    if (!module) {
+      result = this.checkLogin(url);
+      return of(result);
+    }
 
     return this.getConfig(module).pipe(
       map(
         configValue => {
-          var result = false;
+          if (this.debug) {
+            alert(configValue);
+          }
+
           switch (configValue) {
             case '': {
               result = false; // secure by default
@@ -55,7 +73,7 @@ export class AuthGuard implements CanActivate {
     return this.configsService.get('', module, 'canActivate').pipe(
       map(config => {
         if (config) {
-          return config.value
+          return config.value;
         } else {
           return '';
         }
@@ -63,7 +81,7 @@ export class AuthGuard implements CanActivate {
   }
 
   private checkLogin(url: string): boolean {
-    var result = this.authService.isTokenExpired();
+    const result = this.authService.isTokenExpired();
     if (result) {
       this.router.navigate(['/account/login'], { queryParams: { returnUrl: url } });
     }
@@ -72,7 +90,7 @@ export class AuthGuard implements CanActivate {
   }
 
   private checkAdmin(url: string): boolean {
-    var result = this.checkLogin(url);
+    let result = this.checkLogin(url);
     if (result) {
       result = this.authService.isAdmin();
     }

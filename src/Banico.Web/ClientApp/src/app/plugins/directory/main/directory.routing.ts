@@ -16,7 +16,7 @@ const LIST_ROUTES: Routes = [
     { path: 'item/:id', component: DirectoryItemDisplayComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
     { path: 'edit/:id', component: DirectoryFormComponent, canActivate: [AuthGuard], data: { module: 'directory/manage' } },
     { path: ':path', component: DirectoryDisplayComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
-    { path: '', component: DirectoryFrontComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } }, 
+    { path: '', component: DirectoryFrontComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
     { path: '**', component: DirectoryDisplayComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } }
 ] }
 ];

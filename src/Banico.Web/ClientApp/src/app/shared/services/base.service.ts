@@ -53,11 +53,11 @@ export abstract class BaseService {
     }
 
     private getCookie(name): string {
-      var value = '; ' + document.cookie;
-      var parts = value.split('; ');
-      var result = "";
+      const value = '; ' + document.cookie;
+      const parts = value.split('; ');
+      let result = '';
       parts.forEach(element => {
-        var keyValue = element.split('=');
+        const keyValue = element.split('=');
         if (keyValue[0].includes(name)) {
           result = keyValue[1];
         }
@@ -70,7 +70,7 @@ export abstract class BaseService {
       let headers = new HttpHeaders();
       if (isPlatformBrowser(this.platformId)) {
         headers = headers.set('Content-Type', 'application/json');
-        let authToken = this.windowRefService.nativeWindow.localStorage.getItem(this.TOKEN_NAME);
+        const authToken = this.windowRefService.nativeWindow.localStorage.getItem(this.TOKEN_NAME);
         headers = headers.set('Authorization', 'Bearer ' + authToken);
         headers = headers.set('X-XSRF-TOKEN', this.getCookie('XSRF-TOKEN'));
       }
@@ -79,10 +79,12 @@ export abstract class BaseService {
     }
 
     public isAdmin(): boolean {
-      if (!this.localStorage) return false;
-      var isAdminStr: string = this.localStorage.getItem(this.IS_ADMIN);
-      var isAdmin: boolean = false;
-      if (isAdminStr == "y") {
+      if (!this.localStorage) {
+        return false;
+      }
+      const isAdminStr: string = this.localStorage.getItem(this.IS_ADMIN);
+      let isAdmin = false;
+      if (isAdminStr === 'y') {
           isAdmin = true;
       }
       return isAdmin;

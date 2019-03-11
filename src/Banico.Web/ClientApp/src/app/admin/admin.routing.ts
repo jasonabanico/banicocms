@@ -13,70 +13,70 @@ import { ConfigsListComponent } from './configs/components/configs-list/configs-
 import { AuthGuard } from '../shared/auth/auth.guard';
 
 const ADMIN_ROUTES: Routes = [
-    { path: 'admin/sections/section-item/:section', 
-        component: SectionItemsAdminComponent, 
+    { path: 'admin/sections/section-item/:section',
+        component: SectionItemsAdminComponent,
         canActivate: [AuthGuard],
-        data: { module: 'admin/sections' } 
-    },
-    { path: 'admin/sections/:path', 
-        component: SectionItemsAdminComponent, 
-        canActivate: [AuthGuard], 
         data: { module: 'admin/sections' }
     },
-    { path: 'admin/sections', 
-        component: SectionsAdminComponent, 
-        canActivate: [AuthGuard], 
+    { path: 'admin/sections/:path',
+        component: SectionItemsAdminComponent,
+        canActivate: [AuthGuard],
         data: { module: 'admin/sections' }
     },
-    { path: 'admin/roles/add', 
-        component: RoleFormComponent, 
-        canActivate: [AuthGuard], 
+    { path: 'admin/sections',
+        component: SectionsAdminComponent,
+        canActivate: [AuthGuard],
         data: { module: 'admin/sections' }
     },
-    { path: 'admin/roles/edit/:id', 
-        component: RoleFormComponent, 
-        canActivate: [AuthGuard], 
+    { path: 'admin/roles/add',
+        component: RoleFormComponent,
+        canActivate: [AuthGuard],
         data: { module: 'admin/sections' }
     },
-    { path: 'admin/roles', 
-        component: RolesListComponent, 
-        canActivate: [AuthGuard], 
+    { path: 'admin/roles/edit/:id',
+        component: RoleFormComponent,
+        canActivate: [AuthGuard],
+        data: { module: 'admin/sections' }
+    },
+    { path: 'admin/roles',
+        component: RolesListComponent,
+        canActivate: [AuthGuard],
         data: { module: 'admin/roles' }
     },
-    { path: 'admin/users/add', 
-        component: UserFormComponent, 
-        canActivate: [AuthGuard], 
+    { path: 'admin/users/add',
+        component: UserFormComponent,
+        canActivate: [AuthGuard],
         data: { module: 'admin/users' }
     },
-    { path: 'admin/users/edit/:id', 
-        component: UserFormComponent, 
-        canActivate: [AuthGuard], 
+    { path: 'admin/users/edit/:id',
+        component: UserFormComponent,
+        canActivate: [AuthGuard],
         data: { module: 'admin/users' }
     },
-    { path: 'admin/users', 
-        component: UsersListComponent, 
-        canActivate: [AuthGuard], 
+    { path: 'admin/users',
+        component: UsersListComponent,
+        canActivate: [AuthGuard],
         data: { module: 'admin/users' }
     },
-    { path: 'admin/configs/add', 
-        component: ConfigFormComponent, 
-        canActivate: [AuthGuard], 
+    { path: 'admin/configs/add',
+        component: ConfigFormComponent,
+        canActivate: [AuthGuard],
         data: { module: 'admin/configs' }
     },
-    { path: 'admin/configs/edit/:id', 
-        component: ConfigFormComponent, 
-        canActivate: [AuthGuard], 
+    { path: 'admin/configs/edit/:id',
+        component: ConfigFormComponent,
+        canActivate: [AuthGuard],
         data: { module: 'admin/configs' }
     },
-    { path: 'admin/configs', 
-        component: ConfigsListComponent, 
-        canActivate: [AuthGuard], 
+    { path: 'admin/configs',
+        component: ConfigsListComponent,
+        canActivate: [AuthGuard],
         data: { module: 'admin/configs' }
     },
-    { path: 'admin', 
-        component: AdminComponent, 
-        canActivate: [AuthGuard], 
-        data: { module: 'admin' } 
+    { path: 'admin',
+        component: AdminComponent,
+        canActivate: [AuthGuard],
+        data: { module: 'admin' }
     }
 ];
 

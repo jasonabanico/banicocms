@@ -100,7 +100,7 @@ export class SectionItemsAdminComponent implements OnInit {
 
         this.newSectionItem.parentId = this.parentSectionItem.id;
         this.newSectionItem.section = this.parentSectionItem.section;
-        this.newSectionItem.pathName = this.parentSectionItem.pathName
+        this.newSectionItem.pathName = this.parentSectionItem.pathName;
         if (this.parentSectionItem.pathName > '') {
             this.newSectionItem.pathName = this.newSectionItem.pathName + this.PATH_DELIM;
         }
@@ -112,8 +112,8 @@ export class SectionItemsAdminComponent implements OnInit {
     public save() {
         this.newSectionItem.name = this.sectionItemForm.value['name'];
         let alias: string = this.newSectionItem.name.toLowerCase();
-        alias = alias.replace(/ /g, "-");
-        alias = alias.replace(/\W/g, "");
+        alias = alias.replace(/ /g, '-');
+        alias = alias.replace(/[^\w\s-]/g, '');
         this.newSectionItem.alias = alias;
 
         this.sectionsService.addOrUpdateSectionItem(

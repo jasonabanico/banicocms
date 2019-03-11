@@ -1,0 +1,13 @@
+<span *ngIf="linksService.isAdmin">
+  <div class="card">
+      <div class="card-block">
+          <a href="/links/new/{{path}}">Add New Link</a>
+      </div>
+  </div>
+  <br />
+</span>
+
+<p *ngFor="let link of links; index as i">
+  <a href="{{link.url}}">{{link.name}}</a><br />
+  {{link.description}}
+</p>  

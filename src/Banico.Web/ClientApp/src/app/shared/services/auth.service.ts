@@ -1,6 +1,6 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { BaseService } from "./base.service";
+import { BaseService } from './base.service';
 import { Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { JSONP_ERR_NO_CALLBACK } from '@angular/common/http/src/jsonp';
@@ -22,9 +22,11 @@ export class AuthService extends BaseService {
             return this.localStorage.setItem(this.USER_ID, userId);
         }
     }
-    
+
     public getUserId(): string {
-        if (!this.localStorage) return '';
+        if (!this.localStorage) {
+            return '';
+        }
         return this.localStorage.getItem(this.USER_ID);
     }
 
@@ -33,9 +35,11 @@ export class AuthService extends BaseService {
             return this.localStorage.setItem(this.USER_NAME, userName);
         }
     }
-    
+
     public getUserName(): string {
-        if (!this.localStorage) return '';
+        if (!this.localStorage) {
+            return '';
+        }
         return this.localStorage.getItem(this.USER_NAME);
     }
 
@@ -44,41 +48,53 @@ export class AuthService extends BaseService {
             return this.localStorage.setItem(this.AVATAR_HASH, avatarHash);
         }
     }
-    
+
     public getAvatarHash(): string {
-        if (!this.localStorage) return '';
+        if (!this.localStorage) {
+            return '';
+        }
         return this.localStorage.getItem(this.AVATAR_HASH);
     }
 
     public getToken(): string {
-        if (!this.localStorage) return '';
+        if (!this.localStorage) {
+            return '';
+        }
         return this.localStorage.getItem(this.TOKEN_NAME);
     }
-    
+
     public setToken(token: string): void {
         if (this.localStorage) {
             this.localStorage.setItem(this.TOKEN_NAME, token);
         }
     }
-    
+
     public getTokenExpirationDate(token: string): Date {
         const decoded = jwt_decode(token);
-        if (decoded.exp === undefined) return null;
+        if (decoded.exp === undefined) {
+            return null;
+        }
 
-        const date = new Date(0); 
+        const date = new Date(0);
         date.setUTCSeconds(decoded.exp);
         return date;
     }
-    
+
     public isTokenExpired(token?: string): boolean {
-        if (!token) token = this.getToken();
-        if (!token) return true;
+        if (!token) {
+            token = this.getToken();
+        }
+        if (!token) {
+            return true;
+        }
         const date = this.getTokenExpirationDate(token);
-        if (date === undefined) return false;
-        var result = !(date.valueOf() > new Date().valueOf());
+        if (date === undefined) {
+            return false;
+        }
+        const result = !(date.valueOf() > new Date().valueOf());
         return result;
     }
-      
+
     public removeToken() {
         if (this.localStorage) {
             this.localStorage.removeItem(this.TOKEN_NAME);
@@ -88,15 +104,17 @@ export class AuthService extends BaseService {
     }
 
     public hasToken(): boolean {
-        if (!this.localStorage) return false;
-        var authToken = this.localStorage.getItem(this.TOKEN_NAME);
+        if (this.isTokenExpired()) {
+            return false;
+        }
+        const authToken = this.localStorage.getItem(this.TOKEN_NAME);
         return !!authToken;
     }
 
     public setIsAdmin(isAdmin: boolean) {
-        var isAdminStr = "n";
+        let isAdminStr = 'n';
         if (isAdmin) {
-            isAdminStr = "y";
+            isAdminStr = 'y';
         }
         this.localStorage.setItem(this.IS_ADMIN, isAdminStr);
     }
