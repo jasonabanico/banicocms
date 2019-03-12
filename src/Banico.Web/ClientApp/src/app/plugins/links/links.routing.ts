@@ -7,11 +7,11 @@ import { AuthGuard } from '../../shared/auth/auth.guard';
 
 const LINKS_ROUTES: Routes = [
   { path: 'links', component: LinksComponent, children: [
-    { path: 'new/:path', component: LinkFormComponent, canActivate: [AuthGuard], data: { module: 'links/manage' } },
-    { path: 'edit/:id', component: LinkFormComponent, canActivate: [AuthGuard], data: { module: 'links/manage' } },
-    { path: ':path', component: LinkListComponent, canActivate: [AuthGuard], data: { module: 'links/view' } },
-    { path: '', component: LinkListComponent, canActivate: [AuthGuard], data: { module: 'links/view' } },
-    { path: '**', component: LinkListComponent, canActivate: [AuthGuard], data: { module: 'links/view' } }
+    { path: 'new/:path', component: LinkFormComponent, canActivate: [AuthGuard], data: { module: 'link/manage' } },
+    { path: 'edit/:id', component: LinkFormComponent, canActivate: [AuthGuard], data: { module: 'link/manage' } },
+    { path: ':path', component: LinkListComponent, canActivate: [AuthGuard], data: { module: 'link/view' } },
+    { path: '', component: LinkListComponent, canActivate: [AuthGuard], data: { module: 'link/view' } },
+    { path: '**', component: LinkListComponent, canActivate: [AuthGuard], data: { module: 'link/view' } }
   ] }
 ];
 
