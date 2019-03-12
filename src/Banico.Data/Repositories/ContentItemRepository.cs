@@ -395,14 +395,14 @@ namespace Banico.Data.Repositories
             if (!string.IsNullOrEmpty(sectionItems))
             {
                 var sections = sectionItems.Split(SECTION_DELIM);
-                for (int i = 0; i < (sections.Count() - 1); i ++)
+                for (int i = 0; i < sections.Count(); i ++)
                 {
                     var sectionFields = sections[i].Split(TYPE_DELIM);
-                    var sectionType = sectionFields[0];
+                    var section = sectionFields[0];
                     var sectionItemString = sectionFields[1];
 
                     var sectionItem = await (from si in _dbContext.SectionItems
-                                        where si.Section == sectionType &&
+                                        where si.Section == section &&
                                             si.PathUrl == sectionItemString
                                         select si).ToListAsync();
 
