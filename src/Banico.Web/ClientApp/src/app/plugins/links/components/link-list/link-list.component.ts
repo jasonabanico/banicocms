@@ -17,7 +17,7 @@ export class LinkListComponent implements OnInit {
 
   constructor(
     private navBarService: NavBarService,
-    private linksService: LinksService,
+    public linksService: LinksService,
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute

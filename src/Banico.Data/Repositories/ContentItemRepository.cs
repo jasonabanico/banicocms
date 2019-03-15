@@ -403,7 +403,7 @@ namespace Banico.Data.Repositories
 
                     var sectionItem = await (from si in _dbContext.SectionItems
                                         where si.Section == section &&
-                                            si.PathUrl == sectionItemString
+                                            (si.PathUrl + si.Alias) == sectionItemString
                                         select si).ToListAsync();
 
                     ContentSectionItem contentSectionItem = new ContentSectionItem();
