@@ -4,7 +4,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { WindowRefService } from './windowref.service';
 
-export abstract class BaseService {  
+export abstract class BaseService {
   protected readonly TOKEN_NAME = 'auth_token';
   protected readonly USER_ID = 'user_id';
   protected readonly USER_NAME = 'username';
@@ -19,12 +19,12 @@ export abstract class BaseService {
   constructor(
     protected windowRefService: WindowRefService,
     protected platformId: Object
-    ) { 
+    ) {
       if (isPlatformBrowser(this.platformId)) {
         this.localStorage = windowRefService.nativeWindow.localStorage;
     }
   }
-  
+
   protected handleError(error: any) {
       if (error) {
         if (error.headers) {
@@ -34,10 +34,10 @@ export abstract class BaseService {
           if (applicationError) {
             return observableThrowError(applicationError);
           }
-    
+
           var modelStateErrors: string = '';
           var serverError = error.error;
-    
+
           return observableThrowError(serverError);
           // if (!serverError.type) {
           //   for (var key in serverError) {
@@ -45,7 +45,7 @@ export abstract class BaseService {
           //       modelStateErrors += serverError[key] + '\n';
           //   }
           // }
-    
+
           // modelStateErrors = modelStateErrors = '' ? null : modelStateErrors;
           // return Observable.throw(modelStateErrors || 'Server error');
         }

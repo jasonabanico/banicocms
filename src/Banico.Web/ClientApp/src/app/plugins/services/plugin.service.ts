@@ -2,14 +2,18 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseService } from '../../shared/services/base.service';
+import { ConfigsService } from '../../shared/services/configs.service';
 import { ContentItemService } from './content-item.service';
 import { WindowRefService } from '../../shared/services/windowref.service';
 import { ContentItem } from '../../entities/content-item';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class PluginService extends BaseService {
     accountUrl: string;
     appBaseUrl: string;
+    module: string;
+    pageSize: number;
 
     public readonly PATH_DELIM: string = '_';
     public readonly TYPE_DELIM: string = '~';
@@ -20,6 +24,7 @@ export class PluginService extends BaseService {
         @Inject(WindowRefService) windowRefService: WindowRefService,
         @Inject(PLATFORM_ID) platformId: Object,
         @Inject('BASE_URL') protected baseUrl: string,
+        protected configsService: ConfigsService,
         protected contentItemService: ContentItemService
     ) {
         super(windowRefService, platformId);
@@ -28,10 +33,18 @@ export class PluginService extends BaseService {
         this.appBaseUrl = `${this.baseUrl}api/Page`;
     }
 
-    public toSectionItems(contentItem: ContentItem): string
-    {
-        var contentSectionItems = contentItem.contentSectionItems;
-        var output: string = '';
+    public getPageSize() {
+        this.configsService.get('', this.module, 'pageSize')
+            .pipe(
+                map(config => {
+                    this.pageSize = Number.parseInt(config.value);
+                })
+            );
+    }
+
+    public toSectionItems(contentItem: ContentItem): string {
+        const contentSectionItems = contentItem.contentSectionItems;
+        let output = '';
 
         contentSectionItems.forEach(
             function (contentSectionItem) {
@@ -41,7 +54,7 @@ export class PluginService extends BaseService {
                 output = output + contentSectionItem.sectionItem.section + this.TYPE_DELIM +
                     contentSectionItem.sectionItem.pathUrl;
             }
-        )
+        );
 
         return output;
     }
@@ -50,7 +63,7 @@ export class PluginService extends BaseService {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Response status: ' + res.status);
         }
-        let body = res.json();
+        const body = res.json();
         return body || {};
     }
 

@@ -31,14 +31,14 @@ export class ConfigsService extends BaseService {
     }
 
     private addResult(res: any) {
-        var id = '';
-        var output;
+        let id = '';
+        let output = '';
         if (res.data.addConfig) {
             id = res.data.addConfig.id;
             output = res.data.addConfig;
         }
 
-        if (id == ''){
+        if (id === '') {
             throw new Error('Unable to create object.');
         }
         return output || {};
@@ -58,7 +58,7 @@ export class ConfigsService extends BaseService {
     }
 
     public setInitialSettings(): Observable<boolean> {
-        return this.http.post(this.baseUrl + "api/Config/SetInitialSettings", {}, this.jsonAuthRequestOptions).pipe(
+        return this.http.post(this.baseUrl + 'api/Config/SetInitialSettings', {}, this.jsonAuthRequestOptions).pipe(
         map(res => true),
         catchError(this.handleError),);
     }
@@ -81,9 +81,9 @@ export class ConfigsService extends BaseService {
     public getAll(
         id: string,
         name: string,
-        module: string    
+        module: string
     ): Observable<Config[]> {
-        var result = this.apollo.watchQuery<ConfigsQueryResult>({
+        const result = this.apollo.watchQuery<ConfigsQueryResult>({
             query: ConfigsQuery,
             variables: {
                 id: id,
@@ -104,7 +104,7 @@ export class ConfigsService extends BaseService {
         module: string,
         value: string
     ): Observable<any> {
-        var result = this.apollo.mutate({
+        const result = this.apollo.mutate({
             mutation: AddOrUpdateConfigMutation,
             variables: {
                 id: id,

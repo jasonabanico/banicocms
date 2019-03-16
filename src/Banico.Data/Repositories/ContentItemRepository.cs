@@ -34,6 +34,10 @@ namespace Banico.Data.Repositories
 
             string maxPageSize = _configuration["Content:MaxPageSize"];
             int.TryParse(maxPageSize, out _maxPageSize);
+
+            if (_maxPageSize == 0) {
+                _maxPageSize = 40;
+            }
         }
 
         public async Task<List<ContentItem>> Get(

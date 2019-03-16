@@ -38,9 +38,9 @@ export class ConfigsService {
     public getAll(
         id: string,
         module: string,
-        name: string    
+        name: string
     ): Observable<Config[]> {
-        var result = this.apollo.watchQuery<ConfigsQueryResult>({
+        const result = this.apollo.watchQuery<ConfigsQueryResult>({
             query: ConfigsQuery,
             variables: {
                 id: id,

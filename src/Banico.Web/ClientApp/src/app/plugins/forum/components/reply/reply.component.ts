@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-import { ConfigsService } from '../../../../shared/services/configs.service';
 import { ReplyService } from '../../services/reply.service';
 import { ReplyCommentService } from '../../services/reply-comment.service';
 import { Reply } from '../../entities/reply';
@@ -21,9 +20,8 @@ export class ReplyComponent {
   public isEdit: boolean;
   public moment: string;
   public momentRelative: string;
-  
+
   constructor(
-    private configService: ConfigsService,
     private replyService: ReplyService,
     private replyCommentService: ReplyCommentService
     ) {
@@ -40,15 +38,9 @@ export class ReplyComponent {
     this.reply = reply;
     this.moment = moment(reply.createdDate).format('MMMM Do YYYY, h:mm:ss a');
     this.momentRelative = moment(reply.createdDate).fromNow();
+    this.replyCommentService.getReplyComments(reply.id, 0)
+      .subscribe(replyComments => this.replyComments = replyComments);
     this.replyService.setReplyUser(reply);
-    this.configService.get('', 'forums', 'pageSize')
-      .pipe(
-        map(config => {
-          const size = config.value;
-          this.replyCommentService.getReplyComments(reply.id, 0, +size)
-          .subscribe(replyComments => this.replyComments = replyComments);
-        })
-      );
     this.isEdit = false;
   }
 

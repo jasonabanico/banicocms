@@ -1,13 +1,13 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { PluginService } from "../../services/plugin.service";
+import { PluginService } from '../../services/plugin.service';
 import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
 import { ReplyComment } from '../entities/reply-comment';
 
 @Injectable()
-export class ReplyCommentService extends PluginService {
+export class ReplyCommentService extends PluginService implements OnInit {
 
     public get(id: string): Observable<ReplyComment> {
         return this.contentItemService.get(id).pipe(
@@ -15,15 +15,20 @@ export class ReplyCommentService extends PluginService {
             return new ReplyComment(item);
         }));
     }
-    
-    public getReplyComments(replyId: string, page: number, pageSize: number): Observable<ReplyComment[]> {
+
+    ngOnInit() {
+        this.module = 'reply-comment';
+        this.getPageSize();
+    }
+
+    public getReplyComments(replyId: string, page: number): Observable<ReplyComment[]> {
         return this.contentItemService.getAll('', '', '',
-        'reply-comment', replyId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true, '', page, pageSize).pipe(
+        this.module, replyId, '', '', '', '', '', '', '', '', '', '', '', '', '',
+        '', '', '', '', '', '', '', '', '', '', true, true, '', page, this.pageSize).pipe(
         map(items => {
-            var replyComments: ReplyComment[] = new Array<ReplyComment>();
+            const replyComments: ReplyComment[] = new Array<ReplyComment>();
             items.forEach(function(item: ContentItem) {
-                replyComments.push(new ReplyComment(item));                
+                replyComments.push(new ReplyComment(item));
             });
 
             return replyComments;
@@ -31,7 +36,7 @@ export class ReplyCommentService extends PluginService {
     }
 
     public setReplyCommentUser(replyComment: ReplyComment) {
-        var user = this.contentItemService.getProfileById(replyComment.userId)
+        this.contentItemService.getProfileById(replyComment.userId)
         .subscribe(user => {
             replyComment.username = user.alias;
             replyComment.avatarHash = user.attribute01;
@@ -43,21 +48,21 @@ export class ReplyCommentService extends PluginService {
         replyId: string,
         text: string
     ): Observable<string> {
-        let replyComment: ReplyComment = new ReplyComment(null);
+        const replyComment: ReplyComment = new ReplyComment(null);
 
         replyComment.id = id;
         replyComment.replyId = replyId;
         replyComment.text = text;
 
-        let contentItem: ContentItem = replyComment.ToContentItem();
+        const contentItem: ContentItem = replyComment.ToContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             catchError(this.handleError));
     }
 
     public delete(replyComment: ReplyComment): Observable<{}> {
-        let headers = new HttpHeaders();
+        const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        let data = 'id=' + replyComment.id;
+        const data = 'id=' + replyComment.id;
         return this.http
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers
