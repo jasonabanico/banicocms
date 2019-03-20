@@ -8,6 +8,7 @@
 </span>
 
 <p *ngFor="let link of links; index as i">
-  <a href="{{link.url}}">{{link.name}}</a><br />
+  <a href="{{link.url}}">{{i}} - {{link.name}}</a><br />
   {{link.description}}
-</p>  
+</p>
+

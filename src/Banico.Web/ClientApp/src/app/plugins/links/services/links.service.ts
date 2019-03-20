@@ -22,7 +22,14 @@ export class LinksService extends PluginService implements OnInit {
     }
 
     public getLinks(sectionItems: string): Observable<Link[]> {
-        return this.contentItemService.getAll('', '', '',
+        this.contentItemService.getCount('', '', '',
+        this.module, '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
+        '', '', '', '', '', '', '', '', '', '', true, true).pipe(
+        map(count => {
+            alert(count);
+        }));
+
+            return this.contentItemService.getAll('', '', '',
         this.module, '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '', true, true, '', 0, this.pageSize).pipe(
         map(items => {

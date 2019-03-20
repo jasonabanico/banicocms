@@ -4,10 +4,11 @@ import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/com
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 
-import { ContentItemsQuery } from './content-item.queries';
+import { ContentItemsQuery, ContentItemsCountQuery } from './content-item.queries';
 import { AddOrUpdateContentItemMutation } from './content-item.mutations';
 import { ContentItemsQueryResult } from './content-item.queryresults';
 import { ContentItem } from '../../entities/content-item';
+import { ContentItemsCountQueryResult } from './content-items-count-query-result';
 //import { status, json } from '../../../shared/fetch';
 
 @Injectable()
@@ -90,6 +91,80 @@ export class ContentItemService {
                 return null;
             }
         }));
+    }
+
+    public getCount(
+        id: string,
+        name: string,
+        alias: string,
+        module: string,
+        parentId: string,
+        createdBy: string,
+        sectionItems: string,
+        content: string,
+        attribute01: string,
+        attribute02: string,
+        attribute03: string,
+        attribute04: string,
+        attribute05: string,
+        attribute06: string,
+        attribute07: string,
+        attribute08: string,
+        attribute09: string,
+        attribute10: string,
+        attribute11: string,
+        attribute12: string,
+        attribute13: string,
+        attribute14: string,
+        attribute15: string,
+        attribute16: string,
+        attribute17: string,
+        attribute18: string,
+        attribute19: string,
+        attribute20: string,
+        includeChildren: boolean,
+        includeParents: boolean
+    ): Observable<number> {
+        const result = this.apollo.watchQuery<ContentItemsCountQueryResult>({
+            query: ContentItemsCountQuery,
+            variables: {
+                id: id,
+                name: name,
+                alias: alias,
+                module: module,
+                parentId: parentId,
+                createdBy: createdBy,
+                sectionItems: sectionItems,
+                content: content,
+                attribute01: attribute01,
+                attribute02: attribute02,
+                attribute03: attribute03,
+                attribute04: attribute04,
+                attribute05: attribute05,
+                attribute06: attribute06,
+                attribute07: attribute07,
+                attribute08: attribute08,
+                attribute09: attribute09,
+                attribute10: attribute10,
+                attribute11: attribute11,
+                attribute12: attribute12,
+                attribute13: attribute13,
+                attribute14: attribute14,
+                attribute15: attribute15,
+                attribute16: attribute16,
+                attribute17: attribute17,
+                attribute18: attribute18,
+                attribute19: attribute19,
+                attribute20: attribute20,
+                includeChildren: includeChildren,
+                includeParents: includeParents
+            }
+        })
+            .valueChanges
+            .pipe(
+              map(result => result.data.count)
+            );
+        return result;
     }
 
     public getAll(
