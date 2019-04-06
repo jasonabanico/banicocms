@@ -34,6 +34,7 @@ namespace Banico.Api
       services.AddSingleton<ContentItemType>();
       services.AddSingleton<ContentSectionItemType>();
       services.AddSingleton<ContentItemInputType>();
+      services.AddSingleton<ContentItemsCountType>();
       services.AddSingleton<ConfigType>();
       services.AddSingleton<ConfigInputType>();
       var sp = services.BuildServiceProvider();
