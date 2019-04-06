@@ -9,6 +9,8 @@ namespace Banico.Core.Repositories
 {
     public interface IContentItemRepository
     {
+        MaxPageSize GetMaxPageSize();
+
         Task<ContentItemsCount> GetCount(
             string id,
             string name,

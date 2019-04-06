@@ -4,7 +4,7 @@ import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/com
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 
-import { ContentItemsQuery, ContentItemsCountQuery } from './content-item.queries';
+import { ContentItemsQuery, ContentItemsCountQuery, MaxPageSizeQuery } from './content-item.queries';
 import { AddOrUpdateContentItemMutation } from './content-item.mutations';
 import { ContentItemsQueryResult } from './content-item.queryresults';
 import { ContentItem } from '../../entities/content-item';
@@ -93,6 +93,21 @@ export class ContentItemService {
         }));
     }
 
+    public getMaxPageSize(): Observable<number> {
+        const result = this.apollo.watchQuery<ContentItemsCountQueryResult>({
+            query: MaxPageSizeQuery
+        })
+        .valueChanges
+        .pipe(
+          map(maxPageSizeResult => {
+              const data: any = maxPageSizeResult.data;
+              return data.maxPageSize.count;
+          })
+        );
+    return result;
+
+    }
+
     public getCount(
         id: string,
         name: string,
@@ -162,7 +177,10 @@ export class ContentItemService {
         })
             .valueChanges
             .pipe(
-              map(result => result.data.count)
+              map(contentItemsCountResult => {
+                  const data: any = contentItemsCountResult.data;
+                  return data.contentItemsCount.count;
+              })
             );
         return result;
     }

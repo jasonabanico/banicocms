@@ -69,6 +69,11 @@ namespace Banico.Api.Models
                     )
                 );
 
+            Field<MaxPageSizeType>(
+                "maxPageSize",
+                resolve: context => contentItemRepository.GetMaxPageSize()
+            );
+
             Field<ContentItemsCountType>(
                 "contentItemsCount",
                 arguments: new QueryArguments(

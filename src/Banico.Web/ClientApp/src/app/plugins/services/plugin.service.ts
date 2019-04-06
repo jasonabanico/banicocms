@@ -12,7 +12,6 @@ import { map } from 'rxjs/operators';
 export class PluginService extends BaseService {
     accountUrl: string;
     appBaseUrl: string;
-    module: string;
     pageSize: number;
 
     public readonly PATH_DELIM: string = '_';
@@ -33,13 +32,21 @@ export class PluginService extends BaseService {
         this.appBaseUrl = `${this.baseUrl}api/Page`;
     }
 
-    public getPageSize() {
-        this.configsService.get('', this.module, 'pageSize')
+    public getPageSize(module: string): Observable<number> {
+        return this.configsService.get('', module, 'pageSize')
             .pipe(
                 map(config => {
-                    this.pageSize = Number.parseInt(config.value);
+                    if (config) {
+                        return Number.parseInt(config.value);
+                    } else {
+                        return 0;
+                    }
                 })
             );
+    }
+
+    public getMaxPageSize(): Observable<number> {
+        return this.contentItemService.getMaxPageSize();
     }
 
     public toSectionItems(contentItem: ContentItem): string {

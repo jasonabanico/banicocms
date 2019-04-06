@@ -7,18 +7,14 @@ import { HttpHeaders } from '@angular/common/http';
 import { ReplyComment } from '../entities/reply-comment';
 
 @Injectable()
-export class ReplyCommentService extends PluginService implements OnInit {
+export class ReplyCommentService extends PluginService {
+    public module = 'reply-comment';
 
     public get(id: string): Observable<ReplyComment> {
         return this.contentItemService.get(id).pipe(
         map(item => {
             return new ReplyComment(item);
         }));
-    }
-
-    ngOnInit() {
-        this.module = 'reply-comment';
-        this.getPageSize();
     }
 
     public getReplyComments(replyId: string, page: number): Observable<ReplyComment[]> {

@@ -1,7 +1,15 @@
 import gql from 'graphql-tag';
 
+export const MaxPageSizeQuery = gql`
+    query maxPageSizeQuery {
+        maxPageSize {
+            count
+        }
+    }
+`;
+
 export const ContentItemsCountQuery = gql`
-    query contentItemsQueryCount(
+    query contentItemsCountQuery(
         $id: String,
         $name: String,
         $alias: String,

@@ -7,12 +7,8 @@ import { ContentItem } from '../../../entities/content-item';
 import { Link } from '../entities/link';
 
 @Injectable()
-export class LinksService extends PluginService implements OnInit {
-
-    ngOnInit() {
-        this.module = 'link';
-        this.getPageSize();
-    }
+export class LinksService extends PluginService {
+    public module = 'link';
 
     public get(id: string): Observable<Link> {
         return this.contentItemService.get(id).pipe(
@@ -21,15 +17,14 @@ export class LinksService extends PluginService implements OnInit {
         }));
     }
 
-    public getLinks(sectionItems: string): Observable<Link[]> {
-        this.contentItemService.getCount('', '', '',
+    public getLinksCount(sectionItems: string): Observable<number> {
+        return this.contentItemService.getCount('', '', '',
         this.module, '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true).pipe(
-        map(count => {
-            alert(count);
-        }));
+        '', '', '', '', '', '', '', '', '', '', true, true).pipe();
+    }
 
-            return this.contentItemService.getAll('', '', '',
+    public getLinks(sectionItems: string): Observable<Link[]> {
+        return this.contentItemService.getAll('', '', '',
         this.module, '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '', true, true, '', 0, this.pageSize).pipe(
         map(items => {

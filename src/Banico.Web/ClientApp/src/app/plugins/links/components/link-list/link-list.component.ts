@@ -13,6 +13,10 @@ import { LinksService } from '../../services/links.service';
 export class LinkListComponent implements OnInit {
   private sub: any;
   private path: string;
+  public page = 0;
+  public pageSize = 0;
+  public maxPageSize = 0;
+  public linksCount = 0;
   public links: Link[];
 
   constructor(
@@ -30,8 +34,23 @@ export class LinkListComponent implements OnInit {
       this.path = params['path'];
       this.navBarService.initialize('links', this.path, '', '/links');
 
+      this.linksService.getPageSize(this.linksService.module)
+        .subscribe(pageSize => {
+          this.pageSize = pageSize;
+        });
+
+      this.linksService.getMaxPageSize()
+        .subscribe(maxPageSize => {
+          this.maxPageSize = maxPageSize;
+        });
+
       if (this.path) {
-          this.linksService.getLinks(this.path)
+        this.linksService.getLinksCount(this.path)
+          .subscribe(count => {
+            this.linksCount = count;
+          });
+
+        this.linksService.getLinks(this.path)
           .subscribe(links => this.setLinks(links));
       }
     });

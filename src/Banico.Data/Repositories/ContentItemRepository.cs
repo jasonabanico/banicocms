@@ -40,6 +40,13 @@ namespace Banico.Data.Repositories
             }
         }
 
+        public MaxPageSize GetMaxPageSize() {
+            MaxPageSize result = new MaxPageSize();
+            result.Count = _maxPageSize;
+
+            return result;
+        }
+
         public async Task<ContentItemsCount> GetCount(
             string id,
             string name,
