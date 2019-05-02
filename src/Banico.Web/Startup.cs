@@ -1,201 +1,122 @@
-using System;
-using System.Net;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
+using System.IO;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using FluentValidation.AspNetCore;
+using Microsoft.Net.Http.Headers;
 using AspNetCore.RouteAnalyzer;
-using Banico.Core.Entities;
+using Swashbuckle.AspNetCore.Swagger;
+using WebEssentials.AspNetCore.Pwa;
 using Banico.Data;
-using Banico.Data.Settings;
-using Banico.Api;
-using Banico.Identity;
-using Banico.Identity.Extensions;
-using Banico.Services;
-using Banico.Services.Interfaces;
 
-namespace Banico.Web
+namespace Banico.Web 
 {
-    public class Startup
+    public class Startup 
     {
-        private bool developmentEnvironment = false;
+        private BanicoStartup banicoStartup;
 
-        private IdentityStartup identityStartup;
-        private DataStartup dataStartup;
-        private ApiStartup apiStartup;
-        private ServicesStartup servicesStartup;
-
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup (IConfiguration configuration, IHostingEnvironment env) 
         {
-            Configuration = configuration;
- 
-             if (env.IsDevelopment())
-            {
-                this.developmentEnvironment = true;
-            }
+            var builder = new ConfigurationBuilder()
+                .SetBasePath (env.ContentRootPath)
+                .AddJsonFile ("appsettings.json", optional : true, reloadOnChange : true)
+                .AddJsonFile ($"appsettings.{env.EnvironmentName}.json", optional : true)
+                .AddEnvironmentVariables ();
+            this.Configuration = builder.Build();
 
-            identityStartup = new IdentityStartup(configuration, this.developmentEnvironment);
-            dataStartup = new DataStartup();
-            apiStartup = new ApiStartup();
-            servicesStartup = new ServicesStartup();
-       }
+            this.banicoStartup = new BanicoStartup();
+            this.banicoStartup.Init(configuration, env);
+        }
 
-        public IConfiguration Configuration { get; }
+        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
-            services.AddSingleton<IConfiguration>(Configuration);
-
+        public void ConfigureServices (IServiceCollection services) {
             // Add framework services.
-            string appDbContextConnectionString = Configuration.GetConnectionString("AppDbContext");
+            this.banicoStartup.ConfigureServices(services);
+            services.AddNodeServices();
+            services.AddHttpContextAccessor();
+            services.AddProgressiveWebApp(new PwaOptions { Strategy = ServiceWorkerStrategy.CacheFirst, RegisterServiceWorker = true, RegisterWebmanifest = true }, "manifest.json");
 
-            if ((!String.IsNullOrEmpty(appDbContextConnectionString)) && 
-                (!this.developmentEnvironment))
-            {
-                services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlServer(appDbContextConnectionString,
-                    optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Data")));
-            }
-            else
-            {
-                var connectionStringBuilder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder { DataSource = "banico.db" };
-                appDbContextConnectionString = connectionStringBuilder.ToString();
-                services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlite(appDbContextConnectionString,
-                    optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Data")));
-            }
-      
-            services.Configure<AuthMessageSenderOptions>(Configuration);
-            //services.AddAntiforgery(opts => opts.HeaderName = "X-XSRF-Token");
-            services.AddAntiforgery(opts =>
-                {
-                    //opts.Cookie.Name = "XSRF-TOKEN";
-                    opts.HeaderName = "X-XSRF-TOKEN";
-                }
-            );
-
-            identityStartup.ConfigureServices(services);
-            dataStartup.ConfigureServices(Configuration, services);
-            apiStartup.ConfigureServices(services);
-            servicesStartup.ConfigureServices(services);
-
-            // services.AddMvc(opts =>
-            // {
-            //     opts.Filters.AddService(typeof(AngularAntiforgeryCookieResultFilter));
-            // })
-            services.AddMvc()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>())
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(
-                    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                )
-                .AddApplicationPart(typeof(ApiStartup).Assembly)
-                .AddApplicationPart(typeof(IdentityStartup).Assembly);
-            // services.AddTransient<AngularAntiforgeryCookieResultFilter>();
-            
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
+            // Register the Swagger generator, defining one or more Swagger documents
+            services.AddSwaggerGen (c => {
+                c.SwaggerDoc ("v1", new Info { Title = "Angular 7.0 Universal & ASP.NET Core advanced starter-kit web API", Version = "v1" });
             });
-
-            services.AddRouteAnalyzer();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(
+        public void Configure (
             IApplicationBuilder app, 
             IHostingEnvironment env, 
+            ILoggerFactory loggerFactory, 
             IAntiforgery antiforgery, 
-            ILoggerFactory loggerFactory,
             IApplicationLifetime applicationLifetime, // Add
-            IRouteAnalyzer routeAnalyzer)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler(
-                    builder =>
-                    {
-                    builder.Run(
-                        async context =>
-                        {
-                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            IRouteAnalyzer routeAnalyzer) {
+            // move to Program.cs - loggerFactory.AddConsole (this.Configuration.GetSection ("Logging"));
+            // move to Program.cs - loggerFactory.AddDebug ();
 
-                        var error = context.Features.Get<IExceptionHandlerFeature>();
-                        if (error != null)
-                        {
-                            context.Response.AddApplicationError(error.Error.Message);
-                            await context.Response.WriteAsync(error.Error.Message).ConfigureAwait(false);
+            // app.UseStaticFiles();
+
+            this.banicoStartup.Configure(app, env, antiforgery);
+            app.UseStaticFiles(new StaticFileOptions() {
+                OnPrepareResponse = c => {
+                    //Do not add cache to json files. We need to have new versions when we add new translations.
+                    c.Context.Response.GetTypedHeaders ().CacheControl = !c.Context.Request.Path.Value.Contains (".json")
+                        ? new CacheControlHeaderValue () {
+                            MaxAge = TimeSpan.FromDays (30) // Cache everything except json for 30 days
                         }
-                        });
-                    });
-            }
-
-            loggerFactory.AddConsole();
-
-            apiStartup.Configure(app, env);
-
-            app.UseAuthentication();
-            
-            app.Use(next => context =>
-                {
-                    string path = context.Request.Path.Value;
-                    
-                    if (path.ToLower().Contains("/account")) {
-            //         if (
-            // string.Equals(path, "/", StringComparison.OrdinalIgnoreCase) ||
-            // string.Equals(path, "/index.html", StringComparison.OrdinalIgnoreCase)) {
-                        // The request token can be sent as a JavaScript-readable cookie, 
-                        // and Angular uses it by default.
-                        var tokens = antiforgery.GetAndStoreTokens(context);
-                        context.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, 
-                            new CookieOptions() { HttpOnly = false });
-                    }
-
-                    return next(context);
+                        : new CacheControlHeaderValue () {
+                            MaxAge = TimeSpan.FromMinutes (15) // Cache json for 15 minutes
+                        };
                 }
-            );
-
-            app.UseHttpsRedirection();
-            // app.UseMiddleware<AntiForgeryMiddleware>("XSRF-TOKEN");
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-            app.UseJwtTokenMiddleware();
-            app.UseSpaStaticFiles();
-            app.UseCookiePolicy();
-            app.UseGraphiQl();
-            
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
             });
 
+            if (env.IsDevelopment()) {
+                app.UseDeveloperExceptionPage ();
+                app.UseWebpackDevMiddleware (new WebpackDevMiddlewareOptions {
+                    HotModuleReplacement = true,
+                        HotModuleReplacementEndpoint = "/dist/"
+                });
+                app.UseSwagger ();
+                app.UseSwaggerUI (c => {
+                    c.SwaggerEndpoint ("/swagger/v1/swagger.json", "My API V1");
+                });
+
+                // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
+
+                app.MapWhen (x => !x.Request.Path.Value.StartsWith ("/swagger", StringComparison.OrdinalIgnoreCase), builder => {
+                    builder.UseMvc (routes => {
+                        routes.MapSpaFallbackRoute (
+                            name: "spa-fallback",
+                            defaults : new { controller = "Home", action = "Index" });
+                    });
+                });
+            } else {
+                app.UseMvc(routes => {
+                    routes.MapRoute (
+                        name: "default",
+                        template: "{controller=Home}/{action=Index}/{id?}");
+
+                    routes.MapRoute (
+                        "Sitemap",
+                        "sitemap.xml",
+                        new { controller = "Home", action = "SitemapXml" });
+
+                    routes.MapSpaFallbackRoute (
+                        name: "spa-fallback",
+                        defaults : new { controller = "Home", action = "Index" });
+
+                });
+                app.UseExceptionHandler("/Home/Error");
+            }
+
+            // display all routes
             applicationLifetime.ApplicationStarted.Register(() =>
             {
                 var infos = routeAnalyzer.GetAllRouteInformations();
@@ -208,69 +129,6 @@ namespace Banico.Web
                 Console.WriteLine("");
             });
 
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                spa.Options.SourcePath = "ClientApp";
-
-                // see https://docs.microsoft.com/en-us/aspnet/core/spa/angular?view=aspnetcore-2.1&tabs=visual-studio                
-    
-                spa.UseSpaPrerendering(options =>
-                {
-                    options.BootModulePath = $"{spa.Options.SourcePath}/dist/server/main.js";
-                    options.BootModuleBuilder = env.IsDevelopment()
-                        ? new AngularCliBuilder(npmScript: "build:ssr")
-                        : null;
-                    options.ExcludeUrls = new[] { "/sockjs-node" };
-                });
-
-                if (env.IsDevelopment())
-                {
-                    spa.Options.StartupTimeout = new TimeSpan(0, 0, 600);
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-
-            });
-        }
-    }
-
-    public static class ApplicationBuilderExtensions
-    {
-        public static IApplicationBuilder UseAntiforgeryTokenMiddleware(this IApplicationBuilder builder, string requestTokenCookieName)
-        {
-            return builder.UseMiddleware<AntiForgeryMiddleware>(requestTokenCookieName);
-        }
-    }
-
-    public class AntiForgeryMiddleware
-    {
-        private readonly RequestDelegate next;
-        private readonly string requestTokenCookieName;
-        private readonly string[] httpVerbs = new string[] { "GET", "HEAD", "OPTIONS", "TRACE" };
-
-        public AntiForgeryMiddleware(RequestDelegate next, string requestTokenCookieName)
-        {
-            this.next = next;
-            this.requestTokenCookieName = requestTokenCookieName;
-        }
-
-        public async Task Invoke(HttpContext context, IAntiforgery antiforgery)
-        {
-            if (httpVerbs.Contains(context.Request.Method, StringComparer.OrdinalIgnoreCase))
-            {
-                if (context.User.Identity.IsAuthenticated) {
-                    var tokens = antiforgery.GetAndStoreTokens(context);
-                
-                    context.Response.Cookies.Append(requestTokenCookieName, tokens.RequestToken, new CookieOptions()
-                    {
-                        HttpOnly = false
-                    });
-                }
-            }      
-
-            await next.Invoke(context);
         }
     }
 }

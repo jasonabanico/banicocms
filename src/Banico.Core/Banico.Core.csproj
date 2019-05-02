@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <RestoreFallbackFolders>clear</RestoreFallbackFolders>
   </PropertyGroup>
 
   <!-- https://github.com/dotnet/corefx/issues/29820 -->

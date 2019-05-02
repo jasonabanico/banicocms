@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <PreserveCompilationContext>false</PreserveCompilationContext>
+    <RestoreFallbackFolders>clear</RestoreFallbackFolders>
   </PropertyGroup>
 
   <!-- https://github.com/dotnet/corefx/issues/29820 -->

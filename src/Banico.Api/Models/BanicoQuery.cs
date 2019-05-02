@@ -167,7 +167,7 @@ namespace Banico.Api.Models
                     new QueryArgument<BooleanGraphType> { 
                         Name = "includeParents" 
                     }),
-                resolve: context =>  contentItemRepository.GetCount(
+                resolve: context => contentItemRepository.GetCount(
                     context.GetArgument<string>("id"),
                     context.GetArgument<string>("name"),
                     context.GetArgument<string>("alias"),

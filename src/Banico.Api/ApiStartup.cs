@@ -32,9 +32,9 @@ namespace Banico.Api
       services.AddSingleton<SectionItemType>();
       services.AddSingleton<SectionItemInputType>();
       services.AddSingleton<ContentItemType>();
+      services.AddSingleton<ContentItemsCountType>();
       services.AddSingleton<ContentSectionItemType>();
       services.AddSingleton<ContentItemInputType>();
-      services.AddSingleton<ContentItemsCountType>();
       services.AddSingleton<MaxPageSizeType>();
       services.AddSingleton<ConfigType>();
       services.AddSingleton<ConfigInputType>();

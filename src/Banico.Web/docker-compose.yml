@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  Banico.Web:
+    image: ${DOCKER_REGISTRY}Banico.Web
+    build:
+      context: .
+      dockerfile: Dockerfile

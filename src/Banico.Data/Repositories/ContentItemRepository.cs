@@ -209,7 +209,7 @@ namespace Banico.Data.Repositories
                 // }
             }
 
-            int count = await contentItems.CountAsync();
+            int count = await contentItems.CountAsync();          
             ContentItemsCount result = new ContentItemsCount();
             result.Count = count;
 

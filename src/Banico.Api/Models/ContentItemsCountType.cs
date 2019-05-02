@@ -8,7 +8,7 @@ namespace Banico.Api.Models
     {
         public ContentItemsCountType()
         {
-            Field(x => x.Count,  nullable:true);
+            Field(x => x.Count, nullable:true);
         }
     }
 }
