@@ -27,6 +27,9 @@ export class AuthService extends BaseService {
         if (!this.localStorage) {
             return '';
         }
+        if (this.isTokenExpired()) {
+            return '';
+        }
         return this.localStorage.getItem(this.USER_ID);
     }
 
@@ -38,6 +41,9 @@ export class AuthService extends BaseService {
 
     public getUserName(): string {
         if (!this.localStorage) {
+            return '';
+        }
+        if (this.isTokenExpired()) {
             return '';
         }
         return this.localStorage.getItem(this.USER_NAME);
@@ -53,11 +59,17 @@ export class AuthService extends BaseService {
         if (!this.localStorage) {
             return '';
         }
+        if (this.isTokenExpired()) {
+            return '';
+        }
         return this.localStorage.getItem(this.AVATAR_HASH);
     }
 
     public getToken(): string {
         if (!this.localStorage) {
+            return '';
+        }
+        if (this.isTokenExpired()) {
             return '';
         }
         const item = this.localStorage.getItem(this.TOKEN_NAME);
