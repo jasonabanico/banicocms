@@ -69,9 +69,6 @@ export class AuthService extends BaseService {
         if (!this.localStorage) {
             return '';
         }
-        if (this.isTokenExpired()) {
-            return '';
-        }
         const item = this.localStorage.getItem(this.TOKEN_NAME);
         
         return item;
