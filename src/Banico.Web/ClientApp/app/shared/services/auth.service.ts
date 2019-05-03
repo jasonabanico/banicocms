@@ -60,7 +60,9 @@ export class AuthService extends BaseService {
         if (!this.localStorage) {
             return '';
         }
-        return this.localStorage.getItem(this.TOKEN_NAME);
+        const item = this.localStorage.getItem(this.TOKEN_NAME);
+        
+        return item;
     }
 
     public setToken(token: string): void {
@@ -99,6 +101,7 @@ export class AuthService extends BaseService {
         if (this.localStorage) {
             this.localStorage.removeItem(this.TOKEN_NAME);
             this.localStorage.removeItem(this.USER_ID);
+            this.localStorage.removeItem(this.USER_NAME);
             this.localStorage.removeItem(this.IS_ADMIN);
         }
     }
