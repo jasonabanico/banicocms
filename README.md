@@ -17,16 +17,11 @@ http://banico.org
 # clone repository
 git clone https://github.com/jasebanico/banicocms
 
-# get server dependencies
+# get and build dependencies
 cd banico/src/Banico.Web
-dotnet restore
-
-# get client dependencies
-cd ClientApp
-npm install
+npm install && npm run build:dev && dotnet restore
 
 # build
-cd..
 dotnet build
 
 # use default settings for now, customize later
