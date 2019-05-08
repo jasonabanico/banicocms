@@ -18,7 +18,7 @@ http://banico.org
 git clone https://github.com/jasebanico/banicocms
 
 # get and build dependencies
-cd banico/src/Banico.Web
+cd banicocms/src/Banico.Web
 npm install && npm run build:dev && dotnet restore
 
 # build
