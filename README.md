@@ -22,18 +22,15 @@ cd banico/src/Banico.Web
 dotnet restore
 
 # get client dependencies
-npm install -g webpack
-npm install -g @angular/angular-cli
-npm install -g @angular/compiler-cli
-npm update
+cd ClientApp
+npm install
 
 # build
-webpack
+cd..
 dotnet build
-cd ..
 
 # use default settings for now, customize later
-cd Banico.Web/config
+cd Config
 cp sample.front.component.html front.component.html
 cp sample.appsettings.json appsettings.json
 cp sample.app.config.ts app.config.ts
@@ -41,10 +38,10 @@ cp sample.app.config.ts app.config.ts
 # edit app setting values
 
 # create database
+cd ..
 dotnet ef database update --context AppIdentityDbContext
 dotnet ef database update --context AppDbContext
 
 # run banico
-cd ..
 dotnet run
 ```
