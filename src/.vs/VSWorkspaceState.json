@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Banico.Core",
+    "\\Banico.Core\\Entities",
     "\\Banico.Web"
   ],
-  "SelectedNode": "\\Banico.Web",
   "PreviewInSolutionExplorer": false
 }
