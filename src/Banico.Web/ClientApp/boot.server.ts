@@ -1,6 +1,5 @@
 ﻿import 'zone.js/dist/zone-node';
 import './polyfills/server.polyfills';
-
 import { enableProdMode } from '@angular/core';
 import { createTransferScript, IEngineOptions, ngAspnetCoreEngine } from '@nguniversal/aspnetcore-engine';
 import { createServerRenderer } from 'aspnet-prerendering';
@@ -18,9 +17,9 @@ export default createServerRenderer((params) => {
     ngModule: AppModule,
     request: params,
     providers: [
-      { provide: 'BASE_URL', useValue: params.origin + params.baseUrl }
       // Optional - Any other Server providers you want to pass
       // (remember you'll have to provide them for the Browser as well)
+      { provide: 'BASE_URL', useValue: params.origin + params.baseUrl }
     ]
   };
 

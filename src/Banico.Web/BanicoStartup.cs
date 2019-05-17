@@ -40,7 +40,7 @@ namespace Banico.Web
         public void Init(IConfiguration configuration, IHostingEnvironment env)
         {
             this.Configuration = configuration;
-            CurrentEnvironment = env;
+            this.CurrentEnvironment = env;
  
              if (env.IsDevelopment())
             {
@@ -58,7 +58,7 @@ namespace Banico.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string envName = CurrentEnvironment.EnvironmentName;
+            string envName = this.CurrentEnvironment.EnvironmentName;
             Console.WriteLine("Environment is " + envName + ".");
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -118,10 +118,12 @@ namespace Banico.Web
             // services.AddTransient<AngularAntiforgeryCookieResultFilter>();
             
             // In production, the Angular files will be served from this directory
-            //services.AddSpaStaticFiles(configuration =>
-            //{
-                //configuration.RootPath = "ClientApp/dist";
-            //});
+            if (!this.CurrentEnvironment.IsDevelopment()) {
+                services.AddSpaStaticFiles(configuration =>
+                {
+                    configuration.RootPath = "ClientApp/dist";
+                });
+            }
 
             services.AddRouteAnalyzer();
         }

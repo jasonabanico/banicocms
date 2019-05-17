@@ -18,6 +18,7 @@ export default createServerRenderer(params => {
     providers: [
       // Optional - Any other Server providers you want to pass
       // (remember you'll have to provide them for the Browser as well)
+      { provide: 'BASE_URL', useValue: params.origin + params.baseUrl }
     ]
   };
 
