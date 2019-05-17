@@ -19,7 +19,7 @@ namespace Banico.Web
 {
     public class Startup 
     {
-        private BanicoStartup banicoStartup;
+        private WebStartup webStartup;
 
         public Startup (IConfiguration configuration, IHostingEnvironment env) 
         {
@@ -30,8 +30,8 @@ namespace Banico.Web
                 .AddEnvironmentVariables ();
             this.Configuration = builder.Build();
 
-            this.banicoStartup = new BanicoStartup();
-            this.banicoStartup.Init(configuration, env);
+            this.webStartup = new WebStartup();
+            this.webStartup.Init(configuration, env);
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -39,7 +39,7 @@ namespace Banico.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices (IServiceCollection services) {
             // Add framework services.
-            this.banicoStartup.ConfigureServices(services);
+            this.webStartup.ConfigureServices(services);
             services.AddNodeServices();
             services.AddHttpContextAccessor();
             services.AddProgressiveWebApp(new PwaOptions { Strategy = ServiceWorkerStrategy.CacheFirst, RegisterServiceWorker = true, RegisterWebmanifest = true }, "manifest.json");
@@ -61,9 +61,7 @@ namespace Banico.Web
             // move to Program.cs - loggerFactory.AddConsole (this.Configuration.GetSection ("Logging"));
             // move to Program.cs - loggerFactory.AddDebug ();
 
-            // app.UseStaticFiles();
-
-            this.banicoStartup.Configure(app, env, antiforgery);
+            this.webStartup.Configure(app, env, antiforgery);
             app.UseStaticFiles(new StaticFileOptions() {
                 OnPrepareResponse = c => {
                     //Do not add cache to json files. We need to have new versions when we add new translations.

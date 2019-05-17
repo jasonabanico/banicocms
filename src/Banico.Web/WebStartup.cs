@@ -27,7 +27,7 @@ using Banico.Services.Interfaces;
 
 namespace Banico.Web
 {
-    public class BanicoStartup
+    public class WebStartup
     {
         private bool developmentEnvironment = false;
         private IHostingEnvironment CurrentEnvironment{ get; set; } 
