@@ -14,6 +14,8 @@ using AspNetCore.RouteAnalyzer;
 using Swashbuckle.AspNetCore.Swagger;
 using WebEssentials.AspNetCore.Pwa;
 using Banico.Data;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 
 namespace Banico.Web 
 {
@@ -61,6 +63,8 @@ namespace Banico.Web
             // move to Program.cs - loggerFactory.AddConsole (this.Configuration.GetSection ("Logging"));
             // move to Program.cs - loggerFactory.AddDebug ();
 
+            // app.UseStaticFiles();
+
             this.webStartup.Configure(app, env, antiforgery);
             app.UseStaticFiles(new StaticFileOptions() {
                 OnPrepareResponse = c => {
@@ -73,7 +77,8 @@ namespace Banico.Web
                             MaxAge = TimeSpan.FromMinutes (15) // Cache json for 15 minutes
                         };
                 }
-            });
+            });            
+            app.UseSpaStaticFiles();
 
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage ();
@@ -127,6 +132,18 @@ namespace Banico.Web
                 Console.WriteLine("");
             });
 
+            app.UseSpa(spa =>
+            {
+            // To learn more about options for serving an Angular SPA from ASP.NET Core,
+            // see https://go.microsoft.com/fwlink/?linkid=864501
+
+            spa.Options.SourcePath = "ClientApp";
+
+            if (env.IsDevelopment())
+            {
+                spa.UseAngularCliServer(npmScript: "start");
+            }
+            });
         }
     }
 }
