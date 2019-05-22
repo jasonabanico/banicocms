@@ -1,4 +1,3 @@
 {
-    "appService.defaultWebAppToDeploy": "/subscriptions/964b2b4c-c36a-4320-8936-3668ec6ecd76/resourceGroups/Free-WestUS2-Resource-Group/providers/Microsoft.Web/sites/BanicoCMS",
     "appService.deploySubpath": "src/Banico.Web"
 }
