@@ -118,12 +118,10 @@ namespace Banico.Web
             // services.AddTransient<AngularAntiforgeryCookieResultFilter>();
             
             // In production, the Angular files will be served from this directory
-            if (!this.CurrentEnvironment.IsDevelopment()) {
-                services.AddSpaStaticFiles(configuration =>
-                {
-                    configuration.RootPath = "ClientApp/dist";
-                });
-            }
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
 
             services.AddRouteAnalyzer();
         }

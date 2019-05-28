@@ -7,6 +7,9 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerComposeProjectPath>docker-compose.dcproj</DockerComposeProjectPath>
     <RestoreFallbackFolders>clear</RestoreFallbackFolders>
+    <Content Include="wwwroot/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content> 
   </PropertyGroup>
   <ItemGroup>
     <!-- New Meta Package has SpaServices in It -->
