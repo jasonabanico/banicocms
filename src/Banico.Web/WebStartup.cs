@@ -132,7 +132,10 @@ namespace Banico.Web
             IHostingEnvironment env, 
             IAntiforgery antiforgery)
         {
+            dataStartup.Configure(app, env);
+            identityStartup.Configure(app, env);
             apiStartup.Configure(app, env);
+
             app.UseAuthentication();            
             app.Use(next => context =>
                 {
