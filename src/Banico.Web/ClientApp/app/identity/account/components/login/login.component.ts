@@ -7,6 +7,7 @@ import { AccountService } from '../../main/account.service';
 import { WindowRefService } from '../../../../shared/services/windowref.service';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { ContentItemService } from '../../../../plugins/services/content-item.service';
+import { ToastrService } from '../../../../shared/services/toastr.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { combineLatest } from 'rxjs';
 
@@ -31,6 +32,7 @@ export class LoginComponent {
     private contentItemService: ContentItemService,
     private authService: AuthService,
     private accountService: AccountService,
+    private toastrService: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder
@@ -68,7 +70,7 @@ export class LoginComponent {
         this.router.navigate([this.returnUrl]);
       }
     } catch (errors) {
-      errors[''].forEach(error => toastr.error(error));
+      this.toastrService.showErrors(errors);
     }
     this.isRequesting = false;
   }

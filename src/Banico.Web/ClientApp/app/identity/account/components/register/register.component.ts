@@ -1,17 +1,17 @@
 import {finalize} from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import * as toastr from 'toastr';
 
 import { AccountService } from '../../main/account.service';
+import { ToastrService } from '../../../../shared/services/toastr.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: []
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
     public isRequesting = false;
     public isSuccessful = false;
     public errors: string[][] = [,];
@@ -28,18 +28,10 @@ export class RegisterComponent implements OnInit {
 
     constructor (
         private accountService: AccountService,
+        private toastrService: ToastrService,
         private router: Router,
         private fb: FormBuilder
     ) {
-    }
-
-    ngOnInit() {
-        toastr.options = {
-            preventDuplicates: true,
-            timeOut: 0,
-            extendedTimeOut: 0,
-            closeButton: true
-          };
     }
 
     public cleanStringify(object) {
@@ -68,7 +60,7 @@ export class RegisterComponent implements OnInit {
         }
     }
 
-    public async register() {
+    public register() {
         this.submitted = true;
         this.isRequesting = true;
         this.errors = [,];
@@ -81,30 +73,16 @@ export class RegisterComponent implements OnInit {
                 this.registerForm.value['confirmPassword'],
                 this.registerForm.value['code']
             ).pipe(
-            finalize(() => this.isRequesting = false))
+            finalize(() => {
+                this.isRequesting = false;
+            }))
             .subscribe(
                 result  => {
                     this.isRequesting = false;
                     this.isSuccessful = true;
                 },
                 err => {
-                    const validationErrorDictionary = err;
-                    //JSON.parse(err);
-                    for (const fieldName in validationErrorDictionary) {
-                        if (validationErrorDictionary.hasOwnProperty(fieldName)) {
-                            //if (form.controls[fieldName]) {
-                                // integrate into angular's validation if we have field validation
-                                //form.controls[fieldName].setErrors({ invalid: true });
-                            //}
-                            // if we have cross field validation then show the validation error at the top of the screen
-                            const error: string[] = [];
-                            error.push(validationErrorDictionary[fieldName]);
-                            this.errors[fieldName] = [];
-                            this.errors[fieldName].push(error);
-                        }
-                    }
-
-                    this.errors[''].forEach(error => toastr.error(error));
+                    this.toastrService.showErrors(err);
                 });
                     // this.router.navigate(['/login'], {
                     //     queryParams: {

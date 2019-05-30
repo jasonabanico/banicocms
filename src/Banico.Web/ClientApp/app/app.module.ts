@@ -19,6 +19,7 @@ import { ShellModule } from './shell/shell.module';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/auth/auth.guard';
 import { ConfigsService } from './shared/services/configs.service';
+import { ToastrService } from './shared/services/toastr.service';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
@@ -48,6 +49,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     Location, 
     AuthService,
     ConfigsService,
+    ToastrService,
     AuthGuard, {
       provide: LocationStrategy, 
       useClass: PathLocationStrategy
