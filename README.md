@@ -21,9 +21,6 @@ git clone https://github.com/jasebanico/banicocms
 cd banicocms/src/Banico.Web
 npm install && npm run build:dev && dotnet restore
 
-# build
-dotnet build
-
 # use default settings for now, customize later
 cd Config
 cp sample.front.component.html front.component.html
