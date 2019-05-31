@@ -11,10 +11,11 @@ const APP_ROUTES: Routes = [
     {
         path: 'home',
         component: HomeComponent
-    },
+    }
+    //,
 
     // All else fails - go home!
-    { path: '**', component: HomeComponent }
+    //{ path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({
