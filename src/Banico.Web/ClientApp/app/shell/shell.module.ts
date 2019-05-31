@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PipesModule } from '../pipes/pipes.module';
-import { FrontComponent } from './front/front.component';
+import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './modal/modal.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -16,7 +16,7 @@ import { AuthService } from '../shared/services/auth.service';
         PipesModule
     ],
     declarations: [ 
-        FrontComponent,
+        HomeComponent,
         ModalComponent,
         NavBarComponent,
         NavMenuComponent,
