@@ -23,7 +23,7 @@ npm install && npm run build:dev && dotnet restore
 
 # use default settings for now, customize later
 cd Config
-cp sample.front.component.html front.component.html
+cp sample.home.component.html home.component.html
 cp sample.appsettings.json appsettings.json
 cp sample.app.config.ts app.config.ts
 

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './shell/home/home.component';
 
 const APP_ROUTES: Routes = [
     {
@@ -7,9 +8,13 @@ const APP_ROUTES: Routes = [
         redirectTo: 'home',
         pathMatch: 'full'
     },
+    {
+        path: 'home',
+        component: HomeComponent
+    },
 
     // All else fails - go home!
-    { path: '**', redirectTo: 'home' }
+    { path: '**', component: HomeComponent }
 ];
 
 @NgModule({

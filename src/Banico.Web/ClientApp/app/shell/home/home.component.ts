@@ -2,10 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
-    selector: 'app-front',
-    templateUrl: '../../../../config/front.component.html'
+    selector: 'app-home',
+    templateUrl: '../../../../config/home.component.html'
 })
-export class FrontComponent implements OnInit {
+export class HomeComponent implements OnInit {
     public location: string;
     public content: string;
 
