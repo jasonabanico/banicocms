@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Profile } from './profile';
@@ -11,7 +11,7 @@ export class ProfileService {
     appBaseUrl: string;
 
     constructor(
-        private http: Http,
+        private http: HttpClient,
         @Inject(ORIGIN_URL) private baseUrl: string
     ) {
         this.accountUrl = `${this.baseUrl}api/Account`;
@@ -27,12 +27,12 @@ export class ProfileService {
     }
 
     public getUser(): Observable<Profile> {
-        let headers = new Headers();
+        let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = '';
         
         return this.http
-            .post(this.accountUrl + '/GetProfile', data, {
+            .post<Profile>(this.accountUrl + '/GetProfile', data, {
                 headers: headers
             }).pipe(
             map(this.extractData));
@@ -40,12 +40,12 @@ export class ProfileService {
     }
 
     public getProfile(): Observable<Profile> {
-        let headers = new Headers();
+        let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = '';
         
         return this.http
-            .post(this.appBaseUrl + '/Get', data, {
+            .post<Profile>(this.appBaseUrl + '/Get', data, {
                 headers: headers
             }).pipe(
             map(this.extractData));
@@ -53,20 +53,20 @@ export class ProfileService {
     }
     
     public getProfileByAlias(alias: string): Observable<Profile> {
-        let headers = new Headers();
+        let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'alias=' + alias;
 
         return this.http
-            .post(this.appBaseUrl + '/GetByAlias', data, {
+            .post<Profile>(this.appBaseUrl + '/GetByAlias', data, {
                 headers: headers
             }).pipe(
             map(this.extractData));
             //.catch(this.handleError);
     }
 
-    public updateUser(profile: Profile): Observable<Response> {
-        let headers = new Headers();
+    public updateUser(profile: Profile): Observable<Object> {
+        let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'firstName=' + profile.firstName + 
             '&lastName=' + profile.lastName + '&alias=' + profile.alias;
@@ -82,8 +82,8 @@ export class ProfileService {
             //});
     }
 
-    public addOrUpdateProfile(profile: Profile): Observable<Response> {
-        let headers = new Headers();
+    public addOrUpdateProfile(profile: Profile): Observable<Object> {
+        let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'content=' + profile.content;
         return this.http

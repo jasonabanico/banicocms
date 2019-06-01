@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Invite } from './invite';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -10,7 +10,7 @@ export class InviteService {
     inviteUrl: string;
 
     constructor(
-        private http: Http,
+        private http: HttpClient,
         @Inject(ORIGIN_URL) private baseUrl: string
     ) {
         this.inviteUrl = `${this.baseUrl}api/Invite`;
@@ -25,11 +25,11 @@ export class InviteService {
     }
 
     public addInvite(invite: Invite): Observable<Invite> {
-        let headers = new Headers();
+        let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let data = 'emails=' + invite.emails;
         return this.http
-            .post(this.inviteUrl + '/Add', data, {
+            .post<Invite>(this.inviteUrl + '/Add', data, {
                 headers: headers
             }).pipe(
             map(this.extractData));
