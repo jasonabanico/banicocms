@@ -9,8 +9,7 @@ import { DirectoryFormComponent } from '../components/directory-form/directory-f
 import { DirectoryFrontComponent } from '../components/directory-front/directory-front.component';
 import { AuthGuard } from '../../../shared/auth/auth.guard';
 
-const LIST_ROUTES: Routes = [
-  { path: 'directory', component: DirectoryComponent, children: [
+const DIRECTORY_ROUTES: Routes = [
     { path: 'new/:path', component: DirectoryFormComponent, canActivate: [AuthGuard], data: { module: 'directory/manage' } },
     { path: 'search/:search', component: DirectorySearchComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
     { path: 'item/:id', component: DirectoryItemDisplayComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
@@ -18,12 +17,11 @@ const LIST_ROUTES: Routes = [
     { path: ':path', component: DirectoryDisplayComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
     { path: '', component: DirectoryFrontComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
     { path: '**', component: DirectoryDisplayComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } }
-] }
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forChild(LIST_ROUTES)
+        RouterModule.forChild(DIRECTORY_ROUTES)
     ],
     exports: [
         RouterModule

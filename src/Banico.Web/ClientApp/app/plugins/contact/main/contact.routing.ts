@@ -7,11 +7,9 @@ import { ContactFormComponent } from '../components/contact-form/contact-form.co
 import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const CONTACT_ROUTES: Routes = [
-  { path: 'contact', component: ContactComponent, children: [
-    { path: 'new', component: ContactFormComponent, canActivate: [AuthGuard], data: { module: 'contact/manage' } },
-    { path: 'edit/:alias', component: ContactFormComponent, canActivate: [AuthGuard], data: { module: 'contact/manage' } },
-    { path: ':alias', component: ContactDisplayComponent, canActivate: [AuthGuard], data: { module: 'contact/view' } }
-  ] }
+  { path: 'new', component: ContactFormComponent, canActivate: [AuthGuard], data: { module: 'contact/manage' } },
+  { path: 'edit/:alias', component: ContactFormComponent, canActivate: [AuthGuard], data: { module: 'contact/manage' } },
+  { path: ':alias', component: ContactDisplayComponent, canActivate: [AuthGuard], data: { module: 'contact/view' } }
 ];
 
 @NgModule({

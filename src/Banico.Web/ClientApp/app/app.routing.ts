@@ -11,7 +11,20 @@ const APP_ROUTES: Routes = [
     {
         path: 'home',
         component: HomeComponent
-    }
+    },
+    {
+        path: 'admin',
+        loadChildren: './admin/admin.module#AdminModule'
+    },
+    {
+        path: 'account',
+        loadChildren: './identity/account/main/account.module#AccountModule'
+    },
+    {
+        path: 'manage',
+        loadChildren: './identity/manage/main/manage.module#ManageModule'
+    },
+
     //,
 
     // All else fails - go home!

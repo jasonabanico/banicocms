@@ -12,14 +12,12 @@ import { ResetPasswordComponent } from '../components/reset-password/reset-passw
 import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 export const ROUTES: Routes = [
-  { path: 'account', component: AccountComponent, children: [
-    { path: 'confirm-email', component: ConfirmEmailComponent },
-    { path: 'forgot-password', component: ForgotPasswordComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'resend-confirmation', component: ResendConfirmationComponent },
-    { path: 'reset-password', component: ResetPasswordComponent }
-  ] }
+  { path: 'confirm-email', component: ConfirmEmailComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'resend-confirmation', component: ResendConfirmationComponent },
+  { path: 'reset-password', component: ResetPasswordComponent }
 ];
 
 @NgModule({

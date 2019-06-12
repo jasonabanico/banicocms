@@ -10,11 +10,9 @@ import { SetPasswordComponent } from '../components/set-password/set-password.co
 import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 export const ROUTES: Routes = [
-  { path: 'manage', component: ManageComponent, children: [
-    { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard] },
-    { path: 'manage-logins', component: ManageLoginsComponent, canActivate: [AuthGuard] },
-    { path: 'set-password', component: SetPasswordComponent, canActivate: [AuthGuard] }
-  ] }
+  { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard] },
+  { path: 'manage-logins', component: ManageLoginsComponent, canActivate: [AuthGuard] },
+  { path: 'set-password', component: SetPasswordComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

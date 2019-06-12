@@ -7,11 +7,9 @@ import { FaqFormComponent } from '../components//faq-form/faq-form.component';
 import { AuthGuard } from '../../../shared/auth/auth.guard';
 
 const FAQ_ROUTES: Routes = [
-  { path: 'faq', component: FaqComponent, children: [
-    { path: 'new', component: FaqFormComponent, canActivate: [AuthGuard], data: { module: 'faq/manage' } },
-    { path: 'edit/:alias', component: FaqFormComponent, canActivate: [AuthGuard], data: { module: 'faq/manage' } },
-    { path: ':alias', component: FaqDisplayComponent, canActivate: [AuthGuard], data: { module: 'faq/view' } }
-  ] }
+  { path: 'new', component: FaqFormComponent, canActivate: [AuthGuard], data: { module: 'faq/manage' } },
+  { path: 'edit/:alias', component: FaqFormComponent, canActivate: [AuthGuard], data: { module: 'faq/manage' } },
+  { path: ':alias', component: FaqDisplayComponent, canActivate: [AuthGuard], data: { module: 'faq/view' } }
 ];
 
 @NgModule({
