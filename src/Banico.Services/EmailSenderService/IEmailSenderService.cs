@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Banico.Services.Interfaces
 {
-    public interface IEmailSender
+    public interface IEmailSenderService
     {
         SendGridMessage Message { get; set; }
         Task<Response> SendEmailAsync(string email, string subject, string message);

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Banico.Services.Interfaces
 {
-    public interface ISuperAdminService
+    public interface ISuperAdminAccessService
     {
         bool IsSuperAdminEmail(string email);
         Task<bool> IsSuperAdmin(IPrincipal user);

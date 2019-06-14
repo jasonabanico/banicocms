@@ -31,8 +31,8 @@ namespace Banico.Identity.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly string _externalCookieScheme;
-        private readonly IEmailSender _emailSender;
-        private readonly ISmsSender _smsSender;
+        private readonly IEmailSenderService _emailSender;
+        private readonly ISmsSenderService _smsSender;
         private readonly ILogger _logger;
         private readonly IConfiguration _configuration;
         private readonly ClaimsPrincipal _caller;
@@ -42,8 +42,8 @@ namespace Banico.Identity.Controllers
         public ManageController(
           UserManager<AppUser> userManager,
           SignInManager<AppUser> signInManager,
-          IEmailSender emailSender,
-          ISmsSender smsSender,
+          IEmailSenderService emailSender,
+          ISmsSenderService smsSender,
           ILoggerFactory loggerFactory,
           IConfiguration configuration,
           IHttpContextAccessor httpContextAccessor,

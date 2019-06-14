@@ -10,11 +10,11 @@ namespace Banico.Services
     public class InviteService : IInviteService
     {
         private readonly IInviteRepository _inviteRepository;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailSenderService _emailSender;
         
         public InviteService (
             IInviteRepository inviteRepository,
-            IEmailSender emailSender)
+            IEmailSenderService emailSender)
         {
             _inviteRepository = inviteRepository;
             _emailSender = emailSender;

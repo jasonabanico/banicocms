@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Banico.Services.Interfaces
 {
-    public interface ISmsSender
+    public interface ISmsSenderService
     {
         Task SendSmsAsync(string number, string message);
     }

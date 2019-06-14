@@ -7,10 +7,10 @@ namespace Banico.Services
   {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddTransient<IEmailSender, AuthMessageSender>();
-        services.AddTransient<ISmsSender, AuthMessageSender>();
+        services.AddTransient<IEmailSenderService, EmailSenderService>();
+        services.AddTransient<ISmsSenderService, EmailSenderService>();
         services.AddScoped<IInviteService, InviteService>();
-        services.AddScoped<ISuperAdminService, SuperAdminService>();
+        services.AddScoped<ISuperAdminAccessService, SuperAdminAccessService>();
         services.AddScoped<IItemSecurityService, ItemSecurityService>();
     }
   }

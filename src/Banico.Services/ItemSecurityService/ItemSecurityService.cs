@@ -5,9 +5,9 @@ namespace Banico.Services
 {
     public class ItemSecurityService : IItemSecurityService
     {
-        public ISuperAdminService _superAdminService;
+        public ISuperAdminAccessService _superAdminService;
 
-        public ItemSecurityService(ISuperAdminService superAdminService)
+        public ItemSecurityService(ISuperAdminAccessService superAdminService)
         {
             _superAdminService = superAdminService;
         }

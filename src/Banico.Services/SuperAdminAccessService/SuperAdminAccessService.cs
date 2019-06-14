@@ -11,13 +11,13 @@ using Banico.Services.Interfaces;
 
 namespace Banico.Services
 {
-    public class SuperAdminService : ISuperAdminService
+    public class SuperAdminAccessService : ISuperAdminAccessService
     {
         public UserManager<AppUser> _userManager;
         public RoleManager<AppRole> _roleManager;
         public IConfiguration _configuration;
 
-        public SuperAdminService (
+        public SuperAdminAccessService (
             UserManager<AppUser> userManager,
             RoleManager<AppRole> roleManager,
             IConfiguration configuration)

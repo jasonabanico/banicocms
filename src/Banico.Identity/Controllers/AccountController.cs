@@ -36,11 +36,11 @@ namespace Banico.Identity.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly IEmailSender _emailSender;
-        private readonly ISmsSender _smsSender;
+        private readonly IEmailSenderService _emailSender;
+        private readonly ISmsSenderService _smsSender;
         private readonly ILogger _logger;
         private readonly IInviteService _inviteService;
-        private readonly ISuperAdminService _superAdminService;
+        private readonly ISuperAdminAccessService _superAdminService;
         private readonly string _externalCookieScheme;
         private readonly IConfiguration _configuration;
         private readonly IJwtFactory _jwtFactory;
@@ -54,11 +54,11 @@ namespace Banico.Identity.Controllers
         public AccountController(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
-            IEmailSender emailSender,
-            ISmsSender smsSender,
+            IEmailSenderService emailSender,
+            ISmsSenderService smsSender,
             ILoggerFactory loggerFactory,
             IInviteService inviteService,
-            ISuperAdminService superAdminService,
+            ISuperAdminAccessService superAdminService,
             IConfiguration configuration, 
             IJwtFactory jwtFactory, 
             IOptions<JwtIssuerOptions> jwtOptions,
