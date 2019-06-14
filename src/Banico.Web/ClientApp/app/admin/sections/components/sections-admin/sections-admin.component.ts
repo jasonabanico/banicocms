@@ -2,7 +2,7 @@ import {finalize} from 'rxjs/operators';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SectionsService } from '../../main/services/sections.service';
+import { SectionsService } from '../../../../shared/services/sections.service';
 import { Section } from '../../../../entities/section';
 
 @Component({

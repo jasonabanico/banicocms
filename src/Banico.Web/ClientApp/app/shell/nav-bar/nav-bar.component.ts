@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { NavBarService } from './nav-bar.service';
-import { SectionsService } from '../../admin/sections/main/services/sections.service';
+import { SectionsService } from '../../shared/services/sections.service';
 
 @Component({
     selector: 'app-nav-bar',

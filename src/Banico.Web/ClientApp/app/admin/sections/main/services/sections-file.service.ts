@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/com
 import { SectionItem } from '../../../../entities/section-item';
 //import { status, json } from '../../../shared/fetch';
 //import { Observable } from 'rxjs/Observable';
-import { SectionsService } from './sections.service';
+import { SectionsService } from '../../../../shared/services/sections.service';
 
 @Injectable()
 export class SectionsFileService {

@@ -17,10 +17,6 @@ const APP_ROUTES: Routes = [
         loadChildren: './admin/admin.module#AdminModule'
     },
     {
-        path: 'account',
-        loadChildren: './identity/account/main/account.module#AccountModule'
-    },
-    {
         path: 'manage',
         loadChildren: './identity/manage/main/manage.module#ManageModule'
     },

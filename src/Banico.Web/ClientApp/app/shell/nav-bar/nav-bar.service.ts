@@ -4,7 +4,7 @@ import { Injectable, Inject } from '@angular/core';
 import { NavBarItem } from '../../entities/nav-bar-item';
 import { SectionItem } from '../../entities/section-item';
 import { Section } from '../../entities/section';
-import { SectionsService } from '../../admin/sections/main/services/sections.service';
+import { SectionsService } from '../../shared/services/sections.service';
 
 @Injectable()
 export class NavBarService {

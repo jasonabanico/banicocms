@@ -19,6 +19,7 @@ import { AuthGuard } from './shared/auth/auth.guard';
 import { ConfigsService } from './shared/services/configs.service';
 import { ToastrService } from './shared/services/toastr.service';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { AccountModule } from './identity/account/main/account.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MDBBootstrapModule.forRoot(),
     AppRoutingModule,
     PipesModule,
+    AccountModule,
     PluginsModule,
     SharedModule,
     ShellModule
