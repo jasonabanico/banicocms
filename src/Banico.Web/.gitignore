@@ -1,3 +1,7 @@
+Config/app.config.ts
+Config/appsettings.json
+Config/home.component.html
+
 /Properties/launchSettings.json
 
 ## Ignore Visual Studio temporary files, build results, and

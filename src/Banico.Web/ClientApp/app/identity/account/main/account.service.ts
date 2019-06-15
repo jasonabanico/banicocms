@@ -93,13 +93,11 @@ export class AccountService extends BaseService {
 
     public resendConfirmation(
         email: string
-    ) {
+    ): Observable<any> {
         const body = JSON.stringify({
             email
         });
-        return this.http.post(this.baseUrl + 'api/Account/ResendConfirmation', body, this.jsonRequestOptions).pipe(
-        map(res => true),
-        catchError(this.handleError), );
+        return this.http.post(this.baseUrl + 'api/Account/ResendConfirmation', body, this.jsonRequestOptions);
     }
 
     public forgotPassword(

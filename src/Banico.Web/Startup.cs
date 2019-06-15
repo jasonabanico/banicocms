@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
@@ -25,13 +26,6 @@ namespace Banico.Web
 
         public Startup (IConfiguration configuration, IHostingEnvironment env) 
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath (env.ContentRootPath)
-                .AddJsonFile ("appsettings.json", optional : true, reloadOnChange : true)
-                .AddJsonFile ($"appsettings.{env.EnvironmentName}.json", optional : true)
-                .AddEnvironmentVariables ();
-            this.Configuration = builder.Build();
-
             this.webStartup = new WebStartup();
             this.webStartup.Init(configuration, env);
         }

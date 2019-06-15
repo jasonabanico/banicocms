@@ -1,0 +1,75 @@
+{
+    "InviteOnly": "true",
+    "SuperAdmins": "ENTER-SUPERADMIN-EMAIL-HERE",
+    "EmailSender": {
+      "EmailUser": "ENTER-SENDGRID-USER-HERE",
+      "EmailKey": "ENTER-SENDGRID-KEY-HERE"  
+    },
+    "Email": {
+      "Name": "ENTER-ADMIN-NAME-HERE",
+      "Address": "ENTER-EMAIL-ADDRESS-HERE"
+    },
+    "JwtIssuerOptions": {
+      "Issuer": "webApi",
+      "Audience": "http://localhost:5000/"
+    },
+    "Logging": {
+      "LogLevel": {
+        "Default": "Trace",
+        "System": "Trace",
+        "Microsoft": "Trace"
+      }
+    },
+    "ConfigDefaultSettings": {
+      "Configs": [
+        ",initialized,n",
+        "admin,canActivate,admin"
+        ]
+    },
+    "ConfigInitialSettings": {
+      "Configs": [
+        "admin/sections,canActivate,admin",
+        "admin/roles,canActivate,admin",
+        "admin/users,canActivate,admin",
+        "admin/configs,canActivate,admin",
+        "contact,isActive,n",
+        "contact,canActivate,admin",
+        "directory,isActive,n",
+        "directory/view,canActivate,user",
+        "directory/manage,canActivate,admin",
+        "faq,isActive,n",
+        "faq/view,canActivate,user",
+        "faq/manage,canActivate,admin",
+        "forum,isActive,n",
+        "subforum/manage,canActivate,admin",
+        "subforum/view,canActivate,user",
+        "topic/manage,canActivate,user",
+        "topic/view,canActivate,user",
+        "invite,isActive,n",
+        "invite,canActivate,user",
+        "link/view,canActivate,user",
+        "link/manage,canActivate,admin",
+        "list,isActive,n",
+        "list-set/view,canActivate,user",
+        "list-set/manage,canActivate,admin",
+        "list-item/view,canActivate,user",
+        "list-item/manage,canActivate,admin",
+        "list/view,canActivate,user",
+        "list/manage,canActivate,user",
+        "page,isActive,n",
+        "page/view,canActivate,user",
+        "page/manage,canActivate,admin",
+        "profile,isActive,n",
+        "profile/view,canActivate,user",
+        "profile/manage,canActivate,user",
+        "reply/view,canActivate,user",
+        "reply/manage,canActivate,user",
+        "reply-comment/view/canActivate,user",
+        "reply-comment/manage/canActivate,user"      
+        ]
+    },
+    "Content": {
+      "MaxPageSize": "40"
+    }
+  }
+  

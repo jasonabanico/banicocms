@@ -36,6 +36,8 @@ export class ResendConfirmationComponent {
           this.isSuccessful = true;                         
         }
       },
-      errors =>  this.errors = errors);
+      errors =>  {
+        this.errors = errors;
+      });
   }
 }

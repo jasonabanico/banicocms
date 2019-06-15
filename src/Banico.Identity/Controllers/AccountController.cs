@@ -201,7 +201,7 @@ namespace Banico.Identity.Controllers
             return BadRequest(Errors.AddErrorToModelState("", "", ModelState));            
         }
 
-        private async Task SendConfirmationEmail(AppUser user)
+        private async Task<IActionResult> SendConfirmationEmail(AppUser user)
         {
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
             // Send an email with this link
@@ -225,11 +225,13 @@ namespace Banico.Identity.Controllers
             "Thank you.<br /><br />" +
             "Site Admin";
 
-            await _emailSender.SendEmailAsync(user.Email, "Confirm your account",
+            var response = await _emailSender.SendEmailAsync(user.Email, "Confirm your account",
                 confirmText);
+
+            return new OkObjectResult(null);
         }
 
-        private async Task SendForgotPasswordEmail(AppUser user)
+        private async Task<IActionResult> SendForgotPasswordEmail(AppUser user)
         {
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
             var urlBuilder =
@@ -250,6 +252,8 @@ namespace Banico.Identity.Controllers
 
             var response = await _emailSender.SendEmailAsync(user.Email, "Reset Your Password",
                 resetPasswordText);
+
+            return new OkObjectResult(null);
         }
     
         //
@@ -292,11 +296,11 @@ namespace Banico.Identity.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await this.SendConfirmationEmail(user);
+                    var emailResult = await this.SendConfirmationEmail(user);
                     // await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
                     //return RedirectToLocal(returnUrl);
-                    return new OkObjectResult("");
+                    return emailResult;
                 }
                 return BadRequest(Errors.AddErrorToModelState("", "", ModelState));
             }
@@ -433,7 +437,7 @@ namespace Banico.Identity.Controllers
                                 };
                         var callbackUrl = urlBuilder.ToString();
 
-                        await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                        var response = await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
                         $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
                         // await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation(3, "User created a new account with password.");
@@ -512,8 +516,8 @@ namespace Banico.Identity.Controllers
             var user = await _userManager.FindByEmailAsync(model.Email);
             if ((user != null) && (!await(_userManager.IsEmailConfirmedAsync(user))))
             {
-                await this.SendConfirmationEmail(user);
-                return new OkObjectResult("");
+                var emailResult = await this.SendConfirmationEmail(user);
+                return emailResult;
             }
 
             //return RedirectToAction(nameof(ConfirmationSent));
@@ -593,7 +597,7 @@ namespace Banico.Identity.Controllers
             var message = "Your security code is: " + code;
             if (model.SelectedProvider == "Email")
             {
-                await _emailSender.SendEmailAsync(await _userManager.GetEmailAsync(user), "Security Code", message);
+                var response = await _emailSender.SendEmailAsync(await _userManager.GetEmailAsync(user), "Security Code", message);
             }
             else if (model.SelectedProvider == "Phone")
             {

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
+using Microsoft.Extensions.Configuration;
 
 public class Program {
      public static void Main (string[] args) {
@@ -24,15 +25,25 @@ public class Program {
 
          host.Run ();
      }
-     public static IWebHost BuildWebHost (string[] args) =>
-        WebHost.CreateDefaultBuilder (args)
-        .UseKestrel ()
-        .UseContentRoot (Directory.GetCurrentDirectory ())
-        .UseIISIntegration ()
-        .UseStartup<Startup> ()
-        .ConfigureKestrel((context, options) =>
-        {
-            // Set properties and call methods on options
-        })
-        .Build ();
+     public static IWebHost BuildWebHost(string[] args)
+     {
+        var settingsPath = Path.Combine(Directory.GetCurrentDirectory(), "Config");
+
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(settingsPath)
+            .AddJsonFile("appsettings.json", false, true)
+            .Build();
+            
+        return WebHost.CreateDefaultBuilder(args)
+            .UseConfiguration(configuration)
+            .UseKestrel()
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseIISIntegration()
+            .UseStartup<Startup>()
+            .ConfigureKestrel((context, options) =>
+            {
+                // Set properties and call methods on options
+            })
+            .Build ();
+     }
  }

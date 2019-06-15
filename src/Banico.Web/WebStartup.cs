@@ -89,7 +89,7 @@ namespace Banico.Web
                     optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Data")));
             }
       
-            services.Configure<EmailSenderOptions>(this.Configuration);
+            services.Configure<EmailSenderOptions>(this.Configuration.GetSection("EmailSender"));
             //services.AddAntiforgery(opts => opts.HeaderName = "X-XSRF-Token");
             services.AddAntiforgery(opts =>
                 {
