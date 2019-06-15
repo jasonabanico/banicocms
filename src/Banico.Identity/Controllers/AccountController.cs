@@ -218,7 +218,6 @@ namespace Banico.Identity.Controllers
             
             string confirmText = @"Hi,<br /><br />" +
             "Thank you for registering an account on our site.<br /><br />" +
-            "You are one step away from being able to link your website to your chosen word.<br /><br />" +
             "Please confirm your email address by clicking here:<br /><br />" +
             "<a href='" + callbackUrl + "'>Confirm Email</a><br /><br />" +
             "If you didn't register for this account, just ignore and delete this message.<br /><br />" +
