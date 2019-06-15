@@ -25,11 +25,11 @@ export class AccountService extends BaseService {
     }
 
     public login(
-        email: string,
+        username: string,
         password: string
     ): Observable<Object> {
         const body = JSON.stringify({
-            email,
+            username,
             password
         });
         return this.http.post(this.baseUrl + 'api/Account/Login', body, this.jsonRequestOptions).pipe(

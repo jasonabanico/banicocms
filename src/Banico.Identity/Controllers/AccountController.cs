@@ -146,7 +146,7 @@ namespace Banico.Identity.Controllers
             if (ModelState.IsValid)
             {
                 // Require the user to have a confirmed email before they can log on.
-                var user = await _userManager.FindByEmailAsync(model.Email);
+                var user = await _userManager.FindByNameAsync(model.Username);
                 if (user != null)
                 {
                     if (!await _userManager.IsEmailConfirmedAsync(user))
@@ -159,14 +159,14 @@ namespace Banico.Identity.Controllers
 
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
                     HttpContext.User = await _userClaimsPrincipalFactory.CreateAsync(user);
                     var tokens = _antiforgery.GetAndStoreTokens(HttpContext);
 
-                    var identity = _jwtFactory.GenerateClaimsIdentity(model.Email, user.Id);
+                    var identity = _jwtFactory.GenerateClaimsIdentity(model.Username, user.Id);
                     var profile = await _contentItemRepository.CreateProfileIfNotExists(user.Id, user.UserName, user.Email);
                     string username = await this.GetUsername();
                     bool isAdmin = await this.IsSuperAdmin();

@@ -23,7 +23,7 @@ export class LoginComponent {
   public returnUrl = '/';
 
   public loginForm: FormGroup = this.fb.group({
-    email: ['', Validators.required],
+    username: ['', Validators.required],
     password: ['', Validators.required]
   });
 
@@ -58,7 +58,7 @@ export class LoginComponent {
     this.isRequesting = true;
     try {
       const result = await this.accountService.login(
-        this.loginForm.value['email'],
+        this.loginForm.value['username'],
         this.loginForm.value['password']
         ).pipe(first()).toPromise();
       if (result) {

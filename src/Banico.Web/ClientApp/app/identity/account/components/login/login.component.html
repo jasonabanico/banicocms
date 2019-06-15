@@ -40,22 +40,22 @@ novalidate
         <div class="col">
             <input 
                 class="form-control mt-4" 
-                id="email"
-                name="email"
-                type="email" 
-                formControlName="email"
-                placeholder="Email"
+                id="username"
+                name="username"
+                type="text" 
+                formControlName="username"
+                placeholder="Username"
                 />
             <!--
             data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." id="Email" name="Email" value="" />
             -->
-            <span class="text-danger field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+            <span class="text-danger field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
         </div>
     </div>
                 
-    <div class="alert alert-danger" role="alert" *ngIf="errors['Email']">
+    <div class="alert alert-danger" role="alert" *ngIf="errors['Username']">
         <ul>
-            <li *ngFor="let error of errors['Email']">
+            <li *ngFor="let error of errors['Username']">
                 {{ error }}
             </li>
         </ul>
