@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Banico.Data.Migrations
+namespace Banico.EntityFrameworkCore.Migrations
 {
     public partial class Initial : Migration
     {

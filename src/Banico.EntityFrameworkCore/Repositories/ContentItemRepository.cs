@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Banico.Core.Entities;
 using Banico.Core.Repositories;
 
-namespace Banico.Data.Repositories
+namespace Banico.EntityFrameworkCore.Repositories
 {
     public class ContentItemRepository : IContentItemRepository
     {

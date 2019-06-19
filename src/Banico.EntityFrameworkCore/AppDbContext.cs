@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Banico.Core.Entities;
-using Banico.Data.Settings;
+using Banico.EntityFrameworkCore.Settings;
 
-namespace Banico.Data
+namespace Banico.EntityFrameworkCore
 {
     public class AppDbContext : DbContext
     {

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banico.Core", "src\Banico.Core\Banico.Core.csproj", "{5F96B4AD-A5B0-4C4C-A740-C40794F42B28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banico.Data", "src\Banico.Data\Banico.Data.csproj", "{D0AB3C30-34BD-41D9-9ACC-966C3353C3FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banico.EntityFrameworkCore", "src\Banico.EntityFrameworkCore\Banico.EntityFrameworkCore.csproj", "{D0AB3C30-34BD-41D9-9ACC-966C3353C3FA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banico.Api", "src\Banico.Api\Banico.Api.csproj", "{1108F66C-10D8-45BB-A9D6-0EF1BE408056}"
 EndProject

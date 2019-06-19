@@ -5,10 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Banico.Core.Repositories;
-using Banico.Data.Repositories;
-using Banico.Data.Settings;
+using Banico.EntityFrameworkCore.Repositories;
+using Banico.EntityFrameworkCore.Settings;
 
-namespace Banico.Data
+namespace Banico.EntityFrameworkCore
 {
   public class DataStartup
   {

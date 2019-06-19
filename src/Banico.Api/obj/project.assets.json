@@ -4772,7 +4772,7 @@
           "bin/placeholder/Banico.Core.dll": {}
         }
       },
-      "Banico.Data/1.0.0": {
+      "Banico.EntityFrameworkCore/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
@@ -4783,10 +4783,10 @@
           "Microsoft.Extensions.Configuration.Json": "2.2.0"
         },
         "compile": {
-          "bin/placeholder/Banico.Data.dll": {}
+          "bin/placeholder/Banico.EntityFrameworkCore.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Banico.Data.dll": {}
+          "bin/placeholder/Banico.EntityFrameworkCore.dll": {}
         }
       }
     }
@@ -12877,16 +12877,16 @@
       "path": "../Banico.Core/Banico.Core.csproj",
       "msbuildProject": "../Banico.Core/Banico.Core.csproj"
     },
-    "Banico.Data/1.0.0": {
+    "Banico.EntityFrameworkCore/1.0.0": {
       "type": "project",
-      "path": "../Banico.Data/Banico.Data.csproj",
-      "msbuildProject": "../Banico.Data/Banico.Data.csproj"
+      "path": "../Banico.EntityFrameworkCore/Banico.EntityFrameworkCore.csproj",
+      "msbuildProject": "../Banico.EntityFrameworkCore/Banico.EntityFrameworkCore.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Banico.Core >= 1.0.0",
-      "Banico.Data >= 1.0.0",
+      "Banico.EntityFrameworkCore >= 1.0.0",
       "GraphQL >= 2.4.0",
       "GraphQL.Authorization >= 2.1.29",
       "GraphQL.Server.Transports.AspNetCore >= 3.4.0",
@@ -12927,8 +12927,8 @@
             "/Users/jasonbanico/Dropbox/Workspace/Banico.MacOSX/src/Banico.Core/Banico.Core.csproj": {
               "projectPath": "/Users/jasonbanico/Dropbox/Workspace/Banico.MacOSX/src/Banico.Core/Banico.Core.csproj"
             },
-            "/Users/jasonbanico/Dropbox/Workspace/Banico.MacOSX/src/Banico.Data/Banico.Data.csproj": {
-              "projectPath": "/Users/jasonbanico/Dropbox/Workspace/Banico.MacOSX/src/Banico.Data/Banico.Data.csproj"
+            "/Users/jasonbanico/Dropbox/Workspace/Banico.MacOSX/src/Banico.EntityFrameworkCore/Banico.EntityFrameworkCore.csproj": {
+              "projectPath": "/Users/jasonbanico/Dropbox/Workspace/Banico.MacOSX/src/Banico.EntityFrameworkCore/Banico.EntityFrameworkCore.csproj"
             }
           }
         }

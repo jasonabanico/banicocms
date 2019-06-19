@@ -17,8 +17,8 @@ using Microsoft.Extensions.Logging;
 using FluentValidation.AspNetCore;
 using AspNetCore.RouteAnalyzer;
 using Banico.Core.Entities;
-using Banico.Data;
-using Banico.Data.Settings;
+using Banico.EntityFrameworkCore;
+using Banico.EntityFrameworkCore.Settings;
 using Banico.Api;
 using Banico.Identity;
 using Banico.Identity.Extensions;
@@ -78,7 +78,7 @@ namespace Banico.Web
             {
                 services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(appDbContextConnectionString,
-                    optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Data")));
+                    optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
             }
             else
             {
@@ -86,7 +86,7 @@ namespace Banico.Web
                 appDbContextConnectionString = connectionStringBuilder.ToString();
                 services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlite(appDbContextConnectionString,
-                    optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Data")));
+                    optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
             }
       
             services.Configure<EmailSenderOptions>(this.Configuration.GetSection("EmailSender"));

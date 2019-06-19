@@ -1,4 +1,4 @@
-namespace Banico.Data.Settings
+namespace Banico.EntityFrameworkCore.Settings
 {
     public class ConfigDefaultSettings
     {

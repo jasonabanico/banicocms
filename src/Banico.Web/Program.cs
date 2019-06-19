@@ -1,5 +1,5 @@
 ﻿using Banico.Web;
-using Banico.Data;
+using Banico.EntityFrameworkCore;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;

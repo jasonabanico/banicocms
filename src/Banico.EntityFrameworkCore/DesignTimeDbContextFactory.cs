@@ -1,10 +1,10 @@
 using System.IO;
-using Banico.Data.Settings;
+using Banico.EntityFrameworkCore.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Banico.Data
+namespace Banico.EntityFrameworkCore
 {
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {

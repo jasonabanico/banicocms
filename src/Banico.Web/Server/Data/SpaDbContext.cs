@@ -1,7 +1,7 @@
 ﻿// using Banico.Web.Models;
 // using Microsoft.EntityFrameworkCore;
 
-// namespace Banico.Data {
+// namespace Banico.EntityFrameworkCore {
 //     public class SpaDbContext : DbContext {
 //         public SpaDbContext (DbContextOptions<SpaDbContext> options) : base (options) {
 //             Database.EnsureCreated ();

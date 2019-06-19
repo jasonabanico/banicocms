@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Banico.Core.Entities;
 using Banico.Core.Repositories;
-using Banico.Data.Settings;
+using Banico.EntityFrameworkCore.Settings;
 
-namespace Banico.Data.Repositories
+namespace Banico.EntityFrameworkCore.Repositories
 {
     public class ConfigRepository : IConfigRepository
     {

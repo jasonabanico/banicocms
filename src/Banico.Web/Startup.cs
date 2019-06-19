@@ -14,7 +14,7 @@ using Microsoft.Net.Http.Headers;
 using AspNetCore.RouteAnalyzer;
 using Swashbuckle.AspNetCore.Swagger;
 using WebEssentials.AspNetCore.Pwa;
-using Banico.Data;
+using Banico.EntityFrameworkCore;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 

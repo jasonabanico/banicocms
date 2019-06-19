@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Banico.Core.Repositories;
-using Banico.Data.Repositories;
+using Banico.EntityFrameworkCore.Repositories;
 using Banico.Api.Models;
 using Banico.Api.Services;
 

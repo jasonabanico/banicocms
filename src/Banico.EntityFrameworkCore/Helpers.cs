@@ -7,7 +7,7 @@ using System;
 using Banico.Core.Entities;
 using Banico.Core.Repositories;
 
-namespace Banico.Data
+namespace Banico.EntityFrameworkCore
 {
     public class Helpers
     {

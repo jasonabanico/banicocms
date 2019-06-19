@@ -5,7 +5,7 @@ using Banico.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Banico.Data {
+namespace Banico.EntityFrameworkCore {
     public static class DbInitializer {
         public static void Initialize (AppDbContext context) {
             context.Database.EnsureCreated ();
