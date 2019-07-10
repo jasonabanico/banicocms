@@ -207,6 +207,7 @@ namespace Banico.Identity.Controllers
             // Send an email with this link
             var originalCode = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             var code = WebUtility.UrlEncode(originalCode);
+
             var urlBuilder =
                 new System.UriBuilder(Request.GetRawUrl())
                     {
@@ -232,7 +233,9 @@ namespace Banico.Identity.Controllers
 
         private async Task<IActionResult> SendForgotPasswordEmail(AppUser user)
         {
-            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var originalCode = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var code = WebUtility.UrlEncode(originalCode);
+            
             var urlBuilder =
                 new System.UriBuilder(Request.GetRawUrl())
                     {
@@ -358,10 +361,13 @@ namespace Banico.Identity.Controllers
                 return RedirectToLocal(returnUrl);
             }
             
+            /*
             if (result.RequiresTwoFactor)
             {
                 return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl });
             }
+            */
+            
             if (result.IsLockedOut)
             {
                 return View("Lockout");
@@ -552,6 +558,7 @@ namespace Banico.Identity.Controllers
             return BadRequest(Errors.AddErrorToModelState("", "Unknown error", ModelState));
         }
 
+        /*
         //
         // GET: /api/Account/SendCode
         [HttpGet]
@@ -608,18 +615,18 @@ namespace Banico.Identity.Controllers
 
         //
         // GET: /api/Account/VerifyCode
-        // [HttpGet]
-        // [AllowAnonymous]
-        // public async Task<IActionResult> VerifyCode(string provider, bool rememberMe, string returnUrl = null)
-        // {
-        //     // Require that the user has already logged in via username/password or external login
-        //     var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-        //     if (user == null)
-        //     {
-        //         return View("Error");
-        //     }
-        //     return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
-        // }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> VerifyCode(string provider, bool rememberMe, string returnUrl = null)
+        {
+            // Require that the user has already logged in via username/password or external login
+            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
+        }
 
         //
         // POST: /api/Account/VerifyCode
@@ -652,6 +659,7 @@ namespace Banico.Identity.Controllers
                 return View(model);
             }
         }
+        */
 
         #region Helpers
 
