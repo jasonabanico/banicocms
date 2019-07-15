@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 const PLUGIN_ROUTES: Routes = [
     {
         path: 'contact',
-        loadChildren: './contact/main/contact.module#ContactModule'
+        loadChildren: './contact/contact.module#ContactModule'
     },
     {
         path: 'directory',
