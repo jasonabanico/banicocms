@@ -4,12 +4,12 @@ import { HttpClientXsrfModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule }  from '@angular/forms';
 
 import { SharedModule }   from '../../shared/modules/shared.module';
-import { AccountService }  from './account.service';
+import { AccountService }  from './services/account.service';
 import { UserService }  from '../../shared/services/user.service';
 import { EmailValidator } from '../../directives/email.validator.directive';
 
 import { AccountRoutingModule }  from './account.routing';
-import { AccountComponent } from './account.component';
+import { AccountComponent } from './components/account.component';
 import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
