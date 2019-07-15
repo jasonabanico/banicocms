@@ -1,5 +1,5 @@
 ﻿import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { ProfileRoutingModule } from './profile.routing';
@@ -9,7 +9,7 @@ import { ProfileFormComponent } from '../components/profile-form/profile-form.co
 
 @NgModule({
   imports: [ 
-    BrowserModule,
+    CommonModule,
     FormsModule,
     ProfileRoutingModule
   ],

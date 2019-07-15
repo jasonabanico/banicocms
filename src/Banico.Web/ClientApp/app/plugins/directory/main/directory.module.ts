@@ -1,5 +1,5 @@
 ﻿import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { DirectoryRoutingModule } from './directory.routing';
@@ -12,7 +12,7 @@ import { DirectoryFrontComponent } from '../components/directory-front/directory
 
 @NgModule({
   imports: [ 
-    BrowserModule,
+    CommonModule,
     FormsModule,
     DirectoryRoutingModule
   ],

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { ListRoutingModule } from './list.routing';
 import { ListComponent } from './components/list.component';
 import { ListDisplayComponent } from './components/list-display/list-display.component';
@@ -18,7 +17,6 @@ import { ListService } from './services/list.service';
 @NgModule({
   imports: [
     CommonModule,
-    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     ListRoutingModule

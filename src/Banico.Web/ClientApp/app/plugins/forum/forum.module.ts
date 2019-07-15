@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { ForumRoutingModule } from './forum.routing';
 import { ForumComponent } from './components/forum.component';
 import { SubforumComponent } from './components/subforum/subforum.component';
@@ -21,7 +20,6 @@ import { ReplyCommentService } from './services/reply-comment.service';
 @NgModule({
   imports: [
     CommonModule,
-    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     ForumRoutingModule

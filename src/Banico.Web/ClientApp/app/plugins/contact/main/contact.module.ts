@@ -1,5 +1,5 @@
-﻿import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+﻿import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { ContactRoutingModule } from './contact.routing';
@@ -9,7 +9,7 @@ import { ContactFormComponent } from '../components/contact-form/contact-form.co
 
 @NgModule({
   imports: [ 
-    BrowserModule,
+    CommonModule,
     FormsModule,
     ContactRoutingModule
   ],
