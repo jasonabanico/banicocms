@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { WindowRefService } from '../../shared/services/windowref.service';
 import { AuthService } from '../../shared/services/auth.service';
-import { AccountService } from '../../identity/account/main/account.service';
+import { AccountService } from '../../identity/account/services/account.service';
 
 @Component({
   selector: 'app-nav-menu',

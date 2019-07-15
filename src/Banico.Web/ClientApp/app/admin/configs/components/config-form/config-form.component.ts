@@ -2,7 +2,7 @@ import {finalize} from 'rxjs/operators';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfigsService } from '../../main/configs.service';
+import { ConfigsService } from '../../services/configs.service';
 import { Config } from '../../../../entities/config';
 
 @Component({

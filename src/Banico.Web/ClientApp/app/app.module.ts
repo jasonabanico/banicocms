@@ -19,7 +19,7 @@ import { AuthGuard } from './shared/auth/auth.guard';
 import { ConfigsService } from './shared/services/configs.service';
 import { ToastrService } from './shared/services/toastr.service';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { AccountModule } from './identity/account/main/account.module';
+import { AccountModule } from './identity/account/account.module';
 
 @NgModule({
   declarations: [

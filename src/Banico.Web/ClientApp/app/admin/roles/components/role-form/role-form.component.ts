@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Role } from "../../../../entities/role";
-import { RolesService } from "../../main/roles.service";
+import { RolesService } from "../../services/roles.service";
 
 @Component({
     selector: 'app-role-form',

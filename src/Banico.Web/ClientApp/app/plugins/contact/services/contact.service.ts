@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Contact } from './contact';
+import { Contact } from '../entities/contact';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { PluginService } from '../../services/plugin.service';

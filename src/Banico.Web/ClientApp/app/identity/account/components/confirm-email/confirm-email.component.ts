@@ -1,7 +1,7 @@
 import {finalize, filter} from 'rxjs/operators';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccountService } from '../../main/account.service';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-confirm-email',

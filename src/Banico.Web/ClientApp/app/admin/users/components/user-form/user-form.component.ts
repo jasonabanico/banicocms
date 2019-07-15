@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../../../entities/user';
-import { UsersService } from '../../main/users.service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-user-form',

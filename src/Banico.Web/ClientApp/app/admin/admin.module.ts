@@ -5,10 +5,10 @@ import { PipesModule } from '../pipes/pipes.module';
 
 import { AdminRoutingModule } from './admin.routing';
 import { AdminComponent } from './admin/admin.component';
-import { RolesModule } from './roles/main/roles.module';
-import { SectionsModule } from './sections/main/sections.module';
-import { UsersModule } from './users/main/users.module';
-import { ConfigsModule } from './configs/main/configs.module';
+import { RolesModule } from './roles/roles.module';
+import { SectionsModule } from './sections/sections.module';
+import { UsersModule } from './users/users.module';
+import { ConfigsModule } from './configs/configs.module';
 
 @NgModule({
     imports: [ 

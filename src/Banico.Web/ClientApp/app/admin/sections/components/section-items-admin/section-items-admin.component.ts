@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SectionItem } from '../../../../entities/section-item';
 import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
 import { SectionsService } from '../../../../shared/services/sections.service';
-import { SectionsFileService } from '../../main/services/sections-file.service';
+import { SectionsFileService } from '../../services/sections-file.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({

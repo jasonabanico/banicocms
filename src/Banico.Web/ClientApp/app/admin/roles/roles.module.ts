@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientXsrfModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule }  from '@angular/forms';
-import { UserFormComponent } from '../components/user-form/user-form.component';
-import { UsersListComponent } from '../components/users-list/users-list.component';
-import { UsersService } from './users.service';
+import { RoleFormComponent } from './components/role-form/role-form.component';
+import { RolesListComponent } from './components/roles-list/roles-list.component';
+import { RolesService } from './services/roles.service';
 
 @NgModule({
   imports: [
@@ -17,13 +17,13 @@ import { UsersService } from './users.service';
     })  
   ],
   declarations: [
-    UserFormComponent,
-    UsersListComponent
+    RoleFormComponent,
+    RolesListComponent
   ],
   providers: [ 
-    UsersService
+    RolesService
   ],
     bootstrap: [ 
   ]
 })
-export class UsersModule { }
+export class RolesModule { }

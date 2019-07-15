@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { Config } from "../../../../entities/config";
-import { ConfigsService } from "../../main/configs.service";
+import { ConfigsService } from "../../services/configs.service";
 
 @Component({
     selector: 'app-configs-list',

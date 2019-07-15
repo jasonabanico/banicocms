@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { Role } from "../../../../entities/role";
-import { RolesService } from "../../main/roles.service";
+import { RolesService } from "../../services/roles.service";
 
 @Component({
     selector: 'app-rolelist',

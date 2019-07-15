@@ -2,7 +2,7 @@ import {finalize} from 'rxjs/operators';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { AccountService } from '../../main/account.service';
+import { AccountService } from '../../services/account.service';
  
 @Component({
   selector: 'app-reset-password',

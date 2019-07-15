@@ -3,7 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as toastr from 'toastr';
-import { AccountService } from '../../main/account.service';
+import { AccountService } from '../../services/account.service';
 import { WindowRefService } from '../../../../shared/services/windowref.service';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { ContentItemService } from '../../../../plugins/services/content-item.service';

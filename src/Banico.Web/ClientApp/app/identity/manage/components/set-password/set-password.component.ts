@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ManageService } from '../../main/manage.service';
+import { ManageService } from '../../services/manage.service';
 import { SetPassword } from './set-password.interface';
 
 @Component({

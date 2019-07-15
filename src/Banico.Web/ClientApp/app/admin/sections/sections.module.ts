@@ -2,8 +2,8 @@
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { SectionsAdminComponent } from '../components/sections-admin/sections-admin.component';
-import { SectionItemsAdminComponent } from '../components/section-items-admin/section-items-admin.component';
+import { SectionsAdminComponent } from './components/sections-admin/sections-admin.component';
+import { SectionItemsAdminComponent } from './components/section-items-admin/section-items-admin.component';
 
 import { SectionsFileService } from './services/sections-file.service';
 

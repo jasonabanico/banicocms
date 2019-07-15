@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientXsrfModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule }  from '@angular/forms';
-import { ConfigsService } from './configs.service';
-import { ConfigFormComponent } from '../components/config-form/config-form.component';
-import { ConfigsListComponent } from '../components/configs-list/configs-list.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { UsersListComponent } from './components/users-list/users-list.component';
+import { UsersService } from './services/users.service';
 
 @NgModule({
   imports: [
@@ -17,13 +17,13 @@ import { ConfigsListComponent } from '../components/configs-list/configs-list.co
     })  
   ],
   declarations: [
-    ConfigFormComponent,
-    ConfigsListComponent
+    UserFormComponent,
+    UsersListComponent
   ],
   providers: [ 
-    ConfigsService
+    UsersService
   ],
     bootstrap: [ 
   ]
 })
-export class ConfigsModule { }
+export class UsersModule { }

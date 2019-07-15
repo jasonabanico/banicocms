@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Contact } from '../../main/contact';
-import { Field } from '../../main/field';
-import { ContactService } from '../../main/contact.service';
+import { Contact } from '../../entities/contact';
+import { Field } from '../../entities/field';
+import { ContactService } from '../../services/contact.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({

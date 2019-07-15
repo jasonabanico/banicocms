@@ -4,11 +4,11 @@ import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/com
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 
-import { SectionsQuery } from '../../admin/sections/main/services/sections.queries';
-import { SectionItemsQuery } from '../../admin/sections/main/services/sections.queries';
-import { AddOrUpdateSectionMutation, AddOrUpdateSectionItemMutation } from '../../admin/sections/main/services/sections.mutations';
-import { SectionsQueryResult } from '../../admin/sections/main/services/sections.queryresults';
-import { SectionItemsQueryResult } from '../../admin/sections/main/services/sections.queryresults';
+import { SectionsQuery } from '../../admin/sections/services/sections.queries';
+import { SectionItemsQuery } from '../../admin/sections/services/sections.queries';
+import { AddOrUpdateSectionMutation, AddOrUpdateSectionItemMutation } from '../../admin/sections/services/sections.mutations';
+import { SectionsQueryResult } from '../../admin/sections/services/sections.queryresults';
+import { SectionItemsQueryResult } from '../../admin/sections/services/sections.queryresults';
 
 import { Section } from '../../entities/section';
 import { SectionItem } from '../../entities/section-item';
