@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { PluginService } from '../../services/plugin.service';
 import { ContentItem } from '../../../entities/content-item';
-import { Faq } from './faq';
-import { Qa } from './qa';
+import { Faq } from '../entities/faq';
+import { Qa } from '../entities/qa';
 
 @Injectable()
 export class FaqService extends PluginService {

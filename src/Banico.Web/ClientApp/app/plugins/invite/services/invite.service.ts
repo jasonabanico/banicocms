@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Invite } from './invite';
+import { Invite } from '../entities/invite';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ORIGIN_URL } from '../../../shared/constants/baseurl.constants';

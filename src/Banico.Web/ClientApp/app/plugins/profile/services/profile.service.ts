@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Profile } from './profile';
+import { Profile } from '../entities/profile';
 import { ORIGIN_URL } from '../../../shared/constants/baseurl.constants';
 
 @Injectable()

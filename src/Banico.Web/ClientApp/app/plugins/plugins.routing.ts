@@ -12,7 +12,7 @@ const PLUGIN_ROUTES: Routes = [
     },
     {
         path: 'faq',
-        loadChildren: './faq/main/faq.module#FaqModule'
+        loadChildren: './faq/faq.module#FaqModule'
     },
     {
         path: 'forum',
@@ -20,7 +20,7 @@ const PLUGIN_ROUTES: Routes = [
     },
     {
         path: 'invite',
-        loadChildren: './invite/main/invite.module#InviteModule'
+        loadChildren: './invite/invite.module#InviteModule'
     },
     {
         path: 'links',
@@ -32,11 +32,11 @@ const PLUGIN_ROUTES: Routes = [
     },
     {
         path: 'page',
-        loadChildren: './page/main/page.module#PageModule'
+        loadChildren: './page/page.module#PageModule'
     },
     {
         path: 'profile',
-        loadChildren: './profile/main/profile.module#ProfileModule'
+        loadChildren: './profile/profile.module#ProfileModule'
     },
 ];
 

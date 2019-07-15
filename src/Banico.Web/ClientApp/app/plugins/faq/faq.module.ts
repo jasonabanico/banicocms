@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { FaqRoutingModule } from './faq.routing';
-import { FaqComponent }  from './faq.component';
-import { FaqDisplayComponent } from '../components/faq-display/faq-display.component';
-import { FaqFormComponent } from '../components/faq-form/faq-form.component';
+import { FaqComponent }  from './components/faq.component';
+import { FaqDisplayComponent } from './components/faq-display/faq-display.component';
+import { FaqFormComponent } from './components/faq-form/faq-form.component';
 
 @NgModule({
   imports: [ 

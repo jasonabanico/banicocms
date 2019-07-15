@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Profile } from '../../main/profile';
-import { ProfileService } from '../../main/profile.service';
+import { Profile } from '../../entities/profile';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
     selector: 'app-profile-display',

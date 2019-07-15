@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Invite } from '../../main/invite';
-import { InviteService } from '../../main/invite.service';
+import { Invite } from '../../entities/invite';
+import { InviteService } from '../../services/invite.service';
 
 @Component({
     selector: 'app-invite-form',

@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { PageRoutingModule } from './page.routing';
-import { PageComponent }  from './page.component';
-import { PageDisplayComponent } from '../components/page-display/page-display.component';
-import { PageFormComponent } from '../components/page-form/page-form.component';
+import { PageComponent }  from './components/page.component';
+import { PageDisplayComponent } from './components/page-display/page-display.component';
+import { PageFormComponent } from './components/page-form/page-form.component';
 
 @NgModule({
   imports: [ 

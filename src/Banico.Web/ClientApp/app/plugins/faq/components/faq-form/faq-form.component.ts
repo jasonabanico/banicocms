@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Faq } from '../../main/faq';
-import { Qa } from '../../main/qa';
-import { FaqService } from '../../main/faq.service';
+import { Faq } from '../../entities/faq';
+import { Qa } from '../../entities/qa';
+import { FaqService } from '../../services/faq.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({

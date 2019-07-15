@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ContentItem } from '../../../entities/content-item';
 import { PluginService } from '../../services/plugin.service';
-import { Page } from './page';
+import { Page } from '../entities/page';
 
 @Injectable()
 export class PageService extends PluginService {

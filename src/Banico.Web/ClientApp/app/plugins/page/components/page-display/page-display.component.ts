@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Page } from '../../main/page';
+import { Page } from '../../entities/page';
 import { AuthService } from '../../../../shared/services/auth.service';
-import { PageService } from '../../main/page.service';
+import { PageService } from '../../services/page.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({
