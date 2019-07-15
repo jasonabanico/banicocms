@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { PluginService } from "../../services/plugin.service";
 import { ContentItem } from '../../../entities/content-item';
-import { DirectoryItem } from './directory-item';
+import { DirectoryItem } from '../entities/directory-item';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()

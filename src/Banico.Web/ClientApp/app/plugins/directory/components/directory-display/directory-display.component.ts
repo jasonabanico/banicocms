@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DirectoryItem } from '../../main/directory-item';
+import { DirectoryItem } from '../../entities/directory-item';
 import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
 import { SectionsService } from '../../../../shared/services/sections.service';
-import { DirectoryService } from '../../main/directory.service';
+import { DirectoryService } from '../../services/directory.service';
 
 @Component({
     selector: 'app-directory-display',

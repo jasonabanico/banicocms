@@ -8,7 +8,7 @@ const PLUGIN_ROUTES: Routes = [
     },
     {
         path: 'directory',
-        loadChildren: './directory/main/directory.module#DirectoryModule'
+        loadChildren: './directory/directory.module#DirectoryModule'
     },
     {
         path: 'faq',

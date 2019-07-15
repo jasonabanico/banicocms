@@ -2,8 +2,8 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 import { ContentItem } from '../../../../entities/content-item';
-import { DirectoryItem } from '../../main/directory-item';
-import { DirectoryService } from '../../main/directory.service';
+import { DirectoryItem } from '../../entities/directory-item';
+import { DirectoryService } from '../../services/directory.service';
 import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 import { AppConfig}  from '../../../../../../Config/app.config';
