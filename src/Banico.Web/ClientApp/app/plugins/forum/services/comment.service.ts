@@ -4,65 +4,65 @@ import { map, catchError } from 'rxjs/operators';
 import { PluginService } from '../../services/plugin.service';
 import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
-import { ReplyComment } from '../entities/reply-comment';
+import { Comment } from '../entities/comment';
 
 @Injectable()
-export class ReplyCommentService extends PluginService implements OnInit {
+export class CommentService extends PluginService implements OnInit {
 
-    public get(id: string): Observable<ReplyComment> {
+    public get(id: string): Observable<Comment> {
         return this.contentItemService.get(id).pipe(
         map(item => {
-            return new ReplyComment(item);
+            return new Comment(item);
         }));
     }
 
     ngOnInit() {
-        this.module = 'reply-comment';
+        this.module = 'forum-comment';
         this.getPageSize();
     }
 
-    public getReplyComments(replyId: string, page: number): Observable<ReplyComment[]> {
+    public getComments(postId: string, page: number): Observable<Comment[]> {
         return this.contentItemService.getAll('', '', '',
-        this.module, replyId, '', '', '', '', '', '', '', '', '', '', '', '', '',
+        this.module, postId, '', '', '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '', true, true, '', page, this.pageSize).pipe(
         map(items => {
-            const replyComments: ReplyComment[] = new Array<ReplyComment>();
+            const comments: Comment[] = new Array<Comment>();
             items.forEach(function(item: ContentItem) {
-                replyComments.push(new ReplyComment(item));
+                comments.push(new Comment(item));
             });
 
-            return replyComments;
+            return comments;
         }));
     }
 
-    public setReplyCommentUser(replyComment: ReplyComment) {
-        this.contentItemService.getProfileById(replyComment.userId)
+    public setCommentUser(comment: Comment) {
+        this.contentItemService.getProfileById(comment.userId)
         .subscribe(user => {
-            replyComment.username = user.alias;
-            replyComment.avatarHash = user.attribute01;
+            comment.username = user.alias;
+            comment.avatarHash = user.attribute01;
         });
     }
 
     public addOrUpdate(
         id: string,
-        replyId: string,
+        postId: string,
         text: string
     ): Observable<string> {
-        const replyComment: ReplyComment = new ReplyComment(null);
+        const comment: Comment = new Comment(null);
 
-        replyComment.id = id;
-        replyComment.replyId = replyId;
-        replyComment.text = text;
+        comment.id = id;
+        comment.postId = postId;
+        comment.text = text;
 
-        const contentItem: ContentItem = replyComment.ToContentItem();
+        const contentItem: ContentItem = comment.ToContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             catchError(this.handleError));
     }
 
-    public delete(replyComment: ReplyComment): Observable<{}> {
+    public delete(comment: Comment): Observable<{}> {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        const data = 'id=' + replyComment.id;
+        const data = 'id=' + comment.id;
         return this.http
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers

@@ -59,8 +59,8 @@
   </div>
 </div>
 
-<app-reply-form [topicId]="topic?.id"></app-reply-form>
+<app-post-form [topicId]="topic?.id"></app-post-form>
 
-<div *ngFor="let reply of replies">
-  <app-reply [id]="reply.id"></app-reply>
+<div *ngFor="let post of posts">
+  <app-post [id]="post.id"></app-post>
 </div>

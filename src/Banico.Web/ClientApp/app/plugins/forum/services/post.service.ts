@@ -4,37 +4,37 @@ import { map, catchError } from 'rxjs/operators';
 import { PluginService } from '../../services/plugin.service';
 import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
-import { Reply } from '../entities/reply';
+import { Post } from '../entities/post';
 
 @Injectable()
-export class ReplyService extends PluginService {
+export class PostService extends PluginService {
 
-    public get(id: string): Observable<Reply> {
+    public get(id: string): Observable<Post> {
         return this.contentItemService.get(id).pipe(
         map(item => {
-            return new Reply(item);
+            return new Post(item);
         }));
     }
 
-    public getReplies(topicId: string, page: number, pageSize: number): Observable<Reply[]> {
+    public getPosts(topicId: string, page: number, pageSize: number): Observable<Post[]> {
         return this.contentItemService.getAll('', '', '',
-        'reply', topicId, '', '', '', '', '', '', '', '', '', '', '', '', '',
+        'forum-post', topicId, '', '', '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '', true, true, '', page, pageSize).pipe(
         map(items => {
-            const replies: Reply[] = new Array<Reply>();
+            const replies: Post[] = new Array<Post>();
             items.forEach(function(item: ContentItem) {
-                replies.push(new Reply(item));
+                replies.push(new Post(item));
             });
 
             return replies;
         }));
     }
 
-    public setReplyUser(reply: Reply) {
-        this.contentItemService.getProfileById(reply.userId)
+    public setPostUser(post: Post) {
+        this.contentItemService.getProfileById(post.userId)
         .subscribe(user => {
-            reply.username = user.alias;
-            reply.avatarHash = user.attribute01;
+            post.username = user.alias;
+            post.avatarHash = user.attribute01;
         });
     }
 
@@ -43,21 +43,21 @@ export class ReplyService extends PluginService {
         topicId: string,
         text: string
     ): Observable<string> {
-        const reply: Reply = new Reply(null);
+        const post: Post = new Post(null);
 
-        reply.id = id;
-        reply.topicId = topicId;
-        reply.text = text;
+        post.id = id;
+        post.topicId = topicId;
+        post.text = text;
 
-        const contentItem: ContentItem = reply.ToContentItem();
+        const contentItem: ContentItem = post.ToContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             catchError(this.handleError));
     }
 
-    public delete(reply: Reply): Observable<{}> {
+    public delete(post: Post): Observable<{}> {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        const data = 'id=' + reply.id;
+        const data = 'id=' + post.id;
         return this.http
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers

@@ -1,6 +1,6 @@
 import { ContentItem } from "../../../entities/content-item";
 
-export class Reply {
+export class Post {
   id: string;
   text: string;
   topicId: string;
@@ -10,7 +10,7 @@ export class Reply {
   createdDate: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module == 'reply')) {
+    if ((contentItem) && (contentItem.module == 'forum-post')) {
       this.id = contentItem.id;
       this.text = contentItem.content;
       this.topicId = contentItem.parentId;
@@ -22,7 +22,7 @@ export class Reply {
   public ToContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = 'reply';
+    output.module = 'forum-post';
     output.id = this.id;
     output.content = this.text;
     output.parentId = this.topicId;

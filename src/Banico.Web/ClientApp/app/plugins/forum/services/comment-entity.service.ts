@@ -3,11 +3,11 @@ import {
   EntityCollectionServiceBase,
   EntityCollectionServiceElementsFactory
 } from 'ngrx-data';
-import { ReplyComment } from '../entities/reply-comment';
+import { Comment } from '../entities/comment';
 
 @Injectable({ providedIn: 'root' })
-export class ReplyCommentEntityService extends EntityCollectionServiceBase<ReplyComment> {
+export class CommentEntityService extends EntityCollectionServiceBase<Comment> {
   constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
-    super('ReplyComment', serviceElementsFactory);
+    super('Comment', serviceElementsFactory);
   }
 }

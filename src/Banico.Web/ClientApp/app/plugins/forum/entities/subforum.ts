@@ -8,7 +8,7 @@ export class Subforum {
   sectionItems: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module == 'subforum')) {
+    if ((contentItem) && (contentItem.module == 'forum-subforum')) {
       this.id = contentItem.id;
       this.name = contentItem.name;
       this.alias = contentItem.alias;
@@ -20,7 +20,7 @@ export class Subforum {
   public ToContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = 'subforum';
+    output.module = 'forum-subforum';
     output.id = this.id;
     output.name = this.name;
     output.alias = this.alias;

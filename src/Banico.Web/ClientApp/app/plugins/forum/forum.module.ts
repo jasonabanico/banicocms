@@ -7,14 +7,14 @@ import { SubforumComponent } from './components/subforum/subforum.component';
 import { SubforumFormComponent } from './components/subforum-form/subforum-form.component';
 import { TopicComponent } from './components/topic/topic.component';
 import { TopicFormComponent } from './components/topic-form/topic-form.component';
-import { ReplyComponent } from './components/reply/reply.component';
-import { ReplyFormComponent } from './components/reply-form/reply-form.component';
-import { ReplyCommentComponent } from './components/reply-comment/reply-comment.component';
-import { ReplyCommentFormComponent } from './components/reply-comment-form/reply-comment-form.component';
+import { PostComponent } from './components/post/post.component';
+import { PostFormComponent } from './components/post-form/post-form.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { SubforumService } from './services/subforum.service';
 import { TopicService } from './services/topic.service';
-import { ReplyService } from './services/reply.service';
-import { ReplyCommentService } from './services/reply-comment.service';
+import { PostService } from './services/post.service';
+import { CommentService } from './services/comment.service';
 //import { ForumStoreModule } from './store/forum-store.module';
 
 @NgModule({
@@ -31,16 +31,16 @@ import { ReplyCommentService } from './services/reply-comment.service';
     SubforumFormComponent,
     TopicComponent,
     TopicFormComponent,
-    ReplyComponent,
-    ReplyFormComponent,
-    ReplyCommentComponent,
-    ReplyCommentFormComponent
+    PostComponent,
+    PostFormComponent,
+    CommentComponent,
+    CommentFormComponent
   ],
   providers: [ 
     SubforumService,
     TopicService,
-    ReplyService,
-    ReplyCommentService
+    PostService,
+    CommentService
   ]
 })
 export class ForumModule { }

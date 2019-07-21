@@ -62,10 +62,10 @@
         "profile,isActive,n",
         "profile/view,canActivate,user",
         "profile/manage,canActivate,user",
-        "reply/view,canActivate,user",
-        "reply/manage,canActivate,user",
-        "reply-comment/view/canActivate,user",
-        "reply-comment/manage/canActivate,user"      
+        "post/view,canActivate,user",
+        "post/manage,canActivate,user",
+        "comment/view/canActivate,user",
+        "comment/manage/canActivate,user"      
         ]
     },
     "Content": {

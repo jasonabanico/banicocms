@@ -2,27 +2,27 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../shared/services/auth.service';
-import { ReplyService } from '../../services/reply.service';
-import { Reply } from '../../entities/reply';
+import { PostService } from '../../services/post.service';
+import { Post } from '../../entities/post';
 
 @Component({
-  selector: 'app-reply-form',
-  templateUrl: './reply-form.component.html',
-  styleUrls: ['./reply-form.component.scss']
+  selector: 'app-post-form',
+  templateUrl: './post-form.component.html',
+  styleUrls: ['./post-form.component.scss']
 })
-export class ReplyFormComponent implements OnInit {
+export class PostFormComponent implements OnInit {
   public isEdit: boolean = false;
   public username: string;
   public avatarHash: string;
 
-  public replyForm: FormGroup = this.fb.group({
+  public postForm: FormGroup = this.fb.group({
     id: ['', Validators.required],
     topicId: ['', Validators.required],
     text: ['', Validators.required]
   });
 
   constructor(
-    private replyService: ReplyService,
+    private postService: PostService,
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
@@ -37,36 +37,36 @@ export class ReplyFormComponent implements OnInit {
 
   @Input()
   set topicId(topicId: string) {
-    this.replyForm.patchValue({
+    this.postForm.patchValue({
       topicId: topicId
     });
   }
 
   @Input()
   set id(id: string) {
-    this.replyService.get(id)
-    .subscribe(reply => this.set(reply));
+    this.postService.get(id)
+    .subscribe(post => this.set(post));
   }
 
   @Output() saved: EventEmitter<string> = new EventEmitter<string>();
   @Output() cancelled: EventEmitter<null> = new EventEmitter<null>();
 
-  private set(reply: Reply) {
-    this.replyForm.patchValue({
-      id: reply.id,
-      topicId: reply.topicId,
-      text: reply.text
+  private set(post: Post) {
+    this.postForm.patchValue({
+      id: post.id,
+      topicId: post.topicId,
+      text: post.text
     });
     this.isEdit = true;
   }
 
   public save() {
     // this.isRequesting = true;
-    var id = this.replyForm.value['id'];
-    var text = this.replyForm.value['text'];
-    this.replyService.addOrUpdate(
+    var id = this.postForm.value['id'];
+    var text = this.postForm.value['text'];
+    this.postService.addOrUpdate(
       id,
-      this.replyForm.value['topicId'],
+      this.postForm.value['topicId'],
       text
     )
     .subscribe(

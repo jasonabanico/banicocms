@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReplyFormComponent } from './reply-form.component';
+import { PostFormComponent } from './post-form.component';
 
-describe('ReplyComponent', () => {
-  let component: ReplyFormComponent;
-  let fixture: ComponentFixture<ReplyFormComponent>;
+describe('PostComponent', () => {
+  let component: PostFormComponent;
+  let fixture: ComponentFixture<PostFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReplyFormComponent ]
+      declarations: [ PostFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReplyFormComponent);
+    fixture = TestBed.createComponent(PostFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

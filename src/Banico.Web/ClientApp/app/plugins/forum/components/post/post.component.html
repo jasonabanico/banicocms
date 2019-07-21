@@ -4,11 +4,11 @@
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="mr-2">
-                    <img class="rounded-circle" width="45" src="https://www.gravatar.com/avatar/{{reply?.avatarHash}}?size=45&d=mp" alt="">
+                    <img class="rounded-circle" width="45" src="https://www.gravatar.com/avatar/{{post?.avatarHash}}?size=45&d=mp" alt="">
                 </div>
                 <div class="ml-2">
-                    <div class="h5 m-0">@{{reply?.username}}</div>
-                    <div class="h7 text-muted">{{reply?.username}}</div>
+                    <div class="h5 m-0">@{{post?.username}}</div>
+                    <div class="h7 text-muted">{{post?.username}}</div>
                 </div>
             </div>
             <div>
@@ -30,7 +30,7 @@
     <div class="card-body">
         <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> {{moment}} ({{momentRelative}})</div>
         <p class="card-text">
-          {{reply?.text}}
+          {{post?.text}}
         </p>
     </div>
     <div class="card-footer">
@@ -41,10 +41,10 @@
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
-            <ng-container class="list-group-item" *ngFor="let replyComment of replyComments">
-                <app-reply-comment [id]="replyComment.id"></app-reply-comment>
+            <ng-container class="list-group-item" *ngFor="let comment of comments">
+                <app-comment [id]="comment.id"></app-comment>
             </ng-container>
-            <app-reply-comment-form [replyId]="reply?.id" (saved)="onCommentSave($event)"></app-reply-comment-form>
+            <app-comment-form [postId]="post?.id" (saved)="onCommentSave($event)"></app-comment-form>
         </li>
       </ul>
   </div>      

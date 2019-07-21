@@ -1,0 +1,26 @@
+<ng-container *ngIf="!isEdit">
+  <div class="media d-block d-md-flex">
+    <img class="rounded-circle" width="30" src="https://www.gravatar.com/avatar/{{comment?.avatarHash}}?size=30&d=mp" alt="">
+    <div class="media-body text-md-left ml-md-3 ml-0">
+      <p class="small">
+        <a href="">@{{comment?.username}}</a>
+        {{comment?.text}}<br />
+        <a href="javascript:;" (click)="edit()">Edit</a> &bull; 
+        <a href="javascript:;" >Like</a> &bull; 
+        {{moment}} ({{momentRelative}})
+      </p>
+    </div>
+  </div>  
+</ng-container>
+<app-comment-form 
+  *ngIf="isEdit" 
+  [id]="comment?.id" 
+  [postId]="comment?.postId"
+  [text]="comment?.text" 
+  [userId]="comment?.userId"
+  [username]="comment?.username"
+  [avatarHash]="comment?.avatarHash"
+  [createdDate]="comment?.createdDate"
+  (saved)="onSave($event)" 
+  (cancelled)="onCancel($event)"
+></app-comment-form>

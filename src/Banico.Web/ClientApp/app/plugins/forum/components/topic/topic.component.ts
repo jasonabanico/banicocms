@@ -4,9 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { TopicService } from '../../services/topic.service';
 import { SubforumService } from '../../services/subforum.service';
-import { ReplyService } from '../../services/reply.service';
+import { PostService } from '../../services/post.service';
 import { Subforum } from '../../entities/subforum';
-import { Reply } from '../../entities/reply';
+import { Post } from '../../entities/post';
 import * as moment from 'moment';
 
 @Component({
@@ -16,7 +16,7 @@ import * as moment from 'moment';
 })
 export class TopicComponent implements OnInit {
   public topic: Topic;
-  public replies: Reply[];
+  public posts: Post[];
   public subforum: Subforum;
   public moment: string;
   public momentRelative: string;
@@ -24,7 +24,7 @@ export class TopicComponent implements OnInit {
   constructor(
     private topicService: TopicService,
     private subforumService: SubforumService,
-    private replyService: ReplyService,
+    private postService: PostService,
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute
@@ -50,7 +50,7 @@ export class TopicComponent implements OnInit {
     this.topicService.setTopicUser(topic);
     this.subforumService.get(topic.subForumId)
     .subscribe(subforum => this.subforum = subforum);
-    this.replyService.getReplies(topic.id, 0, 0)
-    .subscribe(replies => this.replies = replies);
+    this.postService.getPosts(topic.id, 0, 0)
+    .subscribe(posts => this.posts = posts);
   }
 }

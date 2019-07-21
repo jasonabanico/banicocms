@@ -3,11 +3,11 @@ import { EntityMetadataMap } from 'ngrx-data';
 const entityMetadata: EntityMetadataMap = {
   Subforum: {},
   Topic: {},
-  Reply: {},
-  ReplyComment: {}
+  Post: {},
+  Comment: {}
 };
 
-const pluralNames = { Reply: 'Replies' };
+const pluralNames = { };
 
 export const entityConfig = {
   entityMetadata,

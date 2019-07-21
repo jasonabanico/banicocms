@@ -1,19 +1,19 @@
 import { ContentItem } from "../../../entities/content-item";
 
-export class ReplyComment {
+export class Comment {
   id: string;
   text: string;
-  replyId: string;
+  postId: string;
   userId: string;
   username: string;
   avatarHash: string;
   createdDate: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module == 'reply-comment')) {
+    if ((contentItem) && (contentItem.module == 'forum-comment')) {
       this.id = contentItem.id;
       this.text = contentItem.content;
-      this.replyId = contentItem.parentId;
+      this.postId = contentItem.parentId;
       this.userId = contentItem.createdBy;
       this.createdDate = contentItem.createdDate;
     }
@@ -22,10 +22,10 @@ export class ReplyComment {
   public ToContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = 'reply-comment';
+    output.module = 'forum-comment';
     output.id = this.id;
     output.content = this.text;
-    output.parentId = this.replyId;
+    output.parentId = this.postId;
     
     return output;
   }

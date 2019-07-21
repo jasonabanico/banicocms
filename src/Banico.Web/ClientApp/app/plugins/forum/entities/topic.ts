@@ -11,7 +11,7 @@ export class Topic {
   createdDate: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module == 'topic')) {
+    if ((contentItem) && (contentItem.module == 'forum-topic')) {
       this.id = contentItem.id;
       this.title = contentItem.name;
       this.text = contentItem.content;
@@ -24,7 +24,7 @@ export class Topic {
   public ToContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = 'topic';
+    output.module = 'forum-topic';
     output.id = this.id;
     output.name = this.title;
     output.content = this.text;
