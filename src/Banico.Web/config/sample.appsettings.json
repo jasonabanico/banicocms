@@ -1,6 +1,6 @@
 {
     "InviteOnly": "true",
-    "SuperAdmins": "ENTER-SUPERADMIN-EMAIL-HERE",
+    "SuperAdmins": "ENTER-SUPERADMIN-USERNAME-HERE",
     "EmailSender": {
       "EmailUser": "ENTER-SENDGRID-USER-HERE",
       "EmailKey": "ENTER-SENDGRID-KEY-HERE"  
@@ -41,10 +41,14 @@
         "faq/view,canActivate,user",
         "faq/manage,canActivate,admin",
         "forum,isActive,n",
-        "subforum/manage,canActivate,admin",
-        "subforum/view,canActivate,user",
-        "topic/manage,canActivate,user",
-        "topic/view,canActivate,user",
+        "forum-subforum/manage,canActivate,admin",
+        "forum-subforum/view,canActivate,user",
+        "forum-topic/manage,canActivate,user",
+        "forum-topic/view,canActivate,user",
+        "forum-post/view,canActivate,user",
+        "forum-post/manage,canActivate,user",
+        "forum-comment/view/canActivate,user",
+        "forum-comment/manage/canActivate,user",    
         "invite,isActive,n",
         "invite,canActivate,user",
         "link/view,canActivate,user",
@@ -61,11 +65,7 @@
         "page/manage,canActivate,admin",
         "profile,isActive,n",
         "profile/view,canActivate,user",
-        "profile/manage,canActivate,user",
-        "post/view,canActivate,user",
-        "post/manage,canActivate,user",
-        "comment/view/canActivate,user",
-        "comment/manage/canActivate,user"      
+        "profile/manage,canActivate,user"
         ]
     },
     "Content": {

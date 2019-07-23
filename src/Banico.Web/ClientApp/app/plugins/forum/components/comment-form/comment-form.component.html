@@ -1,40 +1,43 @@
-<form [formGroup]="commentForm" novalidate (ngSubmit)="save()">
-  <input type="hidden"
-    id="id" 
-    name="id"
-    formControlName="id" />
-  <input type="hidden"
-    id="postId" 
-    name="postId"
-    formControlName="postId" />
-  <input type="hidden"
-    id="userId" 
-    name="userId"
-    formControlName="userId" />
-  <input type="hidden"
-    id="username" 
-    name="username"
-    formControlName="username" />
-  <input type="hidden"
-    id="avatarHash" 
-    name="avatarHash"
-    formControlName="avatarHash" />
-  <input type="hidden"
-    id="createdDate" 
-    name="createdDate"
-    formControlName="createdDate" />
-  <div class="form-group">
-    <div class="col-md-10">
+<ng-container>
+  <div class="media d-block d-md-flex">
+    <img class="rounded-circle" width="30" src="https://www.gravatar.com/avatar/{{avatarHash}}?size=30&d=mp" alt="">
+    <div class="media-body ml-md-3 ml-0">
+      <form [formGroup]="commentForm" novalidate (ngSubmit)="save()">
+        <input type="hidden"
+          id="id" 
+          name="id"
+          formControlName="id" />
+        <input type="hidden"
+          id="postId" 
+          name="postId"
+          formControlName="postId" />
+        <input type="hidden"
+          id="userId" 
+          name="userId"
+          formControlName="userId" />
+        <input type="hidden"
+          id="username" 
+          name="username"
+          formControlName="username" />
+        <input type="hidden"
+          id="avatarHash" 
+          name="avatarHash"
+          formControlName="avatarHash" />
+        <input type="hidden"
+          id="createdDate" 
+          name="createdDate"
+          formControlName="createdDate" />
         <input 
-            class="form-control" 
-            id="text" 
-            name="text"
-            type="text"
-            formControlName="text" 
-            (keyup.enter)="save()" />
+          class="form-control" 
+          id="text" 
+          name="text"
+          type="text"
+          formControlName="text" 
+          (keyup.enter)="save()" />
+        <p class="small" *ngIf="isEdit">
+          <a href="javascript:;" (click)="cancel()">Cancel</a>
+        </p>
+      </form>
     </div>
-    <p class="small" *ngIf="isEdit">
-      <a href="javascript:;" (click)="cancel()">Cancel</a>
-    </p>
-  </div>
-</form>
+  </div>  
+</ng-container>

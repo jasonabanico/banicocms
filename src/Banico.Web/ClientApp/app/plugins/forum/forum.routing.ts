@@ -7,12 +7,12 @@ import { TopicFormComponent } from './components/topic-form/topic-form.component
 import { TopicComponent } from './components/topic/topic.component';
 
 const FORUM_ROUTES: Routes = [
-    { path: 'new', component: SubforumFormComponent, canActivate: [AuthGuard], data: { module: 'subforum/manage' } },
-    { path: 'edit/:id', component: SubforumFormComponent, canActivate: [AuthGuard], data: { module: 'subforum/manage' } },
-    { path: ':alias', component: SubforumComponent, canActivate: [AuthGuard], data: { module: 'subforum/view' } },
-    { path: 'topic/new/:subforumId', component: TopicFormComponent, canActivate: [AuthGuard], data: { module: 'topic/manage' } },
-    { path: 'topic/edit/:id', component: TopicFormComponent, canActivate: [AuthGuard], data: { module: 'topic/manage' } },
-    { path: 'topic/:id', component: TopicComponent, canActivate: [AuthGuard], data: { module: 'topic/view' } }
+    { path: 'new', component: SubforumFormComponent, canActivate: [AuthGuard], data: { module: 'forum-subforum/manage' } },
+    { path: 'edit/:id', component: SubforumFormComponent, canActivate: [AuthGuard], data: { module: 'forum-subforum/manage' } },
+    { path: ':alias', component: SubforumComponent, canActivate: [AuthGuard], data: { module: 'forum-subforum/view' } },
+    { path: 'topic/new/:subforumId', component: TopicFormComponent, canActivate: [AuthGuard], data: { module: 'forum-topic/manage' } },
+    { path: 'topic/edit/:id', component: TopicFormComponent, canActivate: [AuthGuard], data: { module: 'forum-topic/manage' } },
+    { path: 'topic/:id', component: TopicComponent, canActivate: [AuthGuard], data: { module: 'forum-topic/view' } }
 ];
 
 @NgModule({
