@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentService } from '../../services/comment.service';
 import { Comment } from '../../entities/comment';
+import { AccountService } from '../../../../identity/account/services/account.service';
 
 @Component({
   selector: 'app-comment-form',
@@ -26,6 +27,7 @@ export class CommentFormComponent implements OnInit {
 
   constructor(
     private commentService: CommentService,
+    private accountService: AccountService,
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute

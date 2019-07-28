@@ -34,10 +34,12 @@ namespace Banico.Web
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices (IServiceCollection services) {
-            // Add framework services.
-            this.webStartup.ConfigureServices(services);
             services.AddNodeServices();
             services.AddHttpContextAccessor();
+
+            // Add framework services.
+            this.webStartup.ConfigureServices(services);
+
             services.AddProgressiveWebApp(new PwaOptions { Strategy = ServiceWorkerStrategy.CacheFirst, RegisterServiceWorker = true, RegisterWebmanifest = true }, "manifest.json");
 
             // Register the Swagger generator, defining one or more Swagger documents

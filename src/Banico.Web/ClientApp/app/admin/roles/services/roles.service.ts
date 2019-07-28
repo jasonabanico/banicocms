@@ -47,12 +47,12 @@ export class RolesService extends BaseService {
     }
 
     public getAll(): Observable<Role[]> {
-        return this.http.get<Role[]>(this.baseUrl + "api/Roles/GetAll", this.jsonAuthRequestOptions).pipe(
+        return this.http.get<Role[]>(this.baseUrl + "api/Roles/GetAll", this.jsonAuthRequestOptions()).pipe(
         catchError(this.handleError));
     }
 
     public get(id: string): Observable<Role> {
-        return this.http.get<Role>(this.baseUrl + "api/Roles/Get", this.jsonAuthRequestOptions).pipe(
+        return this.http.get<Role>(this.baseUrl + "api/Roles/Get", this.jsonAuthRequestOptions()).pipe(
         catchError(this.handleError));
     }
 

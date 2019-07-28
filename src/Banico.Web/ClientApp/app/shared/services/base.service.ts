@@ -14,7 +14,6 @@ export abstract class BaseService {
   protected localStorage: any;
   protected jsonHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
   protected jsonRequestOptions = { headers: this.jsonHeader };
-  protected jsonAuthRequestOptions = { headers: this.authHeader() };
 
   constructor(
     protected windowRefService: WindowRefService,
@@ -65,6 +64,10 @@ export abstract class BaseService {
 
       return result;
     }
+
+  protected jsonAuthRequestOptions() {
+    return { headers: this.authHeader() };
+  } 
 
   private authHeader(): HttpHeaders {
       let headers = new HttpHeaders();

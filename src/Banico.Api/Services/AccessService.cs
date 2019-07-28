@@ -33,9 +33,13 @@ namespace Banico.Api.Services
         public string GetCurrentUserId()
         {
             var currentUser = string.Empty;
-            if (_httpContextAccessor.HttpContext.User != null) 
+            var contextUser = _httpContextAccessor.HttpContext.User;
+            if (contextUser != null) 
             {
-                currentUser = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if (contextUser.Identity.IsAuthenticated)
+                {
+                    currentUser = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                }
             }
             return currentUser;
         }

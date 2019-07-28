@@ -88,31 +88,34 @@ namespace Banico.Identity.Controllers
             }
         }
 
-        private async Task<string> GetUsername()
+        public string GetUsername()
         {
-            string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var user = await _userManager.FindByIdAsync(userId);
+            Claim nameIdClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (nameIdClaim != null)
+            {
+                return nameIdClaim.Value;
+            }
 
-            return user.UserName;
+            return string.Empty;
         }
 
         [AllowAnonymous]
-        public async Task<JsonResult> IsLoggedIn()
+        public JsonResult IsLoggedIn()
         {
-            string username = await this.GetUsername();
+            string username = this.GetUsername();
             return new JsonResult(!string.IsNullOrEmpty(username));
         }
 
-        public async Task<JsonResult> LoggedInAs()
+        public JsonResult LoggedInAs()
         {
-            string username = await this.GetUsername();
+            string username = this.GetUsername();
             return new JsonResult(username);
         }
 
-        public async Task<bool> IsSuperAdmin()
+        public bool IsSuperAdmin()
         {
             bool result = false;
-            string username = await this.GetUsername();
+            string username = this.GetUsername();
 
             if (!string.IsNullOrEmpty(username))
             {
@@ -168,8 +171,8 @@ namespace Banico.Identity.Controllers
 
                     var identity = _jwtFactory.GenerateClaimsIdentity(model.Username, user.Id);
                     var profile = await _contentItemRepository.CreateProfileIfNotExists(user.Id, user.UserName, user.Email);
-                    string username = await this.GetUsername();
-                    bool isAdmin = await this.IsSuperAdmin();
+                    string username = this.GetUsername();
+                    bool isAdmin = this.IsSuperAdmin();
                     _logger.LogInformation(1, "User logged in.");
                     var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, username, isAdmin, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
                     return new OkObjectResult(jwt);

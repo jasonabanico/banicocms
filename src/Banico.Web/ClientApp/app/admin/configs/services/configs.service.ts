@@ -58,7 +58,7 @@ export class ConfigsService extends BaseService {
     }
 
     public setInitialSettings(): Observable<boolean> {
-        return this.http.post(this.baseUrl + 'api/Config/SetInitialSettings', {}, this.jsonAuthRequestOptions).pipe(
+        return this.http.post(this.baseUrl + 'api/Config/SetInitialSettings', {}, this.jsonAuthRequestOptions()).pipe(
         map(res => true),
         catchError(this.handleError),);
     }

@@ -32,7 +32,7 @@ export class ManageService extends BaseService {
             newPassword,
             confirmPassword 
         });
-        return this.http.post(this.baseUrl + "api/Manage/ChangePassword", body, this.jsonAuthRequestOptions).pipe(
+        return this.http.post(this.baseUrl + "api/Manage/ChangePassword", body, this.jsonAuthRequestOptions()).pipe(
         map(res => true),
         catchError(this.handleError));
     }

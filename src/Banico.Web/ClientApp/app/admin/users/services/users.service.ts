@@ -47,12 +47,12 @@ export class UsersService extends BaseService {
     }
 
     public getAll(): Observable<User[]> {
-        return this.http.get<User[]>(this.baseUrl + "api/Users/GetAll", this.jsonAuthRequestOptions).pipe(
+        return this.http.get<User[]>(this.baseUrl + "api/Users/GetAll", this.jsonAuthRequestOptions()).pipe(
         catchError(this.handleError));
     }
 
     public get(id: string): Observable<User> {
-        return this.http.get<User>(this.baseUrl + "api/Users/Get?id="+id, this.jsonAuthRequestOptions).pipe(
+        return this.http.get<User>(this.baseUrl + "api/Users/Get?id="+id, this.jsonAuthRequestOptions()).pipe(
         catchError(this.handleError));
     }
 
@@ -98,7 +98,7 @@ export class UsersService extends BaseService {
             alias,
             email
         });
-        return this.http.post(this.baseUrl + "api/Users/Add", body, this.jsonAuthRequestOptions).pipe(
+        return this.http.post(this.baseUrl + "api/Users/Add", body, this.jsonAuthRequestOptions()).pipe(
         map(res => true),
         catchError(this.handleError),);
     }
@@ -119,7 +119,7 @@ export class UsersService extends BaseService {
             alias,
             email
         });
-        return this.http.post(this.baseUrl + "api/Users/Update", body, this.jsonAuthRequestOptions).pipe(
+        return this.http.post(this.baseUrl + "api/Users/Update", body, this.jsonAuthRequestOptions()).pipe(
         map(res => true),
         catchError(this.handleError),);
     }
@@ -127,7 +127,7 @@ export class UsersService extends BaseService {
     public delete(
         id: string
     ): Observable<boolean> {
-        return this.http.post(this.baseUrl + "api/Users/Delete", id, this.jsonAuthRequestOptions).pipe(
+        return this.http.post(this.baseUrl + "api/Users/Delete", id, this.jsonAuthRequestOptions()).pipe(
         map(res => true),
         catchError(this.handleError),);
     }

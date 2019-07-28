@@ -37,12 +37,12 @@ export class AccountService extends BaseService {
     }
 
     public isSuperAdmin(): Observable<boolean> {
-        return this.http.get<boolean>(this.baseUrl + 'api/Account/IsSuperAdmin', this.jsonAuthRequestOptions ).pipe(
+        return this.http.get<boolean>(this.baseUrl + 'api/Account/IsSuperAdmin', this.jsonAuthRequestOptions()).pipe(
         catchError(this.handleError));
     }
 
     public loggedInAs(): Observable<string> {
-        return this.http.get<any>(this.baseUrl + 'api/Account/GetUsername', this.jsonAuthRequestOptions).pipe(
+        return this.http.get<any>(this.baseUrl + 'api/Account/GetUsername', this.jsonAuthRequestOptions()).pipe(
         map(data => {
             if (data) {
                 return data;
@@ -54,7 +54,7 @@ export class AccountService extends BaseService {
     }
 
     public logout(): Observable<boolean> {
-        return this.http.post(this.baseUrl + 'api/Account/Logout', {}, this.jsonAuthRequestOptions).pipe(
+        return this.http.post(this.baseUrl + 'api/Account/Logout', {}, this.jsonAuthRequestOptions()).pipe(
         map(res => true),
         catchError(this.handleError), );
     }

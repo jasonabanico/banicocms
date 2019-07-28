@@ -41,8 +41,6 @@ namespace Banico.Api
       var sp = services.BuildServiceProvider();
       services.AddSingleton<ISchema>(new BanicoSchema(new FuncDependencyResolver(type => sp.GetService(type))));
 
-      services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
       services.AddGraphQL(_ =>
       {
           _.EnableMetrics = true;

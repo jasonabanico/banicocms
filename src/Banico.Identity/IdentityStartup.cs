@@ -69,8 +69,6 @@ namespace Banico.Identity
       // Register the ConfigurationBuilder instance of FacebookAuthSettings
       services.Configure<FacebookAuthSettings>(Configuration.GetSection(nameof(FacebookAuthSettings)));
 
-      services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
-
       // jwt wire up
       // Get options from app settings
       var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
