@@ -39,6 +39,7 @@ namespace Banico.Core.Entities
         public string Attribute18 { get; set; }
         public string Attribute19 { get; set; }
         public string Attribute20 { get; set; }
+        public int ChildCount { get; set; }
 
         public string Snippet
         {
