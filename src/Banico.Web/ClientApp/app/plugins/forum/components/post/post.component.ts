@@ -38,7 +38,7 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.commentService.getPageSize('forum-comment');
+    this.commentService.setPageSize(10);
   }
 
   private set(post: Post) {

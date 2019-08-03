@@ -33,15 +33,8 @@ export class PluginService extends BaseService {
         this.appBaseUrl = `${this.baseUrl}api/Page`;
     }
 
-    public getPageSize(module: string) {
-        this.configsService.get('', module, 'pageSize')
-            .subscribe(config => {
-                this.setPageSize(config);
-            });
-    }
-
-    public setPageSize(config: Config) {
-        this.pageSize = Number(config.value);
+    public setPageSize(size: number) {
+        this.pageSize = size;
     }
 
     public toSectionItems(contentItem: ContentItem): string {

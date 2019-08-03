@@ -36,9 +36,9 @@ export class TopicComponent implements OnInit {
       var id = params['id'];
       if (id) {
         this.topicService.get(id)
-        .subscribe(topic => {
-          this.set(topic);
-        });
+          .subscribe(topic => {
+            this.set(topic);
+          });
       }
     });
   }
@@ -49,8 +49,8 @@ export class TopicComponent implements OnInit {
     this.momentRelative = moment(topic.createdDate).fromNow();
     this.topicService.setTopicUser(topic);
     this.subforumService.get(topic.subForumId)
-    .subscribe(subforum => this.subforum = subforum);
+      .subscribe(subforum => this.subforum = subforum);
     this.postService.getPosts(topic.id, 0, 0)
-    .subscribe(posts => this.posts = posts);
+      .subscribe(posts => this.posts = posts);
   }
 }

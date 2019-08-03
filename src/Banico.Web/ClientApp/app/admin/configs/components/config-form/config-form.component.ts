@@ -39,7 +39,7 @@ export class ConfigFormComponent implements OnInit {
             var id = params['id'];
             this.configsService.get(id, '', '')
                 .subscribe(config => {
-                this.set(config);
+                    this.set(config);
                 });
             }
         });
