@@ -406,8 +406,9 @@ namespace Banico.EntityFrameworkCore.Repositories
             int skipRows = 0;
             if (page > 0)
             {
-                skipRows = (page - 1) * pageSize;
+                skipRows = page * pageSize;
             }
+
             contentItems = contentItems.Skip(skipRows).Take(pageSize);
 
             return await contentItems.ToListAsync();

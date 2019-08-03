@@ -162,7 +162,9 @@ export class ContentItemService {
         })
             .valueChanges
             .pipe(
-              map(result => result.data.count)
+              map(result => {
+                  return result.data.contentItemsCount.count;
+              })
             );
         return result;
     }

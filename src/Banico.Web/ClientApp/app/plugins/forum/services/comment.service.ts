@@ -1,4 +1,4 @@
-import { Injectable, Inject, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { PluginService } from '../../services/plugin.service';
@@ -7,8 +7,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Comment } from '../entities/comment';
 
 @Injectable()
-export class CommentService extends PluginService implements OnInit {
-
+export class CommentService extends PluginService {
     public get(id: string): Observable<Comment> {
         return this.contentItemService.get(id).pipe(
         map(item => {
@@ -16,14 +15,15 @@ export class CommentService extends PluginService implements OnInit {
         }));
     }
 
-    ngOnInit() {
-        this.module = 'forum-comment';
-        this.getPageSize();
+    public getCommentsCount(postId: string): Observable<number> {
+        return this.contentItemService.getCount('', '', '',
+        'forum-comment', postId, '', '', '', '', '', '', '', '', '', '', '', '', '',
+        '', '', '', '', '', '', '', '', '', '', true, true);
     }
 
     public getComments(postId: string, page: number): Observable<Comment[]> {
         return this.contentItemService.getAll('', '', '',
-        this.module, postId, '', '', '', '', '', '', '', '', '', '', '', '', '',
+        'forum-comment', postId, '', '', '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '', true, true, '', page, this.pageSize).pipe(
         map(items => {
             const comments: Comment[] = new Array<Comment>();

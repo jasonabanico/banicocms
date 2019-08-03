@@ -13,9 +13,12 @@ import { map } from 'rxjs/operators';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-export class PostComponent {
+export class PostComponent implements OnInit {
   public post: Post;
+  public commentsCount: number;
   public comments: Comment[];
+  public hasMorePages: boolean;
+  public page: number = 0;
   private _id: string;
   public isEdit: boolean;
   public moment: string;
@@ -34,12 +37,21 @@ export class PostComponent {
     .subscribe(post => this.set(post));
   }
 
+  ngOnInit() {
+    this.commentService.getPageSize('forum-comment');
+  }
+
   private set(post: Post) {
     this.post = post;
     this.moment = moment(post.createdDate).format('MMMM Do YYYY, h:mm:ss a');
     this.momentRelative = moment(post.createdDate).fromNow();
-    this.commentService.getComments(post.id, 0)
-      .subscribe(comments => this.comments = comments);
+    this.commentService.getCommentsCount(post.id)
+      .subscribe(commentsCount => {
+        this.commentsCount = commentsCount;
+        this.page = Math.floor(this.commentsCount / this.commentService.pageSize);
+        this.commentService.getComments(post.id, this.page)
+          .subscribe(comments => this.comments = comments);
+      });
     this.postService.setPostUser(post);
     this.isEdit = false;
   }
@@ -59,8 +71,21 @@ export class PostComponent {
 
   public onCommentSave(comment: Comment) {
     this.commentService.get(comment.id)
-    .subscribe(comment => {
-      this.comments.push(comment)
+      .subscribe(comment => {
+        this.comments.push(comment)
     });
+  }
+
+  public moreComments() {
+    if (this.page > 0) {
+      this.page--;
+      this.commentService.getComments(this.post.id, this.page)
+        .subscribe(comments => {
+          this.comments.forEach(function (comment) {
+            comments.push(comment);
+          });
+          this.comments = comments;
+        });
+    }
   }
 }

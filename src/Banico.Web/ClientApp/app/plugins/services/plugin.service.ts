@@ -1,19 +1,19 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BaseService } from '../../shared/services/base.service';
 import { ConfigsService } from '../../shared/services/configs.service';
 import { ContentItemService } from './content-item.service';
 import { WindowRefService } from '../../shared/services/windowref.service';
 import { ContentItem } from '../../entities/content-item';
-import { map } from 'rxjs/operators';
+import { Config } from '../../entities/config';
 
 @Injectable()
 export class PluginService extends BaseService {
     accountUrl: string;
     appBaseUrl: string;
-    module: string;
-    pageSize: number;
+    pageSize = 40;
 
     public readonly PATH_DELIM: string = '_';
     public readonly TYPE_DELIM: string = '~';
@@ -33,13 +33,15 @@ export class PluginService extends BaseService {
         this.appBaseUrl = `${this.baseUrl}api/Page`;
     }
 
-    public getPageSize() {
-        this.configsService.get('', this.module, 'pageSize')
-            .pipe(
-                map(config => {
-                    this.pageSize = Number.parseInt(config.value);
-                })
-            );
+    public getPageSize(module: string) {
+        this.configsService.get('', module, 'pageSize')
+            .subscribe(config => {
+                this.setPageSize(config);
+            });
+    }
+
+    public setPageSize(config: Config) {
+        this.pageSize = Number(config.value);
     }
 
     public toSectionItems(contentItem: ContentItem): string {

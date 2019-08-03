@@ -1,4 +1,4 @@
-import { Injectable, Inject, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -7,12 +7,7 @@ import { ContentItem } from '../../../entities/content-item';
 import { Link } from '../entities/link';
 
 @Injectable()
-export class LinksService extends PluginService implements OnInit {
-
-    ngOnInit() {
-        this.module = 'link';
-        this.getPageSize();
-    }
+export class LinksService extends PluginService {
 
     public get(id: string): Observable<Link> {
         return this.contentItemService.get(id).pipe(
@@ -23,14 +18,14 @@ export class LinksService extends PluginService implements OnInit {
 
     public getLinks(sectionItems: string): Observable<Link[]> {
         this.contentItemService.getCount('', '', '',
-        this.module, '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
+        'link', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '', true, true).pipe(
         map(count => {
             alert(count);
         }));
 
             return this.contentItemService.getAll('', '', '',
-        this.module, '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
+        'link', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '', true, true, '', 0, this.pageSize).pipe(
         map(items => {
             const links: Link[] = new Array<Link>();

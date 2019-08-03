@@ -34,13 +34,12 @@
         </p>
     </div>
     <div class="card-footer">
-      <a href="javascript:;" (click)="edit()" class="card-link"><i class="fa fa-pencil-square"></i> Edit</a>
-      <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+      <a href="javascript:;" (click)="edit()" class="card-link"><i class="fa fa-pencil"></i> Edit</a>
       <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-      <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
+            <a *ngIf="page > 0" href="javascript:;" (click)="moreComments()">View more comments</a>
             <ng-container class="list-group-item" *ngFor="let comment of comments">
                 <app-comment [id]="comment.id"></app-comment>
             </ng-container>
