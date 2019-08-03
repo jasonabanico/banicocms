@@ -6,6 +6,7 @@ export class Subforum {
   alias: string;
   description: string;
   sectionItems: string;
+  topicCount: number;
 
   constructor(private contentItem: ContentItem) {
     if ((contentItem) && (contentItem.module == 'forum-subforum')) {
@@ -14,6 +15,7 @@ export class Subforum {
       this.alias = contentItem.alias;
       this.description = contentItem.content;
       this.sectionItems = contentItem.sectionItems;
+      this.topicCount = contentItem.childCount;
     }
   }
 

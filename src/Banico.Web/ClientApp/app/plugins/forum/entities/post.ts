@@ -8,6 +8,7 @@ export class Post {
   username: string;
   avatarHash: string;
   createdDate: string;
+  commentCount: number;
 
   constructor(private contentItem: ContentItem) {
     if ((contentItem) && (contentItem.module == 'forum-post')) {
@@ -16,6 +17,7 @@ export class Post {
       this.topicId = contentItem.parentId;
       this.userId = contentItem.createdBy;
       this.createdDate = contentItem.createdDate;
+      this.commentCount = contentItem.childCount;
     }
   }
 

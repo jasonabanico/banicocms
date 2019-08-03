@@ -39,7 +39,6 @@ namespace Banico.Core.Entities
         public string Attribute18 { get; set; }
         public string Attribute19 { get; set; }
         public string Attribute20 { get; set; }
-        public int ChildCount { get; set; }
 
         public string Snippet
         {
@@ -111,6 +110,7 @@ namespace Banico.Core.Entities
             this.Tenant = item.Tenant;
             this.Id = item.Id;
             this.ParentId = item.ParentId;
+            this.ChildCount = item.ChildCount;
             this.ContentSectionItems = item.ContentSectionItems;
             this.Module = item.Module;
 

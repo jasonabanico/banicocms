@@ -9,6 +9,7 @@ export class Topic {
   username: string;
   avatarHash: string;
   createdDate: string;
+  postCount: number;
 
   constructor(private contentItem: ContentItem) {
     if ((contentItem) && (contentItem.module == 'forum-topic')) {
@@ -18,6 +19,7 @@ export class Topic {
       this.userId = contentItem.createdBy;
       this.subForumId = contentItem.parentId;
       this.createdDate = contentItem.createdDate;
+      this.postCount = contentItem.childCount;
     }
   }
 

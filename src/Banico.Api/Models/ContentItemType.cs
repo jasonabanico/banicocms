@@ -17,6 +17,7 @@ namespace Banico.Api.Models
             Field(x => x.UpdatedBy, nullable:true);
             Field(x => x.UpdatedDate, nullable:true);
             Field(x => x.ParentId, nullable:true);
+            Field(x => x.ChildCount, nullable:true);
 
             Field(x => x.Alias, nullable:true);
             Field(x => x.Module, nullable:true);

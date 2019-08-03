@@ -35,4 +35,5 @@ export class ContentItem {
   attribute19: string;
   attribute20: string;
   contentSectionItems: ContentSectionItem[];
+  childCount: number;
 }
