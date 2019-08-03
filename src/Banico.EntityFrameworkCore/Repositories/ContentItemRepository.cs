@@ -560,6 +560,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             item.Id = Guid.NewGuid().ToString();
             item.ContentSectionItems = await this.ToContentSectionItems(item.SectionItems);
             _dbContext.ContentItems.Add(item);
+            this.UpdateChildCount(item.ParentId, 1);
             var result = await _dbContext.SaveChangesAsync();
 
             if (result > 0)
@@ -661,6 +662,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             "", 0, 1))
                 .FirstOrDefault();
             _dbContext.Remove(item);
+            this.UpdateChildCount(item.ParentId, -1);
             var result = await _dbContext.SaveChangesAsync();
 
             if (result > 0)
@@ -699,6 +701,23 @@ namespace Banico.EntityFrameworkCore.Repositories
             else
             {
                 return profileItems[0];
+            }
+        }
+
+        private void UpdateChildCount(string parentId, int increase)
+        {
+            if (!string.IsNullOrEmpty(parentId))
+            {
+                var contentItems = from contentItem in _dbContext.ContentItems
+                    where contentItem.Id == parentId
+                    select contentItem;
+
+                if (contentItems.Count() > 0)
+                {
+                    var contentItem = contentItems.First();
+                    contentItem.ChildCount += increase;
+                    _dbContext.ContentItems.Update(contentItem);
+                }
             }
         }
     }
