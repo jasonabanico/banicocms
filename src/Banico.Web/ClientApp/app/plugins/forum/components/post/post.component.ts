@@ -15,7 +15,6 @@ import { map } from 'rxjs/operators';
 })
 export class PostComponent implements OnInit {
   public post: Post;
-  public commentsCount: number;
   public comments: Comment[];
   public hasMorePages: boolean;
   public page: number = 0;
@@ -45,13 +44,11 @@ export class PostComponent implements OnInit {
     this.post = post;
     this.moment = moment(post.createdDate).format('MMMM Do YYYY, h:mm:ss a');
     this.momentRelative = moment(post.createdDate).fromNow();
-    this.commentService.getCommentsCount(post.id)
-      .subscribe(commentsCount => {
-        this.commentsCount = commentsCount;
-        this.page = Math.floor(this.commentsCount / this.commentService.pageSize);
-        this.commentService.getComments(post.id, this.page)
-          .subscribe(comments => this.comments = comments);
-      });
+    if (post.commentCount > 0) {
+      this.page = Math.floor(post.commentCount / this.commentService.pageSize);
+      this.commentService.getComments(post.id, this.page)
+        .subscribe(comments => this.comments = comments);
+    }
     this.postService.setPostUser(post);
     this.isEdit = false;
   }

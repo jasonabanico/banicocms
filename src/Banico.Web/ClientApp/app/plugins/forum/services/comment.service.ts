@@ -15,12 +15,6 @@ export class CommentService extends PluginService {
         }));
     }
 
-    public getCommentsCount(postId: string): Observable<number> {
-        return this.contentItemService.getCount('', '', '',
-        'forum-comment', postId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true);
-    }
-
     public getComments(postId: string, page: number): Observable<Comment[]> {
         return this.contentItemService.getAll('', '', '',
         'forum-comment', postId, '', '', '', '', '', '', '', '', '', '', '', '', '',

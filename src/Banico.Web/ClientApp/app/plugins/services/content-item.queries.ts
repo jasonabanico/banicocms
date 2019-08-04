@@ -144,6 +144,7 @@ export const ContentItemsQuery = gql`
                 alias,
                 module,
                 parentId,
+                childCount,
                 createdBy,
                 createdDate,
                 content,
