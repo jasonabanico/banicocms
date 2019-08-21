@@ -48,7 +48,7 @@ export class PostFormComponent implements OnInit {
     .subscribe(post => this.set(post));
   }
 
-  @Output() saved: EventEmitter<string> = new EventEmitter<string>();
+  @Output() saved: EventEmitter<Post> = new EventEmitter<Post>();
   @Output() cancelled: EventEmitter<null> = new EventEmitter<null>();
 
   private set(post: Post) {
@@ -63,15 +63,24 @@ export class PostFormComponent implements OnInit {
   public save() {
     // this.isRequesting = true;
     var id = this.postForm.value['id'];
+    var topicId = this.postForm.value['topicId'];
     var text = this.postForm.value['text'];
+
+    var post = new Post(null);
+    post.id = id;
+    post.topicId = topicId;
+    post.text = text;
+    post.userId = this.authService.getUserId();
+    post.username = this.authService.getUserName();
+
     this.postService.addOrUpdate(
       id,
-      this.postForm.value['topicId'],
+      topicId,
       text
     )
     .subscribe(
       id => {
-        this.saved.emit(text);
+        this.saved.emit(post);
       }
       //errors =>  //this.errors = errors
     );

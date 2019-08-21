@@ -53,4 +53,8 @@ export class TopicComponent implements OnInit {
     this.postService.getPosts(topic.id, 0, 0)
       .subscribe(posts => this.posts = posts);
   }
+
+  public addPost(post: Post) {
+    this.posts.push(post);
+  }
 }
