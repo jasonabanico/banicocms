@@ -53,6 +53,10 @@ export class PostComponent implements OnInit {
     if (post.commentCount > 0) {
       this.page = Math.floor(post.commentCount / this.commentService.pageSize);
       this.offset = post.commentCount % this.commentService.pageSize;
+      if ((this.page > 0) && (this.offset === 0))
+      {
+        this.page -= 1;
+      }
       this.commentService.getComments(post.id, this.page, this.offset)
         .subscribe(comments => this.comments = comments);
     }
@@ -77,6 +81,7 @@ export class PostComponent implements OnInit {
     this.commentService.get(comment.id)
       .subscribe(comment => {
         this.comments.push(comment)
+        this.post.commentCount += 1;
     });
   }
 

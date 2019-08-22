@@ -405,16 +405,25 @@ namespace Banico.EntityFrameworkCore.Repositories
             }
 
             int skipRows = 0;
-            if (page > 0)
+
+            if (offset > 0)
             {
-                skipRows = page * pageSize + offset;
-                contentItems = contentItems.Skip(skipRows).Take(pageSize);
+                if (page > 0)
+                {
+                    skipRows = (page - 1) * pageSize + offset;
+                    contentItems = contentItems.Skip(skipRows).Take(pageSize);
+                }
+                else
+                {
+                    contentItems = contentItems.Take(offset);
+                }
             }
             else
             {
-                if (offset > 0)
+                if (page > 0)
                 {
-                    contentItems = contentItems.Take(offset);
+                    skipRows = page * pageSize;
+                    contentItems = contentItems.Skip(skipRows).Take(pageSize);
                 }
                 else
                 {
