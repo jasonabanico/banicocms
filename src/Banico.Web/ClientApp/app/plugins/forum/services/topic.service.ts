@@ -27,7 +27,7 @@ export class TopicService extends PluginService {
     public getTopics(subforumId: string): Observable<Topic[]> {
         return this.contentItemService.getAll('', '', '',
         'forum-topic', subforumId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true, '', 0, 0).pipe(
+        '', '', '', '', '', '', '', '', '', '', true, true, '', 0, 0, 0).pipe(
         map(items => {
             var topics: Topic[] = new Array<Topic>();
             items.forEach(item => {

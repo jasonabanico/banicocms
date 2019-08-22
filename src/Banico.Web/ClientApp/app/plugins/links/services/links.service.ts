@@ -26,7 +26,7 @@ export class LinksService extends PluginService {
 
             return this.contentItemService.getAll('', '', '',
         'link', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true, '', 0, this.pageSize).pipe(
+        '', '', '', '', '', '', '', '', '', '', true, true, '', 0, this.pageSize, 0).pipe(
         map(items => {
             const links: Link[] = new Array<Link>();
             items.forEach(function(item: ContentItem) {

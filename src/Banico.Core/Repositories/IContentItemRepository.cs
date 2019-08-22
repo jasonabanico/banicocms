@@ -77,7 +77,8 @@ namespace Banico.Core.Repositories
             bool includeParents,
             string orderBy,
             int page,
-            int pageSize
+            int pageSize,
+            int offset
         );
 
         Task<IEnumerable<ContentSectionItem>> GetContentSectionItemsByContentItemId(string id);

@@ -16,10 +16,10 @@ export class PostService extends PluginService {
         }));
     }
 
-    public getPosts(topicId: string, page: number, pageSize: number): Observable<Post[]> {
+    public getPosts(topicId: string, page: number, pageSize: number, offset: number): Observable<Post[]> {
         return this.contentItemService.getAll('', '', '',
         'forum-post', topicId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true, '', page, pageSize).pipe(
+        '', '', '', '', '', '', '', '', '', '', true, true, '', page, pageSize, offset).pipe(
         map(items => {
             const replies: Post[] = new Array<Post>();
             items.forEach(function(item: ContentItem) {

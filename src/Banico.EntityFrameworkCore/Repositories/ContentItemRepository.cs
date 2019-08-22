@@ -249,7 +249,8 @@ namespace Banico.EntityFrameworkCore.Repositories
             bool includeParents,
             string orderBy,
             int page,
-            int pageSize
+            int pageSize,
+            int offset
         ) {
             var contentItems = from c in _dbContext.ContentItems
                 where 
@@ -406,10 +407,20 @@ namespace Banico.EntityFrameworkCore.Repositories
             int skipRows = 0;
             if (page > 0)
             {
-                skipRows = page * pageSize;
+                skipRows = page * pageSize + offset;
+                contentItems = contentItems.Skip(skipRows).Take(pageSize);
             }
-
-            contentItems = contentItems.Skip(skipRows).Take(pageSize);
+            else
+            {
+                if (offset > 0)
+                {
+                    contentItems = contentItems.Take(offset);
+                }
+                else
+                {
+                    contentItems = contentItems.Take(pageSize);
+                }
+            }
 
             return await contentItems.ToListAsync();
         }
@@ -606,7 +617,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         {
             var updateItem = (await this.Get(item.Id, "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
-            "", 0, 1))
+            "", 0, 1, 0))
                 .FirstOrDefault();
 
             if (updateItem != null)
@@ -659,7 +670,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         {
             var item = (await this.Get(id, "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
-            "", 0, 1))
+            "", 0, 1, 0))
                 .FirstOrDefault();
             _dbContext.Remove(item);
             this.UpdateChildCount(item.ParentId, -1);
@@ -677,7 +688,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         {
             var profileItems = await this.Get("", "", alias, "profile", "", userId, "",
                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", false, false, "", 0, 1);
+                "", "", "", "", "", false, false, "", 0, 1, 0);
 
             if (profileItems.Count == 0)
             {

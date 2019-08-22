@@ -302,6 +302,9 @@ namespace Banico.Api.Models
                     },
                     new QueryArgument<IntGraphType> { 
                         Name = "pageSize" 
+                    },
+                    new QueryArgument<IntGraphType> { 
+                        Name = "offset" 
                     }
                     ),
                 resolve: context =>  contentItemRepository.Get(
@@ -337,7 +340,8 @@ namespace Banico.Api.Models
                     context.GetArgument<bool>("includeParents"),
                     context.GetArgument<string>("orderBy"),
                     context.GetArgument<int>("page"),
-                    context.GetArgument<int>("pageSize")
+                    context.GetArgument<int>("pageSize"),
+                    context.GetArgument<int>("offset")
                     )
                 );            
 

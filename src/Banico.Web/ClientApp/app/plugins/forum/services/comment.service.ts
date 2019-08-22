@@ -15,10 +15,10 @@ export class CommentService extends PluginService {
         }));
     }
 
-    public getComments(postId: string, page: number): Observable<Comment[]> {
+    public getComments(postId: string, page: number, offset: number): Observable<Comment[]> {
         return this.contentItemService.getAll('', '', '',
         'forum-comment', postId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true, '', page, this.pageSize).pipe(
+        '', '', '', '', '', '', '', '', '', '', true, true, '', page, this.pageSize, offset).pipe(
         map(items => {
             const comments: Comment[] = new Array<Comment>();
             items.forEach(function(item: ContentItem) {

@@ -103,7 +103,8 @@ export const ContentItemsQuery = gql`
         $includeChildren: Boolean,
         $includeParents: Boolean,
         $page: Int,
-        $pageSize: Int
+        $pageSize: Int,
+        $offset: Int
     ) {
         contentItems(
             id: $id,
@@ -137,7 +138,8 @@ export const ContentItemsQuery = gql`
             includeChildren: $includeChildren,
             includeParents: $includeParents,
             page: $page,
-            pageSize: $pageSize
+            pageSize: $pageSize,
+            offset: $offset
             ) {
                 id,
                 name,

@@ -18,6 +18,7 @@ export class PostComponent implements OnInit {
   public comments: Comment[];
   public hasMorePages: boolean;
   public page: number = 0;
+  public offset: number = 0;
   private _id: string;
   public isEdit: boolean;
   public moment: string;
@@ -51,7 +52,8 @@ export class PostComponent implements OnInit {
     this.momentRelative = moment(post.createdDate).fromNow();
     if (post.commentCount > 0) {
       this.page = Math.floor(post.commentCount / this.commentService.pageSize);
-      this.commentService.getComments(post.id, this.page)
+      this.offset = post.commentCount % this.commentService.pageSize;
+      this.commentService.getComments(post.id, this.page, this.offset)
         .subscribe(comments => this.comments = comments);
     }
     this.postService.setPostUser(post);
@@ -81,7 +83,7 @@ export class PostComponent implements OnInit {
   public moreComments() {
     if (this.page > 0) {
       this.page--;
-      this.commentService.getComments(this.post.id, this.page)
+      this.commentService.getComments(this.post.id, this.page, this.offset)
         .subscribe(comments => {
           this.comments.forEach(function (comment) {
             comments.push(comment);
