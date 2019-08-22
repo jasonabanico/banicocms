@@ -55,8 +55,14 @@
   </div>
 </div>
 
+<h2>
+    Posts
+</h2>
+<hr />
+
 <div *ngFor="let post of posts">
-  <app-post [id]="post.id"></app-post>
+  <app-post *ngIf="post.id" [id]="post.id"></app-post>
+  <app-post *ngIf="!post.id" [newPost]="post"></app-post>
 </div>
 
 <app-post-form [topicId]="topic?.id" (saved)="addPost($event)"></app-post-form>

@@ -36,6 +36,11 @@ export class PostComponent implements OnInit {
     .subscribe(post => this.set(post));
   }
 
+  @Input()
+  set newPost(post: Post) {
+    this.set(post);
+  }
+
   ngOnInit() {
     this.commentService.setPageSize(10);
   }
