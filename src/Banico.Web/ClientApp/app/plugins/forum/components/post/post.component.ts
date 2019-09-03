@@ -58,7 +58,7 @@ export class PostComponent implements OnInit {
         this.page -= 1;
       }
       this.commentService.getComments(post.id, this.page, this.offset)
-        .subscribe(comments => this.comments = comments);
+      .subscribe(comments => this.comments = comments);
     }
     this.postService.setPostUser(post);
     this.isEdit = false;
@@ -80,6 +80,9 @@ export class PostComponent implements OnInit {
   public onCommentSave(comment: Comment) {
     this.commentService.get(comment.id)
       .subscribe(comment => {
+        if (!this.comments) {
+          this.comments = new Array<Comment>();
+        }
         this.comments.push(comment)
         this.post.commentCount += 1;
     });
@@ -93,7 +96,7 @@ export class PostComponent implements OnInit {
           this.comments.forEach(function (comment) {
             comments.push(comment);
           });
-          this.comments = comments;
+            this.comments = comments;
         });
     }
   }
