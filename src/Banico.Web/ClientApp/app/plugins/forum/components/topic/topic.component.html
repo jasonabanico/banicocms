@@ -60,6 +60,8 @@
 </h2>
 <hr />
 
+<a *ngIf="page > 0" href="javascript:;" (click)="morePosts()">More Posts</a>
+
 <div *ngFor="let post of posts">
   <app-post *ngIf="post.id" [id]="post.id"></app-post>
   <app-post *ngIf="!post.id" [newPost]="post"></app-post>

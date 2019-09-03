@@ -15,9 +15,12 @@ import * as moment from 'moment';
   styleUrls: ['./topic.component.scss']
 })
 export class TopicComponent implements OnInit {
+  public subforum: Subforum;
   public topic: Topic;
   public posts: Post[];
-  public subforum: Subforum;
+  public hasMorePages: boolean;
+  public page: number = 0;
+  public offset: number = 0;
   public moment: string;
   public momentRelative: string;
   
@@ -32,6 +35,7 @@ export class TopicComponent implements OnInit {
   }
 
   public ngOnInit() {
+    this.postService.setPageSize(20);
     this.route.params.subscribe(params => {
       var id = params['id'];
       if (id) {
@@ -50,11 +54,32 @@ export class TopicComponent implements OnInit {
     this.topicService.setTopicUser(topic);
     this.subforumService.get(topic.subForumId)
       .subscribe(subforum => this.subforum = subforum);
-    this.postService.getPosts(topic.id, 0, 0, 0)
-      .subscribe(posts => this.posts = posts);
+    if (topic.postCount > 0) {      
+      this.page = Math.floor(topic.postCount / this.postService.pageSize);
+      this.offset = topic.postCount % this.postService.pageSize;
+      if ((this.page > 0) && (this.offset === 0))
+      {
+        this.page -= 1;
+      }
+      this.postService.getPosts(topic.id, this.page, this.offset)
+        .subscribe(posts => this.posts = posts);
+    }
   }
 
   public addPost(post: Post) {
     this.posts.push(post);
+  }
+
+  public morePosts() {
+    if (this.page > 0) {
+      this.page--;
+      this.postService.getPosts(this.topic.id, this.page, this.offset)
+        .subscribe(posts => {
+          this.posts.forEach(function (post) {
+            posts.push(post);
+          });
+          this.posts = posts;
+        });
+    }
   }
 }
