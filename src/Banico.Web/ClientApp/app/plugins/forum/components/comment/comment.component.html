@@ -7,7 +7,7 @@
         {{comment?.text}}<br />
         <a href="javascript:;" (click)="edit()">Edit</a> &bull; 
         <a href="javascript:;" >Like</a> &bull; 
-        {{moment}} ({{momentRelative}})
+        {{comment?.moment()}} ({{comment?.momentRelative()}})
       </p>
     </div>
   </div>  

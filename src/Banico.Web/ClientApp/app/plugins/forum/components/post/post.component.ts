@@ -5,7 +5,6 @@ import { PostService } from '../../services/post.service';
 import { CommentService } from '../../services/comment.service';
 import { Post } from '../../entities/post';
 import { Comment } from '../../entities/comment';
-import * as moment from 'moment';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -21,8 +20,6 @@ export class PostComponent implements OnInit {
   public offset: number = 0;
   private _id: string;
   public isEdit: boolean;
-  public moment: string;
-  public momentRelative: string;
 
   constructor(
     private postService: PostService,
@@ -48,8 +45,6 @@ export class PostComponent implements OnInit {
 
   private set(post: Post) {
     this.post = post;
-    this.moment = moment(post.createdDate).format('MMMM Do YYYY, h:mm:ss a');
-    this.momentRelative = moment(post.createdDate).fromNow();
     if (post.commentCount > 0) {
       this.page = Math.floor(post.commentCount / this.commentService.pageSize);
       this.offset = post.commentCount % this.commentService.pageSize;

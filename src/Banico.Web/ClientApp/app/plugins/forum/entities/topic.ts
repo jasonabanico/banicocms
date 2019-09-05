@@ -1,4 +1,5 @@
 import { ContentItem } from "../../../entities/content-item";
+import * as moment from 'moment';
 
 export class Topic {
   id: string;
@@ -34,4 +35,13 @@ export class Topic {
     
     return output;
   }
+
+  public moment(): string {
+    return moment(this.createdDate).format('MMMM Do YYYY, h:mm:ss a');
+  }
+
+  public momentRelative(): string {
+    return moment(this.createdDate).fromNow();
+  }
+
 }

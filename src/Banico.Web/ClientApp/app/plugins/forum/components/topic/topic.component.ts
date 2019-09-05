@@ -7,7 +7,6 @@ import { SubforumService } from '../../services/subforum.service';
 import { PostService } from '../../services/post.service';
 import { Subforum } from '../../entities/subforum';
 import { Post } from '../../entities/post';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-topic',
@@ -21,8 +20,6 @@ export class TopicComponent implements OnInit {
   public hasMorePages: boolean;
   public page: number = 0;
   public offset: number = 0;
-  public moment: string;
-  public momentRelative: string;
   
   constructor(
     private topicService: TopicService,
@@ -49,8 +46,6 @@ export class TopicComponent implements OnInit {
 
   private set(topic: Topic) {
     this.topic = topic;
-    this.moment = moment(topic.createdDate).format('MMMM Do YYYY, h:mm:ss a');
-    this.momentRelative = moment(topic.createdDate).fromNow();
     this.topicService.setTopicUser(topic);
     this.subforumService.get(topic.subForumId)
       .subscribe(subforum => this.subforum = subforum);

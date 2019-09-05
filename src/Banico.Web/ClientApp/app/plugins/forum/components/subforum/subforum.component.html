@@ -1,16 +1,35 @@
-<h3>
-  {{subforum?.name}}
-  {{subforum?.alias}}
-</h3>
-
-<p>
-  {{subforum?.description}}
-</p>
-
-<p>
-  <a href="/forum/topic/new/{{subforum?.id}}">New Topic</a>
-</p>
-
-<div *ngFor="let topic of topics">
-  <a href="/forum/topic/{{topic.id}}">{{topic.title}}</a>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{subforum?.name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">/forum/{{subforum?.alias}}</h6>
+    <p class="card-text">{{subforum?.description}}</p>
+    <a href="/forum/topic/new/{{subforum?.id}}" class="card-link">New Topic</a>
+  </div>
 </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" colspan="2">Topic</th>
+      <th scope="col">Started</th>
+      <th scope="col">Posts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let topic of topics">
+      <td>
+        <a href="/forum/topic/{{topic.id}}">{{topic.title}}</a>
+      </td>
+      <td>
+        {{topic.text}}
+      </td>
+      <td>
+        {{topic.moment()}} ({{topic.momentRelative()}})
+      </td>
+      <td>
+        {{topic.postCount}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+

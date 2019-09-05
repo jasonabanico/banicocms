@@ -1,4 +1,5 @@
 import { ContentItem } from "../../../entities/content-item";
+import * as moment from 'moment';
 
 export class Comment {
   id: string;
@@ -28,5 +29,13 @@ export class Comment {
     output.parentId = this.postId;
     
     return output;
+  }
+
+  public moment(): string {
+    return moment(this.createdDate).format('MMMM Do YYYY, h:mm:ss a');
+  }
+
+  public momentRelative(): string {
+    return moment(this.createdDate).fromNow();
   }
 }

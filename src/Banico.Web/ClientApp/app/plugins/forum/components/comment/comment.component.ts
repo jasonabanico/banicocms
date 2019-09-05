@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Comment } from '../../entities/comment';
 import { CommentService } from '../../services/comment.service';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-comment',
@@ -14,8 +13,6 @@ export class CommentComponent {
   public comment: Comment;
   private _id: string;
   public isEdit: boolean;
-  public moment: string;
-  public momentRelative: string;
 
   constructor(
     private commentService: CommentService
@@ -31,8 +28,6 @@ export class CommentComponent {
 
   private set(comment: Comment) {
     this.comment = comment;
-    this.moment = moment(comment.createdDate).format('MMMM Do YYYY, h:mm:ss a');
-    this.momentRelative = moment(comment.createdDate).fromNow();
     this.commentService.setCommentUser(comment);
     this.isEdit = false;
   }
