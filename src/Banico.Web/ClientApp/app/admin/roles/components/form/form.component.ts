@@ -6,11 +6,11 @@ import { Role } from "../../../../entities/role";
 import { RolesService } from "../../services/roles.service";
 
 @Component({
-    selector: 'app-admin-role-form',
-    templateUrl: './role-form.component.html',
+    selector: 'app-admin-roles-form',
+    templateUrl: './form.component.html',
     providers: []
 })
-export class RoleFormComponent {
+export class RolesFormComponent {
   private sub: any;
   public isSuccessful: boolean;
   public isRequesting: boolean;

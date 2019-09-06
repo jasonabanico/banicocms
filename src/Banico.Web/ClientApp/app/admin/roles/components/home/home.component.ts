@@ -3,11 +3,11 @@ import { Role } from "../../../../entities/role";
 import { RolesService } from "../../services/roles.service";
 
 @Component({
-    selector: 'app-admin-roles-list',
-    templateUrl: './roles-list.component.html',
+    selector: 'app-admin-roles-home',
+    templateUrl: './home.component.html',
     providers: []
 })
-export class RolesListComponent {
+export class RolesHomeComponent {
     public roles: Role[];
 
     constructor(

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdminComponent } from './admin/admin.component';
+import { AdminHomeComponent } from './home/home.component';
 import { AdminSectionsSectionComponent } from './sections/components/section/section.component';
 import { AdminSectionsSectionItemComponent } from './sections/components/section-item/section-item.component';
-import { RoleFormComponent } from './roles/components/role-form/role-form.component';
-import { RolesListComponent } from './roles/components/roles-list/roles-list.component';
+import { RolesFormComponent } from './roles/components/form/form.component';
+import { RolesHomeComponent } from './roles/components/home/home.component';
 import { UserFormComponent } from './users/components/user-form/user-form.component';
 import { UsersListComponent } from './users/components/users-list/users-list.component';
 import { ConfigFormComponent } from './configs/components/config-form/config-form.component';
@@ -29,17 +29,17 @@ const ADMIN_ROUTES: Routes = [
         data: { module: 'admin/sections' }
     },
     { path: 'roles/add',
-        component: RoleFormComponent,
+        component: RolesFormComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin/sections' }
     },
     { path: 'roles/edit/:id',
-        component: RoleFormComponent,
+        component: RolesFormComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin/sections' }
     },
     { path: 'roles',
-        component: RolesListComponent,
+        component: RolesHomeComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin/roles' }
     },
@@ -74,7 +74,7 @@ const ADMIN_ROUTES: Routes = [
         data: { module: 'admin/configs' }
     },
     { path: '',
-        component: AdminComponent,
+        component: AdminHomeComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin' }
     }

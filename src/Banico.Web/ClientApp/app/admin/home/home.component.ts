@@ -2,11 +2,11 @@ import { Component } from "@angular/core";
 import { ConfigsService } from "../configs/services/configs.service";
 
 @Component({
-    selector: 'app-admin',
-    templateUrl: './admin.component.html',
+    selector: 'app-admin-home',
+    templateUrl: './home.component.html',
     providers: []
 })
-export class AdminComponent {
+export class AdminHomeComponent {
     isInitialized: boolean;
 
     constructor(

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ManageService } from '../../services/manage.service';
 
 @Component({
-  selector: 'app-identity-account-change-password',
+  selector: 'app-identity-manage-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: []
 })
