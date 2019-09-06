@@ -6,7 +6,7 @@ import { PageService } from '../../services/page.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({
-    selector: 'app-page-display',
+    selector: 'app-plugins-page-display',
     templateUrl: './page-display.component.html',
     providers: [PageService]
 })

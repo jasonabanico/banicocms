@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 
 @Component({
-  selector: 'app-spinner',
+  selector: 'app-shell-spinner',
   templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.scss']
 })

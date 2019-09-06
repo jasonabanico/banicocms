@@ -4,7 +4,7 @@ import { ListSet } from '../../entities/list-set';
 import { ListSetService } from '../../services/list-set.service';
 
 @Component({
-  selector: 'app-list-set-display',
+  selector: 'app-plugins-list-set-display',
   templateUrl: './list-set-display.component.html',
   styleUrls: ['./list-set-display.component.scss']
 })

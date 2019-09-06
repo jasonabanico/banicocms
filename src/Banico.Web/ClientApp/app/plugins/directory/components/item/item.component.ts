@@ -9,11 +9,11 @@ import { ModalComponent } from '../../../../shell/modal/modal.component';
 import { AppConfig}  from '../../../../../../Config/app.config';
 
 @Component({
-    selector: 'app-directory-item-display',
-    templateUrl: './directory-item-display.component.html',
+    selector: 'app-plugins-directory-item',
+    templateUrl: './item.component.html',
     providers: [DirectoryService]
 })
-export class DirectoryItemDisplayComponent implements OnInit, OnDestroy {
+export class DirectoryItemComponent implements OnInit, OnDestroy {
     private id: string;
     public directoryItem: DirectoryItem;
     private sub: any;

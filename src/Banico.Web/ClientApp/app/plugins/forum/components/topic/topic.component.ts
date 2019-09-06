@@ -9,7 +9,7 @@ import { Subforum } from '../../entities/subforum';
 import { Post } from '../../entities/post';
 
 @Component({
-  selector: 'app-topic',
+  selector: 'app-plugins-forum-topic',
   templateUrl: './topic.component.html',
   styleUrls: ['./topic.component.scss']
 })

@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
-    selector: 'app-contact',
+    selector: 'app-plugins-contact',
     templateUrl: './contact.component.html'
 })
 export class ContactComponent implements OnInit {

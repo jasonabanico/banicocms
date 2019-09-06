@@ -6,7 +6,7 @@ import { FaqService } from '../../services/faq.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({
-    selector: 'app-faq-display',
+    selector: 'app-plugins-faq-display',
     templateUrl: './faq-display.component.html',
     providers: [FaqService]
 })

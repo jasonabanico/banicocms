@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
-    selector: 'app-links',
+    selector: 'app-plugins-links',
     templateUrl: './links.component.html'
 })
 export class LinksComponent implements OnInit {

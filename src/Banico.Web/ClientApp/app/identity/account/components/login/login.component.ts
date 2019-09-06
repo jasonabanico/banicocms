@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { combineLatest } from 'rxjs';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-identity-account-login',
   templateUrl: './login.component.html',
   styleUrls: []
 })

@@ -2,8 +2,8 @@
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { SectionsAdminComponent } from './components/sections-admin/sections-admin.component';
-import { SectionItemsAdminComponent } from './components/section-items-admin/section-items-admin.component';
+import { AdminSectionsSectionComponent } from './components/section/section.component';
+import { AdminSectionsSectionItemComponent } from './components/section-item/section-item.component';
 
 import { SectionsFileService } from './services/sections-file.service';
 
@@ -14,8 +14,8 @@ import { SectionsFileService } from './services/sections-file.service';
     ReactiveFormsModule
   ],
   declarations: [ 
-    SectionsAdminComponent,
-    SectionItemsAdminComponent 
+    AdminSectionsSectionComponent,
+    AdminSectionsSectionItemComponent 
    ],
    providers: [
      SectionsFileService

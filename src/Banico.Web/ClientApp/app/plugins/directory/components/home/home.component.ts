@@ -7,11 +7,11 @@ import { SectionsService } from '../../../../shared/services/sections.service';
 import { DirectoryService } from '../../services/directory.service';
 
 @Component({
-    selector: 'app-directory-front',
-    templateUrl: './directory-front.component.html',
+    selector: 'app-plugins-directory-home',
+    templateUrl: './home.component.html',
     providers: [DirectoryService]
 })
-export class DirectoryFrontComponent implements OnInit, OnDestroy {
+export class DirectoryHomeComponent implements OnInit, OnDestroy {
     private id: string;
     private sub: any;
     private path: string;

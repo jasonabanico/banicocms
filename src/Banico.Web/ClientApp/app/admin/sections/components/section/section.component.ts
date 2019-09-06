@@ -6,11 +6,11 @@ import { SectionsService } from '../../../../shared/services/sections.service';
 import { Section } from '../../../../entities/section';
 
 @Component({
-    selector: 'app-sections-admin',
-    templateUrl: './sections-admin.component.html',
+    selector: 'app-admin-sections-section',
+    templateUrl: './section.component.html',
     providers: [SectionsService]
 })
-export class SectionsAdminComponent implements OnInit {
+export class AdminSectionsSectionComponent implements OnInit {
     public isSuccessful: boolean;
     public isRequesting: boolean;
     public errors: string;  

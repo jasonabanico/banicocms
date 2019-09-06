@@ -8,7 +8,7 @@ import { Topic } from '../../entities/topic';
 import { SubforumEntityService } from '../../services/subforum-entity.service';
 
 @Component({
-  selector: 'app-subforum',
+  selector: 'app-plugins-forum-subforum',
   templateUrl: './subforum.component.html',
   styleUrls: ['./subforum.component.scss']
 })

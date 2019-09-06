@@ -5,7 +5,7 @@ import { AuthService } from '../../shared/services/auth.service';
 import { AccountService } from '../../identity/account/services/account.service';
 
 @Component({
-  selector: 'app-nav-menu',
+  selector: 'app-shell-nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })

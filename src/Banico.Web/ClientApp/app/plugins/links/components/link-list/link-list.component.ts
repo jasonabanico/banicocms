@@ -6,7 +6,7 @@ import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
 import { LinksService } from '../../services/links.service';
 
 @Component({
-  selector: 'app-link-list',
+  selector: 'app-plugins-links-link-list',
   templateUrl: './link-list.component.html',
   styleUrls: ['./link-list.component.css']
 })

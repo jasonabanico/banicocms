@@ -2,21 +2,21 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DirectoryComponent } from './components/directory.component';
-import { DirectorySearchComponent } from './components/directory-search/directory-search.component';
-import { DirectoryDisplayComponent } from './components/directory-display/directory-display.component';
-import { DirectoryItemDisplayComponent } from './components/directory-item-display/directory-item-display.component';
-import { DirectoryFormComponent } from './components/directory-form/directory-form.component';
-import { DirectoryFrontComponent } from './components/directory-front/directory-front.component';
+import { DirectorySearchComponent } from './components/search/search.component';
+import { DirectoryListComponent } from './components/list/list.component';
+import { DirectoryItemComponent } from './components/item/item.component';
+import { DirectoryItemFormComponent } from './components/item-form/item-form.component';
+import { DirectoryHomeComponent } from './components/home/home.component';
 import { AuthGuard } from '../../shared/auth/auth.guard';
 
 const DIRECTORY_ROUTES: Routes = [
-    { path: 'new/:path', component: DirectoryFormComponent, canActivate: [AuthGuard], data: { module: 'directory/manage' } },
+    { path: 'new/:path', component: DirectoryItemFormComponent, canActivate: [AuthGuard], data: { module: 'directory/manage' } },
     { path: 'search/:search', component: DirectorySearchComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
-    { path: 'item/:id', component: DirectoryItemDisplayComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
-    { path: 'edit/:id', component: DirectoryFormComponent, canActivate: [AuthGuard], data: { module: 'directory/manage' } },
-    { path: ':path', component: DirectoryDisplayComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
-    { path: '', component: DirectoryFrontComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
-    { path: '**', component: DirectoryDisplayComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } }
+    { path: 'item/:id', component: DirectoryItemComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
+    { path: 'edit/:id', component: DirectoryItemFormComponent, canActivate: [AuthGuard], data: { module: 'directory/manage' } },
+    { path: ':path', component: DirectoryListComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
+    { path: '', component: DirectoryHomeComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } },
+    { path: '**', component: DirectoryListComponent, canActivate: [AuthGuard], data: { module: 'directory/view' } }
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-modal',
+  selector: 'app-shell-modal',
   templateUrl: './modal.component.html'
 })
 

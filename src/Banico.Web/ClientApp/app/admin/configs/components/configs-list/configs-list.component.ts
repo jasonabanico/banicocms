@@ -3,7 +3,7 @@ import { Config } from "../../../../entities/config";
 import { ConfigsService } from "../../services/configs.service";
 
 @Component({
-    selector: 'app-configs-list',
+    selector: 'app-admin-configs-list',
     templateUrl: './configs-list.component.html',
     providers: []
 })

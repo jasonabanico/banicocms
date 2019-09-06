@@ -6,7 +6,7 @@ import { PostService } from '../../services/post.service';
 import { Post } from '../../entities/post';
 
 @Component({
-  selector: 'app-post-form',
+  selector: 'app-plugins-forum-post-form',
   templateUrl: './post-form.component.html',
   styleUrls: ['./post-form.component.scss']
 })

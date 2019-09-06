@@ -6,7 +6,7 @@ import { SubforumEntityService } from '../../services/subforum-entity.service';
 import { SubforumService } from '../../services/subforum.service';
 
 @Component({
-  selector: 'app-subforum-form',
+  selector: 'app-plugins-forum-subforum-form',
   templateUrl: './subforum-form.component.html',
   styleUrls: ['./subforum-form.component.scss']
 })

@@ -6,20 +6,20 @@ import { SectionsService } from '../../../../shared/services/sections.service';
 import { DirectoryService } from '../../services/directory.service';
 
 @Component({
-    selector: 'app-directory-display',
-    templateUrl: './directory-display.component.html',
+    selector: 'app-plugins-directory-search',
+    templateUrl: './search.component.html',
     providers: [DirectoryService]
 })
-export class DirectoryDisplayComponent implements OnInit, OnDestroy {
+export class DirectorySearchComponent implements OnInit, OnDestroy {
     private id: string;
     private sub: any;
-    private path: string;
+    public path: string;
     public directoryItems: DirectoryItem[];
     public isAdmin: boolean;
 
     constructor(
         @Inject(NavBarService) private navBarService: NavBarService,
-        @Inject(DirectoryService) public directoryService: DirectoryService,
+        @Inject(DirectoryService) private directoryService: DirectoryService,
         private route: ActivatedRoute
     ) {
     }
@@ -32,11 +32,12 @@ export class DirectoryDisplayComponent implements OnInit, OnDestroy {
         // });
 
         this.sub = this.route.params.subscribe(params => {
-            this.path = params['path'];
-            this.navBarService.initialize('directory', this.path, '', '/directory');
+            var search = params['search'];
+            this.navBarService.initialize('directory', '', '', '/directory');
 
-            if (this.path) {
-                this.directoryService.getDirectoryItems(this.path)
+        if (search)
+            {
+                this.directoryService.getWithTextSearch(search)
                 .subscribe(directoryItems => this.setDirectoryItems(directoryItems));
             }
         });

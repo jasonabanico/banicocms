@@ -6,7 +6,7 @@ import { ContactService } from '../../services/contact.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({
-    selector: 'app-contact-form',
+    selector: 'app-plugins-contact-form',
     templateUrl: './contact-form.component.html',
     providers: [ContactService]
 })

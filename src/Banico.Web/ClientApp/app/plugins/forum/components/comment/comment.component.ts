@@ -5,7 +5,7 @@ import { Comment } from '../../entities/comment';
 import { CommentService } from '../../services/comment.service';
 
 @Component({
-  selector: 'app-comment',
+  selector: 'app-plugins-forum-comment',
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss']
 })

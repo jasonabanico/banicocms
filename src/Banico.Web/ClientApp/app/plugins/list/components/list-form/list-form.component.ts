@@ -9,7 +9,7 @@ import { ListSet } from '../../entities/list-set';
 import { ListItem } from '../../entities/list-item';
 
 @Component({
-  selector: 'app-list-form',
+  selector: 'app-plugins-list-form',
   templateUrl: './list-form.component.html',
   styleUrls: ['./list-form.component.css']
 })

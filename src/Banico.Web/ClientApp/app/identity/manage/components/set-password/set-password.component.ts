@@ -4,7 +4,7 @@ import { ManageService } from '../../services/manage.service';
 import { SetPassword } from './set-password.interface';
 
 @Component({
-  selector: 'app-set-password',
+  selector: 'app-identity-manage-set-password',
   templateUrl: './set-password.component.html',
   styleUrls: []
 })

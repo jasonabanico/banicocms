@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
-    selector: 'app-home',
+    selector: 'app-shell-home',
     templateUrl: '../../../../config/home.component.html'
 })
 export class HomeComponent implements OnInit {

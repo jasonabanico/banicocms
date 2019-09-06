@@ -6,11 +6,11 @@ import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
 import { DirectoryService } from '../../services/directory.service';
 
 @Component({
-    selector: 'app-directory-form',
-    templateUrl: './directory-form.component.html',
+    selector: 'app-plugins-directory-item-form',
+    templateUrl: './item-form.component.html',
     providers: [DirectoryService]
 })
-export class DirectoryFormComponent implements OnInit {
+export class DirectoryItemFormComponent implements OnInit {
     public directoryItem: DirectoryItem;
     private sub: any;
     private isEdit: boolean = false;

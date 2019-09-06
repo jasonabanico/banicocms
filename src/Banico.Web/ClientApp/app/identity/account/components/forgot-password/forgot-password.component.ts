@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AccountService } from '../../services/account.service';
 
 @Component({
-  selector: 'app-forgot-password',
+  selector: 'app-identity-account-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: []
 })

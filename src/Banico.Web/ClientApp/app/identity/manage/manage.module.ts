@@ -12,7 +12,7 @@ import { ManageRoutingModule }  from './manage.routing';
 import { ManageComponent } from './components/manage.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { IndexComponent } from './components/index/index.component';
-import { ManageLoginsComponent } from './components/manage-logins/manage-logins.component';
+import { ManageLoginsComponent } from './components/manage-logins/logins.component';
 import { SetPasswordComponent } from './components/set-password/set-password.component';
 
 @NgModule({

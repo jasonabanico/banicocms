@@ -5,7 +5,7 @@ import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
  
 @Component({
-  selector: 'app-resend-confirmation',
+  selector: 'app-identity-account-resend-confirmation',
   templateUrl: './resend-confirmation.component.html',
   styleUrls: []
 })

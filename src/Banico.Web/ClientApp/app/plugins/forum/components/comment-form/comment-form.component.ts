@@ -6,7 +6,7 @@ import { Comment } from '../../entities/comment';
 import { AccountService } from '../../../../identity/account/services/account.service';
 
 @Component({
-  selector: 'app-comment-form',
+  selector: 'app-plugins-forum-comment-form',
   templateUrl: './comment-form.component.html',
   styleUrls: ['./comment-form.component.scss']
 })

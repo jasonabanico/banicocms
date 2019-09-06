@@ -8,7 +8,7 @@ import { Comment } from '../../entities/comment';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-post',
+  selector: 'app-plugins-forum-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })

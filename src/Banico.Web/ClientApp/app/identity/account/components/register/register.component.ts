@@ -6,7 +6,7 @@ import { AccountService } from '../../services/account.service';
 import { ToastrService } from '../../../../shared/services/toastr.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-identity-account-register',
   templateUrl: './register.component.html',
   styleUrls: []
 })

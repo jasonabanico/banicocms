@@ -7,11 +7,11 @@ import { SectionsFileService } from '../../services/sections-file.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
-    selector: 'app-section-items-admin',
-    templateUrl: './section-items-admin.component.html',
+    selector: 'app-admin-sections-section-item',
+    templateUrl: './section-item.component.html',
     providers: [SectionsFileService]
 })
-export class SectionItemsAdminComponent implements OnInit {
+export class AdminSectionsSectionItemComponent implements OnInit {
     public helper: string;
     public showDropdown: boolean;
 

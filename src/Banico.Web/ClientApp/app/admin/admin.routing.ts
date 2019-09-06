@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent } from './admin/admin.component';
-import { SectionsAdminComponent } from './sections/components/sections-admin/sections-admin.component';
-import { SectionItemsAdminComponent } from './sections/components/section-items-admin/section-items-admin.component';
+import { AdminSectionsSectionComponent } from './sections/components/section/section.component';
+import { AdminSectionsSectionItemComponent } from './sections/components/section-item/section-item.component';
 import { RoleFormComponent } from './roles/components/role-form/role-form.component';
 import { RolesListComponent } from './roles/components/roles-list/roles-list.component';
 import { UserFormComponent } from './users/components/user-form/user-form.component';
@@ -14,17 +14,17 @@ import { AuthGuard } from '../shared/auth/auth.guard';
 
 const ADMIN_ROUTES: Routes = [
     { path: 'sections/section-item/:section',
-        component: SectionItemsAdminComponent,
+        component: AdminSectionsSectionItemComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin/sections' }
     },
     { path: 'sections/:path',
-        component: SectionItemsAdminComponent,
+        component: AdminSectionsSectionItemComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin/sections' }
     },
     { path: 'sections',
-        component: SectionsAdminComponent,
+        component: AdminSectionsSectionComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin/sections' }
     },

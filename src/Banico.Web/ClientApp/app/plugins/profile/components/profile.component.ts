@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
-    selector: 'app-profile',
+    selector: 'app-plugins-profile',
     templateUrl: './profile.component.html'
 })
 export class ProfileComponent implements OnInit {

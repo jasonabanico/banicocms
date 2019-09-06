@@ -4,7 +4,7 @@ import { Page } from '../../entities/page';
 import { PageService } from '../../services/page.service';
 
 @Component({
-    selector: 'app-page-form',
+    selector: 'app-plugins-page-form',
     templateUrl: './page-form.component.html',
     providers: [PageService]
 })

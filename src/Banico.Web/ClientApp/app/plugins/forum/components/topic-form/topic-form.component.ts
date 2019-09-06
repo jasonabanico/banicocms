@@ -7,7 +7,7 @@ import { SubforumService } from '../../services/subforum.service';
 import { Topic } from '../../entities/topic';
 
 @Component({
-  selector: 'app-topic-form',
+  selector: 'app-plugins-forum-topic-form',
   templateUrl: './topic-form.component.html',
   styleUrls: ['./topic-form.component.scss']
 })

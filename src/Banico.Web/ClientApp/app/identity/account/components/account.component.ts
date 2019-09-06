@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
-    selector: 'app-account',
+    selector: 'app-identity-account',
     templateUrl: './account.component.html'
 })
 export class AccountComponent implements OnInit {

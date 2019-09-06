@@ -4,7 +4,7 @@ import { Profile } from '../../entities/profile';
 import { ProfileService } from '../../services/profile.service';
 
 @Component({
-    selector: 'app-profile-display',
+    selector: 'app-plugins-profile-display',
     templateUrl: './profile-display.component.html',
     providers: [ProfileService]
 })

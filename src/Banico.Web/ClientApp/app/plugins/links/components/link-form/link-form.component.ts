@@ -7,7 +7,7 @@ import { LinksService } from '../../services/links.service';
 import { Link } from '../../entities/link';
 
 @Component({
-  selector: 'app-link-form',
+  selector: 'app-plugins-links-link-form',
   templateUrl: './link-form.component.html',
   styleUrls: ['./link-form.component.css']
 })

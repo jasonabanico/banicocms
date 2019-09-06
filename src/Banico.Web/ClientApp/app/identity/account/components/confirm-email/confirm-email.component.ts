@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../../services/account.service';
 
 @Component({
-  selector: 'app-confirm-email',
+  selector: 'app-identity-account-confirm-email',
   templateUrl: './confirm-email.component.html',
   styleUrls: []
 })

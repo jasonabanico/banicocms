@@ -5,7 +5,7 @@ import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
  
 @Component({
-  selector: 'app-reset-password',
+  selector: 'app-identity-account-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: []
 })

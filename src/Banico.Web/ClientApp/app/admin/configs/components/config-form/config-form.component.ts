@@ -6,7 +6,7 @@ import { ConfigsService } from '../../services/configs.service';
 import { Config } from '../../../../entities/config';
 
 @Component({
-    selector: 'app-config-form',
+    selector: 'app-admin-config-form',
     templateUrl: './config-form.component.html',
     providers: [ConfigsService]
 })

@@ -4,8 +4,8 @@ import { UserService } from '../../../../shared/services/user.service';
 import { Router } from '@angular/router';
  
 @Component({
-  selector: 'app-manage-logins',
-  templateUrl: './manage-logins.component.html',
+  selector: 'app-identity-manage-logins',
+  templateUrl: './logins.component.html',
   styleUrls: []
 })
 export class ManageLoginsComponent {
