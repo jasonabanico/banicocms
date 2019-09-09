@@ -2,20 +2,20 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Comment } from '../../entities/comment';
-import { CommentService } from '../../services/comment.service';
+import { ForumCommentService } from '../../services/comment.service';
 
 @Component({
   selector: 'app-plugins-forum-comment',
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss']
 })
-export class CommentComponent {
+export class ForumCommentComponent {
   public comment: Comment;
   private _id: string;
   public isEdit: boolean;
 
   constructor(
-    private commentService: CommentService
+    private commentService: ForumCommentService
     ) {
   }
 

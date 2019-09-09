@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-import { PostService } from '../../services/post.service';
-import { CommentService } from '../../services/comment.service';
+import { ForumPostService } from '../../services/post.service';
+import { ForumCommentService } from '../../services/comment.service';
 import { Post } from '../../entities/post';
 import { Comment } from '../../entities/comment';
 import { map } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-export class PostComponent implements OnInit {
+export class ForumPostComponent implements OnInit {
   public post: Post;
   public comments: Comment[];
   public hasMorePages: boolean;
@@ -22,8 +22,8 @@ export class PostComponent implements OnInit {
   public isEdit: boolean;
 
   constructor(
-    private postService: PostService,
-    private commentService: CommentService
+    private postService: ForumPostService,
+    private commentService: ForumCommentService
     ) {
   }
 

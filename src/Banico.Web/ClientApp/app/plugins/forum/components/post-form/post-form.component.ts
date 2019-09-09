@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../shared/services/auth.service';
-import { PostService } from '../../services/post.service';
+import { ForumPostService } from '../../services/post.service';
 import { Post } from '../../entities/post';
 
 @Component({
@@ -10,7 +10,7 @@ import { Post } from '../../entities/post';
   templateUrl: './post-form.component.html',
   styleUrls: ['./post-form.component.scss']
 })
-export class PostFormComponent implements OnInit {
+export class ForumPostFormComponent implements OnInit {
   public isEdit: boolean = false;
   public username: string;
   public avatarHash: string;
@@ -22,7 +22,7 @@ export class PostFormComponent implements OnInit {
   });
 
   constructor(
-    private postService: PostService,
+    private postService: ForumPostService,
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,

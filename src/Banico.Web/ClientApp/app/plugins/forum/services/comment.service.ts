@@ -8,7 +8,7 @@ import { Comment } from '../entities/comment';
 import { ContentItemSearch } from '../entities/contentItemSearch';
 
 @Injectable()
-export class CommentService extends PluginService {
+export class ForumCommentService extends PluginService {
     public get(id: string): Observable<Comment> {
         return this.contentItemService.get(id).pipe(
         map(item => {

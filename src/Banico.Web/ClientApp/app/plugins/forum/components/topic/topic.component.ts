@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Topic } from '../../entities/topic';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-import { TopicService } from '../../services/topic.service';
-import { SubforumService } from '../../services/subforum.service';
-import { PostService } from '../../services/post.service';
+import { ForumTopicService } from '../../services/topic.service';
+import { ForumSubforumService } from '../../services/subforum.service';
+import { ForumPostService } from '../../services/post.service';
 import { Subforum } from '../../entities/subforum';
 import { Post } from '../../entities/post';
 
@@ -13,7 +13,7 @@ import { Post } from '../../entities/post';
   templateUrl: './topic.component.html',
   styleUrls: ['./topic.component.scss']
 })
-export class TopicComponent implements OnInit {
+export class ForumTopicComponent implements OnInit {
   public subforum: Subforum;
   public topic: Topic;
   public posts: Post[];
@@ -22,9 +22,9 @@ export class TopicComponent implements OnInit {
   public offset: number = 0;
   
   constructor(
-    private topicService: TopicService,
-    private subforumService: SubforumService,
-    private postService: PostService,
+    private topicService: ForumTopicService,
+    private subforumService: ForumSubforumService,
+    private postService: ForumPostService,
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute

@@ -3,14 +3,14 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subforum } from '../../entities/subforum';
 import { SubforumEntityService } from '../../services/subforum-entity.service';
-import { SubforumService } from '../../services/subforum.service';
+import { ForumSubforumService } from '../../services/subforum.service';
 
 @Component({
   selector: 'app-plugins-forum-subforum-form',
   templateUrl: './subforum-form.component.html',
   styleUrls: ['./subforum-form.component.scss']
 })
-export class SubforumFormComponent implements OnInit {
+export class ForumSubforumFormComponent implements OnInit {
 
   public subforumForm: FormGroup = this.fb.group({
     id: ['', Validators.required],
@@ -22,7 +22,7 @@ export class SubforumFormComponent implements OnInit {
 
   constructor(
     //private subforumEntityService: SubforumEntityService,
-    private subforumService: SubforumService,
+    private subforumService: ForumSubforumService,
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute

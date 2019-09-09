@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommentService } from '../../services/comment.service';
+import { ForumCommentService } from '../../services/comment.service';
 import { Comment } from '../../entities/comment';
 import { AccountService } from '../../../../identity/account/services/account.service';
 
@@ -10,7 +10,7 @@ import { AccountService } from '../../../../identity/account/services/account.se
   templateUrl: './comment-form.component.html',
   styleUrls: ['./comment-form.component.scss']
 })
-export class CommentFormComponent implements OnInit {
+export class ForumCommentFormComponent implements OnInit {
   public isEdit: boolean = false;
   private delta = 500;
   private lastKeypressTime = 0;
@@ -26,7 +26,7 @@ export class CommentFormComponent implements OnInit {
   });
 
   constructor(
-    private commentService: CommentService,
+    private commentService: ForumCommentService,
     private accountService: AccountService,
     private router: Router,
     private fb: FormBuilder,

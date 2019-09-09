@@ -7,7 +7,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Subforum } from '../entities/subforum';
 
 @Injectable()
-export class SubforumService extends PluginService {
+export class ForumSubforumService extends PluginService {
 
     public get(id: string): Observable<Subforum> {
         return this.contentItemService.get(id).pipe(

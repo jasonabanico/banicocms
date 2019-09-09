@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subforum } from '../../entities/subforum';
-import { SubforumService } from '../../services/subforum.service';
-import { TopicService } from '../../services/topic.service';
+import { ForumSubforumService } from '../../services/subforum.service';
+import { ForumTopicService } from '../../services/topic.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Topic } from '../../entities/topic';
@@ -12,15 +12,15 @@ import { SubforumEntityService } from '../../services/subforum-entity.service';
   templateUrl: './subforum.component.html',
   styleUrls: ['./subforum.component.scss']
 })
-export class SubforumComponent implements OnInit {
+export class ForumSubforumComponent implements OnInit {
   //public subforum$: Observable<Subforum>;
   public subforum: Subforum;
   public topics: Topic[];
 
   constructor(
     //private subforumEntityService: SubforumEntityService,
-    private subforumService: SubforumService,
-    private topicService: TopicService,
+    private subforumService: ForumSubforumService,
+    private topicService: ForumTopicService,
     private route: ActivatedRoute
     ) {
   }

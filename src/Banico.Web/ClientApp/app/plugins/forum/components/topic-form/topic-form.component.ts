@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subforum } from '../../entities/subforum';
-import { TopicService } from '../../services/topic.service';
-import { SubforumService } from '../../services/subforum.service';
+import { ForumTopicService } from '../../services/topic.service';
+import { ForumSubforumService } from '../../services/subforum.service';
 import { Topic } from '../../entities/topic';
 
 @Component({
@@ -11,7 +11,7 @@ import { Topic } from '../../entities/topic';
   templateUrl: './topic-form.component.html',
   styleUrls: ['./topic-form.component.scss']
 })
-export class TopicFormComponent implements OnInit {
+export class ForumTopicFormComponent implements OnInit {
   public subforum: Subforum;
 
   public topicForm: FormGroup = this.fb.group({
@@ -22,8 +22,8 @@ export class TopicFormComponent implements OnInit {
   });
 
   constructor(
-    private topicService: TopicService,
-    private subforumService: SubforumService,
+    private topicService: ForumTopicService,
+    private subforumService: ForumSubforumService,
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute

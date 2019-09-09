@@ -8,7 +8,7 @@ import { Topic } from '../entities/topic';
 import { ContentItemSearch } from '../entities/contentItemSearch';
 
 @Injectable()
-export class TopicService extends PluginService {
+export class ForumTopicService extends PluginService {
 
     public get(id: string): Observable<Topic> {
         return this.contentItemService.get(id).pipe(

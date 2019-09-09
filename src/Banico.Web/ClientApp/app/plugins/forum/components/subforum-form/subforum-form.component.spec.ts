@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubforumFormComponent } from './subforum-form.component';
+import { ForumSubforumFormComponent } from './subforum-form.component';
 
-describe('SubforumFormComponent', () => {
-  let component: SubforumFormComponent;
-  let fixture: ComponentFixture<SubforumFormComponent>;
+describe('ForumSubforumFormComponent', () => {
+  let component: ForumSubforumFormComponent;
+  let fixture: ComponentFixture<ForumSubforumFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubforumFormComponent ]
+      declarations: [ ForumSubforumFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SubforumFormComponent);
+    fixture = TestBed.createComponent(ForumSubforumFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

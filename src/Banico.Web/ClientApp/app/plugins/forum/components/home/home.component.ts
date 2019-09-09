@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
-export class SubforumComponent {
+export class ForumHomeComponent {
 
 }

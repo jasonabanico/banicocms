@@ -8,7 +8,7 @@ import { Post } from '../entities/post';
 import { ContentItemSearch } from '../entities/contentItemSearch';
 
 @Injectable()
-export class PostService extends PluginService {
+export class ForumPostService extends PluginService {
 
     public get(id: string): Observable<Post> {
         return this.contentItemService.get(id).pipe(

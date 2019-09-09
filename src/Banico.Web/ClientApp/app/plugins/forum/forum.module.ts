@@ -3,18 +3,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForumRoutingModule } from './forum.routing';
 import { ForumComponent } from './components/forum.component';
-import { SubforumComponent } from './components/subforum/subforum.component';
-import { SubforumFormComponent } from './components/subforum-form/subforum-form.component';
-import { TopicComponent } from './components/topic/topic.component';
-import { TopicFormComponent } from './components/topic-form/topic-form.component';
-import { PostComponent } from './components/post/post.component';
-import { PostFormComponent } from './components/post-form/post-form.component';
-import { CommentComponent } from './components/comment/comment.component';
-import { CommentFormComponent } from './components/comment-form/comment-form.component';
-import { SubforumService } from './services/subforum.service';
-import { TopicService } from './services/topic.service';
-import { PostService } from './services/post.service';
-import { CommentService } from './services/comment.service';
+import { ForumSubforumComponent } from './components/subforum/subforum.component';
+import { ForumSubforumFormComponent } from './components/subforum-form/subforum-form.component';
+import { ForumTopicComponent } from './components/topic/topic.component';
+import { ForumTopicFormComponent } from './components/topic-form/topic-form.component';
+import { ForumPostComponent } from './components/post/post.component';
+import { ForumPostFormComponent } from './components/post-form/post-form.component';
+import { ForumCommentComponent } from './components/comment/comment.component';
+import { ForumCommentFormComponent } from './components/comment-form/comment-form.component';
+import { ForumSubforumService } from './services/subforum.service';
+import { ForumTopicService } from './services/topic.service';
+import { ForumPostService } from './services/post.service';
+import { ForumCommentService } from './services/comment.service';
 //import { ForumStoreModule } from './store/forum-store.module';
 
 @NgModule({
@@ -27,20 +27,20 @@ import { CommentService } from './services/comment.service';
   ],
   declarations: [
     ForumComponent,
-    SubforumComponent,
-    SubforumFormComponent,
-    TopicComponent,
-    TopicFormComponent,
-    PostComponent,
-    PostFormComponent,
-    CommentComponent,
-    CommentFormComponent
+    ForumSubforumComponent,
+    ForumSubforumFormComponent,
+    ForumTopicComponent,
+    ForumTopicFormComponent,
+    ForumPostComponent,
+    ForumPostFormComponent,
+    ForumCommentComponent,
+    ForumCommentFormComponent
   ],
   providers: [ 
-    SubforumService,
-    TopicService,
-    PostService,
-    CommentService
+    ForumSubforumService,
+    ForumTopicService,
+    ForumPostService,
+    ForumCommentService
   ]
 })
 export class ForumModule { }
