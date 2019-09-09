@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FaqComponent } from './components/faq.component';
-import { FaqDisplayComponent } from './components/faq-display/faq-display.component';
-import { FaqFormComponent } from './components/faq-form/faq-form.component';
+import { FaqListComponent } from './components/list/list.component';
+import { FaqListFormComponent } from './components/list-form/list-form.component';
 import { AuthGuard } from '../../shared/auth/auth.guard';
 
 const FAQ_ROUTES: Routes = [
-  { path: 'new', component: FaqFormComponent, canActivate: [AuthGuard], data: { module: 'faq/manage' } },
-  { path: 'edit/:alias', component: FaqFormComponent, canActivate: [AuthGuard], data: { module: 'faq/manage' } },
-  { path: ':alias', component: FaqDisplayComponent, canActivate: [AuthGuard], data: { module: 'faq/view' } }
+  { path: 'new', component: FaqListFormComponent, canActivate: [AuthGuard], data: { module: 'faq/manage' } },
+  { path: 'edit/:alias', component: FaqListFormComponent, canActivate: [AuthGuard], data: { module: 'faq/manage' } },
+  { path: ':alias', component: FaqListComponent, canActivate: [AuthGuard], data: { module: 'faq/view' } }
 ];
 
 @NgModule({

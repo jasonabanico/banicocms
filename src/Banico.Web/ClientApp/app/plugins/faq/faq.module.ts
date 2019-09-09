@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { FaqRoutingModule } from './faq.routing';
 import { FaqComponent }  from './components/faq.component';
-import { FaqDisplayComponent } from './components/faq-display/faq-display.component';
-import { FaqFormComponent } from './components/faq-form/faq-form.component';
+import { FaqListComponent } from './components/list/list.component';
+import { FaqListFormComponent } from './components/list-form/list-form.component';
 
 @NgModule({
   imports: [ 
@@ -15,8 +15,8 @@ import { FaqFormComponent } from './components/faq-form/faq-form.component';
   ],
   declarations: [ 
     FaqComponent,
-    FaqDisplayComponent,
-    FaqFormComponent 
+    FaqListComponent,
+    FaqListFormComponent 
   ],
   bootstrap:    [ FaqComponent ]
 })

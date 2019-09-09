@@ -6,11 +6,11 @@ import { FaqService } from '../../services/faq.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({
-    selector: 'app-plugins-faq-display',
-    templateUrl: './faq-display.component.html',
+    selector: 'app-plugins-faq-list',
+    templateUrl: './faq-list.component.html',
     providers: [FaqService]
 })
-export class FaqDisplayComponent implements OnInit, OnDestroy {
+export class FaqListComponent implements OnInit, OnDestroy {
     public faq: Faq;
     private sub: any;
     public isAdmin: boolean;

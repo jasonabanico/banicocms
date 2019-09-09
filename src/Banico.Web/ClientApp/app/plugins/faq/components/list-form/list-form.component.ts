@@ -10,7 +10,7 @@ import { ModalComponent } from '../../../../shell/modal/modal.component';
     templateUrl: './faq-form.component.html',
     providers: [FaqService]
 })
-export class FaqFormComponent implements OnInit {
+export class FaqListFormComponent implements OnInit {
     public faq: Faq;
     private parentId: string;
     private sub: any;
