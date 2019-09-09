@@ -18,16 +18,14 @@ export class LinksService extends PluginService {
     }
 
     public getLinks(sectionItems: string): Observable<Link[]> {        
-        this.contentItemService.getCount('', '', '',
-        'link', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true).pipe(
-        map(count => {
-            alert(count);
-        }));
         const contentItemSearch = new ContentItemSearch();
         contentItemSearch.module = 'link';
         contentItemSearch.sectionItems = sectionItems;
         contentItemSearch.pageSize = this.pageSize;
+        this.contentItemService.getCount(contentItemSearch).pipe(
+        map(count => {
+            //alert(count);
+        }));
             return this.contentItemService.getAll(contentItemSearch).pipe(
         map(items => {
             const links: Link[] = new Array<Link>();
