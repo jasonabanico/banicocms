@@ -5,6 +5,7 @@ import { PluginService } from "../../services/plugin.service";
 import { ContentItem } from '../../../entities/content-item';
 import { ListItem } from '../entities/list-item';
 import { HttpHeaders } from '@angular/common/http';
+import { ContentItemSearch } from '../../forum/entities/contentItemSearch';
 
 @Injectable()
 export class ListItemService extends PluginService {
@@ -24,9 +25,10 @@ export class ListItemService extends PluginService {
     }
 
     public getListItems(listSetId: string): Observable<ListItem[]> {
-        return this.contentItemService.getAll('', '', '',
-        'list-item', listSetId, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', false, false, '', 0, 0, 0).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.module = 'list-item';
+        contentItemSearch.parentId = listSetId;
+        return this.contentItemService.getAll(contentItemSearch).pipe(
         map(items => {
             var listItems: ListItem[] = new Array<ListItem>();
             items.forEach(function(item: ContentItem) {

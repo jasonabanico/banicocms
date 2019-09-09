@@ -5,6 +5,7 @@ import { PluginService } from '../../services/plugin.service';
 import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
 import { Post } from '../entities/post';
+import { ContentItemSearch } from '../entities/contentItemSearch';
 
 @Injectable()
 export class PostService extends PluginService {
@@ -17,9 +18,13 @@ export class PostService extends PluginService {
     }
 
     public getPosts(topicId: string, page: number, offset: number): Observable<Post[]> {
-        return this.contentItemService.getAll('', '', '',
-        'forum-post', topicId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true, '', page, this.pageSize, offset).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.module = 'forum-post';
+        contentItemSearch.parentId = topicId;
+        contentItemSearch.page = page;
+        contentItemSearch.pageSize = this.pageSize;
+        contentItemSearch.offset = offset;
+        return this.contentItemService.getAll(contentItemSearch).pipe(
         map(items => {
             const replies: Post[] = new Array<Post>();
             items.forEach(function(item: ContentItem) {

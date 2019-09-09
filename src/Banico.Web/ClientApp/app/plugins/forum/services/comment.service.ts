@@ -5,6 +5,7 @@ import { PluginService } from '../../services/plugin.service';
 import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
 import { Comment } from '../entities/comment';
+import { ContentItemSearch } from '../entities/contentItemSearch';
 
 @Injectable()
 export class CommentService extends PluginService {
@@ -16,9 +17,13 @@ export class CommentService extends PluginService {
     }
 
     public getComments(postId: string, page: number, offset: number): Observable<Comment[]> {
-        return this.contentItemService.getAll('', '', '',
-        'forum-comment', postId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true, '', page, this.pageSize, offset).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.module = 'forum-comment';
+        contentItemSearch.parentId = postId;
+        contentItemSearch.page = page;
+        contentItemSearch.pageSize = this.pageSize;
+        contentItemSearch.offset = offset;
+        return this.contentItemService.getAll(contentItemSearch).pipe(
         map(items => {
             const comments: Comment[] = new Array<Comment>();
             items.forEach(function(item: ContentItem) {

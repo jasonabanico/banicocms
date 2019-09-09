@@ -5,6 +5,7 @@ import { PluginService } from "../../services/plugin.service";
 import { ContentItem } from '../../../entities/content-item';
 import { HttpHeaders } from '@angular/common/http';
 import { Topic } from '../entities/topic';
+import { ContentItemSearch } from '../entities/contentItemSearch';
 
 @Injectable()
 export class TopicService extends PluginService {
@@ -25,9 +26,10 @@ export class TopicService extends PluginService {
     }
 
     public getTopics(subforumId: string): Observable<Topic[]> {
-        return this.contentItemService.getAll('', '', '',
-        'forum-topic', subforumId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true, '', 0, 0, 0).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.module = 'forum-topic';
+        contentItemSearch.parentId = subforumId;
+        return this.contentItemService.getAll(contentItemSearch).pipe(
         map(items => {
             var topics: Topic[] = new Array<Topic>();
             items.forEach(item => {

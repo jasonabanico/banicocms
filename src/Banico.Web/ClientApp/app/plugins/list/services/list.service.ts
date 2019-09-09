@@ -5,6 +5,7 @@ import { PluginService } from "../../services/plugin.service";
 import { ContentItem } from '../../../entities/content-item';
 import { List } from '../entities/list';
 import { HttpHeaders } from '@angular/common/http';
+import { ContentItemSearch } from '../../forum/entities/contentItemSearch';
 
 @Injectable()
 export class ListService extends PluginService {
@@ -17,9 +18,10 @@ export class ListService extends PluginService {
     }
     
     public getAll(listSetId: string): Observable<List[]> {
-        return this.contentItemService.getAll('', '', '',
-        'list', listSetId, '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0, 0).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.module = 'list';
+        contentItemSearch.name = listSetId;
+        return this.contentItemService.getAll(contentItemSearch).pipe(
         map(listItems => {
             var lists: List[] = new Array<List>();
             listItems.forEach(function(item: ContentItem) {
@@ -31,9 +33,10 @@ export class ListService extends PluginService {
     }
 
     public getByUser(userId: string): Observable<List[]> {
-        return this.contentItemService.getAll('', '', '',
-        'list', '', userId, '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0, 0).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.module = 'list';
+        contentItemSearch.alias = userId;
+        return this.contentItemService.getAll(contentItemSearch).pipe(
         map(listItems => {
             var lists: List[] = new Array<List>();
             listItems.forEach(function(item: ContentItem) {

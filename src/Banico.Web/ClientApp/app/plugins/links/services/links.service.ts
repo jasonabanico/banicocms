@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { PluginService } from '../../services/plugin.service';
 import { ContentItem } from '../../../entities/content-item';
 import { Link } from '../entities/link';
+import { ContentItemSearch } from '../../forum/entities/contentItemSearch';
 
 @Injectable()
 export class LinksService extends PluginService {
@@ -16,17 +17,18 @@ export class LinksService extends PluginService {
         }));
     }
 
-    public getLinks(sectionItems: string): Observable<Link[]> {
+    public getLinks(sectionItems: string): Observable<Link[]> {        
         this.contentItemService.getCount('', '', '',
         'link', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '', '', '', true, true).pipe(
         map(count => {
             alert(count);
         }));
-
-            return this.contentItemService.getAll('', '', '',
-        'link', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true, '', 0, this.pageSize, 0).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.module = 'link';
+        contentItemSearch.sectionItems = sectionItems;
+        contentItemSearch.pageSize = this.pageSize;
+            return this.contentItemService.getAll(contentItemSearch).pipe(
         map(items => {
             const links: Link[] = new Array<Link>();
             items.forEach(function(item: ContentItem) {

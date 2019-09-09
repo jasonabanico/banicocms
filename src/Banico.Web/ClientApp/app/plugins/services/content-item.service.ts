@@ -9,6 +9,7 @@ import { AddOrUpdateContentItemMutation } from './content-item.mutations';
 import { ContentItemsQueryResult } from './content-item.queryresults';
 import { ContentItem } from '../../entities/content-item';
 import { ContentItemsCountQueryResult } from './content-items-count-query-result';
+import { ContentItemSearch } from '../forum/entities/contentItemSearch';
 //import { status, json } from '../../../shared/fetch';
 
 @Injectable()
@@ -42,9 +43,9 @@ export class ContentItemService {
     }
 
     public get(id: string): Observable<ContentItem> {
-        return this.getAll(id, '', '',
-        '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0, 0).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.id = id;
+        return this.getAll(contentItemSearch).pipe(
         map(items => {
             if (items.length >= 1) {
                 return items[0];
@@ -55,9 +56,9 @@ export class ContentItemService {
     }
 
     public getByAlias(alias: string): Observable<ContentItem> {
-        return this.getAll('', '', alias,
-        '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0, 0).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.alias = alias;
+        return this.getAll(contentItemSearch).pipe(
         map(items => {
             if (items.length >= 1) {
                 return items[0];
@@ -68,9 +69,10 @@ export class ContentItemService {
     }
 
     public getProfileById(userId: string): Observable<ContentItem> {
-        return this.getAll('', '', '',
-        'profile', '', userId, '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0, 0).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.module = 'profile';
+        contentItemSearch.createdBy = userId;
+        return this.getAll(contentItemSearch).pipe(
         map(items => {
             if (items.length >= 1) {
                 return items[0];
@@ -81,9 +83,10 @@ export class ContentItemService {
     }
 
     public getProfileByUsername(alias: string): Observable<ContentItem> {
-        return this.getAll('', '', alias,
-        'profile', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0, 0).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.module = 'profile';
+        contentItemSearch.alias = alias;
+        return this.getAll(contentItemSearch).pipe(
         map(items => {
             if (items.length >= 1) {
                 return items[0];
@@ -169,79 +172,44 @@ export class ContentItemService {
         return result;
     }
 
-    public getAll(
-        id: string,
-        name: string,
-        alias: string,
-        module: string,
-        parentId: string,
-        createdBy: string,
-        sectionItems: string,
-        content: string,
-        attribute01: string,
-        attribute02: string,
-        attribute03: string,
-        attribute04: string,
-        attribute05: string,
-        attribute06: string,
-        attribute07: string,
-        attribute08: string,
-        attribute09: string,
-        attribute10: string,
-        attribute11: string,
-        attribute12: string,
-        attribute13: string,
-        attribute14: string,
-        attribute15: string,
-        attribute16: string,
-        attribute17: string,
-        attribute18: string,
-        attribute19: string,
-        attribute20: string,
-        includeChildren: boolean,
-        includeParents: boolean,
-        orderBy: string,
-        page: number,
-        pageSize: number,
-        offset: number
-    ): Observable<ContentItem[]> {
+    public getAll(contentItemSearch: ContentItemSearch): Observable<ContentItem[]> {
         var result = this.apollo.watchQuery<ContentItemsQueryResult>({
             query: ContentItemsQuery,
             variables: {
-                id: id,
-                name: name,
-                alias: alias,
-                module: module,
-                parentId: parentId,
-                createdBy: createdBy,
-                sectionItems: sectionItems,
-                content: content,
-                attribute01: attribute01,
-                attribute02: attribute02,
-                attribute03: attribute03,
-                attribute04: attribute04,
-                attribute05: attribute05,
-                attribute06: attribute06,
-                attribute07: attribute07,
-                attribute08: attribute08,
-                attribute09: attribute09,
-                attribute10: attribute10,
-                attribute11: attribute11,
-                attribute12: attribute12,
-                attribute13: attribute13,
-                attribute14: attribute14,
-                attribute15: attribute15,
-                attribute16: attribute16,
-                attribute17: attribute17,
-                attribute18: attribute18,
-                attribute19: attribute19,
-                attribute20: attribute20,
-                includeChildren: includeChildren,
-                includeParents: includeParents,
-                orderBy: orderBy,
-                page: page,
-                pageSize: pageSize,
-                offset: offset
+                id: contentItemSearch.id,
+                name: contentItemSearch.name,
+                alias: contentItemSearch.alias,
+                module: contentItemSearch.module,
+                parentId: contentItemSearch.parentId,
+                createdBy: contentItemSearch.createdBy,
+                sectionItems: contentItemSearch.sectionItems,
+                content: contentItemSearch.content,
+                attribute01: contentItemSearch.attribute01,
+                attribute02: contentItemSearch.attribute02,
+                attribute03: contentItemSearch.attribute03,
+                attribute04: contentItemSearch.attribute04,
+                attribute05: contentItemSearch.attribute05,
+                attribute06: contentItemSearch.attribute06,
+                attribute07: contentItemSearch.attribute07,
+                attribute08: contentItemSearch.attribute08,
+                attribute09: contentItemSearch.attribute09,
+                attribute10: contentItemSearch.attribute10,
+                attribute11: contentItemSearch.attribute11,
+                attribute12: contentItemSearch.attribute12,
+                attribute13: contentItemSearch.attribute13,
+                attribute14: contentItemSearch.attribute14,
+                attribute15: contentItemSearch.attribute15,
+                attribute16: contentItemSearch.attribute16,
+                attribute17: contentItemSearch.attribute17,
+                attribute18: contentItemSearch.attribute18,
+                attribute19: contentItemSearch.attribute19,
+                attribute20: contentItemSearch.attribute20,
+                includeChildren: contentItemSearch.includeChildren,
+                includeParents: contentItemSearch.includeParents,
+                orderBy: contentItemSearch.orderBy,
+                page: contentItemSearch.page,
+                pageSize: contentItemSearch.pageSize,
+                offset: contentItemSearch.offset
             }
         })
             .valueChanges

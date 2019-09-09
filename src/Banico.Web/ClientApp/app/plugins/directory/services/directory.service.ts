@@ -5,6 +5,7 @@ import { PluginService } from "../../services/plugin.service";
 import { ContentItem } from '../../../entities/content-item';
 import { DirectoryItem } from '../entities/directory-item';
 import { HttpHeaders } from '@angular/common/http';
+import { ContentItemSearch } from '../../forum/entities/contentItemSearch';
 
 @Injectable()
 export class DirectoryService extends PluginService {
@@ -17,9 +18,9 @@ export class DirectoryService extends PluginService {
     }
     
     public getAll(): Observable<DirectoryItem[]> {
-        return this.contentItemService.getAll('', '', '',
-        'directory', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0, 0).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.module = 'directory';
+        return this.contentItemService.getAll(contentItemSearch).pipe(
         map(items => {
             var directoryItems: DirectoryItem[] = new Array<DirectoryItem>();
             items.forEach(function(item: ContentItem) {
@@ -31,9 +32,12 @@ export class DirectoryService extends PluginService {
     }
 
     public getDirectoryItems(sectionItems: string): Observable<DirectoryItem[]> {
-        return this.contentItemService.getAll('', '', '',
-        'directory', '', '', sectionItems, '', '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', true, true, '', 0, 0, 0).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.module = 'directory';
+        contentItemSearch.sectionItems = sectionItems;
+        contentItemSearch.includeChildren = true;
+        contentItemSearch.includeParents = true;
+        return this.contentItemService.getAll(contentItemSearch).pipe(
         map(items => {
             var directoryItems: DirectoryItem[] = new Array<DirectoryItem>();
             items.forEach(function(item: ContentItem) {
@@ -45,9 +49,10 @@ export class DirectoryService extends PluginService {
     }
 
     public getWithTextSearch(text: string): Observable<DirectoryItem[]> {
-        return this.contentItemService.getAll('', '', '',
-        'directory', '', '', '', text, '', '', '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '', '', '', false, false, '', 0, 0, 0).pipe(
+        const contentItemSearch = new ContentItemSearch();
+        contentItemSearch.module = 'directory';
+        contentItemSearch.content = text;
+        return this.contentItemService.getAll(contentItemSearch).pipe(
         map(items => {
             var directoryItems: DirectoryItem[] = new Array<DirectoryItem>();
             items.forEach(function(item: ContentItem) {
