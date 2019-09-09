@@ -7,7 +7,7 @@ import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({
     selector: 'app-plugins-faq-list',
-    templateUrl: './faq-list.component.html',
+    templateUrl: './list.component.html',
     providers: [FaqService]
 })
 export class FaqListComponent implements OnInit, OnDestroy {

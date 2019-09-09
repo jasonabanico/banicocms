@@ -6,8 +6,8 @@ import { FaqService } from '../../services/faq.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({
-    selector: 'app-plugins-faq-form',
-    templateUrl: './faq-form.component.html',
+    selector: 'app-plugins-faq-list-form',
+    templateUrl: './list-form.component.html',
     providers: [FaqService]
 })
 export class FaqListFormComponent implements OnInit {

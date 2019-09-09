@@ -6,9 +6,9 @@ import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
 import { LinksService } from '../../services/links.service';
 
 @Component({
-  selector: 'app-plugins-links-link-list',
-  templateUrl: './link-list.component.html',
-  styleUrls: ['./link-list.component.css']
+  selector: 'app-plugins-links-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css']
 })
 export class LinksListComponent implements OnInit {
   private sub: any;
