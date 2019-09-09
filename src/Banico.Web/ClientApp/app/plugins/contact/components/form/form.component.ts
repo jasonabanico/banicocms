@@ -7,11 +7,11 @@ import { ContactService } from '../../services/contact.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({
-    selector: 'app-plugins-contact-display',
-    templateUrl: './contact-display.component.html',
+    selector: 'app-plugins-contact-form',
+    templateUrl: './form.component.html',
     providers: [ContactService]
 })
-export class ContactDisplayComponent implements OnInit, OnDestroy {
+export class ContactFormComponent implements OnInit, OnDestroy {
     public contact: Contact;
     private sub: any;
     public isAdmin: boolean;

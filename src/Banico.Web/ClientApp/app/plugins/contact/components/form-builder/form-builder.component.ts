@@ -6,11 +6,11 @@ import { ContactService } from '../../services/contact.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({
-    selector: 'app-plugins-contact-form',
-    templateUrl: './contact-form.component.html',
+    selector: 'app-plugins-contact-form-builder',
+    templateUrl: './form-builder.component.html',
     providers: [ContactService]
 })
-export class ContactFormComponent implements OnInit {
+export class ContactFormBuilderComponent implements OnInit {
     public contact: Contact;
     private parentId: string;
     private sub: any;
