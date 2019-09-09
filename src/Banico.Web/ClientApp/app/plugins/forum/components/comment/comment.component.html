@@ -12,7 +12,7 @@
     </div>
   </div>  
 </ng-container>
-<app-comment-form 
+<app-plugins-forum-comment-form 
   *ngIf="isEdit" 
   [id]="comment?.id" 
   [postId]="comment?.postId"
@@ -23,4 +23,4 @@
   [createdDate]="comment?.createdDate"
   (saved)="onSave($event)" 
   (cancelled)="onCancel($event)"
-></app-comment-form>
+></app-plugins-forum-comment-form>

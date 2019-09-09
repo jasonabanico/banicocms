@@ -5,6 +5,7 @@ import { ForumSubforumFormComponent } from './components/subforum-form/subforum-
 import { ForumSubforumComponent } from './components/subforum/subforum.component';
 import { ForumTopicFormComponent } from './components/topic-form/topic-form.component';
 import { ForumTopicComponent } from './components/topic/topic.component';
+import { ForumHomeComponent } from './components/home/home.component';
 
 const FORUM_ROUTES: Routes = [
     { path: 'new', component: ForumSubforumFormComponent, canActivate: [AuthGuard], data: { module: 'forum-subforum/manage' } },
@@ -12,7 +13,8 @@ const FORUM_ROUTES: Routes = [
     { path: ':alias', component: ForumSubforumComponent, canActivate: [AuthGuard], data: { module: 'forum-subforum/view' } },
     { path: 'topic/new/:subforumId', component: ForumTopicFormComponent, canActivate: [AuthGuard], data: { module: 'forum-topic/manage' } },
     { path: 'topic/edit/:id', component: ForumTopicFormComponent, canActivate: [AuthGuard], data: { module: 'forum-topic/manage' } },
-    { path: 'topic/:id', component: ForumTopicComponent, canActivate: [AuthGuard], data: { module: 'forum-topic/view' } }
+    { path: 'topic/:id', component: ForumTopicComponent, canActivate: [AuthGuard], data: { module: 'forum-topic/view' } },
+    { path: '', component: ForumHomeComponent, canActivate: [AuthGuard], data: { module: 'forum-subforum/view' } }
 ];
 
 @NgModule({

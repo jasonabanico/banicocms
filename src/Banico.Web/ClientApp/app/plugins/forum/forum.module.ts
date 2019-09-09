@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForumRoutingModule } from './forum.routing';
 import { ForumComponent } from './components/forum.component';
+import { ForumHomeComponent } from './components/home/home.component';
 import { ForumSubforumComponent } from './components/subforum/subforum.component';
 import { ForumSubforumFormComponent } from './components/subforum-form/subforum-form.component';
 import { ForumTopicComponent } from './components/topic/topic.component';
@@ -27,6 +28,7 @@ import { ForumCommentService } from './services/comment.service';
   ],
   declarations: [
     ForumComponent,
+    ForumHomeComponent,
     ForumSubforumComponent,
     ForumSubforumFormComponent,
     ForumTopicComponent,

@@ -63,8 +63,8 @@
 <a *ngIf="page > 0" href="javascript:;" (click)="morePosts()">More Posts</a>
 
 <div *ngFor="let post of posts">
-  <app-post *ngIf="post.id" [id]="post.id"></app-post>
-  <app-post *ngIf="!post.id" [newPost]="post"></app-post>
+  <app-plugins-forum-post *ngIf="post.id" [id]="post.id"></app-plugins-forum-post>
+  <app-plugins-forum-post *ngIf="!post.id" [newPost]="post"></app-plugins-forum-post>
 </div>
 
-<app-post-form [topicId]="topic?.id" (saved)="addPost($event)"></app-post-form>
+<app-plugins-forum-post-form [topicId]="topic?.id" (saved)="addPost($event)"></app-plugins-forum-post-form>

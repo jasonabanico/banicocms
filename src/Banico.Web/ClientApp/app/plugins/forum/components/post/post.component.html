@@ -42,9 +42,9 @@
         <li class="list-group-item">
             <a *ngIf="page > 0" href="javascript:;" (click)="moreComments()">View more comments</a>
             <ng-container class="list-group-item" *ngFor="let comment of comments">
-                <app-comment [id]="comment.id"></app-comment>
+                <app-plugins-forum-comment [id]="comment.id"></app-plugins-forum-comment>
             </ng-container>
-            <app-comment-form [postId]="post?.id" (saved)="onCommentSave($event)"></app-comment-form>
+            <app-plugins-forum-comment-form [postId]="post?.id" (saved)="onCommentSave($event)"></app-plugins-forum-comment-form>
         </li>
       </ul>
   </div>      
