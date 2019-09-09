@@ -5,7 +5,7 @@ import { InviteService } from '../../services/invite.service';
 
 @Component({
     selector: 'app-plugins-invite-form',
-    templateUrl: './invite-form.component.html',
+    templateUrl: './form.component.html',
     providers: [InviteService]
 })
 export class InviteFormComponent implements OnInit {

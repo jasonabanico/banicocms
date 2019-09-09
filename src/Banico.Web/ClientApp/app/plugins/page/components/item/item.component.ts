@@ -6,11 +6,11 @@ import { PageService } from '../../services/page.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 
 @Component({
-    selector: 'app-plugins-page-display',
-    templateUrl: './page-display.component.html',
+    selector: 'app-plugins-page-item',
+    templateUrl: './item.component.html',
     providers: [PageService]
 })
-export class PageDisplayComponent implements OnInit, OnDestroy {
+export class PageItemComponent implements OnInit, OnDestroy {
     public page: Page;
     private sub: any;
     public isAdmin: boolean;

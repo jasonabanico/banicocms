@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LinksRoutingModule } from './links.routing';
 import { LinksComponent } from './components/links.component';
-import { LinkFormComponent } from './components/link-form/link-form.component';
-import { LinkListComponent } from './components/link-list/link-list.component';
+import { LinksFormComponent } from './components/form/form.component';
+import { LinksListComponent } from './components/list/list.component';
 import { LinksService } from './services/links.service';
 
 @NgModule({
@@ -16,8 +16,8 @@ import { LinksService } from './services/links.service';
   ],
   declarations: [
     LinksComponent,
-    LinkFormComponent,
-    LinkListComponent
+    LinksFormComponent,
+    LinksListComponent
   ],
   providers: [
     LinksService

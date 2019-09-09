@@ -10,7 +10,7 @@ import { LinksService } from '../../services/links.service';
   templateUrl: './link-list.component.html',
   styleUrls: ['./link-list.component.css']
 })
-export class LinkListComponent implements OnInit {
+export class LinksListComponent implements OnInit {
   private sub: any;
   private path: string;
   public links: Link[];

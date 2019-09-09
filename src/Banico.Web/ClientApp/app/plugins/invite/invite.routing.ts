@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { InviteComponent } from './components/invite.component';
-import { InviteFormComponent } from './components/invite-form/invite-form.component';
+import { InviteFormComponent } from './components/form/form.component';
 import { AuthGuard } from '../../shared/auth/auth.guard';
 
 const INVITE_ROUTES: Routes = [

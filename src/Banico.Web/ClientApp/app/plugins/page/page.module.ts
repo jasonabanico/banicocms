@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { PageRoutingModule } from './page.routing';
 import { PageComponent }  from './components/page.component';
-import { PageDisplayComponent } from './components/page-display/page-display.component';
-import { PageFormComponent } from './components/page-form/page-form.component';
+import { PageItemComponent } from './components/item/item.component';
+import { PageFormComponent } from './components/form/form.component';
 
 @NgModule({
   imports: [ 
@@ -15,7 +15,7 @@ import { PageFormComponent } from './components/page-form/page-form.component';
   ],
   declarations: [ 
     PageComponent,
-    PageDisplayComponent,
+    PageItemComponent,
     PageFormComponent 
   ],
   bootstrap:    [ PageComponent ]

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LinksComponent } from './components/links.component';
-import { LinkFormComponent } from './components/link-form/link-form.component';
-import { LinkListComponent } from './components/link-list/link-list.component';
+import { LinkFormComponent } from './components/form/form.component';
+import { LinkListComponent } from './components/list/list.component';
 import { AuthGuard } from '../../shared/auth/auth.guard';
 
 const LINKS_ROUTES: Routes = [

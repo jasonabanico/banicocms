@@ -5,7 +5,7 @@ import { PageService } from '../../services/page.service';
 
 @Component({
     selector: 'app-plugins-page-form',
-    templateUrl: './page-form.component.html',
+    templateUrl: './form.component.html',
     providers: [PageService]
 })
 export class PageFormComponent implements OnInit {

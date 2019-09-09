@@ -11,7 +11,7 @@ import { Link } from '../../entities/link';
   templateUrl: './link-form.component.html',
   styleUrls: ['./link-form.component.css']
 })
-export class LinkFormComponent implements OnInit {
+export class LinksFormComponent implements OnInit {
   public link: Link;
 
   public linkForm: FormGroup = this.fb.group({

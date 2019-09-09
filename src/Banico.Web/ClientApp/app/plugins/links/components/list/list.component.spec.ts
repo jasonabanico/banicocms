@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LinkFormComponent } from './link-form.component';
+import { LinksListComponent } from './list.component';
 
-describe('LinkFormComponent', () => {
-  let component: LinkFormComponent;
-  let fixture: ComponentFixture<LinkFormComponent>;
+describe('LinksListComponent', () => {
+  let component: LinksListComponent;
+  let fixture: ComponentFixture<LinksListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LinkFormComponent ]
+      declarations: [ LinksListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LinkFormComponent);
+    fixture = TestBed.createComponent(LinksListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
