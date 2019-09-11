@@ -68,8 +68,8 @@ namespace Banico.Api.Models
                     if (_accessService.Allowed(contentItem).Result)
                     {
                         this.StampItem(contentItem);
-                        var userId = _accessService.GetCurrentUserId();
-                        var isAdmin = _accessService.IsAdmin();
+                        var userId = _accessService.GetUserId();
+                        var isAdmin = _accessService.IsAdmin().Result;
                         return contentItemRepository.AddOrUpdate(contentItem, userId, isAdmin);
                     }
                     else
@@ -93,7 +93,7 @@ namespace Banico.Api.Models
 
         private void StampItem(Item item) 
         {
-            string user = _accessService.GetCurrentUserId();
+            string user = _accessService.GetUserId();
 
             if (string.IsNullOrEmpty(item.Id)) 
             {

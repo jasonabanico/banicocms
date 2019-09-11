@@ -30,29 +30,29 @@ namespace Banico.Api.Services
             _configRepository = configRepository;
         }
 
-        public string GetCurrentUserId()
+        public string GetUserId()
         {
-            var currentUser = string.Empty;
+            var userId = string.Empty;
             var contextUser = _httpContextAccessor.HttpContext.User;
             if (contextUser != null) 
             {
                 if (contextUser.Identity.IsAuthenticated)
                 {
-                    currentUser = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 }
             }
-            return currentUser;
+            return userId;
         }
 
         public bool IsUser()
         {
-            return !string.IsNullOrEmpty(this.GetCurrentUserId());
+            return !string.IsNullOrEmpty(this.GetUserId());
         }
 
-        public bool IsAdmin()
+        public async Task<bool> IsAdmin()
         {
             bool result = false;
-            string username = this.GetUsername().Result;
+            string username = await this.GetUsername();
 
             if (!string.IsNullOrEmpty(username))
             {
@@ -72,7 +72,7 @@ namespace Banico.Api.Services
 
         public async Task<string> GetUsername()
         {
-            string userId = this.GetCurrentUserId();
+            string userId = this.GetUserId();
             var user = await _userManager.FindByIdAsync(userId);
 
             return user.UserName;
@@ -92,7 +92,7 @@ namespace Banico.Api.Services
                     {
                         case "public": return true;
                         case "user": return this.IsUser();
-                        case "admin": return this.IsAdmin();
+                        case "admin": return await this.IsAdmin();
                     }
                 }
             }

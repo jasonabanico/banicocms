@@ -88,9 +88,28 @@ namespace Banico.Identity.Controllers
             }
         }
 
-        public string GetUsername()
+        public void ListClaims()
+        {
+            foreach(var claim in HttpContext.User.Claims)
+            {
+                Console.WriteLine("CLAIM TYPE/VALUE --> " + claim.Type + " / " + claim.Value);
+            }
+        }
+
+        public string GetUserId()
         {
             Claim nameIdClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (nameIdClaim != null)
+            {
+                return nameIdClaim.Value;
+            }
+
+            return string.Empty;
+        }
+
+        public string GetUsername()
+        {
+            Claim nameIdClaim = HttpContext.User.FindFirst(ClaimTypes.Name);
             if (nameIdClaim != null)
             {
                 return nameIdClaim.Value;
@@ -102,8 +121,8 @@ namespace Banico.Identity.Controllers
         [AllowAnonymous]
         public JsonResult IsLoggedIn()
         {
-            string username = this.GetUsername();
-            return new JsonResult(!string.IsNullOrEmpty(username));
+            string userId = this.GetUserId();
+            return new JsonResult(!string.IsNullOrEmpty(userId));
         }
 
         public JsonResult LoggedInAs()
@@ -171,10 +190,10 @@ namespace Banico.Identity.Controllers
 
                     var identity = _jwtFactory.GenerateClaimsIdentity(model.Username, user.Id);
                     var profile = await _contentItemRepository.CreateProfileIfNotExists(user.Id, user.UserName, user.Email);
-                    string username = this.GetUsername();
+                    string userId = this.GetUserId();
                     bool isAdmin = this.IsSuperAdmin();
                     _logger.LogInformation(1, "User logged in.");
-                    var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, username, isAdmin, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
+                    var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, userId, isAdmin, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
                     return new OkObjectResult(jwt);
                 }
 

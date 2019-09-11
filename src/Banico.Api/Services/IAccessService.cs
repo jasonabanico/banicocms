@@ -11,9 +11,9 @@ namespace Banico.Api.Services
 {
     public interface IAccessService
     {
-        string GetCurrentUserId();
+        string GetUserId();
         bool IsUser();
-        bool IsAdmin();
+        Task<bool> IsAdmin();
         Task<string> GetUsername();
         Task<bool> Allowed(ContentItem contentItem);
     }
