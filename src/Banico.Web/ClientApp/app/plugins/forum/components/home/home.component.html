@@ -2,6 +2,6 @@
 
 <ul>
     <li class="list-group-item" *ngFor="let subforum of subforums">
-        {{subforum.name}} ({{subforum.topicCount}})
+        <a href="/forum/{{subforum.alias}}">{{subforum.name}}</a> ({{subforum.topicCount}})
     </li>
 </ul>
