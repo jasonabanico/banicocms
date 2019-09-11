@@ -1,10 +1,18 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+            / <a href="/forum">forum</a> / 
+            {{subforum?.alias}}
+        </li>
+    </ol>
+</nav>
+
 <div class="card mb-3">
   <div class="card-header">
     <div class="d-flex justify-content-between align-items-center">
       <div class="d-flex justify-content-between align-items-center">
         <div class="ml-2">
             <div class="h5 m-0 mb-2">{{subforum?.name}}</div>
-            <h6 class="card-subtitle mb-2 text-muted">/forum/{{subforum?.alias}}</h6>
           </div>
       </div>
     </div>
