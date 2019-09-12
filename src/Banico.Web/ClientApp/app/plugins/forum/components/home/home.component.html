@@ -1,7 +1,14 @@
 <h1>Forums</h1>
 
-<ul>
-    <li class="list-group-item" *ngFor="let subforum of subforums">
-        <a href="/forum/{{subforum.alias}}">{{subforum.name}}</a> ({{subforum.topicCount}})
-    </li>
-</ul>
+<div class="d-flex flex-wrap">
+    <div *ngFor="let subforum of subforums" class="card text-center m-1" style="width: 10rem;">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="/forum/{{subforum.alias}}">
+                    {{subforum.name}}
+                </a>
+                <span class="small">({{subforum.topicCount}})</span>
+            </h5> 
+        </div>
+    </div>
+</div>
