@@ -1,6 +1,15 @@
 <h1>Forums</h1>
 
 <div class="d-flex flex-wrap">
+    <div class="card text-center m-1" style="width: 10rem;">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="/forum/new">
+                    New Subforum
+                </a>
+            </h5> 
+        </div>
+    </div>
     <div *ngFor="let subforum of subforums" class="card text-center m-1" style="width: 10rem;">
         <div class="card-body">
             <h5 class="card-title">
@@ -9,6 +18,9 @@
                 </a>
                 <span class="small">({{subforum.topicCount}})</span>
             </h5> 
+            <p class="card-text">
+                {{subforum.description}}
+            </p>
         </div>
     </div>
 </div>
