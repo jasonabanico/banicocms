@@ -38,7 +38,7 @@ public canActivate(
       return of(result);
     }
 
-    return this.getConfig(module).pipe(
+    return this.getCanActivateConfig(module).pipe(
       map(
         configValue => {
           if (this.debug) {
@@ -69,7 +69,7 @@ public canActivate(
       ));
   }
 
-  private getConfig(module: string): Observable<string> {
+  private getCanActivateConfig(module: string): Observable<string> {
     return this.configsService.get('', module, 'canActivate').pipe(
       map(config => {
         if (config) {

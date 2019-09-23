@@ -12,9 +12,9 @@ namespace Banico.Core.Repositories
         Task<bool> IsInitialized();
         Task<bool> SetInitialSettings();
         Task<List<Config>> Get(string id, string module, string name);
-        Task<Config> AddOrUpdate(Config config);
-        Task<Config> Add(Config config);
-        Task<Config> Update(Config config);
+        Task<Config> AddOrUpdate(Config config, bool isSuperAdmin);
+        Task<Config> Add(Config config, bool isSuperAdmin);
+        Task<Config> Update(Config config, bool isSuperAdmin);
         Task<Config> Delete(string id);
     }
 }

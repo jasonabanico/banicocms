@@ -189,7 +189,12 @@ namespace Banico.Identity.Controllers
                     var tokens = _antiforgery.GetAndStoreTokens(HttpContext);
 
                     var identity = _jwtFactory.GenerateClaimsIdentity(model.Username, user.Id);
-                    var profile = await _contentItemRepository.CreateProfileIfNotExists(user.Id, user.UserName, user.Email);
+                    var tenant = string.Empty;
+                    var profile = await _contentItemRepository.CreateProfileIfNotExists(
+                        tenant,
+                        user.Id, 
+                        user.UserName, 
+                        user.Email);
                     string userId = this.GetUserId();
                     bool isAdmin = this.IsSuperAdmin();
                     _logger.LogInformation(1, "User logged in.");

@@ -1,11 +1,14 @@
 using System;
 using GraphQL.Types;
 using Banico.Core.Repositories;
+using Microsoft.Extensions.Configuration;
 
 namespace Banico.Api.Models
 {
     public class BanicoQuery : ObjectGraphType
     {
+        private IConfiguration _configuration;
+
         public BanicoQuery(
             ISectionRepository sectionRepository,
             ISectionItemRepository sectionItemRepository,
@@ -27,11 +30,17 @@ namespace Banico.Api.Models
                         Name = "name" 
                     }
                     ),
-                resolve: context =>  sectionRepository.Get(
-                    context.GetArgument<string>("id"),
-                    context.GetArgument<string>("module"),
-                    context.GetArgument<string>("name")
-                    ));
+                resolve: context => 
+                {
+                    string tenant = string.Empty;
+                    return sectionRepository.Get(
+                        tenant,
+                        context.GetArgument<string>("id"),
+                        context.GetArgument<string>("module"),
+                        context.GetArgument<string>("name")
+                        );
+
+                });
 
             Field<ListGraphType<SectionItemType>>(
                 "sectionItems",
@@ -58,15 +67,20 @@ namespace Banico.Api.Models
                         Name = "isRoot" 
                     }
                     ),
-                resolve: context =>  sectionItemRepository.Get(
-                    context.GetArgument<string>("id"),
-                    context.GetArgument<string>("section"),
-                    context.GetArgument<string>("pathUrl"),
-                    context.GetArgument<string>("alias"),
-                    context.GetArgument<string>("name"),
-                    context.GetArgument<string>("parentId"),
-                    context.GetArgument<bool>("isRoot")
-                    )
+                resolve: (context) =>  
+                {   
+                    string tenant = string.Empty;
+                    return sectionItemRepository.Get(
+                        tenant,
+                        context.GetArgument<string>("id"),
+                        context.GetArgument<string>("section"),
+                        context.GetArgument<string>("pathUrl"),
+                        context.GetArgument<string>("alias"),
+                        context.GetArgument<string>("name"),
+                        context.GetArgument<string>("parentId"),
+                        context.GetArgument<bool>("isRoot")
+                    );
+                }
                 );
 
             Field<MaxPageSizeType>(
@@ -167,39 +181,43 @@ namespace Banico.Api.Models
                     new QueryArgument<BooleanGraphType> { 
                         Name = "includeParents" 
                     }),
-                resolve: context => contentItemRepository.GetCount(
-                    context.GetArgument<string>("id"),
-                    context.GetArgument<string>("name"),
-                    context.GetArgument<string>("alias"),
-                    context.GetArgument<string>("module"),
-                    context.GetArgument<string>("parentId"),
-                    context.GetArgument<string>("createdBy"),
-                    context.GetArgument<string>("sectionItems"),
-                    context.GetArgument<string>("content"),
-                    context.GetArgument<string>("attribute01"),
-                    context.GetArgument<string>("attribute02"),
-                    context.GetArgument<string>("attribute03"),
-                    context.GetArgument<string>("attribute04"),
-                    context.GetArgument<string>("attribute05"),
-                    context.GetArgument<string>("attribute06"),
-                    context.GetArgument<string>("attribute07"),
-                    context.GetArgument<string>("attribute08"),
-                    context.GetArgument<string>("attribute09"),
-                    context.GetArgument<string>("attribute10"),
-                    context.GetArgument<string>("attribute11"),
-                    context.GetArgument<string>("attribute12"),
-                    context.GetArgument<string>("attribute13"),
-                    context.GetArgument<string>("attribute14"),
-                    context.GetArgument<string>("attribute15"),
-                    context.GetArgument<string>("attribute16"),
-                    context.GetArgument<string>("attribute17"),
-                    context.GetArgument<string>("attribute18"),
-                    context.GetArgument<string>("attribute19"),
-                    context.GetArgument<string>("attribute20"),
-                    context.GetArgument<bool>("includeChildren"),
-                    context.GetArgument<bool>("includeParents")
-                    )
-                );            
+                resolve: context => 
+                {
+                    string tenant = string.Empty;
+                    return contentItemRepository.GetCount(
+                        tenant,
+                        context.GetArgument<string>("id"),
+                        context.GetArgument<string>("name"),
+                        context.GetArgument<string>("alias"),
+                        context.GetArgument<string>("module"),
+                        context.GetArgument<string>("parentId"),
+                        context.GetArgument<string>("createdBy"),
+                        context.GetArgument<string>("sectionItems"),
+                        context.GetArgument<string>("content"),
+                        context.GetArgument<string>("attribute01"),
+                        context.GetArgument<string>("attribute02"),
+                        context.GetArgument<string>("attribute03"),
+                        context.GetArgument<string>("attribute04"),
+                        context.GetArgument<string>("attribute05"),
+                        context.GetArgument<string>("attribute06"),
+                        context.GetArgument<string>("attribute07"),
+                        context.GetArgument<string>("attribute08"),
+                        context.GetArgument<string>("attribute09"),
+                        context.GetArgument<string>("attribute10"),
+                        context.GetArgument<string>("attribute11"),
+                        context.GetArgument<string>("attribute12"),
+                        context.GetArgument<string>("attribute13"),
+                        context.GetArgument<string>("attribute14"),
+                        context.GetArgument<string>("attribute15"),
+                        context.GetArgument<string>("attribute16"),
+                        context.GetArgument<string>("attribute17"),
+                        context.GetArgument<string>("attribute18"),
+                        context.GetArgument<string>("attribute19"),
+                        context.GetArgument<string>("attribute20"),
+                        context.GetArgument<bool>("includeChildren"),
+                        context.GetArgument<bool>("includeParents")
+                    );
+                });            
 
             Field<ListGraphType<ContentItemType>>(
                 "contentItems",
@@ -307,43 +325,47 @@ namespace Banico.Api.Models
                         Name = "offset" 
                     }
                     ),
-                resolve: context =>  contentItemRepository.Get(
-                    context.GetArgument<string>("id"),
-                    context.GetArgument<string>("name"),
-                    context.GetArgument<string>("alias"),
-                    context.GetArgument<string>("module"),
-                    context.GetArgument<string>("parentId"),
-                    context.GetArgument<string>("createdBy"),
-                    context.GetArgument<string>("sectionItems"),
-                    context.GetArgument<string>("content"),
-                    context.GetArgument<string>("attribute01"),
-                    context.GetArgument<string>("attribute02"),
-                    context.GetArgument<string>("attribute03"),
-                    context.GetArgument<string>("attribute04"),
-                    context.GetArgument<string>("attribute05"),
-                    context.GetArgument<string>("attribute06"),
-                    context.GetArgument<string>("attribute07"),
-                    context.GetArgument<string>("attribute08"),
-                    context.GetArgument<string>("attribute09"),
-                    context.GetArgument<string>("attribute10"),
-                    context.GetArgument<string>("attribute11"),
-                    context.GetArgument<string>("attribute12"),
-                    context.GetArgument<string>("attribute13"),
-                    context.GetArgument<string>("attribute14"),
-                    context.GetArgument<string>("attribute15"),
-                    context.GetArgument<string>("attribute16"),
-                    context.GetArgument<string>("attribute17"),
-                    context.GetArgument<string>("attribute18"),
-                    context.GetArgument<string>("attribute19"),
-                    context.GetArgument<string>("attribute20"),
-                    context.GetArgument<bool>("includeChildren"),
-                    context.GetArgument<bool>("includeParents"),
-                    context.GetArgument<string>("orderBy"),
-                    context.GetArgument<int>("page"),
-                    context.GetArgument<int>("pageSize"),
-                    context.GetArgument<int>("offset")
-                    )
-                );            
+                resolve: context => 
+                {
+                    string tenant = string.Empty;
+                    return contentItemRepository.Get(
+                        tenant,
+                        context.GetArgument<string>("id"),
+                        context.GetArgument<string>("name"),
+                        context.GetArgument<string>("alias"),
+                        context.GetArgument<string>("module"),
+                        context.GetArgument<string>("parentId"),
+                        context.GetArgument<string>("createdBy"),
+                        context.GetArgument<string>("sectionItems"),
+                        context.GetArgument<string>("content"),
+                        context.GetArgument<string>("attribute01"),
+                        context.GetArgument<string>("attribute02"),
+                        context.GetArgument<string>("attribute03"),
+                        context.GetArgument<string>("attribute04"),
+                        context.GetArgument<string>("attribute05"),
+                        context.GetArgument<string>("attribute06"),
+                        context.GetArgument<string>("attribute07"),
+                        context.GetArgument<string>("attribute08"),
+                        context.GetArgument<string>("attribute09"),
+                        context.GetArgument<string>("attribute10"),
+                        context.GetArgument<string>("attribute11"),
+                        context.GetArgument<string>("attribute12"),
+                        context.GetArgument<string>("attribute13"),
+                        context.GetArgument<string>("attribute14"),
+                        context.GetArgument<string>("attribute15"),
+                        context.GetArgument<string>("attribute16"),
+                        context.GetArgument<string>("attribute17"),
+                        context.GetArgument<string>("attribute18"),
+                        context.GetArgument<string>("attribute19"),
+                        context.GetArgument<string>("attribute20"),
+                        context.GetArgument<bool>("includeChildren"),
+                        context.GetArgument<bool>("includeParents"),
+                        context.GetArgument<string>("orderBy"),
+                        context.GetArgument<int>("page"),
+                        context.GetArgument<int>("pageSize"),
+                        context.GetArgument<int>("offset")
+                    );
+                });            
 
             Field<ListGraphType<ConfigType>>(
                 "configs",

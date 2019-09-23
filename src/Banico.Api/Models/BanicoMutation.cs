@@ -15,10 +15,12 @@ namespace Banico.Api.Models
 {
     public class BanicoMutation : ObjectGraphType
     {
+        private IConfiguration _configuration;
         private IConfigRepository _configRepository;
         private IAccessService _accessService;
 
         public BanicoMutation(
+            IConfiguration configuration,
             ISectionRepository sectionRepository,
             ISectionItemRepository sectionItemRepository,
             IContentItemRepository contentItemRepository,
@@ -26,6 +28,7 @@ namespace Banico.Api.Models
             IAccessService accessService
         )
         {
+            _configuration = configuration;
             _configRepository = configRepository;
             _accessService = accessService;
 
@@ -41,7 +44,8 @@ namespace Banico.Api.Models
                 {
                     var section = context.GetArgument<Section>("section");
                     this.StampItem(section);
-                    return sectionRepository.AddOrUpdate(section);
+                    var isSectionAdmin = _accessService.Allowed("admin/sections").Result;
+                    return sectionRepository.AddOrUpdate(section, isSectionAdmin);
                 });
 
             Field<SectionItemType>(
@@ -54,7 +58,8 @@ namespace Banico.Api.Models
                 {
                     var sectionItem = context.GetArgument<SectionItem>("sectionItem");
                     this.StampItem(sectionItem);
-                    return sectionItemRepository.AddOrUpdate(sectionItem);
+                    var isSectionItemAdmin = _accessService.Allowed("admin/sectionItems").Result;
+                    return sectionItemRepository.AddOrUpdate(sectionItem, isSectionItemAdmin);
                 });
 
             Field<ContentItemType>(
@@ -87,7 +92,8 @@ namespace Banico.Api.Models
                 {
                     var config = context.GetArgument<Config>("config");
                     this.StampItem(config);
-                    return configRepository.AddOrUpdate(config);
+                    var isSuperAdmin = _accessService.IsSuperAdmin().Result;
+                    return configRepository.AddOrUpdate(config, isSuperAdmin);
                 });
         }
 

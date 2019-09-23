@@ -5,6 +5,7 @@
       "EmailUser": "ENTER-SENDGRID-USER-HERE",
       "EmailKey": "ENTER-SENDGRID-KEY-HERE"  
     },
+    "TenantRegEx": "ENTER-REGEX-HERE",
     "Email": {
       "Name": "ENTER-ADMIN-NAME-HERE",
       "Address": "ENTER-EMAIL-ADDRESS-HERE"

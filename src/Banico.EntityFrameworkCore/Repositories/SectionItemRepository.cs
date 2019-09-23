@@ -6,20 +6,25 @@ using System.Linq.Expressions;
 using System;
 using Banico.Core.Entities;
 using Banico.Core.Repositories;
+using Microsoft.Extensions.Configuration;
 
 namespace Banico.EntityFrameworkCore.Repositories
 {
     public class SectionItemRepository : ISectionItemRepository
     {
         public AppDbContext DbContext { get; set; }
+        private string _tenantRegEx = string.Empty;
 
         private const char PATH_DELIM = '_';
         private const char TYPE_DELIM = '~';
         private const char SECTION_DELIM = '*';
 
-        public SectionItemRepository(AppDbContext dbContext)
+        public SectionItemRepository(
+            AppDbContext dbContext,
+            IConfiguration configuration)
         {
             this.DbContext = dbContext;
+            _tenantRegEx = configuration["TenantRegEx"];
         }
 
         public void ParsePath(
@@ -65,6 +70,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         }
 
         public async Task<List<SectionItem>> Get(
+            string tenant,
             string id,
             string section,
             string pathUrl,
@@ -81,26 +87,32 @@ namespace Banico.EntityFrameworkCore.Repositories
                     (s.Alias == alias || string.IsNullOrEmpty(alias)) &&
                     (s.Name == name || string.IsNullOrEmpty(name)) && 
                     (s.ParentId == parentId || string.IsNullOrEmpty(parentId)) &&
-                    (s.ParentId == string.Empty || !isRoot)
+                    (s.ParentId == string.Empty || !isRoot) &&
+                    (s.Tenant == tenant || string.IsNullOrEmpty(tenant))
                 select s;
 
             return await sectionItems.ToListAsync();
         }
 
-        public async Task<SectionItem> AddOrUpdate(SectionItem sectionItem)
+        public async Task<SectionItem> AddOrUpdate(SectionItem sectionItem, bool isSectionItemAdmin)
         {
             if (string.IsNullOrEmpty(sectionItem.Id)) 
             {
-                return await this.Add(sectionItem);
+                return await this.Add(sectionItem, isSectionItemAdmin);
             }
             else
             {
-                return await this.Update(sectionItem);
+                return await this.Update(sectionItem, isSectionItemAdmin);
             }
         }
 
-        public async Task<SectionItem> Add(SectionItem sectionItem)
+        public async Task<SectionItem> Add(SectionItem sectionItem, bool isSectionItemAdmin)
         {
+            if (!isSectionItemAdmin)
+            {
+                return new SectionItem();
+            }
+
             sectionItem.Id = Guid.NewGuid().ToString();
             this.DbContext.SectionItems.Add(sectionItem);
             var result = await this.DbContext.SaveChangesAsync();
@@ -115,10 +127,15 @@ namespace Banico.EntityFrameworkCore.Repositories
 
         // Update(item, i => i.Title)
         // Returns no. of objects saved
-        public async Task<SectionItem> Update(SectionItem sectionItem)
+        public async Task<SectionItem> Update(SectionItem sectionItem, bool isSectionItemAdmin)
         {
-            var storedSectionItem = (await this.Get(sectionItem.Id,
-                string.Empty, string.Empty, string.Empty,
+            if (!isSectionItemAdmin)
+            {
+                return new SectionItem();
+            }
+
+            var storedSectionItem = (await this.Get(
+                string.Empty, sectionItem.Id, string.Empty, string.Empty, string.Empty,
                 string.Empty, string.Empty, false))
                 .FirstOrDefault();
 
@@ -141,10 +158,15 @@ namespace Banico.EntityFrameworkCore.Repositories
             return new SectionItem();
         }
 
-        public async Task<SectionItem> Delete(string id)
+        public async Task<SectionItem> Delete(string id, bool isSectionItemAdmin)
         {
-            var sectionItem = (await this.Get(id,
-                string.Empty, string.Empty, string.Empty,
+            if (!isSectionItemAdmin)
+            {
+                return new SectionItem();
+            }
+
+            var sectionItem = (await this.Get(
+                string.Empty, id, string.Empty, string.Empty, string.Empty,
                 string.Empty, string.Empty, false))
                 .FirstOrDefault();
 

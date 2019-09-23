@@ -78,12 +78,12 @@ namespace Banico.EntityFrameworkCore.Repositories
 
                 foreach (Config initialConfig in initialConfigs)
                 {
-                    await this.AddOrUpdate(initialConfig);
+                    await this.AddOrUpdate(initialConfig, true);
                 }
 
                 Config initConfig = await this.GetIsInitialized();
                 initConfig.Value = "y";
-                await this.AddOrUpdate(initConfig);
+                await this.AddOrUpdate(initConfig, true);
             }
 
             return true;
@@ -107,20 +107,25 @@ namespace Banico.EntityFrameworkCore.Repositories
             return await configs.ToListAsync();
         }
 
-        public async Task<Config> AddOrUpdate(Config config)
+        public async Task<Config> AddOrUpdate(Config config, bool isSuperAdmin)
         {
             if (string.IsNullOrEmpty(config.Id)) 
             {
-                return await this.Add(config);
+                return await this.Add(config, isSuperAdmin);
             }
             else
             {
-                return await this.Update(config);
+                return await this.Update(config, isSuperAdmin);
             }
         }
 
-        public async Task<Config> Add(Config config)
+        public async Task<Config> Add(Config config, bool isSuperAdmin)
         {
+            if (!isSuperAdmin)
+            {
+                return new Config();
+            }
+
             config.Id = Guid.NewGuid().ToString();
             this.DbContext.Configs.Add(config);
             var result = await this.DbContext.SaveChangesAsync();
@@ -133,8 +138,13 @@ namespace Banico.EntityFrameworkCore.Repositories
             return new Config();
         }
 
-        public async Task<Config> Update(Config config)
+        public async Task<Config> Update(Config config, bool isSuperAdmin)
         {
+            if (!isSuperAdmin)
+            {
+                return new Config();
+            }
+
             var storedConfigs = (await this.Get(config.Id,
                 string.Empty, string.Empty));
 

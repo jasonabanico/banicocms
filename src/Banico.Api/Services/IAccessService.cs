@@ -13,8 +13,11 @@ namespace Banico.Api.Services
     {
         string GetUserId();
         bool IsUser();
+        Task<bool> IsSuperAdmin();
         Task<bool> IsAdmin();
         Task<string> GetUsername();
+        Task<bool> Allowed(string module);
         Task<bool> Allowed(ContentItem contentItem);
+        Task<string> GetTenant();
     }
 }

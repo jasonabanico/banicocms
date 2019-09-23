@@ -15,6 +15,7 @@ namespace Banico.Core.Repositories
             out string[] pathUrls, 
             out string[] aliases);
         Task<List<SectionItem>> Get(
+            string tenant,
             string id,
             string section,
             string pathUrl,
@@ -22,9 +23,9 @@ namespace Banico.Core.Repositories
             string name,
             string parentId,
             bool isRoot);
-        Task<SectionItem> AddOrUpdate(SectionItem section);
-        Task<SectionItem> Add(SectionItem section);
-        Task<SectionItem> Update(SectionItem section);
-        Task<SectionItem> Delete(string id);
+        Task<SectionItem> AddOrUpdate(SectionItem section, bool isSectionItemAdmin);
+        Task<SectionItem> Add(SectionItem section, bool isSectionItemAdmin);
+        Task<SectionItem> Update(SectionItem section, bool isSectionItemAdmin);
+        Task<SectionItem> Delete(string id, bool isSectionItemAdmin);
     }
 }

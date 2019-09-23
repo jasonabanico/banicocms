@@ -49,7 +49,7 @@ namespace Banico.Api.Services
             return !string.IsNullOrEmpty(this.GetUserId());
         }
 
-        public async Task<bool> IsAdmin()
+        public async Task<bool> IsSuperAdmin()
         {
             bool result = false;
             string username = await this.GetUsername();
@@ -70,19 +70,39 @@ namespace Banico.Api.Services
             return result;
         }
 
-        public async Task<string> GetUsername()
+        public async Task<bool> IsAdmin()
+        {
+            bool isSuperAdmin = await this.IsSuperAdmin();
+
+            // to-do: check roles too
+
+            return isSuperAdmin;
+        }
+
+        private async Task<AppUser> GetUser()
         {
             string userId = this.GetUserId();
             var user = await _userManager.FindByIdAsync(userId);
+            return user;
+        }
+
+        public async Task<string> GetUsername()
+        {
+            var user = await this.GetUser();
 
             return user.UserName;
         }
 
         public async Task<bool> Allowed(ContentItem contentItem)
         {
+            return await this.Allowed(contentItem.Module);
+        }
+
+        public async Task<bool> Allowed(string module)
+        {
             // if (await this.Active(contentItem))
             {
-                List<Config> config = await _configRepository.Get("", contentItem.Module + "/manage", "canActivate");
+                List<Config> config = await _configRepository.Get("", module + "/manage", "canActivate");
 
                 if (config.Count > 0)
                 {
@@ -100,5 +120,14 @@ namespace Banico.Api.Services
             return false;
         }
 
+        public async Task<string> GetTenant()
+        {
+            var user = await this.GetUser();
+            var email = user.Email;
+
+            // to-do
+
+            return string.Empty;
+        }
     }
 }

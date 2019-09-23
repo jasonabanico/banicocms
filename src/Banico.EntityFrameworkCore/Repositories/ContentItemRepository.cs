@@ -23,6 +23,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         private readonly IConfiguration _configuration;
 
         private int _maxPageSize = 0;
+        private string _tenantRegEx = string.Empty;
 
         public ContentItemRepository(
             AppDbContext dbContext,
@@ -38,6 +39,8 @@ namespace Banico.EntityFrameworkCore.Repositories
             if (_maxPageSize == 0) {
                 _maxPageSize = 40;
             }
+
+            _tenantRegEx = _configuration["TenantRegEx"];
         }
 
         public MaxPageSize GetMaxPageSize() {
@@ -48,6 +51,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         }
 
         public async Task<ContentItemsCount> GetCount(
+            string tenant,
             string id,
             string name,
             string alias,
@@ -86,7 +90,8 @@ namespace Banico.EntityFrameworkCore.Repositories
                     (c.Alias == alias || string.IsNullOrEmpty(alias)) && 
                     (c.ParentId == parentId || string.IsNullOrEmpty(parentId)) &&
                     (c.Name == name || string.IsNullOrEmpty(name)) && 
-                    (c.CreatedBy == createdBy || string.IsNullOrEmpty(createdBy))
+                    (c.CreatedBy == createdBy || string.IsNullOrEmpty(createdBy)) &&
+                    (c.Tenant == tenant || string.IsNullOrEmpty(tenant))
                 select c;
 
             if (!string.IsNullOrEmpty(name))
@@ -217,6 +222,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         }
 
         public async Task<List<ContentItem>> Get(
+            string tenant,
             string id,
             string name,
             string alias,
@@ -259,7 +265,8 @@ namespace Banico.EntityFrameworkCore.Repositories
                     (c.Alias == alias || string.IsNullOrEmpty(alias)) && 
                     (c.ParentId == parentId || string.IsNullOrEmpty(parentId)) &&
                     (c.Name == name || string.IsNullOrEmpty(name)) && 
-                    (c.CreatedBy == createdBy || string.IsNullOrEmpty(createdBy))
+                    (c.CreatedBy == createdBy || string.IsNullOrEmpty(createdBy)) &&
+                    (c.Tenant == tenant || string.IsNullOrEmpty(tenant))
                 select c;
 
             if (!string.IsNullOrEmpty(name))
@@ -624,7 +631,7 @@ namespace Banico.EntityFrameworkCore.Repositories
 
         public async Task<ContentItem> Update(ContentItem item, string userID, bool isAdmin)
         {
-            var updateItem = (await this.Get(item.Id, "", "", "", "", "", "", "", "", "", "",
+            var updateItem = (await this.Get("", item.Id, "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
             "", 0, 1, 0))
                 .FirstOrDefault();
@@ -677,7 +684,7 @@ namespace Banico.EntityFrameworkCore.Repositories
 
         public async Task<ContentItem> Delete(string id)
         {
-            var item = (await this.Get(id, "", "", "", "", "", "", "", "", "", "",
+            var item = (await this.Get("", id, "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
             "", 0, 1, 0))
                 .FirstOrDefault();
@@ -693,9 +700,13 @@ namespace Banico.EntityFrameworkCore.Repositories
             return new ContentItem();
         }
 
-        public async Task<ContentItem> CreateProfileIfNotExists(string userId, string alias, string email)
+        public async Task<ContentItem> CreateProfileIfNotExists(
+            string tenant, 
+            string userId, 
+            string alias, 
+            string email)
         {
-            var profileItems = await this.Get("", "", alias, "profile", "", userId, "",
+            var profileItems = await this.Get(tenant, "", "", alias, "profile", "", userId, "",
                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", "", false, false, "", 0, 1, 0);
 

@@ -12,6 +12,7 @@ namespace Banico.Core.Repositories
         MaxPageSize GetMaxPageSize();
 
         Task<ContentItemsCount> GetCount(
+            string tenant,
             string id,
             string name,
             string alias,
@@ -45,6 +46,7 @@ namespace Banico.Core.Repositories
         );
 
         Task<List<ContentItem>> Get(
+            string tenant,
             string id,
             string name,
             string alias,
@@ -86,6 +88,6 @@ namespace Banico.Core.Repositories
         Task<ContentItem> Add(ContentItem item);
         Task<ContentItem> Update(ContentItem item, string userId, bool isAdmin);
         Task<ContentItem> Delete(string id);
-        Task<ContentItem> CreateProfileIfNotExists(string userId, string alias, string email);
+        Task<ContentItem> CreateProfileIfNotExists(string tenant, string userId, string alias, string email);
     }
 }
