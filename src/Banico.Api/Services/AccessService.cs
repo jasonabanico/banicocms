@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using Nager.PublicSuffix;
 using System.Net.Mail;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Banico.Api.Services
 {
@@ -40,7 +41,7 @@ namespace Banico.Api.Services
             {
                 if (contextUser.Identity.IsAuthenticated)
                 {
-                    userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    userId = _httpContextAccessor.HttpContext.User.FindFirst("id").Value;
                 }
             }
             return userId;
@@ -51,10 +52,10 @@ namespace Banico.Api.Services
             return !string.IsNullOrEmpty(this.GetUserId());
         }
 
-        public async Task<bool> IsSuperAdmin()
+        public bool IsSuperAdmin()
         {
             bool result = false;
-            string username = await this.GetUsername();
+            string username = this.GetUsername();
 
             if (!string.IsNullOrEmpty(username))
             {
@@ -72,9 +73,9 @@ namespace Banico.Api.Services
             return result;
         }
 
-        public async Task<bool> IsAdmin()
+        public bool IsAdmin()
         {
-            bool isSuperAdmin = await this.IsSuperAdmin();
+            bool isSuperAdmin = this.IsSuperAdmin();
 
             // to-do: check roles too
 
@@ -88,11 +89,18 @@ namespace Banico.Api.Services
             return user;
         }
 
-        public async Task<string> GetUsername()
+        public string GetUsername()
         {
-            var user = await this.GetUser();
-
-            return user.UserName;
+            var username = string.Empty;
+            var contextUser = _httpContextAccessor.HttpContext.User;
+            if (contextUser != null) 
+            {
+                if (contextUser.Identity.IsAuthenticated)
+                {
+                    username = _httpContextAccessor.HttpContext.User.FindFirst(JwtRegisteredClaimNames.Sub).Value;
+                }
+            }
+            return username;
         }
 
         public async Task<bool> Allowed(ContentItem contentItem)
@@ -114,7 +122,7 @@ namespace Banico.Api.Services
                     {
                         case "public": return true;
                         case "user": return this.IsUser();
-                        case "admin": return await this.IsAdmin();
+                        case "admin": return this.IsAdmin();
                     }
                 }
             }

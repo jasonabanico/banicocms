@@ -26,6 +26,7 @@ using Banico.Services;
 using Banico.Services.Interfaces;
 using Banico.Identity.Helpers;
 using Banico.Identity.ViewModels.Account;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Banico.Identity.Controllers
 {
@@ -98,7 +99,7 @@ namespace Banico.Identity.Controllers
 
         public string GetUserId()
         {
-            Claim nameIdClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+            Claim nameIdClaim = HttpContext.User.FindFirst(Helpers.Constants.Strings.JwtClaimIdentifiers.Id);
             if (nameIdClaim != null)
             {
                 return nameIdClaim.Value;
@@ -109,7 +110,7 @@ namespace Banico.Identity.Controllers
 
         public string GetUsername()
         {
-            Claim nameIdClaim = HttpContext.User.FindFirst(ClaimTypes.Name);
+            Claim nameIdClaim = HttpContext.User.FindFirst(JwtRegisteredClaimNames.Sub);
             if (nameIdClaim != null)
             {
                 return nameIdClaim.Value;
@@ -195,10 +196,9 @@ namespace Banico.Identity.Controllers
                         user.Id, 
                         user.UserName, 
                         user.Email);
-                    string userId = this.GetUserId();
                     bool isAdmin = this.IsSuperAdmin();
                     _logger.LogInformation(1, "User logged in.");
-                    var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, userId, isAdmin, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
+                    var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, user.UserName, isAdmin, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
                     return new OkObjectResult(jwt);
                 }
 
@@ -300,7 +300,7 @@ namespace Banico.Identity.Controllers
             }
 
             string inviter = string.Empty;
-            if ((_InviteOnly) && (!_superAdminService.IsSuperAdminEmail(model.Email)))
+            if ((_InviteOnly) && (!_superAdminService.IsSuperAdminUsername(model.Username)))
             {
                 if (string.IsNullOrEmpty(model.Code))
                 {

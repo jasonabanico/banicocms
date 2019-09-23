@@ -12896,7 +12896,7 @@
       "GraphQL.Server.Ui.Playground >= 3.4.0",
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
-      "Nager.PublicSuffix"
+      "Nager.PublicSuffix >= 1.4.0"
     ]
   },
   "packageFolders": {
@@ -12976,7 +12976,7 @@
           },
           "Nager.PublicSuffix": {
             "target": "Package",
-            "version": "(, )"
+            "version": "[1.4.0, )"
           }
         },
         "imports": [

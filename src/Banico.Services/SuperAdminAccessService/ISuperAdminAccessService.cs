@@ -9,7 +9,7 @@ namespace Banico.Services.Interfaces
 {
     public interface ISuperAdminAccessService
     {
-        bool IsSuperAdminEmail(string email);
+        bool IsSuperAdminUsername(string username);
         Task<bool> IsSuperAdmin(IPrincipal user);
     }
 }

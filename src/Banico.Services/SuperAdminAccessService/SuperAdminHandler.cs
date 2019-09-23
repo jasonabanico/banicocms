@@ -26,6 +26,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 using System.Security.Claims;
+using Banico.Core.Entities;
+using System.IdentityModel.Tokens.Jwt;
 // using AspNet.Security.OAuth.LinkedIn;
 
 // using Microsoft.AspNetCore.Http;
@@ -39,27 +41,60 @@ namespace Banico.Services
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public SuperAdminHandler(IServiceProvider serviceProvider)
+        public SuperAdminHandler(
+            IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+        }
+
+        public string GetUserId(AuthorizationHandlerContext context)
+        {
+            var userId = string.Empty;
+            var contextUser = context.User;
+            if (contextUser != null) 
+            {
+                if (contextUser.Identity.IsAuthenticated)
+                {
+                    userId = context.User.FindFirst("id").Value;
+                }
+            }
+            return userId;
+        }
+
+        public string GetUsername(AuthorizationHandlerContext context)
+        {
+            var userId = string.Empty;
+            var contextUser = context.User;
+            if (contextUser != null) 
+            {
+                if (contextUser.Identity.IsAuthenticated)
+                {
+                    userId = context.User.FindFirst(JwtRegisteredClaimNames.Sub).Value;
+                }
+            }
+            return userId;
         }
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, SuperAdminRequirement requirement)
         {
             IConfiguration configuration = _serviceProvider.GetService<IConfiguration>();
 
+            Console.WriteLine("1111111");
             if (context.User != null)
             {
+                Console.WriteLine("22222222");
                 if (context.User.Identity != null)
                 {
-                    string email = ((System.Security.Claims.ClaimsIdentity)context.User.Identity).
-                        FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name").Value;
+                    Console.WriteLine("3333333");
+                    string username = this.GetUsername(context);
+                    Console.WriteLine(username);
             
                     string superAdminConfig = configuration["SuperAdmins"];
                     string[] superAdmins = superAdminConfig.Split(',');
                     foreach (string superAdmin in superAdmins)
                     {
-                        if (email == superAdmin)
+                        Console.WriteLine(superAdmin);
+                        if (username == superAdmin)
                         {
                             context.Succeed(requirement);
                         }

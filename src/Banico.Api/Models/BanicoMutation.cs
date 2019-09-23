@@ -74,7 +74,7 @@ namespace Banico.Api.Models
                     {
                         this.StampItem(contentItem);
                         var userId = _accessService.GetUserId();
-                        var isAdmin = _accessService.IsAdmin().Result;
+                        var isAdmin = _accessService.IsAdmin();
                         return contentItemRepository.AddOrUpdate(contentItem, userId, isAdmin);
                     }
                     else
@@ -92,7 +92,7 @@ namespace Banico.Api.Models
                 {
                     var config = context.GetArgument<Config>("config");
                     this.StampItem(config);
-                    var isSuperAdmin = _accessService.IsSuperAdmin().Result;
+                    var isSuperAdmin = _accessService.IsSuperAdmin();
                     return configRepository.AddOrUpdate(config, isSuperAdmin);
                 });
         }

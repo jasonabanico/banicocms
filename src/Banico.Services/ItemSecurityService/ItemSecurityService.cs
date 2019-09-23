@@ -19,7 +19,7 @@ namespace Banico.Services
                 return true;
             }
 
-            if (_superAdminService.IsSuperAdminEmail(user.Email))
+            if (_superAdminService.IsSuperAdminUsername(user.UserName))
             {
                 return true;
             }

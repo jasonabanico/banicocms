@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Banico.Core.Entities;
 using Banico.Services.Interfaces;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Banico.Services
 {
@@ -27,7 +28,7 @@ namespace Banico.Services
             _configuration = configuration;
         }
         
-        public bool IsSuperAdminEmail(string email)
+        public bool IsSuperAdminUsername(string username)
         {
             string superAdminConfig = _configuration["SuperAdmins"];
             if (!string.IsNullOrEmpty(superAdminConfig))
@@ -35,7 +36,7 @@ namespace Banico.Services
                 string[] superAdmins = superAdminConfig.Split(',');
                 foreach (string superAdmin in superAdmins)
                 {
-                    if (email == superAdmin)
+                    if (username == superAdmin)
                     {
                         return true;
                     }
@@ -47,10 +48,10 @@ namespace Banico.Services
 
         public async Task<bool> IsSuperAdmin(IPrincipal user)
         {
-            string email = ((System.Security.Claims.ClaimsIdentity)user.Identity).
-                FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name").Value;
+            string username = ((System.Security.Claims.ClaimsIdentity)user.Identity).
+                FindFirst(JwtRegisteredClaimNames.Sub).Value;
             
-            if (this.IsSuperAdminEmail(email))
+            if (this.IsSuperAdminUsername(username))
             {
                 return true;
             }

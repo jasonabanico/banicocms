@@ -15,7 +15,7 @@ using Banico.Core.Repositories;
 namespace Banico.Identity.Controllers
 {
     [Route("api/[controller]/[action]")]
-    [Authorize(Policy="SuperAdmin")]
+    [Authorize(Policy="SuperAdmin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ConfigController : Controller
     {
         private readonly IConfigRepository _configRepository;
