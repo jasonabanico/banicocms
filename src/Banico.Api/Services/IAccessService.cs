@@ -18,6 +18,6 @@ namespace Banico.Api.Services
         Task<string> GetUsername();
         Task<bool> Allowed(string module);
         Task<bool> Allowed(ContentItem contentItem);
-        Task<string> GetTenant();
+        Task<string> GetUserDomain();
     }
 }

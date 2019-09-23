@@ -105,14 +105,24 @@ namespace Banico.Api.Models
             {
                 item.CreatedBy = user;
                 item.CreatedDate = DateTimeOffset.UtcNow;
+                item.Tenant = this.DomainTenant();
             } 
-            else 
+            else
             {
                 item.UpdatedBy = user;
                 item.UpdatedDate = DateTimeOffset.UtcNow;
             }
         }
 
+        private string DomainTenant()
+        {
+            if (_configuration["DomainAsTenant"] == "y")
+            {
+                return _accessService.GetUserDomain().Result;
+            }
+
+            return string.Empty;
+        }
 
         private async Task<bool> Active(ContentItem contentItem)
         {

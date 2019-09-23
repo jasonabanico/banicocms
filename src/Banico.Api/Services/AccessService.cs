@@ -7,6 +7,8 @@ using Banico.Core.Entities;
 using Banico.Core.Repositories;
 using Microsoft.AspNetCore.Http;
 using System;
+using Nager.PublicSuffix;
+using System.Net.Mail;
 
 namespace Banico.Api.Services
 {
@@ -120,14 +122,16 @@ namespace Banico.Api.Services
             return false;
         }
 
-        public async Task<string> GetTenant()
+        public async Task<string> GetUserDomain()
         {
             var user = await this.GetUser();
             var email = user.Email;
+            MailAddress address = new MailAddress(email);
+            string host = address.Host;
+            var domainParser = new DomainParser(new WebTldRuleProvider());
+            var domainName = domainParser.Get(host);
 
-            // to-do
-
-            return string.Empty;
+            return domainName.RegistrableDomain;
         }
     }
 }

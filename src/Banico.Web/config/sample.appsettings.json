@@ -1,5 +1,6 @@
 {
     "InviteOnly": "true",
+    "DomainAsTenant": "n",
     "SuperAdmins": "ENTER-SUPERADMIN-USERNAME-HERE",
     "EmailSender": {
       "EmailUser": "ENTER-SENDGRID-USER-HERE",
