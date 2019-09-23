@@ -13,7 +13,6 @@ namespace Banico.EntityFrameworkCore.Repositories
     public class SectionItemRepository : ISectionItemRepository
     {
         public AppDbContext DbContext { get; set; }
-        private string _tenantRegEx = string.Empty;
 
         private const char PATH_DELIM = '_';
         private const char TYPE_DELIM = '~';
@@ -24,7 +23,6 @@ namespace Banico.EntityFrameworkCore.Repositories
             IConfiguration configuration)
         {
             this.DbContext = dbContext;
-            _tenantRegEx = configuration["TenantRegEx"];
         }
 
         public void ParsePath(

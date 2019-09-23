@@ -13,14 +13,12 @@ namespace Banico.EntityFrameworkCore.Repositories
     public class SectionRepository : ISectionRepository
     {
         public AppDbContext DbContext { get; set; }
-        private string _tenantRegex = string.Empty;
 
         public SectionRepository(
             AppDbContext dbContext,
             IConfiguration configuration)
         {
             this.DbContext = dbContext;
-            _tenantRegex = configuration["TenantRegEx"];
         }
 
         public async Task<List<Section>> Get(

@@ -23,7 +23,6 @@ namespace Banico.EntityFrameworkCore.Repositories
         private readonly IConfiguration _configuration;
 
         private int _maxPageSize = 0;
-        private string _tenantRegEx = string.Empty;
 
         public ContentItemRepository(
             AppDbContext dbContext,
@@ -39,8 +38,6 @@ namespace Banico.EntityFrameworkCore.Repositories
             if (_maxPageSize == 0) {
                 _maxPageSize = 40;
             }
-
-            _tenantRegEx = _configuration["TenantRegEx"];
         }
 
         public MaxPageSize GetMaxPageSize() {
