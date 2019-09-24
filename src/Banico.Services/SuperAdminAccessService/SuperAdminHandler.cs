@@ -61,6 +61,14 @@ namespace Banico.Services
             return userId;
         }
 
+        public void ListClaims(ClaimsPrincipal user)
+        {
+            foreach(var claim in user.Claims)
+            {
+                Console.WriteLine("CLAIM TYPE/VALUE --> " + claim.Type + " / " + claim.Value);
+            }
+        }
+
         public string GetUsername(AuthorizationHandlerContext context)
         {
             var userId = string.Empty;
@@ -69,7 +77,11 @@ namespace Banico.Services
             {
                 if (contextUser.Identity.IsAuthenticated)
                 {
-                    userId = context.User.FindFirst(JwtRegisteredClaimNames.Sub).Value;
+                    var sub = contextUser.FindFirst(ClaimTypes.NameIdentifier);
+                    if (sub != null)
+                    {
+                        userId = sub.Value;
+                    }
                 }
             }
             return userId;
@@ -79,13 +91,10 @@ namespace Banico.Services
         {
             IConfiguration configuration = _serviceProvider.GetService<IConfiguration>();
 
-            Console.WriteLine("1111111");
             if (context.User != null)
             {
-                Console.WriteLine("22222222");
                 if (context.User.Identity != null)
                 {
-                    Console.WriteLine("3333333");
                     string username = this.GetUsername(context);
                     Console.WriteLine(username);
             

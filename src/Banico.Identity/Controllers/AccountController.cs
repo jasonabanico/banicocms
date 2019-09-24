@@ -132,10 +132,14 @@ namespace Banico.Identity.Controllers
             return new JsonResult(username);
         }
 
-        public bool IsSuperAdmin()
+        public bool IsSuperAdmin(string username)
         {
             bool result = false;
-            string username = this.GetUsername();
+
+            if (string.IsNullOrEmpty(username))
+            {
+                username = this.GetUsername();
+            }
 
             if (!string.IsNullOrEmpty(username))
             {
@@ -196,7 +200,7 @@ namespace Banico.Identity.Controllers
                         user.Id, 
                         user.UserName, 
                         user.Email);
-                    bool isAdmin = this.IsSuperAdmin();
+                    bool isAdmin = this.IsSuperAdmin(user.UserName);
                     _logger.LogInformation(1, "User logged in.");
                     var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, user.UserName, isAdmin, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
                     return new OkObjectResult(jwt);

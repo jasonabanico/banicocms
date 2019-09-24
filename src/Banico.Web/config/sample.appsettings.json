@@ -31,6 +31,7 @@
     "ConfigInitialSettings": {
       "Configs": [
         "admin/sections,canActivate,admin",
+        "admin/sectionItems,canActivate,admin",
         "admin/roles,canActivate,admin",
         "admin/users,canActivate,admin",
         "admin/configs,canActivate,admin",
@@ -49,8 +50,8 @@
         "forum-topic/view,canActivate,user",
         "forum-post/view,canActivate,user",
         "forum-post/manage,canActivate,user",
-        "forum-comment/view/canActivate,user",
-        "forum-comment/manage/canActivate,user",
+        "forum-comment/view,canActivate,user",
+        "forum-comment/manage,canActivate,user",
         "invite,isActive,n",
         "invite,canActivate,user",
         "link/view,canActivate,user",
