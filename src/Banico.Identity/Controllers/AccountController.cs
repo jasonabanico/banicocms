@@ -27,6 +27,8 @@ using Banico.Services.Interfaces;
 using Banico.Identity.Helpers;
 using Banico.Identity.ViewModels.Account;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
+using Nager.PublicSuffix;
 
 namespace Banico.Identity.Controllers
 {
@@ -195,6 +197,11 @@ namespace Banico.Identity.Controllers
 
                     var identity = _jwtFactory.GenerateClaimsIdentity(model.Username, user.Id);
                     var tenant = string.Empty;
+                    if (_configuration["DomainAsTenant"] == "y")
+                    {
+                        this.GetUserDomain(user.Email);
+                    }
+                    
                     var profile = await _contentItemRepository.CreateProfileIfNotExists(
                         tenant,
                         user.Id, 
@@ -230,6 +237,16 @@ namespace Banico.Identity.Controllers
 
             // If we got this far, something failed, redisplay form
             return BadRequest(Errors.AddErrorToModelState("", "", ModelState));            
+        }
+
+        public string GetUserDomain(string email)
+        {
+            MailAddress address = new MailAddress(email);
+            string host = address.Host;
+            var domainParser = new DomainParser(new WebTldRuleProvider());
+            var domainName = domainParser.Get(host);
+
+            return domainName.RegistrableDomain;
         }
 
         private async Task<IActionResult> SendConfirmationEmail(AppUser user)
