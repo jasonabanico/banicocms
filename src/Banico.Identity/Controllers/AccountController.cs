@@ -110,7 +110,7 @@ namespace Banico.Identity.Controllers
 
         public string GetUsername()
         {
-            Claim nameIdClaim = HttpContext.User.FindFirst(JwtRegisteredClaimNames.Sub);
+            Claim nameIdClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
             if (nameIdClaim != null)
             {
                 return nameIdClaim.Value;

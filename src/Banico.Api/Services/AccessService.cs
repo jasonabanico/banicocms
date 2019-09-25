@@ -97,7 +97,7 @@ namespace Banico.Api.Services
             {
                 if (contextUser.Identity.IsAuthenticated)
                 {
-                    username = _httpContextAccessor.HttpContext.User.FindFirst(JwtRegisteredClaimNames.Sub).Value;
+                    username = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 }
             }
             return username;
