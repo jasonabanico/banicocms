@@ -31,6 +31,9 @@ export class RegisterComponent {
         private router: Router,
         private fb: FormBuilder
     ) {
+        let isInviteOnly = this.accountService.isInviteOnly().subscribe(result => {
+            this.inviteOnly = (result === "true");
+        });
     }
 
     public cleanStringify(object) {

@@ -41,6 +41,18 @@ export class AccountService extends BaseService {
         catchError(this.handleError));
     }
 
+    public isInviteOnly(): Observable<string> {
+        return this.http.get<any>(this.baseUrl + 'api/Account/IsInviteOnly').pipe(
+        map(data => {
+            if (data) {
+                return data;
+            }
+
+            return '';
+        }),
+        catchError(this.handleError), );
+    }
+
     public loggedInAs(): Observable<string> {
         return this.http.get<any>(this.baseUrl + 'api/Account/GetUsername', this.jsonAuthRequestOptions()).pipe(
         map(data => {
