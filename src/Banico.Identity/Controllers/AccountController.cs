@@ -29,6 +29,7 @@ using Banico.Identity.ViewModels.Account;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mail;
 using Nager.PublicSuffix;
+using System.Text.RegularExpressions;
 
 namespace Banico.Identity.Controllers
 {
@@ -318,6 +319,17 @@ namespace Banico.Identity.Controllers
             if (await this.UserExists(model.Username))
             {
                 return BadRequest(Errors.AddErrorToModelState("Username", "Username already exists.", ModelState));
+            }
+
+            string tenantRegEx = _configuration["TenantRegEx"];
+            if (!string.IsNullOrEmpty(tenantRegEx))
+            {
+                Regex regex = new Regex(tenantRegEx);
+                var match = regex.Match(model.Email);
+                if (!match.Success)
+                {
+                    return BadRequest(Errors.AddErrorToModelState("Email", "Email is not allowed.", ModelState));
+                }
             }
 
             string inviter = string.Empty;
