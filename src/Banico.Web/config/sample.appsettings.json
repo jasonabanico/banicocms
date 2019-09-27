@@ -67,7 +67,7 @@
         "page,isEnabled,n",
         "page/view,canActivate,user",
         "page/manage,canActivate,admin",
-        "profile,isEnabled,n",
+        "profile,isEnabled,y",
         "profile/view,canActivate,user",
         "profile/manage,canActivate,user"
         ]
