@@ -63,7 +63,6 @@ export class LoginComponent {
         ).pipe(first()).toPromise();
       if (result) {
         const myResult: any = result;
-        alert(JSON.stringify(myResult));
         this.authService.setToken(myResult.auth_token);
         this.authService.setUserId(myResult.id);
         this.authService.setIsAdmin(myResult.is_admin);

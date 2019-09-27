@@ -710,6 +710,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             if (profileItems.Count == 0)
             {
                 ContentItem profileItem = new ContentItem("profile");
+                profileItem.Tenant = tenant;
                 profileItem.Id = Guid.NewGuid().ToString();
                 profileItem.Alias = alias;
 
