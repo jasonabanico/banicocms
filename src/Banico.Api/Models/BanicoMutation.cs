@@ -70,17 +70,18 @@ namespace Banico.Api.Models
                 resolve: context =>
                 {
                     var contentItem = context.GetArgument<ContentItem>("contentItem");
-                    if (_accessService.Allowed(contentItem).Result)
+                    if (this.IsEnabled(contentItem).Result)
                     {
-                        this.StampItem(contentItem);
-                        var userId = _accessService.GetUserId();
-                        var isAdmin = _accessService.IsAdmin();
-                        return contentItemRepository.AddOrUpdate(contentItem, userId, isAdmin);
+                        if (_accessService.Allowed(contentItem).Result)
+                        {
+                            this.StampItem(contentItem);
+                            var userId = _accessService.GetUserId();
+                            var isAdmin = _accessService.IsAdmin();
+                            return contentItemRepository.AddOrUpdate(contentItem, userId, isAdmin);
+                        }
                     }
-                    else
-                    {
-                        return new ContentItem();
-                    }
+
+                    return new ContentItem();
                 });
 
             Field<ConfigType>(
@@ -124,9 +125,9 @@ namespace Banico.Api.Models
             return string.Empty;
         }
 
-        private async Task<bool> Active(ContentItem contentItem)
+        private async Task<bool> IsEnabled(ContentItem contentItem)
         {
-            List<Config> config = await _configRepository.Get("", contentItem.Module, "isActive");
+            List<Config> config = await _configRepository.Get("", contentItem.Module, "isEnabled");
 
             if (config.Count > 0)
             {
