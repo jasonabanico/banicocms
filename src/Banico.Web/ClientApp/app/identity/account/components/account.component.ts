@@ -4,7 +4,7 @@
     selector: 'app-identity-account',
     templateUrl: './account.component.html'
 })
-export class AccountComponent implements OnInit {
+export class IdentityAccountComponent implements OnInit {
 
     constructor() {
     }

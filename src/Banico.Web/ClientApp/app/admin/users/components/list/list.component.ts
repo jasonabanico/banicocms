@@ -5,10 +5,10 @@ import { UsersService } from '../../services/users.service';
 
 @Component({
     selector: 'app-admin-users-list',
-    templateUrl: './users-list.component.html',
+    templateUrl: './list.component.html',
     providers: [UsersService]
 })
-export class UsersListComponent implements OnInit {
+export class AdminUsersListComponent implements OnInit {
     public users: User[];
 
     constructor(

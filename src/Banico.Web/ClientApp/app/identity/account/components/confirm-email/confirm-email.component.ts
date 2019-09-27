@@ -8,7 +8,7 @@ import { AccountService } from '../../services/account.service';
   templateUrl: './confirm-email.component.html',
   styleUrls: []
 })
-export class ConfirmEmailComponent {
+export class IdentityAccountConfirmEmailComponent {
   private sub: any;
   isRequesting: boolean;
   isSuccessful: boolean = false;

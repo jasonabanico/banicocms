@@ -4,7 +4,7 @@
     selector: 'app-identity-manage',
     templateUrl: './manage.component.html'
 })
-export class ManageComponent implements OnInit {
+export class IdentityManageComponent implements OnInit {
 
     constructor() {
     }

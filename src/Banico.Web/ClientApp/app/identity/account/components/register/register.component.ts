@@ -10,7 +10,7 @@ import { ToastrService } from '../../../../shared/services/toastr.service';
   templateUrl: './register.component.html',
   styleUrls: []
 })
-export class RegisterComponent {
+export class IdentityAccountRegisterComponent {
     public isRequesting = false;
     public isSuccessful = false;
     public errors: string[][] = [,];

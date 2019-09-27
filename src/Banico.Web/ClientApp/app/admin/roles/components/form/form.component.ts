@@ -10,7 +10,7 @@ import { RolesService } from "../../services/roles.service";
     templateUrl: './form.component.html',
     providers: []
 })
-export class RolesFormComponent {
+export class AdminRolesFormComponent {
   private sub: any;
   public isSuccessful: boolean;
   public isRequesting: boolean;

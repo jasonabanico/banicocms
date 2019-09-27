@@ -9,7 +9,7 @@ import { AccountService } from '../../services/account.service';
   templateUrl: './resend-confirmation.component.html',
   styleUrls: []
 })
-export class ResendConfirmationComponent {
+export class IdentityAccountResendConfirmationComponent {
   public isRequesting: boolean = false;
   public isSuccessful: boolean = false;
   public errors: string;  

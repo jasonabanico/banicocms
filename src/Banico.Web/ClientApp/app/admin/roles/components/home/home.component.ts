@@ -7,7 +7,7 @@ import { RolesService } from "../../services/roles.service";
     templateUrl: './home.component.html',
     providers: []
 })
-export class RolesHomeComponent {
+export class AdminRolesHomeComponent {
     public roles: Role[];
 
     constructor(

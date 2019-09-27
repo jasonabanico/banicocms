@@ -9,7 +9,7 @@ import { AccountService } from '../../services/account.service';
   templateUrl: './forgot-password.component.html',
   styleUrls: []
 })
-export class ForgotPasswordComponent {
+export class IdentityAccountForgotPasswordComponent {
   public isSuccessful: boolean;
   public isRequesting: boolean;
   public errors: string;  

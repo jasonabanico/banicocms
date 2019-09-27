@@ -6,11 +6,11 @@ import { User } from '../../../../entities/user';
 import { UsersService } from '../../services/users.service';
 
 @Component({
-  selector: 'app-admin-user-form',
-  templateUrl: './user-form.component.html',
+  selector: 'app-admin-users-form',
+  templateUrl: './form.component.html',
   styleUrls: []
 })
-export class UserFormComponent {
+export class AdminUsersFormComponent {
   private sub: any;
   public isSuccessful: boolean;
   public isRequesting: boolean;

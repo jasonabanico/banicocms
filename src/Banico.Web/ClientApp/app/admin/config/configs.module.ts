@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClientXsrfModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule }  from '@angular/forms';
 import { ConfigsService } from './services/configs.service';
-import { ConfigFormComponent } from './components/config-form/config-form.component';
-import { ConfigsListComponent } from './components/configs-list/configs-list.component';
+import { AdminConfigFormComponent } from './components/form/form.component';
+import { AdminConfigListComponent } from './components/list/list.component';
 
 @NgModule({
   imports: [
@@ -17,8 +17,8 @@ import { ConfigsListComponent } from './components/configs-list/configs-list.com
     })  
   ],
   declarations: [
-    ConfigFormComponent,
-    ConfigsListComponent
+    AdminConfigFormComponent,
+    AdminConfigListComponent
   ],
   providers: [ 
     ConfigsService
@@ -26,4 +26,4 @@ import { ConfigsListComponent } from './components/configs-list/configs-list.com
     bootstrap: [ 
   ]
 })
-export class ConfigsModule { }
+export class AdminConfigModule { }

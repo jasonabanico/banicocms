@@ -21,4 +21,4 @@ import { SectionsFileService } from './services/sections-file.service';
      SectionsFileService
    ]   
 })
-export class SectionsModule { }
+export class AdminSectionsModule { }

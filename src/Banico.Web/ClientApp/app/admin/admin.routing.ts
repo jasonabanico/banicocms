@@ -4,12 +4,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminHomeComponent } from './home/home.component';
 import { AdminSectionsSectionComponent } from './sections/components/section/section.component';
 import { AdminSectionsSectionItemComponent } from './sections/components/section-item/section-item.component';
-import { RolesFormComponent } from './roles/components/form/form.component';
-import { RolesHomeComponent } from './roles/components/home/home.component';
-import { UserFormComponent } from './users/components/user-form/user-form.component';
-import { UsersListComponent } from './users/components/users-list/users-list.component';
-import { ConfigFormComponent } from './configs/components/config-form/config-form.component';
-import { ConfigsListComponent } from './configs/components/configs-list/configs-list.component';
+import { AdminRolesFormComponent } from './roles/components/form/form.component';
+import { AdminRolesHomeComponent } from './roles/components/home/home.component';
+import { AdminUsersFormComponent } from './users/components/form/form.component';
+import { AdminUsersListComponent } from './users/components/list/list.component';
+import { AdminConfigFormComponent } from './config/components/form/form.component';
+import { AdminConfigListComponent } from './config/components/list/list.component';
 import { AuthGuard } from '../shared/auth/auth.guard';
 
 const ADMIN_ROUTES: Routes = [
@@ -29,49 +29,49 @@ const ADMIN_ROUTES: Routes = [
         data: { module: 'admin/sections' }
     },
     { path: 'roles/add',
-        component: RolesFormComponent,
+        component: AdminRolesFormComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin/sections' }
     },
     { path: 'roles/edit/:id',
-        component: RolesFormComponent,
+        component: AdminRolesFormComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin/sections' }
     },
     { path: 'roles',
-        component: RolesHomeComponent,
+        component: AdminRolesHomeComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin/roles' }
     },
     { path: 'users/add',
-        component: UserFormComponent,
+        component: AdminUsersFormComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin/users' }
     },
     { path: 'users/edit/:id',
-        component: UserFormComponent,
+        component: AdminUsersFormComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin/users' }
     },
     { path: 'users',
-        component: UsersListComponent,
+        component: AdminUsersListComponent,
         canActivate: [AuthGuard],
         data: { module: 'admin/users' }
     },
-    { path: 'configs/add',
-        component: ConfigFormComponent,
+    { path: 'config/add',
+        component: AdminConfigFormComponent,
         canActivate: [AuthGuard],
-        data: { module: 'admin/configs' }
+        data: { module: 'admin/config' }
     },
-    { path: 'configs/edit/:id',
-        component: ConfigFormComponent,
+    { path: 'config/edit/:id',
+        component: AdminConfigFormComponent,
         canActivate: [AuthGuard],
-        data: { module: 'admin/configs' }
+        data: { module: 'admin/config' }
     },
-    { path: 'configs',
-        component: ConfigsListComponent,
+    { path: 'config',
+        component: AdminConfigListComponent,
         canActivate: [AuthGuard],
-        data: { module: 'admin/configs' }
+        data: { module: 'admin/config' }
     },
     { path: '',
         component: AdminHomeComponent,

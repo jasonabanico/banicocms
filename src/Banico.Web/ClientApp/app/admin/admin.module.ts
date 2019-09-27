@@ -5,10 +5,10 @@ import { PipesModule } from '../pipes/pipes.module';
 
 import { AdminRoutingModule } from './admin.routing';
 import { AdminHomeComponent } from './home/home.component';
-import { RolesModule } from './roles/roles.module';
-import { SectionsModule } from './sections/sections.module';
-import { UsersModule } from './users/users.module';
-import { ConfigsModule } from './configs/configs.module';
+import { AdminRolesModule } from './roles/roles.module';
+import { AdminSectionsModule } from './sections/sections.module';
+import { AdminUsersModule } from './users/users.module';
+import { AdminConfigModule } from './config/configs.module';
 
 @NgModule({
     imports: [ 
@@ -16,10 +16,10 @@ import { ConfigsModule } from './configs/configs.module';
         FormsModule,
         ReactiveFormsModule,
         AdminRoutingModule,
-        RolesModule,
-        SectionsModule,
-        UsersModule,
-        ConfigsModule
+        AdminRolesModule,
+        AdminSectionsModule,
+        AdminUsersModule,
+        AdminConfigModule
     ],
     declarations: [ 
         AdminHomeComponent

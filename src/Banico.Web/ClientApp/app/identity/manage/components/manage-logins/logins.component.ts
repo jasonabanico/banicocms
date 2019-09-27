@@ -8,5 +8,5 @@ import { Router } from '@angular/router';
   templateUrl: './logins.component.html',
   styleUrls: []
 })
-export class ManageLoginsComponent {
+export class IdentityManageLoginsComponent {
 }

@@ -16,7 +16,7 @@ import { combineLatest } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: []
 })
-export class LoginComponent {
+export class IdentityAccountLoginComponent {
   public isRequesting = false;
   public isSuccessful = false;
   public errors: string[] = new Array<string>();

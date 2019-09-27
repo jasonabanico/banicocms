@@ -7,10 +7,10 @@ import { Config } from '../../../../entities/config';
 
 @Component({
     selector: 'app-admin-config-form',
-    templateUrl: './config-form.component.html',
+    templateUrl: './form.component.html',
     providers: [ConfigsService]
 })
-export class ConfigFormComponent implements OnInit {
+export class AdminConfigFormComponent implements OnInit {
     private sub: any;
     isSuccessful: boolean;
     isRequesting: boolean;

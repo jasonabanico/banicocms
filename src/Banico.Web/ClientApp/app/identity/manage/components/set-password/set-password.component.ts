@@ -8,7 +8,7 @@ import { SetPassword } from './set-password.interface';
   templateUrl: './set-password.component.html',
   styleUrls: []
 })
-export class SetPasswordComponent {
+export class IdentityManageSetPasswordComponent {
   isRequesting: boolean;
   isSuccessful: boolean;
   errors: string;  

@@ -9,11 +9,11 @@ import { UserService }  from '../../shared/services/user.service';
 import { EmailValidator } from '../../directives/email.validator.directive';
 
 import { ManageRoutingModule }  from './manage.routing';
-import { ManageComponent } from './components/manage.component';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
-import { IndexComponent } from './components/index/index.component';
-import { ManageLoginsComponent } from './components/manage-logins/logins.component';
-import { SetPasswordComponent } from './components/set-password/set-password.component';
+import { IdentityManageComponent } from './components/manage.component';
+import { IdentityManageChangePasswordComponent } from './components/change-password/change-password.component';
+import { IdentityManageHomeComponent } from './components/home/home.component';
+import { IdentityManageLoginsComponent } from './components/manage-logins/logins.component';
+import { IdentityManageSetPasswordComponent } from './components/set-password/set-password.component';
 
 @NgModule({
   imports: [
@@ -28,18 +28,18 @@ import { SetPasswordComponent } from './components/set-password/set-password.com
     })  
   ],
   declarations: [
-    ManageComponent,
-    ChangePasswordComponent,
-    IndexComponent,
-    ManageLoginsComponent,
-    SetPasswordComponent
+    IdentityManageComponent,
+    IdentityManageChangePasswordComponent,
+    IdentityManageHomeComponent,
+    IdentityManageLoginsComponent,
+    IdentityManageSetPasswordComponent
   ],
   providers: [ 
     ManageService,
     UserService
   ],
     bootstrap: [ 
-      ManageComponent 
+      IdentityManageComponent 
   ]
 })
-export class ManageModule { }
+export class IdentityManageModule { }

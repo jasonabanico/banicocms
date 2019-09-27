@@ -9,13 +9,13 @@ import { UserService }  from '../../shared/services/user.service';
 import { EmailValidator } from '../../directives/email.validator.directive';
 
 import { AccountRoutingModule }  from './account.routing';
-import { AccountComponent } from './components/account.component';
-import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { ResendConfirmationComponent } from './components/resend-confirmation/resend-confirmation.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { IdentityAccountComponent } from './components/account.component';
+import { IdentityAccountConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
+import { IdentityAccountLoginComponent } from './components/login/login.component';
+import { IdentityAccountRegisterComponent } from './components/register/register.component';
+import { IdentityAccountResendConfirmationComponent } from './components/resend-confirmation/resend-confirmation.component';
+import { IdentityAccountResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { IdentityAccountForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
@@ -32,20 +32,20 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MDBBootstrapModule.forRoot()
   ],
   declarations: [
-    AccountComponent,
-    ConfirmEmailComponent,
-    LoginComponent, 
-    RegisterComponent, 
-    ResendConfirmationComponent,
-    ResetPasswordComponent,
-    ForgotPasswordComponent,
+    IdentityAccountComponent,
+    IdentityAccountConfirmEmailComponent,
+    IdentityAccountLoginComponent, 
+    IdentityAccountRegisterComponent, 
+    IdentityAccountResendConfirmationComponent,
+    IdentityAccountResetPasswordComponent,
+    IdentityAccountForgotPasswordComponent,
   ],
   providers: [ 
     AccountService,
     UserService
   ],
     bootstrap: [ 
-      AccountComponent 
+      IdentityAccountComponent 
   ]
 })
-export class AccountModule { }
+export class IdentityAccountModule { }

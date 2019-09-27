@@ -34,7 +34,7 @@
         "admin/sectionItems,canActivate,admin",
         "admin/roles,canActivate,admin",
         "admin/users,canActivate,admin",
-        "admin/configs,canActivate,admin",
+        "admin/config,canActivate,admin",
         "contact,isEnabled,n",
         "contact,canActivate,admin",
         "directory,isEnabled,n",

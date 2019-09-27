@@ -8,7 +8,7 @@ import { ManageService } from '../../services/manage.service';
   templateUrl: './change-password.component.html',
   styleUrls: []
 })
-export class ChangePasswordComponent {
+export class IdentityManageChangePasswordComponent {
   public isSuccessful: boolean;
   public isRequesting: boolean;
   public errors: string;  

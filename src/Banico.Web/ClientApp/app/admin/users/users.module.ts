@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientXsrfModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule }  from '@angular/forms';
-import { UserFormComponent } from './components/user-form/user-form.component';
-import { UsersListComponent } from './components/users-list/users-list.component';
+import { AdminUsersFormComponent } from './components/form/form.component';
+import { AdminUsersListComponent } from './components/list/list.component';
 import { UsersService } from './services/users.service';
 
 @NgModule({
@@ -17,8 +17,8 @@ import { UsersService } from './services/users.service';
     })  
   ],
   declarations: [
-    UserFormComponent,
-    UsersListComponent
+    AdminUsersFormComponent,
+    AdminUsersListComponent
   ],
   providers: [ 
     UsersService
@@ -26,4 +26,4 @@ import { UsersService } from './services/users.service';
     bootstrap: [ 
   ]
 })
-export class UsersModule { }
+export class AdminUsersModule { }

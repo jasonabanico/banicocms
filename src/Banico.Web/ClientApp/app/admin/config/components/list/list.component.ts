@@ -3,11 +3,11 @@ import { Config } from "../../../../entities/config";
 import { ConfigsService } from "../../services/configs.service";
 
 @Component({
-    selector: 'app-admin-configs-list',
-    templateUrl: './configs-list.component.html',
+    selector: 'app-admin-config-list',
+    templateUrl: './list.component.html',
     providers: []
 })
-export class ConfigsListComponent {
+export class AdminConfigListComponent {
     public configs: Config[];
 
     constructor(
