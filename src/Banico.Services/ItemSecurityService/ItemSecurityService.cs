@@ -5,11 +5,11 @@ namespace Banico.Services
 {
     public class ItemSecurityService : IItemSecurityService
     {
-        public ISuperAdminAccessService _superAdminService;
+        public IClaimsService _claimsService;
 
-        public ItemSecurityService(ISuperAdminAccessService superAdminService)
+        public ItemSecurityService(IClaimsService claimsService)
         {
-            _superAdminService = superAdminService;
+            _claimsService = claimsService;
         }
 
         public bool IsAuthorized(Item item, AppUser user)
@@ -19,7 +19,7 @@ namespace Banico.Services
                 return true;
             }
 
-            if (_superAdminService.IsSuperAdminUsername(user.UserName))
+            if (_claimsService.IsSuperAdmin(user.UserName))
             {
                 return true;
             }

@@ -10,6 +10,7 @@ using System;
 using Nager.PublicSuffix;
 using System.Net.Mail;
 using System.IdentityModel.Tokens.Jwt;
+using Banico.Services;
 
 namespace Banico.Api.Services
 {
@@ -17,6 +18,7 @@ namespace Banico.Api.Services
     {
         private IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IClaimsService _claimsService;
         private readonly IConfiguration _configuration;
         private IConfigRepository _configRepository;
 
@@ -35,16 +37,7 @@ namespace Banico.Api.Services
 
         public string GetUserId()
         {
-            var userId = string.Empty;
-            var contextUser = _httpContextAccessor.HttpContext.User;
-            if (contextUser != null) 
-            {
-                if (contextUser.Identity.IsAuthenticated)
-                {
-                    userId = _httpContextAccessor.HttpContext.User.FindFirst("id").Value;
-                }
-            }
-            return userId;
+            return _claimsService.GetUsername(_httpContextAccessor.HttpContext.User);
         }
 
         public bool IsUser()
@@ -54,23 +47,7 @@ namespace Banico.Api.Services
 
         public bool IsSuperAdmin()
         {
-            bool result = false;
-            string username = this.GetUsername();
-
-            if (!string.IsNullOrEmpty(username))
-            {
-                string superAdminConfig = _configuration["SuperAdmins"];
-                string[] superAdmins = superAdminConfig.Split(',');
-                foreach (string superAdmin in superAdmins)
-                {
-                    if (username == superAdmin)
-                    {
-                        result = true;
-                    }
-                }
-            }
-
-            return result;
+            return _claimsService.IsSuperAdmin(_httpContextAccessor.HttpContext.User);
         }
 
         public bool IsAdmin()
@@ -91,16 +68,7 @@ namespace Banico.Api.Services
 
         public string GetUsername()
         {
-            var username = string.Empty;
-            var contextUser = _httpContextAccessor.HttpContext.User;
-            if (contextUser != null) 
-            {
-                if (contextUser.Identity.IsAuthenticated)
-                {
-                    username = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                }
-            }
-            return username;
+            return _claimsService.GetUsername(_httpContextAccessor.HttpContext.User);
         }
 
         public async Task<bool> Allowed(ContentItem contentItem)

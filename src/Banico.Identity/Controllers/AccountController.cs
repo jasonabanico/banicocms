@@ -38,13 +38,13 @@ namespace Banico.Identity.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AccountController : Controller
     {
+        private readonly IClaimsService _claimsService;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IEmailSenderService _emailSender;
         private readonly ISmsSenderService _smsSender;
         private readonly ILogger _logger;
         private readonly IInviteService _inviteService;
-        private readonly ISuperAdminAccessService _superAdminService;
         private readonly string _externalCookieScheme;
         private readonly IConfiguration _configuration;
         private readonly IJwtFactory _jwtFactory;
@@ -56,13 +56,13 @@ namespace Banico.Identity.Controllers
         private bool _InviteOnly = false;
 
         public AccountController(
+            IClaimsService claimsService,
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             IEmailSenderService emailSender,
             ISmsSenderService smsSender,
             ILoggerFactory loggerFactory,
             IInviteService inviteService,
-            ISuperAdminAccessService superAdminService,
             IConfiguration configuration, 
             IJwtFactory jwtFactory, 
             IOptions<JwtIssuerOptions> jwtOptions,
@@ -71,13 +71,13 @@ namespace Banico.Identity.Controllers
             IAntiforgery antiforgery,
             IContentItemRepository contentItemRepository)
         {
+            _claimsService = claimsService;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _inviteService = inviteService;
-            _superAdminService = superAdminService;
             _configuration = configuration;
             _jwtFactory = jwtFactory;
             _jwtOptions = jwtOptions.Value;
@@ -102,24 +102,12 @@ namespace Banico.Identity.Controllers
 
         public string GetUserId()
         {
-            Claim nameIdClaim = HttpContext.User.FindFirst(Helpers.Constants.Strings.JwtClaimIdentifiers.Id);
-            if (nameIdClaim != null)
-            {
-                return nameIdClaim.Value;
-            }
-
-            return string.Empty;
+            return _claimsService.GetUserId(HttpContext.User);
         }
 
         public string GetUsername()
         {
-            Claim nameIdClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-            if (nameIdClaim != null)
-            {
-                return nameIdClaim.Value;
-            }
-
-            return string.Empty;
+            return _claimsService.GetUsername(HttpContext.User);
         }
 
         [HttpGet]
@@ -141,31 +129,6 @@ namespace Banico.Identity.Controllers
         {
             string username = this.GetUsername();
             return new JsonResult(username);
-        }
-
-        public bool IsSuperAdmin(string username)
-        {
-            bool result = false;
-
-            if (string.IsNullOrEmpty(username))
-            {
-                username = this.GetUsername();
-            }
-
-            if (!string.IsNullOrEmpty(username))
-            {
-                string superAdminConfig = _configuration["SuperAdmins"];
-                string[] superAdmins = superAdminConfig.Split(',');
-                foreach (string superAdmin in superAdmins)
-                {
-                    if (username == superAdmin)
-                    {
-                        result = true;
-                    }
-                }
-            }
-
-            return result;
         }
 
         private async Task<bool> UserExists(string username)
@@ -216,9 +179,9 @@ namespace Banico.Identity.Controllers
                         user.Id, 
                         user.UserName, 
                         user.Email);
-                    bool isAdmin = this.IsSuperAdmin(user.UserName);
+                    bool isSuperAdmin = _claimsService.IsSuperAdmin(user.UserName);
                     _logger.LogInformation(1, "User logged in.");
-                    var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, user.UserName, isAdmin, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
+                    var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, user.UserName, isSuperAdmin, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
                     return new OkObjectResult(jwt);
                 }
 
@@ -341,7 +304,7 @@ namespace Banico.Identity.Controllers
             }
 
             string inviter = string.Empty;
-            if ((_InviteOnly) && (!_superAdminService.IsSuperAdminUsername(model.Username)))
+            if ((_InviteOnly) && (!_claimsService.IsSuperAdmin(model.Username)))
             {
                 if (string.IsNullOrEmpty(model.Code))
                 {

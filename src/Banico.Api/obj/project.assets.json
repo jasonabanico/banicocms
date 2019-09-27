@@ -3110,6 +3110,20 @@
           }
         }
       },
+      "Sendgrid/9.7.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/SendGrid.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/SendGrid.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_green/1.1.11": {
         "type": "package",
         "dependencies": {
@@ -4799,6 +4813,20 @@
         },
         "runtime": {
           "bin/placeholder/Banico.EntityFrameworkCore.dll": {}
+        }
+      },
+      "Banico.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "Banico.Core": "1.0.0",
+          "SendGrid": "9.7.0"
+        },
+        "compile": {
+          "bin/placeholder/Banico.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Banico.Services.dll": {}
         }
       }
     }
@@ -8170,6 +8198,22 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "Sendgrid/9.7.0": {
+      "sha512": "/Cl0it+7y6yJEnjMsskaY+qEbRH/AWj24RvDjPfo4/g+40wZj3H5IHzwKi/ust4OMN8MxOaww+1ZRruKehHccw==",
+      "type": "package",
+      "path": "sendgrid/9.7.0",
+      "files": [
+        ".nupkg.metadata",
+        "lib/net452/SendGrid.dll",
+        "lib/net452/SendGrid.pdb",
+        "lib/net452/SendGrid.xml",
+        "lib/netstandard1.3/SendGrid.dll",
+        "lib/netstandard1.3/SendGrid.pdb",
+        "lib/netstandard1.3/SendGrid.xml",
+        "sendgrid.9.7.0.nupkg.sha512",
+        "sendgrid.nuspec"
       ]
     },
     "SQLitePCLRaw.bundle_green/1.1.11": {
@@ -12884,12 +12928,18 @@
       "type": "project",
       "path": "../Banico.EntityFrameworkCore/Banico.EntityFrameworkCore.csproj",
       "msbuildProject": "../Banico.EntityFrameworkCore/Banico.EntityFrameworkCore.csproj"
+    },
+    "Banico.Services/1.0.0": {
+      "type": "project",
+      "path": "../Banico.Services/Banico.Services.csproj",
+      "msbuildProject": "../Banico.Services/Banico.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Banico.Core >= 1.0.0",
       "Banico.EntityFrameworkCore >= 1.0.0",
+      "Banico.Services >= 1.0.0",
       "GraphQL >= 2.4.0",
       "GraphQL.Authorization >= 2.1.29",
       "GraphQL.Server.Transports.AspNetCore >= 3.4.0",
@@ -12933,6 +12983,9 @@
             },
             "/Users/jasonbanico/Dropbox/Workspace/Banico.MacOSX/src/Banico.EntityFrameworkCore/Banico.EntityFrameworkCore.csproj": {
               "projectPath": "/Users/jasonbanico/Dropbox/Workspace/Banico.MacOSX/src/Banico.EntityFrameworkCore/Banico.EntityFrameworkCore.csproj"
+            },
+            "/Users/jasonbanico/Dropbox/Workspace/Banico.MacOSX/src/Banico.Services/Banico.Services.csproj": {
+              "projectPath": "/Users/jasonbanico/Dropbox/Workspace/Banico.MacOSX/src/Banico.Services/Banico.Services.csproj"
             }
           }
         }

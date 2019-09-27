@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Banico.Core\Banico.Core.csproj" Version="1.0.0" />
     <ProjectReference Include="..\Banico.EntityFrameworkCore\Banico.EntityFrameworkCore.csproj" Version="1.0.0" />
+    <ProjectReference Include="..\Banico.Services\Banico.Services.csproj" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

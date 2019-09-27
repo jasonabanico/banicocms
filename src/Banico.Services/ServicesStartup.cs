@@ -10,8 +10,8 @@ namespace Banico.Services
         services.AddTransient<IEmailSenderService, EmailSenderService>();
         services.AddTransient<ISmsSenderService, EmailSenderService>();
         services.AddScoped<IInviteService, InviteService>();
-        services.AddScoped<ISuperAdminAccessService, SuperAdminAccessService>();
         services.AddScoped<IItemSecurityService, ItemSecurityService>();
+        services.AddSingleton<IClaimsService, ClaimsService>();
     }
   }
 }

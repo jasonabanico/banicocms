@@ -98,10 +98,10 @@ namespace Banico.Web
                 }
             );
 
+            servicesStartup.ConfigureServices(services);
             identityStartup.ConfigureServices(services);
             dataStartup.ConfigureServices(this.Configuration, services);
             apiStartup.ConfigureServices(services);
-            servicesStartup.ConfigureServices(services);
 
             // services.AddMvc(opts =>
             // {

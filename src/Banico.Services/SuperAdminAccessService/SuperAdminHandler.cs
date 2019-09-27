@@ -40,51 +40,19 @@ namespace Banico.Services
     public class SuperAdminHandler : AuthorizationHandler<SuperAdminRequirement>
     {
         private readonly IServiceProvider _serviceProvider;
+        private readonly IClaimsService _claimsService;
 
         public SuperAdminHandler(
-            IServiceProvider serviceProvider)
+            IServiceProvider serviceProvider,
+            IClaimsService claimsService)
         {
             _serviceProvider = serviceProvider;
+            _claimsService = claimsService;
         }
 
         public string GetUserId(AuthorizationHandlerContext context)
         {
-            var userId = string.Empty;
-            var contextUser = context.User;
-            if (contextUser != null) 
-            {
-                if (contextUser.Identity.IsAuthenticated)
-                {
-                    userId = context.User.FindFirst("id").Value;
-                }
-            }
-            return userId;
-        }
-
-        public void ListClaims(ClaimsPrincipal user)
-        {
-            foreach(var claim in user.Claims)
-            {
-                Console.WriteLine("CLAIM TYPE/VALUE --> " + claim.Type + " / " + claim.Value);
-            }
-        }
-
-        public string GetUsername(AuthorizationHandlerContext context)
-        {
-            var userId = string.Empty;
-            var contextUser = context.User;
-            if (contextUser != null) 
-            {
-                if (contextUser.Identity.IsAuthenticated)
-                {
-                    var sub = contextUser.FindFirst(ClaimTypes.NameIdentifier);
-                    if (sub != null)
-                    {
-                        userId = sub.Value;
-                    }
-                }
-            }
-            return userId;
+            return _claimsService.GetUserId(context);
         }
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, SuperAdminRequirement requirement)
@@ -95,18 +63,10 @@ namespace Banico.Services
             {
                 if (context.User.Identity != null)
                 {
-                    string username = this.GetUsername(context);
-                    Console.WriteLine(username);
-            
-                    string superAdminConfig = configuration["SuperAdmins"];
-                    string[] superAdmins = superAdminConfig.Split(',');
-                    foreach (string superAdmin in superAdmins)
+                    bool isSuperAdmin = _claimsService.IsSuperAdmin(context);
+                    if (isSuperAdmin)
                     {
-                        Console.WriteLine(superAdmin);
-                        if (username == superAdmin)
-                        {
-                            context.Succeed(requirement);
-                        }
+                        context.Succeed(requirement);
                     }
                 }
                 else
