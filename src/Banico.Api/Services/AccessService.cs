@@ -52,13 +52,19 @@ namespace Banico.Api.Services
             return _claimsService.IsSuperAdmin(_httpContextAccessor.HttpContext.User);
         }
 
-        public bool IsAdmin()
+        public bool IsAdminOrSuperAdmin()
         {
             bool isSuperAdmin = this.IsSuperAdmin();
 
             // to-do: check roles too
+            bool isAdmin = this.IsAdmin();
 
-            return isSuperAdmin;
+            return isSuperAdmin || isAdmin;
+        }
+
+        public bool IsAdmin()
+        {
+            return false;
         }
 
         private async Task<AppUser> GetUser()
@@ -105,11 +111,12 @@ namespace Banico.Api.Services
                 {
                     string permission = config[0].Value;
 
-                    switch (permission)
+                    switch (permission.ToLower())
                     {
                         case "public": return true;
                         case "user": return this.IsUser();
-                        case "admin": return this.IsAdmin();
+                        case "admin": return this.IsAdminOrSuperAdmin();
+                        case "superadmin": return this.IsSuperAdmin();
                     }
                 }
             }

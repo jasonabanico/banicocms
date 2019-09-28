@@ -76,7 +76,7 @@ namespace Banico.Api.Models
                         {
                             this.StampItem(contentItem);
                             var userId = _accessService.GetUserId();
-                            var isAdmin = _accessService.IsAdmin();
+                            var isAdmin = _accessService.IsAdminOrSuperAdmin();
                             return contentItemRepository.AddOrUpdate(contentItem, userId, isAdmin);
                         }
                     }

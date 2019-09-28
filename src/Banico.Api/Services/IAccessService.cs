@@ -15,6 +15,7 @@ namespace Banico.Api.Services
         bool IsUser();
         bool IsSuperAdmin();
         bool IsAdmin();
+        bool IsAdminOrSuperAdmin();
         string GetUsername();
         Task<bool> IsEnabled(string moduleAndFunction);
         Task<bool> Allowed(string module);

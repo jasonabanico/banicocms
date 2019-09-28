@@ -10,6 +10,7 @@ namespace Banico.Core.Entities
     public string LastName { get; set; }
     public string Alias { get; set; }
     public string Inviter { get; set; }
+    public string Tenant { get; set; }
     // public long? FacebookId { get; set; }
     // public string PictureUrl { get; set; }
   }
