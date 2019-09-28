@@ -24,12 +24,14 @@ namespace Banico.Api.Services
 
         public AccessService(
             IHttpContextAccessor httpContextAccessor,
+            IClaimsService claimsService,
             UserManager<AppUser> userManager,
             IConfiguration configuration,
             IConfigRepository configRepository
         )
         {
             _httpContextAccessor = httpContextAccessor;
+            _claimsService = claimsService;
             _userManager = userManager;
             _configuration = configuration;
             _configRepository = configRepository;
@@ -37,7 +39,7 @@ namespace Banico.Api.Services
 
         public string GetUserId()
         {
-            return _claimsService.GetUsername(_httpContextAccessor.HttpContext.User);
+            return _claimsService.GetUserId(_httpContextAccessor.HttpContext.User);
         }
 
         public bool IsUser()
@@ -80,7 +82,7 @@ namespace Banico.Api.Services
         {
             var module = moduleAndFunction.Split('/')[0];
             var rootModule = module.Split('-')[0];
-            List<Config> config = await _configRepository.Get("", module, "isEnabled");
+            List<Config> config = await _configRepository.Get("", rootModule, "isEnabled");
 
             if (config.Count > 0)
             {

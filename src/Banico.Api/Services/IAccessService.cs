@@ -16,6 +16,7 @@ namespace Banico.Api.Services
         bool IsSuperAdmin();
         bool IsAdmin();
         string GetUsername();
+        Task<bool> IsEnabled(string moduleAndFunction);
         Task<bool> Allowed(string module);
         Task<bool> Allowed(ContentItem contentItem);
         Task<string> GetUserDomain();

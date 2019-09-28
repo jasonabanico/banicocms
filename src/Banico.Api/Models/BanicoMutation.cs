@@ -70,7 +70,7 @@ namespace Banico.Api.Models
                 resolve: context =>
                 {
                     var contentItem = context.GetArgument<ContentItem>("contentItem");
-                    if (this.IsEnabled(contentItem).Result)
+                    if (_accessService.IsEnabled(contentItem.Module).Result)
                     {
                         if (_accessService.Allowed(contentItem).Result)
                         {
@@ -124,17 +124,5 @@ namespace Banico.Api.Models
 
             return string.Empty;
         }
-
-        private async Task<bool> IsEnabled(ContentItem contentItem)
-        {
-            List<Config> config = await _configRepository.Get("", contentItem.Module, "isEnabled");
-
-            if (config.Count > 0)
-            {
-                return config[0].Value == "y";
-            }
-
-            return false;
-        }
-     }
+    }
 }
