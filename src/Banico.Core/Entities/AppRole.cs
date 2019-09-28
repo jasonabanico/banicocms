@@ -9,6 +9,14 @@ namespace Banico.Core.Entities
 {
     public class AppRole : IdentityRole<string>
     {
+        public AppRole()
+        {
+        }
+
+        public AppRole(string role): base(role)
+        {
+        }
+
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
         public string IPAddress { get; set; }

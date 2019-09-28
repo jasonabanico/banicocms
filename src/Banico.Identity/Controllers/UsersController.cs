@@ -15,7 +15,7 @@ namespace Banico.Web
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    [Authorize(Policy="SuperAdmin")]
+    [Authorize(Policy="Admin")]
     public class UsersController : Controller
     {
         private readonly UserManager<AppUser> userManager;

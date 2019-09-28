@@ -55,13 +55,14 @@ namespace Banico.Web
             ILoggerFactory loggerFactory, 
             IAntiforgery antiforgery, 
             IApplicationLifetime applicationLifetime, // Add
-            IRouteAnalyzer routeAnalyzer) {
+            IRouteAnalyzer routeAnalyzer,
+            IServiceProvider services) {
             // move to Program.cs - loggerFactory.AddConsole (this.Configuration.GetSection ("Logging"));
             // move to Program.cs - loggerFactory.AddDebug ();
 
             // app.UseStaticFiles();
 
-            this.webStartup.Configure(app, env, antiforgery);
+            this.webStartup.Configure(app, env, antiforgery, services);
             app.UseStaticFiles(new StaticFileOptions() {
                 OnPrepareResponse = c => {
                     //Do not add cache to json files. We need to have new versions when we add new translations.

@@ -130,10 +130,11 @@ namespace Banico.Web
         public void Configure(
             IApplicationBuilder app, 
             IHostingEnvironment env, 
-            IAntiforgery antiforgery)
+            IAntiforgery antiforgery,
+            IServiceProvider services)
         {
             dataStartup.Configure(app, env);
-            identityStartup.Configure(app, env);
+            identityStartup.Configure(app, env, services);
             apiStartup.Configure(app, env);
 
             app.UseAuthentication();            

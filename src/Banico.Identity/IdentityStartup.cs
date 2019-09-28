@@ -133,7 +133,10 @@ namespace Banico.Identity
       {
           options.AddPolicy("SuperAdmin",
               policy => policy.Requirements.Add(new SuperAdminRequirement()));
+          options.AddPolicy("Admin",
+              policy => policy.Requirements.Add(new AdminRequirement()));
       });
+      services.AddSingleton<IAuthorizationHandler, AdminHandler>();
       services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
 
       services.ConfigureApplicationCookie(options =>
@@ -156,8 +159,23 @@ namespace Banico.Identity
       return Task.CompletedTask;
     };
 
+    private async Task CreateUserRoles(IServiceProvider serviceProvider)
+    {
+      var RoleManager = serviceProvider.GetRequiredService<RoleManager<AppRole>>();
+      var UserManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
+        
+      IdentityResult roleResult;
+      //Adding Admin Role
+      var roleCheck = await RoleManager.RoleExistsAsync("Admin");
+      if (!roleCheck)              
+      {
+      //create the roles and seed them to the database
+      roleResult = await RoleManager.CreateAsync(new AppRole("Admin"));
+      }
+    }
+
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider services)
     {
       using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
       {
@@ -171,6 +189,8 @@ namespace Banico.Identity
               name: "api",
               template: "api/{controller}/{action=Index}");
       });
+
+      this.CreateUserRoles(services).Wait();
     }
   }
 }
