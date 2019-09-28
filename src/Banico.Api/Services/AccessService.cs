@@ -76,9 +76,26 @@ namespace Banico.Api.Services
             return await this.Allowed(contentItem.Module);
         }
 
+        public async Task<bool> IsEnabled(string moduleAndFunction)
+        {
+            var module = moduleAndFunction.Split('/')[0];
+            var rootModule = module.Split('-')[0];
+            List<Config> config = await _configRepository.Get("", module, "isEnabled");
+
+            if (config.Count > 0)
+            {
+                if (config[0].Value == "y")
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public async Task<bool> Allowed(string module)
         {
-            // if (await this.Active(contentItem))
+            if (await this.IsEnabled(module))
             {
                 List<Config> config = await _configRepository.Get("", module + "/manage", "canActivate");
 
