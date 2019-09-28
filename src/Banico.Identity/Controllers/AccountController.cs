@@ -326,6 +326,12 @@ namespace Banico.Identity.Controllers
                 }
 
                 var user = new AppUser { UserName = model.Username, Email = model.Email, Inviter = inviter };
+
+                if (_configuration["DomainAsTenant"] == "y")
+                {
+                    user.Tenant = this.GetUserDomain(user.Email);
+                }
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
