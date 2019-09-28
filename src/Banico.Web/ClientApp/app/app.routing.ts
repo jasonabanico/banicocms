@@ -18,7 +18,7 @@ const APP_ROUTES: Routes = [
     },
     {
         path: 'manage',
-        loadChildren: './identity/manage/manage.module#ManageModule'
+        loadChildren: './identity/manage/manage.module#IdentityManageModule'
     },
 
     //,
