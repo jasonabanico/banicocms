@@ -36,10 +36,10 @@ export class AccountService extends BaseService {
         catchError(this.handleError));
     }
 
-    public isSuperAdmin(): Observable<boolean> {
-        return this.http.get<boolean>(this.baseUrl + 'api/Account/IsSuperAdmin', this.jsonAuthRequestOptions()).pipe(
-        catchError(this.handleError));
-    }
+    // public isSuperAdmin(): Observable<boolean> {
+    //     return this.http.get<boolean>(this.baseUrl + 'api/Account/IsSuperAdmin', this.jsonAuthRequestOptions()).pipe(
+    //     catchError(this.handleError));
+    // }
 
     public isInviteOnly(): Observable<string> {
         return this.http.get<any>(this.baseUrl + 'api/Account/IsInviteOnly').pipe(

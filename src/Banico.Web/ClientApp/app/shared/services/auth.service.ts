@@ -1,18 +1,23 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { BaseService } from './base.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { JSONP_ERR_NO_CALLBACK } from '@angular/common/http/src/jsonp';
 import { WindowRefService } from './windowref.service';
 import * as jwt_decode from 'jwt-decode';
+import { Router } from '@angular/router';
+import { ConfigsService } from './configs.service';
+import { map } from 'rxjs/operators';
 
 export class AuthService extends BaseService {
     constructor(
         private http: HttpClient,
         @Inject(WindowRefService) windowRefService: WindowRefService,
         @Inject(PLATFORM_ID) platformId: Object,
-        @Inject('BASE_URL') private baseUrl: string
+        @Inject('BASE_URL') private baseUrl: string,
+        private router: Router, 
+        private configsService: ConfigsService
     ) {
         super(windowRefService, platformId);
     }
@@ -139,4 +144,83 @@ export class AuthService extends BaseService {
         }
         this.localStorage.setItem(this.IS_SUPERADMIN, isSuperAdminStr);
     }
+
+    public canAccess(
+        module: string, 
+        url: string,
+        autoRedirect: boolean
+    ): Observable<boolean> {
+        let result = false;
+
+        if (!module) {
+            result = this.checkLogin(url, autoRedirect);
+            return of(result);
+          }
+
+          return this.getCanActivateConfig(module).pipe(
+            map(
+              configValue => {
+                switch (configValue) {
+                  case '': {
+                    result = false; // secure by default
+                    break;
+                  }
+                  case 'public': {
+                    result = true;
+                    break;
+                  }
+                  case 'user': {
+                    result = this.checkLogin(url, autoRedirect);
+                    break;
+                  }
+                  case 'admin': {
+                    result = this.checkAdmin(url, autoRedirect);
+                    break;
+                  }
+                  case 'superadmin': {
+                    result = this.checkSuperAdmin(url, autoRedirect);
+                    break;
+                  }
+                }
+      
+                return result;
+              }
+            ));      
+    }
+
+    public getCanActivateConfig(module: string): Observable<string> {
+        return this.configsService.get('', module, 'canActivate').pipe(
+          map(config => {
+            if (config) {
+              return config.value;
+            } else {
+              return '';
+            }
+          }));
+      }
+        
+      public checkLogin(url: string, autoRedirect: boolean): boolean {
+        const result = this.isTokenExpired();
+        if (result && autoRedirect) {
+          this.router.navigate(['/account/login'], { queryParams: { returnUrl: url } });
+        }
+    
+        return !result;
+      }
+
+      public checkAdmin(url: string, autoRedirect: boolean): boolean {
+        let result = this.checkLogin(url, autoRedirect);
+        if (result) {
+          result = this.isAdmin();
+        }
+        return result;
+      }
+    
+      public checkSuperAdmin(url: string, autoRedirect: boolean): boolean {
+        let result = this.checkLogin(url, autoRedirect);
+        if (result) {
+          result = this.isSuperAdmin();
+        }
+        return result;
+      }
 }
