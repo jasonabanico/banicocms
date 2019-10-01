@@ -16,6 +16,7 @@ namespace Banico.Identity.Helpers
         IJwtFactory jwtFactory,
         string userName, 
         bool isAdmin,
+        bool isSuperAdmin,
         JwtIssuerOptions jwtOptions, 
         JsonSerializerSettings serializerSettings)
       {
@@ -25,7 +26,8 @@ namespace Banico.Identity.Helpers
           username = userName,
           auth_token = await jwtFactory.GenerateEncodedToken(userName, identity),
           expires_in = (int)jwtOptions.ValidFor.TotalSeconds,
-          is_admin = isAdmin
+          is_admin = isAdmin,
+          is_superadmin = isSuperAdmin
         };
 
         return JsonConvert.SerializeObject(response, serializerSettings);

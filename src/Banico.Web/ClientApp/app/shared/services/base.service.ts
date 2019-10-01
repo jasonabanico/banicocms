@@ -10,6 +10,7 @@ export abstract class BaseService {
   protected readonly USER_NAME = 'username';
   protected readonly AVATAR_HASH = 'avatar_hash';
   protected readonly IS_ADMIN = 'is_admin';
+  protected readonly IS_SUPERADMIN = 'is_superadmin';
 
   protected localStorage: any;
   protected jsonHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -92,4 +93,16 @@ export abstract class BaseService {
       }
       return isAdmin;
   }
+
+  public isSuperAdmin(): boolean {
+    if (!this.localStorage) {
+      return false;
+    }
+    const isSuperAdminStr: string = this.localStorage.getItem(this.IS_SUPERADMIN);
+    let isSuperAdmin = false;
+    if (isSuperAdminStr === 'y') {
+        isSuperAdmin = true;
+    }
+    return isSuperAdmin;
+}
 }

@@ -46,6 +46,17 @@ namespace Banico.Services
             return IsSuperAdmin(user);
         }
         
+        public bool IsAdmin(AuthorizationHandlerContext context)
+        {
+            if (context == null)
+            {
+                return false;
+            }
+
+            var user = context.User;
+            return IsAdmin(user);
+        }
+
         public bool IsSuperAdmin(ClaimsPrincipal user)
         {
             if (user == null)
@@ -55,6 +66,11 @@ namespace Banico.Services
 
             string username = this.GetUsername(user);
             return IsSuperAdmin(username);
+        }
+
+        public bool IsAdmin(ClaimsPrincipal user)
+        {
+            return user.IsInRole("Admin");
         }
 
         public bool IsSuperAdmin(string username)

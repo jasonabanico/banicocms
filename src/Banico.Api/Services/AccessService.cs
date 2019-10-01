@@ -56,7 +56,6 @@ namespace Banico.Api.Services
         {
             bool isSuperAdmin = this.IsSuperAdmin();
 
-            // to-do: check roles too
             bool isAdmin = this.IsAdmin();
 
             return isSuperAdmin || isAdmin;
@@ -64,7 +63,7 @@ namespace Banico.Api.Services
 
         public bool IsAdmin()
         {
-            return false;
+            return _claimsService.IsAdmin(_httpContextAccessor.HttpContext.User);
         }
 
         private async Task<AppUser> GetUser()

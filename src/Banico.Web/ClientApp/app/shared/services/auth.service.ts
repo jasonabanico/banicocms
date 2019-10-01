@@ -112,6 +112,7 @@ export class AuthService extends BaseService {
             this.localStorage.removeItem(this.USER_ID);
             this.localStorage.removeItem(this.USER_NAME);
             this.localStorage.removeItem(this.IS_ADMIN);
+            this.localStorage.removeItem(this.IS_SUPERADMIN);
         }
     }
 
@@ -129,5 +130,13 @@ export class AuthService extends BaseService {
             isAdminStr = 'y';
         }
         this.localStorage.setItem(this.IS_ADMIN, isAdminStr);
+    }
+
+    public setIsSuperAdmin(isSuperAdmin: boolean) {
+        let isSuperAdminStr = 'n';
+        if (isSuperAdmin) {
+            isSuperAdminStr = 'y';
+        }
+        this.localStorage.setItem(this.IS_SUPERADMIN, isSuperAdminStr);
     }
 }

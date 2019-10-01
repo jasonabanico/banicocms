@@ -30,11 +30,11 @@
     },
     "ConfigInitialSettings": {
       "Configs": [
-        "admin/sections,canActivate,admin",
+        "admin/sections,canActivate,superadmin",
         "admin/sectionItems,canActivate,admin",
-        "admin/roles,canActivate,admin",
+        "admin/roles,canActivate,superadmin",
         "admin/users,canActivate,admin",
-        "admin/config,canActivate,admin",
+        "admin/config,canActivate,superadmin",
         "contact,isEnabled,n",
         "contact,canActivate,admin",
         "directory,isEnabled,n",

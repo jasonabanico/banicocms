@@ -62,6 +62,10 @@ public canActivate(
               result = this.checkAdmin(url);
               break;
             }
+            case 'superadmin': {
+              result = this.checkSuperAdmin(url);
+              break;
+            }
           }
 
           return result;
@@ -93,6 +97,14 @@ public canActivate(
     let result = this.checkLogin(url);
     if (result) {
       result = this.authService.isAdmin();
+    }
+    return result;
+  }
+
+  private checkSuperAdmin(url: string): boolean {
+    let result = this.checkLogin(url);
+    if (result) {
+      result = this.authService.isSuperAdmin();
     }
     return result;
   }
