@@ -12,9 +12,9 @@ export class ForumPostService extends PluginService {
 
     public get(id: string): Observable<Post> {
         return this.contentItemService.get(id).pipe(
-        map(item => {
-            return new Post(item);
-        }));
+            map(item => {
+                return new Post(item);
+            }));
     }
 
     public getPosts(topicId: string, page: number, offset: number): Observable<Post[]> {
@@ -25,22 +25,22 @@ export class ForumPostService extends PluginService {
         contentItemSearch.pageSize = this.pageSize;
         contentItemSearch.offset = offset;
         return this.contentItemService.getAll(contentItemSearch).pipe(
-        map(items => {
-            const replies: Post[] = new Array<Post>();
-            items.forEach(function(item: ContentItem) {
-                replies.push(new Post(item));
-            });
+            map(items => {
+                const replies: Post[] = new Array<Post>();
+                items.forEach(function (item: ContentItem) {
+                    replies.push(new Post(item));
+                });
 
-            return replies;
-        }));
+                return replies;
+            }));
     }
 
     public setPostUser(post: Post) {
         this.contentItemService.getProfileById(post.userId)
-        .subscribe(user => {
-            post.username = user.alias;
-            post.avatarHash = user.attribute01;
-        });
+            .subscribe(user => {
+                post.username = user.alias;
+                post.avatarHash = user.attribute01;
+            });
     }
 
     public addOrUpdate(
@@ -67,11 +67,11 @@ export class ForumPostService extends PluginService {
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers
             }).pipe(
-            map(this.extractData));
-            //.subscribe({
-                //next: x => console.log('Observer got a next value: ' + x),
-                //error: err => alert(JSON.stringify(err)),
-                //complete: () => console.log('Saved completed.'),
-            //});
+                map(this.extractData));
+        //.subscribe({
+        //next: x => console.log('Observer got a next value: ' + x),
+        //error: err => alert(JSON.stringify(err)),
+        //complete: () => console.log('Saved completed.'),
+        //});
     }
 }

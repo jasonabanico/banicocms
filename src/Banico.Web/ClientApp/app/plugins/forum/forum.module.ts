@@ -38,7 +38,7 @@ import { ForumCommentService } from './services/comment.service';
     ForumCommentComponent,
     ForumCommentFormComponent
   ],
-  providers: [ 
+  providers: [
     ForumSubforumService,
     ForumTopicService,
     ForumPostService,

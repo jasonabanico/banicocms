@@ -16,28 +16,28 @@ export class ForumSubforumService extends PluginService {
         return this.contentItemService.getAll(contentItemSearch).pipe(
             map(items => {
                 const replies: Subforum[] = new Array<Subforum>();
-                items.forEach(function(item: ContentItem) {
+                items.forEach(function (item: ContentItem) {
                     replies.push(new Subforum(item));
                 });
-    
+
                 return replies;
             }));
     }
 
     public get(id: string): Observable<Subforum> {
         return this.contentItemService.get(id).pipe(
-        map(item => {
-            return new Subforum(item);
-        }));
+            map(item => {
+                return new Subforum(item);
+            }));
     }
-    
+
     public getByAlias(alias: string): Observable<Subforum> {
         return this.contentItemService.getByAlias(alias).pipe(
-        map(item => {
-            return new Subforum(item);
-        }));
+            map(item => {
+                return new Subforum(item);
+            }));
     }
-    
+
     public addOrUpdate(
         id: string,
         name: string,
@@ -69,11 +69,11 @@ export class ForumSubforumService extends PluginService {
             .post(this.appBaseUrl + '/Delete', data, {
                 headers: headers
             }).pipe(
-            map(this.extractData));
-            //.subscribe({
-                //next: x => console.log('Observer got a next value: ' + x),
-                //error: err => alert(JSON.stringify(err)),
-                //complete: () => console.log('Saved completed.'),
-            //});
+                map(this.extractData));
+        //.subscribe({
+        //next: x => console.log('Observer got a next value: ' + x),
+        //error: err => alert(JSON.stringify(err)),
+        //complete: () => console.log('Saved completed.'),
+        //});
     }
 }

@@ -7,7 +7,7 @@ const entityMetadata: EntityMetadataMap = {
   Comment: {}
 };
 
-const pluralNames = { };
+const pluralNames = {};
 
 export const entityConfig = {
   entityMetadata,
