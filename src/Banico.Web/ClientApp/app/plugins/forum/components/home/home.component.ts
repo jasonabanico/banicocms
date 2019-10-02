@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Subforum } from '../../entities/subforum';
 import { ForumSubforumService } from '../../services/subforum.service';
+import { AuthService } from '../../../../shared/services/auth.service';
+import { map } from 'rxjs/internal/operators/map';
 
 @Component({
     selector: 'app-plugins-forum-home',
@@ -8,9 +10,11 @@ import { ForumSubforumService } from '../../services/subforum.service';
 })
 export class ForumHomeComponent {
     public subforums: Subforum[];
+    public canManageSubforum: boolean = false;
     
     constructor(
-        private subforumService: ForumSubforumService
+        private subforumService: ForumSubforumService,
+        private authService: AuthService
         ) {
     }
     
@@ -18,6 +22,8 @@ export class ForumHomeComponent {
         this.subforums = new Array();
         this.subforumService.getAll()
             .subscribe(subforums => this.setSubforums(subforums));
+        this.authService.canAccess('forum-subforum/manage', '', false).pipe(
+            map(result => this.canManageSubforum = result));
     }
 
     private setSubforums(subforums: Subforum[])

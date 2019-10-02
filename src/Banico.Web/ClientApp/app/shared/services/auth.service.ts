@@ -211,7 +211,7 @@ export class AuthService extends BaseService {
       public checkAdmin(url: string, autoRedirect: boolean): boolean {
         let result = this.checkLogin(url, autoRedirect);
         if (result) {
-          result = this.isAdmin();
+          result = this.isAdmin() || this.isSuperAdmin();
         }
         return result;
       }
