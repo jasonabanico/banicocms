@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DirectoryItem } from '../../entities/directory-item';
-import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
+import { SectionBarService } from '../../../../shell/section-bar/section-bar.service';
 import { SectionsService } from '../../../../shared/services/sections.service';
 import { DirectoryService } from '../../services/directory.service';
 
@@ -18,7 +18,7 @@ export class DirectoryListComponent implements OnInit, OnDestroy {
     public isAdmin: boolean;
 
     constructor(
-        @Inject(NavBarService) private navBarService: NavBarService,
+        @Inject(SectionBarService) private sectionBarService: SectionBarService,
         @Inject(DirectoryService) public directoryService: DirectoryService,
         private route: ActivatedRoute
     ) {
@@ -33,7 +33,7 @@ export class DirectoryListComponent implements OnInit, OnDestroy {
 
         this.sub = this.route.params.subscribe(params => {
             this.path = params['path'];
-            this.navBarService.initialize('directory', this.path, '', '/directory');
+            this.sectionBarService.initialize('directory', this.path, '', '/directory');
 
             if (this.path) {
                 this.directoryService.getDirectoryItems(this.path)

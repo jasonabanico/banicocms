@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { PipesModule } from '../pipes/pipes.module';
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './modal/modal.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { SectionBarComponent } from './section-bar/section-bar.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { SpinnerComponent } from './spinner/spinner.component';
-import { NavBarService } from './nav-bar/nav-bar.service';
+import { SectionBarService } from './section-bar/section-bar.service';
 import { AuthService } from '../shared/services/auth.service';
 
 @NgModule({
@@ -18,16 +18,16 @@ import { AuthService } from '../shared/services/auth.service';
     declarations: [ 
         HomeComponent,
         ModalComponent,
-        NavBarComponent,
+        SectionBarComponent,
         NavMenuComponent,
         SpinnerComponent,
     ],
     exports: [
-        NavBarComponent,
+        SectionBarComponent,
         NavMenuComponent
     ],
     providers: [
-        NavBarService,
+        SectionBarService,
         AuthService
     ]
 })

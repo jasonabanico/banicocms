@@ -1,15 +1,15 @@
 
 import {first} from 'rxjs/operators';
 import { Injectable, Inject } from '@angular/core';
-import { NavBarItem } from '../../entities/nav-bar-item';
+import { SectionBarItem } from '../../entities/section-bar-item';
 import { SectionItem } from '../../entities/section-item';
 import { Section } from '../../entities/section';
 import { SectionsService } from '../../shared/services/sections.service';
 
 @Injectable()
-export class NavBarService {
+export class SectionBarService {
     public isAdmin: boolean;
-    public navBarItems: NavBarItem[];
+    public sectionBarItems: SectionBarItem[];
     public pathUrlRoot: string;
     private inputPathUrl: string;
 
@@ -31,7 +31,7 @@ export class NavBarService {
         this.isAdmin = false;
         this.inputPathUrl = inputPathUrl;
         this.pathUrlRoot = pathRoot;
-        this.navBarItems = new Array<NavBarItem>();
+        this.sectionBarItems = new Array<SectionBarItem>();
 
         let sections = new Array<Section>();
         if (adminSection) {
@@ -43,76 +43,76 @@ export class NavBarService {
             sections = await this.sectionsService.getSections('', module, '').pipe(first()).toPromise();
         }
 
-        this.initializeNavBarItems(sections);
+        this.initializeSectionBarItems(sections);
 
         for (let i = 0; i < sections.length; i++) {
-            this.setup(this.navBarItems[i]);
+            this.setup(this.sectionBarItems[i]);
         }
     }
 
     // Initializes each nav bar
-    private initializeNavBarItems(sections: Section[]) {
+    private initializeSectionBarItems(sections: Section[]) {
         for (var i: number = 0; i < sections.length; i++) {
-            var navBarItem = new NavBarItem();
-            navBarItem.showDropdown = false;
-            navBarItem.childrenVisible = false;
-            navBarItem.section = sections[i];
-            navBarItem.sectionItem = new SectionItem();
-            navBarItem.childSectionItems = new Array<SectionItem>();
+            var sectionBarItem = new SectionBarItem();
+            sectionBarItem.showDropdown = false;
+            sectionBarItem.childrenVisible = false;
+            sectionBarItem.section = sections[i];
+            sectionBarItem.sectionItem = new SectionItem();
+            sectionBarItem.childSectionItems = new Array<SectionItem>();
 
-            this.navBarItems.push(navBarItem);
+            this.sectionBarItems.push(sectionBarItem);
         }
     }
 
-    public async setup(navBarItem: NavBarItem) {
-        var sectionName: string = navBarItem.section.name;
-        navBarItem.homePathUrl = this.fullPathUrl(sectionName, "");
+    public async setup(sectionBarItem: SectionBarItem) {
+        var sectionName: string = sectionBarItem.section.name;
+        sectionBarItem.homePathUrl = this.fullPathUrl(sectionName, "");
         var sectionPathUrl: string = this.pathUrlSegmentBySection(sectionName);
 
         if (sectionPathUrl) {
             var sectionItems = await this.sectionsService.getSectionItemByPath(sectionName + this.TYPE_DELIM + 
                 sectionPathUrl).pipe(first()).toPromise();
-            await this.setNavBarItem(navBarItem, sectionItems[0]);
+            await this.setSectionBarItem(sectionBarItem, sectionItems[0]);
         }
 
         if (!sectionPathUrl) {
             sectionItems = await this.sectionsService.getSectionItems('', sectionName, 
                 '', '', '', '', true).pipe(first()).toPromise();
-            navBarItem.childSectionItems = this.cleanChildSectionItems(navBarItem, sectionItems);
+            sectionBarItem.childSectionItems = this.cleanChildSectionItems(sectionBarItem, sectionItems);
         }
 
         // set dropdown
-        navBarItem.showDropdown = (navBarItem.childSectionItems.length > 0);
+        sectionBarItem.showDropdown = (sectionBarItem.childSectionItems.length > 0);
     }
 
-    public async setNavBarItem(navBarItem: NavBarItem, sectionItem: SectionItem) {
-        if (!navBarItem) {
-            navBarItem = this.navBarItems[0];
+    public async setSectionBarItem(sectionBarItem: SectionBarItem, sectionItem: SectionItem) {
+        if (!sectionBarItem) {
+            sectionBarItem = this.sectionBarItems[0];
         }
 
-        navBarItem.sectionItem = sectionItem;        
+        sectionBarItem.sectionItem = sectionItem;        
 
         // set path names
-        navBarItem.pathNames = this.setPathNames(navBarItem);
+        sectionBarItem.pathNames = this.setPathNames(sectionBarItem);
 
         // set path url
-        var sectionPathUrl: string = navBarItem.sectionItem.pathUrl;
+        var sectionPathUrl: string = sectionBarItem.sectionItem.pathUrl;
         if (sectionPathUrl) {
             sectionPathUrl = sectionPathUrl + this.PATH_DELIM;
         }
-        sectionPathUrl = sectionPathUrl + navBarItem.sectionItem.alias;
-        this.setPathUrls(navBarItem, sectionPathUrl);
+        sectionPathUrl = sectionPathUrl + sectionBarItem.sectionItem.alias;
+        this.setPathUrls(sectionBarItem, sectionPathUrl);
 
         // set child section items
-        var sectionItems = await this.sectionsService.getSectionItems('', '', '', '', '', navBarItem.sectionItem.id, false).pipe(first()).toPromise();
-        navBarItem.childSectionItems = this.cleanChildSectionItems(navBarItem, sectionItems);
+        var sectionItems = await this.sectionsService.getSectionItems('', '', '', '', '', sectionBarItem.sectionItem.id, false).pipe(first()).toPromise();
+        sectionBarItem.childSectionItems = this.cleanChildSectionItems(sectionBarItem, sectionItems);
     }
 
-    private setPathNames(navBarItem: NavBarItem) {
+    private setPathNames(sectionBar: SectionBarItem) {
         var pathNames = new Array<string>();
 
-        if (navBarItem.sectionItem.pathName) {
-           pathNames = navBarItem.sectionItem.pathName.split(this.PATH_DELIM);
+        if (sectionBar.sectionItem.pathName) {
+           pathNames = sectionBar.sectionItem.pathName.split(this.PATH_DELIM);
         }
 
         var i: number;
@@ -125,12 +125,12 @@ export class NavBarService {
         return pathNames;
     }
 
-    private setPathUrls(navBarItem: NavBarItem, sectionPathUrl: string) {
+    private setPathUrls(sectionBarItem: SectionBarItem, sectionPathUrl: string) {
         var pathUrls: string[];
-        pathUrls = navBarItem.sectionItem.pathUrl.split(this.PATH_DELIM);
+        pathUrls = sectionBarItem.sectionItem.pathUrl.split(this.PATH_DELIM);
         var sectionName: string;
-        if (navBarItem.section != null) {
-            sectionName = navBarItem.section.name;
+        if (sectionBarItem.section != null) {
+            sectionName = sectionBarItem.section.name;
         }
             
         var i: number;
@@ -142,7 +142,7 @@ export class NavBarService {
             }
         }
 
-        navBarItem.pathUrls = [];
+        sectionBarItem.pathUrls = [];
         var currentPathUrl: string = "";
         for (i = 0; i < pathUrls.length; i++) {
             if (i > 0) {
@@ -151,18 +151,18 @@ export class NavBarService {
             currentPathUrl = currentPathUrl + pathUrls[i];
             var newCurrentPathUrl: string = this.fullPathUrl(sectionName, currentPathUrl);
 
-            navBarItem.pathUrls.push(newCurrentPathUrl);
+            sectionBarItem.pathUrls.push(newCurrentPathUrl);
         }
     }
 
-    public cleanChildSectionItems(navBarItem: NavBarItem, sectionItems: SectionItem[]) {
+    public cleanChildSectionItems(sectionBarItem: SectionBarItem, sectionItems: SectionItem[]) {
         if (sectionItems && (sectionItems.length > 0)) {
             var i: number;
             for (i = 0; i < sectionItems.length; i++) {
                 //sectionItems[i].fullpath = this.pathWithAlias(sectionItems[i].path, sectionItems[i].alias);
 
                 if (sectionItems[i]) {
-                    if (sectionItems[i].section != navBarItem.section.name) {
+                    if (sectionItems[i].section != sectionBarItem.section.name) {
                         sectionItems.splice(i, 1);
                     }
                 }
@@ -183,15 +183,15 @@ export class NavBarService {
 
     private fullPathUrl(section: string, localPathUrl: string): string {
         var fullPathUrl: string = "";
-        for (var i: number = 0; i < this.navBarItems.length; i++) {
+        for (var i: number = 0; i < this.sectionBarItems.length; i++) {
             var pathUrlToAdd: string = "";
 
-            if (this.navBarItems[i].section.name != section) {
-                pathUrlToAdd = this.navBarItems[i].section.name + this.TYPE_DELIM + 
-                    this.pathUrlSegmentBySection(this.navBarItems[i].section.name);
+            if (this.sectionBarItems[i].section.name != section) {
+                pathUrlToAdd = this.sectionBarItems[i].section.name + this.TYPE_DELIM + 
+                    this.pathUrlSegmentBySection(this.sectionBarItems[i].section.name);
             } else {
                 if (localPathUrl) {
-                    pathUrlToAdd = this.navBarItems[i].section.name + this.TYPE_DELIM + localPathUrl;
+                    pathUrlToAdd = this.sectionBarItems[i].section.name + this.TYPE_DELIM + localPathUrl;
                 }
             }
 
@@ -223,12 +223,12 @@ export class NavBarService {
 
     public addSectionItem(index: number, sectionItem: SectionItem) {
         //sectionItem.fullpath = this.pathWithAlias(sectionItem.path, sectionItem.alias);
-        this.navBarItems[index].childSectionItems.push(sectionItem);
-        this.navBarItems[index].showDropdown = true;
+        this.sectionBarItems[index].childSectionItems.push(sectionItem);
+        this.sectionBarItems[index].showDropdown = true;
     }
 
-    public setVisible($event: any, navBarItem: NavBarItem) {
+    public setVisible($event: any, sectionBar: SectionBarItem) {
         //$event.preventDefault();
-        navBarItem.childrenVisible = !navBarItem.childrenVisible;
+        sectionBar.childrenVisible = !sectionBar.childrenVisible;
     }
 }

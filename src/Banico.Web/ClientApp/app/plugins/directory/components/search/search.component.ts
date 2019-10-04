@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DirectoryItem } from '../../entities/directory-item';
-import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
+import { SectionBarService } from '../../../../shell/section-bar/section-bar.service';
 import { SectionsService } from '../../../../shared/services/sections.service';
 import { DirectoryService } from '../../services/directory.service';
 
@@ -18,7 +18,7 @@ export class DirectorySearchComponent implements OnInit, OnDestroy {
     public isAdmin: boolean;
 
     constructor(
-        @Inject(NavBarService) private navBarService: NavBarService,
+        @Inject(SectionBarService) private sectionBarService: SectionBarService,
         @Inject(DirectoryService) private directoryService: DirectoryService,
         private route: ActivatedRoute
     ) {
@@ -33,7 +33,7 @@ export class DirectorySearchComponent implements OnInit, OnDestroy {
 
         this.sub = this.route.params.subscribe(params => {
             var search = params['search'];
-            this.navBarService.initialize('directory', '', '', '/directory');
+            this.sectionBarService.initialize('directory', '', '', '/directory');
 
         if (search)
             {

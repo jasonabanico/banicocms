@@ -2,7 +2,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { ContentItem } from '../../../../entities/content-item';
 import { DirectoryItem } from '../../entities/directory-item';
-import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
+import { SectionBarService } from '../../../../shell/section-bar/section-bar.service';
 import { DirectoryService } from '../../services/directory.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class DirectoryItemFormComponent implements OnInit {
     private isEdit: boolean = false;
 
     public constructor(
-        @Inject(NavBarService) private navBarService: NavBarService,
+        @Inject(SectionBarService) private sectionBarService: SectionBarService,
         @Inject(DirectoryService) private directoryService: DirectoryService,
         private router: Router,
         private route: ActivatedRoute
@@ -33,7 +33,7 @@ export class DirectoryItemFormComponent implements OnInit {
                     .subscribe(directoryItem => this.set(directoryItem));
             }
             if (path) {
-                this.navBarService.initialize('directory', path, '', '/directory');
+                this.sectionBarService.initialize('directory', path, '', '/directory');
                 this.directoryItem.sectionItems = path;
             }
         });
@@ -42,7 +42,7 @@ export class DirectoryItemFormComponent implements OnInit {
     private set(directoryItem: DirectoryItem) {
         this.directoryItem = directoryItem;
         var sectionItems = this.directoryService.toSectionItems(directoryItem.ToContentItem());
-        this.navBarService.initialize('directory', sectionItems, '', '/directory');
+        this.sectionBarService.initialize('directory', sectionItems, '', '/directory');
         this.isEdit = true;
     }
 

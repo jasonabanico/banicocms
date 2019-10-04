@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SectionItem } from '../../../../entities/section-item';
-import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
+import { SectionBarService } from '../../../../shell/section-bar/section-bar.service';
 import { SectionsService } from '../../../../shared/services/sections.service';
 import { SectionsFileService } from '../../services/sections-file.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -31,7 +31,7 @@ export class AdminSectionsSectionItemComponent implements OnInit {
       });
 
     public constructor(
-        private navBarService: NavBarService,
+        private sectionBarService: SectionBarService,
         private sectionsService: SectionsService,
         private sectionFileService: SectionsFileService,
         private router: Router,
@@ -64,7 +64,7 @@ export class AdminSectionsSectionItemComponent implements OnInit {
                     });
             }
 
-            this.navBarService.initialize('', pathUrl, section, '/admin/sections');
+            this.sectionBarService.initialize('', pathUrl, section, '/admin/sections');
         });
     }
 
@@ -85,7 +85,7 @@ export class AdminSectionsSectionItemComponent implements OnInit {
 
     private setSection(section: string) {
         this.parentSectionItem.section = section;
-        //this.navBarService.setSectionType(0, sectionType);
+        //this.sectionBarService.setSectionType(0, sectionType);
         this.newSectionItem.section = section;
     }
 
@@ -106,7 +106,7 @@ export class AdminSectionsSectionItemComponent implements OnInit {
         }
         this.newSectionItem.pathName = this.newSectionItem.pathName + this.parentSectionItem.name;
 
-        this.navBarService.setNavBarItem(null, parentSectionItem);
+        this.sectionBarService.setSectionBarItem(null, parentSectionItem);
     }
 
     public save() {
@@ -131,7 +131,7 @@ export class AdminSectionsSectionItemComponent implements OnInit {
     private saveSectionItemSuccess(sectionItem: SectionItem) {
         if (sectionItem.id != '') {
             alert('Saved.');
-            this.navBarService.addSectionItem(0, sectionItem);
+            this.sectionBarService.addSectionItem(0, sectionItem);
             this.resetNewSectionItem();
         }
         else {

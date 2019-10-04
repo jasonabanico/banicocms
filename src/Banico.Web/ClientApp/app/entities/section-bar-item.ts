@@ -1,7 +1,7 @@
 import { Section } from './section';
 import { SectionItem } from './section-item';
 
-export class NavBarItem {
+export class SectionBarItem {
     section: Section;
     sectionItem: SectionItem;
     childSectionItems: SectionItem[];

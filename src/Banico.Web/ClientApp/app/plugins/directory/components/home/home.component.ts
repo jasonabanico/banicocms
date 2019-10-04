@@ -2,7 +2,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Section } from '../../../../entities/section';
 import { DirectoryItem } from '../../entities/directory-item';
-import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
+import { SectionBarService } from '../../../../shell/section-bar/section-bar.service';
 import { SectionsService } from '../../../../shared/services/sections.service';
 import { DirectoryService } from '../../services/directory.service';
 
@@ -19,7 +19,7 @@ export class DirectoryHomeComponent implements OnInit, OnDestroy {
     public isAdmin: boolean;
 
     constructor(
-        @Inject(NavBarService) private navBarService: NavBarService,
+        @Inject(SectionBarService) private sectionBarService: SectionBarService,
         @Inject(SectionsService) private sectionsService: SectionsService,
         @Inject(DirectoryService) private directoryService: DirectoryService,
         private route: ActivatedRoute
@@ -29,7 +29,7 @@ export class DirectoryHomeComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.path = '';
-            this.navBarService.initialize('directory', this.path, '', '/directory');
+            this.sectionBarService.initialize('directory', this.path, '', '/directory');
 
             this.directoryService.getAll()
                 .subscribe(directoryItems => this.setDirectoryItems(directoryItems));

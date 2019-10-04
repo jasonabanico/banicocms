@@ -4,7 +4,7 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 import { ContentItem } from '../../../../entities/content-item';
 import { DirectoryItem } from '../../entities/directory-item';
 import { DirectoryService } from '../../services/directory.service';
-import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
+import { SectionBarService } from '../../../../shell/section-bar/section-bar.service';
 import { ModalComponent } from '../../../../shell/modal/modal.component';
 import { AppConfig}  from '../../../../../../Config/app.config';
 
@@ -21,7 +21,7 @@ export class DirectoryItemComponent implements OnInit, OnDestroy {
     public uriEncodeAddress: string;
 
     constructor(
-        @Inject(NavBarService) private navBarService: NavBarService,
+        @Inject(SectionBarService) private sectionBarService: SectionBarService,
         @Inject(DirectoryService) private directoryService: DirectoryService,
         private route: ActivatedRoute,
         private router: Router,
@@ -42,7 +42,7 @@ export class DirectoryItemComponent implements OnInit, OnDestroy {
         this.directoryItem = directoryItem;
         this.uriEncodeAddress = encodeURIComponent(directoryItem.address);
         var sectionItems = this.directoryService.toSectionItems(directoryItem.ToContentItem());
-        this.navBarService.initialize('directory', sectionItems, '', '/directory');
+        this.sectionBarService.initialize('directory', sectionItems, '', '/directory');
     }
 
     public mapUrl(): SafeUrl {

@@ -1,18 +1,18 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { NavBarService } from './nav-bar.service';
+import { SectionBarService } from './section-bar.service';
 import { SectionsService } from '../../shared/services/sections.service';
 
 @Component({
-    selector: 'app-shell-nav-bar',
-    templateUrl: './nav-bar.component.html'
+    selector: 'app-shell-section-bar',
+    templateUrl: './section-bar.component.html'
 })
-export class NavBarComponent implements OnInit {
+export class SectionBarComponent implements OnInit {
     public href: string = "";
 
       constructor(
-        @Inject(NavBarService) public navBarService: NavBarService,
+        @Inject(SectionBarService) public sectionBarService: SectionBarService,
         private location: Location,
         private router: Router
     ) {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Link } from '../../entities/link';
-import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
+import { SectionBarService } from '../../../../shell/section-bar/section-bar.service';
 import { LinksService } from '../../services/links.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class LinksListComponent implements OnInit {
   public links: Link[];
 
   constructor(
-    private navBarService: NavBarService,
+    private sectionBarService: SectionBarService,
     public linksService: LinksService,
     private router: Router,
     private fb: FormBuilder,
@@ -28,7 +28,7 @@ export class LinksListComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.path = params['path'];
-      this.navBarService.initialize('links', this.path, '', '/links');
+      this.sectionBarService.initialize('links', this.path, '', '/links');
 
       if (this.path) {
           this.linksService.getLinks(this.path)

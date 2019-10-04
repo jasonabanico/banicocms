@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Identifiers } from '@angular/compiler';
 import { FormsModule, NgForm, FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NavBarService } from '../../../../shell/nav-bar/nav-bar.service';
+import { SectionBarService } from '../../../../shell/section-bar/section-bar.service';
 import { LinksService } from '../../services/links.service';
 import { Link } from '../../entities/link';
 
@@ -23,7 +23,7 @@ export class LinksFormComponent implements OnInit {
   });
 
   constructor(
-    private navBarService: NavBarService,
+    private sectionBarService: SectionBarService,
     public linksService: LinksService,
     private router: Router,
     private fb: FormBuilder,
@@ -43,7 +43,7 @@ export class LinksFormComponent implements OnInit {
 
       if (params['path']) {
         const sectionItems = params['path'];
-        this.navBarService.initialize('link', sectionItems, '', '/links');
+        this.sectionBarService.initialize('link', sectionItems, '', '/links');
         this.linkForm.patchValue({
           sectionItems: sectionItems
         });
