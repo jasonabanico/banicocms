@@ -5,7 +5,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './modal/modal.component';
 import { SectionBarComponent } from './section-bar/section-bar.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SectionBarService } from './section-bar/section-bar.service';
 import { AuthService } from '../shared/services/auth.service';
@@ -19,12 +19,12 @@ import { AuthService } from '../shared/services/auth.service';
         HomeComponent,
         ModalComponent,
         SectionBarComponent,
-        NavMenuComponent,
+        TopBarComponent,
         SpinnerComponent,
     ],
     exports: [
         SectionBarComponent,
-        NavMenuComponent
+        TopBarComponent
     ],
     providers: [
         SectionBarService,

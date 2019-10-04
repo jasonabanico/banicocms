@@ -5,11 +5,11 @@ import { AuthService } from '../../shared/services/auth.service';
 import { AccountService } from '../../identity/account/services/account.service';
 
 @Component({
-  selector: 'app-shell-nav-menu',
-  templateUrl: './nav-menu.component.html',
-  styleUrls: ['./nav-menu.component.css']
+  selector: 'app-shell-top-bar',
+  templateUrl: './top-bar.component.html',
+  styleUrls: ['./top-bar.component.css']
 })
-export class NavMenuComponent implements OnInit {
+export class TopBarComponent implements OnInit {
   isExpanded: boolean = false;
   isLoggedIn: boolean = false;
   loggedInAs: string = '';
