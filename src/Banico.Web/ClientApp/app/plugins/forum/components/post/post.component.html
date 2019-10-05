@@ -44,7 +44,10 @@
             <ng-container class="list-group-item" *ngFor="let comment of comments">
                 <app-plugins-forum-comment [id]="comment.id"></app-plugins-forum-comment>
             </ng-container>
-            <app-plugins-forum-comment-form [postId]="post?.id" (saved)="onCommentSave($event)"></app-plugins-forum-comment-form>
+            <app-plugins-forum-comment-form 
+                [postId]="post?.id" 
+                (saved)="onCommentSave($event)"
+            ></app-plugins-forum-comment-form>
         </li>
       </ul>
   </div>      
