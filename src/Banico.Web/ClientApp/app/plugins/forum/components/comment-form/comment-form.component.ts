@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ForumCommentService } from '../../services/comment.service';
 import { Comment } from '../../entities/comment';
 import { AccountService } from '../../../../identity/account/services/account.service';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-plugins-forum-comment-form',
@@ -14,6 +15,7 @@ export class ForumCommentFormComponent implements OnInit {
   public isEdit: boolean = false;
   private delta = 500;
   private lastKeypressTime = 0;
+  public avatarHash: string;
   
   public commentForm: FormGroup = this.fb.group({
     id: ['', Validators.required],
@@ -28,10 +30,15 @@ export class ForumCommentFormComponent implements OnInit {
   constructor(
     private commentService: ForumCommentService,
     private accountService: AccountService,
+    private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute
   ) {
+    this.avatarHash = this.authService.getAvatarHash();
+    this.commentForm.patchValue({
+      avatarHash: this.avatarHash
+    });
   }
 
   @Input()
@@ -65,13 +72,6 @@ export class ForumCommentFormComponent implements OnInit {
   set username(username: string) {
     this.commentForm.patchValue({
       username: username
-    });
-  }
-
-  @Input()
-  set avatarHash(avatarHash: string) {
-    this.commentForm.patchValue({
-      avatarHash: avatarHash
     });
   }
 
