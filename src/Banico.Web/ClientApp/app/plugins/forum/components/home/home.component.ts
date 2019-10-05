@@ -22,8 +22,8 @@ export class ForumHomeComponent {
         this.subforums = new Array();
         this.subforumService.getAll()
             .subscribe(subforums => this.setSubforums(subforums));
-        this.authService.canAccess('forum-subforum/manage', '', false).pipe(
-            map(result => this.canManageSubforum = result));
+        this.authService.canAccess('forum-subforum/manage', '', false)
+            .subscribe(result => this.canManageSubforum = result);
     }
 
     private setSubforums(subforums: Subforum[])
