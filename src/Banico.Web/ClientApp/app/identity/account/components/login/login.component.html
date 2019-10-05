@@ -27,97 +27,98 @@
 -->
 <div class="row align-items-center justify-content-center">
     <div class="col-md-6 col-sm-6 col-xs-6">
-        <form 
-            class="text-center border border-light p-5 mt-4"
-            [formGroup]="loginForm" 
-            novalidate 
-            (ngSubmit)="login()">
-        
-            <p class="h4 mt-4">Sign in</p>
-        
-            <p>
-                Don't have an account yet? <a href="/account/register">Sign up here.</a>
-            </p>
-
-            <div class="text-danger"></div>
-        
-            <div class="form-row">
-                <div class="col">
-                    <input 
-                        class="form-control mt-4" 
-                        id="username"
-                        name="username"
-                        type="text" 
-                        formControlName="username"
-                        placeholder="Username"
-                        />
-                    <!--
-                    data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." id="Email" name="Email" value="" />
-                    -->
-                    <span class="text-danger field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
-                </div>
-            </div>
-                        
-            <div class="alert alert-danger" role="alert" *ngIf="errors['Username']">
-                <ul>
-                    <li *ngFor="let error of errors['Username']">
-                        {{ error }}
-                    </li>
-                </ul>
-            </div>
-        
-            <div class="form-row">
-                <div class="col">
-                    <input 
-                        class="form-control mt-4"
-                        id="password"
-                        name="password"
-                        type="password" 
-                        formControlName="password"
-                        placeholder="Password"
-                        />
-                    <!--
-                        data-val="true" data-val-required="The Password field is required." id="Password" name="Password" />
-                    -->
-                    <span class="text-danger field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
-                </div>
-            </div>
-        
-            <div class="alert alert-danger" role="alert" *ngIf="errors['Password']">
-                <ul>
-                    <li *ngFor="let error of errors['Password']">
-                        {{ error }}
-                    </li>
-                </ul>
-            </div>
-                    <!--
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <label for="RememberMe">
-                            <input type="checkbox" data-val="true" data-val-required="The Remember me? field is required." id="RememberMe" name="RememberMe" value="true" />
-                            Remember me?
-                        </label>
+        <div class="text-center border border-light p-5 mt-4">
+                <form 
+                [formGroup]="loginForm" 
+                novalidate 
+                (ngSubmit)="login()">
+            
+                <p class="h4 mt-4">Sign in</p>
+            
+                <p>
+                    Don't have an account yet? <a href="/account/register">Sign up here.</a>
+                </p>
+    
+                <div class="text-danger"></div>
+            
+                <div class="form-row">
+                    <div class="col">
+                        <input 
+                            class="form-control mt-4" 
+                            id="username"
+                            name="username"
+                            type="text" 
+                            formControlName="username"
+                            placeholder="Username"
+                            />
+                        <!--
+                        data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." id="Email" name="Email" value="" />
+                        -->
+                        <span class="text-danger field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
                     </div>
                 </div>
-            </div>
-            -->
-                        
-            <div class="form-row mt-4">
-                <div class="col">
-                    <button type="submit" class="btn btn-primary">Log in</button>
+                            
+                <div class="alert alert-danger" role="alert" *ngIf="errors['Username']">
+                    <ul>
+                        <li *ngFor="let error of errors['Username']">
+                            {{ error }}
+                        </li>
+                    </ul>
                 </div>
-            </div>
-                        
-            <hr>
-        
-            <p>
-                <a href="/account/resend-confirmation">Resend confirmation email?</a>
-            </p>
-            <p>
-                <a href="/account/forgot-password">Forgot your password?</a>
-            </p>
-        
-        </form>    
+            
+                <div class="form-row">
+                    <div class="col">
+                        <input 
+                            class="form-control mt-4"
+                            id="password"
+                            name="password"
+                            type="password" 
+                            formControlName="password"
+                            placeholder="Password"
+                            />
+                        <!--
+                            data-val="true" data-val-required="The Password field is required." id="Password" name="Password" />
+                        -->
+                        <span class="text-danger field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+            
+                <div class="alert alert-danger" role="alert" *ngIf="errors['Password']">
+                    <ul>
+                        <li *ngFor="let error of errors['Password']">
+                            {{ error }}
+                        </li>
+                    </ul>
+                </div>
+                        <!--
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            <label for="RememberMe">
+                                <input type="checkbox" data-val="true" data-val-required="The Remember me? field is required." id="RememberMe" name="RememberMe" value="true" />
+                                Remember me?
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                -->
+                            
+                <div class="form-row mt-4">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </div>
+                </div>
+                            
+                <hr>
+            
+                <p>
+                    <a href="/account/resend-confirmation">Resend confirmation email?</a>
+                </p>
+                <p>
+                    <a href="/account/forgot-password">Forgot your password?</a>
+                </p>
+            
+            </form>        
+        </div>
     </div>
 </div>
