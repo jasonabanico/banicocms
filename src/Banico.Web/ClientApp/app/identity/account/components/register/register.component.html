@@ -1,140 +1,142 @@
-
-<span *ngIf="!isSuccessful">
-
-    <form 
-        class="text-center border border-light p-5 mt-4"
-        [formGroup]="registerForm" 
-        novalidate 
-        (ngSubmit)="register()">
-
-        <p class="h4 mt-4">Sign up</p>
-
-        <div class="form-row">
-            <div class="col">
-                <input 
-                    class="form-control mt-4" 
-                    id="username"
-                    name="username"
-                    type="text" 
-                    formControlName="username"
-                    placeholder="Username"
-                    />
-                <span class="text-danger field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="col">
-                <input 
-                    class="form-control mt-4" 
-                    id="email"
-                    name="email"
-                    type="email" 
-                    validateEmail
-                    formControlName="email"
-                    placeholder="Email"
-                    />
+<div class="row align-items-center justify-content-center">
+    <div class="col-md-6 col-sm-6 col-xs-6">
+        <span *ngIf="!isSuccessful">
+            <form 
+                class="text-center border border-light p-5 mt-4"
+                [formGroup]="registerForm" 
+                novalidate 
+                (ngSubmit)="register()">
+        
+                <p class="h4 mt-4">Sign up</p>
+        
+                <div class="form-row">
+                    <div class="col">
+                        <input 
+                            class="form-control mt-4" 
+                            id="username"
+                            name="username"
+                            type="text" 
+                            formControlName="username"
+                            placeholder="Username"
+                            />
+                        <span class="text-danger field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+        
+                <div class="form-row">
+                    <div class="col">
+                        <input 
+                            class="form-control mt-4" 
+                            id="email"
+                            name="email"
+                            type="email" 
+                            validateEmail
+                            formControlName="email"
+                            placeholder="Email"
+                            />
+                            <!--
+                            data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." id="Email" name="Email" value="" 
+                            -->
+                        <span class="text-danger field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+        
+                <div class="alert alert-danger" role="alert" *ngIf="errors['Email']">
+                    <ul>
+                        <li *ngFor="let error of errors['Email']">
+                            {{ error }}
+                        </li>
+                    </ul>
+                </div>
+        
+                <div class="form-row">
+                    <div class="col">
+                        <input 
+                            class="form-control mt-4"
+                            id="password"
+                            name="password"
+                            type="password" 
+                            formControlName="password"
+                            placeholder="Password"
+                            />
+                        <!-- 
+                            data-val="true" data-val-length="The Password must be at least 6 and at max 100 characters long." data-val-length-max="100" data-val-length-min="6" data-val-required="The Password field is required." id="Password" name="Password" 
+                        -->
+                        <span class="text-danger field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+        
+                <div class="alert alert-danger" role="alert" *ngIf="errors['Password']">
+                    <ul>
+                        <li *ngFor="let error of errors['Password']">
+                            {{ error }}
+                        </li>
+                    </ul>
+                </div>
+        
+                <div class="form-row">
                     <!--
-                    data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." id="Email" name="Email" value="" 
+                        <label class="col-md-2 control-label" for="ConfirmPassword">Confirm password</label>
                     -->
-                <span class="text-danger field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
-            </div>
-        </div>
-
-        <div class="alert alert-danger" role="alert" *ngIf="errors['Email']">
-            <ul>
-                <li *ngFor="let error of errors['Email']">
-                    {{ error }}
-                </li>
-            </ul>
-        </div>
-
-        <div class="form-row">
-            <div class="col">
-                <input 
-                    class="form-control mt-4"
-                    id="password"
-                    name="password"
-                    type="password" 
-                    formControlName="password"
-                    placeholder="Password"
-                    />
-                <!-- 
-                    data-val="true" data-val-length="The Password must be at least 6 and at max 100 characters long." data-val-length-max="100" data-val-length-min="6" data-val-required="The Password field is required." id="Password" name="Password" 
-                -->
-                <span class="text-danger field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
-            </div>
-        </div>
-
-        <div class="alert alert-danger" role="alert" *ngIf="errors['Password']">
-            <ul>
-                <li *ngFor="let error of errors['Password']">
-                    {{ error }}
-                </li>
-            </ul>
-        </div>
-
-        <div class="form-row">
-            <!--
-                <label class="col-md-2 control-label" for="ConfirmPassword">Confirm password</label>
-            -->
-            <div class="col">
-                <input 
-                    class="form-control mt-4" 
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password" 
-                    formControlName="confirmPassword"
-                    placeholder="Confirm password"
-                />
-                <!-- 
-                    data-val="true" data-val-equalto="The password and confirmation password do not match." data-val-equalto-other="*.Password" id="ConfirmPassword" name="ConfirmPassword"
-                -->
-                <span class="text-danger field-validation-valid" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span>
-            </div>
-        </div>
-
-        <div class="alert alert-danger" role="alert" *ngIf="errors['ConfirmPassword']">
-            <ul>
-                <li *ngFor="let error of errors['ConfirmPassword']">
-                    {{ error }}
-                </li>
-            </ul>
-        </div>
-
-        <div *ngIf="inviteOnly" class="form-row">
-            <!--
-                <label class="col-md-2 control-label" for="Code">Invite Code</label>
-            -->
-            <div class="col">
-                <input 
-                    class="form-control mt-4" 
-                    id="code" 
-                    name="code" 
-                    type="text" 
-                    formControlName="code"
-                    value=""
-                    placeholder="Invite Code" />
-                <span class="text-danger field-validation-valid" data-valmsg-for="Code" data-valmsg-replace="true"></span>
-            </div>
-        </div>
-
-        <div class="form-row mt-4">
-            <div class="col">
-                <button type="submit" class="btn btn-primary">Register</button>
-            </div>
-        </div>
-
-        <input data-val="true" data-val-required="The InviteOnly field is required." id="InviteOnly" name="InviteOnly" type="hidden" value="{{inviteOnly}}" />
-
-        <hr>
-
-        <!-- Terms of service -->
-        <p>By clicking <em>Register</em> you agree to our
-            <a href="" target="_blank">terms of service</a>
-        </form>
-</span>
-
-<span *ngIf="isSuccessful">
-    <p class="h4 mt-4">Thank you!</p>
-</span>
+                    <div class="col">
+                        <input 
+                            class="form-control mt-4" 
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            type="password" 
+                            formControlName="confirmPassword"
+                            placeholder="Confirm password"
+                        />
+                        <!-- 
+                            data-val="true" data-val-equalto="The password and confirmation password do not match." data-val-equalto-other="*.Password" id="ConfirmPassword" name="ConfirmPassword"
+                        -->
+                        <span class="text-danger field-validation-valid" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+        
+                <div class="alert alert-danger" role="alert" *ngIf="errors['ConfirmPassword']">
+                    <ul>
+                        <li *ngFor="let error of errors['ConfirmPassword']">
+                            {{ error }}
+                        </li>
+                    </ul>
+                </div>
+        
+                <div *ngIf="inviteOnly" class="form-row">
+                    <!--
+                        <label class="col-md-2 control-label" for="Code">Invite Code</label>
+                    -->
+                    <div class="col">
+                        <input 
+                            class="form-control mt-4" 
+                            id="code" 
+                            name="code" 
+                            type="text" 
+                            formControlName="code"
+                            value=""
+                            placeholder="Invite Code" />
+                        <span class="text-danger field-validation-valid" data-valmsg-for="Code" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+        
+                <div class="form-row mt-4">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                </div>
+        
+                <input data-val="true" data-val-required="The InviteOnly field is required." id="InviteOnly" name="InviteOnly" type="hidden" value="{{inviteOnly}}" />
+        
+                <hr>
+        
+                <!-- Terms of service -->
+                <p>By clicking <em>Register</em> you agree to our
+                    <a href="" target="_blank">terms of service</a>
+                </form>
+        </span>
+        
+        <span *ngIf="isSuccessful">
+            <p class="h4 mt-4">Thank you!</p>
+        </span>
+    </div>    
+</div>

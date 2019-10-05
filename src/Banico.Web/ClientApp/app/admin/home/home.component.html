@@ -5,8 +5,8 @@
 </div>
 
 <div *ngIf="isInitialized">
-    <p><a href="/admin/configs">Configs</a></p>
-    <p><a href="/admin/sections">Sections</a></p>
-    <p><a href="/admin/roles">Roles</a></p>
-    <p><a href="/admin/users">Users</a></p>
+    <p *ngIf="configsAllowed"><a href="/admin/configs">Configs</a></p>
+    <p *ngIf="sectionsAllowed"><a href="/admin/sections">Sections</a></p>
+    <p *ngIf="rolesAllowed"><a href="/admin/roles">Roles</a></p>
+    <p *ngIf="usersAllowed"><a href="/admin/users">Users</a></p>
 </div>
