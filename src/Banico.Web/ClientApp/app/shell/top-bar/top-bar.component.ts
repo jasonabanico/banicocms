@@ -13,6 +13,7 @@ export class TopBarComponent implements OnInit {
   isExpanded: boolean = false;
   isLoggedIn: boolean = false;
   loggedInAs: string = '';
+  avatarHash: string = '';
 
   constructor(
     @Inject(WindowRefService) private windowRefService: WindowRefService,
@@ -25,6 +26,7 @@ export class TopBarComponent implements OnInit {
   ngOnInit() {
     this.isLoggedIn = this.authService.hasToken();
     this.loggedInAs = this.authService.getUserName();
+    this.avatarHash = this.authService.getAvatarHash();
   }
 
   logout() {
