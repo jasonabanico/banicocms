@@ -21,9 +21,18 @@ export class TopBarComponent implements OnInit {
     @Inject(AuthService) private authService: AuthService,
     private location: Location
   ) {
+    this.authService.loginDataChanged.subscribe(
+      result => {
+        this.updateLogin();
+      }
+    )
   }
 
   ngOnInit() {
+    this.updateLogin();
+  }
+
+  updateLogin() {
     this.isLoggedIn = this.authService.hasToken();
     this.loggedInAs = this.authService.getUserName();
     this.avatarHash = this.authService.getAvatarHash();

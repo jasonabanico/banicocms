@@ -65,8 +65,10 @@ export class IdentityAccountLoginComponent {
         const myResult: any = result;
         this.authService.setToken(myResult.auth_token);
         this.authService.setUserId(myResult.id);
+        this.authService.setUserName(myResult.username);
         this.authService.setIsAdmin(myResult.is_admin);
         this.getProfile(myResult.id);
+        this.authService.loginDataChanged.emit();
         this.router.navigate([this.returnUrl]);
       }
     } catch (errors) {

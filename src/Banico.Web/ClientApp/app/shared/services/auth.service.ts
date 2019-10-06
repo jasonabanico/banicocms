@@ -1,4 +1,4 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID, EventEmitter } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { BaseService } from './base.service';
 import { Observable, of } from 'rxjs';
@@ -11,6 +11,8 @@ import { ConfigsService } from './configs.service';
 import { map } from 'rxjs/operators';
 
 export class AuthService extends BaseService {
+    public loginDataChanged = new EventEmitter<any>();
+    
     constructor(
         private http: HttpClient,
         @Inject(WindowRefService) windowRefService: WindowRefService,
@@ -118,6 +120,7 @@ export class AuthService extends BaseService {
             this.localStorage.removeItem(this.USER_NAME);
             this.localStorage.removeItem(this.IS_ADMIN);
             this.localStorage.removeItem(this.IS_SUPERADMIN);
+            this.loginDataChanged.emit();
         }
     }
 
