@@ -2,25 +2,21 @@
     <div class="container">
         <a class="navbar-brand" href="#">Banico</a>
 
-        <div *ngIf="!loggedInAs">
-            <ul class="navbar-nav">
-                <li class="nav-item">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <span *ngIf="!loggedInAs">
                     <a class="nav-link" href="/account/login/?returnUrl={{location.path()}}">
                         <i class="fas fa-sign-in-alt"></i>
                     </a>
-                </li>
-            </ul>
-        </div>
-
-        <div *ngIf="loggedInAs">
-            <ul class="navbar-nav">
-                <li class="nav-item">
+                </span>
+                <span *ngIf="loggedInAs">
                     <a class="nav-link" href="/manage">
                         <img class="rounded-circle" width="30" src="https://www.gravatar.com/avatar/{{avatarHash}}?size=30&d=mp" alt="{{loggedInAs}}">
                     </a>
-                </li>
-            </ul>
-        </div>
+                </span>
+            </li>
+        </ul>
+
         <!--
             <ul class="navbar-nav mr-auto">
             <li [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
@@ -47,4 +43,3 @@
     -->
     </div>
 </nav>
-  
