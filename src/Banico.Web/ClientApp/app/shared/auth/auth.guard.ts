@@ -26,8 +26,6 @@ public canActivate(
     const module = route.data['module'] as string;
     const url: string = state.url;
 
-    let result = false;
-
     if (this.debug) {
       alert(module);
       alert(url);
