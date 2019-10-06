@@ -1,7 +1,10 @@
 
 
+using System;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Banico.Identity.Auth;
 using Banico.Identity.Models;
@@ -15,17 +18,26 @@ namespace Banico.Identity.Helpers
         ClaimsIdentity identity, 
         IJwtFactory jwtFactory,
         string userName, 
+        string email,
         bool isAdmin,
         bool isSuperAdmin,
         JwtIssuerOptions jwtOptions, 
         JsonSerializerSettings serializerSettings)
       {
+        string avatarHash = string.Empty;
+        using (var md5 = MD5.Create())
+        {
+            var result = md5.ComputeHash(Encoding.ASCII.GetBytes(email));
+            avatarHash = BitConverter.ToString(result).Replace("-", "").ToLower();
+        }
+
         var response = new
         {
-          id = identity.Claims.Single(c => c.Type == "id").Value,
-          username = userName,
           auth_token = await jwtFactory.GenerateEncodedToken(userName, identity),
           expires_in = (int)jwtOptions.ValidFor.TotalSeconds,
+          id = identity.Claims.Single(c => c.Type == "id").Value,
+          username = userName,
+          avatar_hash = avatarHash,          
           is_admin = isAdmin,
           is_superadmin = isSuperAdmin
         };

@@ -118,6 +118,7 @@ export class AuthService extends BaseService {
             this.localStorage.removeItem(this.TOKEN_NAME);
             this.localStorage.removeItem(this.USER_ID);
             this.localStorage.removeItem(this.USER_NAME);
+            this.localStorage.removeItem(this.AVATAR_HASH);
             this.localStorage.removeItem(this.IS_ADMIN);
             this.localStorage.removeItem(this.IS_SUPERADMIN);
             this.loginDataChanged.emit();

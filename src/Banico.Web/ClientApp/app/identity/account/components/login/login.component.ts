@@ -66,6 +66,7 @@ export class IdentityAccountLoginComponent {
         this.authService.setToken(myResult.auth_token);
         this.authService.setUserId(myResult.id);
         this.authService.setUserName(myResult.username);
+        this.authService.setAvatarHash(myResult.avatar_hash);
         this.authService.setIsAdmin(myResult.is_admin);
         this.getProfile(myResult.id);
         this.authService.loginDataChanged.emit();

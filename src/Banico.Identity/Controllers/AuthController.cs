@@ -45,8 +45,15 @@ namespace Banico.Identity.Controllers
             }
 
           var jwt = await Tokens.GenerateJwt(
-              identity, _jwtFactory, credentials.UserName, false, false, _jwtOptions, 
-              new JsonSerializerSettings { Formatting = Formatting.Indented });
+              identity, 
+              _jwtFactory, 
+              credentials.UserName, 
+              string.Empty, 
+              false, 
+              false, 
+              _jwtOptions, 
+              new JsonSerializerSettings { Formatting = Formatting.Indented }
+            );
           return new OkObjectResult(jwt);
         }
 

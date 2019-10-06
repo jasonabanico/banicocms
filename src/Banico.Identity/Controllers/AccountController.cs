@@ -182,7 +182,16 @@ namespace Banico.Identity.Controllers
                     bool isSuperAdmin = _claimsService.IsSuperAdmin(user.UserName);
                     bool isAdmin = (_claimsService.IsAdmin(HttpContext.User) || isSuperAdmin);
                     _logger.LogInformation(1, "User logged in.");
-                    var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, user.UserName, isAdmin, isSuperAdmin, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
+                    var jwt = await Tokens.GenerateJwt(
+                        identity, 
+                        _jwtFactory, 
+                        user.UserName, 
+                        user.Email,
+                        isAdmin, 
+                        isSuperAdmin, 
+                        _jwtOptions, 
+                        new JsonSerializerSettings { Formatting = Formatting.Indented }
+                    );
                     return new OkObjectResult(jwt);
                 }
 

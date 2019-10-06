@@ -87,8 +87,16 @@ namespace Banico.Identity.Controllers
         return BadRequest(Errors.AddErrorToModelState("login_failure", "Failed to create local user account.", ModelState));
       }
 
-      var jwt = await Tokens.GenerateJwt(_jwtFactory.GenerateClaimsIdentity(localUser.UserName, localUser.Id),
-        _jwtFactory, localUser.UserName, false, false, _jwtOptions, new JsonSerializerSettings {Formatting = Formatting.Indented});
+      var jwt = await Tokens.GenerateJwt(
+        _jwtFactory.GenerateClaimsIdentity(localUser.UserName, localUser.Id),
+        _jwtFactory, 
+        localUser.UserName, 
+        localUser.Email,
+        false, 
+        false, 
+        _jwtOptions,
+        new JsonSerializerSettings {Formatting = Formatting.Indented}
+      );
   
       return new OkObjectResult(jwt);
     }
