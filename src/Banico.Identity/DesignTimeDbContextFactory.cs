@@ -1,5 +1,4 @@
 using System.IO;
-using Banico.Identity.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
