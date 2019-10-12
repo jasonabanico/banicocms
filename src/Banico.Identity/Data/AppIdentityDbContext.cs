@@ -45,6 +45,7 @@ namespace Banico.Identity.Data
                     case "sqllite":
                         optionsBuilder.UseSqlite(connectionString);
                         break;
+                }
             }
         }
     }
