@@ -71,8 +71,7 @@ namespace Banico.EntityFrameworkCore.Migrations
                 name: "Invites",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<string>(nullable: false),
                     Inviter = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Code = table.Column<string>(nullable: true)
