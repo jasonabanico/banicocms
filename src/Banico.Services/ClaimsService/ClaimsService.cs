@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,9 @@ namespace Banico.Services
                 if (user.Identity.IsAuthenticated)
                 {
                     var nameId = user.FindFirst(ClaimTypes.NameIdentifier);
+                    if (nameId == null) {
+                        nameId = user.FindFirst(JwtRegisteredClaimNames.Sub);
+                    }
                     if (nameId != null)
                     {
                         username = nameId.Value;

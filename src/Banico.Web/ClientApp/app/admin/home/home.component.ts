@@ -22,8 +22,12 @@ export class AdminHomeComponent {
 
     public ngOnInit() {
         this.configsService.initialized()
-            .subscribe(result => this.isInitialized = result);
-        this.setPermissions();
+            .subscribe(result => {
+                this.isInitialized = result
+                if (this.isInitialized) {
+                    this.setPermissions();
+                }
+            });
     }
 
     public initialize() {
@@ -31,7 +35,7 @@ export class AdminHomeComponent {
             .subscribe(result => this.isInitialized = result);
         this.setPermissions();
     }
-    
+
     private setPermissions() {
         this.authService.canAccess('admin/configs', '', false)
             .subscribe(result => this.configsAllowed = result);
