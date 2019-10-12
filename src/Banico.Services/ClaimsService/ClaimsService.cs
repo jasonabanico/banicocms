@@ -1,3 +1,4 @@
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +8,7 @@ namespace Banico.Services
 {
     public class ClaimsService : IClaimsService
     {
+        private bool isDebug = false;
         private IConfiguration _configuration;
         public ClaimsService(IConfiguration configuration)
         {
@@ -21,17 +23,25 @@ namespace Banico.Services
 
         public string GetUsername(ClaimsPrincipal user)
         {
+            this.WriteDebugMessage("Getting Username");
             var username = string.Empty;
             if (user != null) 
             {
+                this.WriteDebugMessage("User object found");
                 if (user.Identity.IsAuthenticated)
                 {
+                    this.WriteDebugMessage("User authenticated");
                     var nameId = user.FindFirst(ClaimTypes.NameIdentifier);
                     if (nameId == null) {
+                        this.WriteDebugMessage("NameIdentifier not found");
                         nameId = user.FindFirst(JwtRegisteredClaimNames.Sub);
+                        if (nameId == null) {
+                            this.WriteDebugMessage("Sub not found");
+                        }
                     }
                     if (nameId != null)
                     {
+                        this.WriteDebugMessage("Username is " + nameId.Value);
                         username = nameId.Value;
                     }
                 }
@@ -74,11 +84,14 @@ namespace Banico.Services
 
         public bool IsAdmin(ClaimsPrincipal user)
         {
-            return user.IsInRole("Admin");
+            var isAdmin = user.IsInRole("Admin");
+            this.WriteDebugMessage("IsAdmin role check returns " + isAdmin.ToString());
+            return isAdmin;
         }
 
         public bool IsSuperAdmin(string username)
         {
+            this.WriteDebugMessage("IsSuperAdmin check");
             bool result = false;
 
             if (!string.IsNullOrEmpty(username))
@@ -87,6 +100,7 @@ namespace Banico.Services
                 string[] superAdmins = superAdminConfig.Split(',');
                 foreach (string superAdmin in superAdmins)
                 {
+                    this.WriteDebugMessage("Check if username matches " + superAdmin);
                     if (username == superAdmin)
                     {
                         result = true;
@@ -94,6 +108,7 @@ namespace Banico.Services
                 }
             }
 
+            this.WriteDebugMessage("IsSuperAdmin returns " + result);
             return result;
         }
 
@@ -110,19 +125,29 @@ namespace Banico.Services
 
         public string GetUserId(ClaimsPrincipal user)
         {
+            this.WriteDebugMessage("Getting user id");
+            string id = string.Empty;
             if (user == null)
             {
                 return string.Empty;
             }
 
             if (user.Identity.IsAuthenticated)
-            {
-                // userId = user.FindFirst(Helpers.JwtClaimIdentifiers.Id).Value;
-                return user.FindFirst("id").Value;
+            {                
+                //userId = user.FindFirst(Helpers.JwtClaimIdentifiers.Id).Value;
+                id = user.FindFirst("id").Value;
             }
 
-            return string.Empty;
+            this.WriteDebugMessage("User id is " + id);
+            return id;
         }
 
+        private void WriteDebugMessage(string message)
+        {
+            if (this.isDebug)
+            {
+                Console.WriteLine("------> " + message);
+            }
+        }
     }
 }
