@@ -26,10 +26,9 @@ namespace Banico.Identity.Data
         {
             if (isMigration)
             {
-                var connectionStringBuilder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder { DataSource = "banico-identity.db" };
-                var connectionString = connectionStringBuilder.ToString();
+                string connectionString = this.Configuration.GetConnectionString("AppIdentityDbContext");
 
-                var provider = Configuration["AppIdentityDBProvider"];
+                var provider = Configuration["AppDbProvider"];
                 if (string.IsNullOrEmpty(provider))
                 {
                     provider = "sqlite";
@@ -42,7 +41,12 @@ namespace Banico.Identity.Data
                     case "mysql":
                         optionsBuilder.UseMySql(connectionString);
                         break;
-                    case "sqllite":
+                    case "sqlite":
+                        if (string.IsNullOrEmpty(connectionString))
+                        {
+                            var connectionStringBuilder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder { DataSource = "banico-identity.db" };
+                            connectionString = connectionStringBuilder.ToString();
+                        }
                         optionsBuilder.UseSqlite(connectionString);
                         break;
                 }
