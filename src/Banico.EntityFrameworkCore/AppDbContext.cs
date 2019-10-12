@@ -102,7 +102,6 @@ namespace Banico.EntityFrameworkCore
         }
 
         //List of DB Models - Add your DB models here
-        public DbSet<User> User { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<SectionItem> SectionItems { get; set; }
         public DbSet<ContentSectionItem> ContentSectionItems { get; set; }

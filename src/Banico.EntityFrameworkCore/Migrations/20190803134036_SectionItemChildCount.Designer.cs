@@ -230,20 +230,6 @@ namespace Banico.EntityFrameworkCore.Migrations
                     b.ToTable("SectionItems");
                 });
 
-            modelBuilder.Entity("Banico.Core.Entities.User", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("EntryTime");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("User");
-                });
-
             modelBuilder.Entity("Banico.Core.Entities.ContentSectionItem", b =>
                 {
                     b.HasOne("Banico.Core.Entities.ContentItem")

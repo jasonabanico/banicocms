@@ -10,8 +10,10 @@ namespace Banico.EntityFrameworkCore
     {
         public AppDbContext CreateDbContext(string[] args)
         {
+            var basePath = Directory.GetCurrentDirectory();
+            var path = basePath + "/Config/";
             IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(path)
                 .AddJsonFile("appsettings.json")
                 .Build();
     
