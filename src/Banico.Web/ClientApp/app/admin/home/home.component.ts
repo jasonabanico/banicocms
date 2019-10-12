@@ -26,6 +26,12 @@ export class AdminHomeComponent {
         this.setPermissions();
     }
 
+    public initialize() {
+        this.configsService.setInitialSettings()
+            .subscribe(result => this.isInitialized = result);
+        this.setPermissions();
+    }
+    
     private setPermissions() {
         this.authService.canAccess('admin/configs', '', false)
             .subscribe(result => this.configsAllowed = result);
