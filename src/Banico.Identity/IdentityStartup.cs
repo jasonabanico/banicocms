@@ -48,20 +48,33 @@ namespace Banico.Identity
       // Add framework services.
       string appDbContextConnectionString = Configuration.GetConnectionString("AppIdentityDbContext");
 
-      if ((!String.IsNullOrEmpty(appDbContextConnectionString)) && 
-          (!(this.developmentEnvironment)))
+      var provider = Configuration["AppIdentityDBProvider"];
+      if (string.IsNullOrEmpty(provider))
       {
-          services.AddDbContext<AppIdentityDbContext>(options =>
-              options.UseSqlServer(appDbContextConnectionString,
-              optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Identity")));
+          provider = "sqlite";
       }
-      else
+      switch(provider.ToLower())
       {
-          var connectionStringBuilder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder { DataSource = "banico-identity.db" };
-          appDbContextConnectionString = connectionStringBuilder.ToString();
-          services.AddDbContext<AppIdentityDbContext>(options =>
-              options.UseSqlite(appDbContextConnectionString,
-              optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Identity")));
+          case "mssql":
+              services.AddDbContext<AppIdentityDbContext>(options =>
+                  options.UseSqlServer(appDbContextConnectionString,
+                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
+              break;
+          case "mysql":
+              services.AddDbContext<AppIdentityDbContext>(options =>
+                  options.UseMySql(appDbContextConnectionString,
+                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
+              break;
+          case "sqlite":
+              if (string.IsNullOrEmpty(appDbContextConnectionString))
+              {
+                  var connectionStringBuilder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder { DataSource = "banico-identity.db" };
+                  appDbContextConnectionString = connectionStringBuilder.ToString();
+              }
+              services.AddDbContext<AppIdentityDbContext>(options =>
+                  options.UseSqlite(appDbContextConnectionString,
+                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
+              break;
       }
 
       services.AddSingleton<IJwtFactory, JwtFactory>();
