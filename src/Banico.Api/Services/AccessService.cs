@@ -16,6 +16,7 @@ namespace Banico.Api.Services
 {
     public class AccessService : IAccessService
     {
+        private bool isDebug = false;
         private IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<AppUser> _userManager;
         private readonly IClaimsService _claimsService;
@@ -85,6 +86,7 @@ namespace Banico.Api.Services
 
         public async Task<bool> IsEnabled(string moduleAndFunction)
         {
+            bool result = false;
             var module = moduleAndFunction.Split('/')[0];
             var rootModule = module.Split('-')[0];
             List<Config> config = await _configRepository.Get("", rootModule, "isEnabled");
@@ -93,15 +95,17 @@ namespace Banico.Api.Services
             {
                 if (config[0].Value == "y")
                 {
-                    return true;
+                    result = true;
                 }
             }
 
-            return false;
+            this.WriteDebugMessage("AccessService: Checking if enabled " + moduleAndFunction + " returns " + result.ToString());
+            return result;
         }
 
         public async Task<bool> Allowed(string module)
         {
+            this.WriteDebugMessage("AccessService: Checking if allowed " + module);
             if (await this.IsEnabled(module))
             {
                 List<Config> config = await _configRepository.Get("", module + "/manage", "canActivate");
@@ -110,6 +114,7 @@ namespace Banico.Api.Services
                 {
                     string permission = config[0].Value;
 
+                    this.WriteDebugMessage("AccessService: Permission required is " + permission);
                     switch (permission.ToLower())
                     {
                         case "public": return true;
@@ -133,6 +138,14 @@ namespace Banico.Api.Services
             var domainName = domainParser.Get(host);
 
             return domainName.RegistrableDomain;
+        }
+
+        private void WriteDebugMessage(string message)
+        {
+            if (this.isDebug)
+            {
+                Console.WriteLine("-----> " + message);
+            }
         }
     }
 }

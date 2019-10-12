@@ -85,13 +85,13 @@ namespace Banico.Services
         public bool IsAdmin(ClaimsPrincipal user)
         {
             var isAdmin = user.IsInRole("Admin");
-            this.WriteDebugMessage("IsAdmin role check returns " + isAdmin.ToString());
+            this.WriteDebugMessage("ClaimsService: IsAdmin role check returns " + isAdmin.ToString());
             return isAdmin;
         }
 
         public bool IsSuperAdmin(string username)
         {
-            this.WriteDebugMessage("IsSuperAdmin check");
+            this.WriteDebugMessage("ClaimsService: IsSuperAdmin check");
             bool result = false;
 
             if (!string.IsNullOrEmpty(username))
@@ -100,7 +100,7 @@ namespace Banico.Services
                 string[] superAdmins = superAdminConfig.Split(',');
                 foreach (string superAdmin in superAdmins)
                 {
-                    this.WriteDebugMessage("Check if username matches " + superAdmin);
+                    this.WriteDebugMessage("ClaimsService: Check if username matches " + superAdmin);
                     if (username == superAdmin)
                     {
                         result = true;
@@ -108,7 +108,7 @@ namespace Banico.Services
                 }
             }
 
-            this.WriteDebugMessage("IsSuperAdmin returns " + result);
+            this.WriteDebugMessage("ClaimsService: IsSuperAdmin returns " + result);
             return result;
         }
 
@@ -125,7 +125,7 @@ namespace Banico.Services
 
         public string GetUserId(ClaimsPrincipal user)
         {
-            this.WriteDebugMessage("Getting user id");
+            this.WriteDebugMessage("ClaimsService: Getting user id");
             string id = string.Empty;
             if (user == null)
             {
@@ -138,7 +138,7 @@ namespace Banico.Services
                 id = user.FindFirst("id").Value;
             }
 
-            this.WriteDebugMessage("User id is " + id);
+            this.WriteDebugMessage("ClaimsService: User id is " + id);
             return id;
         }
 
@@ -146,7 +146,7 @@ namespace Banico.Services
         {
             if (this.isDebug)
             {
-                Console.WriteLine("------> " + message);
+                Console.WriteLine("-----> " + message);
             }
         }
     }

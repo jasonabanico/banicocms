@@ -5,12 +5,13 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { WindowRefService } from './windowref.service';
 
 export abstract class BaseService {
+  private isDebug = false;
   protected readonly TOKEN_NAME = 'auth_token';
   protected readonly USER_ID = 'user_id';
   protected readonly USER_NAME = 'username';
   protected readonly AVATAR_HASH = 'avatar_hash';
-  protected readonly IS_ADMIN = 'is_admin';
   protected readonly IS_SUPERADMIN = 'is_superadmin';
+  protected readonly IS_ADMIN = 'is_admin';
 
   protected localStorage: any;
   protected jsonHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -71,30 +72,33 @@ export abstract class BaseService {
   } 
 
   private authHeader(): HttpHeaders {
-      let headers = new HttpHeaders();
-      if (isPlatformBrowser(this.platformId)) {
-        headers = headers.set('Content-Type', 'application/json');
-        const authToken = this.windowRefService.nativeWindow.localStorage.getItem(this.TOKEN_NAME);
-        headers = headers.set('Authorization', 'Bearer ' + authToken);
-        headers = headers.set('X-XSRF-TOKEN', this.getCookie('XSRF-TOKEN'));
-      }
-
-      return headers;
+    let headers = new HttpHeaders();
+    if (isPlatformBrowser(this.platformId)) {
+      headers = headers.set('Content-Type', 'application/json');
+      const authToken = this.windowRefService.nativeWindow.localStorage.getItem(this.TOKEN_NAME);
+      headers = headers.set('Authorization', 'Bearer ' + authToken);
+      headers = headers.set('X-XSRF-TOKEN', this.getCookie('XSRF-TOKEN'));
     }
 
-    public isAdmin(): boolean {
-      if (!this.localStorage) {
-        return false;
-      }
-      const isAdminStr: string = this.localStorage.getItem(this.IS_ADMIN);
-      let isAdmin = false;
-      if (isAdminStr === 'y') {
-          isAdmin = true;
-      }
-      return isAdmin;
+    return headers;
+  }
+
+  public isAdmin(): boolean {
+    this.writeDebugMessage('base.service: checking isAdmin');
+    if (!this.localStorage) {
+      return false;
+    }
+    const isAdminStr: string = this.localStorage.getItem(this.IS_ADMIN);
+    let isAdmin = false;
+    if (isAdminStr === 'y') {
+        isAdmin = true;
+    }
+    this.writeDebugMessage('base.service: isAdmin returns ' + isAdmin);
+    return isAdmin;
   }
 
   public isSuperAdmin(): boolean {
+    this.writeDebugMessage('base.service: checking isSuperAdmin');
     if (!this.localStorage) {
       return false;
     }
@@ -103,6 +107,13 @@ export abstract class BaseService {
     if (isSuperAdminStr === 'y') {
         isSuperAdmin = true;
     }
+    this.writeDebugMessage('base.service: isSuperAdmin returns ' + isSuperAdmin);
     return isSuperAdmin;
-}
+  }
+
+  public writeDebugMessage(message: string) {
+    if (this.isDebug) {
+        console.log('-----> ' + message);
+    }
+  }
 }

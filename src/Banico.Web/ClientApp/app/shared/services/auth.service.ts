@@ -119,8 +119,8 @@ export class AuthService extends BaseService {
             this.localStorage.removeItem(this.USER_ID);
             this.localStorage.removeItem(this.USER_NAME);
             this.localStorage.removeItem(this.AVATAR_HASH);
-            this.localStorage.removeItem(this.IS_ADMIN);
             this.localStorage.removeItem(this.IS_SUPERADMIN);
+            this.localStorage.removeItem(this.IS_ADMIN);
             this.loginDataChanged.emit();
         }
     }
@@ -133,14 +133,6 @@ export class AuthService extends BaseService {
         return !!authToken;
     }
 
-    public setIsAdmin(isAdmin: boolean) {
-        let isAdminStr = 'n';
-        if (isAdmin) {
-            isAdminStr = 'y';
-        }
-        this.localStorage.setItem(this.IS_ADMIN, isAdminStr);
-    }
-
     public setIsSuperAdmin(isSuperAdmin: boolean) {
         let isSuperAdminStr = 'n';
         if (isSuperAdmin) {
@@ -149,12 +141,21 @@ export class AuthService extends BaseService {
         this.localStorage.setItem(this.IS_SUPERADMIN, isSuperAdminStr);
     }
 
+    public setIsAdmin(isAdmin: boolean) {
+        let isAdminStr = 'n';
+        if (isAdmin) {
+            isAdminStr = 'y';
+        }
+        this.localStorage.setItem(this.IS_ADMIN, isAdminStr);
+    }
+
     public canAccess(
         module: string, 
         url: string,
         autoRedirect: boolean
     ): Observable<boolean> {
         let result = false;
+        this.writeDebugMessage('auth.service: checking access for ' + module);
 
         if (!module) {
             result = this.checkLogin(url, autoRedirect);
@@ -187,6 +188,7 @@ export class AuthService extends BaseService {
                   }
                 }
       
+                this.writeDebugMessage('auth.service: access required for module ' + module + ' is ' + configValue + ' and returns ' + result);
                 return result;
               }
             ));      
@@ -203,28 +205,32 @@ export class AuthService extends BaseService {
           }));
       }
         
-      public checkLogin(url: string, autoRedirect: boolean): boolean {
+    public checkLogin(url: string, autoRedirect: boolean): boolean {
         const result = this.isTokenExpired();
         if (result && autoRedirect) {
-          this.router.navigate(['/account/login'], { queryParams: { returnUrl: url } });
+            this.router.navigate(['/account/login'], { queryParams: { returnUrl: url } });
         }
-    
-        return !result;
-      }
 
-      public checkAdmin(url: string, autoRedirect: boolean): boolean {
+        return !result;
+    }
+
+    public checkAdmin(url: string, autoRedirect: boolean): boolean {
+        this.writeDebugMessage('auth.service: checking Admin');
         let result = this.checkLogin(url, autoRedirect);
         if (result) {
-          result = this.isAdmin() || this.isSuperAdmin();
+            result = this.isAdmin() || this.isSuperAdmin();
         }
+        this.writeDebugMessage('auth.service: Admin returns ' + result);
         return result;
-      }
-    
-      public checkSuperAdmin(url: string, autoRedirect: boolean): boolean {
+    }
+
+    public checkSuperAdmin(url: string, autoRedirect: boolean): boolean {
+        this.writeDebugMessage('auth.service: checking SuperAdmin');
         let result = this.checkLogin(url, autoRedirect);
         if (result) {
-          result = this.isSuperAdmin();
+            result = this.isSuperAdmin();
         }
+        this.writeDebugMessage('auth.service: SuperAdmin returns ' + result);
         return result;
-      }
+    }
 }

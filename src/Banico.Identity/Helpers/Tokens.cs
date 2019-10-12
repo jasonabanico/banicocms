@@ -38,8 +38,8 @@ namespace Banico.Identity.Helpers
           id = identity.Claims.Single(c => c.Type == "id").Value,
           username = userName,
           avatar_hash = avatarHash,          
-          is_admin = isAdmin,
-          is_superadmin = isSuperAdmin
+          is_superadmin = isSuperAdmin,
+          is_admin = isAdmin
         };
 
         return JsonConvert.SerializeObject(response, serializerSettings);

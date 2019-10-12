@@ -58,20 +58,20 @@ const ADMIN_ROUTES: Routes = [
         canActivate: [AuthGuard],
         data: { module: 'admin/users' }
     },
-    { path: 'config/add',
+    { path: 'configs/add',
         component: AdminConfigFormComponent,
         canActivate: [AuthGuard],
-        data: { module: 'admin/config' }
+        data: { module: 'admin/configs' }
     },
-    { path: 'config/edit/:id',
+    { path: 'configs/edit/:id',
         component: AdminConfigFormComponent,
         canActivate: [AuthGuard],
-        data: { module: 'admin/config' }
+        data: { module: 'admin/configs' }
     },
-    { path: 'config',
+    { path: 'configs',
         component: AdminConfigListComponent,
         canActivate: [AuthGuard],
-        data: { module: 'admin/config' }
+        data: { module: 'admin/configs' }
     },
     { path: '',
         component: AdminHomeComponent,
