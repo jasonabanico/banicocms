@@ -35,6 +35,13 @@ namespace Banico.EntityFrameworkCore
             {
                 string connectionString = _configuration.GetConnectionString("AppIdentityDbContext");
 
+                // Override with Azure connection string if exists
+                var azureConnectionStringEnvironmentVariable = _configuration["AzureConnectionStringEnvironmentVariable"];
+                if (!string.IsNullOrEmpty(azureConnectionStringEnvironmentVariable))
+                {
+                    connectionString = Environment.GetEnvironmentVariable(azureConnectionStringEnvironmentVariable);
+                }
+
                 var provider = _configuration["AppDbProvider"];
                 if (string.IsNullOrEmpty(provider))
                 {

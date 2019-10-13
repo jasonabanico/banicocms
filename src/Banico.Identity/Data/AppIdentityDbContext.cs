@@ -1,4 +1,5 @@
 ﻿
+using System;
 using Banico.Core.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,13 @@ namespace Banico.Identity.Data
             if (_isMigration)
             {
                 string connectionString = _configuration.GetConnectionString("AppIdentityDbContext");
+
+                // Override with Azure connection string if exists
+                var azureConnectionStringEnvironmentVariable = _configuration["AzureConnectionStringEnvironmentVariable"];
+                if (!string.IsNullOrEmpty(azureConnectionStringEnvironmentVariable))
+                {
+                    connectionString = Environment.GetEnvironmentVariable(azureConnectionStringEnvironmentVariable);
+                }
 
                 var provider = _configuration["AppDbProvider"];
                 if (string.IsNullOrEmpty(provider))

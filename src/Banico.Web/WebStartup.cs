@@ -75,6 +75,13 @@ namespace Banico.Web
             // Add framework services.
             string appDbContextConnectionString = this.Configuration.GetConnectionString("AppDbContext");
 
+            // Override with Azure connection string if exists
+            var azureConnectionStringEnvironmentVariable = this.Configuration["AzureConnectionStringEnvironmentVariable"];
+            if (!string.IsNullOrEmpty(azureConnectionStringEnvironmentVariable))
+            {
+                appDbContextConnectionString = Environment.GetEnvironmentVariable(azureConnectionStringEnvironmentVariable);
+            }
+
             var provider = Configuration["AppDbProvider"];
             if (string.IsNullOrEmpty(provider))
             {

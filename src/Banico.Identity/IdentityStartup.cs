@@ -48,6 +48,13 @@ namespace Banico.Identity
       // Add framework services.
       string appDbContextConnectionString = Configuration.GetConnectionString("AppIdentityDbContext");
 
+      // Override with Azure connection string if exists
+      var azureConnectionStringEnvironmentVariable = this.Configuration["AzureConnectionStringEnvironmentVariable"];
+      if (!string.IsNullOrEmpty(azureConnectionStringEnvironmentVariable))
+      {
+          appDbContextConnectionString = Environment.GetEnvironmentVariable(azureConnectionStringEnvironmentVariable);
+      }
+
       var provider = Configuration["AppIdentityDBProvider"];
       if (string.IsNullOrEmpty(provider))
       {
