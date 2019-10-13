@@ -60,6 +60,8 @@ namespace Banico.Web
         {
             string envName = this.CurrentEnvironment.EnvironmentName;
             Console.WriteLine("Environment is " + envName + ".");
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            Console.WriteLine("ASP.Net Core Environment Variable is is " + env + ".");
 
             services.Configure<CookiePolicyOptions>(options =>
             {

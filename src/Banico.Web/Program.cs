@@ -27,15 +27,22 @@ public class Program {
      }
      public static IWebHost BuildWebHost(string[] args)
      {
-        var settingsPath = Path.Combine(Directory.GetCurrentDirectory(), "Config");
-
-        var configuration = new ConfigurationBuilder()
-            .SetBasePath(settingsPath)
-            .AddJsonFile("appsettings.json", false, true)
-            .Build();
+        // var configuration = new ConfigurationBuilder()
+        //     .AddJsonFile("appsettings.json", false, true)
+        //     .Build();
             
         return WebHost.CreateDefaultBuilder(args)
-            .UseConfiguration(configuration)
+            //.UseConfiguration(configuration)
+            .ConfigureAppConfiguration((context, config) =>
+            {
+                IHostingEnvironment env = context.HostingEnvironment;
+
+                var settingsPath = Path.Combine(Directory.GetCurrentDirectory(), "Config");
+                config
+                    .SetBasePath(settingsPath)
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+            })
             .UseKestrel()
             .UseContentRoot(Directory.GetCurrentDirectory())
             .UseIISIntegration()

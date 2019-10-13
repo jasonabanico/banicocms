@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Banico.EntityFrameworkCore.Settings;
 using Microsoft.EntityFrameworkCore;
@@ -10,17 +11,19 @@ namespace Banico.EntityFrameworkCore
     {
         public AppDbContext CreateDbContext(string[] args)
         {
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var basePath = Directory.GetCurrentDirectory();
             var path = basePath + "/Config/";
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(path)
                 .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
                 .Build();
     
             var configDefaultSettings = new ConfigDefaultSettings();
             configuration.Bind(nameof(ConfigDefaultSettings), configDefaultSettings);
 
-            return new AppDbContext(configDefaultSettings);
+            return new AppDbContext(configuration, configDefaultSettings);
         }
 
     }

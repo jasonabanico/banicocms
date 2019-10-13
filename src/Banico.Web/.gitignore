@@ -1,5 +1,6 @@
 Config/app.config.ts
 Config/appsettings.json
+Config/appsettings.*.json
 Config/home.component.html
 
 /Properties/launchSettings.json

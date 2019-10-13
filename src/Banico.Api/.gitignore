@@ -3,6 +3,7 @@
 
 ## Banico
 appsettings.json
+appsettings.*.json
 *.db
 *.db-journal
 

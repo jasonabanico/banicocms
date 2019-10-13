@@ -1,79 +1,85 @@
 {
-    "InviteOnly": "true",
-    "DomainAsTenant": "n",
-    "TenantRegEx": "ENTER-REGEX-HERE",
-    "SuperAdmins": "ENTER-SUPERADMIN-USERNAME-HERE",
-    "EmailSender": {
-      "EmailUser": "ENTER-SENDGRID-USER-HERE",
-      "EmailKey": "ENTER-SENDGRID-KEY-HERE"  
-    },
-    "Email": {
-      "Name": "ENTER-ADMIN-NAME-HERE",
-      "Address": "ENTER-EMAIL-ADDRESS-HERE"
-    },
-    "JwtIssuerOptions": {
-      "Issuer": "webApi",
-      "Audience": "http://localhost:5000/"
-    },
-    "Logging": {
-      "LogLevel": {
-        "Default": "Trace",
-        "System": "Trace",
-        "Microsoft": "Trace"
-      }
-    },
-    "ConfigDefaultSettings": {
-      "Configs": [
-        ",initialized,n",
-        "admin,canActivate,admin"
-        ]
-    },
-    "ConfigInitialSettings": {
-      "Configs": [
-        "admin/sections,canActivate,superadmin",
-        "admin/sectionItems,canActivate,admin",
-        "admin/roles,canActivate,superadmin",
-        "admin/users,canActivate,admin",
-        "admin/config,canActivate,superadmin",
-        "contact,isEnabled,n",
-        "contact,canActivate,admin",
-        "directory,isEnabled,n",
-        "directory/view,canActivate,user",
-        "directory/manage,canActivate,admin",
-        "faq,isEnabled,n",
-        "faq/view,canActivate,user",
-        "faq/manage,canActivate,admin",
-        "forum,isEnabled,n",
-        "forum-subforum/manage,canActivate,admin",
-        "forum-subforum/view,canActivate,user",
-        "forum-topic/manage,canActivate,user",
-        "forum-topic/view,canActivate,user",
-        "forum-post/view,canActivate,user",
-        "forum-post/manage,canActivate,user",
-        "forum-comment/view,canActivate,user",
-        "forum-comment/manage,canActivate,user",
-        "invite,isEnabled,n",
-        "invite,canActivate,user",
-        "link,isEnabled,n",
-        "link/view,canActivate,user",
-        "link/manage,canActivate,admin",
-        "list,isEnabled,n",
-        "list-set/view,canActivate,user",
-        "list-set/manage,canActivate,admin",
-        "list-item/view,canActivate,user",
-        "list-item/manage,canActivate,admin",
-        "list/view,canActivate,user",
-        "list/manage,canActivate,user",
-        "page,isEnabled,n",
-        "page/view,canActivate,user",
-        "page/manage,canActivate,admin",
-        "profile,isEnabled,y",
-        "profile/view,canActivate,user",
-        "profile/manage,canActivate,user"
-        ]
-    },
-    "Content": {
-      "MaxPageSize": "40"
+  "AppDbProvider": "",
+  "AppIdentityDbProvider": "",
+  "ConnectionStrings": {
+    "AppDbContext": "",
+    "AppIdentityDbContext": ""
+  },
+  "InviteOnly": "true",
+  "DomainAsTenant": "n",
+  "TenantRegEx": "ENTER-REGEX-HERE",
+  "SuperAdmins": "ENTER-SUPERADMIN-USERNAME-HERE",
+  "EmailSender": {
+    "EmailUser": "ENTER-SENDGRID-USER-HERE",
+    "EmailKey": "ENTER-SENDGRID-KEY-HERE"  
+  },
+  "Email": {
+    "Name": "ENTER-ADMIN-NAME-HERE",
+    "Address": "ENTER-EMAIL-ADDRESS-HERE"
+  },
+  "JwtIssuerOptions": {
+    "Issuer": "webApi",
+    "Audience": "http://localhost:5000/"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Trace",
+      "System": "Trace",
+      "Microsoft": "Trace"
     }
+  },
+  "ConfigDefaultSettings": {
+    "Configs": [
+      ",initialized,n",
+      "admin,canActivate,admin"
+      ]
+  },
+  "ConfigInitialSettings": {
+    "Configs": [
+      "admin/sections,canActivate,superadmin",
+      "admin/sectionItems,canActivate,admin",
+      "admin/roles,canActivate,superadmin",
+      "admin/users,canActivate,admin",
+      "admin/config,canActivate,superadmin",
+      "contact,isEnabled,n",
+      "contact,canActivate,admin",
+      "directory,isEnabled,n",
+      "directory/view,canActivate,user",
+      "directory/manage,canActivate,admin",
+      "faq,isEnabled,n",
+      "faq/view,canActivate,user",
+      "faq/manage,canActivate,admin",
+      "forum,isEnabled,n",
+      "forum-subforum/manage,canActivate,admin",
+      "forum-subforum/view,canActivate,user",
+      "forum-topic/manage,canActivate,user",
+      "forum-topic/view,canActivate,user",
+      "forum-post/view,canActivate,user",
+      "forum-post/manage,canActivate,user",
+      "forum-comment/view,canActivate,user",
+      "forum-comment/manage,canActivate,user",
+      "invite,isEnabled,n",
+      "invite,canActivate,user",
+      "link,isEnabled,n",
+      "link/view,canActivate,user",
+      "link/manage,canActivate,admin",
+      "list,isEnabled,n",
+      "list-set/view,canActivate,user",
+      "list-set/manage,canActivate,admin",
+      "list-item/view,canActivate,user",
+      "list-item/manage,canActivate,admin",
+      "list/view,canActivate,user",
+      "list/manage,canActivate,user",
+      "page,isEnabled,n",
+      "page/view,canActivate,user",
+      "page/manage,canActivate,admin",
+      "profile,isEnabled,y",
+      "profile/view,canActivate,user",
+      "profile/manage,canActivate,user"
+      ]
+  },
+  "Content": {
+    "MaxPageSize": "40"
   }
+}
   

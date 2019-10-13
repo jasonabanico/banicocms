@@ -12,13 +12,15 @@ namespace Banico.EntityFrameworkCore
 {
     public class AppDbContext : DbContext
     {
+        private IConfigurationRoot _configuration;
         private ConfigDefaultSettings _configDefaultSettings;
         private readonly bool _isMigration = false;
         public string _connectionString = String.Empty;
 
-        public AppDbContext(ConfigDefaultSettings configDefaultSettings)
+        public AppDbContext(IConfigurationRoot configuration, ConfigDefaultSettings configDefaultSettings)
         {
             _isMigration = true;
+            _configuration = configuration;
             _configDefaultSettings = configDefaultSettings;
         }
 
@@ -31,10 +33,30 @@ namespace Banico.EntityFrameworkCore
         {
             if (_isMigration)
             {
-                var connectionStringBuilder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder { DataSource = "banico.db" };
-                var connectionString = connectionStringBuilder.ToString();
+                string connectionString = _configuration.GetConnectionString("AppIdentityDbContext");
 
-                optionsBuilder.UseSqlite(connectionString);
+                var provider = _configuration["AppDbProvider"];
+                if (string.IsNullOrEmpty(provider))
+                {
+                    provider = "sqlite";
+                }
+                switch(provider.ToLower())
+                {
+                    case "mssql":
+                        optionsBuilder.UseSqlServer(connectionString);
+                        break;
+                    case "mysql":
+                        optionsBuilder.UseMySql(connectionString);
+                        break;
+                    case "sqlite":
+                        if (string.IsNullOrEmpty(connectionString))
+                        {
+                            var connectionStringBuilder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder { DataSource = "banico-identity.db" };
+                            connectionString = connectionStringBuilder.ToString();
+                        }
+                        optionsBuilder.UseSqlite(connectionString);
+                        break;
+                }
             }
         }
 

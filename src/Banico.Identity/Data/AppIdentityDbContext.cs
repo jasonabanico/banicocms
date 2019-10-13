@@ -8,13 +8,13 @@ namespace Banico.Identity.Data
 {
     public class AppIdentityDbContext : IdentityDbContext<AppUser,AppRole, string>
     {
-        private readonly bool isMigration = false;
-        private IConfigurationRoot Configuration;
+        private readonly bool _isMigration = false;
+        private IConfigurationRoot _configuration;
 
         public AppIdentityDbContext(IConfigurationRoot configuration)
         {
-            isMigration = true;
-            Configuration = configuration;
+            _isMigration = true;
+            _configuration = configuration;
         }
 
         public AppIdentityDbContext(DbContextOptions options)
@@ -24,11 +24,11 @@ namespace Banico.Identity.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (isMigration)
+            if (_isMigration)
             {
-                string connectionString = this.Configuration.GetConnectionString("AppIdentityDbContext");
+                string connectionString = _configuration.GetConnectionString("AppIdentityDbContext");
 
-                var provider = Configuration["AppDbProvider"];
+                var provider = _configuration["AppDbProvider"];
                 if (string.IsNullOrEmpty(provider))
                 {
                     provider = "sqlite";
