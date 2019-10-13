@@ -18,7 +18,7 @@ namespace Banico.Identity.Data
             _configuration = configuration;
         }
 
-        public AppIdentityDbContext(DbContextOptions options)
+        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options)
             : base(options)
         {
         }
