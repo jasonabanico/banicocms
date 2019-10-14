@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Banico.Identity.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20191014084827_Initial")]
+    [Migration("20191014090110_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,8 +30,6 @@ namespace Banico.Identity.Migrations
                     b.Property<DateTime>("CreatedDate");
 
                     b.Property<string>("Description");
-
-                    b.Property<string>("IPAddress");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256);

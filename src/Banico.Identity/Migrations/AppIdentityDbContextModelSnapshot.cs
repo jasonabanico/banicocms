@@ -29,8 +29,6 @@ namespace Banico.Identity.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("IPAddress");
-
                     b.Property<string>("Name")
                         .HasMaxLength(256);
 
