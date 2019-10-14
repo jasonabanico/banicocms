@@ -13,7 +13,7 @@ namespace Banico.EntityFrameworkCore
         {
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var basePath = Directory.GetCurrentDirectory();
-            var path = basePath + "/Config/";
+            var path = basePath + "/../Banico.Web/Config/";
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(path)
                 .AddJsonFile("appsettings.json")
