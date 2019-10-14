@@ -33,7 +33,7 @@ namespace Banico.EntityFrameworkCore
         {
             if (_isMigration)
             {
-                string connectionString = _configuration.GetConnectionString("AppIdentityDbContext");
+                string connectionString = _configuration.GetConnectionString("AppDbContext");
 
                 // Override with Azure connection string if exists
                 var azureConnectionStringEnvironmentVariable = _configuration["AzureConnectionStringEnvironmentVariable"];
@@ -58,7 +58,7 @@ namespace Banico.EntityFrameworkCore
                     case "sqlite":
                         if (string.IsNullOrEmpty(connectionString))
                         {
-                            var connectionStringBuilder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder { DataSource = "banico-identity.db" };
+                            var connectionStringBuilder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder { DataSource = "banico.db" };
                             connectionString = connectionStringBuilder.ToString();
                         }
                         optionsBuilder.UseSqlite(connectionString);

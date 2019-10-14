@@ -71,45 +71,6 @@ namespace Banico.Web
             });
 
             services.AddSingleton<IConfiguration>(this.Configuration);
-
-            // Add framework services.
-            string appDbContextConnectionString = this.Configuration.GetConnectionString("AppDbContext");
-
-            // Override with Azure connection string if exists
-            var azureConnectionStringEnvironmentVariable = this.Configuration["AzureConnectionStringEnvironmentVariable"];
-            if (!string.IsNullOrEmpty(azureConnectionStringEnvironmentVariable))
-            {
-                appDbContextConnectionString = Environment.GetEnvironmentVariable(azureConnectionStringEnvironmentVariable);
-            }
-
-            var provider = Configuration["AppDbProvider"];
-            if (string.IsNullOrEmpty(provider))
-            {
-                provider = "sqlite";
-            }
-            switch(provider.ToLower())
-            {
-                case "mssql":
-                    services.AddDbContext<AppDbContext>(options =>
-                        options.UseSqlServer(appDbContextConnectionString,
-                        optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
-                    break;
-                case "mysql":
-                    services.AddDbContext<AppDbContext>(options =>
-                        options.UseMySql(appDbContextConnectionString,
-                        optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
-                    break;
-                case "sqlite":
-                    if (string.IsNullOrEmpty(appDbContextConnectionString))
-                    {
-                        var connectionStringBuilder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder { DataSource = "banico.db" };
-                        appDbContextConnectionString = connectionStringBuilder.ToString();
-                    }
-                    services.AddDbContext<AppDbContext>(options =>
-                        options.UseSqlite(appDbContextConnectionString,
-                        optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
-                    break;
-            }
       
             services.Configure<EmailSenderOptions>(this.Configuration.GetSection("EmailSender"));
             //services.AddAntiforgery(opts => opts.HeaderName = "X-XSRF-Token");
