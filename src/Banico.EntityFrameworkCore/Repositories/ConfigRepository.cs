@@ -82,6 +82,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                 }
 
                 Config initConfig = await this.GetIsInitialized();
+                initConfig.UpdatedDate = DateTimeOffset.UtcNow;
                 initConfig.Value = "y";
                 await this.AddOrUpdate(initConfig, true);
             }
