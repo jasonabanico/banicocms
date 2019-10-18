@@ -29,7 +29,7 @@ module.exports = env => {
     },
     context: __dirname,
     resolve: {
-      extensions: ['.js', '.ts']
+      extensions: ['.webpack.js', '.web.js', '.mjs', '.json', '.js', '.ts']
     },
     output: {
       filename: '[name].js',
@@ -37,6 +37,11 @@ module.exports = env => {
     },
     module: {
       rules: [
+        {
+          test: /\.mjs$/,
+          include: /node_modules/,
+          type: "javascript/auto",
+        },
         {
           test: /^(?!.*\.spec\.ts$).*\.ts$/,
           use: isDevBuild
