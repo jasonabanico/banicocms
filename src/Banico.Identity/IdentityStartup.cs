@@ -65,12 +65,12 @@ namespace Banico.Identity
           case "mssql":
               services.AddDbContext<AppIdentityDbContext>(options =>
                   options.UseSqlServer(appDbContextConnectionString,
-                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
+                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Identity")));
               break;
           case "mysql":
               services.AddDbContext<AppIdentityDbContext>(options =>
                   options.UseMySql(appDbContextConnectionString,
-                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
+                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Identity")));
               break;
           case "sqlite":
               if (string.IsNullOrEmpty(appDbContextConnectionString))
@@ -80,7 +80,7 @@ namespace Banico.Identity
               }
               services.AddDbContext<AppIdentityDbContext>(options =>
                   options.UseSqlite(appDbContextConnectionString,
-                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
+                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Identity")));
               break;
       }
 
