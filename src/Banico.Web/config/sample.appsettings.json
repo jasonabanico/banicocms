@@ -1,6 +1,7 @@
 {
   "AppDbProvider": "",
   "AppIdentityDbProvider": "",
+  "AzureConnectionStringEnvironmentVariable": "",
   "ConnectionStrings": {
     "AppDbContext": "",
     "AppIdentityDbContext": ""
