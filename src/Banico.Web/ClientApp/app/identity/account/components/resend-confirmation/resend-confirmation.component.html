@@ -1,39 +1,41 @@
 <div class="row align-items-center justify-content-center">
-    <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="text-center border border-light p-5 mt-4">
+  <div class="col-md-6 col-sm-6 col-xs-6">
+    <div class="text-center border border-light p-5 mt-4">
+      <p class="h4 mt-4">Resend Confirmation Email</p>
 
-            <p class="h4 mt-4">Resend Confirmation Email</p>
+      <span *ngIf="!isSuccessful">
+        <form
+          [formGroup]="resendConfirmationForm"
+          novalidate
+          (ngSubmit)="resendConfirmation()"
+        >
+          <div class="form-group">
+            <div class="col">
+              <input
+                class="form-control mt-4"
+                id="email"
+                name="email"
+                type="text"
+                formControlName="email"
+                placeholder="Email"
+                required
+              />
+            </div>
+          </div>
 
-            <span *ngIf="!isSuccessful">
-                <form [formGroup]="resendConfirmationForm" novalidate (ngSubmit)="resendConfirmation()">
-                    <div class="form-group">
-                        <div class="col">
-                            <input 
-                                class="form-control mt-4" 
-                                id="email" 
-                                name="email"
-                                type="text"
-                                formControlName="email"
-                                placeholder="Email"
-                                required />
-                        </div>
-                    </div>
+          <div class="form-row mt-4">
+            <div class="col">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </form>
+      </span>
 
-                    <div class="form-row mt-4">
-                        <div class="col">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-
-                </form>
-            </span>
-
-            <span *ngIf="isSuccessful">
-                <p>
-                    Confirmation e-mail will be sent to you.
-                </p>
-            </span>
-        
-        </div>
+      <span *ngIf="isSuccessful">
+        <p>
+          Confirmation e-mail will be sent to you.
+        </p>
+      </span>
     </div>
+  </div>
 </div>
