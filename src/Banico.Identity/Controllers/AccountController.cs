@@ -231,7 +231,7 @@ namespace Banico.Identity.Controllers
             return domainName.RegistrableDomain;
         }
 
-        private async Task<IActionResult> SendConfirmationEmail(AppUser user)
+        private async Task<IActionResult> SendConfirmationEmail(AppUser user, bool isResend)
         {
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
             // Send an email with this link
@@ -253,8 +253,13 @@ namespace Banico.Identity.Controllers
             "<a href='" + callbackUrl + "'>Confirm Email</a><br /><br />" +
             "If you didn't register for this account, just ignore and delete this message.<br /><br />" +
             "Thank you.<br /><br />" +
-            "Site Admin";
+            "Site Admin<br /><br />";
 
+            if (isResend)
+            {
+                confirmText += "(This is confirmation email has been resent upon request.)";
+            }
+            
             var response = await _emailSender.SendEmailAsync(user.Email, "Confirm your account",
                 confirmText);
 
@@ -345,7 +350,7 @@ namespace Banico.Identity.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var emailResult = await this.SendConfirmationEmail(user);
+                    var emailResult = await this.SendConfirmationEmail(user, false);
                     // await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
                     //return RedirectToLocal(returnUrl);
@@ -568,7 +573,7 @@ namespace Banico.Identity.Controllers
             var user = await _userManager.FindByEmailAsync(model.Email);
             if ((user != null) && (!await(_userManager.IsEmailConfirmedAsync(user))))
             {
-                var emailResult = await this.SendConfirmationEmail(user);
+                var emailResult = await this.SendConfirmationEmail(user, true);
                 return emailResult;
             }
 
