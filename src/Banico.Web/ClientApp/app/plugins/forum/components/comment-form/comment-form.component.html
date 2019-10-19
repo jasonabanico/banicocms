@@ -1,43 +1,57 @@
 <ng-container>
   <div class="media d-block d-md-flex">
-    <img class="rounded-circle" width="30" src="https://www.gravatar.com/avatar/{{avatarHash}}?size=30&d=mp" alt="">
+    <img
+      class="rounded-circle"
+      width="30"
+      src="https://www.gravatar.com/avatar/{{ avatarHash }}?size=30&d=mp"
+      alt=""
+    />
     <div class="media-body ml-md-3 ml-0">
       <form [formGroup]="commentForm" novalidate (ngSubmit)="save()">
-        <input type="hidden"
-          id="id" 
-          name="id"
-          formControlName="id" />
-        <input type="hidden"
-          id="postId" 
+        <input type="hidden" id="id" name="id" formControlName="id" />
+        <input
+          type="hidden"
+          id="postId"
           name="postId"
-          formControlName="postId" />
-        <input type="hidden"
-          id="userId" 
+          formControlName="postId"
+        />
+        <input
+          type="hidden"
+          id="userId"
           name="userId"
-          formControlName="userId" />
-        <input type="hidden"
-          id="username" 
+          formControlName="userId"
+        />
+        <input
+          type="hidden"
+          id="username"
           name="username"
-          formControlName="username" />
-        <input type="hidden"
-          id="avatarHash" 
+          formControlName="username"
+        />
+        <input
+          type="hidden"
+          id="avatarHash"
           name="avatarHash"
-          formControlName="avatarHash" />
-        <input type="hidden"
-          id="createdDate" 
+          formControlName="avatarHash"
+        />
+        <input
+          type="hidden"
+          id="createdDate"
           name="createdDate"
-          formControlName="createdDate" />
-        <input 
-          class="form-control" 
-          id="text" 
+          formControlName="createdDate"
+        />
+        <textarea
+          class="form-control"
+          id="text"
           name="text"
           type="text"
-          formControlName="text" 
-          (keyup.enter)="save()" />
+          formControlName="text"
+          (keyup.enter)="save()"
+          rows="1"
+        ></textarea>
         <p class="small" *ngIf="isEdit">
           <a href="javascript:;" (click)="cancel()">Cancel</a>
         </p>
       </form>
     </div>
-  </div>  
+  </div>
 </ng-container>
