@@ -29,11 +29,6 @@ cp sample.app.config.ts app.config.ts
 
 # edit app setting values
 
-# if using MSSQL or MySQL
-cd ..
-dotnet ef database update --context AppDbContext
-dotnet ef database update --context AppIdentityDbContext
-
 # run banico
 dotnet run
 ```
