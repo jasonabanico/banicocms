@@ -1,24 +1,31 @@
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">
-            / <a href="/forum">forum</a> / 
-            <a href="/forum/{{subforum?.alias}}">{{subforum?.alias}}</a>
-        </li>
-    </ol>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">
+      / <a href="/forum">forum</a> /
+      <a href="/forum/{{ subforum?.alias }}">{{ subforum?.alias }}</a>
+    </li>
+  </ol>
 </nav>
-      
+
 <div class="card gedf-card mb-3">
   <div class="card-header">
+    <div class="d-flex justify-content-between align-items-center">
       <div class="d-flex justify-content-between align-items-center">
-          <div class="d-flex justify-content-between align-items-center">
-              <div class="mr-2">
-                  <img class="rounded-circle" width="45" src="https://www.gravatar.com/avatar/{{topic?.avatarHash}}?size=45&d=mp" alt="">
-              </div>
-              <div class="ml-2">
-                  <div class="h5 m-0">@{{topic?.username}}</div>
-              </div>
-          </div>
-          <!--
+        <div class="mr-2">
+          <img
+            class="rounded-circle"
+            width="45"
+            src="https://www.gravatar.com/avatar/{{
+              topic?.avatarHash
+            }}?size=45&d=mp"
+            alt=""
+          />
+        </div>
+        <div class="ml-2">
+          <div class="h5 m-0">@{{ topic?.username }}</div>
+        </div>
+      </div>
+      <!--
             <div>
                 <div class="dropdown">
                     <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -33,37 +40,53 @@
                 </div>
             </div>
           -->
-      </div>
+    </div>
   </div>
   <div class="card-body">
-    <div class="text-muted h7 mb-2"> <i class="far fa-clock"></i> {{topic?.moment()}} ({{topic?.momentRelative()}})</div>
-        <h5 class="card-title">{{topic?.title}}</h5>
+    <div class="text-muted h7 mb-2">
+      <i class="far fa-clock"></i> {{ topic?.moment() }} ({{
+        topic?.momentRelative()
+      }})
+    </div>
+    <h5 class="card-title">{{ topic?.title }}</h5>
 
-        <p class="card-text">
-            {{topic?.text}}
-        </p>
-        <!--
+    <p class="card-text">
+      {{ topic?.text }}
+    </p>
+    <!--
       <div>
           <span class="badge badge-primary mr-2">tag1</span>
       </div>
       -->
   </div>
   <div class="card-footer">
-    <a href="/forum/topic/edit/{{topic?.id}}" class="card-link"><i class="fas fa-pencil-alt"></i> Edit</a>
+    <a href="/forum/topic/edit/{{ topic?.id }}" class="card-link"
+      ><i class="fas fa-pencil-alt"></i> Edit</a
+    >
     <a href="#" class="card-link"><i class="far fa-comment"></i> Comment</a>
   </div>
 </div>
 
-<h2>
-    Posts
-</h2>
-<hr />
+<hr class="mt-4" />
+
+<p class="h4">
+  Posts
+</p>
 
 <a *ngIf="page > 0" href="javascript:;" (click)="morePosts()">More Posts</a>
 
 <div *ngFor="let post of posts">
-  <app-plugins-forum-post *ngIf="post.id" [id]="post.id"></app-plugins-forum-post>
-  <app-plugins-forum-post *ngIf="!post.id" [newPost]="post"></app-plugins-forum-post>
+  <app-plugins-forum-post
+    *ngIf="post.id"
+    [id]="post.id"
+  ></app-plugins-forum-post>
+  <app-plugins-forum-post
+    *ngIf="!post.id"
+    [newPost]="post"
+  ></app-plugins-forum-post>
 </div>
 
-<app-plugins-forum-post-form [topicId]="topic?.id" (saved)="addPost($event)"></app-plugins-forum-post-form>
+<app-plugins-forum-post-form
+  [topicId]="topic?.id"
+  (saved)="addPost($event)"
+></app-plugins-forum-post-form>
