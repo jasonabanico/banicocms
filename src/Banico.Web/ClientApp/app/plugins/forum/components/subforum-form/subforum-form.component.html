@@ -1,51 +1,66 @@
-<p>
-  Subforum
-</p>
+<div class="row">
+  <div class="col">
+    <div class="border border-light p-5 mt-4">
+      <p class="h4">New Subforum</p>
 
-<form [formGroup]="subforumForm" novalidate (ngSubmit)="save()">
-  <input type="hidden"
-    id="id" 
-    name="id"
-    formControlName="id" />
-  <input type="hidden"
-    id="sectionItems" 
-    name="sectionItems"
-    formControlName="sectionItems" />
-  <div class="form-group">
-    <label class="col-md-2 control-label" for="name">Name</label>
-    <div class="col-md-10">
-        <input 
-            class="form-control" 
-            id="name" 
-            name="name"
-            type="text"
-            formControlName="name" />
+      <form
+        class="mt-4"
+        [formGroup]="subforumForm"
+        novalidate
+        (ngSubmit)="save()"
+      >
+        <input type="hidden" id="id" name="id" formControlName="id" />
+        <input
+          type="hidden"
+          id="sectionItems"
+          name="sectionItems"
+          formControlName="sectionItems"
+        />
+        <div class="form-group">
+          <div class="col-md-10">
+            <input
+              class="form-control"
+              id="name"
+              name="name"
+              type="text"
+              formControlName="name"
+              placeholder="Name"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-10">
+            <input
+              class="form-control"
+              id="alias"
+              name="alias"
+              type="text"
+              formControlName="alias"
+              placeholder="Alias"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-10">
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              type="text"
+              formControlName="description"
+              required
+              placeholder="Description"
+              rows="5"
+            >
+            </textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <button type="submit" class="btn btn-primary" value="save">
+            Save
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="form-group">
-    <label class="col-md-2 control-label" for="alias">Alias</label>
-    <div class="col-md-10">
-        <input 
-            class="form-control" 
-            id="alias" 
-            name="alias"
-            type="text"
-            formControlName="alias" />
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-md-2 control-label" for="description">Description</label>
-    <div class="col-md-10">
-        <input 
-            class="form-control" 
-            id="description" 
-            name="description"
-            type="text"
-            formControlName="description"
-            required />
-    </div>
-  </div>  
-  <div class="form-group row">
-    <button type="submit" class="btn btn-primary" value="save">Save</button>
-  </div>
-</form>
+</div>

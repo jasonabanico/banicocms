@@ -1,37 +1,51 @@
-<p>
-  {{subforum?.name}}
-  {{subforum?.alias}}
-</p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">
+      / <a href="/forum">forum</a> /
+      <a href="/forum/{{ subforum?.alias }}">{{ subforum?.alias }}</a>
+    </li>
+  </ol>
+</nav>
 
-<form [formGroup]="topicForm" novalidate (ngSubmit)="save()">
-  <input type="hidden"
-    id="id" 
-    name="id"
-    formControlName="id" />
-  <div class="form-group">
-    <label class="col-md-2 control-label" for="title">Title</label>
-    <div class="col-md-10">
-        <input 
-            class="form-control" 
-            id="title" 
-            name="title"
-            type="text"
-            formControlName="title" />
+<div class="row">
+  <div class="col">
+    <div class="border border-light p-5">
+      <p class="h4">New Topic</p>
+
+      <form class="mt-4" [formGroup]="topicForm" novalidate (ngSubmit)="save()">
+        <input type="hidden" id="id" name="id" formControlName="id" />
+        <div class="form-group">
+          <div class="col-md-10">
+            <input
+              class="form-control"
+              id="title"
+              name="title"
+              type="text"
+              formControlName="title"
+              placeholder="Title"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-10">
+            <textarea
+              class="form-control"
+              id="text"
+              name="text"
+              formControlName="text"
+              required
+              rows="5"
+              placeholder="Text"
+            >
+            </textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <button type="submit" class="btn btn-primary" value="save">
+            Save
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="form-group">
-    <label class="col-md-2 control-label" for="text">Text</label>
-    <div class="col-md-10">
-        <input 
-            class="form-control" 
-            id="text" 
-            name="text"
-            type="text"
-            formControlName="text"
-            required />
-    </div>
-  </div>  
-  <div class="form-group row">
-    <button type="submit" class="btn btn-primary" value="save">Save</button>
-  </div>
-</form>
+</div>

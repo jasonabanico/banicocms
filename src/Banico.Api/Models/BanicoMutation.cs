@@ -79,9 +79,15 @@ namespace Banico.Api.Models
                             var isAdmin = _accessService.IsAdminOrSuperAdmin();
                             return contentItemRepository.AddOrUpdate(contentItem, userId, isAdmin);
                         }
+                        else
+                        {
+                            throw new UnauthorizedAccessException("Add or update of content module " + contentItem.Module + " is not allowed.");
+                        }
                     }
-
-                    return new ContentItem();
+                    else
+                    {
+                        throw new UnauthorizedAccessException("Content module " + contentItem.Module + " is not enabled.");
+                    }
                 });
 
             Field<ConfigType>(
