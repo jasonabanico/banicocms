@@ -39,15 +39,14 @@
           name="createdDate"
           formControlName="createdDate"
         />
-        <textarea
+        <input
           class="form-control"
           id="text"
           name="text"
           type="text"
           formControlName="text"
           (keyup.enter)="save()"
-          rows="1"
-        ></textarea>
+        />
         <p class="small" *ngIf="isEdit">
           <a href="javascript:;" (click)="cancel()">Cancel</a>
         </p>
