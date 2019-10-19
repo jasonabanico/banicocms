@@ -1,31 +1,35 @@
 <div class="row">
-    <div class="col">
-        <div class="border border-light p-5 mt-4">
+  <div class="col">
+    <div class="border border-light p-5 mt-4">
+      <p class="h4 mb-4">Your Account</p>
 
-            <p class="h4">Your Account</p>
+      <p>
+        <a href="https://gravatar.com" target="_blank">
+          <i class="fas fa-user-circle"></i> Set / Update Your Gravatar
+        </a>
+      </p>
 
-            <p class="mt-4">
-                <a href="https://gravatar.com" target="_blank">
-                    Set / Update Your Gravatar
-                </a>
-            </p>
+      <p>
+        <a href="#">
+          <i class="fas fa-address-card"></i> Set / Update Your Personal Profile
+        </a>
+      </p>
 
-            <p>
-                <a href="/manage/change-password">
-                    Change Password
-                </a>
-            </p>
+      <p>
+        <a href="/manage/change-password">
+          <i class="fas fa-key"></i> Change Password
+        </a>
+      </p>
 
-            <hr />
-            
-            <p>
-                <a href="javascript:;" (click)="logout()">
-                    Sign Out
-                </a>        
-            </p>
+      <hr />
 
-        </div>
+      <p>
+        <a href="javascript:;" (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i> Sign Out
+        </a>
+      </p>
     </div>
+  </div>
 </div>
 
 <!--
