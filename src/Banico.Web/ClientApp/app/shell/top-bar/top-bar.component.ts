@@ -1,19 +1,21 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { WindowRefService } from '../../shared/services/windowref.service';
-import { AuthService } from '../../shared/services/auth.service';
-import { AccountService } from '../../identity/account/services/account.service';
+import { Component, Inject, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
+import { WindowRefService } from "../../shared/services/windowref.service";
+import { AuthService } from "../../shared/services/auth.service";
+import { AccountService } from "../../identity/account/services/account.service";
+import { AppConfig } from "../../../../Config/app.config";
 
 @Component({
-  selector: 'app-shell-top-bar',
-  templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.css']
+  selector: "app-shell-top-bar",
+  templateUrl: "./top-bar.component.html",
+  styleUrls: ["./top-bar.component.css"]
 })
 export class TopBarComponent implements OnInit {
+  appTitle: string = "";
   isExpanded: boolean = false;
   isLoggedIn: boolean = false;
-  loggedInAs: string = '';
-  avatarHash: string = '';
+  loggedInAs: string = "";
+  avatarHash: string = "";
 
   constructor(
     @Inject(WindowRefService) private windowRefService: WindowRefService,
@@ -21,11 +23,10 @@ export class TopBarComponent implements OnInit {
     @Inject(AuthService) private authService: AuthService,
     private location: Location
   ) {
-    this.authService.loginDataChanged.subscribe(
-      result => {
-        this.updateLogin();
-      }
-    )
+    this.appTitle = AppConfig.APP_NAME;
+    this.authService.loginDataChanged.subscribe(result => {
+      this.updateLogin();
+    });
   }
 
   ngOnInit() {
@@ -39,16 +40,17 @@ export class TopBarComponent implements OnInit {
   }
 
   logout() {
-    this.accountService.logout()
-    .subscribe(data => {
-      this.authService.removeToken();
-      this.windowRefService.nativeWindow.location.reload();
-    },
-    error => {
-      this.authService.removeToken();
-      this.windowRefService.nativeWindow.location.reload();
-    });
-}
+    this.accountService.logout().subscribe(
+      data => {
+        this.authService.removeToken();
+        this.windowRefService.nativeWindow.location.reload();
+      },
+      error => {
+        this.authService.removeToken();
+        this.windowRefService.nativeWindow.location.reload();
+      }
+    );
+  }
 
   collapse() {
     this.isExpanded = false;
