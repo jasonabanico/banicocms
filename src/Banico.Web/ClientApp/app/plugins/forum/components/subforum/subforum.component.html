@@ -1,10 +1,10 @@
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">
-            / <a href="/forum">forum</a> / 
-            {{subforum?.alias}}
-        </li>
-    </ol>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">
+      / <a href="/forum">forum</a> /
+      {{ subforum?.alias }}
+    </li>
+  </ol>
 </nav>
 
 <div class="card mb-3">
@@ -12,20 +12,25 @@
     <div class="d-flex justify-content-between align-items-center">
       <div class="d-flex justify-content-between align-items-center">
         <div class="ml-2">
-            <div class="h5 m-0 mb-2">{{subforum?.name}}</div>
-          </div>
+          <div class="h5 m-0 mb-2">{{ subforum?.name }}</div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="card-body">
     <p class="card-text">
-      {{subforum?.description}}
+      {{ subforum?.description }}
     </p>
   </div>
 
   <div class="card-footer">
-      <a href="/forum/topic/new/{{subforum?.id}}" class="card-link"><i class="fas fa-pencil-alt"></i> New Topic</a>
+    <a href="javascript:;" (click)="edit()" class="card-link"
+      ><i class="fas fa-pencil-alt"></i> Edit</a
+    >
+    <a href="/forum/topic/new/{{ subforum?.id }}" class="card-link"
+      ><i class="fas fa-sticky-note"></i> New Topic</a
+    >
   </div>
 </div>
 
@@ -40,18 +45,15 @@
   <tbody>
     <tr *ngFor="let topic of topics">
       <td>
-        <a href="/forum/topic/{{topic.id}}">{{topic.title}}</a>
+        <a href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a>
       </td>
       <td>
-        {{topic.text}}
+        {{ topic.text }}
       </td>
+      <td>{{ topic.moment() }} ({{ topic.momentRelative() }})</td>
       <td>
-        {{topic.moment()}} ({{topic.momentRelative()}})
-      </td>
-      <td>
-        {{topic.postCount}}
+        {{ topic.postCount }}
       </td>
     </tr>
   </tbody>
 </table>
-

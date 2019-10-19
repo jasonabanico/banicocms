@@ -1,16 +1,23 @@
 <ng-container *ngIf="!isEdit">
   <div class="card mb-3">
     <div class="card-header">
+      <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="mr-2">
-                    <img class="rounded-circle" width="45" src="https://www.gravatar.com/avatar/{{post?.avatarHash}}?size=45&d=mp" alt="">
-                </div>
-                <div class="ml-2">
-                    <div class="h5 m-0">@{{post?.username}}</div>
-                </div>
-            </div>
-            <!--
+          <div class="mr-2">
+            <img
+              class="rounded-circle"
+              width="45"
+              src="https://www.gravatar.com/avatar/{{
+                post?.avatarHash
+              }}?size=45&d=mp"
+              alt=""
+            />
+          </div>
+          <div class="ml-2">
+            <div class="h5 m-0">@{{ post?.username }}</div>
+          </div>
+        </div>
+        <!--
                 <div>
                     <div class="dropdown">
                         <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -25,32 +32,41 @@
                     </div>
                 </div>
             -->
-        </div>
-  
+      </div>
     </div>
     <div class="card-body">
-        <div class="text-muted mb-2"> <i class="far fa-clock"></i> {{post?.moment()}} ({{post?.momentRelative()}})</div>
-        <p class="card-text">
-          {{post?.text}}
-        </p>
+      <div class="text-muted mb-2">
+        <i class="fas fa-clock"></i> {{ post?.moment() }} ({{
+          post?.momentRelative()
+        }})
+      </div>
+      <p class="card-text">
+        {{ post?.text }}
+      </p>
     </div>
     <div class="card-footer">
-      <a href="javascript:;" (click)="edit()" class="card-link"><i class="fas fa-pencil-alt"></i> Edit</a>
-      <a href="#" class="card-link"><i class="far fa-comment"></i> Comments ({{post?.commentCount}})</a>
+      <a href="javascript:;" (click)="edit()" class="card-link"
+        ><i class="fas fa-pencil-alt"></i> Edit</a
+      >
+      <a href="#" class="card-link"
+        ><i class="fas fa-comment"></i> Comments ({{ post?.commentCount }})</a
+      >
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <a *ngIf="page > 0" href="javascript:;" (click)="moreComments()">View more comments</a>
-            <ng-container class="list-group-item" *ngFor="let comment of comments">
-                <app-plugins-forum-comment [id]="comment.id"></app-plugins-forum-comment>
-            </ng-container>
-            <app-plugins-forum-comment-form 
-                [postId]="post?.id" 
-                (saved)="onCommentSave($event)"
-            ></app-plugins-forum-comment-form>
-        </li>
-      </ul>
-  </div>      
+      <li class="list-group-item">
+        <a *ngIf="page > 0" href="javascript:;" (click)="moreComments()"
+          >View more comments</a
+        >
+        <ng-container class="list-group-item" *ngFor="let comment of comments">
+          <app-plugins-forum-comment
+            [id]="comment.id"
+          ></app-plugins-forum-comment>
+        </ng-container>
+        <app-plugins-forum-comment-form
+          [postId]="post?.id"
+          (saved)="onCommentSave($event)"
+        ></app-plugins-forum-comment-form>
+      </li>
+    </ul>
+  </div>
 </ng-container>
-
-
