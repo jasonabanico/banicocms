@@ -1,12 +1,28 @@
-<h1>Administration</h1>
+<div class="row">
+  <div class="col">
+    <div class="border border-light p-5 mt-4">
+      <p class="h4 mb-4">Administration</p>
 
-<div *ngIf="!isInitialized">
-    <button type="button" class="btn btn-primary" (click)="initialize()">Initialize</button>
-</div>
+      <div *ngIf="!isInitialized">
+        <button type="button" class="btn btn-primary" (click)="initialize()">
+          Initialize
+        </button>
+      </div>
 
-<div *ngIf="isInitialized">
-    <p *ngIf="configsAllowed"><a href="/admin/configs">Configs</a></p>
-    <p *ngIf="sectionsAllowed"><a href="/admin/sections">Sections</a></p>
-    <p *ngIf="rolesAllowed"><a href="/admin/roles">Roles</a></p>
-    <p *ngIf="usersAllowed"><a href="/admin/users">Users</a></p>
+      <div *ngIf="isInitialized">
+        <p *ngIf="configsAllowed">
+          <a href="/admin/configs"><i class="fas fa-cogs"></i> Configs</a>
+        </p>
+        <p *ngIf="sectionsAllowed">
+          <a href="/admin/sections"><i class="fas fa-sitemap"></i> Sections</a>
+        </p>
+        <p *ngIf="rolesAllowed">
+          <a href="/admin/roles"><i class="fas fa-user-tag"></i> Roles</a>
+        </p>
+        <p *ngIf="usersAllowed">
+          <a href="/admin/users"><i class="fas fa-users"></i> Users</a>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
