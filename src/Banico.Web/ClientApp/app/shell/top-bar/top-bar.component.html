@@ -1,23 +1,33 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-    <div class="container">
-        <a class="navbar-brand" href="#">Banico</a>
+  <div class="container">
+    <a class="navbar-brand" href="#">{appTitle}</a>
 
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <span *ngIf="!loggedInAs">
-                    <a class="nav-link" href="/account/login/?returnUrl={{location.path()}}">
-                        <i class="fas fa-sign-in-alt"></i>
-                    </a>
-                </span>
-                <span *ngIf="loggedInAs">
-                    <a class="nav-link" href="/manage">
-                        <img class="rounded-circle" width="30" src="https://www.gravatar.com/avatar/{{avatarHash}}?size=30&d=mp" alt="{{loggedInAs}}">
-                    </a>
-                </span>
-            </li>
-        </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <span *ngIf="!loggedInAs">
+          <a
+            class="nav-link"
+            href="/account/login/?returnUrl={{ location.path() }}"
+          >
+            <i class="fas fa-sign-in-alt"></i>
+          </a>
+        </span>
+        <span *ngIf="loggedInAs">
+          <a class="nav-link" href="/manage">
+            <img
+              class="rounded-circle"
+              width="30"
+              src="https://www.gravatar.com/avatar/{{
+                avatarHash
+              }}?size=30&d=mp"
+              alt="{{ loggedInAs }}"
+            />
+          </a>
+        </span>
+      </li>
+    </ul>
 
-        <!--
+    <!--
             <ul class="navbar-nav mr-auto">
             <li [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
                 <a [routerLink]='["/"]' (click)='collapse()'>
@@ -41,5 +51,5 @@
             </form>
         </div>
     -->
-    </div>
+  </div>
 </nav>
