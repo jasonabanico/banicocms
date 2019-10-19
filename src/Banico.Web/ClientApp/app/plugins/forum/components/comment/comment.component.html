@@ -1,25 +1,36 @@
 <ng-container *ngIf="!isEdit">
   <div class="media d-block d-md-flex">
-    <img class="rounded-circle" width="30" src="https://www.gravatar.com/avatar/{{comment?.avatarHash}}?size=30&d=mp" alt="">
+    <img
+      class="rounded-circle"
+      width="30"
+      src="https://www.gravatar.com/avatar/{{
+        comment?.avatarHash
+      }}?size=30&d=mp"
+      alt=""
+    />
     <div class="media-body text-md-left ml-md-3 ml-0">
       <p class="small">
-        <a href="">@{{comment?.username}}</a>
-        {{comment?.text}}<br />
-        <a href="javascript:;" (click)="edit()">Edit</a> &bull; 
-        <a href="javascript:;" >Like</a> &bull; 
-        {{comment?.moment()}} ({{comment?.momentRelative()}})
+        <a href="">@{{ comment?.username }}</a>
+        {{ comment?.text }}<br />
+        <a
+          *ngIf="comment?.userId == userId"
+          href="javascript:;"
+          (click)="edit()"
+          >Edit</a
+        >
+        &bull; {{ comment?.moment() }} ({{ comment?.momentRelative() }})
       </p>
     </div>
-  </div>  
+  </div>
 </ng-container>
-<app-plugins-forum-comment-form 
-  *ngIf="isEdit" 
-  [id]="comment?.id" 
+<app-plugins-forum-comment-form
+  *ngIf="isEdit"
+  [id]="comment?.id"
   [postId]="comment?.postId"
-  [text]="comment?.text" 
+  [text]="comment?.text"
   [userId]="comment?.userId"
   [username]="comment?.username"
   [createdDate]="comment?.createdDate"
-  (saved)="onSave($event)" 
+  (saved)="onSave($event)"
   (cancelled)="onCancel($event)"
 ></app-plugins-forum-comment-form>

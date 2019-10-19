@@ -60,7 +60,10 @@
       -->
   </div>
   <div class="card-footer">
-    <a href="/forum/topic/edit/{{ topic?.id }}" class="card-link"
+    <a
+      *ngIf="topic?.userId == userId"
+      href="/forum/topic/edit/{{ topic?.id }}"
+      class="card-link"
       ><i class="fas fa-pencil-alt"></i> Edit</a
     >
     <a href="#" class="card-link"><i class="fas fa-comment"></i> Comment</a>

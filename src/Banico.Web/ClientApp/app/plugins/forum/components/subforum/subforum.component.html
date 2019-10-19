@@ -25,7 +25,11 @@
   </div>
 
   <div class="card-footer">
-    <a href="javascript:;" (click)="edit()" class="card-link"
+    <a
+      *ngIf="subforum?.userId == userId"
+      href="javascript:;"
+      (click)="edit()"
+      class="card-link"
       ><i class="fas fa-pencil-alt"></i> Edit</a
     >
     <a href="/forum/topic/new/{{ subforum?.id }}" class="card-link"

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { Topic } from "../../entities/topic";
 import { SubforumEntityService } from "../../services/subforum-entity.service";
+import { AuthService } from "../../../../shared/services/auth.service";
 
 @Component({
   selector: "app-plugins-forum-subforum",
@@ -14,6 +15,7 @@ import { SubforumEntityService } from "../../services/subforum-entity.service";
 })
 export class ForumSubforumComponent implements OnInit {
   //public subforum$: Observable<Subforum>;
+  public userId: string;
   public subforum: Subforum;
   public topics: Topic[];
 
@@ -22,8 +24,11 @@ export class ForumSubforumComponent implements OnInit {
     private subforumService: ForumSubforumService,
     private topicService: ForumTopicService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    private authService: AuthService
+  ) {
+    this.userId = authService.getUserId();
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
