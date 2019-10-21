@@ -2,13 +2,15 @@
 
 http://banico.org
 
+Prerequisites:
+
 <ul>
-    <li>Get Git: https://git-scm.com/downloads</li>
-    <li>Get .Net Core SDK: https://dotnet.microsoft.com/download</li>
-    <li>Get NodeJS and NPM: https://nodejs.org/en/</li>
-    <li>Get Visual Studio Code (recommended editor): https://code.visualstudio.com/</li>
-    <li>Get DB: MySQL https://www.mysql.com/downloads/ or SQLite https://sqlite.org/download.html</li> 
-    <li>Set ASP.Net Hosting Environment: https://andrewlock.net/how-to-set-the-hosting-environment-in-asp-net-core/</li>
+    <li>Git: https://git-scm.com/downloads</li>
+    <li>.Net Core SDK: https://dotnet.microsoft.com/download</li>
+    <li>NodeJS and NPM: https://nodejs.org/en/</li>
+    <li>Visual Studio Code (recommended editor): https://code.visualstudio.com/</li>
+    <li>MySQL https://www.mysql.com/downloads/ or SQLite https://sqlite.org/download.html</li> 
+    <li>ASP.Net Hosting Environment: https://andrewlock.net/how-to-set-the-hosting-environment-in-asp-net-core/</li>
 </ul>
 
 ```bash
