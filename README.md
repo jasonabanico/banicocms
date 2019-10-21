@@ -4,12 +4,10 @@ http://banico.org
 
 <ul>
     <li>Get Git: https://git-scm.com/downloads</li>
-    <li>Get .Net Core: https://www.microsoft.com/net/core</li>
-    <li>Get .Net CLI: https://github.com/dotnet/cli/tree/release/2.0.0#installers-and-binaries</li>
-    <li>Get Mono: http://www.mono-project.com/download/</li>
-    <li>Get NodeJS and NPM: https://nodejs.org/en/</li>
+    <li>Get .Net Core SDK: https://dotnet.microsoft.com/download</li>
+\    <li>Get NodeJS and NPM: https://nodejs.org/en/</li>
     <li>Get Visual Studio Code (recommended editor): https://code.visualstudio.com/</li>
-    <li>Get SQLite: https://sqlite.org/download.html</li> 
+    <li>Get DB: MySQL https://www.mysql.com/downloads/ or SQLite https://sqlite.org/download.html</li> 
     <li>Set ASP.Net Hosting Environment: https://andrewlock.net/how-to-set-the-hosting-environment-in-asp-net-core/</li>
 </ul>
 
