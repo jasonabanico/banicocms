@@ -23,6 +23,6 @@ export class AdminConfigListComponent {
 
     private setConfigs(configs: Config[])
     {
-        this.configs = configs;
+        this.configs = configs.sort((config1, config2) => config1.module.localeCompare(config2.module));
     }
 }
