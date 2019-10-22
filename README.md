@@ -34,3 +34,13 @@ cp sample.app.config.ts app.config.ts
 # run banico
 dotnet run
 ```
+
+Azure Deployment Notes:
+
+These are some fixes that I had to make to make the app run on Azure Web Apps.
+
+<ul>
+    <li>When using "MySQL In App", don't directly use the value in the connection string environment variable. Instead, log it, and write the connection string using a standard format. https://stackoverflow.com/questions/40549509/asp-net-mvc-application-in-azure-with-mysql-in-app</li>
+    <li>Add the setting "WEBSITE_NODE_DEFAULT_VERSION", and providing the highest value available (check Kudu). https://stackoverflow.com/questions/46772705/attempt-to-connect-to-node-timed-out-after-60000ms</li>
+    <li>
+</ul>
