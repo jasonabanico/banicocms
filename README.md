@@ -2,7 +2,7 @@
 
 http://banico.org
 
-Prerequisites:
+==Prerequisites:
 
 <ul>
     <li>Git: https://git-scm.com/downloads</li>
@@ -13,7 +13,7 @@ Prerequisites:
     <li>ASP.Net Hosting Environment: https://andrewlock.net/how-to-set-the-hosting-environment-in-asp-net-core/</li>
 </ul>
 
-Local Dev Environment Setup:
+==Local Dev Environment Setup:
 
 ```bash
 # clone repository
@@ -35,7 +35,7 @@ cp sample.app.config.ts app.config.ts
 dotnet run
 ```
 
-Azure Deployment Notes:
+==Azure Deployment Notes:
 
 These are some fixes that I had to make to get the app run on Azure Web Apps.
 
