@@ -666,7 +666,6 @@ namespace Banico.EntityFrameworkCore.Repositories
                     updateItem.Attribute20 = item.Attribute20;
                     updateItem.UpdatedBy = item.UpdatedBy;
                     updateItem.UpdatedDate = item.UpdatedDate;
-                    updateItem.ChildCount = item.ChildCount;
                     var result = await _dbContext.SaveChangesAsync();
 
                     if (result > 0)
