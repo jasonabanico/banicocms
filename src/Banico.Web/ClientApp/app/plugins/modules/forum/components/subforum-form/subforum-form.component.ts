@@ -11,6 +11,8 @@ import { ForumSubforumService } from "../../services/subforum.service";
   styleUrls: ["./subforum-form.component.scss"]
 })
 export class ForumSubforumFormComponent implements OnInit {
+  public cancelLink: string;
+
   public subforumForm: FormGroup = this.fb.group({
     id: ["", Validators.required],
     name: ["", Validators.required],
@@ -25,7 +27,9 @@ export class ForumSubforumFormComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.cancelLink = "/forum";
+  }
 
   public ngOnInit() {
     this.route.params.subscribe(params => {
@@ -53,6 +57,7 @@ export class ForumSubforumFormComponent implements OnInit {
       description: subforum.description,
       sectionItems: ""
     });
+    this.cancelLink = "/forum/" + subforum.alias;
   }
 
   private setSection(contentSectionItems: string) {

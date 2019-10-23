@@ -1,10 +1,11 @@
 import { ContentItem } from "../../../../entities/content-item";
-import * as moment from 'moment';
+import * as moment from "moment";
 
 export class Topic {
   id: string;
   title: string;
   text: string;
+  snippet: string;
   subForumId: string;
   userId: string;
   username: string;
@@ -13,10 +14,11 @@ export class Topic {
   postCount: number;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module == 'forum-topic')) {
+    if (contentItem && contentItem.module == "forum-topic") {
       this.id = contentItem.id;
       this.title = contentItem.name;
       this.text = contentItem.content;
+      this.snippet = contentItem.snippet;
       this.userId = contentItem.createdBy;
       this.subForumId = contentItem.parentId;
       this.createdDate = contentItem.createdDate;
@@ -27,21 +29,20 @@ export class Topic {
   public ToContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = 'forum-topic';
+    output.module = "forum-topic";
     output.id = this.id;
     output.name = this.title;
     output.content = this.text;
     output.parentId = this.subForumId;
-    
+
     return output;
   }
 
   public moment(): string {
-    return moment(this.createdDate).format('MMMM Do YYYY, h:mm:ss a');
+    return moment(this.createdDate).format("MMMM Do YYYY, h:mm:ss a");
   }
 
   public momentRelative(): string {
     return moment(this.createdDate).fromNow();
   }
-
 }

@@ -5,6 +5,7 @@ export class Subforum {
   name: string;
   alias: string;
   description: string;
+  snippet: string;
   sectionItems: string;
   userId: string;
   username: string;
@@ -18,6 +19,7 @@ export class Subforum {
       this.name = contentItem.name;
       this.alias = contentItem.alias;
       this.description = contentItem.content;
+      this.snippet = contentItem.snippet;
       this.sectionItems = contentItem.sectionItems;
       this.userId = contentItem.createdBy;
       this.createdDate = contentItem.createdDate;
