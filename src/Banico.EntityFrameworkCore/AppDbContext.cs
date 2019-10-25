@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Banico.Core.Entities;
 using Banico.EntityFrameworkCore.Settings;
+using kedzior.io.ConnectionStringConverter;
 
 namespace Banico.EntityFrameworkCore
 {
@@ -40,6 +41,7 @@ namespace Banico.EntityFrameworkCore
                 if (!string.IsNullOrEmpty(azureConnectionStringEnvironmentVariable))
                 {
                     connectionString = Environment.GetEnvironmentVariable(azureConnectionStringEnvironmentVariable);
+                    connectionString = AzureMySQL.ToMySQLStandard(connectionString);
                 }
 
                 var provider = _configuration["AppDbProvider"];

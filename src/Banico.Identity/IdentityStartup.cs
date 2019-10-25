@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Banico.Services;
+using kedzior.io.ConnectionStringConverter;
 
 namespace Banico.Identity
 {
@@ -46,13 +47,14 @@ namespace Banico.Identity
     {
 
       // Add framework services.
-      string appDbContextConnectionString = Configuration.GetConnectionString("AppIdentityDbContext");
+      string appIdentityDbContextConnectionString = Configuration.GetConnectionString("AppIdentityDbContext");
 
       // Override with Azure connection string if exists
       var azureConnectionStringEnvironmentVariable = this.Configuration["AzureConnectionStringEnvironmentVariable"];
       if (!string.IsNullOrEmpty(azureConnectionStringEnvironmentVariable))
       {
-          appDbContextConnectionString = Environment.GetEnvironmentVariable(azureConnectionStringEnvironmentVariable);
+          appIdentityDbContextConnectionString = Environment.GetEnvironmentVariable(azureConnectionStringEnvironmentVariable);
+          appIdentityDbContextConnectionString = AzureMySQL.ToMySQLStandard(appIdentityDbContextConnectionString);
       }
 
       var provider = Configuration["AppIdentityDBProvider"];
@@ -64,22 +66,22 @@ namespace Banico.Identity
       {
           case "mssql":
               services.AddDbContext<AppIdentityDbContext>(options =>
-                  options.UseSqlServer(appDbContextConnectionString,
+                  options.UseSqlServer(appIdentityDbContextConnectionString,
                   optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Identity")));
               break;
           case "mysql":
               services.AddDbContext<AppIdentityDbContext>(options =>
-                  options.UseMySql(appDbContextConnectionString,
+                  options.UseMySql(appIdentityDbContextConnectionString,
                   optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Identity")));
               break;
           case "sqlite":
-              if (string.IsNullOrEmpty(appDbContextConnectionString))
+              if (string.IsNullOrEmpty(appIdentityDbContextConnectionString))
               {
                   var connectionStringBuilder = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder { DataSource = "banico-identity.db" };
-                  appDbContextConnectionString = connectionStringBuilder.ToString();
+                  appIdentityDbContextConnectionString = connectionStringBuilder.ToString();
               }
               services.AddDbContext<AppIdentityDbContext>(options =>
-                  options.UseSqlite(appDbContextConnectionString,
+                  options.UseSqlite(appIdentityDbContextConnectionString,
                   optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.Identity")));
               break;
       }
