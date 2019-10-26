@@ -34,20 +34,20 @@
     <div class="card-footer">
       <button
         class="card-link"
-        type="submit"
-        class="btn btn-primary btn-sm"
-        value="save"
-      >
-        Save
-      </button>
-      <button
-        class="card-link"
         *ngIf="isEdit"
         type="button"
         class="btn btn-danger btn-sm"
         (click)="cancel()"
       >
         Cancel
+      </button>
+      <button
+        class="card-link"
+        type="submit"
+        class="btn btn-primary btn-sm"
+        value="save"
+      >
+        Save
       </button>
     </div>
   </div>

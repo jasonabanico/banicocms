@@ -39,6 +39,9 @@
           name="createdDate"
           formControlName="createdDate"
         />
+        <p class="small" *ngIf="isEdit">
+          <a href="javascript:;" (click)="cancel()">Cancel</a>
+        </p>
         <input
           class="form-control"
           id="text"
@@ -47,9 +50,6 @@
           formControlName="text"
           (keyup.enter)="save()"
         />
-        <p class="small" *ngIf="isEdit">
-          <a href="javascript:;" (click)="cancel()">Cancel</a>
-        </p>
       </form>
     </div>
   </div>
