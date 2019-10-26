@@ -15,6 +15,7 @@ namespace Banico.Api.Models
 {
     public class BanicoMutation : ObjectGraphType
     {
+        private bool isDebug = false;
         private IConfiguration _configuration;
         private IConfigRepository _configRepository;
         private IAccessService _accessService;
@@ -44,7 +45,8 @@ namespace Banico.Api.Models
                 {
                     var section = context.GetArgument<Section>("section");
                     this.StampItem(section);
-                    var isSectionAdmin = _accessService.Allowed("admin/sections").Result;
+                    var isSectionAdmin = _accessService.Allowed("admin/sections", false).Result;
+                    this.WriteDebugMessage("BanicoMutation: isSectionAdmin " + isSectionAdmin.ToString());
                     return sectionRepository.AddOrUpdate(section, isSectionAdmin);
                 });
 
@@ -58,7 +60,7 @@ namespace Banico.Api.Models
                 {
                     var sectionItem = context.GetArgument<SectionItem>("sectionItem");
                     this.StampItem(sectionItem);
-                    var isSectionItemAdmin = _accessService.Allowed("admin/sectionItems").Result;
+                    var isSectionItemAdmin = _accessService.Allowed("admin/sectionItems", false).Result;
                     return sectionItemRepository.AddOrUpdate(sectionItem, isSectionItemAdmin);
                 });
 
@@ -129,6 +131,14 @@ namespace Banico.Api.Models
             }
 
             return string.Empty;
+        }
+
+        private void WriteDebugMessage(string message)
+        {
+            if (this.isDebug)
+            {
+                Console.WriteLine("-----> " + message);
+            }
         }
     }
 }

@@ -12,7 +12,7 @@
   "SuperAdmins": "ENTER-SUPERADMIN-USERNAME-HERE",
   "EmailSender": {
     "EmailUser": "ENTER-SENDGRID-USER-HERE",
-    "EmailKey": "ENTER-SENDGRID-KEY-HERE"  
+    "EmailKey": "ENTER-SENDGRID-KEY-HERE"
   },
   "Email": {
     "Name": "ENTER-ADMIN-NAME-HERE",
@@ -30,17 +30,14 @@
     }
   },
   "ConfigDefaultSettings": {
-    "Configs": [
-      ",initialized,n",
-      "admin,canActivate,admin"
-      ]
+    "Configs": [",initialized,n", "admin,canActivate,admin"]
   },
   "ConfigInitialSettings": {
     "Configs": [
-      "admin/sections,canActivate,superadmin",
-      "admin/sectionItems,canActivate,admin",
-      "admin/roles,canActivate,superadmin",
-      "admin/users,canActivate,admin",
+      "admin/sections/manage,canActivate,superadmin",
+      "admin/sectionItems/manage,canActivate,admin",
+      "admin/roles/manage,canActivate,superadmin",
+      "admin/users/manage,canActivate,admin",
       "admin/config,canActivate,superadmin",
       "contact,isEnabled,n",
       "contact,canActivate,admin",
@@ -77,10 +74,9 @@
       "profile,isEnabled,y",
       "profile/view,canActivate,user",
       "profile/manage,canActivate,user"
-      ]
+    ]
   },
   "Content": {
     "MaxPageSize": "40"
   }
 }
-  
