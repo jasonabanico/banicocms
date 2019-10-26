@@ -673,6 +673,10 @@ namespace Banico.EntityFrameworkCore.Repositories
                         return item;
                     }
                 }
+                else
+                {
+                    throw new UnauthorizedAccessException();
+                }
             }
 
             return new ContentItem();

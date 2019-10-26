@@ -108,7 +108,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         {
             if (!isSectionItemAdmin)
             {
-                return new SectionItem();
+                throw new UnauthorizedAccessException();
             }
 
             sectionItem.Id = Guid.NewGuid().ToString();
@@ -129,7 +129,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         {
             if (!isSectionItemAdmin)
             {
-                return new SectionItem();
+                throw new UnauthorizedAccessException();
             }
 
             var storedSectionItem = (await this.Get(
@@ -160,7 +160,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         {
             if (!isSectionItemAdmin)
             {
-                return new SectionItem();
+                throw new UnauthorizedAccessException();
             }
 
             var sectionItem = (await this.Get(

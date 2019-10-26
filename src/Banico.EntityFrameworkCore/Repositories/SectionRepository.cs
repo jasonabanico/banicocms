@@ -57,7 +57,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         {
             if (!isSectionAdmin)
             {
-                return new Section();
+                throw new UnauthorizedAccessException();
             }
             
             section.Id = Guid.NewGuid().ToString();
@@ -76,7 +76,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         {
             if (!isSectionAdmin)
             {
-                return new Section();
+                throw new UnauthorizedAccessException();
             }
             
             var storedSection = (await this.Get(
@@ -111,7 +111,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         {
             if (!isSectionAdmin)
             {
-                return new Section();
+                throw new UnauthorizedAccessException();
             }
 
             var section = (await this.Get(
