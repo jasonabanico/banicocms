@@ -2,7 +2,7 @@
 
 http://banico.org
 
-==Prerequisites:
+## Prerequisites
 
 <ul>
     <li>Git: https://git-scm.com/downloads</li>
@@ -13,7 +13,7 @@ http://banico.org
     <li>ASP.Net Hosting Environment: https://andrewlock.net/how-to-set-the-hosting-environment-in-asp-net-core/</li>
 </ul>
 
-==Local Dev Environment Setup:
+## Local Dev Environment Setup:
 
 ```bash
 # clone repository
@@ -34,6 +34,8 @@ cp sample.app.config.ts app.config.ts
 # run banico
 dotnet run
 ```
+
+## Azure Web App Deployment Notes
 
 <ul>
     <li>Add the following Application Settings in your web app Configuration:
