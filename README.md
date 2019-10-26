@@ -13,7 +13,7 @@ http://banico.org
     <li>ASP.Net Hosting Environment: https://andrewlock.net/how-to-set-the-hosting-environment-in-asp-net-core/</li>
 </ul>
 
-## Local Dev Environment Setup:
+## Local Dev Environment Setup
 
 ```bash
 # clone repository
