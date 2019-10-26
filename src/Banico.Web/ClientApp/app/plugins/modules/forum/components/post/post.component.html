@@ -40,9 +40,7 @@
           post?.momentRelative()
         }})
       </div>
-      <p class="card-text">
-        {{ post?.text }}
-      </p>
+      <div class="card-text" markdown [data]="post?.text"></div>
     </div>
     <div class="card-footer">
       <a

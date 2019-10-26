@@ -19,9 +19,7 @@
   </div>
 
   <div class="card-body">
-    <p class="card-text">
-      {{ subforum?.description }}
-    </p>
+    <div class="card-text" markdown [data]="subforum?.description"></div>
   </div>
 
   <div class="card-footer">

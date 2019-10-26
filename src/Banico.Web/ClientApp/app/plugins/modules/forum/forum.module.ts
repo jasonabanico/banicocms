@@ -1,21 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ForumRoutingModule } from './forum.routing';
-import { ForumComponent } from './components/forum.component';
-import { ForumHomeComponent } from './components/home/home.component';
-import { ForumSubforumComponent } from './components/subforum/subforum.component';
-import { ForumSubforumFormComponent } from './components/subforum-form/subforum-form.component';
-import { ForumTopicComponent } from './components/topic/topic.component';
-import { ForumTopicFormComponent } from './components/topic-form/topic-form.component';
-import { ForumPostComponent } from './components/post/post.component';
-import { ForumPostFormComponent } from './components/post-form/post-form.component';
-import { ForumCommentComponent } from './components/comment/comment.component';
-import { ForumCommentFormComponent } from './components/comment-form/comment-form.component';
-import { ForumSubforumService } from './services/subforum.service';
-import { ForumTopicService } from './services/topic.service';
-import { ForumPostService } from './services/post.service';
-import { ForumCommentService } from './services/comment.service';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ForumRoutingModule } from "./forum.routing";
+import { ForumComponent } from "./components/forum.component";
+import { ForumHomeComponent } from "./components/home/home.component";
+import { ForumSubforumComponent } from "./components/subforum/subforum.component";
+import { ForumSubforumFormComponent } from "./components/subforum-form/subforum-form.component";
+import { ForumTopicComponent } from "./components/topic/topic.component";
+import { ForumTopicFormComponent } from "./components/topic-form/topic-form.component";
+import { ForumPostComponent } from "./components/post/post.component";
+import { ForumPostFormComponent } from "./components/post-form/post-form.component";
+import { ForumCommentComponent } from "./components/comment/comment.component";
+import { ForumCommentFormComponent } from "./components/comment-form/comment-form.component";
+import { ForumSubforumService } from "./services/subforum.service";
+import { ForumTopicService } from "./services/topic.service";
+import { ForumPostService } from "./services/post.service";
+import { ForumCommentService } from "./services/comment.service";
+import { MarkdownModule } from "ngx-markdown";
 //import { ForumStoreModule } from './store/forum-store.module';
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ForumCommentService } from './services/comment.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ForumRoutingModule
+    ForumRoutingModule,
+    MarkdownModule.forChild()
     //ForumStoreModule
   ],
   declarations: [
@@ -45,4 +47,4 @@ import { ForumCommentService } from './services/comment.service';
     ForumCommentService
   ]
 })
-export class ForumModule { }
+export class ForumModule {}

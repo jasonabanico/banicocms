@@ -50,9 +50,7 @@
     </div>
     <h5 class="card-title">{{ topic?.title }}</h5>
 
-    <p class="card-text">
-      {{ topic?.text }}
-    </p>
+    <div class="card-text" markdown [data]="topic?.text"></div>
     <!--
       <div>
           <span class="badge badge-primary mr-2">tag1</span>

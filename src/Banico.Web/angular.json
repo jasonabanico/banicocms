@@ -26,11 +26,18 @@
               "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/font-awesome/scss/font-awesome.scss",
               "node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
-              "node_modules/angular-bootstrap-md/scss/mdb-free.scss"
+              "node_modules/angular-bootstrap-md/scss/mdb-free.scss",
+              "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css",
+              "node_modules/prismjs/themes/prism-okaidia.css"
             ],
             "scripts": [
               "node_modules/chart.js/dist/Chart.js",
-              "node_modules/hammerjs/hammer.min.js"
+              "node_modules/hammerjs/hammer.min.js",
+              "node_modules/marked/lib/marked.js",
+              "node_modules/prismjs/prism.js",
+              "node_modules/prismjs/components/prism-csharp.min.js",
+              "node_modules/prismjs/components/prism-css.min.js",
+              "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js"
             ]
           },
           "configurations": {
@@ -77,11 +84,9 @@
             "polyfills": "ClientApp/polyfills.ts",
             "tsConfig": "ClientApp/tsconfig.spec.json",
             "karmaConfig": "ClientApp/karma.conf.js",
-            "styles": [
-              "ClientApp/src/styles.scss"
-              ],
-              "scripts": [],
-              "assets": ["ClientApp/favicon.ico", "ClientApp/assets"]
+            "styles": ["ClientApp/src/styles.scss"],
+            "scripts": [],
+            "assets": ["ClientApp/favicon.ico", "ClientApp/assets"]
           }
         },
         "lint": {
