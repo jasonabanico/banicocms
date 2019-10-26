@@ -72,3 +72,10 @@
     </ul>
   </div>
 </ng-container>
+<ng-container *ngIf="isEdit">
+  <app-plugins-forum-post-form
+    [id]="post?.id"
+    (saved)="onSave($event)"
+    (cancelled)="onCancel()"
+  ></app-plugins-forum-post-form>
+</ng-container>

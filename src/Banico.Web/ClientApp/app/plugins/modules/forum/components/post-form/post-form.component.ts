@@ -11,6 +11,7 @@ import { Post } from "../../entities/post";
   styleUrls: ["./post-form.component.scss"]
 })
 export class ForumPostFormComponent implements OnInit {
+  private post: Post;
   public isEdit: boolean = false;
   public username: string;
   public avatarHash: string;
@@ -32,6 +33,7 @@ export class ForumPostFormComponent implements OnInit {
   ngOnInit() {
     this.username = this.authService.getUserName();
     this.avatarHash = this.authService.getAvatarHash();
+    this.post = new Post(null);
   }
 
   @Input()
@@ -55,6 +57,7 @@ export class ForumPostFormComponent implements OnInit {
       topicId: post.topicId,
       text: post.text
     });
+    this.post = post;
     this.isEdit = true;
   }
 
@@ -64,16 +67,15 @@ export class ForumPostFormComponent implements OnInit {
     var topicId = this.postForm.value["topicId"];
     var text = this.postForm.value["text"];
 
-    var post = new Post(null);
-    post.id = id;
-    post.topicId = topicId;
-    post.text = text;
-    post.userId = this.authService.getUserId();
-    post.username = this.authService.getUserName();
+    this.post.id = id;
+    this.post.topicId = topicId;
+    this.post.text = text;
+    this.post.userId = this.authService.getUserId();
+    this.post.username = this.authService.getUserName();
 
     this.postService.addOrUpdate(id, topicId, text).subscribe(
       id => {
-        this.saved.emit(post);
+        this.saved.emit(this.post);
       }
       //errors =>  //this.errors = errors
     );

@@ -66,8 +66,8 @@ export class ForumPostComponent implements OnInit {
     this.isEdit = true;
   }
 
-  public onSave(text: string) {
-    this.post.text = text;
+  public onSave(post: Post) {
+    this.set(post);
     this.isEdit = false;
   }
 
