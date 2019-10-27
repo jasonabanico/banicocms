@@ -7,6 +7,7 @@ import { Post } from "../../entities/post";
 import { Comment } from "../../entities/comment";
 import { map } from "rxjs/operators";
 import { AuthService } from "../../../../../shared/services/auth.service";
+import { BehaviorSubject } from "rxjs";
 
 @Component({
   selector: "app-plugins-forum-post",
@@ -22,6 +23,7 @@ export class ForumPostComponent implements OnInit {
   public offset: number = 0;
   private _id: string;
   public isEdit: boolean;
+  public textChanged: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor(
     private postService: ForumPostService,
@@ -68,6 +70,7 @@ export class ForumPostComponent implements OnInit {
 
   public onSave(post: Post) {
     this.set(post);
+    this.textChanged.next(post.text);
     this.isEdit = false;
   }
 

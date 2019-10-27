@@ -12,6 +12,7 @@ import { Post } from "../../entities/post";
 })
 export class ForumPostFormComponent implements OnInit {
   private post: Post;
+  private postText: string;
   public isEdit: boolean = false;
   public username: string;
   public avatarHash: string;
@@ -34,6 +35,14 @@ export class ForumPostFormComponent implements OnInit {
     this.username = this.authService.getUserName();
     this.avatarHash = this.authService.getAvatarHash();
     this.post = new Post(null);
+
+    // set text in form to the recently updated value
+    this.textChanged.subscribe(text => {
+      this.postText = text;
+      this.postForm.patchValue({
+        text: text
+      });
+    });
   }
 
   @Input()
@@ -48,14 +57,19 @@ export class ForumPostFormComponent implements OnInit {
     this.postService.get(id).subscribe(post => this.set(post));
   }
 
+  @Input() textChanged;
   @Output() saved: EventEmitter<Post> = new EventEmitter<Post>();
   @Output() cancelled: EventEmitter<null> = new EventEmitter<null>();
 
   private set(post: Post) {
+    // if no recently updated text is set, use value from service
+    if (!this.postText) {
+      this.postText = post.text;
+    }
     this.postForm.patchValue({
       id: post.id,
       topicId: post.topicId,
-      text: post.text
+      text: this.postText
     });
     this.post = post;
     this.isEdit = true;
