@@ -90,6 +90,9 @@ export class ForumPostFormComponent implements OnInit {
     this.postService.addOrUpdate(id, topicId, text).subscribe(
       id => {
         this.saved.emit(this.post);
+        this.postForm.patchValue({
+          text: ""
+        });
       }
       //errors =>  //this.errors = errors
     );
