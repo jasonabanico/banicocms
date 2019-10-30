@@ -7,8 +7,10 @@ export class ContentItem {
   module: string;
   createdBy: string;
   createdDate: string;
+  createdDateTicks: number;
   updatedBy: string;
   updatedDate: string;
+  updatedDateTicks: number;
   name: string;
   sectionItems: string;
   content: string;

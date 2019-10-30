@@ -9,6 +9,9 @@ export class Post {
   username: string;
   avatarHash: string;
   createdDate: string;
+  createdDateTicks: number;
+  updatedDate: string;
+  updatedDateTicks: number;
   commentCount: number;
 
   constructor(private contentItem: ContentItem) {
@@ -18,6 +21,9 @@ export class Post {
       this.topicId = contentItem.parentId;
       this.userId = contentItem.createdBy;
       this.createdDate = contentItem.createdDate;
+      this.createdDateTicks = contentItem.createdDateTicks;
+      this.updatedDate = contentItem.updatedDate;
+      this.updatedDateTicks = contentItem.updatedDateTicks;
       this.commentCount = contentItem.childCount;
     }
   }
@@ -44,9 +50,5 @@ export class Post {
 
   public fromNow(): string {
     return moment(this.createdDate).fromNow();
-  }
-
-  public timeStamp(): number {
-    return moment(this.createdDate).unix();
   }
 }

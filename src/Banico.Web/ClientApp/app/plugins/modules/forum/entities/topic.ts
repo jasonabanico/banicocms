@@ -11,6 +11,9 @@ export class Topic {
   username: string;
   avatarHash: string;
   createdDate: string;
+  createdDateTicks: number;
+  updatedDate: string;
+  updatedDateTicks: number;
   postCount: number;
 
   constructor(private contentItem: ContentItem) {
@@ -22,6 +25,9 @@ export class Topic {
       this.userId = contentItem.createdBy;
       this.subForumId = contentItem.parentId;
       this.createdDate = contentItem.createdDate;
+      this.createdDateTicks = contentItem.createdDateTicks;
+      this.updatedDate = contentItem.updatedDate;
+      this.updatedDateTicks = contentItem.updatedDateTicks;
       this.postCount = contentItem.childCount;
     }
   }
@@ -49,9 +55,5 @@ export class Topic {
 
   public fromNow(): string {
     return moment(this.createdDate).fromNow();
-  }
-
-  public timeStamp(): number {
-    return moment(this.createdDate).unix();
   }
 }

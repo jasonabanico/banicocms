@@ -387,20 +387,48 @@ namespace Banico.EntityFrameworkCore.Repositories
             }
 
             Expression<Func<ContentItem, object>> sort = null;
+            bool isDescending = false;
 
-            switch(orderBy) 
+            switch(orderBy.ToLower()) 
             {
                 case "name":
                     sort = c => c.Name;
                     break;
-                case "createdDate":
+                case "name asc":
+                    sort = c => c.Name;
+                    break;
+                case "name desc":
+                    sort = c => c.Name;
+                    isDescending = true;
+                    break;
+                case "createddate":
                     sort = c => c.CreatedDate;
+                    break;
+                case "createddate asc":
+                    sort = c => c.CreatedDate;
+                    break;
+                case "createddate desc":
+                    sort = c => c.CreatedDate;
+                    isDescending = true;
+                    break;
+                case "childcount":
+                    sort = c => c.ChildCount;
+                    break;
+                case "childcount asc":
+                    sort = c => c.ChildCount;
+                    break;
+                case "childcount desc":
+                    sort = c => c.ChildCount;
+                    isDescending = true;
                     break;
             }
 
             if (sort != null) 
             {
-                contentItems = contentItems.OrderBy(sort);
+                if (!isDescending)
+                    contentItems = contentItems.OrderBy(sort);
+                else
+                    contentItems = contentItems.OrderByDescending(sort);
             }
 
             if ((pageSize == 0) || (pageSize > _maxPageSize))

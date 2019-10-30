@@ -196,8 +196,30 @@ export class ContentItemService {
           offset: contentItemSearch.offset
         }
       })
-      .valueChanges.pipe(map(result => result.data.contentItems));
+      .valueChanges.pipe(
+        map(result => {
+          const items = result.data.contentItems;
+          return this.order(items, contentItemSearch.orderBy.toLowerCase());
+        })
+      );
     return result;
+  }
+
+  public order(items: ContentItem[], orderBy: string): ContentItem[] {
+    if (orderBy === "childcount" || orderBy === "childcount asc") {
+      return items.sort((a, b) => a.childCount - b.childCount);
+    }
+    if (orderBy === "childcount desc") {
+      return items.sort((a, b) => b.childCount - a.childCount);
+    }
+    if (orderBy === "createddate" || orderBy === "createddate asc") {
+      return items.sort((a, b) => a.createdDateTicks - b.createdDateTicks);
+    }
+    if (orderBy === "createddate desc") {
+      return items.sort((a, b) => b.createdDateTicks - a.createdDateTicks);
+    }
+
+    return items;
   }
 
   public addOrUpdate(contentItem: ContentItem): Observable<any> {

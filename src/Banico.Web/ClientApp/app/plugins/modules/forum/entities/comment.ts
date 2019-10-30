@@ -9,6 +9,9 @@ export class Comment {
   username: string;
   avatarHash: string;
   createdDate: string;
+  createdDateTicks: number;
+  updatedDate: string;
+  updatedDateTicks: number;
 
   constructor(private contentItem: ContentItem) {
     if (contentItem && contentItem.module == "forum-comment") {
@@ -17,6 +20,9 @@ export class Comment {
       this.postId = contentItem.parentId;
       this.userId = contentItem.createdBy;
       this.createdDate = contentItem.createdDate;
+      this.createdDateTicks = contentItem.createdDateTicks;
+      this.updatedDate = contentItem.updatedDate;
+      this.updatedDateTicks = contentItem.updatedDateTicks;
     }
   }
 
@@ -42,9 +48,5 @@ export class Comment {
 
   public fromNow(): string {
     return moment(this.createdDate).fromNow();
-  }
-
-  public timeStamp(): number {
-    return moment(this.createdDate).unix();
   }
 }

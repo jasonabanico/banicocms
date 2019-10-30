@@ -1,83 +1,88 @@
-import { Injectable, Inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { Injectable, Inject } from "@angular/core";
+import { Observable } from "rxjs";
+import { map, catchError } from "rxjs/operators";
 import { PluginService } from "../../../services/plugin.service";
-import { ContentItem } from '../../../../entities/content-item';
-import { HttpHeaders } from '@angular/common/http';
-import { Topic } from '../entities/topic';
-import { ContentItemSearch } from '../../../entities/contentItemSearch';
+import { ContentItem } from "../../../../entities/content-item";
+import { HttpHeaders } from "@angular/common/http";
+import { Topic } from "../entities/topic";
+import { ContentItemSearch } from "../../../entities/contentItemSearch";
 
 @Injectable()
 export class ForumTopicService extends PluginService {
+  public get(id: string): Observable<Topic> {
+    return this.contentItemService.get(id).pipe(
+      map(item => {
+        return new Topic(item);
+      })
+    );
+  }
 
-    public get(id: string): Observable<Topic> {
-        return this.contentItemService.get(id).pipe(
-        map(item => {
-            return new Topic(item);
-        }));
-    }
+  public setTopicUser(topic: Topic) {
+    var user = this.contentItemService
+      .getProfileById(topic.userId)
+      .subscribe(user => {
+        topic.username = user.alias;
+        topic.avatarHash = user.attribute01;
+      });
+  }
 
-    public setTopicUser(topic: Topic) {
-        var user = this.contentItemService.getProfileById(topic.userId)
-        .subscribe(user => {
-            topic.username = user.alias;
-            topic.avatarHash = user.attribute01;
-        });
-    }
+  public getTopics(subforumId: string): Observable<Topic[]> {
+    const contentItemSearch = new ContentItemSearch();
+    contentItemSearch.module = "forum-topic";
+    contentItemSearch.parentId = subforumId;
+    contentItemSearch.orderBy = "childCount desc";
+    return this.contentItemService.getAll(contentItemSearch).pipe(
+      map(items => {
+        var topics: Topic[] = new Array<Topic>();
+        items.forEach(item => {
+          var topic = new Topic(item);
 
-    public getTopics(subforumId: string): Observable<Topic[]> {
-        const contentItemSearch = new ContentItemSearch();
-        contentItemSearch.module = 'forum-topic';
-        contentItemSearch.parentId = subforumId;
-        return this.contentItemService.getAll(contentItemSearch).pipe(
-        map(items => {
-            var topics: Topic[] = new Array<Topic>();
-            items.forEach(item => {
-                var topic = new Topic(item);
-
-                var user = this.contentItemService.getProfileById(item.createdBy)
-                    .subscribe(user => {
-                        topic.username = user.alias;
-                        topic.avatarHash = user.attribute01;
-                        topics.push(topic);                
-                    });
+          var user = this.contentItemService
+            .getProfileById(item.createdBy)
+            .subscribe(user => {
+              topic.username = user.alias;
+              topic.avatarHash = user.attribute01;
+              topics.push(topic);
             });
+        });
 
-            return topics;
-        }));
-    }
+        return topics;
+      })
+    );
+  }
 
-    public addOrUpdate(
-        id: string,
-        subforumId: string,
-        title: string,
-        text: string
-    ): Observable<boolean> {
-        let topic: Topic = new Topic(null);
+  public addOrUpdate(
+    id: string,
+    subforumId: string,
+    title: string,
+    text: string
+  ): Observable<boolean> {
+    let topic: Topic = new Topic(null);
 
-        topic.id = id;
-        topic.subForumId = subforumId;
-        topic.title = title;
-        topic.text = text;
+    topic.id = id;
+    topic.subForumId = subforumId;
+    topic.title = title;
+    topic.text = text;
 
-        let contentItem: ContentItem = topic.toContentItem();
-        return this.contentItemService.addOrUpdate(contentItem).pipe(
-            catchError(this.handleError));
-    }
+    let contentItem: ContentItem = topic.toContentItem();
+    return this.contentItemService
+      .addOrUpdate(contentItem)
+      .pipe(catchError(this.handleError));
+  }
 
-    public delete(topic: Topic): Observable<{}> {
-        let headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        let data = 'id=' + topic.id;
-        return this.http
-            .post(this.appBaseUrl + '/Delete', data, {
-                headers: headers
-            }).pipe(
-            map(this.extractData));
-            //.subscribe({
-                //next: x => console.log('Observer got a next value: ' + x),
-                //error: err => alert(JSON.stringify(err)),
-                //complete: () => console.log('Saved completed.'),
-            //});
-    }
+  public delete(topic: Topic): Observable<{}> {
+    let headers = new HttpHeaders();
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
+    let data = "id=" + topic.id;
+    return this.http
+      .post(this.appBaseUrl + "/Delete", data, {
+        headers: headers
+      })
+      .pipe(map(this.extractData));
+    //.subscribe({
+    //next: x => console.log('Observer got a next value: ' + x),
+    //error: err => alert(JSON.stringify(err)),
+    //complete: () => console.log('Saved completed.'),
+    //});
+  }
 }
