@@ -1,5 +1,5 @@
 import { ContentItem } from "../../../../entities/content-item";
-import * as moment from 'moment';
+import * as moment from "moment";
 
 export class Comment {
   id: string;
@@ -11,7 +11,7 @@ export class Comment {
   createdDate: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module == 'forum-comment')) {
+    if (contentItem && contentItem.module == "forum-comment") {
       this.id = contentItem.id;
       this.text = contentItem.content;
       this.postId = contentItem.parentId;
@@ -20,22 +20,31 @@ export class Comment {
     }
   }
 
-  public ToContentItem(): ContentItem {
+  public toContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = 'forum-comment';
+    output.module = "forum-comment";
     output.id = this.id;
     output.content = this.text;
     output.parentId = this.postId;
-    
+
     return output;
   }
 
-  public moment(): string {
-    return moment(this.createdDate).format('MMMM Do YYYY, h:mm:ss a');
+  public clone(): Comment {
+    let contentItem = this.toContentItem();
+    return new Comment(contentItem);
   }
 
-  public momentRelative(): string {
+  public formattedDate(): string {
+    return moment(this.createdDate).format("MMMM Do YYYY, h:mm:ss a");
+  }
+
+  public fromNow(): string {
     return moment(this.createdDate).fromNow();
+  }
+
+  public timeStamp(): number {
+    return moment(this.createdDate).unix();
   }
 }

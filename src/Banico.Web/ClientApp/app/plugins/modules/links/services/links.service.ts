@@ -51,7 +51,7 @@ export class LinksService extends PluginService {
         link.description = description;
         link.url = url;
 
-        const contentItem: ContentItem = link.ToContentItem();
+        const contentItem: ContentItem = link.toContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             catchError(error => {
                 this.handleError(error);

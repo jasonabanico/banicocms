@@ -17,7 +17,7 @@ export class Link {
     }
   }
 
-  public ToContentItem(): ContentItem {
+  public toContentItem(): ContentItem {
     const output: ContentItem = new ContentItem();
 
     output.module = 'link';

@@ -24,7 +24,7 @@ export class PageService extends PluginService {
     }
 
     public addOrUpdate(page: Page): Observable<Page> {
-        let contentItem: ContentItem = page.ToContentItem();
+        let contentItem: ContentItem = page.toContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             map(contentItem => new Page(contentItem)),
             catchError(this.handleError));

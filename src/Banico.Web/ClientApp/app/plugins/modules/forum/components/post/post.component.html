@@ -36,8 +36,8 @@
     </div>
     <div class="card-body">
       <div class="text-muted mb-2">
-        <i class="fas fa-clock"></i> {{ post?.moment() }} ({{
-          post?.momentRelative()
+        <i class="fas fa-clock"></i> {{ post?.formattedDate() }} ({{
+          post?.fromNow()
         }})
       </div>
       <div class="card-text" markdown [data]="post?.text"></div>

@@ -54,7 +54,7 @@ export class ForumPostService extends PluginService {
         post.topicId = topicId;
         post.text = text;
 
-        const contentItem: ContentItem = post.ToContentItem();
+        const contentItem: ContentItem = post.toContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             catchError(this.handleError));
     }

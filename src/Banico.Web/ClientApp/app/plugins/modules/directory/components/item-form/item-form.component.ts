@@ -42,7 +42,7 @@ export class DirectoryItemFormComponent implements OnInit {
   private set(directoryItem: DirectoryItem) {
     this.directoryItem = directoryItem;
     var sectionItems = this.directoryService.toSectionItems(
-      directoryItem.ToContentItem()
+      directoryItem.toContentItem()
     );
     this.sectionBarService.initialize(
       "directory",

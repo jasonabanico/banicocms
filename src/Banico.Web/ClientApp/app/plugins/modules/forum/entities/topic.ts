@@ -26,7 +26,7 @@ export class Topic {
     }
   }
 
-  public ToContentItem(): ContentItem {
+  public toContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
     output.module = "forum-topic";
@@ -38,11 +38,20 @@ export class Topic {
     return output;
   }
 
-  public moment(): string {
+  public clone(): Topic {
+    let contentItem = this.toContentItem();
+    return new Topic(contentItem);
+  }
+
+  public formattedDate(): string {
     return moment(this.createdDate).format("MMMM Do YYYY, h:mm:ss a");
   }
 
-  public momentRelative(): string {
+  public fromNow(): string {
     return moment(this.createdDate).fromNow();
+  }
+
+  public timeStamp(): number {
+    return moment(this.createdDate).unix();
   }
 }

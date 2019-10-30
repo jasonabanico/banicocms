@@ -60,7 +60,7 @@ export class ForumTopicService extends PluginService {
         topic.title = title;
         topic.text = text;
 
-        let contentItem: ContentItem = topic.ToContentItem();
+        let contentItem: ContentItem = topic.toContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             catchError(this.handleError));
     }

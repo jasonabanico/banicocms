@@ -20,7 +20,7 @@ export class ListSet {
     }
   }
 
-  public ToContentItem(): ContentItem {
+  public toContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
     output.module = "list-set";

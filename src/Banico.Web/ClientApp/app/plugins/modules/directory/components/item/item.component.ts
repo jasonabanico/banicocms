@@ -41,7 +41,7 @@ export class DirectoryItemComponent implements OnInit, OnDestroy {
     this.directoryItem = directoryItem;
     this.uriEncodeAddress = encodeURIComponent(directoryItem.address);
     var sectionItems = this.directoryService.toSectionItems(
-      directoryItem.ToContentItem()
+      directoryItem.toContentItem()
     );
     this.sectionBarService.initialize(
       "directory",
@@ -88,7 +88,7 @@ export class DirectoryItemComponent implements OnInit, OnDestroy {
         if (data.value == "1") {
           alert("Saved.");
           var sectionItems = this.directoryService.toSectionItems(
-            this.directoryItem.ToContentItem()
+            this.directoryItem.toContentItem()
           );
           this.router.navigateByUrl("directory/" + sectionItems);
         } else {

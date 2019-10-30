@@ -17,7 +17,7 @@ export class List {
     }
   }
 
-  public ToContentItem(): ContentItem {
+  public toContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
     output.module = "list";

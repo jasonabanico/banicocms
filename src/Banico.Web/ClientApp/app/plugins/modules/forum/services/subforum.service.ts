@@ -62,7 +62,7 @@ export class ForumSubforumService extends PluginService {
     subforum.description = description;
     subforum.sectionItems = sectionItems;
 
-    let contentItem: ContentItem = subforum.ToContentItem();
+    let contentItem: ContentItem = subforum.toContentItem();
     return this.contentItemService.addOrUpdate(contentItem).pipe(
       map(res => {
         return true;

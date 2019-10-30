@@ -53,7 +53,7 @@ export class ForumCommentService extends PluginService {
         comment.postId = postId;
         comment.text = text;
 
-        const contentItem: ContentItem = comment.ToContentItem();
+        const contentItem: ContentItem = comment.toContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             catchError(this.handleError));
     }

@@ -58,7 +58,12 @@ export class ForumPostComponent implements OnInit {
       }
       this.commentService
         .getComments(post.id, this.page, this.offset)
-        .subscribe(comments => (this.comments = comments));
+        .subscribe(
+          comments =>
+            (this.comments = comments.sort(
+              (a, b) => a.timeStamp() - b.timeStamp()
+            ))
+        );
     }
     this.postService.setPostUser(post);
     this.isEdit = false;
@@ -97,7 +102,7 @@ export class ForumPostComponent implements OnInit {
           this.comments.forEach(function(comment) {
             comments.push(comment);
           });
-          this.comments = comments;
+          this.comments = comments.sort((a, b) => a.timestamp - b.timestamp);
         });
     }
   }

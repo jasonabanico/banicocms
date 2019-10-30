@@ -61,12 +61,16 @@ export class ForumTopicComponent implements OnInit {
       }
       this.postService
         .getPosts(topic.id, this.page, this.offset)
-        .subscribe(posts => (this.posts = posts));
+        .subscribe(
+          posts =>
+            (this.posts = posts.sort((a, b) => a.timeStamp() - b.timeStamp()))
+        );
     }
   }
 
   public addPost(post: Post) {
-    this.posts.push(post);
+    const newPost = post.clone();
+    this.posts.push(newPost);
   }
 
   public morePosts() {
@@ -78,7 +82,7 @@ export class ForumTopicComponent implements OnInit {
           this.posts.forEach(function(post) {
             posts.push(post);
           });
-          this.posts = posts;
+          this.posts = posts.sort((a, b) => a.timeStamp() - b.timeStamp());
         });
     }
   }

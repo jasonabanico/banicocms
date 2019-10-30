@@ -54,7 +54,7 @@ export class ListSetService extends PluginService {
         listSet.description = description;
         listSet.sectionItems = sectionItems;
 
-        let contentItem: ContentItem = listSet.ToContentItem();
+        let contentItem: ContentItem = listSet.toContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             map(res => {
                 return true;

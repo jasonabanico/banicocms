@@ -18,7 +18,7 @@
           (click)="edit()"
           >Edit</a
         >
-        &bull; {{ comment?.moment() }} ({{ comment?.momentRelative() }})
+        &bull; {{ comment?.formattedDate() }} ({{ comment?.fromNow() }})
       </p>
     </div>
   </div>

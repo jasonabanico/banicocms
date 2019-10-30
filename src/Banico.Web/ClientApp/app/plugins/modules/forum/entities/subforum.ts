@@ -27,7 +27,7 @@ export class Subforum {
     }
   }
 
-  public ToContentItem(): ContentItem {
+  public toContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
     output.module = "forum-subforum";
@@ -38,5 +38,10 @@ export class Subforum {
     output.sectionItems = this.sectionItems;
 
     return output;
+  }
+
+  public clone(): Subforum {
+    let contentItem = this.toContentItem();
+    return new Subforum(contentItem);
   }
 }

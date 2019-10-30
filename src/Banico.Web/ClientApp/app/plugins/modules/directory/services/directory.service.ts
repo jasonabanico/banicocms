@@ -64,7 +64,7 @@ export class DirectoryService extends PluginService {
     }
 
     public addOrUpdate(directoryItem: DirectoryItem): Observable<DirectoryItem> {
-        let contentItem: ContentItem = directoryItem.ToContentItem();
+        let contentItem: ContentItem = directoryItem.toContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             map(contentItem => new DirectoryItem(contentItem)),
             catchError(this.handleError));

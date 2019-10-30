@@ -54,7 +54,7 @@ export class ListItemService extends PluginService {
         listItem.alias = alias;
         listItem.description = description;
 
-        let contentItem: ContentItem = listItem.ToContentItem();
+        let contentItem: ContentItem = listItem.toContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             map(res => true),
             catchError(this.handleError));

@@ -44,7 +44,7 @@ export class ListSetFormComponent implements OnInit {
     }
     
     private set(listSet: ListSet) {
-        var sectionItems = this.listSetService.toSectionItems(listSet.ToContentItem());
+        var sectionItems = this.listSetService.toSectionItems(listSet.toContentItem());
         this.listSetForm.patchValue({
             id: listSet.id,
             sectionItems: sectionItems,

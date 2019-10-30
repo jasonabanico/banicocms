@@ -23,7 +23,7 @@ export class ContactService extends PluginService {
     }
 
     public addOrUpdate(contact: Contact): Observable<Contact> {
-        let contentItem: ContentItem = contact.ToContentItem();
+        let contentItem: ContentItem = contact.toContentItem();
         return this.contentItemService.addOrUpdate(contentItem).pipe(
             map(contentItem => new Contact(contentItem)),
             catchError(this.handleError));
