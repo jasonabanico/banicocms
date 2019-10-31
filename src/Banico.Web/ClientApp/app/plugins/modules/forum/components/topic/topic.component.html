@@ -73,7 +73,16 @@
   Posts
 </p>
 
-<a *ngIf="page > 0" href="javascript:;" (click)="morePosts()">More Posts</a>
+<p>
+  <button
+    *ngIf="page > 0"
+    type="button"
+    class="btn btn-primary btn-sm"
+    (click)="morePosts()"
+  >
+    More Posts
+  </button>
+</p>
 
 <div *ngFor="let post of posts">
   <app-plugins-forum-post

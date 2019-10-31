@@ -18,6 +18,10 @@ export class ForumSubforumComponent implements OnInit {
   public userId: string;
   public subforum: Subforum;
   public topics: Topic[];
+  public hasMorePages: boolean;
+  public page: number = 0;
+  public totalPages: number = 0;
+  public offset: number = 0;
 
   constructor(
     //private subforumEntityService: SubforumEntityService,
@@ -31,6 +35,7 @@ export class ForumSubforumComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.topicService.setPageSize(15);
     this.route.params.subscribe(params => {
       if (params["alias"]) {
         var alias = params["alias"];
@@ -43,12 +48,31 @@ export class ForumSubforumComponent implements OnInit {
 
   private set(subforum: Subforum) {
     this.subforum = subforum;
-    this.topicService
-      .getTopics(subforum.id)
-      .subscribe(topics => (this.topics = topics));
+    if (subforum.topicCount > 0) {
+      this.topicService
+        .getTopics(subforum.id, this.page, this.offset)
+        .subscribe(topics => (this.topics = topics));
+    }
+    this.totalPages = Math.floor(
+      this.subforum.topicCount / this.topicService.pageSize
+    );
   }
 
   public edit() {
     this.router.navigate(["/forum/edit/" + this.subforum.id]);
+  }
+
+  public moreTopics() {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.topicService
+        .getTopics(this.subforum.id, this.page, this.offset)
+        .subscribe(topics => {
+          this.topics.forEach(function(topic) {
+            topics.push(topic);
+          });
+          this.topics = topics.sort((a, b) => b.postCount - a.postCount);
+        });
+    }
   }
 }

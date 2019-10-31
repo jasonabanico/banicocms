@@ -26,10 +26,17 @@ export class ForumTopicService extends PluginService {
       });
   }
 
-  public getTopics(subforumId: string): Observable<Topic[]> {
+  public getTopics(
+    subforumId: string,
+    page: number,
+    offset: number
+  ): Observable<Topic[]> {
     const contentItemSearch = new ContentItemSearch();
     contentItemSearch.module = "forum-topic";
     contentItemSearch.parentId = subforumId;
+    contentItemSearch.page = page;
+    contentItemSearch.pageSize = this.pageSize;
+    contentItemSearch.offset = offset;
     contentItemSearch.orderBy = "childCount desc";
     return this.contentItemService.getAll(contentItemSearch).pipe(
       map(items => {
