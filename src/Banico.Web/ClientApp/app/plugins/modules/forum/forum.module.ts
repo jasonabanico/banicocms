@@ -1,5 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { MarkdownModule } from "ngx-markdown";
+import { PluginsModule } from "../../plugins.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ForumRoutingModule } from "./forum.routing";
 import { ForumComponent } from "./components/forum.component";
@@ -16,7 +18,6 @@ import { ForumSubforumService } from "./services/subforum.service";
 import { ForumTopicService } from "./services/topic.service";
 import { ForumPostService } from "./services/post.service";
 import { ForumCommentService } from "./services/comment.service";
-import { MarkdownModule } from "ngx-markdown";
 //import { ForumStoreModule } from './store/forum-store.module';
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MarkdownModule } from "ngx-markdown";
     FormsModule,
     ReactiveFormsModule,
     ForumRoutingModule,
-    MarkdownModule.forChild()
+    MarkdownModule.forChild(),
+    PluginsModule
     //ForumStoreModule
   ],
   declarations: [

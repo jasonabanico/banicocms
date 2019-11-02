@@ -37,12 +37,14 @@ export class ForumPostFormComponent implements OnInit {
     this.post = new Post(null);
 
     // set text in form to the recently updated value
-    this.textChanged.subscribe(text => {
-      this.postText = text;
-      this.postForm.patchValue({
-        text: text
+    if (this.textChanged) {
+      this.textChanged.subscribe(text => {
+        this.postText = text;
+        this.postForm.patchValue({
+          text: text
+        });
       });
-    });
+    }
   }
 
   @Input()
