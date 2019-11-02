@@ -10,17 +10,17 @@ steps:
     projects: '**/Banico.Web.csproj'
 
 - task: NodeTool@0
-  displayName: 'Use Node 10.15.2'
+  displayName: 'Use Node 10.16.3'
   inputs:
-    versionSpec: 10.15.2
+    versionSpec: 10.16.3
 
 - task: Npm@1
-  displayName: 'npm i -g npm@6.4.1'
+  displayName: 'npm i -g npm@6.9.0'
   inputs:
     command: custom
     workingDir: src/Banico.Web
     verbose: false
-    customCommand: 'i -g npm@6.4.1'
+    customCommand: 'i -g npm@6.9.0'
 
 - task: Npm@1
   displayName: 'npm install'
