@@ -44,5 +44,6 @@ dotnet run
             <li>"WEBSITE_NODE_DEFAULT_VERSION", and provide the highest value available (check Kudu). https://stackoverflow.com/questions/46772705/attempt-to-connect-to-node-timed-out-after-60000ms</li>
         </ul>
     </li>
+    <li>If using MySQL In App, make sure that it is turned on.</li>
     <li>Restart the app after Initializing the config.</li>
 </ul>
