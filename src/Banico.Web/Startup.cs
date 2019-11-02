@@ -63,7 +63,6 @@ namespace Banico.Web
             // app.UseStaticFiles();
 
             this.webStartup.Configure(app, env, antiforgery, services);
-            app.UseHttpsRedirection();
             app.UseStaticFiles(new StaticFileOptions() {
                 OnPrepareResponse = c => {
                     //Do not add cache to json files. We need to have new versions when we add new translations.
