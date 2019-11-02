@@ -29,12 +29,12 @@ steps:
     verbose: false
 
 - task: Npm@1
-  displayName: 'npm run build:dev'
+  displayName: 'npm run build:prod'
   inputs:
     command: custom
     workingDir: src/Banico.Web
     verbose: false
-    customCommand: 'run build:dev'
+    customCommand: 'run build:prod'
 
 - task: DotNetCoreCLI@2
   displayName: Build
