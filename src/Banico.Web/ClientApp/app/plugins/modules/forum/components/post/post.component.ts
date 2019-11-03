@@ -8,7 +8,6 @@ import { Comment } from "../../entities/comment";
 import { map } from "rxjs/operators";
 import { AuthService } from "../../../../../shared/services/auth.service";
 import { BehaviorSubject } from "rxjs";
-import { EmbedService } from "../../../../services/embed.service";
 
 @Component({
   selector: "app-plugins-forum-post",
@@ -25,14 +24,11 @@ export class ForumPostComponent implements OnInit {
   private _id: string;
   public isEdit: boolean;
   public textChanged: BehaviorSubject<any> = new BehaviorSubject(null);
-  public postTextWithoutEmbeds: string;
-  public embeds: string[];
 
   constructor(
     private postService: ForumPostService,
     private commentService: ForumCommentService,
-    private authService: AuthService,
-    private embedService: EmbedService
+    private authService: AuthService
   ) {
     this.userId = authService.getUserId();
   }
@@ -54,11 +50,6 @@ export class ForumPostComponent implements OnInit {
 
   private set(post: Post) {
     this.post = post;
-
-    this.embeds = this.embedService.getEmbeds(this.post.text);
-    this.postTextWithoutEmbeds = this.embedService.filterEmbedding(
-      this.post.text
-    );
 
     if (post.commentCount > 0) {
       this.page = Math.floor(post.commentCount / this.commentService.pageSize);

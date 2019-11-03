@@ -40,10 +40,7 @@
           post?.fromNow()
         }})
       </div>
-      <ng-container *ngFor="let embed of embeds">
-        <app-plugins-embed [tagId]="embed"></app-plugins-embed>
-      </ng-container>
-      <div class="card-text" markdown [data]="postTextWithoutEmbeds"></div>
+      <app-plugins-rich-text [text]="post?.text"></app-plugins-rich-text>
     </div>
     <div class="card-footer">
       <a

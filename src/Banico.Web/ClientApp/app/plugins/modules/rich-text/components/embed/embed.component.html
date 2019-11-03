@@ -11,3 +11,10 @@
   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen
 ></iframe>
+<span *ngIf="tag === 'imgur'">
+  <blockquote
+    class="imgur-embed-pub"
+    lang="en"
+    data-id="a/{{ id }}"
+  ></blockquote>
+</span>
