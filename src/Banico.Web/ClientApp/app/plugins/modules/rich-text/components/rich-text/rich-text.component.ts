@@ -12,9 +12,9 @@ export class RichTextComponent {
   @Input()
   set text(text: string) {
     if (text) {
-      this.elements = text.split(/(\{\{(.*?)\}\})/g);
+      this.elements = text.split(/(\{\{.*?\}\})/g);
       this.elements.forEach(element => {
-        let regex = /\{\{(.*?)\}\}/g;
+        let regex = /\{\{.*?\}\}/g;
         this.isEmbed.push(regex.test(element));
       });
     }
