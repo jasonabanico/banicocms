@@ -41,7 +41,7 @@ dotnet run
     <li>Add the following Application Settings in your web app Configuration:
         <ul>
             <li>"ASPNETCORE_ENVIRONMENT", and set to "production"</li>
-            <li>"WEBSITE_NODE_DEFAULT_VERSION", and provide the highest value available (check Kudu). https://stackoverflow.com/questions/46772705/attempt-to-connect-to-node-timed-out-after-60000ms</li>
+            <li>"WEBSITE_NODE_DEFAULT_VERSION", and provide the highest value available, eg. 10.16.3 (check Kudu). https://stackoverflow.com/questions/46772705/attempt-to-connect-to-node-timed-out-after-60000ms</li>
         </ul>
     </li>
     <li>If using MySQL In App, make sure that it is turned on.</li>
