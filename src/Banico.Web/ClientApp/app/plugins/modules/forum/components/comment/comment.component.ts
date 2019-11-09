@@ -1,9 +1,17 @@
-import { Component, OnInit, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild
+} from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder } from "@angular/forms";
+import { AuthService } from "../../../../../shared/services/auth.service";
+import { ModalComponent } from "../../../../../shell/modal/modal.component";
 import { Comment } from "../../entities/comment";
 import { ForumCommentService } from "../../services/comment.service";
-import { AuthService } from "../../../../../shared/services/auth.service";
 
 @Component({
   selector: "app-plugins-forum-comment",
@@ -15,6 +23,8 @@ export class ForumCommentComponent {
   public comment: Comment;
   private _id: string;
   public isEdit: boolean;
+
+  @ViewChild("deleteModal") deleteModal;
 
   constructor(
     private commentService: ForumCommentService,
@@ -28,6 +38,8 @@ export class ForumCommentComponent {
     this._id = id;
     this.commentService.get(id).subscribe(comment => this.set(comment));
   }
+
+  @Output() deleted: EventEmitter<Comment> = new EventEmitter<Comment>();
 
   private set(comment: Comment) {
     this.comment = comment;
@@ -46,5 +58,15 @@ export class ForumCommentComponent {
 
   public onCancel() {
     this.isEdit = false;
+  }
+
+  delete() {
+    this.deleteModal.show();
+  }
+
+  public deleteConfirm() {
+    this.commentService.delete(this.comment.id).subscribe(result => {
+      if (result === this.comment.id) this.deleted.emit(this.comment);
+    });
   }
 }

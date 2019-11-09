@@ -59,19 +59,19 @@ export class LinksService extends PluginService {
             }));
     }
 
-    public delete(link: Link): Observable<{}> {
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        const data = 'id=' + link.id;
-        return this.http
-            .post(this.appBaseUrl + '/Delete', data, {
-                headers: headers
-            }).pipe(
-            map(this.extractData));
-            //.subscribe({
-                //next: x => console.log('Observer got a next value: ' + x),
-                //error: err => alert(JSON.stringify(err)),
-                //complete: () => console.log('Saved completed.'),
-            //});
-    }
+    // public delete(link: Link): Observable<{}> {
+    //     const headers = new HttpHeaders();
+    //     headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    //     const data = 'id=' + link.id;
+    //     return this.http
+    //         .post(this.appBaseUrl + '/Delete', data, {
+    //             headers: headers
+    //         }).pipe(
+    //         map(this.extractData));
+    //         //.subscribe({
+    //             //next: x => console.log('Observer got a next value: ' + x),
+    //             //error: err => alert(JSON.stringify(err)),
+    //             //complete: () => console.log('Saved completed.'),
+    //         //});
+    // }
 }

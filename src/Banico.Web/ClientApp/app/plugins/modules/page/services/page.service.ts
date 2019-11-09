@@ -30,20 +30,20 @@ export class PageService extends PluginService {
             catchError(this.handleError));
     }
 
-    public delete(page: Page): Observable<boolean> {
-        let headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        let data = 'id=' + page.id;
-        return this.http
-            .post(this.appBaseUrl + '/Delete', data, {
-                headers: headers
-            }).pipe(
-            map(res => true),
-            catchError(this.handleError));
-                //.subscribe({
-                //next: x => console.log('Observer got a next value: ' + x),
-                //error: err => alert(JSON.stringify(err)),
-                //complete: () => console.log('Saved completed.'),
-            //});
-    }
+    // public delete(page: Page): Observable<boolean> {
+    //     let headers = new HttpHeaders();
+    //     headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    //     let data = 'id=' + page.id;
+    //     return this.http
+    //         .post(this.appBaseUrl + '/Delete', data, {
+    //             headers: headers
+    //         }).pipe(
+    //         map(res => true),
+    //         catchError(this.handleError));
+    //             //.subscribe({
+    //             //next: x => console.log('Observer got a next value: ' + x),
+    //             //error: err => alert(JSON.stringify(err)),
+    //             //complete: () => console.log('Saved completed.'),
+    //         //});
+    // }
 }

@@ -1,15 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-shell-modal',
-  templateUrl: './modal.component.html'
+  selector: "app-shell-modal",
+  templateUrl: "./modal.component.html"
 })
+export class ModalComponent {
+  @Input() id;
+  @Input() title;
+  @Input() body;
+  @Input() button;
 
-export class ModalComponent  {
-    @Input() title;
-    @Input() body;
-    @Input() button;
-    
-    //constructor (public activeModal: NgbActiveModal) {
-    //}
+  public show() {
+    document.getElementById("openModalButton-" + this.id).click();
+  }
 }

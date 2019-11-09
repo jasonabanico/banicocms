@@ -2,8 +2,9 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MarkdownModule } from "ngx-markdown";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { RichTextModule } from "../rich-text/rich-text.module";
 import { ForumRoutingModule } from "./forum.routing";
+import { RichTextModule } from "../rich-text/rich-text.module";
+import { ShellModule } from "../../../shell/shell.module";
 import { ForumComponent } from "./components/forum.component";
 import { ForumHomeComponent } from "./components/home/home.component";
 import { ForumSubforumComponent } from "./components/subforum/subforum.component";
@@ -27,7 +28,8 @@ import { ForumCommentService } from "./services/comment.service";
     ReactiveFormsModule,
     ForumRoutingModule,
     MarkdownModule.forChild(),
-    RichTextModule
+    RichTextModule,
+    ShellModule
     //ForumStoreModule
   ],
   declarations: [

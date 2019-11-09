@@ -13,7 +13,10 @@ import {
   ContentItemsQuery,
   ContentItemsCountQuery
 } from "./content-item.queries";
-import { AddOrUpdateContentItemMutation } from "./content-item.mutations";
+import {
+  AddOrUpdateContentItemMutation,
+  DeleteContentItemMutation
+} from "./content-item.mutations";
 import { ContentItemsQueryResult } from "./content-item.queryresults";
 import { ContentItem } from "../../entities/content-item";
 import { ContentItemsCountQueryResult } from "./content-items-count-query-result";
@@ -264,6 +267,19 @@ export class ContentItemService {
     //error: err => alert(JSON.stringify(err)),
     //complete: () => console.log('Saved completed.'),
     //});
+  }
+
+  public delete(id: string): Observable<any> {
+    var result = this.apollo
+      .mutate({
+        mutation: DeleteContentItemMutation,
+        variables: {
+          id: id
+        }
+      })
+      .pipe(map(result => result.data.addOrUpdateContentItem.id));
+
+    return result;
   }
 
   private handleError(error: Response) {

@@ -71,9 +71,9 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       message = message + fieldItem.name + ": " + this.fieldValue[i] + "\n";
     }
 
-    this.contactService
-      .sendContactEmail(this.contact, message)
-      .subscribe(response => alert(JSON.stringify(response)));
+    // this.contactService
+    //   .sendContactEmail(this.contact, message)
+    //   .subscribe(response => alert(JSON.stringify(response)));
   }
 
   private SaveResponse(data: any) {
