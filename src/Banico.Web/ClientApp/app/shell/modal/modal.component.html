@@ -3,8 +3,8 @@
   mdbBtn
   id="openModalButton-{{ id }}"
   data-toggle="modal"
-  data-target="#appModal"
-  (click)="frame.show()"
+  data-target="#basicModal"
+  (click)="basicModal.show()"
   [hidden]="true"
 >
   Launch
@@ -22,14 +22,6 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button
-          type="button"
-          class="close pull-right"
-          aria-label="Close"
-          (click)="basicModal.hide()"
-        >
-          <span aria-hidden="true">×</span>
-        </button>
         <h4 class="modal-title w-100" id="myModalLabel">{{ title }}</h4>
       </div>
       <div class="modal-body">
@@ -37,6 +29,7 @@
       </div>
       <div class="modal-footer">
         <button
+          id="closeModalButton-{{ id }}"
           type="button"
           mdbBtn
           color="secondary"
@@ -45,7 +38,7 @@
           (click)="basicModal.hide()"
           mdbWavesEffect
         >
-          Close
+          Cancel
         </button>
         <button
           type="button"
@@ -53,6 +46,7 @@
           color="primary"
           class="relative waves-light"
           mdbWavesEffect
+          (click)="action()"
         >
           {{ button }}
         </button>

@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "app-shell-modal",
@@ -10,7 +10,14 @@ export class ModalComponent {
   @Input() body;
   @Input() button;
 
+  @Output() actioned: EventEmitter<any> = new EventEmitter();
+
   public show() {
     document.getElementById("openModalButton-" + this.id).click();
+  }
+
+  public action() {
+    this.actioned.emit();
+    document.getElementById("closeModalButton-" + this.id).click();
   }
 }
