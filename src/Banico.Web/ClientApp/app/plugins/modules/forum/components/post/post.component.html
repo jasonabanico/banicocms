@@ -50,6 +50,9 @@
         class="card-link"
         ><i class="fas fa-pencil-alt"></i> Edit</a
       >
+      <a *ngIf="post?.userId == userId" href="javascript:;" class="card-link">
+        <i class="fas fa-trash-alt"></i> Delete</a
+      >
       <a href="#" class="card-link"
         ><i class="fas fa-comment"></i> Comments ({{ post?.commentCount }})</a
       >
