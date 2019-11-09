@@ -1,4 +1,11 @@
-import { Component, OnInit, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  Output,
+  EventEmitter
+} from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder } from "@angular/forms";
 import { ForumPostService } from "../../services/post.service";
@@ -33,6 +40,8 @@ export class ForumPostComponent implements OnInit {
     this.userId = authService.getUserId();
   }
 
+  @ViewChild("deleteModal") deleteModal;
+
   @Input()
   set id(id: string) {
     this._id = id;
@@ -43,6 +52,8 @@ export class ForumPostComponent implements OnInit {
   set newPost(post: Post) {
     this.set(post);
   }
+
+  @Output() deleted: EventEmitter<Post> = new EventEmitter<Post>();
 
   ngOnInit() {
     this.commentService.setPageSize(10);
@@ -79,6 +90,16 @@ export class ForumPostComponent implements OnInit {
     this.isEdit = false;
   }
 
+  delete() {
+    this.deleteModal.show();
+  }
+
+  public deleteConfirmed() {
+    this.postService.delete(this.post.id).subscribe(id => {
+      if (id === this.post.id) this.deleted.emit(this.post);
+    });
+  }
+
   public onCommentSave(comment: Comment) {
     this.commentService.get(comment.id).subscribe(comment => {
       if (!this.comments) {
@@ -107,5 +128,6 @@ export class ForumPostComponent implements OnInit {
 
   public removeComment(id: string) {
     this.comments = this.comments.filter(comment => comment.id != id);
+    this.post.commentCount -= 1;
   }
 }

@@ -68,6 +68,7 @@ export class ForumTopicComponent implements OnInit {
   public addPost(post: Post) {
     const newPost = post.clone();
     this.posts.push(newPost);
+    this.topic.postCount += 1;
   }
 
   public morePosts() {
@@ -86,5 +87,10 @@ export class ForumTopicComponent implements OnInit {
           }
         });
     }
+  }
+
+  public removePost(id: string) {
+    this.posts = this.posts.filter(post => post.id != id);
+    this.topic.postCount -= 1;
   }
 }

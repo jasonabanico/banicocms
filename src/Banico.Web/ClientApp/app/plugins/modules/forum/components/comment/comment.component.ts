@@ -24,14 +24,14 @@ export class ForumCommentComponent {
   private _id: string;
   public isEdit: boolean;
 
-  @ViewChild("deleteModal") deleteModal;
-
   constructor(
     private commentService: ForumCommentService,
     private authService: AuthService
   ) {
     this.userId = this.authService.getUserId();
   }
+
+  @ViewChild("deleteModal") deleteModal;
 
   @Input()
   set id(id: string) {

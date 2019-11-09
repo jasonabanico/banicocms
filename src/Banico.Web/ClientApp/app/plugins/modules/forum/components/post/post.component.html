@@ -1,4 +1,13 @@
 <ng-container *ngIf="!isEdit">
+  <app-shell-modal
+    #deleteModal
+    id="{{ post?.id }}"
+    title="Delete"
+    body="Are you sure you want to delete this post?"
+    button="Delete"
+    (actioned)="deleteConfirmed()"
+  >
+  </app-shell-modal>
   <div class="card mb-3">
     <div class="card-header">
       <div class="d-flex justify-content-between align-items-center">
@@ -50,7 +59,12 @@
         class="card-link"
         ><i class="fas fa-pencil-alt"></i> Edit</a
       >
-      <a *ngIf="post?.userId == userId" href="javascript:;" class="card-link">
+      <a
+        *ngIf="post?.userId == userId"
+        href="javascript:;"
+        (click)="delete()"
+        class="card-link"
+      >
         <i class="fas fa-trash-alt"></i> Delete</a
       >
       <a href="#" class="card-link"
