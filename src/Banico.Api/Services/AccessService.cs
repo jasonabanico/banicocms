@@ -128,6 +128,16 @@ namespace Banico.Api.Services
             return false;
         }
 
+        public string DomainTenant()
+        {
+            if (_configuration["DomainAsTenant"] == "y")
+            {
+                return this.GetUserDomain().Result;
+            }
+
+            return string.Empty;
+        }
+
         public async Task<string> GetUserDomain()
         {
             var user = await this.GetUser();

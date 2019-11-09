@@ -62,6 +62,7 @@
         <ng-container class="list-group-item" *ngFor="let comment of comments">
           <app-plugins-forum-comment
             [id]="comment.id"
+            (deleted)="removeComment(comment.id)"
           ></app-plugins-forum-comment>
         </ng-container>
         <app-plugins-forum-comment-form

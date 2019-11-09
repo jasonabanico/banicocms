@@ -2,6 +2,7 @@ using System;
 using GraphQL.Types;
 using Banico.Core.Repositories;
 using Microsoft.Extensions.Configuration;
+using Banico.Api.Services;
 
 namespace Banico.Api.Models
 {
@@ -10,6 +11,7 @@ namespace Banico.Api.Models
         private IConfiguration _configuration;
 
         public BanicoQuery(
+            IAccessService accessService,
             ISectionRepository sectionRepository,
             ISectionItemRepository sectionItemRepository,
             IContentItemRepository contentItemRepository,
@@ -183,7 +185,7 @@ namespace Banico.Api.Models
                     }),
                 resolve: context => 
                 {
-                    string tenant = string.Empty;
+                    string tenant = accessService.DomainTenant();
                     return contentItemRepository.GetCount(
                         tenant,
                         context.GetArgument<string>("id"),
@@ -327,7 +329,7 @@ namespace Banico.Api.Models
                     ),
                 resolve: context => 
                 {
-                    string tenant = string.Empty;
+                    string tenant = accessService.DomainTenant();
                     return contentItemRepository.Get(
                         tenant,
                         context.GetArgument<string>("id"),

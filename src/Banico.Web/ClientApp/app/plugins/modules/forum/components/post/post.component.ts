@@ -104,4 +104,8 @@ export class ForumPostComponent implements OnInit {
         });
     }
   }
+
+  public removeComment(id: string) {
+    this.comments = this.comments.filter(comment => comment.id != id);
+  }
 }

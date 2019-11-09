@@ -710,22 +710,36 @@ namespace Banico.EntityFrameworkCore.Repositories
             return new ContentItem();
         }
 
-        public async Task<ContentItem> Delete(string id)
+        public async Task<ContentItem> Delete(string id, string userId, bool isAdmin)
         {
             var item = (await this.Get("", id, "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
             "", 0, 1, 0))
                 .FirstOrDefault();
-            _dbContext.Remove(item);
-            this.UpdateChildCount(item.ParentId, -1);
-            var result = await _dbContext.SaveChangesAsync();
-
-            if (result > 0)
+            if (item != null)
             {
-                return item;
+                if (item.CreatedBy == userId || isAdmin)
+                {
+                    _dbContext.Remove(item);
+                    this.UpdateChildCount(item.ParentId, -1);
+                    var result = await _dbContext.SaveChangesAsync();
+
+                    if (result > 0)
+                    {
+                        return item;
+                    }
+                }
+                else
+                {
+                    throw new UnauthorizedAccessException("Deletion of content " + id + " is not allowed.");
+                }
+            }
+            else
+            {
+                throw new UnauthorizedAccessException("Content " + id + " not found.");
             }
 
-            return new ContentItem();
+            return null;
         }
 
         public async Task<ContentItem> CreateProfileIfNotExists(

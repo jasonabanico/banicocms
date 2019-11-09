@@ -65,9 +65,8 @@ export class ForumCommentComponent {
   }
 
   public deleteConfirmed() {
-    alert("DELETING " + this.comment.id);
-    // this.commentService.delete(this.comment.id).subscribe(result => {
-    //   if (result === this.comment.id) this.deleted.emit(this.comment);
-    // });
+    this.commentService.delete(this.comment.id).subscribe(result => {
+      if (result === this.comment.id) this.deleted.emit(this.comment);
+    });
   }
 }

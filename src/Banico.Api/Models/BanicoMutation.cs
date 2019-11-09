@@ -92,6 +92,19 @@ namespace Banico.Api.Models
                     }
                 });
 
+            Field<ContentItemType>(
+                "deleteContentItem",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "id" }
+                ),
+                resolve: context =>
+                {
+                    var id = context.GetArgument<String>("id");
+                    var userId = _accessService.GetUserId();
+                    var isAdmin = _accessService.IsAdminOrSuperAdmin();
+                    return contentItemRepository.Delete(id, userId, isAdmin);
+                });
+
             Field<ConfigType>(
                 "addOrUpdateConfig",
                 arguments: new QueryArguments(
@@ -114,23 +127,13 @@ namespace Banico.Api.Models
             {
                 item.CreatedBy = user;
                 item.CreatedDate = DateTimeOffset.UtcNow;
-                item.Tenant = this.DomainTenant();
+                item.Tenant = _accessService.DomainTenant();
             } 
             else
             {
                 item.UpdatedBy = user;
                 item.UpdatedDate = DateTimeOffset.UtcNow;
             }
-        }
-
-        private string DomainTenant()
-        {
-            if (_configuration["DomainAsTenant"] == "y")
-            {
-                return _accessService.GetUserDomain().Result;
-            }
-
-            return string.Empty;
         }
 
         private void WriteDebugMessage(string message)

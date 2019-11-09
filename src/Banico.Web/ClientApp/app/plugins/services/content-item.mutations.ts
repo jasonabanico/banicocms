@@ -67,7 +67,7 @@ export const AddOrUpdateContentItemMutation = gql`
 `;
 
 export const DeleteContentItemMutation = gql`
-  mutation deleteContentItem($id: String) {
+  mutation deleteContentItem($id: String!) {
     deleteContentItem(id: $id) {
       id
     }

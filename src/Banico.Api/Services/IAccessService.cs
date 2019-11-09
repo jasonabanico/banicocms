@@ -20,6 +20,7 @@ namespace Banico.Api.Services
         Task<bool> IsEnabled(string moduleAndFunction);
         Task<bool> Allowed(string module, bool enabledRequired);
         Task<bool> Allowed(ContentItem contentItem);
+        string DomainTenant();
         Task<string> GetUserDomain();
     }
 }
