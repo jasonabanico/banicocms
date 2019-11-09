@@ -65,8 +65,8 @@ export class ForumCommentComponent {
   }
 
   public deleteConfirmed() {
-    this.commentService.delete(this.comment.id).subscribe(result => {
-      if (result === this.comment.id) this.deleted.emit(this.comment);
+    this.commentService.delete(this.comment.id).subscribe(id => {
+      if (id === this.comment.id) this.deleted.emit(this.comment);
     });
   }
 }

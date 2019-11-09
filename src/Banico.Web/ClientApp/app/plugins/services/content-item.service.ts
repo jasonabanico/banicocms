@@ -277,7 +277,7 @@ export class ContentItemService {
           id: id
         }
       })
-      .pipe(map(result => result.data.addOrUpdateContentItem.id));
+      .pipe(map(result => result.data.deleteContentItem.id));
 
     return result;
   }
