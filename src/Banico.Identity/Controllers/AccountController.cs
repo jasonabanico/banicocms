@@ -146,6 +146,8 @@ namespace Banico.Identity.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Username = model.Username.ToLowerInvariant();
+
                 // Require the user to have a confirmed email before they can log on.
                 var user = await _userManager.FindByNameAsync(model.Username);
                 if (user != null)
@@ -301,6 +303,9 @@ namespace Banico.Identity.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Register([FromBody]RegisterViewModel model, string returnUrl = null)
         {
+            model.Username = model.Username.ToLowerInvariant();
+            model.Email = model.Email.ToLowerInvariant();
+
             ViewData["ReturnUrl"] = returnUrl;
 
             if (await this.UserExists(model.Username))
@@ -550,6 +555,8 @@ namespace Banico.Identity.Controllers
         // [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword([FromBody]ForgotPasswordViewModel model)
         {
+            model.Email = model.Email.ToLowerInvariant();
+
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
@@ -571,6 +578,8 @@ namespace Banico.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> ResendConfirmation([FromBody]ResendConfirmationViewModel model)
         {
+            model.Email = model.Email.ToLowerInvariant();
+
             var user = await _userManager.FindByEmailAsync(model.Email);
             if ((user != null) && (!await(_userManager.IsEmailConfirmedAsync(user))))
             {
@@ -589,6 +598,8 @@ namespace Banico.Identity.Controllers
         // [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword([FromBody]ResetPasswordViewModel model)
         {
+            model.Email = model.Email.ToLowerInvariant();
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(Errors.AddErrorToModelState("", "Invalid model state", ModelState));
