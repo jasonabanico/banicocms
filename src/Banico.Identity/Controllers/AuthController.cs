@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
- 
 
 namespace Banico.Identity.Controllers
 {
@@ -48,6 +47,7 @@ namespace Banico.Identity.Controllers
               identity, 
               _jwtFactory, 
               credentials.UserName, 
+              string.Empty,
               string.Empty, 
               false, 
               false, 

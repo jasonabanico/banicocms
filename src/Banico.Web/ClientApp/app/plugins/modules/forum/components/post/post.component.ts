@@ -23,6 +23,7 @@ import { BehaviorSubject } from "rxjs";
 })
 export class ForumPostComponent implements OnInit {
   public userId: string;
+  public isAdmin: boolean;
   public post: Post;
   public comments: Comment[];
   public hasMorePages: boolean;
@@ -38,6 +39,7 @@ export class ForumPostComponent implements OnInit {
     private authService: AuthService
   ) {
     this.userId = authService.getUserId();
+    this.isAdmin = authService.isAdmin();
   }
 
   @ViewChild("deleteModal") deleteModal;

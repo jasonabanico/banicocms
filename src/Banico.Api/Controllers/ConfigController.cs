@@ -15,21 +15,31 @@ using Banico.Core.Repositories;
 namespace Banico.Identity.Controllers
 {
     [Route("api/[controller]/[action]")]
-    [Authorize(Policy="SuperAdmin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ConfigController : Controller
     {
+        private readonly IConfiguration _configuration;
         private readonly IConfigRepository _configRepository;
  
-        public ConfigController(IConfigRepository configRepository)
+        public ConfigController(
+            IConfiguration configuration, 
+            IConfigRepository configRepository)
         {
+            _configuration = configuration;
             _configRepository = configRepository;
         }
 
         [HttpPost]
+        [Authorize(Policy="SuperAdmin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<bool> SetInitialSettings()
         {
             var result = await _configRepository.SetInitialSettings();
             return result;
+        }
+
+        [HttpGet]
+        public bool DomainAsTenant()
+        {
+            return _configuration["DomainAsTenant"] == "y";
         }
     }
 }

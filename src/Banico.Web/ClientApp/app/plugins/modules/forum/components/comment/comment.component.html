@@ -29,7 +29,7 @@
         >
         &bull;
         <a
-          *ngIf="comment?.userId == userId"
+          *ngIf="comment?.userId == userId || isAdmin"
           href="javascript:;"
           (click)="delete()"
           >Delete</a

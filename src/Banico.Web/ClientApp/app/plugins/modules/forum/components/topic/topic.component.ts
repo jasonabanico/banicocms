@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Topic } from "../../entities/topic";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder } from "@angular/forms";
@@ -16,6 +16,7 @@ import { AuthService } from "../../../../../shared/services/auth.service";
 })
 export class ForumTopicComponent implements OnInit {
   public userId: string;
+  public isAdmin: boolean;
   public subforum: Subforum;
   public topic: Topic;
   public posts: Post[];
@@ -33,7 +34,10 @@ export class ForumTopicComponent implements OnInit {
     private authService: AuthService
   ) {
     this.userId = authService.getUserId();
+    this.isAdmin = authService.isAdmin();
   }
+
+  @ViewChild("deleteModal") deleteModal;
 
   public ngOnInit() {
     this.postService.setPageSize(20);
@@ -92,5 +96,16 @@ export class ForumTopicComponent implements OnInit {
   public removePost(id: string) {
     this.posts = this.posts.filter(post => post.id != id);
     this.topic.postCount -= 1;
+  }
+
+  delete() {
+    this.deleteModal.show();
+  }
+
+  public deleteConfirmed() {
+    this.topicService.delete(this.topic.id).subscribe(id => {
+      if (id === this.topic.id)
+        this.router.navigateByUrl("/forum/" + this.subforum.alias);
+    });
   }
 }

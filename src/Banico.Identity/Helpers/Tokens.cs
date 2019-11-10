@@ -18,6 +18,7 @@ namespace Banico.Identity.Helpers
         ClaimsIdentity identity, 
         IJwtFactory jwtFactory,
         string userName, 
+        string tenant,
         string email,
         bool isAdmin,
         bool isSuperAdmin,
@@ -37,6 +38,7 @@ namespace Banico.Identity.Helpers
           expires_in = (int)jwtOptions.ValidFor.TotalSeconds,
           id = identity.Claims.Single(c => c.Type == "id").Value,
           username = userName,
+          tenant = tenant,
           avatar_hash = avatarHash,          
           is_superadmin = isSuperAdmin,
           is_admin = isAdmin

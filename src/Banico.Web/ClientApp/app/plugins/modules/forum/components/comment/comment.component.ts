@@ -20,6 +20,7 @@ import { ForumCommentService } from "../../services/comment.service";
 })
 export class ForumCommentComponent {
   public userId: string;
+  public isAdmin: boolean;
   public comment: Comment;
   private _id: string;
   public isEdit: boolean;
@@ -29,6 +30,7 @@ export class ForumCommentComponent {
     private authService: AuthService
   ) {
     this.userId = this.authService.getUserId();
+    this.isAdmin = this.authService.isAdmin();
   }
 
   @ViewChild("deleteModal") deleteModal;

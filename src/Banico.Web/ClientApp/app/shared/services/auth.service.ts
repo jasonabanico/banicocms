@@ -56,6 +56,22 @@ export class AuthService extends BaseService {
         return this.localStorage.getItem(this.USER_NAME);
     }
 
+    public setTenant(tenant: string) {
+        if (this.localStorage) {
+            return this.localStorage.setItem(this.TENANT, tenant);
+        }
+    }
+
+    public getTenant(): string {
+        if (!this.localStorage) {
+            return '';
+        }
+        if (this.isTokenExpired()) {
+            return '';
+        }
+        return this.localStorage.getItem(this.TENANT);
+    }
+
     public setAvatarHash(avatarHash: string) {
         if (this.localStorage) {
             return this.localStorage.setItem(this.AVATAR_HASH, avatarHash);
@@ -118,6 +134,7 @@ export class AuthService extends BaseService {
             this.localStorage.removeItem(this.TOKEN_NAME);
             this.localStorage.removeItem(this.USER_ID);
             this.localStorage.removeItem(this.USER_NAME);
+            this.localStorage.removeItem(this.TENANT);
             this.localStorage.removeItem(this.AVATAR_HASH);
             this.localStorage.removeItem(this.IS_SUPERADMIN);
             this.localStorage.removeItem(this.IS_ADMIN);

@@ -60,7 +60,7 @@
         ><i class="fas fa-pencil-alt"></i> Edit</a
       >
       <a
-        *ngIf="post?.userId == userId"
+        *ngIf="post?.userId == userId || isAdmin"
         href="javascript:;"
         (click)="delete()"
         class="card-link"

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { WindowRefService } from "../../shared/services/windowref.service";
 import { AuthService } from "../../shared/services/auth.service";
+import { ConfigsService } from "../../shared/services/configs.service";
 import { AccountService } from "../../identity/account/services/account.service";
 import { AppConfig } from "../../../../Config/app.config";
 
@@ -12,6 +13,8 @@ import { AppConfig } from "../../../../Config/app.config";
 })
 export class TopBarComponent implements OnInit {
   appTitle: string = "";
+  domainAsTenant: boolean = false;
+  tenant: string = "";
   isExpanded: boolean = false;
   isLoggedIn: boolean = false;
   loggedInAs: string = "";
@@ -21,11 +24,18 @@ export class TopBarComponent implements OnInit {
     @Inject(WindowRefService) private windowRefService: WindowRefService,
     @Inject(AccountService) private accountService: AccountService,
     @Inject(AuthService) private authService: AuthService,
+    @Inject(ConfigsService) private configsService: ConfigsService,
     private location: Location
   ) {
     this.appTitle = AppConfig.APP_NAME;
     this.authService.loginDataChanged.subscribe(result => {
       this.updateLogin();
+    });
+    this.configsService.domainAsTenant().subscribe(result => {
+      this.domainAsTenant = result;
+      if (this.domainAsTenant) {
+        this.tenant = this.authService.getTenant();
+      }
     });
   }
 

@@ -90,7 +90,8 @@ namespace Banico.Identity.Controllers
       var jwt = await Tokens.GenerateJwt(
         _jwtFactory.GenerateClaimsIdentity(localUser.UserName, localUser.Id),
         _jwtFactory, 
-        localUser.UserName, 
+        localUser.UserName,
+        string.Empty,
         localUser.Email,
         false, 
         false, 

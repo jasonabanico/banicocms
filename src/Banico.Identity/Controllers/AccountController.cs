@@ -186,6 +186,7 @@ namespace Banico.Identity.Controllers
                         identity, 
                         _jwtFactory, 
                         user.UserName, 
+                        tenant,
                         user.Email,
                         isAdmin, 
                         isSuperAdmin, 
