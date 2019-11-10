@@ -65,7 +65,6 @@ export class IdentityAccountLoginComponent {
         .toPromise();
       if (result) {
         const myResult: any = result;
-        alert("AUTH " + JSON.stringify(result));
         this.authService.setToken(myResult.auth_token);
         this.authService.setUserId(myResult.id);
         this.authService.setUserName(myResult.username);
