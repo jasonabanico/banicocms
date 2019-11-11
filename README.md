@@ -29,6 +29,9 @@ cp sample.home.component.html home.component.html
 cp sample.appsettings.json appsettings.json
 cp sample.app.config.ts app.config.ts
 
+# optional: create environment specific appsettings, such as
+# appsettings.development.json or appsettings.production.json
+
 # edit app setting values
 
 # run banico
