@@ -38,6 +38,7 @@ dotnet run
 ## Azure Web App Deployment Notes
 
 <ul>
+    <li>If using Azure DevOps, use azure-pipelines.yml.</li>
     <li>Add the following Application Settings in your web app Configuration:
         <ul>
             <li>"ASPNETCORE_ENVIRONMENT", and set to "production"</li>
