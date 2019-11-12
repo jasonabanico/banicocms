@@ -1,36 +1,32 @@
-<h1>
-  Roles
-</h1>
+<h1>User Admin</h1>
 
 <div class="btn-group">
-  <a href="/admin/roles/add" class="btn btn-primary">
-    <i class="glyphicon glyphicon-plus"></i> Add Role
+  <a href="/admin/users/add" class="btn btn-primary">
+    <i class="glyphicon glyphicon-plus"></i> Add User
   </a>
 </div>
 <div class="top-buffer"></div>
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Users</th>
+      <th scope="col">User ID</th>
+      <th scope="col">Email</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let role of roles">
-      <td>{{ role.name }}</td>
-      <td>{{ role.description }}</td>
-      <td>{{ role.NumberOfUsers }}</td>
+    <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.email }}</td>
       <td>
         <a
-          href="/admin/roles/edit/{{ role.id }}"
+          href="/admin/users/edit/{{ user.id }}"
           class="btn btn-primary btn-sm"
         >
           <i class="fas fa-pencil-alt"></i> Edit
         </a>
         <a
-          href="/admin/roles/delete/{{ role.id }}"
+          href="/admin/users/delete/{{ user.id }}"
           class="btn btn-danger btn-sm"
         >
           <i class="fas fa-trash-alt"></i> Delete

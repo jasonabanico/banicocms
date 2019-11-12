@@ -7,9 +7,9 @@ import { AdminSectionsSectionItemComponent } from "./sections/components/section
 import { AdminRolesFormComponent } from "./roles/components/form/form.component";
 import { AdminRolesHomeComponent } from "./roles/components/home/home.component";
 import { AdminUsersFormComponent } from "./users/components/form/form.component";
-import { AdminUsersListComponent } from "./users/components/list/list.component";
+import { AdminUsersHomeComponent } from "./users/components/home/home.component";
 import { AdminConfigFormComponent } from "./config/components/form/form.component";
-import { AdminConfigListComponent } from "./config/components/list/list.component";
+import { AdminConfigHomeComponent } from "./config/components/home/home.component";
 import { AuthGuard } from "../shared/auth/auth.guard";
 
 const ADMIN_ROUTES: Routes = [
@@ -63,7 +63,7 @@ const ADMIN_ROUTES: Routes = [
   },
   {
     path: "users",
-    component: AdminUsersListComponent,
+    component: AdminUsersHomeComponent,
     canActivate: [AuthGuard],
     data: { module: "admin/users/manage" }
   },
@@ -81,7 +81,7 @@ const ADMIN_ROUTES: Routes = [
   },
   {
     path: "configs",
-    component: AdminConfigListComponent,
+    component: AdminConfigHomeComponent,
     canActivate: [AuthGuard],
     data: { module: "admin/configs/manage" }
   },

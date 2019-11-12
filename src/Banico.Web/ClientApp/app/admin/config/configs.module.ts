@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClientXsrfModule } from '@angular/common/http';
-import { ReactiveFormsModule, FormsModule }  from '@angular/forms';
-import { ConfigsService } from './services/configs.service';
-import { AdminConfigFormComponent } from './components/form/form.component';
-import { AdminConfigListComponent } from './components/list/list.component';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { HttpClientXsrfModule } from "@angular/common/http";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { ConfigsService } from "./services/configs.service";
+import { AdminConfigFormComponent } from "./components/form/form.component";
+import { AdminConfigHomeComponent } from "./components/home/home.component";
 
 @NgModule({
   imports: [
@@ -12,18 +12,12 @@ import { AdminConfigListComponent } from './components/list/list.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientXsrfModule.withOptions({
-      cookieName: 'XSRF-TOKEN',
-      headerName: 'X-XSRF-Token'
-    })  
+      cookieName: "XSRF-TOKEN",
+      headerName: "X-XSRF-Token"
+    })
   ],
-  declarations: [
-    AdminConfigFormComponent,
-    AdminConfigListComponent
-  ],
-  providers: [ 
-    ConfigsService
-  ],
-    bootstrap: [ 
-  ]
+  declarations: [AdminConfigFormComponent, AdminConfigHomeComponent],
+  providers: [ConfigsService],
+  bootstrap: []
 })
-export class AdminConfigModule { }
+export class AdminConfigModule {}

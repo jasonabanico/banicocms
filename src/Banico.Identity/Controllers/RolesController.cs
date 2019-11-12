@@ -16,7 +16,9 @@ namespace Banico.Identity.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Authorize(Policy="SuperAdmin")]
+
     public class RolesController : Controller
     {
         private readonly RoleManager<AppRole> roleManager;
