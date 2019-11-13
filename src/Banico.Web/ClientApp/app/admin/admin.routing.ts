@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
 import { AdminHomeComponent } from "./home/home.component";
+import { AdminSetTenantHomeComponent } from "./set-tenant/components/home/home.component";
 import { AdminSectionsSectionComponent } from "./sections/components/section/section.component";
 import { AdminSectionsSectionItemComponent } from "./sections/components/section-item/section-item.component";
 import { AdminRolesFormComponent } from "./roles/components/form/form.component";
@@ -13,6 +14,12 @@ import { AdminConfigHomeComponent } from "./config/components/home/home.componen
 import { AuthGuard } from "../shared/auth/auth.guard";
 
 const ADMIN_ROUTES: Routes = [
+  {
+    path: "set-tenant",
+    component: AdminSetTenantHomeComponent,
+    canActivate: [AuthGuard],
+    data: { role: "superadmin" }
+  },
   {
     path: "sections/section-item/:section",
     component: AdminSectionsSectionItemComponent,

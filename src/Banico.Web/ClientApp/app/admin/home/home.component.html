@@ -10,6 +10,9 @@
       </div>
 
       <div *ngIf="isInitialized">
+        <p *ngIf="isSuperAdmin">
+          <a href="/admin/set-tenant"><i class="fas fa-home"></i> Set Tenant</a>
+        </p>
         <p *ngIf="configsAllowed">
           <a href="/admin/configs"><i class="fas fa-cogs"></i> Configs</a>
         </p>

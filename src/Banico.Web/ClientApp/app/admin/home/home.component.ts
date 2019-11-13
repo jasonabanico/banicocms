@@ -9,6 +9,7 @@ import { AuthService } from "../../shared/services/auth.service";
 })
 export class AdminHomeComponent {
   isInitialized: boolean;
+  isSuperAdmin: boolean = false;
   configsAllowed: boolean = false;
   sectionsAllowed: boolean = false;
   rolesAllowed: boolean = false;
@@ -36,6 +37,7 @@ export class AdminHomeComponent {
   }
 
   private setPermissions() {
+    this.isSuperAdmin = this.authService.isSuperAdmin();
     this.authService
       .canAccess("admin/configs/manage", "", false)
       .subscribe(result => (this.configsAllowed = result));

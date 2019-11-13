@@ -768,6 +768,16 @@ namespace Banico.Identity.Controllers
             return user;
         }
 
+        [Authorize(Policy="SuperAdmin")]
+        public async Task<AppUser> SetTenant(string tenant)
+        {
+            AppUser user = await Utilities.GetUser(this, _userManager);
+            user.Tenant = tenant;
+
+            var result = await _userManager.UpdateAsync(user);
+            return user;
+        }
+
         #endregion
     }
 }

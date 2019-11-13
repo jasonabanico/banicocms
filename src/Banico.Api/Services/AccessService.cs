@@ -141,6 +141,12 @@ namespace Banico.Api.Services
         public async Task<string> GetUserDomain()
         {
             var user = await this.GetUser();
+
+            if (!string.IsNullOrEmpty(user.Tenant))
+            {
+                return user.Tenant;
+            }
+            
             var email = user.Email;
             MailAddress address = new MailAddress(email);
             string host = address.Host;
