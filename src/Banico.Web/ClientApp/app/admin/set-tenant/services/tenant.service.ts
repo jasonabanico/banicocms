@@ -29,7 +29,7 @@ export class TenantService extends BaseService {
       .post(
         this.baseUrl + "api/Account/SetTenant",
         body,
-        this.jsonRequestOptions
+        this.jsonAuthRequestOptions()
       )
       .pipe(catchError(this.handleError));
   }
