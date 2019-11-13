@@ -1,46 +1,54 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">
+      <a href="/admin">admin</a>
+    </li>
+  </ol>
+</nav>
+
 <h1>Config</h1>
 
 <form [formGroup]="configForm" novalidate (ngSubmit)="save()">
-    <input type="hidden"
-        id="id" 
-        name="id"
-        formControlName="id" />
-    <div class="form-group">
-        <label class="col-md-2 control-label" for="module">Module</label>
-        <div class="col-md-10">
-            <input 
-                class="form-control" 
-                id="module" 
-                name="module"
-                type="text"
-                formControlName="module" />
-        </div>
+  <input type="hidden" id="id" name="id" formControlName="id" />
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="module">Module</label>
+    <div class="col-md-10">
+      <input
+        class="form-control"
+        id="module"
+        name="module"
+        type="text"
+        formControlName="module"
+      />
     </div>
-    <div class="form-group">
-      <label class="col-md-2 control-label" for="name">Name</label>
-      <div class="col-md-10">
-          <input 
-              class="form-control" 
-              id="name" 
-              name="name"
-              type="text"
-              formControlName="name"
-              required />
-      </div>
-    </div>    
-    <div class="form-group">
-        <label class="col-md-2 control-label" for="value">Value</label>
-        <div class="col-md-10">
-            <input 
-                class="form-control" 
-                id="value" 
-                name="value"
-                type="text"
-                formControlName="value"
-                required />
-        </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="name">Name</label>
+    <div class="col-md-10">
+      <input
+        class="form-control"
+        id="name"
+        name="name"
+        type="text"
+        formControlName="name"
+        required
+      />
     </div>
-    <div class="form-group row">
-        <button type="submit" class="btn btn-primary" value="save">Save</button>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="value">Value</label>
+    <div class="col-md-10">
+      <input
+        class="form-control"
+        id="value"
+        name="value"
+        type="text"
+        formControlName="value"
+        required
+      />
     </div>
+  </div>
+  <div class="form-group row">
+    <button type="submit" class="btn btn-primary" value="save">Save</button>
+  </div>
 </form>
