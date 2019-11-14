@@ -173,7 +173,11 @@ namespace Banico.Identity.Controllers
                     var tenant = string.Empty;
                     if (_configuration["DomainAsTenant"] == "y")
                     {
-                        tenant = this.GetUserDomain(user.Email);
+                        tenant = user.Tenant;
+                        if (string.IsNullOrEmpty(tenant))
+                        {
+                            tenant = this.GetUserDomain(user.Email);
+                        }
                     }
                     
                     var profile = await _contentItemRepository.CreateProfileIfNotExists(
