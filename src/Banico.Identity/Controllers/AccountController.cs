@@ -622,6 +622,18 @@ namespace Banico.Identity.Controllers
             return BadRequest(Errors.AddErrorToModelState("", "Unknown error", ModelState));
         }
 
+        [HttpPost]
+        [Authorize(Policy="SuperAdmin")]
+        public async Task<string> SetTenant([FromBody]SetTenantViewModel model)
+        {
+            string userId = this.GetUserId();
+            AppUser user = await _userManager.FindByIdAsync(userId);
+            user.Tenant = model.Tenant;
+
+            var result = await _userManager.UpdateAsync(user);
+            return userId;
+        }
+
         /*
         //
         // GET: /api/Account/SendCode
@@ -763,17 +775,6 @@ namespace Banico.Identity.Controllers
             user.FirstName = firstName;
             user.LastName = lastName;
             user.Alias = alias;
-
-            var result = await _userManager.UpdateAsync(user);
-            return user;
-        }
-
-        [Authorize(Policy="SuperAdmin")]
-        public async Task<AppUser> SetTenant(string tenant)
-        {
-            string userId = this.GetUserId();
-            AppUser user = await _userManager.FindByIdAsync(userId);
-            user.Tenant = tenant;
 
             var result = await _userManager.UpdateAsync(user);
             return user;

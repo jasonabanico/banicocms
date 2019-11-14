@@ -22,7 +22,7 @@ export class TenantService extends BaseService {
   }
 
   public setTenant(tenant: string): Observable<Object> {
-    const body = JSON.stringify({
+    let body = JSON.stringify({
       tenant
     });
     return this.http
