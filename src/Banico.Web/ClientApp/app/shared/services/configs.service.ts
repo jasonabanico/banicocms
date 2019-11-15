@@ -31,15 +31,26 @@ export class ConfigsService {
   }
 
   public get(id: string, module: string, name: string): Observable<Config> {
-    return this.getAll(id, module, name).pipe(
-      map(items => {
-        if (items.length >= 1) {
-          return items[0];
-        } else {
-          return null;
-        }
-      })
+    let body = JSON.stringify({ id, module, name });
+    let headers = new HttpHeaders({ "Content-Type": "application/json" });
+    let options = { headers: headers };
+
+    return this.http.post<Config>(
+      this.baseUrl + "api/Config/Get",
+      body,
+      options
     );
+
+    // -- NOT USING GRAPHQL BECAUSE OF UNAUTHENTICATED REQUESTS
+    // return this.getAll(id, module, name).pipe(
+    //   map(items => {
+    //     if (items.length >= 1) {
+    //       return items[0];
+    //     } else {
+    //       return null;
+    //     }
+    //   })
+    // );
   }
 
   public getAll(

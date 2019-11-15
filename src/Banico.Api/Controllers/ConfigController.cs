@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Banico.Core.Repositories;
+using Banico.Core.Entities;
 
 namespace Banico.Identity.Controllers
 {
@@ -40,6 +41,18 @@ namespace Banico.Identity.Controllers
         public bool DomainAsTenant()
         {
             return _configuration["DomainAsTenant"] == "y";
+        }
+
+        [HttpPost]
+        public async Task<Config> Get([FromBody] string id, [FromBody] string module, [FromBody] string name)
+        {
+            List<Config> results = await _configRepository.Get(id, module, name);
+            if (results.Count > 0)
+            {
+                return results[0];
+            }
+
+            return new Config();
         }
     }
 }
