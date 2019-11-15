@@ -1,6 +1,6 @@
 ﻿import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MarkdownModule } from "ngx-markdown";
 import { RichTextModule } from "../rich-text/rich-text.module";
 import { ShellModule } from "../../../shell/shell.module";
@@ -14,6 +14,7 @@ import { ProfileService } from "./services/profile.service";
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     ProfileRoutingModule,
     MarkdownModule.forChild(),
     RichTextModule,

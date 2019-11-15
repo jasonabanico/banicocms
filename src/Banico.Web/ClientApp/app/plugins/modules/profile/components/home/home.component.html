@@ -1,12 +1,24 @@
-<span *ngIf="isAdmin">
-    <div class="card">
-        <div class="card-block">
-            <a href="/profile/edit/"><i class="fa fa-edit" aria-hidden="true" style="padding-right: 5px;"></i>Edit</a>
-        </div>
-    </div>
+<div class="card mb-3">
+  <span *ngIf="canEdit">
+    <a href="/profile/edit/{{ profile?.alias }}" class="btn btn-primary btn-sm">
+      ><i class="fa fa-edit" aria-hidden="true" style="padding-right: 5px;"></i
+      >Edit</a
+    >
     <br />
-</span>
+  </span>
 
-<h1>{{profile.firstName}} {{profile.lastName}} ({{profile.alias}})</h1>
-<div [innerHtml]="profile.htmlContent"></div>
-<p class="text-muted">Last Update: {{ profile.updatedDate | date }}</p>
+  <p class="h4">{{ profile?.alias }}</p>
+
+  <app-plugins-rich-text [text]="profile?.content"></app-plugins-rich-text>
+
+  <p *ngIf="profile?.updatedDate" class="text-muted">
+    Last Update: {{ profile?.formattedUpdatedDate() }} ({{
+      profile?.updatedFromNow()
+    }})
+  </p>
+  <p *ngIf="!profile?.updatedDate" class="text-muted">
+    Created: {{ profile?.formattedCreatedDate }} ({{
+      profile?.createdFromNow()
+    }})
+  </p>
+</div>

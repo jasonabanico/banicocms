@@ -1,21 +1,22 @@
 import { ContentItem } from "../../../../entities/content-item";
+import * as moment from "moment";
 
 export class Profile {
   id: string;
   alias: string;
   content: string;
-  htmlContent: string;
   createdDate: string;
   updatedDate: string;
+  avatarHash: string;
 
   constructor(private contentItem: ContentItem) {
     if (contentItem && contentItem.module == "profile") {
       this.id = contentItem.id;
       this.alias = contentItem.alias;
       this.content = contentItem.content;
-      this.htmlContent = contentItem.htmlContent;
       this.createdDate = contentItem.createdDate;
       this.updatedDate = contentItem.updatedDate;
+      this.avatarHash = contentItem.attribute01;
     }
   }
 
@@ -26,7 +27,24 @@ export class Profile {
     output.id = this.id;
     output.alias = this.alias;
     output.content = this.content;
+    output.attribute01 = this.avatarHash;
 
     return output;
+  }
+
+  public formattedCreatedDate(): string {
+    return moment(this.createdDate).format("MMMM Do YYYY, h:mm:ss a");
+  }
+
+  public formattedUpdatedDate(): string {
+    return moment(this.updatedDate).format("MMMM Do YYYY, h:mm:ss a");
+  }
+
+  public createdFromNow(): string {
+    return moment(this.createdDate).fromNow();
+  }
+
+  public updatedFromNow(): string {
+    return moment(this.updatedDate).fromNow();
   }
 }

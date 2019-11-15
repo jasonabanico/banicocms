@@ -11,7 +11,7 @@ import { AuthService } from "../../../../../shared/services/auth.service";
 export class ProfileHomeComponent implements OnInit {
   public profile: Profile;
   private sub: any;
-  public isAdmin: boolean;
+  public canEdit: boolean;
 
   constructor(
     private profileService: ProfileService,
@@ -27,15 +27,12 @@ export class ProfileHomeComponent implements OnInit {
       if (!alias) {
         alias = this.authService.getUserName();
       }
+      if (this.authService.isAdmin() || this.authService.getUserName == alias) {
+        this.canEdit = true;
+      }
       this.profileService
         .getByAlias(alias)
-        .subscribe(profile => this.setProfile(profile));
+        .subscribe(profile => (this.profile = profile));
     });
-  }
-
-  public setProfile(profile: Profile) {
-    this.profile.updatedDate = profile.updatedDate;
-    this.profile.content = profile.content;
-    this.profile.htmlContent = profile.htmlContent;
   }
 }

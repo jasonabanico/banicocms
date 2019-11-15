@@ -151,6 +151,8 @@ export const ContentItemsQuery = gql`
       childCount
       createdBy
       createdDate
+      updatedBy
+      updatedDate
       content
       htmlContent
       snippet
