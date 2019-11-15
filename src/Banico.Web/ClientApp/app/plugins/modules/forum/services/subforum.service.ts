@@ -33,7 +33,7 @@ export class ForumSubforumService extends PluginService {
   }
 
   public getByAlias(alias: string): Observable<Subforum> {
-    return this.contentItemService.getByAlias(alias).pipe(
+    return this.contentItemService.getByAlias("forum-subforum", alias).pipe(
       map(item => {
         return new Subforum(item);
       })

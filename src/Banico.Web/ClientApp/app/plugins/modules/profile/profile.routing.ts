@@ -2,8 +2,8 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
 import { ProfileComponent } from "./components/profile.component";
-import { ProfileDisplayComponent } from "./components/profile-display/profile-display.component";
-import { ProfileFormComponent } from "./components/profile-form/profile-form.component";
+import { ProfileHomeComponent } from "./components/home/home.component";
+import { ProfileFormComponent } from "./components/form/form.component";
 import { AuthGuard } from "../../../shared/auth/auth.guard";
 
 const PROFILE_ROUTES: Routes = [
@@ -15,15 +15,15 @@ const PROFILE_ROUTES: Routes = [
   },
   {
     path: ":alias",
-    component: ProfileDisplayComponent,
+    component: ProfileHomeComponent,
     canActivate: [AuthGuard],
-    data: { module: "profile/manage" }
+    data: { module: "profile/view" }
   },
   {
     path: "",
-    component: ProfileDisplayComponent,
+    component: ProfileHomeComponent,
     canActivate: [AuthGuard],
-    data: { module: "profile/view" }
+    data: { module: "profile/manage" }
   }
 ];
 

@@ -67,8 +67,9 @@ export class ContentItemService {
     );
   }
 
-  public getByAlias(alias: string): Observable<ContentItem> {
+  public getByAlias(module: string, alias: string): Observable<ContentItem> {
     const contentItemSearch = new ContentItemSearch();
+    contentItemSearch.module = module;
     contentItemSearch.alias = alias;
     return this.getAll(contentItemSearch).pipe(
       map(items => {

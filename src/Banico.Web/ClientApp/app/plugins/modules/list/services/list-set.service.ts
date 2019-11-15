@@ -18,7 +18,7 @@ export class ListSetService extends PluginService {
   }
 
   public getByAlias(alias: string): Observable<ListSet> {
-    return this.contentItemService.getByAlias(alias).pipe(
+    return this.contentItemService.getByAlias("list-set", alias).pipe(
       map(item => {
         return new ListSet(item);
       })

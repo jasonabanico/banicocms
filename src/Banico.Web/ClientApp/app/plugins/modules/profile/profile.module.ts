@@ -1,23 +1,25 @@
-﻿import { NgModule }      from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
-import { ProfileRoutingModule } from './profile.routing';
-import { ProfileComponent }  from './components/profile.component';
-import { ProfileDisplayComponent } from './components/profile-display/profile-display.component';
-import { ProfileFormComponent } from './components/profile-form/profile-form.component';
+﻿import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { MarkdownModule } from "ngx-markdown";
+import { RichTextModule } from "../rich-text/rich-text.module";
+import { ShellModule } from "../../../shell/shell.module";
+import { ProfileRoutingModule } from "./profile.routing";
+import { ProfileComponent } from "./components/profile.component";
+import { ProfileHomeComponent } from "./components/home/home.component";
+import { ProfileFormComponent } from "./components/form/form.component";
+import { ProfileService } from "./services/profile.service";
 
 @NgModule({
-  imports: [ 
+  imports: [
     CommonModule,
     FormsModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    MarkdownModule.forChild(),
+    RichTextModule,
+    ShellModule
   ],
-  declarations: [ 
-    ProfileComponent,
-    ProfileDisplayComponent,
-    ProfileFormComponent 
-  ],
-  bootstrap:    [ ProfileComponent ]
+  declarations: [ProfileComponent, ProfileHomeComponent, ProfileFormComponent],
+  providers: [ProfileService]
 })
-export class ProfileModule { }
+export class ProfileModule {}
