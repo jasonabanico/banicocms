@@ -157,6 +157,20 @@ export class ContentItemService {
     return result;
   }
 
+  public getOne(
+    contentItemSearch: ContentItemSearch
+    ): Observable<ContentItem> {
+      var result = this.getAll(contentItemSearch).pipe(
+        map(result => {
+          if (result && result.length > 0) {
+            return result[0];
+          }
+        })
+      );
+
+      return result;
+    }
+
   public getAll(
     contentItemSearch: ContentItemSearch
   ): Observable<ContentItem[]> {

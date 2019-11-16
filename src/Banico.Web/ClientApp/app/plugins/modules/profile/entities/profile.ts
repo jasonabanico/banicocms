@@ -7,7 +7,9 @@ export class Profile {
   content: string;
   createdDate: string;
   updatedDate: string;
+  type: string;
   avatarHash: string;
+  headline: string;
 
   constructor(private contentItem: ContentItem) {
     if (contentItem && contentItem.module == "profile") {
@@ -16,7 +18,9 @@ export class Profile {
       this.content = contentItem.content;
       this.createdDate = contentItem.createdDate;
       this.updatedDate = contentItem.updatedDate;
-      this.avatarHash = contentItem.attribute01;
+      this.type = contentItem.attribute01;
+      this.avatarHash = contentItem.attribute02;
+      this.headline = contentItem.attribute03;
     }
   }
 
@@ -27,7 +31,9 @@ export class Profile {
     output.id = this.id;
     output.alias = this.alias;
     output.content = this.content;
-    output.attribute01 = this.avatarHash;
+    output.attribute01 = this.type;
+    output.attribute02 = this.avatarHash;
+    output.attribute03 = this.headline;
 
     return output;
   }

@@ -19,7 +19,9 @@
     />
     <div class="media-body text-md-left ml-md-3 ml-0">
       <p class="small">
-        <a href="">@{{ comment?.username }}</a>
+        <a href="/profile/in/{{ comment?.username }}"
+          >@{{ comment?.username }}</a
+        >
         {{ comment?.text }}<br />
         <a
           *ngIf="comment?.userId == userId"

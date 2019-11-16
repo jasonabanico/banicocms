@@ -15,6 +15,7 @@ export class ProfileFormComponent implements OnInit {
   private sub: any;
   public profileForm: FormGroup = this.fb.group({
     alias: ["", Validators.required],
+    headline: ["", Validators.required],
     content: ["", Validators.required]
   });
 
@@ -29,11 +30,15 @@ export class ProfileFormComponent implements OnInit {
   public ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       var alias = this.authService.getUserName();
+      var type = "in";
       if (params["alias"]) {
         alias = params["alias"];
       }
+      if (params["type"]) {
+        type = params["type"];
+      }
       this.profileService
-        .getByAlias(alias)
+        .getByTypeAndAlias(type, alias)
         .subscribe(profile => this.setProfile(profile));
     });
   }
@@ -42,15 +47,19 @@ export class ProfileFormComponent implements OnInit {
     this.profile = profile;
     this.profileForm.patchValue({
       alias: profile.alias,
+      headline: profile.headline,
       content: profile.content
     });
   }
 
   public save() {
     this.profile.content = this.profileForm.value["content"];
+    this.profile.headline = this.profileForm.value["headline"];
     this.profileService.addOrUpdate(this.profile).subscribe(
       result => {
-        this.router.navigate(["/profile/" + this.profile.alias]);
+        this.router.navigate([
+          "/profile/" + this.profile.type + "/" + this.profile.alias
+        ]);
       }
       //errors =>  this.errors = errors
     );

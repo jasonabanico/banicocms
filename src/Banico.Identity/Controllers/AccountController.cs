@@ -763,27 +763,6 @@ namespace Banico.Identity.Controllers
             // }
         }
 
-        public async Task<ProfileViewModel> GetProfile()
-        {
-            ProfileViewModel profileViewModel = new ProfileViewModel();
-            AppUser user = await Utilities.GetUser(this, _userManager);
-            profileViewModel.FirstName = user.FirstName;
-            profileViewModel.LastName = user.LastName;
-            profileViewModel.Alias = user.Alias;
-            return profileViewModel;
-        }
-
-        public async Task<AppUser> SetProfile(string firstName, string lastName, string alias)
-        {
-            AppUser user = await Utilities.GetUser(this, _userManager);
-            user.FirstName = firstName;
-            user.LastName = lastName;
-            user.Alias = alias;
-
-            var result = await _userManager.UpdateAsync(user);
-            return user;
-        }
-
         #endregion
     }
 }

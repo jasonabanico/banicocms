@@ -18,8 +18,13 @@ export class ProfileService extends PluginService {
     );
   }
 
-  public getByAlias(alias: string): Observable<Profile> {
-    return this.contentItemService.getByAlias("profile", alias).pipe(
+  public getByTypeAndAlias(type: string, alias: string): Observable<Profile> {
+    var contentItemSearch = new ContentItemSearch();
+    contentItemSearch.module = "profile";
+    contentItemSearch.attribute01 = type;
+    contentItemSearch.alias = alias;
+
+    return this.contentItemService.getOne(contentItemSearch).pipe(
       map(item => {
         return new Profile(item);
       })

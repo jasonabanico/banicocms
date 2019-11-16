@@ -23,15 +23,22 @@ export class ProfileHomeComponent implements OnInit {
   ngOnInit() {
     this.profile = new Profile(null);
     this.sub = this.route.params.subscribe(params => {
-      var alias = params["alias"];
-      if (!alias) {
-        alias = this.authService.getUserName();
+      var alias = this.authService.getUserName();
+      var type = "in";
+      if (params["alias"]) {
+        alias = params["alias"];
       }
-      if (this.authService.isAdmin() || this.authService.getUserName == alias) {
+      if (params["type"]) {
+        type = params["type"];
+      }
+      if (
+        this.authService.isAdmin() ||
+        this.authService.getUserName() == alias
+      ) {
         this.canEdit = true;
       }
       this.profileService
-        .getByAlias(alias)
+        .getByTypeAndAlias(type, alias)
         .subscribe(profile => (this.profile = profile));
     });
   }

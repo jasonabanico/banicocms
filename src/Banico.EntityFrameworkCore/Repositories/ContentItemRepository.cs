@@ -761,11 +761,12 @@ namespace Banico.EntityFrameworkCore.Repositories
 
                 profileItem.CreatedBy = userId;
                 profileItem.CreatedDate = DateTimeOffset.UtcNow;
+                profileItem.Attribute01 = "in"; // individual
 
                 using (var md5 = MD5.Create())
                 {
                     var result = md5.ComputeHash(Encoding.ASCII.GetBytes(email));
-                    profileItem.Attribute01 = BitConverter.ToString(result).Replace("-", "").ToLower();
+                    profileItem.Attribute02 = BitConverter.ToString(result).Replace("-", "").ToLower();
                 }
 
                 profileItem = await this.Add(profileItem);
