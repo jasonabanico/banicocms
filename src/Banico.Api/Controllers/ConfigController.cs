@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Banico.Core.Repositories;
 using Banico.Core.Entities;
+using Banico.Api.Models;
 
 namespace Banico.Identity.Controllers
 {
@@ -44,9 +45,9 @@ namespace Banico.Identity.Controllers
         }
 
         [HttpPost]
-        public async Task<Config> Get([FromBody] string id, [FromBody] string module, [FromBody] string name)
+        public async Task<Config> GetConfig([FromBody] GetConfigViewModel model)
         {
-            List<Config> results = await _configRepository.Get(id, module, name);
+            List<Config> results = await _configRepository.Get(model.Id, model.Module, model.Name);
             if (results.Count > 0)
             {
                 return results[0];

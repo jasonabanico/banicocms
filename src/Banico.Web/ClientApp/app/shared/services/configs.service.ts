@@ -36,7 +36,7 @@ export class ConfigsService {
     let options = { headers: headers };
 
     return this.http.post<Config>(
-      this.baseUrl + "api/Config/Get",
+      this.baseUrl + "api/Config/GetConfig",
       body,
       options
     );
