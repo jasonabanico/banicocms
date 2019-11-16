@@ -23,7 +23,7 @@ export class Profile {
   public toContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = "forum-topic";
+    output.module = "profile";
     output.id = this.id;
     output.alias = this.alias;
     output.content = this.content;
