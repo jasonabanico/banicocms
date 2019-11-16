@@ -11,9 +11,9 @@ import { ProfileService } from "../../services/profile.service";
   providers: [ProfileService]
 })
 export class ProfileFormComponent implements OnInit {
+  private profile: Profile;
   private sub: any;
   public profileForm: FormGroup = this.fb.group({
-    id: ["", Validators.required],
     alias: ["", Validators.required],
     content: ["", Validators.required]
   });
@@ -39,20 +39,18 @@ export class ProfileFormComponent implements OnInit {
   }
 
   public setProfile(profile: Profile) {
+    this.profile = profile;
     this.profileForm.patchValue({
-      id: profile.id,
       alias: profile.alias,
       content: profile.content
     });
   }
 
   public save() {
-    var id = this.profileForm.value["id"];
-    var alias = this.profileForm.value["alias"];
-    var content = this.profileForm.value["content"];
-    this.profileService.addOrUpdate(id, alias, content).subscribe(
+    this.profile.content = this.profileForm.value["content"];
+    this.profileService.addOrUpdate(this.profile).subscribe(
       result => {
-        this.router.navigate(["/profile/" + alias]);
+        this.router.navigate(["/profile/" + this.profile.alias]);
       }
       //errors =>  this.errors = errors
     );

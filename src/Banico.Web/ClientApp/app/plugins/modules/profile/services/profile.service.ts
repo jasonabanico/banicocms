@@ -26,17 +26,7 @@ export class ProfileService extends PluginService {
     );
   }
 
-  public addOrUpdate(
-    id: string,
-    alias: string,
-    content: string
-  ): Observable<boolean> {
-    let profile: Profile = new Profile(null);
-
-    profile.id = id;
-    profile.alias = alias;
-    profile.content = content;
-
+  public addOrUpdate(profile: Profile): Observable<boolean> {
     let contentItem: ContentItem = profile.toContentItem();
     return this.contentItemService.addOrUpdate(contentItem).pipe(
       map(res => {
