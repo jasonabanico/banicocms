@@ -21,7 +21,7 @@ export class ProfileService extends PluginService {
   public getByTypeAndAlias(type: string, alias: string): Observable<Profile> {
     var contentItemSearch = new ContentItemSearch();
     contentItemSearch.module = "profile";
-    contentItemSearch.attribute01 = type;
+    contentItemSearch.attribute02 = type;
     contentItemSearch.alias = alias;
 
     return this.contentItemService.getOne(contentItemSearch).pipe(
