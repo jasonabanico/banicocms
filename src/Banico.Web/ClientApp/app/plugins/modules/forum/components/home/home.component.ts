@@ -28,6 +28,6 @@ export class ForumHomeComponent {
   }
 
   private setSubforums(subforums: Subforum[]) {
-    this.subforums = subforums;
+    this.subforums = subforums.sort((a, b) => b.topicCount - a.topicCount);
   }
 }
