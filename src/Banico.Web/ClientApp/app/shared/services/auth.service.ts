@@ -246,14 +246,11 @@ export class AuthService extends BaseService {
   }
 
   public checkAdmin(url: string, autoRedirect: boolean): boolean {
-    alert("checkAdmin");
     this.writeDebugMessage("auth.service: checking Admin");
     let result = this.checkLogin(url, autoRedirect);
     if (result) {
       result = this.isAdmin() || this.isSuperAdmin();
     }
-    alert("isAdmin " + this.isAdmin());
-    alert("isSuperAdmin " + this.isSuperAdmin());
     this.writeDebugMessage("auth.service: Admin returns " + result);
     return result;
   }
