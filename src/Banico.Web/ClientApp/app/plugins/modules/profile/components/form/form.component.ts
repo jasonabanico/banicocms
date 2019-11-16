@@ -11,6 +11,7 @@ import { ProfileService } from "../../services/profile.service";
   providers: [ProfileService]
 })
 export class ProfileFormComponent implements OnInit {
+  private sub: any;
   public profileForm: FormGroup = this.fb.group({
     id: ["", Validators.required],
     alias: ["", Validators.required],
@@ -26,10 +27,15 @@ export class ProfileFormComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
-    var alias = this.authService.getUserName();
-    this.profileService
-      .getByAlias(alias)
-      .subscribe(profile => this.setProfile(profile));
+    this.sub = this.route.params.subscribe(params => {
+      var alias = this.authService.getUserName();
+      if (params["alias"]) {
+        alias = params["alias"];
+      }
+      this.profileService
+        .getByAlias(alias)
+        .subscribe(profile => this.setProfile(profile));
+    });
   }
 
   public setProfile(profile: Profile) {

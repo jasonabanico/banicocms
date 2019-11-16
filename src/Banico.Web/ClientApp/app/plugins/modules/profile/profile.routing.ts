@@ -8,7 +8,7 @@ import { AuthGuard } from "../../../shared/auth/auth.guard";
 
 const PROFILE_ROUTES: Routes = [
   {
-    path: "edit",
+    path: "edit/:alias",
     component: ProfileFormComponent,
     canActivate: [AuthGuard],
     data: { module: "profile/manage" }
