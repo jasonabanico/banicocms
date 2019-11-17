@@ -88,7 +88,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                     (c.ParentId == parentId || string.IsNullOrEmpty(parentId)) &&
                     (c.Name == name || string.IsNullOrEmpty(name)) && 
                     (c.CreatedBy == createdBy || string.IsNullOrEmpty(createdBy)) &&
-                    (c.Tenant == tenant || string.IsNullOrEmpty(tenant))
+                    (c.Tenant == tenant || c.Tenant == "all" || string.IsNullOrEmpty(tenant))
                 select c;
 
             if (!string.IsNullOrEmpty(name))
@@ -263,7 +263,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                     (c.ParentId == parentId || string.IsNullOrEmpty(parentId)) &&
                     (c.Name == name || string.IsNullOrEmpty(name)) && 
                     (c.CreatedBy == createdBy || string.IsNullOrEmpty(createdBy)) &&
-                    (c.Tenant == tenant || string.IsNullOrEmpty(tenant))
+                    (c.Tenant == tenant || c.Tenant == "all" || string.IsNullOrEmpty(tenant))
                 select c;
 
             if (!string.IsNullOrEmpty(name))
