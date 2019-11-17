@@ -137,6 +137,12 @@ namespace Banico.Identity.Controllers
             return user != null;
         }
 
+        private async Task<bool> EmailExists(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            return user != null;
+        }
+
         //
         // POST: /api/Account/Login
         [HttpPost]
@@ -315,6 +321,21 @@ namespace Banico.Identity.Controllers
             if (await this.UserExists(model.Username))
             {
                 return BadRequest(Errors.AddErrorToModelState("Username", "Username already exists.", ModelState));
+            }
+
+            if (model.Username.Length < 5)
+            {
+                return BadRequest(Errors.AddErrorToModelState("Username", "Username must be more than 5 characters.", ModelState));
+            }
+
+            if (model.Username.Length > 20)
+            {
+                return BadRequest(Errors.AddErrorToModelState("Username", "Username must be less than 20 characters.", ModelState));
+            }
+
+            if (await this.EmailExists(model.Email))
+            {
+                return BadRequest(Errors.AddErrorToModelState("Email", "Email already exists.", ModelState));
             }
 
             string tenantRegEx = _configuration["TenantRegEx"];

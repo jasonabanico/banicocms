@@ -146,6 +146,9 @@ namespace Banico.Identity
         o.Password.RequireUppercase = false;
         o.Password.RequireNonAlphanumeric = false;
         o.Password.RequiredLength = 6;
+        o.User.AllowedUserNameCharacters =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        o.User.RequireUniqueEmail = true;
       })
       .AddSignInManager<SignInManager<AppUser>>()
       .AddEntityFrameworkStores<AppIdentityDbContext>()
