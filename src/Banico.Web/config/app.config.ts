@@ -10,4 +10,5 @@
   public static FRONT_TEXT_2 = "Explore the features of Banico CMS.";
   public static START_BUTTON_TEXT = "Learn More";
   public static START_BUTTON_URL = "https://github.com/jasebanico/banicocms";
+  public static SIGNED_IN_HOME_MODULE = "/forum";
 }

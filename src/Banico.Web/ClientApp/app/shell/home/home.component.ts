@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { AppConfig } from "../../../../Config/app.config";
+import { AuthService } from "../../shared/services/auth.service";
 
 @Component({
   selector: "app-shell-home",
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   readonly SECTION_DELIM: string = "*";
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     this.appTitle = AppConfig.APP_NAME;
     this.frontText1 = AppConfig.FRONT_TEXT_1;
     this.frontText2 = AppConfig.FRONT_TEXT_2;
@@ -28,6 +29,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.location = "";
     this.content = "";
+
+    var signedInHomeModule = AppConfig.SIGNED_IN_HOME_MODULE;
+    if (signedInHomeModule && this.authService.checkLogin("", false)) {
+      this.router.navigateByUrl(signedInHomeModule);
+    }
   }
 
   public search() {
