@@ -3,14 +3,16 @@ using System;
 using Banico.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Banico.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191117084430_SectionItems")]
+    partial class SectionItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,8 +47,8 @@ namespace Banico.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "164604a4-bebb-49cf-a91a-97c7759d2525",
-                            CreatedDate = new DateTimeOffset(new DateTime(2019, 8, 3, 13, 40, 36, 73, DateTimeKind.Unspecified).AddTicks(8490), new TimeSpan(0, 0, 0, 0, 0)),
+                            Id = "ad8dd38f-b1e5-45c1-b1d6-c058aa051342",
+                            CreatedDate = new DateTimeOffset(new DateTime(2019, 11, 17, 8, 44, 30, 168, DateTimeKind.Unspecified).AddTicks(9440), new TimeSpan(0, 0, 0, 0, 0)),
                             Module = "",
                             Name = "initialized",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -54,8 +56,8 @@ namespace Banico.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = "95a50705-5d6e-48c4-ad4c-d2a27a379e01",
-                            CreatedDate = new DateTimeOffset(new DateTime(2019, 8, 3, 13, 40, 36, 75, DateTimeKind.Unspecified).AddTicks(980), new TimeSpan(0, 0, 0, 0, 0)),
+                            Id = "e9c43db0-d99b-4f41-b6f5-8e72cceda006",
+                            CreatedDate = new DateTimeOffset(new DateTime(2019, 11, 17, 8, 44, 30, 170, DateTimeKind.Unspecified).AddTicks(1200), new TimeSpan(0, 0, 0, 0, 0)),
                             Module = "admin",
                             Name = "canActivate",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),

@@ -609,6 +609,12 @@ namespace Banico.EntityFrameworkCore.Repositories
         // Returns no. of objects saved, ie., 1
         public async Task<ContentItem> Add(ContentItem item)
         {
+            var aliasExists = await this.AliasExists(item);
+            if (aliasExists)
+            {
+                throw new ArgumentException("Alias " + item + " exists for this module.");
+            }
+
             item.Id = Guid.NewGuid().ToString();
             item.ContentSectionItems = await this.ToContentSectionItems(item.SectionItems);
             _dbContext.ContentItems.Add(item);
@@ -621,6 +627,23 @@ namespace Banico.EntityFrameworkCore.Repositories
             }
 
             return new ContentItem();
+        }
+
+        private async Task<bool> AliasExists(ContentItem item)
+        {
+            if (string.IsNullOrEmpty(item.Alias))
+            {
+                return false;
+            }
+
+            var matchingContent = from content in _dbContext.ContentItems
+                where content.Alias == item.Alias &&
+                    content.Module == item.Module &&
+                    content.SectionItems == item.SectionItems &&
+                    (content.Tenant == item.Tenant || content.Tenant == "all")
+                    select content;
+            
+            return await matchingContent.CountAsync() > 0;
         }
 
         private async Task<List<ContentSectionItem>> ToContentSectionItems(string sectionItems)
@@ -668,6 +691,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                     updateItem.Name = item.Name;
                     updateItem.Content = item.Content;
                     updateItem.Alias = item.Alias;
+                    updateItem.SectionItems = item.SectionItems;
                     if (!string.IsNullOrEmpty(item.SectionItems))
                     {
                         updateItem.ContentSectionItems = await this.ToContentSectionItems(item.SectionItems);
