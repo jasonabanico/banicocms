@@ -629,21 +629,22 @@ namespace Banico.EntityFrameworkCore.Repositories
             return new ContentItem();
         }
 
-        private async Task<bool> AliasExists(ContentItem item)
+        public async Task<bool> AliasExists(ContentItem item)
         {
             if (string.IsNullOrEmpty(item.Alias))
             {
                 return false;
             }
 
-            var matchingContent = from content in _dbContext.ContentItems
+            var matchingAlias = from content in _dbContext.ContentItems
                 where content.Alias == item.Alias &&
                     content.Module == item.Module &&
-                    content.SectionItems == item.SectionItems &&
-                    (content.Tenant == item.Tenant || content.Tenant == "all")
+                    (content.SectionItems == item.SectionItems ||
+                    (content.SectionItems == null && item.SectionItems == null)) &&
+                    (content.Tenant == item.Tenant || content.Tenant == "all" || item.Tenant == "all")
                     select content;
             
-            return await matchingContent.CountAsync() > 0;
+            return await matchingAlias.CountAsync() > 0;
         }
 
         private async Task<List<ContentSectionItem>> ToContentSectionItems(string sectionItems)

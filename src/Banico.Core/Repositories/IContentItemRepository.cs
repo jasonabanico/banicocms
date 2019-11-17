@@ -86,6 +86,7 @@ namespace Banico.Core.Repositories
         Task<IEnumerable<ContentSectionItem>> GetContentSectionItemsByContentItemId(string id);
         Task<ContentItem> AddOrUpdate(ContentItem item, string userId, bool isAdmin);
         Task<ContentItem> Add(ContentItem item);
+        Task<bool> AliasExists(ContentItem item);
         Task<ContentItem> Update(ContentItem item, string userId, bool isAdmin);
         Task<ContentItem> Delete(string id, string userId, bool isAdmin);
         Task<ContentItem> CreateProfileIfNotExists(string tenant, string userId, string alias, string email);
