@@ -1,6 +1,7 @@
 ﻿using Banico.Web.Server.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 
@@ -8,7 +9,15 @@ namespace Banico.Web.Controllers
 {
     public class HomeController : Controller {
         protected readonly IHostingEnvironment HostingEnvironment;
-        public HomeController(IHostingEnvironment hostingEnv) => this.HostingEnvironment = hostingEnv;
+        protected readonly IConfiguration _configuration;
+        public HomeController(
+            IHostingEnvironment hostingEnv,
+            IConfiguration configuration
+        )
+        {
+            this.HostingEnvironment = hostingEnv;
+            _configuration = configuration;
+        }
 
         [HttpGet]
         public async Task<IActionResult> Index () {
@@ -24,6 +33,7 @@ namespace Banico.Web.Controllers
             if (!this.HostingEnvironment.IsDevelopment ()) {
                 this.ViewData["ServiceWorker"] = "<script>'serviceWorker'in navigator&&navigator.serviceWorker.register('/serviceworker')</script>";
             }
+            this.ViewData["GoogleTrackingId"] = _configuration["GoogleTrackingId"];
 
             return View ();
         }
