@@ -2,6 +2,8 @@ Config/app.config.ts
 Config/appsettings.json
 Config/appsettings.*.json
 Config/home.component.html
+Config/_Header.cshtml
+Config/_Footer.cshtml
 
 /Properties/launchSettings.json
 

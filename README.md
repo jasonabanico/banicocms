@@ -28,6 +28,8 @@ cd Config
 cp sample.home.component.html home.component.html
 cp sample.appsettings.json appsettings.json
 cp sample.app.config.ts app.config.ts
+cp sample._Header.cshtml _Header.cshtml
+cp sample._Footer.cshtml _Footer.cshtml
 
 # optional: create environment specific appsettings, such as
 # appsettings.development.json or appsettings.production.json

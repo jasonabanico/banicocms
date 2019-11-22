@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <base href="@(Url.Content("~/"))" />
+    @await Html.PartialAsync("~/Config/_Header.cshtml")
     <title>@ViewData["Title"]</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,6 +48,8 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <!-- Imgur -->
 <script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+    @await Html.PartialAsync("~/Config/_Footer.cshtml")
 
   </body>
 </html>
