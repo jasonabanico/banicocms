@@ -17,6 +17,7 @@ namespace Banico.Api.Models
     {
         private bool isDebug = false;
         private IConfiguration _configuration;
+        private IContentItemRepository _contentItemRepository;
         private IConfigRepository _configRepository;
         private IAccessService _accessService;
 
@@ -30,6 +31,7 @@ namespace Banico.Api.Models
         )
         {
             _configuration = configuration;
+            _contentItemRepository = contentItemRepository;
             _configRepository = configRepository;
             _accessService = accessService;
 
@@ -76,6 +78,11 @@ namespace Banico.Api.Models
                     {
                         if (_accessService.Allowed(contentItem).Result)
                         {
+                            if (!this.checkTenant(contentItem))
+                            {
+                                throw new UnauthorizedAccessException("Update of content item is not allowed.");
+                            }
+
                             this.StampItem(contentItem);
                             var userId = _accessService.GetUserId();
                             var isAdmin = _accessService.IsAdminOrSuperAdmin();
@@ -100,6 +107,10 @@ namespace Banico.Api.Models
                 resolve: context =>
                 {
                     var id = context.GetArgument<String>("id");
+                    if (!this.checkTenant(id).Result)
+                    {
+                        throw new UnauthorizedAccessException("Deletion of content item is not allowed.");
+                    }
                     var userId = _accessService.GetUserId();
                     var isAdmin = _accessService.IsAdminOrSuperAdmin();
                     return contentItemRepository.Delete(id, userId, isAdmin);
@@ -134,6 +145,40 @@ namespace Banico.Api.Models
                 item.UpdatedBy = user;
                 item.UpdatedDate = DateTimeOffset.UtcNow;
             }
+        }
+
+        private async Task<bool> checkTenant(string id)
+        {
+            var item = (await _contentItemRepository.Get("", id, "", "", "", "", "", "", "", "", "", "",
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
+            "", 0, 1, 0))
+                .FirstOrDefault();
+
+            if (item != null)
+            {
+                return this.checkTenant(item);
+            }
+
+            return false;
+        }
+
+        private bool checkTenant(Item item)
+        {
+            var isSuperAdmin = _accessService.IsSuperAdmin();
+
+            if (isSuperAdmin)
+            {
+                return true;
+            }
+
+            if (string.IsNullOrEmpty(item.Tenant))
+            {
+                return true;
+            }
+
+            var userTenant = _accessService.DomainTenant();
+
+            return userTenant == item.Tenant;
         }
 
         private void WriteDebugMessage(string message)

@@ -7,6 +7,16 @@
   </ol>
 </nav>
 
+<app-shell-modal
+  #deleteModal
+  id="{{ subforum?.id }}"
+  title="Delete"
+  body="Are you sure you want to delete this subforum?"
+  button="Delete"
+  (actioned)="deleteConfirmed()"
+>
+</app-shell-modal>
+
 <div class="card mb-3">
   <div class="card-header">
     <div class="d-flex justify-content-between align-items-center">
@@ -29,6 +39,14 @@
       (click)="edit()"
       class="card-link"
       ><i class="fas fa-pencil-alt"></i> Edit</a
+    >
+    <a
+      *ngIf="subforum?.userId == userId || isAdmin"
+      href="javascript:;"
+      (click)="delete()"
+      class="card-link"
+    >
+      <i class="fas fa-trash-alt"></i> Delete</a
     >
     <a href="/forum/topic/new/{{ subforum?.id }}" class="card-link"
       ><i class="fas fa-sticky-note"></i> New Topic</a
@@ -58,5 +76,12 @@
       </td>
     </tr>
   </tbody>
-  <button *ngIf="page < totalPages" type="button" class="btn btn-primary btn-sm" (click)="moreTopics()">More topics</button>
+  <button
+    *ngIf="page < totalPages"
+    type="button"
+    class="btn btn-primary btn-sm"
+    (click)="moreTopics()"
+  >
+    More topics
+  </button>
 </table>

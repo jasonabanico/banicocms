@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Subforum } from "../../entities/subforum";
 import { ForumSubforumService } from "../../services/subforum.service";
 import { ForumTopicService } from "../../services/topic.service";
@@ -16,6 +16,7 @@ import { AuthService } from "../../../../../shared/services/auth.service";
 export class ForumSubforumComponent implements OnInit {
   //public subforum$: Observable<Subforum>;
   public userId: string;
+  public isAdmin: boolean;
   public subforum: Subforum;
   public topics: Topic[];
   public hasMorePages: boolean;
@@ -32,7 +33,10 @@ export class ForumSubforumComponent implements OnInit {
     private authService: AuthService
   ) {
     this.userId = authService.getUserId();
+    this.isAdmin = authService.isAdmin();
   }
+
+  @ViewChild("deleteModal") deleteModal;
 
   ngOnInit() {
     this.topicService.setPageSize(15);
@@ -74,5 +78,15 @@ export class ForumSubforumComponent implements OnInit {
           this.topics = topics.sort((a, b) => b.postCount - a.postCount);
         });
     }
+  }
+
+  delete() {
+    this.deleteModal.show();
+  }
+
+  public deleteConfirmed() {
+    this.subforumService.delete(this.subforum.id).subscribe(id => {
+      if (id === this.subforum.id) this.router.navigateByUrl("/forum");
+    });
   }
 }
