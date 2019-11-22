@@ -33,7 +33,6 @@ namespace Banico.Web.Controllers
             if (!this.HostingEnvironment.IsDevelopment ()) {
                 this.ViewData["ServiceWorker"] = "<script>'serviceWorker'in navigator&&navigator.serviceWorker.register('/serviceworker')</script>";
             }
-            this.ViewData["GoogleTrackingId"] = _configuration["GoogleTrackingId"];
 
             return View ();
         }

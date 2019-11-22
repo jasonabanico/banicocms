@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    @if (ViewData["GoogleTrackingId"] != null)
-    {
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src='https://www.googletagmanager.com/gtag/js?id=@ViewData["GoogleTrackingId"]'></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', '@ViewData["GoogleTrackingId"]');
-      </script>
-    }
     <meta charset="utf-8" />
     <base href="@(Url.Content("~/"))" />
     <title>@ViewData["Title"]</title>
