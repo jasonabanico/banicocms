@@ -18,6 +18,7 @@
   <thead>
     <tr>
       <th scope="col">User ID</th>
+      <th scope="col">Username</th>
       <th scope="col">Email</th>
       <th scope="col">Action</th>
     </tr>
@@ -25,6 +26,7 @@
   <tbody>
     <tr *ngFor="let user of users">
       <td>{{ user.id }}</td>
+      <td>{{ user.userName }}</td>
       <td>{{ user.email }}</td>
       <td>
         <a

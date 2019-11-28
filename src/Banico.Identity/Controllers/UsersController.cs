@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Banico.Core.Entities;
+using Banico.Identity.ViewModels.Users;
 
 namespace Banico.Web
 {
@@ -54,79 +55,72 @@ namespace Banico.Web
 
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] AppUser user)
-            //, [FromBody] string appRoleId)
         {
             IdentityResult result = await userManager.CreateAsync(user);
             if (result.Succeeded)
             {
-                // AppRole role = await roleManager.FindByIdAsync(appRoleId);
-                // if (role != null)
-                // {
-                //     IdentityResult roleResult = await userManager.AddToRoleAsync(user, role.Name);
-                //     if (roleResult.Succeeded)
-                //     {
-                //         return Ok(user);
-                //     }
-                // } else {
-                    return Ok(user);
-                // }
+                return Ok(user);
             } else {
                 return BadRequest(result.Errors);
             }
-
-            return BadRequest("");
         }
 
         [HttpPost]
         public async Task<IActionResult> Update([FromBody] AppUser user)
-        //, [FromBody] string appRoleId)
         {
             if (user != null)
             {
-                var userRole = await userManager.GetRolesAsync(user);
-                string existingRole = string.Empty;
-                string existingRoleId = string.Empty;
-                if ((userRole != null) && (userRole.Count() > 0))
-                {
-                    existingRole = userManager.GetRolesAsync(user).Result.Single();
-                    existingRoleId = roleManager.Roles.Single(r => r.Name == existingRole).Id;
-                }
                 user = await this.UpdateUser(user);
                 IdentityResult result = await userManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
-                    // if (!string.IsNullOrEmpty(appRoleId) && (existingRoleId != appRoleId))
-                    // {
-                    //     if (!string.IsNullOrEmpty(existingRole))
-                    //     {
-                    //         IdentityResult roleResult = await userManager.RemoveFromRoleAsync(user, existingRole);
-                    //         if (!roleResult.Succeeded) {
-                    //             return BadRequest(roleResult.Errors);
-                    //         }
-                    //     }
-
-                    //     AppRole applicationRole = await roleManager.FindByIdAsync(appRoleId);
-                    //     if (applicationRole != null)
-                    //     {
-                    //         IdentityResult newRoleResult = await userManager.AddToRoleAsync(user, applicationRole.Name);
-                    //         if (newRoleResult.Succeeded)
-                    //         {
-                    //             return Ok(user);
-                    //         }
-                    //         else
-                    //         {
-                    //             return BadRequest(newRoleResult.Errors);
-                    //         }
-                    //     } else {
-                    //         return BadRequest("Role ID is null - " + appRoleId);
-                    //     }
-                    // } else {
-                        return Ok(user);
-                    // }
+                    return Ok(user);
                 }
                 else
                 {
                     return BadRequest(result.Errors);
+                }
+            }
+
+            return BadRequest(user);
+        }
+
+        [HttpGet]
+        public async Task<string> GetUserRole(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            var userRole = await userManager.GetRolesAsync(user);
+            string existingRole = string.Empty;
+            string existingRoleId = string.Empty;
+            if ((userRole != null) && (userRole.Count() > 0))
+            {
+                existingRole = userManager.GetRolesAsync(user).Result.Single();
+                existingRoleId = roleManager.Roles.Single(r => r.Name == existingRole).Id;
+            }
+
+            return existingRoleId;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleModel model)
+        {
+            var user = await userManager.FindByIdAsync(model.Id);
+            if (user != null)
+            {
+                AppRole applicationRole = await roleManager.FindByIdAsync(model.RoleId);
+                if (applicationRole != null)
+                {
+                    IdentityResult newRoleResult = await userManager.AddToRoleAsync(user, applicationRole.Name);
+                    if (newRoleResult.Succeeded)
+                    {
+                        return Ok(user);
+                    }
+                    else
+                    {
+                        return BadRequest(newRoleResult.Errors);
+                    }
+                } else {
+                    return BadRequest("Role ID is null - " + model.RoleId);
                 }
             }
 
