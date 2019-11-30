@@ -24,6 +24,22 @@ export class ForumSubforumService extends PluginService {
     );
   }
 
+  public getBySectionItems(sectionItems: string): Observable<Subforum[]> {
+    const contentItemSearch = new ContentItemSearch();
+    contentItemSearch.module = "forum-subforum";
+    contentItemSearch.sectionItems = sectionItems;
+    return this.contentItemService.getAll(contentItemSearch).pipe(
+      map(items => {
+        const replies: Subforum[] = new Array<Subforum>();
+        items.forEach(function(item: ContentItem) {
+          replies.push(new Subforum(item));
+        });
+
+        return replies;
+      })
+    );
+  }
+
   public get(id: string): Observable<Subforum> {
     return this.contentItemService.get(id).pipe(
       map(item => {

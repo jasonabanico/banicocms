@@ -48,6 +48,7 @@
       "faq/view,canActivate,user",
       "faq/manage,canActivate,admin",
       "forum,isEnabled,n",
+      "forum,withSections,n",
       "forum-subforum/manage,canActivate,admin",
       "forum-subforum/view,canActivate,user",
       "forum-topic/manage,canActivate,user",
