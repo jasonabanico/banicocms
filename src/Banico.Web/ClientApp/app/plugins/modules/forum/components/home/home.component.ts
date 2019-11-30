@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Subforum } from "../../entities/subforum";
 import { ForumSubforumService } from "../../services/subforum.service";
@@ -11,7 +11,7 @@ import { SectionBarService } from "../../../../../shell/section-bar/section-bar.
   selector: "app-plugins-forum-home",
   templateUrl: "./home.component.html"
 })
-export class ForumHomeComponent {
+export class ForumHomeComponent implements OnInit, OnDestroy {
   private path: string;
   private sub: any;
   public subforums: Subforum[];
@@ -65,7 +65,12 @@ export class ForumHomeComponent {
       .getAll()
       .subscribe(subforums => this.setSubforums(subforums));
   }
+
   private setSubforums(subforums: Subforum[]) {
     this.subforums = subforums.sort((a, b) => b.topicCount - a.topicCount);
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }
