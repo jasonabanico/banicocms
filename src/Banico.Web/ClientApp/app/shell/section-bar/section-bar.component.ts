@@ -1,28 +1,27 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Location } from '@angular/common';
-import { Router } from '@angular/router';
-import { SectionBarService } from './section-bar.service';
-import { SectionsService } from '../../shared/services/sections.service';
+import { Component, OnInit, Inject } from "@angular/core";
+import { Location } from "@angular/common";
+import { Router } from "@angular/router";
+import { SectionBarService } from "./section-bar.service";
+import { SectionsService } from "../../shared/services/sections.service";
 
 @Component({
-    selector: 'app-shell-section-bar',
-    templateUrl: './section-bar.component.html'
+  selector: "app-shell-section-bar",
+  templateUrl: "./section-bar.component.html"
 })
 export class SectionBarComponent implements OnInit {
-    public href: string = "";
+  public href: string = "";
 
-      constructor(
-        @Inject(SectionBarService) public sectionBarService: SectionBarService,
-        private location: Location,
-        private router: Router
-    ) {
-        router.events.subscribe((val) => {
-            if(location.path() != ''){
-              this.href = location.path();
-            }
-        });
+  constructor(
+    @Inject(SectionBarService) public sectionBarService: SectionBarService,
+    private location: Location,
+    private router: Router
+  ) {
+    router.events.subscribe(val => {
+      if (location.path() != "") {
+        this.href = location.path();
       }
+    });
+  }
 
-    ngOnInit() {
-    }
+  ngOnInit() {}
 }

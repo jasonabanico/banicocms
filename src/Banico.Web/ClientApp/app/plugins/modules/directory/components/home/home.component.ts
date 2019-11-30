@@ -20,7 +20,6 @@ export class DirectoryHomeComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(SectionBarService) private sectionBarService: SectionBarService,
-    @Inject(SectionsService) private sectionsService: SectionsService,
     @Inject(DirectoryService) private directoryService: DirectoryService,
     private route: ActivatedRoute
   ) {}

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Subforum } from "../../entities/subforum";
 import { ForumSubforumService } from "../../services/subforum.service";
@@ -18,8 +18,8 @@ export class ForumHomeComponent {
   public canManageSubforum: boolean = false;
 
   constructor(
+    @Inject(SectionBarService) private sectionBarService: SectionBarService,
     private configsService: ConfigsService,
-    private sectionBarService: SectionBarService,
     private subforumService: ForumSubforumService,
     private authService: AuthService,
     private route: ActivatedRoute
