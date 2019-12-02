@@ -22,7 +22,7 @@ export class SectionsService {
     sectionTypeApiBaseUrl: string;
     itemApiBaseUrl: string;
 
-    public readonly PATH_DELIM: string = '_';
+    public readonly SEGMENT_DELIM: string = '_';
     public readonly TYPE_DELIM: string = '~';
     public readonly SECTION_DELIM: string = '*';
 
@@ -123,12 +123,12 @@ export class SectionsService {
         var pathUrlWithoutSection = pathUrl.split(this.TYPE_DELIM)[1];
         var output: string = '';
         if (pathUrlWithoutSection) {
-            var pathNodes = pathUrlWithoutSection.split(this.PATH_DELIM);
+            var pathNodes = pathUrlWithoutSection.split(this.SEGMENT_DELIM);
         
             var i: number;
             for (i = 0; i < (pathNodes.length - 1); i++) {
                 if (output) {
-                    output = output + this.PATH_DELIM;
+                    output = output + this.SEGMENT_DELIM;
                 }
                 output = output + pathNodes[i];
             }
@@ -141,7 +141,7 @@ export class SectionsService {
         if (pathUrl) {
             var pathUrlWithoutSection = pathUrl.split(this.TYPE_DELIM)[1];
             if (pathUrlWithoutSection && (pathUrlWithoutSection.length > 0)) {
-                var pathNodes = pathUrlWithoutSection.split(this.PATH_DELIM);
+                var pathNodes = pathUrlWithoutSection.split(this.SEGMENT_DELIM);
                 return pathNodes[pathNodes.length - 1];
             }
 

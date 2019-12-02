@@ -19,7 +19,7 @@ export class PluginService extends BaseService {
   accountUrl: string;
   pageSize = 40;
 
-  public readonly PATH_DELIM: string = "_";
+  public readonly SEGMENT_DELIM: string = "_";
   public readonly TYPE_DELIM: string = "~";
   public readonly SECTION_DELIM: string = "*";
 

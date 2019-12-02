@@ -15,7 +15,7 @@ namespace Banico.EntityFrameworkCore.Repositories
 {
     public class ContentItemRepository : IContentItemRepository
     {
-        private const char PATH_DELIM = '_';
+        private const char SEGMENT_DELIM = '_';
         private const char TYPE_DELIM = '~';
         private const char SECTION_DELIM = '*';
 
@@ -480,10 +480,10 @@ namespace Banico.EntityFrameworkCore.Repositories
                     var sectionFields = sectionItemsArray[i].Split(TYPE_DELIM);
                     var section = sectionFields[0];
                     var sectionValue = sectionFields[1];
-                    var pathFields = sectionValue.Split(PATH_DELIM);
+                    var segments = sectionValue.Split(SEGMENT_DELIM);
                     string pathUrl = string.Empty;
-                    string alias = pathFields[pathFields.Count() - 1];
-                    if (pathFields.Count() > 1)
+                    string alias = segments[segments.Count() - 1];
+                    if (segments.Count() > 1)
                     {
                         pathUrl = sectionValue.Substring(0, sectionValue.Length - alias.Length - 1);
                     }
@@ -508,7 +508,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                             var childrenPathUrl = "";
                             if (pathUrl != "")
                             {
-                                childrenPathUrl = pathUrl + PATH_DELIM + alias;
+                                childrenPathUrl = pathUrl + SEGMENT_DELIM + alias;
                             }
                             else
                             {
@@ -546,17 +546,17 @@ namespace Banico.EntityFrameworkCore.Repositories
         //         var typeAndSection = allSectionItemsArray[i].Split(TYPE_DELIM);
         //         List<string> innerList = new List<string>();
         //         var section = typeAndSection[0];
-        //         var sectionItems = typeAndSection[1].Split(PATH_DELIM);
+        //         var sectionItems = typeAndSection[1].Split(SEGMENT_DELIM);
         //         string pathUrl = "";
         //         for (int j = 0; j < sectionItems.Length; j++)
         //         {
         //             string alias = sectionItems[j];
-        //             Console.WriteLine("INNERLIST = " + j.ToString() + " " + pathUrl + PATH_DELIM + alias);
-        //             innerList.Add(pathUrl + PATH_DELIM + alias);
+        //             Console.WriteLine("INNERLIST = " + j.ToString() + " " + pathUrl + SEGMENT_DELIM + alias);
+        //             innerList.Add(pathUrl + SEGMENT_DELIM + alias);
 
         //             if (pathUrl.Length > 0)
         //             {
-        //                 pathUrl = pathUrl + PATH_DELIM;
+        //                 pathUrl = pathUrl + SEGMENT_DELIM;
         //             }
 
         //             pathUrl = pathUrl + alias;
@@ -659,9 +659,23 @@ namespace Banico.EntityFrameworkCore.Repositories
                     var section = sectionFields[0];
                     var sectionItemString = sectionFields[1];
 
+                    var segments = sectionItemString.Split(SEGMENT_DELIM);
+                    
+                    var pathUrl = string.Empty;
+                    for (int j = 0; j < segments.Count() - 1; j++)
+                    {
+                        if (!string.IsNullOrEmpty(pathUrl))
+                        {
+                            pathUrl += SEGMENT_DELIM;
+                        }
+                        pathUrl += segments[j];
+                    }
+                    var alias = segments[segments.Count() - 1];
+
                     var sectionItem = await (from si in _dbContext.SectionItems
                                         where si.Section == section &&
-                                            (si.PathUrl + si.Alias) == sectionItemString
+                                            si.PathUrl == pathUrl &&
+                                            si.Alias == alias
                                         select si).ToListAsync();
 
                     ContentSectionItem contentSectionItem = new ContentSectionItem();

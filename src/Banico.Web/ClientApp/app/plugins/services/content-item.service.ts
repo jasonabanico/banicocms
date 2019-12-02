@@ -30,7 +30,7 @@ export class ContentItemService {
   sectionTypeApiBaseUrl: string;
   itemApiBaseUrl: string;
 
-  public readonly PATH_DELIM: string = "_";
+  public readonly SEGMENT_DELIM: string = "_";
   public readonly TYPE_DELIM: string = "~";
   public readonly SECTION_DELIM: string = "*";
 

@@ -21,7 +21,7 @@ export class AdminSectionsSectionItemComponent implements OnInit {
   private sub: any;
   private file: any;
 
-  private readonly PATH_DELIM: string = "_";
+  private readonly SEGMENT_DELIM: string = "_";
   private readonly TYPE_DELIM: string = "~";
   private readonly SECTION_DELIM: string = "*";
 
@@ -100,7 +100,7 @@ export class AdminSectionsSectionItemComponent implements OnInit {
     this.newSectionItem.pathUrl = this.parentSectionItem.pathUrl;
     if (this.newSectionItem.pathUrl) {
       this.newSectionItem.pathUrl =
-        this.newSectionItem.pathUrl + this.PATH_DELIM;
+        this.newSectionItem.pathUrl + this.SEGMENT_DELIM;
     }
     this.newSectionItem.pathUrl =
       this.newSectionItem.pathUrl + this.parentSectionItem.alias;
@@ -110,7 +110,7 @@ export class AdminSectionsSectionItemComponent implements OnInit {
     this.newSectionItem.pathName = this.parentSectionItem.pathName;
     if (this.parentSectionItem.pathName > "") {
       this.newSectionItem.pathName =
-        this.newSectionItem.pathName + this.PATH_DELIM;
+        this.newSectionItem.pathName + this.SEGMENT_DELIM;
     }
     this.newSectionItem.pathName =
       this.newSectionItem.pathName + this.parentSectionItem.name;
@@ -154,14 +154,14 @@ export class AdminSectionsSectionItemComponent implements OnInit {
     this.newSectionItem.pathUrl = this.parentSectionItem.pathUrl;
     if (this.newSectionItem.pathUrl) {
       this.newSectionItem.pathUrl =
-        this.newSectionItem.pathUrl + this.PATH_DELIM;
+        this.newSectionItem.pathUrl + this.SEGMENT_DELIM;
     }
     this.newSectionItem.pathUrl =
       this.newSectionItem.pathUrl + this.parentSectionItem.alias;
     this.newSectionItem.pathName = this.parentSectionItem.pathName;
     if (this.newSectionItem.pathName) {
       this.newSectionItem.pathName =
-        this.newSectionItem.pathName + this.PATH_DELIM;
+        this.newSectionItem.pathName + this.SEGMENT_DELIM;
     }
     this.newSectionItem.pathName =
       this.newSectionItem.pathName + this.parentSectionItem.name;

@@ -12,7 +12,7 @@ export class SectionBarService {
   public pathUrlRoot: string;
   private inputPathUrl: string;
 
-  public readonly PATH_DELIM: string = "_";
+  public readonly SEGMENT_DELIM: string = "_";
   public readonly TYPE_DELIM: string = "~";
   public readonly SECTION_DELIM: string = "*";
 
@@ -109,7 +109,7 @@ export class SectionBarService {
     // set path url
     var sectionPathUrl: string = sectionBarItem.sectionItem.pathUrl;
     if (sectionPathUrl) {
-      sectionPathUrl = sectionPathUrl + this.PATH_DELIM;
+      sectionPathUrl = sectionPathUrl + this.SEGMENT_DELIM;
     }
     sectionPathUrl = sectionPathUrl + sectionBarItem.sectionItem.alias;
     this.setPathUrls(sectionBarItem, sectionPathUrl);
@@ -129,7 +129,7 @@ export class SectionBarService {
     var pathNames = new Array<string>();
 
     if (sectionBar.sectionItem.pathName) {
-      pathNames = sectionBar.sectionItem.pathName.split(this.PATH_DELIM);
+      pathNames = sectionBar.sectionItem.pathName.split(this.SEGMENT_DELIM);
     }
 
     var i: number;
@@ -144,7 +144,7 @@ export class SectionBarService {
 
   private setPathUrls(sectionBarItem: SectionBarItem, sectionPathUrl: string) {
     var pathUrls: string[];
-    pathUrls = sectionBarItem.sectionItem.pathUrl.split(this.PATH_DELIM);
+    pathUrls = sectionBarItem.sectionItem.pathUrl.split(this.SEGMENT_DELIM);
     var sectionName: string;
     if (sectionBarItem.section != null) {
       sectionName = sectionBarItem.section.name;
@@ -163,7 +163,7 @@ export class SectionBarService {
     var currentPathUrl: string = "";
     for (i = 0; i < pathUrls.length; i++) {
       if (i > 0) {
-        currentPathUrl = currentPathUrl + this.PATH_DELIM;
+        currentPathUrl = currentPathUrl + this.SEGMENT_DELIM;
       }
       currentPathUrl = currentPathUrl + pathUrls[i];
       var newCurrentPathUrl: string = this.fullPathUrl(
@@ -198,7 +198,7 @@ export class SectionBarService {
   private pathWithAlias(sectionItem: SectionItem): string {
     var pathUrlWithAlias: string = sectionItem.pathUrl;
     if (pathUrlWithAlias) {
-      pathUrlWithAlias = pathUrlWithAlias + this.PATH_DELIM;
+      pathUrlWithAlias = pathUrlWithAlias + this.SEGMENT_DELIM;
     }
     pathUrlWithAlias = pathUrlWithAlias + sectionItem.alias;
     return this.fullPathUrl(sectionItem.section, pathUrlWithAlias);

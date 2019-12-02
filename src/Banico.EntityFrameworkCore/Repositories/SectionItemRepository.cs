@@ -14,7 +14,7 @@ namespace Banico.EntityFrameworkCore.Repositories
     {
         public AppDbContext DbContext { get; set; }
 
-        private const char PATH_DELIM = '_';
+        private const char SEGMENT_DELIM = '_';
         private const char TYPE_DELIM = '~';
         private const char SECTION_DELIM = '*';
 
@@ -45,7 +45,7 @@ namespace Banico.EntityFrameworkCore.Repositories
 
                     typeList.Add(typePathItems[0]);
 
-                    string[] pathItems = typePathItems[1].Split(PATH_DELIM);
+                    string[] pathItems = typePathItems[1].Split(SEGMENT_DELIM);
 
                     aliasList.Add(pathItems[pathItems.Length - 1]);
 
@@ -54,7 +54,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                     {
                         if (!string.IsNullOrEmpty(currentPathUrl))
                         {
-                            currentPathUrl = currentPathUrl + PATH_DELIM;
+                            currentPathUrl = currentPathUrl + SEGMENT_DELIM;
                         }
                         currentPathUrl = currentPathUrl + pathItems[i];
                     }

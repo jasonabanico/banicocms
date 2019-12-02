@@ -9,7 +9,7 @@ import { SectionsService } from '../../../shared/services/sections.service';
 export class SectionsFileService {
     sectionApiBaseUrl: string;
 
-    readonly PATH_DELIM: string = '_';
+    readonly SEGMENT_DELIM: string = '_';
     readonly TYPE_DELIM: string = '~';
     readonly SECTION_DELIM: string = '*';
 
@@ -88,11 +88,11 @@ export class SectionsFileService {
                 sectionItem.parentId = parentId;
 
                 if (pathName) {
-                    pathName = sectionItem.pathName + this.PATH_DELIM;
+                    pathName = sectionItem.pathName + this.SEGMENT_DELIM;
                 }
 
                 if (path) {
-                    path = sectionItem.pathUrl + this.PATH_DELIM;
+                    path = sectionItem.pathUrl + this.SEGMENT_DELIM;
                 }
 
                 this.sectionService.addOrUpdateSectionItem(
@@ -115,11 +115,11 @@ export class SectionsFileService {
         } 
         else {
             if (pathName) {
-                pathName = pathName + this.PATH_DELIM;
+                pathName = pathName + this.SEGMENT_DELIM;
             }
 
             if (path) {
-                path = path + this.PATH_DELIM;
+                path = path + this.SEGMENT_DELIM;
             }
 
             this.ProcessPair(sectionItem,
