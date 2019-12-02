@@ -3,7 +3,7 @@ import { Injectable, Inject } from "@angular/core";
 import { SectionBarItem } from "../../entities/section-bar-item";
 import { SectionItem } from "../../entities/section-item";
 import { Section } from "../../entities/section";
-import { SectionsService } from "../../shared/services/sections.service";
+import { SectionsService } from "./sections.service";
 
 @Injectable()
 export class SectionBarService {

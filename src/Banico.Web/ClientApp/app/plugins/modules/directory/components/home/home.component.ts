@@ -2,7 +2,7 @@
 import { ActivatedRoute } from "@angular/router";
 import { Section } from "../../../../../entities/section";
 import { DirectoryItem } from "../../entities/directory-item";
-import { SectionBarService } from "../../../../../shell/section-bar/section-bar.service";
+import { SectionBarService } from "../../../../../shared/services/section-bar.service";
 import { SectionsService } from "../../../../../shared/services/sections.service";
 import { DirectoryService } from "../../services/directory.service";
 

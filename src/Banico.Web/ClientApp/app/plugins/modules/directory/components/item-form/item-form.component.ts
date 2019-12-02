@@ -2,7 +2,7 @@
 import { Router, ActivatedRoute } from "@angular/router";
 import { ContentItem } from "../../../../../entities/content-item";
 import { DirectoryItem } from "../../entities/directory-item";
-import { SectionBarService } from "../../../../../shell/section-bar/section-bar.service";
+import { SectionBarService } from "../../../../../shared/services/section-bar.service";
 import { DirectoryService } from "../../services/directory.service";
 
 @Component({

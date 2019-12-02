@@ -8,7 +8,6 @@ import { ModalComponent } from "./modal/modal.component";
 import { SectionBarComponent } from "./section-bar/section-bar.component";
 import { TopBarComponent } from "./top-bar/top-bar.component";
 import { SpinnerComponent } from "./spinner/spinner.component";
-import { SectionBarService } from "./section-bar/section-bar.service";
 import { AuthService } from "../shared/services/auth.service";
 
 @NgModule({
@@ -21,6 +20,6 @@ import { AuthService } from "../shared/services/auth.service";
     SpinnerComponent
   ],
   exports: [ModalComponent, SectionBarComponent, TopBarComponent],
-  providers: [SectionBarService, AuthService]
+  providers: [AuthService]
 })
 export class ShellModule {}

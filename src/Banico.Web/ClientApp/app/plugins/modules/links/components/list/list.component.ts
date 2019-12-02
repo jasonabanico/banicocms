@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Link } from '../../entities/link';
-import { SectionBarService } from '../../../../../shell/section-bar/section-bar.service';
+import { SectionBarService } from '../../../../../shared/services/section-bar.service';
 import { LinksService } from '../../services/links.service';
 
 @Component({

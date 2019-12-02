@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, OnDestroy, Inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { DirectoryItem } from "../../entities/directory-item";
-import { SectionBarService } from "../../../../../shell/section-bar/section-bar.service";
+import { SectionBarService } from "../../../../../shared/services/section-bar.service";
 import { SectionsService } from "../../../../../shared/services/sections.service";
 import { DirectoryService } from "../../services/directory.service";
 

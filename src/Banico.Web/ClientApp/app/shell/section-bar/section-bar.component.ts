@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
-import { SectionBarService } from "./section-bar.service";
+import { SectionBarService } from "../../shared/services/section-bar.service";
 import { SectionsService } from "../../shared/services/sections.service";
 
 @Component({

@@ -4,7 +4,7 @@ import { SafeUrl, DomSanitizer } from "@angular/platform-browser";
 import { ContentItem } from "../../../../../entities/content-item";
 import { DirectoryItem } from "../../entities/directory-item";
 import { DirectoryService } from "../../services/directory.service";
-import { SectionBarService } from "../../../../../shell/section-bar/section-bar.service";
+import { SectionBarService } from "../../../../../shared/services/section-bar.service";
 import { AppConfig } from "../../../../../../../Config/app.config";
 
 @Component({

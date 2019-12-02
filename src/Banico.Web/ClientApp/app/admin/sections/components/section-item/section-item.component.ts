@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SectionItem } from "../../../../entities/section-item";
-import { SectionBarService } from "../../../../shell/section-bar/section-bar.service";
+import { SectionBarService } from "../../../../shared/services/section-bar.service";
 import { SectionsService } from "../../../../shared/services/sections.service";
 import { SectionsFileService } from "../../services/sections-file.service";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";

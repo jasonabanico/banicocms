@@ -5,7 +5,7 @@ import { ForumSubforumService } from "../../services/subforum.service";
 import { AuthService } from "../../../../../shared/services/auth.service";
 import { ConfigsService } from "../../../../../shared/services/configs.service";
 import { map } from "rxjs/internal/operators/map";
-import { SectionBarService } from "../../../../../shell/section-bar/section-bar.service";
+import { SectionBarService } from "../../../../../shared/services/section-bar.service";
 
 @Component({
   selector: "app-plugins-forum-home",
