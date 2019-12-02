@@ -9,7 +9,7 @@ import { ForumHomeComponent } from "./components/home/home.component";
 
 const FORUM_ROUTES: Routes = [
   {
-    path: "new/:path",
+    path: "sub/new/:path",
     component: ForumSubforumFormComponent,
     canActivate: [AuthGuard],
     data: { module: "forum-subforum/manage" }

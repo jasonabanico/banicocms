@@ -53,15 +53,17 @@ export class ForumSubforumFormComponent implements OnInit {
       name: subforum.name,
       alias: subforum.alias,
       description: subforum.description,
-      sectionItems: ""
+      sectionItems: subforum.sectionItems
     });
-    this.cancelLink = "/forum/" + subforum.alias;
+    this.cancelLink =
+      "/forum/" + subforum.sectionItems + "?f=" + subforum.alias;
   }
 
   private setSection(contentSectionItems: string) {
     this.subforumForm.patchValue({
       sectionItems: contentSectionItems
     });
+    this.cancelLink = "/forum/" + contentSectionItems;
   }
 
   public save() {
