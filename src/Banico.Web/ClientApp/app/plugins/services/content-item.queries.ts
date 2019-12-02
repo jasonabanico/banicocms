@@ -176,6 +176,7 @@ export const ContentItemsQuery = gql`
       attribute18
       attribute19
       attribute20
+      sectionItems
       contentSectionItems {
         sectionItem {
           section
