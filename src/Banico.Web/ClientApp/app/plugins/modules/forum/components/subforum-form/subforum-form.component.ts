@@ -70,17 +70,20 @@ export class ForumSubforumFormComponent implements OnInit {
     // this.isRequesting = true;
     var id = this.subforumForm.value["id"];
     var alias = this.subforumForm.value["alias"];
+    var sectionItems = this.subforumForm.value["sectionItems"];
     this.subforumService
       .addOrUpdate(
         id,
         this.subforumForm.value["name"],
         alias,
         this.subforumForm.value["description"],
-        this.subforumForm.value["sectionItems"]
+        sectionItems
       )
       .subscribe(
         result => {
-          this.router.navigate(["/forum/" + alias]);
+          this.router.navigate(["/forum/sub/" + sectionItems], {
+            queryParams: { f: alias }
+          });
         }
         //errors =>  this.errors = errors
       );
