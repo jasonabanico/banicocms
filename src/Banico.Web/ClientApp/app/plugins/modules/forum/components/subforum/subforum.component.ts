@@ -41,12 +41,16 @@ export class ForumSubforumComponent implements OnInit {
   ngOnInit() {
     this.topicService.setPageSize(15);
     this.route.params.subscribe(params => {
-      if (params["alias"]) {
-        var alias = params["alias"];
-        this.subforumService.getByAlias(alias).subscribe(subforum => {
-          this.set(subforum);
-        });
-      }
+      var sectionItems = params["path"];
+
+      this.route.queryParams.subscribe(queryParams => {
+        var alias = queryParams["f"];
+        this.subforumService
+          .getByAliasAndSection(alias, sectionItems)
+          .subscribe(subforum => {
+            this.set(subforum);
+          });
+      });
     });
   }
 

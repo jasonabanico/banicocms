@@ -48,12 +48,17 @@ export class ForumSubforumService extends PluginService {
     );
   }
 
-  public getByAlias(alias: string): Observable<Subforum> {
-    return this.contentItemService.getByAlias("forum-subforum", alias).pipe(
-      map(item => {
-        return new Subforum(item);
-      })
-    );
+  public getByAliasAndSection(
+    alias: string,
+    sectionItems: string
+  ): Observable<Subforum> {
+    return this.contentItemService
+      .getByAliasAndSection("forum-subforum", alias, sectionItems)
+      .pipe(
+        map(item => {
+          return new Subforum(item);
+        })
+      );
   }
 
   public setSubforumUser(subforum: Subforum) {

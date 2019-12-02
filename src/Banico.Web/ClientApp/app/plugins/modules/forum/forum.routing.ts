@@ -9,19 +9,19 @@ import { ForumHomeComponent } from "./components/home/home.component";
 
 const FORUM_ROUTES: Routes = [
   {
-    path: "new",
+    path: "new/:path",
     component: ForumSubforumFormComponent,
     canActivate: [AuthGuard],
     data: { module: "forum-subforum/manage" }
   },
   {
-    path: "edit/:id",
+    path: "sub/edit/:id",
     component: ForumSubforumFormComponent,
     canActivate: [AuthGuard],
     data: { module: "forum-subforum/manage" }
   },
   {
-    path: ":alias",
+    path: "sub/:path",
     component: ForumSubforumComponent,
     canActivate: [AuthGuard],
     data: { module: "forum-subforum/view" }
@@ -43,6 +43,12 @@ const FORUM_ROUTES: Routes = [
     component: ForumTopicComponent,
     canActivate: [AuthGuard],
     data: { module: "forum-topic/view" }
+  },
+  {
+    path: ":path",
+    component: ForumHomeComponent,
+    canActivate: [AuthGuard],
+    data: { module: "forum-subforum/view" }
   },
   {
     path: "",

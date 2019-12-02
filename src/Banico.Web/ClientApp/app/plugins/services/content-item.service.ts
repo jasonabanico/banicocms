@@ -82,6 +82,26 @@ export class ContentItemService {
     );
   }
 
+  public getByAliasAndSection(
+    module: string,
+    alias: string,
+    sectionItems: string
+  ): Observable<ContentItem> {
+    const contentItemSearch = new ContentItemSearch();
+    contentItemSearch.module = module;
+    contentItemSearch.alias = alias;
+    contentItemSearch.sectionItems = sectionItems;
+    return this.getAll(contentItemSearch).pipe(
+      map(items => {
+        if (items.length >= 1) {
+          return items[0];
+        } else {
+          return null;
+        }
+      })
+    );
+  }
+
   public getProfileById(userId: string): Observable<ContentItem> {
     const contentItemSearch = new ContentItemSearch();
     contentItemSearch.module = "profile";
@@ -157,19 +177,17 @@ export class ContentItemService {
     return result;
   }
 
-  public getOne(
-    contentItemSearch: ContentItemSearch
-    ): Observable<ContentItem> {
-      var result = this.getAll(contentItemSearch).pipe(
-        map(result => {
-          if (result && result.length > 0) {
-            return result[0];
-          }
-        })
-      );
+  public getOne(contentItemSearch: ContentItemSearch): Observable<ContentItem> {
+    var result = this.getAll(contentItemSearch).pipe(
+      map(result => {
+        if (result && result.length > 0) {
+          return result[0];
+        }
+      })
+    );
 
-      return result;
-    }
+    return result;
+  }
 
   public getAll(
     contentItemSearch: ContentItemSearch

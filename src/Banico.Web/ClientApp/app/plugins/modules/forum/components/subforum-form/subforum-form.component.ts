@@ -39,10 +39,8 @@ export class ForumSubforumFormComponent implements OnInit {
           this.set(subforum);
         });
       }
-    });
 
-    this.route.queryParams.subscribe(params => {
-      var contentSectionItems = params["section"];
+      var contentSectionItems = params["path"];
       if (contentSectionItems) {
         this.setSection(contentSectionItems);
       }
