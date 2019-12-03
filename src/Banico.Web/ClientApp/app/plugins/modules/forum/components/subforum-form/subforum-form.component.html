@@ -10,7 +10,7 @@
         (ngSubmit)="save()"
       >
         <input type="hidden" id="id" name="id" formControlName="id" />
-        <div class="form-group">
+        <div class="form-group" *ngIf="isSectioned">
           <div class="col-md-10">
             <input
               class="form-control"

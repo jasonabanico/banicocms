@@ -11,6 +11,7 @@ import { ForumSubforumService } from "../../services/subforum.service";
   styleUrls: ["./subforum-form.component.scss"]
 })
 export class ForumSubforumFormComponent implements OnInit {
+  public isSectioned: boolean = false;
   public cancelLink: string;
 
   public subforumForm: FormGroup = this.fb.group({
@@ -42,6 +43,7 @@ export class ForumSubforumFormComponent implements OnInit {
 
       var contentSectionItems = params["path"];
       if (contentSectionItems) {
+        this.isSectioned = true;
         this.setSection(contentSectionItems);
       }
     });
