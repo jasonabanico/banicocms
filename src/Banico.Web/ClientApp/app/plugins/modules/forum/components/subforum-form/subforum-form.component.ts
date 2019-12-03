@@ -56,7 +56,7 @@ export class ForumSubforumFormComponent implements OnInit {
       sectionItems: subforum.sectionItems
     });
     this.cancelLink =
-      "/forum/" + subforum.sectionItems + "?f=" + subforum.alias;
+      "/forum/sub/" + subforum.alias + "/" + subforum.sectionItems;
   }
 
   private setSection(contentSectionItems: string) {

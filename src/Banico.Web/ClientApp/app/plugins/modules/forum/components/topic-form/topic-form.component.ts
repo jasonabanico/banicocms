@@ -52,7 +52,8 @@ export class ForumTopicFormComponent implements OnInit {
 
   public setSubforum(subforum: Subforum) {
     this.subforum = subforum;
-    this.cancelLink = "/forum/" + subforum.alias;
+    this.cancelLink =
+      "/forum/sub/" + subforum.alias + "/" + subforum.sectionItems;
     this.topicForm.patchValue({
       subforumId: subforum.id
     });

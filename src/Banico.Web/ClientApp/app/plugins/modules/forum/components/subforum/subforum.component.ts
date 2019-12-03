@@ -64,7 +64,7 @@ export class ForumSubforumComponent implements OnInit {
   }
 
   public edit() {
-    this.router.navigate(["/forum/edit/" + this.subforum.id]);
+    this.router.navigate(["/forum/sub/edit/" + this.subforum.id]);
   }
 
   public moreTopics() {

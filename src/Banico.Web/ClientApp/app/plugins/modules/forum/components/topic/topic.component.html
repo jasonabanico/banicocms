@@ -2,7 +2,9 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item active" aria-current="page">
       / <a href="/forum">forum</a> /
-      <a href="/forum/{{ subforum?.alias }}">{{ subforum?.alias }}</a>
+      <a href="/forum/sub/{{ subforum?.alias }}/{{ subforum?.sectionItems }}">{{
+        subforum?.alias
+      }}</a>
     </li>
   </ol>
 </nav>
