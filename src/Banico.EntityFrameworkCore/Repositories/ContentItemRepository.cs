@@ -612,7 +612,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             var aliasExists = await this.AliasExists(item);
             if (aliasExists)
             {
-                throw new ArgumentException("Alias " + item + " exists for this module.");
+                throw new ArgumentException("Alias " + item.Alias + " exists for this module.");
             }
 
             item.Id = Guid.NewGuid().ToString();
