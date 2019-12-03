@@ -21,7 +21,7 @@ const FORUM_ROUTES: Routes = [
     data: { module: "forum-subforum/manage" }
   },
   {
-    path: "sub/:path",
+    path: "sub/:alias/:path",
     component: ForumSubforumComponent,
     canActivate: [AuthGuard],
     data: { module: "forum-subforum/view" }

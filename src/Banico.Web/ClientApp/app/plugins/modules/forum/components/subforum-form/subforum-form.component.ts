@@ -81,9 +81,7 @@ export class ForumSubforumFormComponent implements OnInit {
       )
       .subscribe(
         result => {
-          this.router.navigate(["/forum/sub/" + sectionItems], {
-            queryParams: { f: alias }
-          });
+          this.router.navigate(["/forum/sub/" + alias + "/" + sectionItems]);
         }
         //errors =>  this.errors = errors
       );
