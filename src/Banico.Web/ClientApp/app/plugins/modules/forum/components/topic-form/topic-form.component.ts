@@ -62,11 +62,14 @@ export class ForumTopicFormComponent implements OnInit {
   private set(topic: Topic) {
     this.topicForm.patchValue({
       id: topic.id,
-      subforumId: topic.subForumId,
+      subforumId: topic.subforumId,
       title: topic.title,
       text: topic.text
     });
     this.cancelLink = "/forum/topic/" + topic.id;
+    this.subforumService.get(topic.subforumId).subscribe(subforum => {
+      this.setSubforum(subforum);
+    });
   }
 
   public save() {

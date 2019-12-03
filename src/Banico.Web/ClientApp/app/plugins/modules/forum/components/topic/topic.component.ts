@@ -55,7 +55,7 @@ export class ForumTopicComponent implements OnInit {
     this.topic = topic;
     this.topicService.setTopicUser(topic);
     this.subforumService
-      .get(topic.subForumId)
+      .get(topic.subforumId)
       .subscribe(subforum => (this.subforum = subforum));
     if (topic.postCount > 0) {
       this.page = Math.floor(topic.postCount / this.postService.pageSize);

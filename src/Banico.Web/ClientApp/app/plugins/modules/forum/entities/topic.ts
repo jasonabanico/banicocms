@@ -6,7 +6,7 @@ export class Topic {
   title: string;
   text: string;
   snippet: string;
-  subForumId: string;
+  subforumId: string;
   userId: string;
   username: string;
   avatarHash: string;
@@ -23,7 +23,7 @@ export class Topic {
       this.text = contentItem.content;
       this.snippet = contentItem.snippet;
       this.userId = contentItem.createdBy;
-      this.subForumId = contentItem.parentId;
+      this.subforumId = contentItem.parentId;
       this.createdDate = contentItem.createdDate;
       this.createdDateTicks = contentItem.createdDateTicks;
       this.updatedDate = contentItem.updatedDate;
@@ -39,7 +39,7 @@ export class Topic {
     output.id = this.id;
     output.name = this.title;
     output.content = this.text;
-    output.parentId = this.subForumId;
+    output.parentId = this.subforumId;
 
     return output;
   }

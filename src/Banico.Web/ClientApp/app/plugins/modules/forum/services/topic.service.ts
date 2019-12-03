@@ -67,7 +67,7 @@ export class ForumTopicService extends PluginService {
     let topic: Topic = new Topic(null);
 
     topic.id = id;
-    topic.subForumId = subforumId;
+    topic.subforumId = subforumId;
     topic.title = title;
     topic.text = text;
 
