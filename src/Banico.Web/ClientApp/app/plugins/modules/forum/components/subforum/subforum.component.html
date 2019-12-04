@@ -54,7 +54,7 @@
   </div>
 </div>
 
-<table class="table">
+<table class="table table-hover">
   <thead>
     <tr>
       <th scope="col" colspan="2">Topic</th>
@@ -68,11 +68,17 @@
         <a href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a>
       </td>
       <td>
-        {{ topic.snippet }}
+        <a href="/forum/topic/{{ topic.id }}">{{ topic.snippet }}</a>
       </td>
-      <td>{{ topic.formattedDate() }} ({{ topic.fromNow() }})</td>
       <td>
-        {{ topic.postCount }}
+        <a href="/forum/topic/{{ topic.id }}"
+          >{{ topic.formattedDate() }} ({{ topic.fromNow() }})</a
+        >
+      </td>
+      <td>
+        <a href="/forum/topic/{{ topic.id }}">
+          {{ topic.postCount }}
+        </a>
       </td>
     </tr>
   </tbody>
