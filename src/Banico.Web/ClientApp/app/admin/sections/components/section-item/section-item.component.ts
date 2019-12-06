@@ -1,10 +1,11 @@
 ﻿import { Component, OnInit, Inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { ToastrService } from "../../../../shared/services/toastr.service";
 import { SectionItem } from "../../../../entities/section-item";
 import { SectionBarService } from "../../../../shared/services/section-bar.service";
 import { SectionsService } from "../../../../shared/services/sections.service";
 import { SectionsFileService } from "../../services/sections-file.service";
-import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-admin-sections-section-item",
@@ -31,6 +32,7 @@ export class AdminSectionsSectionItemComponent implements OnInit {
   });
 
   public constructor(
+    private toastrService: ToastrService,
     private sectionBarService: SectionBarService,
     private sectionsService: SectionsService,
     private sectionFileService: SectionsFileService,
@@ -140,11 +142,11 @@ export class AdminSectionsSectionItemComponent implements OnInit {
 
   private saveSectionItemSuccess(sectionItem: SectionItem) {
     if (sectionItem.id != "") {
-      alert("Saved.");
       this.sectionBarService.addSectionItem(0, sectionItem);
       this.resetNewSectionItem();
+      window.location.reload();
     } else {
-      alert("Save failed.");
+      this.toastrService.showErrorMessage("Save failed.");
     }
   }
 
