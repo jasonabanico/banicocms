@@ -18,7 +18,7 @@ using Banico.Api.Models;
 namespace Banico.Api.Controllers
 {
     [Route("/api/[controller]")] 
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class GraphQLController : Controller
     {
         private readonly ISchema _schema;

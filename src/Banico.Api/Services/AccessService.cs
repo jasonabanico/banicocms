@@ -142,6 +142,11 @@ namespace Banico.Api.Services
         {
             var user = await this.GetUser();
 
+            if (user == null)
+            {
+                return string.Empty;
+            }
+
             if (!string.IsNullOrEmpty(user.Tenant))
             {
                 return user.Tenant;
