@@ -90,7 +90,8 @@ namespace Banico.Api.Models
                         }
                         else
                         {
-                            throw new UnauthorizedAccessException("Add or update of content module " + contentItem.Module + " is not allowed.");
+                            var userId = _accessService.GetUserId();
+                            throw new UnauthorizedAccessException("Add or update of content module " + contentItem.Module + " is not allowed for user " + userId + ".");
                         }
                     }
                     else

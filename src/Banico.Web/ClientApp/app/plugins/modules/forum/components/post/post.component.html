@@ -85,6 +85,7 @@
           ></app-plugins-forum-comment>
         </ng-container>
         <app-plugins-forum-comment-form
+          *ngIf="userId"
           [postId]="post?.id"
           (saved)="onCommentSave($event)"
         ></app-plugins-forum-comment-form>

@@ -23,20 +23,15 @@
           >@{{ comment?.username }}</a
         >
         {{ comment?.text }}<br />
-        <a
-          *ngIf="comment?.userId == userId"
-          href="javascript:;"
-          (click)="edit()"
-          >Edit</a
-        >
-        &bull;
-        <a
-          *ngIf="comment?.userId == userId || isAdmin"
-          href="javascript:;"
-          (click)="delete()"
-          >Delete</a
-        >
-        &bull; {{ comment?.formattedDate() }} ({{ comment?.fromNow() }})
+        <span *ngIf="comment?.userId == userId">
+          <a href="javascript:;" (click)="edit()">Edit</a>
+          &bull;
+        </span>
+        <span *ngIf="comment?.userId == userId || isAdmin">
+          <a href="javascript:;" (click)="delete()">Delete</a>
+          &bull;
+        </span>
+        {{ comment?.formattedDate() }} ({{ comment?.fromNow() }})
       </p>
     </div>
   </div>

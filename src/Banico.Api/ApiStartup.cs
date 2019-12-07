@@ -13,6 +13,8 @@ using Banico.Core.Repositories;
 using Banico.EntityFrameworkCore.Repositories;
 using Banico.Api.Models;
 using Banico.Api.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Banico.Api
 {
@@ -43,8 +45,16 @@ namespace Banico.Api
 
       services.AddGraphQL(_ =>
       {
-          _.EnableMetrics = true;
-          _.ExposeExceptions = true;
+        _.EnableMetrics = true;
+        _.ExposeExceptions = true;
+      });
+
+      services.AddAuthorization(configuration =>
+      {
+        configuration.AddPolicy("AnonymousOrJwt", new AuthorizationPolicyBuilder()
+          .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+          .RequireAssertion(_ => true)
+          .Build());
       });
       //.AddUserContextBuilder(httpContext => new GraphQLUserContext { User = httpContext.User });
     }
