@@ -60,13 +60,13 @@ const FORUM_ROUTES: Routes = [
     path: ":path",
     component: ForumHomeComponent,
     canActivate: [AuthGuard],
-    data: { module: "forum-subforum/view" }
+    data: { module: "forum-home/view" }
   },
   {
     path: "",
     component: ForumHomeComponent,
     canActivate: [AuthGuard],
-    data: { module: "forum-subforum/view" }
+    data: { module: "forum-home/view" }
   }
 ];
 
