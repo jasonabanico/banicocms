@@ -1,11 +1,9 @@
 ﻿{
   "compilerOptions": {
     "moduleResolution": "node",
-    "module": "es2015",
+    "module": "esnext",
     "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types"],
     "alwaysStrict": true,
     "noImplicitAny": false,
     "sourceMap": true,
@@ -14,16 +12,8 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "allowUnreachableCode": false,
-    "lib": [
-      "es2016",
-      "dom"
-    ],
-    "types": [ 
-      "jasmine",
-      "node" 
-    ]
+    "lib": ["es2016", "dom"],
+    "types": ["jasmine", "node"]
   },
-  "include": [
-    "ClientApp"
-  ]
+  "include": ["ClientApp"]
 }
