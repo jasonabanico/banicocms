@@ -81,7 +81,7 @@ namespace Banico.Api.Services
 
         public async Task<bool> Allowed(ContentItem contentItem)
         {
-            return await this.Allowed(contentItem.Module, true);
+            return await this.Allowed(contentItem.Module, contentItem.Type, true);
         }
 
         public async Task<bool> IsEnabled(string moduleAndFunction)
@@ -103,12 +103,12 @@ namespace Banico.Api.Services
             return result;
         }
 
-        public async Task<bool> Allowed(string module, bool enabledRequired)
+        public async Task<bool> Allowed(string module, string type, bool enabledRequired)
         {
             this.WriteDebugMessage("AccessService: Checking if allowed " + module);
             if (!enabledRequired || await this.IsEnabled(module))
             {
-                List<Config> config = await _configRepository.Get("", module + "/manage", "canActivate");
+                List<Config> config = await _configRepository.Get("", module + "-" + type + "/manage", "canActivate");
 
                 if (config.Count > 0)
                 {

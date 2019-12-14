@@ -32,7 +32,8 @@ export class ForumTopicService extends PluginService {
     offset: number
   ): Observable<Topic[]> {
     const contentItemSearch = new ContentItemSearch();
-    contentItemSearch.module = "forum-topic";
+    contentItemSearch.module = "forum";
+    contentItemSearch.type = "topic";
     contentItemSearch.parentId = subforumId;
     contentItemSearch.page = page;
     contentItemSearch.pageSize = this.pageSize;

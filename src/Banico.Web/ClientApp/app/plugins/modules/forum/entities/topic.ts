@@ -17,7 +17,11 @@ export class Topic {
   postCount: number;
 
   constructor(private contentItem: ContentItem) {
-    if (contentItem && contentItem.module == "forum-topic") {
+    if (
+      contentItem &&
+      contentItem.module == "forum" &&
+      contentItem.type == "topic"
+    ) {
       this.id = contentItem.id;
       this.title = contentItem.name;
       this.text = contentItem.content;
@@ -35,7 +39,8 @@ export class Topic {
   public toContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = "forum-topic";
+    output.module = "forum";
+    output.type = "topic";
     output.id = this.id;
     output.name = this.title;
     output.content = this.text;

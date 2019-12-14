@@ -11,10 +11,9 @@ namespace Banico.Core.Entities
     {
         public string Alias { get; set; }
         public string Module { get; private set; }
-
+        public string Type {get; private set; }
         public string SectionItems { get; set; }
         public IEnumerable<ContentSectionItem> ContentSectionItems { get; set; }
-
         public string Content { get; set; }
 
         // Attributes
@@ -91,14 +90,15 @@ namespace Banico.Core.Entities
 
         }
         
-        public ContentItem(string module)
+        public ContentItem(string module, string type)
         {
             this.Module = module;
+            this.Type = type;
         }
 
         public ContentItem Clone()
         {
-            ContentItem newItem = new ContentItem(this.Module);
+            ContentItem newItem = new ContentItem(this.Module, this.Type);
             newItem.Clone(this);
             return newItem;
         }
@@ -106,13 +106,13 @@ namespace Banico.Core.Entities
         public void Clone(ContentItem item)
         {
             this.Module = item.Module;
+            this.Type = item.Type;
             this.Tenant = item.Tenant;
             this.Id = item.Id;
             this.ParentId = item.ParentId;
             this.ChildCount = item.ChildCount;
             this.SectionItems = item.SectionItems;
             this.ContentSectionItems = item.ContentSectionItems;
-            this.Module = item.Module;
 
             this.CreatedBy = item.CreatedBy;
             this.CreatedDate = item.CreatedDate;

@@ -17,7 +17,7 @@ export class PageService extends PluginService {
   }
 
   public getByAlias(alias: string): Observable<Page> {
-    return this.contentItemService.getByAlias("page", alias).pipe(
+    return this.contentItemService.getByAlias("page", "", alias).pipe(
       map(item => {
         return new Page(item);
       })

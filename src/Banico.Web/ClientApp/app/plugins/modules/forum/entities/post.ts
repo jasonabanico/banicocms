@@ -15,7 +15,11 @@ export class Post {
   commentCount: number;
 
   constructor(private contentItem: ContentItem) {
-    if (contentItem && contentItem.module == "forum-post") {
+    if (
+      contentItem &&
+      contentItem.module == "forum" &&
+      contentItem.type == "post"
+    ) {
       this.id = contentItem.id;
       this.text = contentItem.content;
       this.topicId = contentItem.parentId;
@@ -31,7 +35,8 @@ export class Post {
   public toContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = "forum-post";
+    output.module = "forum";
+    output.type = "post";
     output.id = this.id;
     output.content = this.text;
     output.parentId = this.topicId;

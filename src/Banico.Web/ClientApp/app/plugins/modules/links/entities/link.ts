@@ -1,4 +1,4 @@
-import { ContentItem } from '../../../../entities/content-item';
+import { ContentItem } from "../../../../entities/content-item";
 
 export class Link {
   id: string;
@@ -8,7 +8,7 @@ export class Link {
   url: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module === 'link')) {
+    if (contentItem && contentItem.module === "link") {
       this.id = contentItem.id;
       this.name = contentItem.name;
       this.sectionItems = contentItem.sectionItems;
@@ -20,7 +20,7 @@ export class Link {
   public toContentItem(): ContentItem {
     const output: ContentItem = new ContentItem();
 
-    output.module = 'link';
+    output.module = "link";
     output.id = this.id;
     output.name = this.name;
     output.sectionItems = this.sectionItems;

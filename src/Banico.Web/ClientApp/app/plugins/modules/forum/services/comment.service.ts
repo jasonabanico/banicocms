@@ -23,7 +23,8 @@ export class ForumCommentService extends PluginService {
     offset: number
   ): Observable<Comment[]> {
     const contentItemSearch = new ContentItemSearch();
-    contentItemSearch.module = "forum-comment";
+    contentItemSearch.module = "forum";
+    contentItemSearch.type = "comment";
     contentItemSearch.parentId = postId;
     contentItemSearch.page = page;
     contentItemSearch.pageSize = this.pageSize;

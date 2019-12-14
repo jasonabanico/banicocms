@@ -14,7 +14,11 @@ export class Comment {
   updatedDateTicks: number;
 
   constructor(private contentItem: ContentItem) {
-    if (contentItem && contentItem.module == "forum-comment") {
+    if (
+      contentItem &&
+      contentItem.module == "forum" &&
+      contentItem.type == "comment"
+    ) {
       this.id = contentItem.id;
       this.text = contentItem.content;
       this.postId = contentItem.parentId;
@@ -29,7 +33,8 @@ export class Comment {
   public toContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = "forum-comment";
+    output.module = "forum";
+    output.type = "comment";
     output.id = this.id;
     output.content = this.text;
     output.parentId = this.postId;

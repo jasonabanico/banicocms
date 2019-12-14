@@ -106,6 +106,9 @@ namespace Banico.Api.Models
                         Name = "module" 
                     },
                     new QueryArgument<StringGraphType> { 
+                        Name = "type" 
+                    },
+                    new QueryArgument<StringGraphType> { 
                         Name = "parentId" 
                     },
                     new QueryArgument<StringGraphType> { 
@@ -192,6 +195,7 @@ namespace Banico.Api.Models
                         context.GetArgument<string>("name"),
                         context.GetArgument<string>("alias"),
                         context.GetArgument<string>("module"),
+                        context.GetArgument<string>("type"),
                         context.GetArgument<string>("parentId"),
                         context.GetArgument<string>("createdBy"),
                         context.GetArgument<string>("sectionItems"),
@@ -235,6 +239,9 @@ namespace Banico.Api.Models
                     },
                     new QueryArgument<StringGraphType> { 
                         Name = "module" 
+                    },
+                    new QueryArgument<StringGraphType> { 
+                        Name = "type" 
                     },
                     new QueryArgument<StringGraphType> { 
                         Name = "parentId" 
@@ -336,6 +343,7 @@ namespace Banico.Api.Models
                         context.GetArgument<string>("name"),
                         context.GetArgument<string>("alias"),
                         context.GetArgument<string>("module"),
+                        context.GetArgument<string>("type"),
                         context.GetArgument<string>("parentId"),
                         context.GetArgument<string>("createdBy"),
                         context.GetArgument<string>("sectionItems"),

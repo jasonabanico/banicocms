@@ -17,7 +17,7 @@ export class ContactService extends PluginService {
   }
 
   public getByAlias(alias: string): Observable<Contact> {
-    return this.contentItemService.getByAlias("contact", alias).pipe(
+    return this.contentItemService.getByAlias("contact", "", alias).pipe(
       map(item => {
         return new Contact(item);
       })

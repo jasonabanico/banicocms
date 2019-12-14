@@ -18,7 +18,7 @@ export class FaqService extends PluginService {
   }
 
   public getByAlias(alias: string): Observable<Faq> {
-    return this.contentItemService.getByAlias("faq", alias).pipe(
+    return this.contentItemService.getByAlias("faq", "", alias).pipe(
       map(item => {
         return new Faq(item);
       })

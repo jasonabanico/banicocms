@@ -53,6 +53,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             string name,
             string alias,
             string module,
+            string type,
             string parentId,
             string createdBy,
             string sectionItems,
@@ -84,6 +85,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                 where 
                     (c.Id == id || string.IsNullOrEmpty(id)) &&
                     (c.Module == module || string.IsNullOrEmpty(module)) && 
+                    (c.Type == type || string.IsNullOrEmpty(type)) &&
                     (c.Alias == alias || string.IsNullOrEmpty(alias)) && 
                     (c.ParentId == parentId || string.IsNullOrEmpty(parentId)) &&
                     (c.Name == name || string.IsNullOrEmpty(name)) && 
@@ -224,6 +226,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             string name,
             string alias,
             string module,
+            string type,
             string parentId,
             string createdBy,
             string sectionItems,
@@ -259,6 +262,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                 where 
                     (c.Id == id || string.IsNullOrEmpty(id)) &&
                     (c.Module == module || string.IsNullOrEmpty(module)) && 
+                    (c.Type == type || string.IsNullOrEmpty(type)) && 
                     (c.Alias == alias || string.IsNullOrEmpty(alias)) && 
                     (c.ParentId == parentId || string.IsNullOrEmpty(parentId)) &&
                     (c.Name == name || string.IsNullOrEmpty(name)) && 
@@ -639,6 +643,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             var matchingAlias = from content in _dbContext.ContentItems
                 where content.Alias == item.Alias &&
                     content.Module == item.Module &&
+                    content.Type == item.Type &&
                     (content.SectionItems == item.SectionItems ||
                     (content.SectionItems == null && item.SectionItems == null)) &&
                     (content.Tenant == item.Tenant || content.Tenant == "all" || item.Tenant == "all")
@@ -694,7 +699,7 @@ namespace Banico.EntityFrameworkCore.Repositories
 
         public async Task<ContentItem> Update(ContentItem item, string userID, bool isAdmin)
         {
-            var updateItem = (await this.Get("", item.Id, "", "", "", "", "", "", "", "", "", "",
+            var updateItem = (await this.Get("", item.Id, "", "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
             "", 0, 1, 0))
                 .FirstOrDefault();
@@ -751,7 +756,7 @@ namespace Banico.EntityFrameworkCore.Repositories
 
         public async Task<ContentItem> Delete(string id, string userId, bool isAdmin)
         {
-            var item = (await this.Get("", id, "", "", "", "", "", "", "", "", "", "",
+            var item = (await this.Get("", id, "", "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
             "", 0, 1, 0))
                 .FirstOrDefault();
@@ -787,13 +792,13 @@ namespace Banico.EntityFrameworkCore.Repositories
             string alias, 
             string email)
         {
-            var profileItems = await this.Get(tenant, "", "", alias, "profile", "", userId, "",
+            var profileItems = await this.Get(tenant, "", "", alias, "profile", "", "", userId, "",
                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", "", false, false, "", 0, 1, 0);
 
             if (profileItems.Count == 0)
             {
-                ContentItem profileItem = new ContentItem("profile");
+                ContentItem profileItem = new ContentItem("profile", "");
                 profileItem.Tenant = tenant;
                 profileItem.Id = Guid.NewGuid().ToString();
                 profileItem.Alias = alias;

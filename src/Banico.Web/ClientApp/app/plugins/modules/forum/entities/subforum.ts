@@ -14,7 +14,11 @@ export class Subforum {
   topicCount: number;
 
   constructor(private contentItem: ContentItem) {
-    if (contentItem && contentItem.module == "forum-subforum") {
+    if (
+      contentItem &&
+      contentItem.module == "forum" &&
+      contentItem.type == "subforum"
+    ) {
       this.id = contentItem.id;
       this.name = contentItem.name;
       this.alias = contentItem.alias;
@@ -30,7 +34,8 @@ export class Subforum {
   public toContentItem(): ContentItem {
     let output: ContentItem = new ContentItem();
 
-    output.module = "forum-subforum";
+    output.module = "forum";
+    output.type = "subforum";
     output.id = this.id;
     output.name = this.name;
     output.alias = this.alias;

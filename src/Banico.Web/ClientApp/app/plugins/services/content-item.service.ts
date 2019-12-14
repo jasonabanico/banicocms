@@ -67,9 +67,14 @@ export class ContentItemService {
     );
   }
 
-  public getByAlias(module: string, alias: string): Observable<ContentItem> {
+  public getByAlias(
+    module: string,
+    type: string,
+    alias: string
+  ): Observable<ContentItem> {
     const contentItemSearch = new ContentItemSearch();
     contentItemSearch.module = module;
+    contentItemSearch.type = type;
     contentItemSearch.alias = alias;
     return this.getAll(contentItemSearch).pipe(
       map(items => {
@@ -84,11 +89,13 @@ export class ContentItemService {
 
   public getByAliasAndSection(
     module: string,
+    type: string,
     alias: string,
     sectionItems: string
   ): Observable<ContentItem> {
     const contentItemSearch = new ContentItemSearch();
     contentItemSearch.module = module;
+    contentItemSearch.type = type;
     contentItemSearch.alias = alias;
     contentItemSearch.sectionItems = sectionItems;
     return this.getAll(contentItemSearch).pipe(
@@ -141,6 +148,7 @@ export class ContentItemService {
           name: contentItemSearch.name,
           alias: contentItemSearch.alias,
           module: contentItemSearch.module,
+          type: contentItemSearch.type,
           parentId: contentItemSearch.parentId,
           createdBy: contentItemSearch.createdBy,
           sectionItems: contentItemSearch.sectionItems,
@@ -200,6 +208,7 @@ export class ContentItemService {
           name: contentItemSearch.name,
           alias: contentItemSearch.alias,
           module: contentItemSearch.module,
+          type: contentItemSearch.type,
           parentId: contentItemSearch.parentId,
           createdBy: contentItemSearch.createdBy,
           sectionItems: contentItemSearch.sectionItems,
@@ -267,6 +276,7 @@ export class ContentItemService {
           name: contentItem.name,
           alias: contentItem.alias,
           module: contentItem.module,
+          type: contentItem.type,
           parentId: contentItem.parentId,
           sectionItems: contentItem.sectionItems,
           content: contentItem.content,

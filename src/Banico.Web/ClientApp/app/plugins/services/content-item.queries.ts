@@ -6,6 +6,7 @@ export const ContentItemsCountQuery = gql`
     $name: String
     $alias: String
     $module: String
+    $type: String
     $parentId: String
     $createdBy: String
     $sectionItems: String
@@ -38,6 +39,7 @@ export const ContentItemsCountQuery = gql`
       name: $name
       alias: $alias
       module: $module
+      type: $type
       parentId: $parentId
       createdBy: $createdBy
       sectionItems: $sectionItems
@@ -76,6 +78,7 @@ export const ContentItemsQuery = gql`
     $name: String
     $alias: String
     $module: String
+    $type: String
     $parentId: String
     $createdBy: String
     $sectionItems: String
@@ -112,6 +115,7 @@ export const ContentItemsQuery = gql`
       name: $name
       alias: $alias
       module: $module
+      type: $type
       parentId: $parentId
       createdBy: $createdBy
       sectionItems: $sectionItems
@@ -147,6 +151,7 @@ export const ContentItemsQuery = gql`
       name
       alias
       module
+      type
       parentId
       childCount
       createdBy

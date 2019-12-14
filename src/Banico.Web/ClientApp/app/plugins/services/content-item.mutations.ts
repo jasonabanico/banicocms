@@ -6,6 +6,7 @@ export const AddOrUpdateContentItemMutation = gql`
     $name: String
     $alias: String
     $module: String
+    $type: String
     $parentId: String
     $sectionItems: String
     $content: String
@@ -36,6 +37,7 @@ export const AddOrUpdateContentItemMutation = gql`
         name: $name
         alias: $alias
         module: $module
+        type: $type
         parentId: $parentId
         sectionItems: $sectionItems
         content: $content

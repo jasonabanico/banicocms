@@ -18,7 +18,7 @@ export class ListItemService extends PluginService {
   }
 
   public getByAlias(alias: string): Observable<ListItem> {
-    return this.contentItemService.getByAlias("list-item", alias).pipe(
+    return this.contentItemService.getByAlias("list", "item", alias).pipe(
       map(item => {
         return new ListItem(item);
       })

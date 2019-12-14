@@ -5,6 +5,7 @@ export class ContentItem {
   id: string;
   alias: string;
   module: string;
+  type: string;
   createdBy: string;
   createdDate: string;
   createdDateTicks: number;

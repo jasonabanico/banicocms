@@ -11,7 +11,8 @@ import { ContentItemSearch } from "../../../entities/contentItemSearch";
 export class ForumSubforumService extends PluginService {
   public getAll(): Observable<Subforum[]> {
     const contentItemSearch = new ContentItemSearch();
-    contentItemSearch.module = "forum-subforum";
+    contentItemSearch.module = "forum";
+    contentItemSearch.type = "subforum";
     return this.contentItemService.getAll(contentItemSearch).pipe(
       map(items => {
         const replies: Subforum[] = new Array<Subforum>();
@@ -26,7 +27,8 @@ export class ForumSubforumService extends PluginService {
 
   public getBySectionItems(sectionItems: string): Observable<Subforum[]> {
     const contentItemSearch = new ContentItemSearch();
-    contentItemSearch.module = "forum-subforum";
+    contentItemSearch.module = "forum";
+    contentItemSearch.type = "subforum";
     contentItemSearch.sectionItems = sectionItems;
     return this.contentItemService.getAll(contentItemSearch).pipe(
       map(items => {
@@ -53,7 +55,7 @@ export class ForumSubforumService extends PluginService {
     sectionItems: string
   ): Observable<Subforum> {
     return this.contentItemService
-      .getByAliasAndSection("forum-subforum", alias, sectionItems)
+      .getByAliasAndSection("forum", "subforum", alias, sectionItems)
       .pipe(
         map(item => {
           return new Subforum(item);

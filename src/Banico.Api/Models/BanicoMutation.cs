@@ -47,7 +47,7 @@ namespace Banico.Api.Models
                 {
                     var section = context.GetArgument<Section>("section");
                     this.StampItem(section);
-                    var isSectionAdmin = _accessService.Allowed("admin/sections", false).Result;
+                    var isSectionAdmin = _accessService.Allowed("admin/sections", "", false).Result;
                     this.WriteDebugMessage("BanicoMutation: isSectionAdmin " + isSectionAdmin.ToString());
                     return sectionRepository.AddOrUpdate(section, isSectionAdmin);
                 });
@@ -62,7 +62,7 @@ namespace Banico.Api.Models
                 {
                     var sectionItem = context.GetArgument<SectionItem>("sectionItem");
                     this.StampItem(sectionItem);
-                    var isSectionItemAdmin = _accessService.Allowed("admin/sectionItems", false).Result;
+                    var isSectionItemAdmin = _accessService.Allowed("admin/sectionItems", "", false).Result;
                     return sectionItemRepository.AddOrUpdate(sectionItem, isSectionItemAdmin);
                 });
 
@@ -91,7 +91,8 @@ namespace Banico.Api.Models
                         else
                         {
                             var userId = _accessService.GetUserId();
-                            throw new UnauthorizedAccessException("Add or update of content module " + contentItem.Module + " is not allowed for user " + userId + ".");
+                            throw new UnauthorizedAccessException("Add or update of content module / type " + contentItem.Module + " / " + 
+                                contentItem.Type + " is not allowed for user " + userId + ".");
                         }
                     }
                     else
@@ -150,8 +151,8 @@ namespace Banico.Api.Models
 
         private async Task<bool> checkTenant(string id)
         {
-            var item = (await _contentItemRepository.Get("", id, "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
+            var item = (await _contentItemRepository.Get("", id, "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
             "", 0, 1, 0))
                 .FirstOrDefault();
 

@@ -23,7 +23,8 @@ export class ForumPostService extends PluginService {
     offset: number
   ): Observable<Post[]> {
     const contentItemSearch = new ContentItemSearch();
-    contentItemSearch.module = "forum-post";
+    contentItemSearch.module = "forum";
+    contentItemSearch.type = "post";
     contentItemSearch.parentId = topicId;
     contentItemSearch.page = page;
     contentItemSearch.pageSize = this.pageSize;
