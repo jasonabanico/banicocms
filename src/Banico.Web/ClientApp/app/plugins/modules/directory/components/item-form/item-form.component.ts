@@ -60,7 +60,7 @@ export class DirectoryItemFormComponent implements OnInit {
   }
 
   private saveDirectoryItemSuccess(directoryItem: DirectoryItem) {
-    if (directoryItem.id != "0") {
+    if (directoryItem.id !== "0") {
       alert("Saved.");
       this.router.navigateByUrl("directory/item/" + directoryItem.id);
     } else {
@@ -69,9 +69,9 @@ export class DirectoryItemFormComponent implements OnInit {
   }
 
   private SaveResponse(data: any) {
-    if (data != null) {
-      if (data.value != null) {
-        if (data.value == "1") {
+    if (data !== null) {
+      if (data.value !== null) {
+        if (data.value === "1") {
           alert("Saved.");
           this.router.navigateByUrl("directory/item/" + this.directoryItem.id);
         } else {

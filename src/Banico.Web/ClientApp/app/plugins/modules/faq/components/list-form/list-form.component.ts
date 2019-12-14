@@ -56,7 +56,7 @@ export class FaqListFormComponent implements OnInit {
     qa.question = this.question;
     qa.answer = this.answer;
 
-    if (this.qaId == -1) {
+    if (this.qaId === -1) {
       this.faq.qas.push(qa);
     } else {
       this.faq.qas[this.qaId] = qa;
@@ -88,7 +88,7 @@ export class FaqListFormComponent implements OnInit {
     // modalRef.componentInstance.body = "Delete this item?";
     // modalRef.componentInstance.button = "Delete";
     // modalRef.result.then((result) => {
-    //     if (result == 'success') {
+    //     if (result === 'success') {
     //         this.faq.qas.splice(qaId, 1);
     //         this.faq.content = JSON.stringify(this.faq.qas);
     //     }
@@ -103,7 +103,7 @@ export class FaqListFormComponent implements OnInit {
   }
 
   private saveFaqSuccess(faq: Faq) {
-    if (faq.id != "0") {
+    if (faq.id !== "0") {
       alert("Saved.");
       this.router.navigateByUrl("faq/" + faq.alias);
     } else {
@@ -112,9 +112,9 @@ export class FaqListFormComponent implements OnInit {
   }
 
   private SaveResponse(data: any) {
-    if (data != null) {
-      if (data.value != null) {
-        if (data.value == "1") {
+    if (data !== null) {
+      if (data.value !== null) {
+        if (data.value === "1") {
           alert("Saved.");
           this.router.navigateByUrl("faq/" + this.faq.alias);
         } else {

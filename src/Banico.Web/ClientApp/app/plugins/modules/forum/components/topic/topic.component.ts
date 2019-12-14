@@ -94,7 +94,7 @@ export class ForumTopicComponent implements OnInit {
   }
 
   public removePost(id: string) {
-    this.posts = this.posts.filter(post => post.id != id);
+    this.posts = this.posts.filter(post => post.id !== id);
     this.topic.postCount -= 1;
   }
 

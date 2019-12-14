@@ -15,7 +15,7 @@ export class Contact {
   updatedDate: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module == 'contact')) {
+    if ((contentItem) && (contentItem.module === 'contact')) {
       this.id = contentItem.id;
       this.title = contentItem.name;
       this.content = contentItem.content;

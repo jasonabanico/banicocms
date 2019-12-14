@@ -19,8 +19,8 @@ export class Topic {
   constructor(private contentItem: ContentItem) {
     if (
       contentItem &&
-      contentItem.module == "forum" &&
-      contentItem.type == "topic"
+      contentItem.module === "forum" &&
+      contentItem.type === "topic"
     ) {
       this.id = contentItem.id;
       this.title = contentItem.name;

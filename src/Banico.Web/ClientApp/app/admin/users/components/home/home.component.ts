@@ -28,7 +28,7 @@ export class AdminUsersHomeComponent implements OnInit {
   // }
 
   // private addSectionSuccess(section: Section) {
-  //     if (section.id != '0') {
+  //     if (section.id !== '0') {
   //         alert('Saved.');
   //         this.section = section;
   //         this.sections.push(this.section);
@@ -40,9 +40,9 @@ export class AdminUsersHomeComponent implements OnInit {
   // }
 
   private SaveResponse(data: any) {
-    if (data != null) {
-      if (data.value != null) {
-        if (data.value == "0") {
+    if (data !== null) {
+      if (data.value !== null) {
+        if (data.value === "0") {
           alert("Saved.");
         } else {
           alert("Save failed.");

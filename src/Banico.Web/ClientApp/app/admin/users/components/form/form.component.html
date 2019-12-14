@@ -95,7 +95,7 @@
           <option
             *ngFor="let role of roles"
             value="{{ role.id }}"
-            [selected]="role.id == roleId"
+            [selected]="role.id === roleId"
             >{{ role.name }}</option
           >
         </select>

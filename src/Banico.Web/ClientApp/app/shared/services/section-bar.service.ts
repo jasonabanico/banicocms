@@ -134,7 +134,7 @@ export class SectionBarService {
 
     var i: number;
     for (i = 0; i < pathNames.length; i++) {
-      if (pathNames[i].length == 0) {
+      if (pathNames[i].length === 0) {
         pathNames.splice(i, 1);
       }
     }
@@ -146,14 +146,14 @@ export class SectionBarService {
     var pathUrls: string[];
     pathUrls = sectionBarItem.sectionItem.pathUrl.split(this.SEGMENT_DELIM);
     var sectionName: string;
-    if (sectionBarItem.section != null) {
+    if (sectionBarItem.section !== null) {
       sectionName = sectionBarItem.section.name;
     }
 
     var i: number;
     for (i = 0; i < pathUrls.length; i++) {
-      if (pathUrls[i] != null) {
-        if (pathUrls[i].length == 0) {
+      if (pathUrls[i] !== null) {
+        if (pathUrls[i].length === 0) {
           pathUrls.splice(i, 1);
         }
       }
@@ -185,7 +185,7 @@ export class SectionBarService {
         //sectionItems[i].fullpath = this.pathWithAlias(sectionItems[i].path, sectionItems[i].alias);
 
         if (sectionItems[i]) {
-          if (sectionItems[i].section != sectionBarItem.section.name) {
+          if (sectionItems[i].section !== sectionBarItem.section.name) {
             sectionItems.splice(i, 1);
           }
         }
@@ -209,7 +209,7 @@ export class SectionBarService {
     for (var i: number = 0; i < this.sectionBarItems.length; i++) {
       var pathUrlToAdd: string = "";
 
-      if (this.sectionBarItems[i].section.name != section) {
+      if (this.sectionBarItems[i].section.name !== section) {
         pathUrlToAdd =
           this.sectionBarItems[i].section.name +
           this.TYPE_DELIM +
@@ -240,7 +240,7 @@ export class SectionBarService {
       for (var i: number = 0; i < pathUrls.length; i++) {
         var pathUrl = pathUrls[i];
         var section = pathUrl.split(this.TYPE_DELIM)[0];
-        if (section == inputSection) {
+        if (section === inputSection) {
           return pathUrl.split(this.TYPE_DELIM)[1];
         }
       }

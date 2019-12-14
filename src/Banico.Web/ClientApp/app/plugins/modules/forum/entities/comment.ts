@@ -16,8 +16,8 @@ export class Comment {
   constructor(private contentItem: ContentItem) {
     if (
       contentItem &&
-      contentItem.module == "forum" &&
-      contentItem.type == "comment"
+      contentItem.module === "forum" &&
+      contentItem.type === "comment"
     ) {
       this.id = contentItem.id;
       this.text = contentItem.content;

@@ -55,7 +55,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     // modalRef.componentInstance.body = "Delete this item?";
     // modalRef.componentInstance.button = "Delete";
     // modalRef.result.then((result) => {
-    //     if (result == 'success') {
+    //     if (result === 'success') {
     //         this.contactService.deleteContact(this.contact)
     //             .subscribe(response => this.SaveResponse(response));
     //     }
@@ -77,9 +77,9 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   }
 
   private SaveResponse(data: any) {
-    if (data != null) {
-      if (data.value != null) {
-        if (data.value == "1") {
+    if (data !== null) {
+      if (data.value !== null) {
+        if (data.value === "1") {
           alert("Saved.");
           this.router.navigateByUrl("front");
         } else {

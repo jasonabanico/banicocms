@@ -68,7 +68,7 @@
                 for details on setting up this ASP.NET application to support two-factor authentication using SMS.
             </p>
             @*@(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
+                @if (Model.PhoneNumber !== null)
                 {
                     <br />
                     <a asp-controller="Manage" asp-action="AddPhoneNumber" class="btn-bracketed">Change</a>

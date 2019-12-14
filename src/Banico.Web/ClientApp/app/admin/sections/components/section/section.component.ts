@@ -76,9 +76,9 @@ export class AdminSectionsSectionComponent implements OnInit {
   }
 
   private SaveResponse(data: any) {
-    if (data != null) {
-      if (data.value != null) {
-        if (data.value == "0") {
+    if (data !== null) {
+      if (data.value !== null) {
+        if (data.value === "0") {
           alert("Saved.");
         } else {
           alert("Save failed.");

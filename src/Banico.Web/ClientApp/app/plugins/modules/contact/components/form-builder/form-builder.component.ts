@@ -58,7 +58,7 @@ export class ContactFormBuilderComponent implements OnInit {
     field.name = this.name;
     field.type = this.type;
 
-    if (this.fieldId == -1) {
+    if (this.fieldId === -1) {
       this.contact.fields.push(field);
     } else {
       this.contact.fields[this.fieldId] = field;
@@ -90,7 +90,7 @@ export class ContactFormBuilderComponent implements OnInit {
     // modalRef.componentInstance.body = "Delete this item?";
     // modalRef.componentInstance.button = "Delete";
     // modalRef.result.then((result) => {
-    //     if (result == 'success') {
+    //     if (result === 'success') {
     //         this.contact.fields.splice(fieldId, 1);
     //         this.contact.content = JSON.stringify(this.contact.fields);
     //     }
@@ -105,7 +105,7 @@ export class ContactFormBuilderComponent implements OnInit {
   }
 
   private saveContactSuccess(contact: Contact) {
-    if (contact.id != "0") {
+    if (contact.id !== "0") {
       alert("Saved.");
       this.router.navigateByUrl("contact/" + contact.alias);
     } else {
@@ -114,9 +114,9 @@ export class ContactFormBuilderComponent implements OnInit {
   }
 
   private SaveResponse(data: any) {
-    if (data != null) {
-      if (data.value != null) {
-        if (data.value == "1") {
+    if (data !== null) {
+      if (data.value !== null) {
+        if (data.value === "1") {
           alert("Saved.");
           this.router.navigateByUrl("contact/" + this.contact.alias);
         } else {

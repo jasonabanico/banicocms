@@ -54,10 +54,10 @@
                     <label for="{{field.name}}">{{field.name}}</label>
                     <span class="link text-primary" (click)="edit(i)">Edit</span>
                     <span class="link text-primary" (click)="delete(i)">Delete</span>
-                    <input *ngIf="field.type == 'text1'" type="text" class="form-control" />
-                    <textarea *ngIf="field.type == 'text4'" rows="4" class="form-control"></textarea>
-                    <textarea *ngIf="field.type == 'text6'" rows="6" class="form-control"></textarea>
-                    <textarea *ngIf="field.type == 'text8'" rows="8" class="form-control"></textarea>
+                    <input *ngIf="field.type === 'text1'" type="text" class="form-control" />
+                    <textarea *ngIf="field.type === 'text4'" rows="4" class="form-control"></textarea>
+                    <textarea *ngIf="field.type === 'text6'" rows="6" class="form-control"></textarea>
+                    <textarea *ngIf="field.type === 'text8'" rows="8" class="form-control"></textarea>
                 </div>
             </span>
         </div>

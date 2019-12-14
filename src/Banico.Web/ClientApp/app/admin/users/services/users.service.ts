@@ -37,7 +37,7 @@ export class UsersService extends BaseService {
       output = res.data.addSectionItem;
     }
 
-    if (id == 0) {
+    if (id === 0) {
       throw new Error("Unable to create object.");
     }
     return output || {};

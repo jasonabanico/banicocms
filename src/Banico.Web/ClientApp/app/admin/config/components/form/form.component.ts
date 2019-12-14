@@ -70,7 +70,7 @@ export class AdminConfigFormComponent implements OnInit {
     }
 
     private saveSuccess(config: Config) {
-        if (config.id != '0') {
+        if (config.id !== '0') {
             alert('Saved.');
         }
         else {
@@ -79,9 +79,9 @@ export class AdminConfigFormComponent implements OnInit {
     }
 
     private SaveResponse(data: any) {
-        if (data != null) {
-            if (data.value != null) {
-                if (data.value == '0') {
+        if (data !== null) {
+            if (data.value !== null) {
+                if (data.value === '0') {
                     alert('Saved.');
                 } else {
                     alert('Save failed.');

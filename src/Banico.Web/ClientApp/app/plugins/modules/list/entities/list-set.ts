@@ -10,7 +10,7 @@ export class ListSet {
   contentSectionItems: ContentSectionItem[];
 
   constructor(private contentItem: ContentItem) {
-    if (contentItem && contentItem.module == "list-set") {
+    if (contentItem && contentItem.module === "list-set") {
       this.id = contentItem.id;
       this.name = contentItem.name;
       this.alias = contentItem.alias;

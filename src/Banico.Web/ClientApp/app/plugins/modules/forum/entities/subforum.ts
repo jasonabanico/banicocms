@@ -16,8 +16,8 @@ export class Subforum {
   constructor(private contentItem: ContentItem) {
     if (
       contentItem &&
-      contentItem.module == "forum" &&
-      contentItem.type == "subforum"
+      contentItem.module === "forum" &&
+      contentItem.type === "subforum"
     ) {
       this.id = contentItem.id;
       this.name = contentItem.name;

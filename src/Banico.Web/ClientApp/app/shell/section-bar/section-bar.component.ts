@@ -17,7 +17,7 @@ export class SectionBarComponent implements OnInit {
     private router: Router
   ) {
     router.events.subscribe(val => {
-      if (location.path() != "") {
+      if (location.path() !== "") {
         this.href = location.path();
       }
     });

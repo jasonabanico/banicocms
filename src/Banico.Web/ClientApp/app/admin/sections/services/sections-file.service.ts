@@ -78,8 +78,8 @@ export class SectionsFileService {
         path: string, 
         remainingFields: string[], 
         lines: string[]) {
-        if (isNaN(Number(sectionItem.id)) || (Number(sectionItem.id) == 0)) {
-            if (name != '') {
+        if (isNaN(Number(sectionItem.id)) || (Number(sectionItem.id) === 0)) {
+            if (name !== '') {
                 sectionItem.name = name;
                 sectionItem.alias = alias;
                 sectionItem.section = sectionType;

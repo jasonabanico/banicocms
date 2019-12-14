@@ -10,7 +10,7 @@ export class Page {
   alias: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module == 'page')) {
+    if ((contentItem) && (contentItem.module === 'page')) {
       this.id = contentItem.id;
       this.title = contentItem.name;
       this.content = contentItem.content;

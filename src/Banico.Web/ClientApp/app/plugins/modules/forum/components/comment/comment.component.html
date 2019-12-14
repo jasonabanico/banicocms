@@ -23,11 +23,11 @@
           >@{{ comment?.username }}</a
         >
         {{ comment?.text }}<br />
-        <span *ngIf="comment?.userId == userId">
+        <span *ngIf="comment?.userId === userId">
           <a href="javascript:;" (click)="edit()">Edit</a>
           &bull;
         </span>
-        <span *ngIf="comment?.userId == userId || isAdmin">
+        <span *ngIf="comment?.userId === userId || isAdmin">
           <a href="javascript:;" (click)="delete()">Delete</a>
           &bull;
         </span>

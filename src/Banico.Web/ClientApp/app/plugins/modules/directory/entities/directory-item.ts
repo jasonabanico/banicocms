@@ -16,7 +16,7 @@ export class DirectoryItem {
   contentSectionItems: ContentSectionItem[];
 
   constructor(private contentItem: ContentItem) {
-    if (contentItem && contentItem.module == "directory") {
+    if (contentItem && contentItem.module === "directory") {
       this.id = contentItem.id;
       this.name = contentItem.name;
       this.description = contentItem.content;

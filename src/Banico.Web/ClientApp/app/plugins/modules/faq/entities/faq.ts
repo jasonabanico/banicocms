@@ -10,7 +10,7 @@ export class Faq {
   updatedDate: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module == 'faq')) {
+    if ((contentItem) && (contentItem.module === 'faq')) {
       this.id = contentItem.id;
       this.title = contentItem.name;
       this.content = contentItem.content;

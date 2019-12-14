@@ -75,7 +75,7 @@ export class DirectoryItemComponent implements OnInit, OnDestroy {
     // modalRef.componentInstance.body = "Delete this item?";
     // modalRef.componentInstance.button = "Delete";
     // modalRef.result.then((result) => {
-    //     if (result == 'success') {
+    //     if (result === 'success') {
     //         this.directoryService.delete(this.directoryItem)
     //             .subscribe(response => this.SaveResponse(response));
     //     }
@@ -83,9 +83,9 @@ export class DirectoryItemComponent implements OnInit, OnDestroy {
   }
 
   private SaveResponse(data: any) {
-    if (data != null) {
-      if (data.value != null) {
-        if (data.value == "1") {
+    if (data !== null) {
+      if (data.value !== null) {
+        if (data.value === "1") {
           alert("Saved.");
           var sectionItems = this.directoryService.toSectionItems(
             this.directoryItem.toContentItem()

@@ -17,8 +17,8 @@ export class Post {
   constructor(private contentItem: ContentItem) {
     if (
       contentItem &&
-      contentItem.module == "forum" &&
-      contentItem.type == "post"
+      contentItem.module === "forum" &&
+      contentItem.type === "post"
     ) {
       this.id = contentItem.id;
       this.text = contentItem.content;

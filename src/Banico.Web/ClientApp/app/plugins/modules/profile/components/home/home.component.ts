@@ -33,7 +33,7 @@ export class ProfileHomeComponent implements OnInit {
       }
       if (
         this.authService.isAdmin() ||
-        this.authService.getUserName() == alias
+        this.authService.getUserName() === alias
       ) {
         this.canEdit = true;
       }

@@ -141,7 +141,7 @@ export class AdminSectionsSectionItemComponent implements OnInit {
   }
 
   private saveSectionItemSuccess(sectionItem: SectionItem) {
-    if (sectionItem.id != "") {
+    if (sectionItem.id !== "") {
       this.sectionBarService.addSectionItem(0, sectionItem);
       this.resetNewSectionItem();
       window.location.reload();
@@ -171,9 +171,9 @@ export class AdminSectionsSectionItemComponent implements OnInit {
   }
 
   private SaveResponse(data: any) {
-    if (data != null) {
-      if (data.value != null) {
-        if (data.value == "0") {
+    if (data !== null) {
+      if (data.value !== null) {
+        if (data.value === "0") {
           alert("Saved.");
         } else {
           alert("Save failed.");

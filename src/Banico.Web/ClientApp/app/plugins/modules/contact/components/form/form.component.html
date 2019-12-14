@@ -22,10 +22,10 @@
     <span *ngFor="let field of contact.fields; let i = index" style="width: 100%;padding-bottom: 10px;">
         <div class="form-group row">
                 <label for="{{field.name}}">{{field.name}}</label>
-                <input *ngIf="field.type == 'text1'" type="text" class="form-control" [(ngModel)]="fieldValue[i]" />
-                <textarea *ngIf="field.type == 'text4'" rows="4" [(ngModel)]="fieldValue[i]" class="form-control"></textarea>
-                <textarea *ngIf="field.type == 'text6'" rows="6" [(ngModel)]="fieldValue[i]" class="form-control"></textarea>
-                <textarea *ngIf="field.type == 'text8'" rows="8" [(ngModel)]="fieldValue[i]" class="form-control"></textarea>
+                <input *ngIf="field.type === 'text1'" type="text" class="form-control" [(ngModel)]="fieldValue[i]" />
+                <textarea *ngIf="field.type === 'text4'" rows="4" [(ngModel)]="fieldValue[i]" class="form-control"></textarea>
+                <textarea *ngIf="field.type === 'text6'" rows="6" [(ngModel)]="fieldValue[i]" class="form-control"></textarea>
+                <textarea *ngIf="field.type === 'text8'" rows="8" [(ngModel)]="fieldValue[i]" class="form-control"></textarea>
             </div>
     </span>
     

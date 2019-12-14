@@ -78,7 +78,7 @@ export class ListSetFormComponent implements OnInit {
     }
 
     private saveSuccess(listSet: ListSet) {
-        if (listSet.id != '0') {
+        if (listSet.id !== '0') {
             alert('Saved.');
         }
         else {
@@ -87,9 +87,9 @@ export class ListSetFormComponent implements OnInit {
     }
 
     private SaveResponse(data: any) {
-        if (data != null) {
-            if (data.value != null) {
-                if (data.value == '0') {
+        if (data !== null) {
+            if (data.value !== null) {
+                if (data.value === '0') {
                     alert('Saved.');
                 } else {
                     alert('Save failed.');

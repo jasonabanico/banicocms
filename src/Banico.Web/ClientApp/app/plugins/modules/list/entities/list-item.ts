@@ -8,7 +8,7 @@ export class ListItem {
   description: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module == 'list-item')) {
+    if ((contentItem) && (contentItem.module === 'list-item')) {
       this.id = contentItem.id;
       this.listSetId = contentItem.parentId;
       this.name = contentItem.name;

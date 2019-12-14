@@ -12,7 +12,7 @@ export class Profile {
   headline: string;
 
   constructor(private contentItem: ContentItem) {
-    if (contentItem && contentItem.module == "profile") {
+    if (contentItem && contentItem.module === "profile") {
       this.id = contentItem.id;
       this.alias = contentItem.alias;
       this.content = contentItem.content;
