@@ -28,11 +28,10 @@ export class InviteService {
     let headers = new HttpHeaders();
     headers.append("Content-Type", "application/x-www-form-urlencoded");
     let data = "emails=" + invite.emails;
-    return this.http
-      .post<Invite>(this.inviteUrl + "/Add", data, {
-        headers: headers
-      })
-      .pipe(map(this.extractData));
+    return this.http.post<Invite>(this.inviteUrl + "/Add", data, {
+      headers: headers
+    });
+    //.pipe(map(this.extractData));
     //.subscribe({
     //next: x => console.log('Observer got a next value: ' + x),
     //error: err => alert(JSON.stringify(err)),

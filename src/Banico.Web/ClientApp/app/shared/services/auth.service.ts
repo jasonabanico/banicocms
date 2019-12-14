@@ -8,7 +8,6 @@ import {
 import { BaseService } from "./base.service";
 import { Observable, of } from "rxjs";
 import { isPlatformBrowser } from "@angular/common";
-import { JSONP_ERR_NO_CALLBACK } from "@angular/common/http/src/jsonp";
 import { WindowRefService } from "./windowref.service";
 import * as jwt_decode from "jwt-decode";
 import { Router } from "@angular/router";

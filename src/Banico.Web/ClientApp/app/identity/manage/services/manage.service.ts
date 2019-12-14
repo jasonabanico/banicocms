@@ -3,7 +3,6 @@ import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/com
 import { BaseService } from "../../../shared/services/base.service";
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { JSONP_ERR_NO_CALLBACK } from '@angular/common/http/src/jsonp';
 import { WindowRefService } from '../../../shared/services/windowref.service';
 import { AuthService } from '../../../shared/services/auth.service';
 
