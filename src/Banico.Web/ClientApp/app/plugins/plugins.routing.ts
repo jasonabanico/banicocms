@@ -4,39 +4,50 @@ import { Routes, RouterModule } from "@angular/router";
 const PLUGIN_ROUTES: Routes = [
   {
     path: "contact",
-    loadChildren: "./modules/contact/contact.module#ContactModule"
+    loadChildren: () =>
+      import("./modules/contact/contact.module").then(m => m.ContactModule)
   },
   {
     path: "directory",
-    loadChildren: "./modules/directory/directory.module#DirectoryModule"
+    loadChildren: () =>
+      import("./modules/directory/directory.module").then(
+        m => m.DirectoryModule
+      )
   },
   {
     path: "faq",
-    loadChildren: "./modules/faq/faq.module#FaqModule"
+    loadChildren: () =>
+      import("./modules/faq/faq.module").then(m => m.FaqModule)
   },
   {
     path: "forum",
-    loadChildren: "./modules/forum/forum.module#ForumModule"
+    loadChildren: () =>
+      import("./modules/forum/forum.module").then(m => m.ForumModule)
   },
   {
     path: "invite",
-    loadChildren: "./modules/invite/invite.module#InviteModule"
+    loadChildren: () =>
+      import("./modules/invite/invite.module").then(m => m.InviteModule)
   },
   {
     path: "links",
-    loadChildren: "./modules/links/links.module#ListModule"
+    loadChildren: () =>
+      import("./modules/links/links.module").then(m => m.LinksModule)
   },
   {
     path: "list",
-    loadChildren: "./modules/list/list.module#ListModule"
+    loadChildren: () =>
+      import("./modules/list/list.module").then(m => m.ListModule)
   },
   {
     path: "page",
-    loadChildren: "./modules/page/page.module#PageModule"
+    loadChildren: () =>
+      import("./modules/page/page.module").then(m => m.PageModule)
   },
   {
     path: "profile",
-    loadChildren: "./modules/profile/profile.module#ProfileModule"
+    loadChildren: () =>
+      import("./modules/profile/profile.module").then(m => m.ProfileModule)
   }
 ];
 

@@ -1,38 +1,37 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './shell/home/home.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { HomeComponent } from "./shell/home/home.component";
 
 const APP_ROUTES: Routes = [
-    {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
-    },
-    {
-        path: 'home',
-        component: HomeComponent
-    },
-    {
-        path: 'admin',
-        loadChildren: './admin/admin.module#AdminModule'
-    },
-    {
-        path: 'manage',
-        loadChildren: './identity/manage/manage.module#IdentityManageModule'
-    },
+  {
+    path: "",
+    redirectTo: "home",
+    pathMatch: "full"
+  },
+  {
+    path: "home",
+    component: HomeComponent
+  },
+  {
+    path: "admin",
+    loadChildren: () => import("./admin/admin.module").then(m => m.AdminModule)
+  },
+  {
+    path: "manage",
+    loadChildren: () =>
+      import("./identity/manage/manage.module").then(
+        m => m.IdentityManageModule
+      )
+  }
 
-    //,
+  //,
 
-    // All else fails - go home!
-    //{ path: '**', redirectTo: 'home' }
+  // All else fails - go home!
+  //{ path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(APP_ROUTES)
-    ],
-    exports: [
-        RouterModule
-    ]
+  imports: [RouterModule.forRoot(APP_ROUTES)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
