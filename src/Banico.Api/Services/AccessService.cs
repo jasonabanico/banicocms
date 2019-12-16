@@ -108,7 +108,14 @@ namespace Banico.Api.Services
             this.WriteDebugMessage("AccessService: Checking if allowed " + module);
             if (!enabledRequired || await this.IsEnabled(module))
             {
-                List<Config> config = await _configRepository.Get("", module + "-" + type + "/manage", "canActivate");
+                string moduleAndType = module;
+
+                if (!string.IsNullOrEmpty(type))
+                {
+                    moduleAndType += "-" + type;
+                }
+
+                List<Config> config = await _configRepository.Get("", moduleAndType + "/manage", "canActivate");
 
                 if (config.Count > 0)
                 {
