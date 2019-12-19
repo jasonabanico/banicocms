@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <base href="@(Url.Content("~/"))" />
-    @await Html.PartialAsync("~/Config/_Header.cshtml")
+    @await Html.PartialAsync("_Header.cshtml")
     <title>@ViewData["Title"]</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,7 +49,7 @@
 <!-- Imgur -->
 <script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
-    @await Html.PartialAsync("~/Config/_Footer.cshtml")
+    @await Html.PartialAsync("_Footer.cshtml")
 
   </body>
 </html>
