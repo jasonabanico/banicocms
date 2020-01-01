@@ -24,6 +24,7 @@ using Banico.Identity;
 using Banico.Identity.Extensions;
 using Banico.Services;
 using Banico.Services.Interfaces;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Banico.Web
 {
@@ -119,6 +120,11 @@ namespace Banico.Web
             dataStartup.Configure(app, env);
             identityStartup.Configure(app, env, services);
             apiStartup.Configure(app, env);
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
             app.UseAuthentication();            
             app.Use(next => context =>
