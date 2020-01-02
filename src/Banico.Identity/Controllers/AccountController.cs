@@ -252,7 +252,7 @@ namespace Banico.Identity.Controllers
             var code = WebUtility.UrlEncode(originalCode);
 
             var urlBuilder =
-                new System.UriBuilder(Request.GetRawUrl())
+                new System.UriBuilder(_configuration["SiteUrl"])
                     {
                         Path = Url.Content("~/account/confirm-email"),
                         Query = "userId=" + user.Id + "&code=" + code
@@ -285,7 +285,7 @@ namespace Banico.Identity.Controllers
             var code = WebUtility.UrlEncode(originalCode);
             
             var urlBuilder =
-                new System.UriBuilder(Request.GetRawUrl())
+                new System.UriBuilder(_configuration["SiteUrl"])
                     {
                         Path = Url.Content("~/account/reset-password"),
                         Query = "email=" + user.Email + "&code=" + code
@@ -518,7 +518,7 @@ namespace Banico.Identity.Controllers
                         // Send an email with this link
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                         var urlBuilder =
-                            new System.UriBuilder(Request.GetRawUrl())
+                            new System.UriBuilder(_configuration["SiteUrl"])
                                 {
                                     Path = Url.Content("~/account/confirm-email"),
                                     Query = "userId=" + user.Id + "&code=" + code

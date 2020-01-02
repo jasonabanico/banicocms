@@ -1,4 +1,5 @@
 {
+  "SiteUrl": "http://localhost:5000",
   "AppDbProvider": "",
   "AppIdentityDbProvider": "",
   "AzureConnectionStringEnvironmentVariable": "",
