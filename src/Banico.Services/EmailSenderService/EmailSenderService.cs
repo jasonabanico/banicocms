@@ -51,6 +51,11 @@ namespace Banico.Services
 
             var response = await client.SendEmailAsync(msg);
 
+            string responseJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(response);
+
+            Console.WriteLine("SendGrid Response");
+            Console.WriteLine(responseJsonString);
+            
             return response;
         }
 
