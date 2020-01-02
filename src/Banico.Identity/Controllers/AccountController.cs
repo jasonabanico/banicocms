@@ -606,7 +606,14 @@ namespace Banico.Identity.Controllers
             model.Email = model.Email.ToLowerInvariant();
 
             var user = await _userManager.FindByEmailAsync(model.Email);
-            if ((user != null) && (!await(_userManager.IsEmailConfirmedAsync(user))))
+            var isConfirmed = await(_userManager.IsEmailConfirmedAsync(user));
+
+            if (isConfirmed)
+            {
+                return BadRequest(Errors.AddErrorToModelState("", "User is already confirmed.", ModelState));
+            }
+
+            if ((user != null) && (!isConfirmed))
             {
                 var emailResult = await this.SendConfirmationEmail(user, true);
                 return emailResult;
