@@ -264,7 +264,7 @@ namespace Banico.Identity.Controllers
             "Thank you for registering an account on our site.<br /><br />" +
             "Please confirm your email address by clicking here:<br /><br />" +
             "<a href='" + callbackUrl + "'>Confirm Email</a><br /><br />" +
-            "If you didn't register for this account, just ignore and delete this message.<br /><br />" +
+            "If you didn't register for this account, please ignore and delete this message.<br /><br />" +
             "Thank you.<br /><br />" +
             "Site Admin<br /><br />";
 
@@ -298,7 +298,7 @@ namespace Banico.Identity.Controllers
                 "<a href='" + callbackUrl + "'>Reset Password</a><br /><br />" +
                 "If you don't want to change your password or didn't request this, just ignore and delete this message.<br /><br />" +
                 "Thank you.<br /><br />" +
-                "Admin";
+                "Site Admin";
 
             var response = await _emailSender.SendEmailAsync(user.Email, "Reset Your Password",
                 resetPasswordText);
