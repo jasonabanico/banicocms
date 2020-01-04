@@ -86,7 +86,7 @@ namespace Banico.Api.Models
                             this.StampItem(contentItem);
                             var userId = _accessService.GetUserId();
                             var isAdmin = _accessService.IsAdminOrSuperAdmin();
-                            return contentItemRepository.AddOrUpdate(contentItem, userId, isAdmin);
+                            return contentItemRepository.AddOrUpdate(contentItem);
                         }
                         else
                         {
@@ -115,7 +115,7 @@ namespace Banico.Api.Models
                     }
                     var userId = _accessService.GetUserId();
                     var isAdmin = _accessService.IsAdminOrSuperAdmin();
-                    return contentItemRepository.Delete(id, userId, isAdmin);
+                    return contentItemRepository.Delete(id);
                 });
 
             Field<ConfigType>(
