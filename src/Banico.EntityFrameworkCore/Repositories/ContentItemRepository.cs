@@ -598,7 +598,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             return new List<ContentSectionItem>();
         }
 
-        public async Task<ContentItem> AddOrUpdate(ContentItem contentItem)
+        public async Task<ContentItem> AddOrUpdate(ContentItem contentItem, string userId, bool isAdmin)
         {
             if (string.IsNullOrEmpty(contentItem.Id)) 
             {
@@ -606,7 +606,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             }
             else
             {
-                return await this.Update(contentItem);
+                return await this.Update(contentItem, userId, isAdmin);
             }
         }
 
@@ -621,6 +621,12 @@ namespace Banico.EntityFrameworkCore.Repositories
 
             item.Id = Guid.NewGuid().ToString();
             item.ContentSectionItems = await this.ToContentSectionItems(item.SectionItems);
+
+            if (string.IsNullOrEmpty(item.Owners))
+            {
+                item.Owners = " " + item.CreatedBy + "";
+            }
+
             _dbContext.ContentItems.Add(item);
             this.UpdateChildCount(item.ParentId, 1);
             var result = await _dbContext.SaveChangesAsync();
@@ -697,7 +703,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             return output;
         }
 
-        public async Task<ContentItem> Update(ContentItem item)
+        public async Task<ContentItem> Update(ContentItem item, string userId, bool isAdmin)
         {
             var updateItem = (await this.Get("", item.Id, "", "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
@@ -706,6 +712,11 @@ namespace Banico.EntityFrameworkCore.Repositories
 
             if (updateItem != null)
             {
+                if (!item.OwnerUserIds.Contains(userId) && !isAdmin)
+                {
+                    throw new UnauthorizedAccessException("Not authorized to update " + item.Id + ".");
+                }
+
                 updateItem.Name = item.Name;
                 updateItem.Content = item.Content;
                 updateItem.Alias = item.Alias;
@@ -734,6 +745,8 @@ namespace Banico.EntityFrameworkCore.Repositories
                 updateItem.Attribute18 = item.Attribute18;
                 updateItem.Attribute19 = item.Attribute19;
                 updateItem.Attribute20 = item.Attribute20;
+                updateItem.Owners = item.Owners;
+                updateItem.OwnerUserIds = item.OwnerUserIds;
                 updateItem.UpdatedBy = item.UpdatedBy;
                 updateItem.UpdatedDate = item.UpdatedDate;
                 var result = await _dbContext.SaveChangesAsync();
@@ -747,7 +760,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             return new ContentItem();
         }
 
-        public async Task<ContentItem> Delete(string id)
+        public async Task<ContentItem> Delete(string id, string userId, bool isAdmin)
         {
             var item = (await this.Get("", id, "", "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
@@ -755,6 +768,10 @@ namespace Banico.EntityFrameworkCore.Repositories
                 .FirstOrDefault();
             if (item != null)
             {
+                if (!item.OwnerUserIds.Contains(userId) && !isAdmin)
+                {
+                    throw new UnauthorizedAccessException("Not authorized to delete " + id + ".");
+                }
                 _dbContext.Remove(item);
                 this.UpdateChildCount(item.ParentId, -1);
                 var result = await _dbContext.SaveChangesAsync();
@@ -789,6 +806,8 @@ namespace Banico.EntityFrameworkCore.Repositories
                 profileItem.Id = Guid.NewGuid().ToString();
                 profileItem.Alias = alias;
 
+                profileItem.Owners = alias + " ";
+                profileItem.OwnerUserIds = userId + " ";
                 profileItem.CreatedBy = userId;
                 profileItem.CreatedDate = DateTimeOffset.UtcNow;
                 profileItem.Attribute02 = "in"; // individual

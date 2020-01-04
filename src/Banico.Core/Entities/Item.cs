@@ -9,6 +9,8 @@ namespace Banico.Core.Entities
         [Key]
         public string Id { get; set; }
         public string Name { get; set; }
+        public string Owners { get; set; }
+        public string OwnerUserIds { get; set; }
         public string CreatedBy { get; set; }
         public DateTimeOffset CreatedDate { get; set; }
         public string UpdatedBy { get; set; }

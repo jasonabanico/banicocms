@@ -38,6 +38,8 @@ namespace Banico.Api.Models
             Field<StringGraphType>("attribute18");
             Field<StringGraphType>("attribute19");
             Field<StringGraphType>("attribute20");
+
+            Field<StringGraphType>("owners");
         }
     }
 }

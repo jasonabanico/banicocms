@@ -84,6 +84,22 @@ namespace Banico.Api.Services
             return await this.Allowed(contentItem.Module, contentItem.Type, true);
         }
 
+        public async Task<string> OwnersToOwnerUserIds(string owners)
+        {
+            string ownerUserIds = string.Empty;
+            var ownerItems = owners.Split(' ');
+            foreach (var ownerItem in ownerItems)
+            {
+                var owner = await _userManager.FindByNameAsync(ownerItem);
+                if (owner != null)
+                {
+                    ownerUserIds = ownerUserIds + owner.Id + " ";
+                }
+            }
+
+            return ownerUserIds;
+        }
+
         public async Task<bool> IsEnabled(string moduleAndFunction)
         {
             bool result = false;

@@ -15,7 +15,6 @@ namespace Banico.Core.Entities
         public string SectionItems { get; set; }
         public IEnumerable<ContentSectionItem> ContentSectionItems { get; set; }
         public string Content { get; set; }
-        public string Owners { get; set; }
 
         // Attributes
         public string Attribute01 { get; set; }
@@ -116,6 +115,7 @@ namespace Banico.Core.Entities
             this.ContentSectionItems = item.ContentSectionItems;
 
             this.Owners = item.Owners;
+            this.OwnerUserIds = item.OwnerUserIds;
             this.CreatedBy = item.CreatedBy;
             this.CreatedDate = item.CreatedDate;
             this.UpdatedBy = item.UpdatedBy;

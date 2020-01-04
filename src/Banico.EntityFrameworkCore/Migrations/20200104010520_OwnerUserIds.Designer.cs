@@ -3,14 +3,16 @@ using System;
 using Banico.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Banico.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200104010520_OwnerUserIds")]
+    partial class OwnerUserIds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,10 +32,6 @@ namespace Banico.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("OwnerUserIds");
-
-                    b.Property<string>("Owners");
-
                     b.Property<string>("Tenant");
 
                     b.Property<string>("UpdatedBy");
@@ -49,8 +47,8 @@ namespace Banico.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f4c4f695-f4be-4bf8-9058-5eb920bf0c28",
-                            CreatedDate = new DateTimeOffset(new DateTime(2020, 1, 4, 1, 20, 56, 730, DateTimeKind.Unspecified).AddTicks(5090), new TimeSpan(0, 0, 0, 0, 0)),
+                            Id = "f99d7323-81db-43b0-9729-bb57a40fcc0f",
+                            CreatedDate = new DateTimeOffset(new DateTime(2020, 1, 4, 1, 5, 20, 60, DateTimeKind.Unspecified).AddTicks(6890), new TimeSpan(0, 0, 0, 0, 0)),
                             Module = "",
                             Name = "initialized",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -58,8 +56,8 @@ namespace Banico.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = "89a36b5a-dc6a-4922-b2c5-cc6f6f2ab61a",
-                            CreatedDate = new DateTimeOffset(new DateTime(2020, 1, 4, 1, 20, 56, 731, DateTimeKind.Unspecified).AddTicks(9890), new TimeSpan(0, 0, 0, 0, 0)),
+                            Id = "1b996bff-6ac5-4ea6-acf3-0488e0f6ce87",
+                            CreatedDate = new DateTimeOffset(new DateTime(2020, 1, 4, 1, 5, 20, 61, DateTimeKind.Unspecified).AddTicks(7320), new TimeSpan(0, 0, 0, 0, 0)),
                             Module = "admin",
                             Name = "canActivate",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -194,10 +192,6 @@ namespace Banico.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("OwnerUserIds");
-
-                    b.Property<string>("Owners");
-
                     b.Property<string>("Tenant");
 
                     b.Property<string>("UpdatedBy");
@@ -225,10 +219,6 @@ namespace Banico.EntityFrameworkCore.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
-
-                    b.Property<string>("OwnerUserIds");
-
-                    b.Property<string>("Owners");
 
                     b.Property<string>("ParentId");
 

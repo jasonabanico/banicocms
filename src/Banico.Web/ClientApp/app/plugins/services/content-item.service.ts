@@ -278,6 +278,7 @@ export class ContentItemService {
           module: contentItem.module,
           type: contentItem.type,
           parentId: contentItem.parentId,
+          owners: contentItem.owners,
           sectionItems: contentItem.sectionItems,
           content: contentItem.content,
           attribute01: contentItem.attribute01,

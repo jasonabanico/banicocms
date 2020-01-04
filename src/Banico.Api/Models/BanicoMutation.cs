@@ -46,7 +46,7 @@ namespace Banico.Api.Models
                 resolve: context =>
                 {
                     var section = context.GetArgument<Section>("section");
-                    this.StampItem(section);
+                    this.StampItem(section).Wait();
                     var isSectionAdmin = _accessService.Allowed("admin/sections", "", false).Result;
                     this.WriteDebugMessage("BanicoMutation: isSectionAdmin " + isSectionAdmin.ToString());
                     return sectionRepository.AddOrUpdate(section, isSectionAdmin);
@@ -61,7 +61,7 @@ namespace Banico.Api.Models
                 resolve: context =>
                 {
                     var sectionItem = context.GetArgument<SectionItem>("sectionItem");
-                    this.StampItem(sectionItem);
+                    this.StampItem(sectionItem).Wait();
                     var isSectionItemAdmin = _accessService.Allowed("admin/sectionItems", "", false).Result;
                     return sectionItemRepository.AddOrUpdate(sectionItem, isSectionItemAdmin);
                 });
@@ -83,10 +83,10 @@ namespace Banico.Api.Models
                                 throw new UnauthorizedAccessException("Update of content item is not allowed.");
                             }
 
-                            this.StampItem(contentItem);
+                            this.StampItem(contentItem).Wait();
                             var userId = _accessService.GetUserId();
                             var isAdmin = _accessService.IsAdminOrSuperAdmin();
-                            return contentItemRepository.AddOrUpdate(contentItem);
+                            return contentItemRepository.AddOrUpdate(contentItem, userId, isAdmin);
                         }
                         else
                         {
@@ -115,7 +115,7 @@ namespace Banico.Api.Models
                     }
                     var userId = _accessService.GetUserId();
                     var isAdmin = _accessService.IsAdminOrSuperAdmin();
-                    return contentItemRepository.Delete(id);
+                    return contentItemRepository.Delete(id, userId, isAdmin);
                 });
 
             Field<ConfigType>(
@@ -126,15 +126,31 @@ namespace Banico.Api.Models
                 resolve: context =>
                 {
                     var config = context.GetArgument<Config>("config");
-                    this.StampItem(config);
+                    this.StampItem(config).Wait();
                     var isSuperAdmin = _accessService.IsSuperAdmin();
                     return configRepository.AddOrUpdate(config, isSuperAdmin);
                 });
         }
 
-        private void StampItem(Item item) 
+        private async Task StampItem(Item item) 
         {
             string user = _accessService.GetUserId();
+            string username = _accessService.GetUsername();
+
+            if (!string.IsNullOrEmpty(item.Owners))
+            {
+                item.Owners = item.Owners.Trim() + " ";
+                if (!item.Owners.Contains(username + " "))
+                {
+                    item.Owners = item.Owners + username + " ";
+                }
+            }
+            else
+            {
+                item.Owners = username + " ";
+            }
+            
+            item.OwnerUserIds = await _accessService.OwnersToOwnerUserIds(username);
 
             if (string.IsNullOrEmpty(item.Id)) 
             {
