@@ -31,15 +31,14 @@ export class ProfileHomeComponent implements OnInit {
       if (params["type"]) {
         type = params["type"];
       }
-      if (
-        this.authService.isAdmin() ||
-        this.authService.getUserName() === alias
-      ) {
-        this.canEdit = true;
-      }
-      this.profileService
-        .getByTypeAndAlias(type, alias)
-        .subscribe(profile => (this.profile = profile));
+      const isAdmin = this.authService.isAdmin();
+      const username = this.authService.getUserName();
+      this.profileService.getByTypeAndAlias(type, alias).subscribe(profile => {
+        this.profile = profile;
+        if (profile.ownerUserIds.includes(username) || isAdmin) {
+          this.canEdit = true;
+        }
+      });
     });
   }
 }

@@ -7,6 +7,7 @@ export class ContentItem {
   module: string;
   type: string;
   owners: string;
+  ownerUserIds: string;
   createdBy: string;
   createdDate: string;
   createdDateTicks: number;

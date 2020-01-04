@@ -34,14 +34,14 @@
 
   <div class="card-footer">
     <a
-      *ngIf="subforum?.userId === userId"
+      *ngIf="userId && (subforum?.ownerUserIds.includes(userId + ' ') || isAdmin)"
       href="javascript:;"
       (click)="edit()"
       class="card-link"
       ><i class="fas fa-pencil-alt"></i> Edit</a
     >
     <a
-      *ngIf="subforum?.userId === userId || isAdmin"
+      *ngIf="userId && (subforum?.ownerUserIds.includes(userId + ' ') || isAdmin)"
       href="javascript:;"
       (click)="delete()"
       class="card-link"

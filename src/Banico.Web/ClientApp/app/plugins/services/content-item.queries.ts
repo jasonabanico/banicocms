@@ -155,6 +155,7 @@ export const ContentItemsQuery = gql`
       parentId
       childCount
       owners
+      ownerUserIds
       createdBy
       createdDate
       updatedBy

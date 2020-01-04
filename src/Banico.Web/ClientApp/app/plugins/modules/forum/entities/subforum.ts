@@ -7,6 +7,7 @@ export class Subforum {
   description: string;
   snippet: string;
   sectionItems: string;
+  ownerUserIds: string;
   userId: string;
   username: string;
   avatarHash: string;
@@ -25,6 +26,7 @@ export class Subforum {
       this.description = contentItem.content;
       this.snippet = contentItem.snippet;
       this.sectionItems = contentItem.sectionItems;
+      this.ownerUserIds = contentItem.ownerUserIds;
       this.userId = contentItem.createdBy;
       this.createdDate = contentItem.createdDate;
       this.topicCount = contentItem.childCount;

@@ -5,6 +5,7 @@ export class Post {
   id: string;
   text: string;
   topicId: string;
+  ownerUserIds: string;
   userId: string;
   username: string;
   avatarHash: string;
@@ -23,6 +24,7 @@ export class Post {
       this.id = contentItem.id;
       this.text = contentItem.content;
       this.topicId = contentItem.parentId;
+      this.ownerUserIds = contentItem.ownerUserIds;
       this.userId = contentItem.createdBy;
       this.createdDate = contentItem.createdDate;
       this.createdDateTicks = contentItem.createdDateTicks;

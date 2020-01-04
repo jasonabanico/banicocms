@@ -13,6 +13,7 @@ namespace Banico.Api.Models
             Field(x => x.Id, nullable:true);
             Field(x => x.Name, nullable:true);
             Field(x => x.Owners, nullable:true);
+            Field(x => x.OwnerUserIds, nullable:true);
             Field(x => x.CreatedBy, nullable:true);
             Field(x => x.CreatedDate, nullable:true);
             Field(x => x.CreatedDateTicks, nullable:true);

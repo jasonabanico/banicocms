@@ -23,11 +23,11 @@
           >@{{ comment?.username }}</a
         >
         {{ comment?.text }}<br />
-        <span *ngIf="comment?.userId === userId">
+        <span *ngIf="userId && comment?.ownerUserIds.includes(userId + ' ')">
           <a href="javascript:;" (click)="edit()">Edit</a>
           &bull;
         </span>
-        <span *ngIf="comment?.userId === userId || isAdmin">
+        <span *ngIf="userId && (comment?.ownerUserIds.includes(userId + ' ') || isAdmin)">
           <a href="javascript:;" (click)="delete()">Delete</a>
           &bull;
         </span>

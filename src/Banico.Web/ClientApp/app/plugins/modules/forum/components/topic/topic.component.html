@@ -73,13 +73,13 @@
   </div>
   <div class="card-footer">
     <a
-      *ngIf="topic?.userId === userId"
+      *ngIf="userId && topic?.ownerUserIds.includes(userId + ' ')"
       href="/forum/topic/edit/{{ topic?.id }}"
       class="card-link"
       ><i class="fas fa-pencil-alt"></i> Edit</a
     >
     <a
-      *ngIf="topic?.userId === userId || isAdmin"
+      *ngIf="userId && (topic?.ownerUserIds.includes(userId + ' ') || isAdmin)"
       href="javascript:;"
       (click)="delete()"
       class="card-link"

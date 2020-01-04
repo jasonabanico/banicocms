@@ -3,6 +3,8 @@ import * as moment from "moment";
 
 export class Profile {
   id: string;
+  owners: string;
+  ownerUserIds: string;
   alias: string;
   content: string;
   createdDate: string;
@@ -14,6 +16,8 @@ export class Profile {
   constructor(private contentItem: ContentItem) {
     if (contentItem && contentItem.module === "profile") {
       this.id = contentItem.id;
+      this.owners = contentItem.owners;
+      this.ownerUserIds = contentItem.ownerUserIds;
       this.alias = contentItem.alias;
       this.content = contentItem.content;
       this.createdDate = contentItem.createdDate;
@@ -29,6 +33,7 @@ export class Profile {
 
     output.module = "profile";
     output.id = this.id;
+    output.owners = this.owners;
     output.alias = this.alias;
     output.content = this.content;
     output.attribute01 = this.avatarHash;

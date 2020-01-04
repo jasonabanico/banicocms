@@ -5,6 +5,7 @@ export class Comment {
   id: string;
   text: string;
   postId: string;
+  ownerUserIds: string;
   userId: string;
   username: string;
   avatarHash: string;
@@ -22,6 +23,7 @@ export class Comment {
       this.id = contentItem.id;
       this.text = contentItem.content;
       this.postId = contentItem.parentId;
+      this.ownerUserIds = contentItem.ownerUserIds;
       this.userId = contentItem.createdBy;
       this.createdDate = contentItem.createdDate;
       this.createdDateTicks = contentItem.createdDateTicks;
