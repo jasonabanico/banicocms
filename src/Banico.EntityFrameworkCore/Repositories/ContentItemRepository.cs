@@ -598,7 +598,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             return new List<ContentSectionItem>();
         }
 
-        public async Task<ContentItem> AddOrUpdate(ContentItem contentItem, string userID, bool isAdmin)
+        public async Task<ContentItem> AddOrUpdate(ContentItem contentItem)
         {
             if (string.IsNullOrEmpty(contentItem.Id)) 
             {
@@ -606,7 +606,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             }
             else
             {
-                return await this.Update(contentItem, userID, isAdmin);
+                return await this.Update(contentItem);
             }
         }
 
@@ -697,7 +697,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             return output;
         }
 
-        public async Task<ContentItem> Update(ContentItem item, string userID, bool isAdmin)
+        public async Task<ContentItem> Update(ContentItem item)
         {
             var updateItem = (await this.Get("", item.Id, "", "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
@@ -706,55 +706,48 @@ namespace Banico.EntityFrameworkCore.Repositories
 
             if (updateItem != null)
             {
-                if ((updateItem.CreatedBy == userID) || (isAdmin))
+                updateItem.Name = item.Name;
+                updateItem.Content = item.Content;
+                updateItem.Alias = item.Alias;
+                updateItem.SectionItems = item.SectionItems;
+                if (!string.IsNullOrEmpty(item.SectionItems))
                 {
-                    updateItem.Name = item.Name;
-                    updateItem.Content = item.Content;
-                    updateItem.Alias = item.Alias;
-                    updateItem.SectionItems = item.SectionItems;
-                    if (!string.IsNullOrEmpty(item.SectionItems))
-                    {
-                        updateItem.ContentSectionItems = await this.ToContentSectionItems(item.SectionItems);
-                    }
-                    updateItem.Attribute01 = item.Attribute01;
-                    updateItem.Attribute02 = item.Attribute02;
-                    updateItem.Attribute03 = item.Attribute03;
-                    updateItem.Attribute04 = item.Attribute04;
-                    updateItem.Attribute05 = item.Attribute05;
-                    updateItem.Attribute06 = item.Attribute06;
-                    updateItem.Attribute07 = item.Attribute07;
-                    updateItem.Attribute08 = item.Attribute08;
-                    updateItem.Attribute09 = item.Attribute09;
-                    updateItem.Attribute10 = item.Attribute10;
-                    updateItem.Attribute11 = item.Attribute11;
-                    updateItem.Attribute12 = item.Attribute12;
-                    updateItem.Attribute13 = item.Attribute13;
-                    updateItem.Attribute14 = item.Attribute14;
-                    updateItem.Attribute15 = item.Attribute15;
-                    updateItem.Attribute16 = item.Attribute16;
-                    updateItem.Attribute17 = item.Attribute17;
-                    updateItem.Attribute18 = item.Attribute18;
-                    updateItem.Attribute19 = item.Attribute19;
-                    updateItem.Attribute20 = item.Attribute20;
-                    updateItem.UpdatedBy = item.UpdatedBy;
-                    updateItem.UpdatedDate = item.UpdatedDate;
-                    var result = await _dbContext.SaveChangesAsync();
-
-                    if (result > 0)
-                    {
-                        return item;
-                    }
+                    updateItem.ContentSectionItems = await this.ToContentSectionItems(item.SectionItems);
                 }
-                else
+                updateItem.Attribute01 = item.Attribute01;
+                updateItem.Attribute02 = item.Attribute02;
+                updateItem.Attribute03 = item.Attribute03;
+                updateItem.Attribute04 = item.Attribute04;
+                updateItem.Attribute05 = item.Attribute05;
+                updateItem.Attribute06 = item.Attribute06;
+                updateItem.Attribute07 = item.Attribute07;
+                updateItem.Attribute08 = item.Attribute08;
+                updateItem.Attribute09 = item.Attribute09;
+                updateItem.Attribute10 = item.Attribute10;
+                updateItem.Attribute11 = item.Attribute11;
+                updateItem.Attribute12 = item.Attribute12;
+                updateItem.Attribute13 = item.Attribute13;
+                updateItem.Attribute14 = item.Attribute14;
+                updateItem.Attribute15 = item.Attribute15;
+                updateItem.Attribute16 = item.Attribute16;
+                updateItem.Attribute17 = item.Attribute17;
+                updateItem.Attribute18 = item.Attribute18;
+                updateItem.Attribute19 = item.Attribute19;
+                updateItem.Attribute20 = item.Attribute20;
+                updateItem.UpdatedBy = item.UpdatedBy;
+                updateItem.UpdatedDate = item.UpdatedDate;
+                var result = await _dbContext.SaveChangesAsync();
+
+                if (result > 0)
                 {
-                    throw new UnauthorizedAccessException();
+                    return item;
                 }
             }
 
             return new ContentItem();
         }
 
-        public async Task<ContentItem> Delete(string id, string userId, bool isAdmin)
+        public async Task<ContentItem> Delete(string id)
         {
             var item = (await this.Get("", id, "", "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
@@ -762,20 +755,13 @@ namespace Banico.EntityFrameworkCore.Repositories
                 .FirstOrDefault();
             if (item != null)
             {
-                if (item.CreatedBy == userId || isAdmin)
-                {
-                    _dbContext.Remove(item);
-                    this.UpdateChildCount(item.ParentId, -1);
-                    var result = await _dbContext.SaveChangesAsync();
+                _dbContext.Remove(item);
+                this.UpdateChildCount(item.ParentId, -1);
+                var result = await _dbContext.SaveChangesAsync();
 
-                    if (result > 0)
-                    {
-                        return item;
-                    }
-                }
-                else
+                if (result > 0)
                 {
-                    throw new UnauthorizedAccessException("Deletion of content " + id + " is not allowed.");
+                    return item;
                 }
             }
             else
