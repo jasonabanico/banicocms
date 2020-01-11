@@ -17,6 +17,8 @@ import { ApolloModule, Apollo } from "apollo-angular";
 import { setContext } from "apollo-link-context";
 import { HttpLinkModule, HttpLink } from "apollo-angular-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import { MDBBootstrapModule } from "angular-bootstrap-md";
+import { MarkdownModule } from "ngx-markdown";
 import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
 import { PipesModule } from "./pipes/pipes.module";
@@ -27,8 +29,6 @@ import { AuthService } from "./shared/services/auth.service";
 import { AuthGuard } from "./shared/auth/auth.guard";
 import { ConfigsService } from "./shared/services/configs.service";
 import { ToastrService } from "./shared/services/toastr.service";
-import { MDBBootstrapModule } from "angular-bootstrap-md";
-import { MarkdownModule } from "ngx-markdown";
 import { IdentityAccountModule } from "./identity/account/account.module";
 
 @NgModule({

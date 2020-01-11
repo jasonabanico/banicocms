@@ -10,6 +10,7 @@ import { ContentItemService } from "../../../../plugins/services/content-item.se
 import { ToastrService } from "../../../../shared/services/toastr.service";
 import { Observable } from "rxjs/internal/Observable";
 import { combineLatest } from "rxjs";
+import { AppConfig } from "../../../../../../Config/app.config";
 
 @Component({
   selector: "app-identity-account-login",
@@ -17,6 +18,7 @@ import { combineLatest } from "rxjs";
   styleUrls: []
 })
 export class IdentityAccountLoginComponent {
+  public reCaptchaSiteKey = "";
   public isRequesting = false;
   public isSuccessful = false;
   public errors: string[] = new Array<string>();
@@ -36,7 +38,9 @@ export class IdentityAccountLoginComponent {
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.reCaptchaSiteKey = AppConfig.RECAPTCHA_SITE_KEY;
+  }
 
   ngOnInit() {
     toastr.options = {
