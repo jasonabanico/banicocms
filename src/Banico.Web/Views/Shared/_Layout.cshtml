@@ -37,6 +37,8 @@
 
     @RenderSection("scripts", required: false)   
 
+    @await Html.PartialAsync("_Footer.cshtml")
+
 <!-- JQuery -->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <!-- Bootstrap tooltips -->
@@ -49,8 +51,6 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <!-- Imgur -->
 <script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-
-    @await Html.PartialAsync("_Footer.cshtml")
 
   </body>
 </html>

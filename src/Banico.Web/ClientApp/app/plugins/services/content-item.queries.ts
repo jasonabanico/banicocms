@@ -161,7 +161,6 @@ export const ContentItemsQuery = gql`
       updatedBy
       updatedDate
       content
-      htmlContent
       snippet
       attribute01
       attribute02

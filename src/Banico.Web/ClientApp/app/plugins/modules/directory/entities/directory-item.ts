@@ -6,7 +6,6 @@ export class DirectoryItem {
   name: string;
   description: string;
   snippet: string;
-  htmlDescription: string;
   address: string;
   phone: string;
   website: string;
@@ -20,7 +19,6 @@ export class DirectoryItem {
       this.id = contentItem.id;
       this.name = contentItem.name;
       this.description = contentItem.content;
-      this.htmlDescription = contentItem.htmlContent;
       this.address = contentItem.attribute01;
       this.phone = contentItem.attribute02;
       this.website = contentItem.attribute03;

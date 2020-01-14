@@ -66,24 +66,6 @@ namespace Banico.Core.Entities
                 return output;
             }
         }
-
-        public string HtmlContent
-        {
-            get
-            {
-                string output = String.Empty;
-                
-                if (!String.IsNullOrEmpty(this.Content))
-                {
-                    // output = Markdown.ToHtml(this.Content);
-
-                    //var sanitizer = new HtmlSanitizer();
-                    //output = sanitizer.Sanitize(output, "");
-                }
-                
-                return output;
-            }
-        }
         
         public ContentItem()
         {
