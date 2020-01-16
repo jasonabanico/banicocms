@@ -16,7 +16,7 @@
     <i class="fa fa-envelope" aria-hidden="true"></i> {{directoryItem.email}}
 </p>
 
-<div [innerHtml]="directoryItem.htmlDescription"></div>
+<app-plugins-rich-text [text]="directoryItem?.description"></app-plugins-rich-text>
 
 <iframe
 width="100%"
