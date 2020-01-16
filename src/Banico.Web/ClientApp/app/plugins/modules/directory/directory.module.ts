@@ -2,6 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { RichTextModule } from '../rich-text/rich-text.module';
 import { DirectoryRoutingModule } from './directory.routing';
 import { DirectoryComponent }  from './components/directory.component';
 import { DirectoryListComponent } from './components/list/list.component';
@@ -14,6 +15,7 @@ import { DirectoryHomeComponent } from './components/home/home.component';
   imports: [ 
     CommonModule,
     FormsModule,
+    RichTextModule,
     DirectoryRoutingModule
   ],
   declarations: [ 
