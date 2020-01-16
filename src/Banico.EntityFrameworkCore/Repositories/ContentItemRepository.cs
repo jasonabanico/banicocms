@@ -810,6 +810,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                 profileItem.OwnerUserIds = userId + " ";
                 profileItem.CreatedBy = userId;
                 profileItem.CreatedDate = DateTimeOffset.UtcNow;
+                profileItem.UpdatedDate = DateTimeOffset.UtcNow;
                 profileItem.Attribute02 = "in"; // individual
 
                 using (var md5 = MD5.Create())

@@ -156,6 +156,8 @@ namespace Banico.Api.Models
             {
                 item.CreatedBy = user;
                 item.CreatedDate = DateTimeOffset.UtcNow;
+                item.UpdatedBy = user;
+                item.UpdatedDate = DateTimeOffset.UtcNow;
                 item.Tenant = _accessService.DomainTenant();
             } 
             else
