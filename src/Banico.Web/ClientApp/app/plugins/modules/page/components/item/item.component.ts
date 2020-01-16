@@ -13,6 +13,7 @@ import { ModalComponent } from "../../../../../shell/modal/modal.component";
 export class PageItemComponent implements OnInit, OnDestroy {
   public page: Page;
   private sub: any;
+  public userId: string;
   public isAdmin: boolean;
 
   constructor(
@@ -20,7 +21,10 @@ export class PageItemComponent implements OnInit, OnDestroy {
     @Inject(AuthService) private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.userId = authService.getUserId();
+    this.isAdmin = authService.isAdmin();
+  }
 
   ngOnInit() {
     this.page = new Page(null);

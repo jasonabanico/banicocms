@@ -1,10 +1,10 @@
 html {
   position: relative;
-  min-height: 100%;
+  min-height: 110%;
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: 120px;
 }
 
 .jumbotron {

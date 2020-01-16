@@ -1,27 +1,11 @@
-<span *ngIf="isAdmin">
-  <div class="card">
-    <div class="card-block">
-      <a href="/page/edit/{{ page.alias }}"
-        ><i
-          class="fa fa-edit"
-          aria-hidden="true"
-          style="padding-right: 5px;"
-        ></i
-        >Edit</a
-      >
-      |
-      <span class="link text-primary" (click)="delete()"
-        ><i
-          class="fa fa-trash-o"
-          aria-hidden="true"
-          style="padding-right: 5px;"
-        ></i
-        >Delete</span
-      >
-    </div>
-  </div>
-  <br />
-</span>
+<p *ngIf="(userId && page?.ownerUserIds.includes(userId + ' ')) || isAdmin">
+  <a href="/page/edit/{{ page.alias }}" class="btn btn-primary btn-sm">
+    <i class="fas fa-pencil-alt"></i> Edit</a
+  >
+  <a href="javascript:;" (click)="delete()" class="btn btn-danger btn-sm">
+    <i class="fas fa-trash-alt"></i> Delete</a
+  >
+</p>
 
 <h1>{{ page.title }}</h1>
 <app-plugins-rich-text [text]="page?.content"></app-plugins-rich-text>

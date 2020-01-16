@@ -1,7 +1,9 @@
-import { ContentItem } from '../../../../entities/content-item';
+import { ContentItem } from "../../../../entities/content-item";
 
 export class Page {
   id: string;
+  owners: string;
+  ownerUserIds: string;
   title: string;
   content: string;
   createdDate: string;
@@ -9,8 +11,10 @@ export class Page {
   alias: string;
 
   constructor(private contentItem: ContentItem) {
-    if ((contentItem) && (contentItem.module === 'page')) {
+    if (contentItem && contentItem.module === "page") {
       this.id = contentItem.id;
+      this.owners = contentItem.owners;
+      this.ownerUserIds = contentItem.ownerUserIds;
       this.title = contentItem.name;
       this.content = contentItem.content;
       this.createdDate = contentItem.createdDate;
@@ -26,8 +30,6 @@ export class Page {
     output.id = this.id;
     output.name = this.title;
     output.content = this.content;
-    output.createdDate = this.createdDate;
-    output.updatedDate = this.updatedDate;
     output.alias = this.alias;
 
     return output;

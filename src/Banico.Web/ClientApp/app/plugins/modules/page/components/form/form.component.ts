@@ -44,7 +44,6 @@ export class PageFormComponent implements OnInit {
   }
 
   private savePageSuccess(page: Page) {
-    alert("Saved.");
     this.router.navigateByUrl("page/" + page.alias);
   }
 
