@@ -15,6 +15,8 @@ namespace Banico.Identity.ViewModels.Account
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        public string Recaptcha { get; set; }
+
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }

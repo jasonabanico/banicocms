@@ -150,6 +150,11 @@ namespace Banico.Identity.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([FromBody]LoginViewModel model)
         {
+            if (!this.ValidateRecaptcha(model.Recaptcha))
+            {
+                return BadRequest(Errors.AddErrorToModelState("Recaptcha", "Please verify that you are not a robot.", ModelState));
+            }
+
             if (ModelState.IsValid)
             {
                 model.Username = model.Username.ToLowerInvariant();
@@ -234,6 +239,22 @@ namespace Banico.Identity.Controllers
             return BadRequest(Errors.AddErrorToModelState("", "", ModelState));            
         }
 
+        public bool ValidateRecaptcha(string encodedResponse)
+        {
+            if (string.IsNullOrEmpty(encodedResponse)) return false;
+
+            var secret = _configuration["RecaptchaSecretKey"];
+
+            if (string.IsNullOrEmpty(secret)) return true; // Recaptcha disabled
+
+            var client = new System.Net.WebClient();
+
+            var googleReply = client.DownloadString(
+                $"https://www.google.com/recaptcha/api/siteverify?secret={secret}&response={encodedResponse}");
+
+            return JsonConvert.DeserializeObject<RecaptchaResponse>(googleReply).Success;
+        }
+    
         public string GetUserDomain(string email)
         {
             MailAddress address = new MailAddress(email);

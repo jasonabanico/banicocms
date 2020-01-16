@@ -26,7 +26,8 @@ export class IdentityAccountLoginComponent {
 
   public loginForm: FormGroup = this.fb.group({
     username: ["", Validators.required],
-    password: ["", Validators.required]
+    password: ["", Validators.required],
+    recaptchaReactive: ["", Validators.required]
   });
 
   constructor(
@@ -63,7 +64,8 @@ export class IdentityAccountLoginComponent {
       const result = await this.accountService
         .login(
           this.loginForm.value["username"],
-          this.loginForm.value["password"]
+          this.loginForm.value["password"],
+          this.loginForm.value["recaptchaReactive"]
         )
         .pipe(first())
         .toPromise();

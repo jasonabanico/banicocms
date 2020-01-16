@@ -7,6 +7,7 @@
     "AppDbContext": "",
     "AppIdentityDbContext": ""
   },
+  "RecaptchaSecretKey": "",
   "InviteOnly": "true",
   "DomainAsTenant": "n",
   "TenantRegEx": "ENTER-REGEX-HERE",
