@@ -13,10 +13,10 @@ body {
       rgba(255, 255, 255, 0.6)
     ),
     url("https://picsum.photos/2560/1440") no-repeat center center;
-  -webkit-background-size: 100% 100%;
-  -moz-background-size: 100% 100%;
-  -o-background-size: 100% 100%;
-  background-size: 100% 100%;
+  -webkit-background-size: auto auto;
+  -moz-background-size: auto auto;
+  -o-background-size: auto auto;
+  background-size: auto auto;
 }
 
 re-captcha {
