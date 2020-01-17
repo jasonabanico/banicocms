@@ -16,8 +16,8 @@ export class PageFormComponent implements OnInit {
   private isEdit: boolean = false;
 
   public pageForm: FormGroup = this.fb.group({
+    title: ["", Validators.required],
     alias: ["", Validators.required],
-    headline: ["", Validators.required],
     content: ["", Validators.required]
   });
 
