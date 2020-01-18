@@ -11,8 +11,7 @@ export class HomeComponent implements OnInit {
   public appTitle: string;
   public frontText1: string;
   public frontText2: string;
-  public startButtonUrl: string;
-  public startButtonText: string;
+  public startButtons: { Text: string; Url: string; Style: string }[];
   public location: string;
   public content: string;
 
@@ -22,8 +21,7 @@ export class HomeComponent implements OnInit {
     this.appTitle = AppConfig.APP_NAME;
     this.frontText1 = AppConfig.FRONT_TEXT_1;
     this.frontText2 = AppConfig.FRONT_TEXT_2;
-    this.startButtonUrl = AppConfig.START_BUTTON_URL;
-    this.startButtonText = AppConfig.START_BUTTON_TEXT;
+    this.startButtons = AppConfig.START_BUTTONS;
   }
 
   ngOnInit() {

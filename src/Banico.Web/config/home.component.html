@@ -7,7 +7,12 @@
   <p>
     {{ frontText2 }}
   </p>
-  <a class="btn btn-primary btn-lg" href="{{ startButtonUrl }}" role="button">{{
-    startButtonText
-  }}</a>
+  <span *ngFor="let startButton of startButtons">
+    <a
+      class="btn btn-{{ startButton.Style }} btn-lg"
+      href="{{ startButton.Url }}"
+      role="button"
+      >{{ startButton.Text }}</a
+    >
+  </span>
 </div>

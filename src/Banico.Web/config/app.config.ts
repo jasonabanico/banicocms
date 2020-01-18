@@ -9,7 +9,13 @@
   public static FRONT_TEXT_1 =
     "Banico CMS is a lean modular system for building content, communication, collaboration, commerce, and community platforms, with ASP.Net Core, Angular, and Bootstrap.";
   public static FRONT_TEXT_2 = "Explore the features of Banico CMS.";
-  public static START_BUTTON_TEXT = "Learn More";
-  public static START_BUTTON_URL = "https://github.com/jasebanico/banicocms";
+  public static START_BUTTONS = [
+    {
+      Text: "Learn More",
+      Url: "https://github.com/jasebanico/banicocms",
+      Style: "primary"
+    },
+    { Text: "About Us", Url: "https://github.com/jasebanico", Style: "success" }
+  ];
   public static SIGNED_IN_HOME_MODULE = "/forum";
 }
