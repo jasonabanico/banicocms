@@ -16,6 +16,11 @@ namespace Banico.Core.Entities
         public IEnumerable<ContentSectionItem> ContentSectionItems { get; set; }
         public string Content { get; set; }
 
+        public string Tags { get; set; }
+        public ICollection<ContentItemTag> ContentItemTags { get; set; }
+        public ICollection<ContentItemReaction> ContentItemReactions { get; set; }
+        public ICollection<ContentItemReactionCount> ContentItemReactionCounts { get; set; }
+
         // Attributes
         public string Attribute01 { get; set; }
         public string Attribute02 { get; set; }
@@ -105,6 +110,7 @@ namespace Banico.Core.Entities
             
             this.Name = item.Name;
             this.Content = item.Content;
+            this.Tags = item.Tags;
 
             this.Attribute01 = item.Attribute01;
             this.Attribute02 = item.Attribute02;

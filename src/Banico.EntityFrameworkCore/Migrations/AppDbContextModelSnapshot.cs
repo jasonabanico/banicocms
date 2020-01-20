@@ -14,8 +14,7 @@ namespace Banico.EntityFrameworkCore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034");
 
             modelBuilder.Entity("Banico.Core.Entities.Config", b =>
                 {
@@ -49,8 +48,8 @@ namespace Banico.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f4c4f695-f4be-4bf8-9058-5eb920bf0c28",
-                            CreatedDate = new DateTimeOffset(new DateTime(2020, 1, 4, 1, 20, 56, 730, DateTimeKind.Unspecified).AddTicks(5090), new TimeSpan(0, 0, 0, 0, 0)),
+                            Id = "c492cde5-22a0-4edc-ae0b-c74f2bff0994",
+                            CreatedDate = new DateTimeOffset(new DateTime(2020, 1, 20, 6, 13, 46, 874, DateTimeKind.Unspecified).AddTicks(4620), new TimeSpan(0, 0, 0, 0, 0)),
                             Module = "",
                             Name = "initialized",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -58,8 +57,8 @@ namespace Banico.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = "89a36b5a-dc6a-4922-b2c5-cc6f6f2ab61a",
-                            CreatedDate = new DateTimeOffset(new DateTime(2020, 1, 4, 1, 20, 56, 731, DateTimeKind.Unspecified).AddTicks(9890), new TimeSpan(0, 0, 0, 0, 0)),
+                            Id = "0e8337e8-a159-4454-87a3-43a6137d3de3",
+                            CreatedDate = new DateTimeOffset(new DateTime(2020, 1, 20, 6, 13, 46, 876, DateTimeKind.Unspecified).AddTicks(4470), new TimeSpan(0, 0, 0, 0, 0)),
                             Module = "admin",
                             Name = "canActivate",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -134,6 +133,8 @@ namespace Banico.EntityFrameworkCore.Migrations
 
                     b.Property<string>("SectionItems");
 
+                    b.Property<string>("Tags");
+
                     b.Property<string>("Tenant");
 
                     b.Property<string>("Type");
@@ -145,6 +146,47 @@ namespace Banico.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContentItems");
+                });
+
+            modelBuilder.Entity("Banico.Core.Entities.ContentItemReaction", b =>
+                {
+                    b.Property<string>("ContentItemId");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("Reaction");
+
+                    b.Property<string>("Username");
+
+                    b.HasKey("ContentItemId", "UserId", "Reaction");
+
+                    b.ToTable("ContentItemReaction");
+                });
+
+            modelBuilder.Entity("Banico.Core.Entities.ContentItemReactionCount", b =>
+                {
+                    b.Property<string>("ContentItemId");
+
+                    b.Property<string>("Reaction");
+
+                    b.Property<int>("Count");
+
+                    b.Property<int>("Score");
+
+                    b.HasKey("ContentItemId", "Reaction");
+
+                    b.ToTable("ContentItemReactionCount");
+                });
+
+            modelBuilder.Entity("Banico.Core.Entities.ContentItemTag", b =>
+                {
+                    b.Property<string>("ContentItemId");
+
+                    b.Property<string>("Tag");
+
+                    b.HasKey("ContentItemId", "Tag");
+
+                    b.ToTable("ContentItemTags");
                 });
 
             modelBuilder.Entity("Banico.Core.Entities.ContentSectionItem", b =>
@@ -247,6 +289,30 @@ namespace Banico.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SectionItems");
+                });
+
+            modelBuilder.Entity("Banico.Core.Entities.ContentItemReaction", b =>
+                {
+                    b.HasOne("Banico.Core.Entities.ContentItem")
+                        .WithMany("ContentItemReactions")
+                        .HasForeignKey("ContentItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Banico.Core.Entities.ContentItemReactionCount", b =>
+                {
+                    b.HasOne("Banico.Core.Entities.ContentItem")
+                        .WithMany("ContentItemReactionCounts")
+                        .HasForeignKey("ContentItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Banico.Core.Entities.ContentItemTag", b =>
+                {
+                    b.HasOne("Banico.Core.Entities.ContentItem")
+                        .WithMany("ContentItemTags")
+                        .HasForeignKey("ContentItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Banico.Core.Entities.ContentSectionItem", b =>

@@ -72,6 +72,16 @@ namespace Banico.EntityFrameworkCore
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<ContentItemTag>(i => {
+                i.HasKey(x => new { x.ContentItemId, x.Tag });
+            });
+            builder.Entity<ContentItemReaction>(i => {
+                i.HasKey(x => new { x.ContentItemId, x.UserId, x.Reaction });
+            });
+            builder.Entity<ContentItemReactionCount>(i => {
+                i.HasKey(x => new { x.ContentItemId, x.Reaction });
+            });
             
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
@@ -137,6 +147,7 @@ namespace Banico.EntityFrameworkCore
         public DbSet<SectionItem> SectionItems { get; set; }
         public DbSet<ContentSectionItem> ContentSectionItems { get; set; }
         public DbSet<ContentItem> ContentItems { get; set; }
+        public DbSet<ContentItemTag> ContentItemTags { get; set; }
         public DbSet<Config> Configs { get; set; }
         public DbSet<Invite> Invites { get; set; }
     }
