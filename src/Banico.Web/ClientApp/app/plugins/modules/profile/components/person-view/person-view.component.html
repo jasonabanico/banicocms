@@ -1,0 +1,47 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="text-center">
+      <img
+        *ngIf="profile?.avatarHash"
+        class="rounded-circle mb-3"
+        width="100"
+        src="https://www.gravatar.com/avatar/{{
+          profile?.avatarHash
+        }}?size=100&d=mp"
+        alt=""
+      />
+
+      <div class="h1 m-0 mb-3">{{ profile?.alias }}</div>
+
+      <div class="h5 text-muted">
+        {{ profile?.headline }}
+      </div>
+    </div>
+
+    <hr />
+
+    <span *ngIf="canEdit">
+      <a
+        href="/profile/edit/{{ profile?.type }}/{{ profile?.alias }}"
+        class="btn btn-primary btn-sm"
+      >
+        <i class="fas fa-pencil-alt"></i> Edit</a
+      >
+      <br />
+    </span>
+
+    <app-plugins-rich-text [text]="profile?.content"></app-plugins-rich-text>
+  </div>
+  <div class="card-footer">
+    <p *ngIf="profile?.updatedDate" class="text-muted">
+      Last Update: {{ profile?.formattedUpdatedDate() }} ({{
+        profile?.updatedFromNow()
+      }})
+    </p>
+    <p *ngIf="!profile?.updatedDate" class="text-muted">
+      Created: {{ profile?.formattedCreatedDate }} ({{
+        profile?.createdFromNow()
+      }})
+    </p>
+  </div>
+</div>

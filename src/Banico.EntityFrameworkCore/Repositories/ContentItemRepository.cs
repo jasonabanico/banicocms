@@ -616,7 +616,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             var aliasExists = await this.AliasExists(item);
             if (aliasExists)
             {
-                throw new ArgumentException("Alias " + item.Alias + " exists for this module.");
+                throw new ArgumentException("Alias " + item.Alias + " exists for this module and type.");
             }
 
             item.Id = Guid.NewGuid().ToString();
@@ -795,13 +795,13 @@ namespace Banico.EntityFrameworkCore.Repositories
             string alias, 
             string email)
         {
-            var profileItems = await this.Get(tenant, "", "", alias, "profile", "", "", userId, "",
+            var profileItems = await this.Get(tenant, "", "", alias, "profile", "person", "", userId, "",
                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", "", false, false, "", 0, 1, 0);
 
             if (profileItems.Count == 0)
             {
-                ContentItem profileItem = new ContentItem("profile", "");
+                ContentItem profileItem = new ContentItem("profile", "person");
                 profileItem.Tenant = tenant;
                 profileItem.Id = Guid.NewGuid().ToString();
                 profileItem.Alias = alias;
@@ -811,7 +811,6 @@ namespace Banico.EntityFrameworkCore.Repositories
                 profileItem.CreatedBy = userId;
                 profileItem.CreatedDate = DateTimeOffset.UtcNow;
                 profileItem.UpdatedDate = DateTimeOffset.UtcNow;
-                profileItem.Attribute02 = "in"; // individual
 
                 using (var md5 = MD5.Create())
                 {

@@ -162,6 +162,7 @@ export const ContentItemsQuery = gql`
       updatedDate
       content
       snippet
+      tags
       attribute01
       attribute02
       attribute03

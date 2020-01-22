@@ -18,6 +18,7 @@ namespace Banico.Api.Models
             Field<StringGraphType>("module");
             Field<StringGraphType>("type");
             Field<StringGraphType>("content");
+            Field<StringGraphType>("tags");
             Field<StringGraphType>("attribute01");
             Field<StringGraphType>("attribute02");
             Field<StringGraphType>("attribute03");

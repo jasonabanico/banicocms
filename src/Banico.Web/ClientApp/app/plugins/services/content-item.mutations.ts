@@ -10,6 +10,7 @@ export const AddOrUpdateContentItemMutation = gql`
     $parentId: String
     $sectionItems: String
     $content: String
+    $tags: String
     $attribute01: String
     $attribute02: String
     $attribute03: String
@@ -42,6 +43,7 @@ export const AddOrUpdateContentItemMutation = gql`
         parentId: $parentId
         sectionItems: $sectionItems
         content: $content
+        tags: $tags
         attribute01: $attribute01
         attribute02: $attribute02
         attribute03: $attribute03

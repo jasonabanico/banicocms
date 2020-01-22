@@ -281,6 +281,7 @@ export class ContentItemService {
           owners: contentItem.owners,
           sectionItems: contentItem.sectionItems,
           content: contentItem.content,
+          tags: contentItem.tags,
           attribute01: contentItem.attribute01,
           attribute02: contentItem.attribute02,
           attribute03: contentItem.attribute03,

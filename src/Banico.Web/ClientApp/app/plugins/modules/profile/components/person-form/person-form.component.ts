@@ -2,18 +2,18 @@
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "../../../../../shared/services/auth.service";
-import { Profile } from "../../entities/profile";
+import { PersonProfile } from "../../entities/person-profile";
 import { ProfileService } from "../../services/profile.service";
 
 @Component({
-  selector: "app-plugins-profile-form",
-  templateUrl: "./form.component.html",
+  selector: "app-plugins-profile-person-form",
+  templateUrl: "./person-form.component.html",
   providers: [ProfileService]
 })
-export class ProfileFormComponent implements OnInit {
-  private profile: Profile;
+export class PersonFormComponent implements OnInit {
+  private profile: PersonProfile;
   private sub: any;
-  public profileForm: FormGroup = this.fb.group({
+  public personProfileForm: FormGroup = this.fb.group({
     alias: ["", Validators.required],
     headline: ["", Validators.required],
     content: ["", Validators.required]
@@ -38,24 +38,24 @@ export class ProfileFormComponent implements OnInit {
         type = params["type"];
       }
       this.profileService
-        .getByTypeAndAlias(type, alias)
+        .getPersonProfile(alias)
         .subscribe(profile => this.setProfile(profile));
     });
   }
 
-  public setProfile(profile: Profile) {
-    this.profile = profile;
-    this.profileForm.patchValue({
-      alias: profile.alias,
-      headline: profile.headline,
-      content: profile.content
+  public setProfile(personProfile: PersonProfile) {
+    this.profile = personProfile;
+    this.personProfileForm.patchValue({
+      alias: personProfile.alias,
+      headline: personProfile.headline,
+      content: personProfile.content
     });
   }
 
   public save() {
-    this.profile.content = this.profileForm.value["content"];
-    this.profile.headline = this.profileForm.value["headline"];
-    this.profileService.addOrUpdate(this.profile).subscribe(
+    this.profile.content = this.personProfileForm.value["content"];
+    this.profile.headline = this.personProfileForm.value["headline"];
+    this.profileService.addOrUpdatePersonProfile(this.profile).subscribe(
       result => {
         this.router.navigate([
           "/profile/" + this.profile.type + "/" + this.profile.alias

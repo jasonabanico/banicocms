@@ -1,15 +1,15 @@
 ﻿import { Component, OnInit, OnDestroy, Inject } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { Profile } from "../../entities/profile";
+import { OrganizationProfile } from "../../entities/organization-profile";
 import { ProfileService } from "../../services/profile.service";
 import { AuthService } from "../../../../../shared/services/auth.service";
 
 @Component({
-  selector: "app-plugins-profile-home",
-  templateUrl: "./home.component.html"
+  selector: "app-plugins-profile-organization-view",
+  templateUrl: "./organization-view.component.html"
 })
-export class ProfileHomeComponent implements OnInit {
-  public profile: Profile;
+export class OrganizationViewComponent implements OnInit {
+  public profile: OrganizationProfile;
   private sub: any;
   public canEdit: boolean;
 
@@ -21,19 +21,16 @@ export class ProfileHomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.profile = new Profile(null);
+    this.profile = new OrganizationProfile(null);
     this.sub = this.route.params.subscribe(params => {
       var alias = this.authService.getUserName();
       var type = "in";
       if (params["alias"]) {
         alias = params["alias"];
       }
-      if (params["type"]) {
-        type = params["type"];
-      }
       const isAdmin = this.authService.isAdmin();
       const username = this.authService.getUserName();
-      this.profileService.getByTypeAndAlias(type, alias).subscribe(profile => {
+      this.profileService.getOrganizationProfile(alias).subscribe(profile => {
         this.profile = profile;
         if (profile.ownerUserIds.includes(username) || isAdmin) {
           this.canEdit = true;

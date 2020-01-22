@@ -1,7 +1,7 @@
 import { ContentItem } from "../../../../entities/content-item";
 import * as moment from "moment";
 
-export class Profile {
+export class PersonProfile {
   id: string;
   owners: string;
   ownerUserIds: string;
@@ -14,7 +14,11 @@ export class Profile {
   headline: string;
 
   constructor(private contentItem: ContentItem) {
-    if (contentItem && contentItem.module === "profile") {
+    if (
+      contentItem &&
+      contentItem.module === "profile" &&
+      contentItem.type === "person"
+    ) {
       this.id = contentItem.id;
       this.owners = contentItem.owners;
       this.ownerUserIds = contentItem.ownerUserIds;

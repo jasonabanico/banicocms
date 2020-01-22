@@ -2,37 +2,59 @@ import { Injectable, Inject } from "@angular/core";
 import { HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map, catchError } from "rxjs/operators";
-import { Profile } from "../entities/profile";
+import { PersonProfile } from "../entities/person-profile";
 import { ContentItemSearch } from "../../../entities/contentItemSearch";
 import { Router, ActivatedRoute } from "@angular/router";
 import { PluginService } from "../../../services/plugin.service";
 import { ContentItem } from "../../../../entities/content-item";
+import { OrganizationProfile } from "../entities/organization-profile";
 
 @Injectable()
 export class ProfileService extends PluginService {
-  public get(id: string): Observable<Profile> {
-    return this.contentItemService.get(id).pipe(
-      map(item => {
-        return new Profile(item);
-      })
-    );
-  }
-
-  public getByTypeAndAlias(type: string, alias: string): Observable<Profile> {
+  public getPersonProfile(alias: string): Observable<PersonProfile> {
     var contentItemSearch = new ContentItemSearch();
     contentItemSearch.module = "profile";
-    contentItemSearch.attribute02 = type;
+    contentItemSearch.type = "person";
     contentItemSearch.alias = alias;
 
     return this.contentItemService.getOne(contentItemSearch).pipe(
       map(item => {
-        return new Profile(item);
+        return new PersonProfile(item);
       })
     );
   }
 
-  public addOrUpdate(profile: Profile): Observable<boolean> {
-    let contentItem: ContentItem = profile.toContentItem();
+  public getOrganizationProfile(
+    alias: string
+  ): Observable<OrganizationProfile> {
+    var contentItemSearch = new ContentItemSearch();
+    contentItemSearch.module = "profile";
+    contentItemSearch.type = "organization";
+    contentItemSearch.alias = alias;
+
+    return this.contentItemService.getOne(contentItemSearch).pipe(
+      map(item => {
+        return new OrganizationProfile(item);
+      })
+    );
+  }
+
+  public addOrUpdatePersonProfile(
+    personProfile: PersonProfile
+  ): Observable<boolean> {
+    let contentItem: ContentItem = personProfile.toContentItem();
+    return this.contentItemService.addOrUpdate(contentItem).pipe(
+      map(res => {
+        return true;
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  public addOrUpdateOrganizationProfile(
+    organizationProfile: OrganizationProfile
+  ): Observable<boolean> {
+    let contentItem: ContentItem = organizationProfile.toContentItem();
     return this.contentItemService.addOrUpdate(contentItem).pipe(
       map(res => {
         return true;

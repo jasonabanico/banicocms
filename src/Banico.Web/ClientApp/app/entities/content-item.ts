@@ -19,6 +19,7 @@ export class ContentItem {
   content: string;
   htmlContent: string;
   snippet: string;
+  tags: string;
   attribute01: string;
   attribute02: string;
   attribute03: string;
