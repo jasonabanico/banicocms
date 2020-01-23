@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   public startButtons: { Text: string; Url: string; Style: string }[];
   public location: string;
   public content: string;
+  public isLoggedIn: boolean;
 
   readonly SECTION_DELIM: string = "*";
 
@@ -27,16 +28,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.location = "";
     this.content = "";
+    this.isLoggedIn = this.authService.checkLogin("", false);
 
     var signedInHomeModule = AppConfig.SIGNED_IN_HOME_MODULE;
-    if (signedInHomeModule && this.authService.checkLogin("", false)) {
+    if (signedInHomeModule && this.isLoggedIn) {
       this.router.navigateByUrl(signedInHomeModule);
     }
-  }
-
-  public search() {
-    this.router.navigateByUrl(
-      "directory/search/" + this.content + this.SECTION_DELIM + this.location
-    );
   }
 }

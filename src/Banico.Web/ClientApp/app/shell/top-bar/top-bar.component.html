@@ -9,19 +9,36 @@
             class="nav-link"
             href="/account/login/?returnUrl={{ location.path() }}"
           >
-            <i class="fas fa-sign-in-alt"></i>
+            <span class="d-none d-sm-block"
+              >Sign in <i class="fas fa-sign-in-alt"></i
+            ></span>
+            <span class="d-block d-sm-none"
+              ><i class="fas fa-sign-in-alt"></i
+            ></span>
           </a>
         </span>
         <span *ngIf="loggedInAs">
-          <a class="nav-link" href="/manage">
-            <img
-              class="rounded-circle"
-              width="30"
-              src="https://www.gravatar.com/avatar/{{
-                avatarHash
-              }}?size=30&d=mp"
-              alt="{{ loggedInAs }}"
-            />
+          <a class="nav-link d-none d-sm-block" href="/manage">
+            <span class="d-none d-sm-block">
+              {{ loggedInAs }}
+              <img
+                class="rounded-circle"
+                width="30"
+                src="https://www.gravatar.com/avatar/{{
+                  avatarHash
+                }}?size=30&d=mp"
+                alt="{{ loggedInAs }}"
+            /></span>
+            <span class="d-block d-sm-none">
+              <img
+                class="rounded-circle"
+                width="30"
+                src="https://www.gravatar.com/avatar/{{
+                  avatarHash
+                }}?size=30&d=mp"
+                alt="{{ loggedInAs }}"
+              />
+            </span>
           </a>
         </span>
       </li>
