@@ -1,8 +1,8 @@
 ﻿import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ShellModule } from "../../../shell/shell.module";
 
-import { RichTextModule } from "../rich-text/rich-text.module";
 import { PageRoutingModule } from "./page.routing";
 import { PageComponent } from "./components/page.component";
 import { PageItemComponent } from "./components/item/item.component";
@@ -13,8 +13,8 @@ import { PageFormComponent } from "./components/form/form.component";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    PageRoutingModule,
-    RichTextModule
+    ShellModule,
+    PageRoutingModule
   ],
   declarations: [PageComponent, PageItemComponent, PageFormComponent],
   bootstrap: [PageComponent]
