@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   public location: string;
   public content: string;
   public isLoggedIn: boolean;
+  public loggedInAs: string;
 
   readonly SECTION_DELIM: string = "*";
 
@@ -29,6 +30,10 @@ export class HomeComponent implements OnInit {
     this.location = "";
     this.content = "";
     this.isLoggedIn = this.authService.checkLogin("", false);
+
+    if (this.isLoggedIn) {
+      this.loggedInAs = this.authService.getUserName();
+    }
 
     var signedInHomeModule = AppConfig.SIGNED_IN_HOME_MODULE;
     if (signedInHomeModule && this.isLoggedIn) {
