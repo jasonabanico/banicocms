@@ -166,8 +166,8 @@ namespace Banico.Identity.Controllers
                     if (!await _userManager.IsEmailConfirmedAsync(user))
                     {
                         ModelState.AddModelError(string.Empty, 
-                                    "You must have a confirmed email to log in.");
-                        return BadRequest(Errors.AddErrorToModelState("Email", "You must have a confirmed email to log in.", ModelState));
+                                    "You must have a confirmed email to sign in.");
+                        return BadRequest(Errors.AddErrorToModelState("Email", "You must have a confirmed email to sign in.", ModelState));
                     }
                 }
 
