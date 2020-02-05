@@ -32,7 +32,7 @@
             href="{{ sectionBarService.pathUrlRoot }}/{{
               sectionBarItem.pathUrls[i]
             }}"
-            >{{ pathName }}</a
+            >{{ pathName | decodeUri }}</a
           >
         </li>
         <li class="breadcrumb-item" *ngIf="sectionBarItem.sectionItem.name">
