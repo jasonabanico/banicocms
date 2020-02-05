@@ -1,134 +1,260 @@
-import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { SectionItem } from '../../../entities/section-item';
+import { Injectable, Inject } from "@angular/core";
+import {
+  HttpClient,
+  HttpResponse,
+  HttpHeaders,
+  HttpRequest
+} from "@angular/common/http";
+import { first } from "rxjs/operators";
+import { SectionItem } from "../../../entities/section-item";
 //import { status, json } from '../../../shared/fetch';
 //import { Observable } from 'rxjs/Observable';
-import { SectionsService } from '../../../shared/services/sections.service';
+import { SectionsService } from "../../../shared/services/sections.service";
 
 @Injectable()
 export class SectionsFileService {
-    sectionApiBaseUrl: string;
+  sectionApiBaseUrl: string;
+  createdSectionItems: SectionItem[] = [];
 
-    readonly SEGMENT_DELIM: string = '_';
-    readonly TYPE_DELIM: string = '~';
-    readonly SECTION_DELIM: string = '*';
+  readonly SEGMENT_DELIM: string = "_";
+  readonly TYPE_DELIM: string = "~";
+  readonly SECTION_DELIM: string = "*";
 
-    constructor(
-        @Inject(SectionsService) private sectionService: SectionsService,
-        private http: HttpClient,
-        @Inject('BASE_URL') private baseUrl: string
-    ) {
-        this.sectionApiBaseUrl = `${this.baseUrl}api/Section`;
-    }
+  constructor(
+    @Inject(SectionsService) private sectionsService: SectionsService,
+    private http: HttpClient,
+    @Inject("BASE_URL") private baseUrl: string
+  ) {
+    this.sectionApiBaseUrl = `${this.baseUrl}api/Section`;
+  }
 
-    public UploadFile(sectionType: string, inputString: string) {
-        var lines = inputString.split('\n');
-        this.ProcessPair(new SectionItem(), sectionType, '', '', '', lines[0].split(','), lines);
-    }
+  public UploadFile(section: string, inputString: string) {
+    //console.log(JSON.stringify(inputString));
+    var lines = inputString.split("\n");
+    var line = lines[0].split(",");
+    //console.log("PROCESSING LINE: " + line);
+    var name = line[0];
+    var alias = line[1];
+    line.splice(0, 2);
+    lines.splice(0, 1);
+    this.Process(section, "", name, alias, line, lines, 0);
+  }
 
-    public ProcessPair(
-        sectionItem: SectionItem, 
-        section: string, 
-        parentId: string, 
-        pathName: string, 
-        path: string, 
-        remainingFields: string[], 
-        lines: string[]) {
-        if (remainingFields.length > 0) {
-            var name: string = remainingFields[0];
-            if (name) {
-                var alias: string = remainingFields[1].replace(/(\r\n|\n|\r)/gm,"");;
-                remainingFields.splice(0, 2);
+  private Process(
+    section: string,
+    parentId: string,
+    name: string,
+    alias: string,
+    remainingItems: string[],
+    remainingLines: string[],
+    lineNumber: number
+  ) {
+    // console.log("PROCESSING: " + name);
+    const isRoot = !parentId;
+    // console.log(
+    //   "CHECKING [" +
+    //     section +
+    //     "] [" +
+    //     alias +
+    //     "] [" +
+    //     parentId +
+    //     "] [" +
+    //     isRoot +
+    //     "]"
+    // );
+    this.sectionsService
+      .getSectionItems("", section, "", alias, "", parentId, isRoot)
+      //.pipe(first())
+      .subscribe(sectionItems => {
+        // console.log("EXIST CHECK: " + JSON.stringify(sectionItems));
+        var sectionItem = null;
 
-                this.sectionService.getSectionItems(
-                    '', '', '', '', name, parentId, false
-                )
-                    .subscribe(sectionItem => this.ProcessSectionItem(
-                        sectionItem[0], 
-                        section, 
-                        name, 
-                        alias, 
-                        parentId, 
-                        pathName, 
-                        path, 
-                        remainingFields, 
-                        lines));
-            } else {
-                if (lines.length > 0) {
-                    lines.splice(0, 1);
-                    this.ProcessPair(new SectionItem(), section, '', '', '', lines[0].split(','), lines);
-                }
-            }
+        if (sectionItems && sectionItems.length > 0 && sectionItems[0])
+          sectionItem = sectionItems[0];
+
+        if (!sectionItem) {
+          sectionItem = this.SearchNewSectionItems(alias, parentId);
         }
-        else {
-            if (lines.length > 0) {
-                lines.splice(0, 1);
-                this.ProcessPair(new SectionItem(), section, '', '', '', lines[0].split(','), lines);
-            }
+
+        if (!sectionItem) {
+          // console.log(name + " does not exist.");
+          sectionItem = new SectionItem();
+          sectionItem.name = name;
+          sectionItem.alias = alias;
+          sectionItem.section = section;
+          if (parentId) {
+            this.sectionsService
+              .getSectionItems(parentId, section, "", "", "", "", false)
+              .pipe(first())
+              .subscribe(sectionItems => {
+                const parentSectionItem = sectionItems[0];
+                sectionItem = this.SetSectionItemParent(
+                  parentSectionItem,
+                  sectionItem
+                );
+                this.AddSectionItem(
+                  section,
+                  sectionItem,
+                  remainingItems,
+                  remainingLines,
+                  lineNumber
+                );
+              });
+          } else {
+            this.AddSectionItem(
+              section,
+              sectionItem,
+              remainingItems,
+              remainingLines,
+              lineNumber
+            );
+          }
+        } else {
+          // console.log(name + " exists.");
+          this.ProcessNext(
+            section,
+            sectionItem.id,
+            remainingItems,
+            remainingLines,
+            lineNumber
+          );
         }
+      });
+  }
+
+  private SetSectionItemParent(
+    parentSectionItem: SectionItem,
+    sectionItem: SectionItem
+  ) {
+    // console.log("PARENT IS " + JSON.stringify(parentSectionItem));
+    sectionItem.parentId = parentSectionItem.id;
+    if (parentSectionItem.pathName) {
+      sectionItem.pathName =
+        parentSectionItem.pathName +
+        this.SEGMENT_DELIM +
+        decodeURIComponent(parentSectionItem.name);
+    } else {
+      sectionItem.pathName = parentSectionItem.name;
+    }
+    // console.log("PATHNAME = " + sectionItem.pathName);
+
+    if (parentSectionItem.pathUrl) {
+      sectionItem.pathUrl =
+        parentSectionItem.pathUrl +
+        this.SEGMENT_DELIM +
+        parentSectionItem.alias;
+    } else {
+      sectionItem.pathUrl = parentSectionItem.alias;
+    }
+    // console.log("PATHURL = " + sectionItem.pathUrl);
+
+    return sectionItem;
+  }
+
+  private AddSectionItem(
+    section: string,
+    sectionItem: SectionItem,
+    remainingItems: string[],
+    remainingLines: string[],
+    lineNumber: number
+  ) {
+    // console.log(JSON.stringify(sectionItem));
+    this.sectionsService
+      .addOrUpdateSectionItem(
+        "",
+        sectionItem.section,
+        sectionItem.parentId,
+        sectionItem.pathUrl,
+        sectionItem.pathName,
+        sectionItem.name,
+        sectionItem.alias
+      )
+      .subscribe(newSectionItem => {
+        // console.log(sectionItem.name + " created with ID " + newSectionItem.id);
+        sectionItem.id = newSectionItem.id;
+        this.createdSectionItems.push(sectionItem);
+        this.ProcessNext(
+          section,
+          newSectionItem.id,
+          remainingItems,
+          remainingLines,
+          lineNumber
+        );
+      });
+  }
+
+  private ProcessNext(
+    section: string,
+    parentId: string,
+    remainingItems: string[],
+    remainingLines: string[],
+    lineNumber: number
+  ) {
+    if (remainingItems.length > 0) {
+      const name = remainingItems[0];
+      // console.log(
+      //   remainingItems.length +
+      //     " more items in the line: " +
+      //     JSON.stringify(remainingItems) +
+      //     " Next is " +
+      //     name +
+      //     " and parent ID " +
+      //     parentId
+      // );
+      const alias = remainingItems[1];
+      remainingItems.splice(0, 2);
+      this.Process(
+        section,
+        parentId,
+        name,
+        alias,
+        remainingItems,
+        remainingLines,
+        lineNumber
+      );
+    } else {
+      // console.log("Moving to the next line " + lineNumber + 1);
+      var line = remainingLines[0].split(",");
+      const name = line[0];
+      const alias = line[1];
+      // console.log("PROCESSING LINE: " + line);
+      line.splice(0, 2);
+      remainingLines.splice(0, 1);
+      this.Process(
+        section,
+        "",
+        name,
+        alias,
+        line,
+        remainingLines,
+        lineNumber + 1
+      );
+    }
+  }
+
+  private SearchNewSectionItems(alias: string, parentId: string) {
+    // console.log(
+    //   "Searching New Section Items for " + alias + " and " + parentId
+    // );
+    for (var i = 0; i < this.createdSectionItems.length; i++) {
+      const sectionItem = this.createdSectionItems[i];
+      // console.log(
+      //   "Comparing " +
+      //     sectionItem.alias +
+      //     " and " +
+      //     alias +
+      //     " plus " +
+      //     sectionItem.parentId +
+      //     " and " +
+      //     parentId
+      // );
+      if (sectionItem.alias === alias && sectionItem.parentId === parentId) {
+        // console.log("FOUND! ID is " + sectionItem.id);
+        return sectionItem;
+      }
     }
 
-    public ProcessSectionItem(
-        sectionItem: SectionItem, 
-        sectionType: string, 
-        name: string, 
-        alias: string, 
-        parentId: string, 
-        pathName: string, 
-        path: string, 
-        remainingFields: string[], 
-        lines: string[]) {
-        if (isNaN(Number(sectionItem.id)) || (Number(sectionItem.id) === 0)) {
-            if (name !== '') {
-                sectionItem.name = name;
-                sectionItem.alias = alias;
-                sectionItem.section = sectionType;
-                sectionItem.pathName = pathName;
-                sectionItem.pathUrl = path;
-                sectionItem.parentId = parentId;
-
-                if (pathName) {
-                    pathName = sectionItem.pathName + this.SEGMENT_DELIM;
-                }
-
-                if (path) {
-                    path = sectionItem.pathUrl + this.SEGMENT_DELIM;
-                }
-
-                this.sectionService.addOrUpdateSectionItem(
-                    sectionItem.id,
-                    sectionItem.section,
-                    sectionItem.parentId,
-                    sectionItem.pathUrl,
-                    sectionItem.pathName,
-                    sectionItem.name,
-                    sectionItem.alias
-                    )
-                    .subscribe(newSection => this.ProcessPair(newSection,
-                        sectionType, 
-                        newSection.id, 
-                        pathName + sectionItem.name, 
-                        path + newSection.alias, 
-                        remainingFields,
-                        lines));
-            }
-        } 
-        else {
-            if (pathName) {
-                pathName = pathName + this.SEGMENT_DELIM;
-            }
-
-            if (path) {
-                path = path + this.SEGMENT_DELIM;
-            }
-
-            this.ProcessPair(sectionItem,
-                sectionType, 
-                sectionItem.id, 
-                pathName + sectionItem.name, 
-                path + sectionItem.alias, 
-                remainingFields,
-                lines);
-        }
-    }
+    // console.log("NOT FOUND");
+    return null;
+  }
 }
