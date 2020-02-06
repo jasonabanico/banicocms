@@ -2,7 +2,7 @@ import { Component, Input } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
-  selector: "app-plugins-embed",
+  selector: "app-shell-embed",
   templateUrl: "./embed.component.html"
 })
 export class EmbedComponent {
