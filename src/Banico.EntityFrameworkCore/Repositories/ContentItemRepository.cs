@@ -795,7 +795,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             string alias, 
             string email)
         {
-            var profileItems = await this.Get(tenant, "", "", alias, "profile", "person", "", userId, "",
+            var profileItems = await this.Get(tenant, "", "", alias, "profile", "in", "", userId, "",
                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", "", false, false, "", 0, 1, 0);
 
