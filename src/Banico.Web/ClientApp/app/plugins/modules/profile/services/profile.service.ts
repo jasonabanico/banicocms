@@ -14,7 +14,7 @@ export class ProfileService extends PluginService {
   public getPersonProfile(alias: string): Observable<PersonProfile> {
     var contentItemSearch = new ContentItemSearch();
     contentItemSearch.module = "profile";
-    contentItemSearch.type = "person";
+    contentItemSearch.type = "in";
     contentItemSearch.alias = alias;
 
     return this.contentItemService.getOne(contentItemSearch).pipe(
@@ -29,7 +29,7 @@ export class ProfileService extends PluginService {
   ): Observable<OrganizationProfile> {
     var contentItemSearch = new ContentItemSearch();
     contentItemSearch.module = "profile";
-    contentItemSearch.type = "organization";
+    contentItemSearch.type = "org";
     contentItemSearch.alias = alias;
 
     return this.contentItemService.getOne(contentItemSearch).pipe(

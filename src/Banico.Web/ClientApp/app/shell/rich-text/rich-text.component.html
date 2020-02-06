@@ -1,4 +1,10 @@
 <span *ngFor="let element of elements; let i = index">
-  <div *ngIf="!isEmbed[i]" class="card-text" markdown [data]="element"></div>
+  <div
+    *ngIf="!isEmbed[i]"
+    class="card-text"
+    markdown
+    [data]="element"
+    [ngStyle]="fontFamily"
+  ></div>
   <app-shell-embed *ngIf="isEmbed[i]" [tagId]="element"></app-shell-embed>
 </span>

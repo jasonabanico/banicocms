@@ -17,18 +17,18 @@ export class PersonProfile {
     if (
       contentItem &&
       contentItem.module === "profile" &&
-      contentItem.type === "person"
+      contentItem.type === "in"
     ) {
       this.id = contentItem.id;
       this.owners = contentItem.owners;
       this.ownerUserIds = contentItem.ownerUserIds;
       this.alias = contentItem.alias;
+      this.type = contentItem.type;
       this.content = contentItem.content;
       this.createdDate = contentItem.createdDate;
       this.updatedDate = contentItem.updatedDate;
       this.avatarHash = contentItem.attribute01;
-      this.type = contentItem.attribute02;
-      this.headline = contentItem.attribute03;
+      this.headline = contentItem.attribute02;
     }
   }
 
@@ -39,9 +39,9 @@ export class PersonProfile {
     output.id = this.id;
     output.owners = this.owners;
     output.alias = this.alias;
+    output.type = this.type;
     output.content = this.content;
     output.attribute01 = this.avatarHash;
-    output.attribute02 = this.type;
     output.attribute03 = this.headline;
 
     return output;
