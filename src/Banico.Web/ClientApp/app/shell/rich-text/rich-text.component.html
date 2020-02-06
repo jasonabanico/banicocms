@@ -4,7 +4,8 @@
     class="card-text"
     markdown
     [data]="element"
-    [ngStyle]="fontFamily"
+    [style.font-family]="fontFamilyStyle"
+    [style.font-size]="fontSizeStyle"
   ></div>
   <app-shell-embed *ngIf="isEmbed[i]" [tagId]="element"></app-shell-embed>
 </span>

@@ -75,7 +75,9 @@
       "page/manage,canActivate,admin",
       "profile,isEnabled,y",
       "profile/view,canActivate,user",
-      "profile/manage,canActivate,user"
+      "profile/manage,canActivate,user",
+      "profile-in/manage,canActivate,user",
+      "profile-org/manage,canActivate,user"
     ]
   },
   "Content": {
