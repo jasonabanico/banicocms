@@ -32,11 +32,11 @@
             href="{{ sectionBarService.pathUrlRoot }}/{{
               sectionBarItem.pathUrls[i]
             }}"
-            >{{ pathName | decodeUri }}</a
+            >{{ pathName }}</a
           >
         </li>
         <li class="breadcrumb-item" *ngIf="sectionBarItem.sectionItem.name">
-          {{ sectionBarItem.sectionItem.name | decodeUri }}
+          {{ sectionBarItem.sectionItem.name }}
         </li>
 
         <span *ngIf="sectionBarItem.showDropdown">
@@ -71,7 +71,7 @@
             href="{{ sectionBarService.pathUrlRoot }}/{{
               sectionBarService.pathWithAlias(childSectionItem)
             }}"
-            >{{ childSectionItem.name | decodeUri }}</a
+            >{{ childSectionItem.name }}</a
           >
         </div>
         <br />

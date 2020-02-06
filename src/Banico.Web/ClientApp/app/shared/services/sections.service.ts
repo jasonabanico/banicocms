@@ -229,8 +229,8 @@ export class SectionsService {
           section: section,
           parentId: parentId,
           pathUrl: pathUrl,
-          pathName: encodeURIComponent(pathName),
-          name: encodeURIComponent(name),
+          pathName: pathName,
+          name: name,
           alias: alias
         }
       })

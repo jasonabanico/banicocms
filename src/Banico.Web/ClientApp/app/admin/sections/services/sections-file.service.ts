@@ -132,7 +132,7 @@ export class SectionsFileService {
       sectionItem.pathName =
         parentSectionItem.pathName +
         this.SEGMENT_DELIM +
-        decodeURIComponent(parentSectionItem.name);
+        parentSectionItem.name;
     } else {
       sectionItem.pathName = parentSectionItem.name;
     }
