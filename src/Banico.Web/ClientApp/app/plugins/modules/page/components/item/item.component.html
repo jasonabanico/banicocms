@@ -7,6 +7,16 @@
   >
 </p>
 
-<h1>{{ page.title }}</h1>
-<app-shell-rich-text [text]="page?.content"></app-shell-rich-text>
-<p class="text-muted">Last Update: {{ page.updatedDate | date }}</p>
+<div class="card mb-3">
+  <div class="card-body">
+    <h1>{{ page.title }}</h1>
+    <app-shell-rich-text
+      [text]="page?.content"
+      fontFamily="serif"
+      fontSize="21px"
+    ></app-shell-rich-text>
+  </div>
+  <div class="card-footer">
+    <p class="text-muted">Last Update: {{ page.updatedDate | date }}</p>
+  </div>
+</div>
