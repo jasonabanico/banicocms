@@ -42,7 +42,7 @@ export class PersonProfile {
     output.type = this.type;
     output.content = this.content;
     output.attribute01 = this.avatarHash;
-    output.attribute03 = this.headline;
+    output.attribute02 = this.headline;
 
     return output;
   }
