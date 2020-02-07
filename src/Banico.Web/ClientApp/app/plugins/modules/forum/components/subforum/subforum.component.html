@@ -32,26 +32,21 @@
     <div class="card-text" markdown [data]="subforum?.description"></div>
   </div>
 
-  <div class="card-footer">
-    <a
-      *ngIf="userId && (subforum?.ownerUserIds.includes(userId + ' ') || isAdmin)"
-      href="javascript:;"
-      (click)="edit()"
-      class="card-link"
+  <div
+    *ngIf="userId && (subforum?.ownerUserIds.includes(userId + ' ') || isAdmin)"
+    class="card-footer"
+  >
+    <a href="javascript:;" (click)="edit()" class="card-link"
       ><i class="fas fa-pencil-alt"></i> Edit</a
     >
-    <a
-      *ngIf="userId && (subforum?.ownerUserIds.includes(userId + ' ') || isAdmin)"
-      href="javascript:;"
-      (click)="delete()"
-      class="card-link"
-    >
+    <a href="javascript:;" (click)="delete()" class="card-link">
       <i class="fas fa-trash-alt"></i> Delete</a
     >
   </div>
 </div>
 
 <a
+  *ngIf="userId"
   href="/forum/topic/new/{{ subforum?.id }}"
   type="button"
   class="btn btn-primary"
