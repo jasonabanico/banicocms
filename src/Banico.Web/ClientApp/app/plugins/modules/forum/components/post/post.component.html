@@ -69,11 +69,12 @@
       >
         <i class="fas fa-trash-alt"></i> Delete</a
       >
-      <a href="#" class="card-link"
-        ><i class="fas fa-comment"></i> Comments ({{ post?.commentCount }})</a
-      >
+      <i class="fas fa-comment"></i> Comments ({{ post?.commentCount }})
     </div>
-    <ul class="list-group list-group-flush">
+    <ul
+      *ngIf="userId || comments?.length > 0"
+      class="list-group list-group-flush"
+    >
       <li class="list-group-item">
         <a *ngIf="page > 0" href="javascript:;" (click)="moreComments()"
           >View more comments</a
