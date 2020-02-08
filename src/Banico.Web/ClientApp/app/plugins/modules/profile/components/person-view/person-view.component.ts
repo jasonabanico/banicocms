@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { PersonProfile } from "../../entities/person-profile";
 import { ProfileService } from "../../services/profile.service";
 import { AuthService } from "../../../../../shared/services/auth.service";
+import { ShellService } from '../../../../../shared/services/shell.service';
 
 @Component({
   selector: "app-plugins-profile-person-view",
@@ -17,7 +18,8 @@ export class PersonViewComponent implements OnInit {
     private profileService: ProfileService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private shellService: ShellService
   ) {}
 
   ngOnInit() {
@@ -31,6 +33,7 @@ export class PersonViewComponent implements OnInit {
       const username = this.authService.getUserName();
       this.profileService.getPersonProfile(alias).subscribe(profile => {
         this.profile = profile;
+        this.shellService.setTitle(this.profile.alias);
         if (profile.ownerUserIds.includes(username) || isAdmin) {
           this.canEdit = true;
         }

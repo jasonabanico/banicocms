@@ -2,9 +2,10 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { ConfigService } from "./utils/config.service";
-import { WindowRefService } from "./services/windowref.service";
 import { SectionsService } from "./services/sections.service";
 import { SectionBarService } from "./services/section-bar.service";
+import { ShellService } from "./services/shell.service";
+import { WindowRefService } from "./services/windowref.service";
 
 @NgModule({
   imports: [CommonModule],
@@ -12,6 +13,7 @@ import { SectionBarService } from "./services/section-bar.service";
     ConfigService,
     SectionsService,
     SectionBarService,
+    ShellService,
     WindowRefService
     // , {
     //   provide: HttpXhrBackend,

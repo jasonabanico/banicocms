@@ -7,6 +7,7 @@ import { Observable } from "rxjs";
 import { Topic } from "../../entities/topic";
 import { SubforumEntityService } from "../../services/subforum-entity.service";
 import { AuthService } from "../../../../../shared/services/auth.service";
+import { ShellService } from "../../../../../shared/services/shell.service";
 
 @Component({
   selector: "app-plugins-forum-subforum",
@@ -30,13 +31,14 @@ export class ForumSubforumComponent implements OnInit {
     private topicService: ForumTopicService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private shellService: ShellService
   ) {
     this.userId = authService.getUserId();
     this.isAdmin = authService.isAdmin();
   }
 
-  @ViewChild("deleteModal", {static: false}) deleteModal;
+  @ViewChild("deleteModal", { static: false }) deleteModal;
 
   ngOnInit() {
     this.topicService.setPageSize(15);
@@ -61,6 +63,8 @@ export class ForumSubforumComponent implements OnInit {
     this.totalPages = Math.floor(
       this.subforum.topicCount / this.topicService.pageSize
     );
+
+    this.shellService.setTitle(this.subforum.name);
   }
 
   public edit() {
