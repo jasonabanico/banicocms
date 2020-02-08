@@ -1,5 +1,5 @@
 ﻿export class AppConfig {
-  public static APP_NAME = "Banico";
+  public static APP_NAME = "Banico CMS";
   public static END_PAGE_TITLE =
     "Content, Communication, Collaboration, Commerce, and Community";
   public static DEFAULT_PAGE_TITLE = "Banico";
