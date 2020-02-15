@@ -6,6 +6,7 @@ import { AuthService } from "../../../../../shared/services/auth.service";
 import { ConfigsService } from "../../../../../shared/services/configs.service";
 import { map } from "rxjs/internal/operators/map";
 import { SectionBarService } from "../../../../../shared/services/section-bar.service";
+import { ShellService } from "../../../../../shared/services/shell.service";
 
 @Component({
   selector: "app-plugins-forum-home",
@@ -20,6 +21,7 @@ export class ForumHomeComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(SectionBarService) private sectionBarService: SectionBarService,
     private configsService: ConfigsService,
+    private shellService: ShellService,
     private subforumService: ForumSubforumService,
     private authService: AuthService,
     private route: ActivatedRoute
@@ -45,6 +47,8 @@ export class ForumHomeComponent implements OnInit, OnDestroy {
     this.authService
       .canAccess("forum-subforum/manage", "", false)
       .subscribe(result => (this.canManageSubforum = result));
+
+    this.shellService.setTitle("Forum");
   }
 
   private initializeForumsByPath() {

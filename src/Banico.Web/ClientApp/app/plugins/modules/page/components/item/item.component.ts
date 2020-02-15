@@ -4,6 +4,7 @@ import { Page } from "../../entities/page";
 import { AuthService } from "../../../../../shared/services/auth.service";
 import { PageService } from "../../services/page.service";
 import { ModalComponent } from "../../../../../shell/modal/modal.component";
+import { ShellService } from "../../../../../shared/services/shell.service";
 
 @Component({
   selector: "app-plugins-page-item",
@@ -17,10 +18,11 @@ export class PageItemComponent implements OnInit, OnDestroy {
   public isAdmin: boolean;
 
   constructor(
-    @Inject(PageService) private pageService: PageService,
-    @Inject(AuthService) private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private pageService: PageService,
+    private authService: AuthService,
+    private shellService: ShellService
   ) {
     this.userId = authService.getUserId();
     this.isAdmin = authService.isAdmin();
@@ -36,6 +38,7 @@ export class PageItemComponent implements OnInit, OnDestroy {
 
   public setPage(page: Page) {
     this.page = page;
+    this.shellService.setTitle(this.page.title);
   }
 
   delete() {

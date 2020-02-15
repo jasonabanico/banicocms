@@ -8,6 +8,7 @@ import { ForumPostService } from "../../services/post.service";
 import { Subforum } from "../../entities/subforum";
 import { Post } from "../../entities/post";
 import { AuthService } from "../../../../../shared/services/auth.service";
+import { ShellService } from "../../../../../shared/services/shell.service";
 
 @Component({
   selector: "app-plugins-forum-topic",
@@ -31,7 +32,8 @@ export class ForumTopicComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private shellService: ShellService
   ) {
     this.userId = authService.getUserId();
     this.isAdmin = authService.isAdmin();
@@ -67,6 +69,8 @@ export class ForumTopicComponent implements OnInit {
         .getPosts(topic.id, this.page, this.offset)
         .subscribe(posts => (this.posts = posts));
     }
+
+    this.shellService.setTitle(this.topic.title);
   }
 
   public addPost(post: Post) {
