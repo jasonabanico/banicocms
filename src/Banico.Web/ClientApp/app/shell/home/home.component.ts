@@ -5,7 +5,7 @@ import { AuthService } from "../../shared/services/auth.service";
 
 @Component({
   selector: "app-shell-home",
-  templateUrl: "../../../../config/home.component.html"
+  templateUrl: "../../../../Config/home.component.html"
 })
 export class HomeComponent implements OnInit {
   public appTitle: string;
@@ -41,3 +41,4 @@ export class HomeComponent implements OnInit {
     }
   }
 }
+
