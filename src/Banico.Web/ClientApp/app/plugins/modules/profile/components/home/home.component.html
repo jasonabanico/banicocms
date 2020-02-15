@@ -1,0 +1,23 @@
+<p class="h4">Profiles</p>
+
+<div *ngIf="canManageSubforum" class="btn-group">
+  <a href="/forum/sub/new/{{ path }}" class="btn btn-primary">
+    <i class="glyphicon glyphicon-plus"></i> New Profile
+  </a>
+</div>
+
+<div class="d-flex flex-wrap">
+  <div
+    *ngFor="let profile of profiles"
+    class="card text-center m-1"
+    style="width: 20rem;"
+  >
+    <div class="card-body">
+      <h5 class="card-title">
+        <a href="/profile/org/{{ profile.alias }}">
+          {{ profile.name }}
+        </a>
+      </h5>
+    </div>
+  </div>
+</div>

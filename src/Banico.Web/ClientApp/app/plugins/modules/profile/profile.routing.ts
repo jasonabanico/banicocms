@@ -6,6 +6,7 @@ import { PersonViewComponent } from "./components/person-view/person-view.compon
 import { PersonFormComponent } from "./components/person-form/person-form.component";
 import { OrganizationViewComponent } from "./components/organization-view/organization-view.component";
 import { OrganizationFormComponent } from "./components/organization-form/organization-form.component";
+import { ProfileHomeComponent } from "./components/home/home.component";
 import { AuthGuard } from "../../../shared/auth/auth.guard";
 
 const PROFILE_ROUTES: Routes = [
@@ -34,10 +35,16 @@ const PROFILE_ROUTES: Routes = [
     data: { module: "profile/view" }
   },
   {
-    path: "",
-    component: PersonViewComponent,
+    path: ":path",
+    component: ProfileHomeComponent,
     canActivate: [AuthGuard],
-    data: { module: "profile/view" }
+    data: { module: "profile-home/view" }
+  },
+  {
+    path: "",
+    component: ProfileHomeComponent,
+    canActivate: [AuthGuard],
+    data: { module: "profile-home/view" }
   }
 ];
 

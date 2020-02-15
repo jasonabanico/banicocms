@@ -5,6 +5,7 @@ import { MarkdownModule } from "ngx-markdown";
 import { ShellModule } from "../../../shell/shell.module";
 import { ProfileRoutingModule } from "./profile.routing";
 import { ProfileComponent } from "./components/profile.component";
+import { ProfileHomeComponent } from "./components/home/home.component";
 import { OrganizationViewComponent } from "./components/organization-view/organization-view.component";
 import { OrganizationFormComponent } from "./components/organization-form/organization-form.component";
 import { PersonViewComponent } from "./components/person-view/person-view.component";
@@ -22,6 +23,7 @@ import { ProfileService } from "./services/profile.service";
   ],
   declarations: [
     ProfileComponent,
+    ProfileHomeComponent,
     OrganizationFormComponent,
     OrganizationViewComponent,
     PersonFormComponent,

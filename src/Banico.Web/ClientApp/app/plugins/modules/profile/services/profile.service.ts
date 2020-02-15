@@ -39,6 +39,28 @@ export class ProfileService extends PluginService {
     );
   }
 
+  public getOrganizationProfilesBySectionItems(
+    sectionItems: string
+  ): Observable<OrganizationProfile[]> {
+    var contentItemSearch = new ContentItemSearch();
+    contentItemSearch.module = "profile";
+    contentItemSearch.type = "org";
+    contentItemSearch.sectionItems = sectionItems;
+
+    return this.contentItemService.getAll(contentItemSearch).pipe(
+      map(profiles => {
+        var organizationProfiles: OrganizationProfile[] = new Array<
+          OrganizationProfile
+        >();
+        profiles.forEach(function(item: ContentItem) {
+          organizationProfiles.push(new OrganizationProfile(item));
+        });
+
+        return organizationProfiles;
+      })
+    );
+  }
+
   public addOrUpdatePersonProfile(
     personProfile: PersonProfile
   ): Observable<boolean> {
