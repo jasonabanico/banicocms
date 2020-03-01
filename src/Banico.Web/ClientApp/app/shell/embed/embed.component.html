@@ -15,9 +15,9 @@
   *ngIf="tag === 'imgur'"
   class="imgur-embed-pub"
   lang="en"
-  data-id="a/{{ id }}"
+  [attr.data-id]="id"
 >
-  <a href="http://imgur.com/a/{{ id }}">View on Imgur</a>
+  <a href="http://imgur.com/{{ id }}">View on Imgur</a>
 </blockquote>
 <div *ngIf="tag === 'instagram'">
   <a href="https://www.instagram.com/p/{{ id }}/">
