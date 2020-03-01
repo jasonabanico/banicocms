@@ -19,8 +19,5 @@ export class EmbedComponent {
     const values = tagId.split(":");
     this.tag = values[0];
     this.id = values[1];
-    alert(this.type);
-    alert(this.tag);
-    alert(this.id);
   }
 }
