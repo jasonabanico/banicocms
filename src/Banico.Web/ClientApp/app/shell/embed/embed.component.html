@@ -11,7 +11,17 @@
   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen
 ></iframe>
-<span *ngIf="tag === 'imgur'">
-  <blockquote class="imgur-embed-pub" lang="en" attr.data-id="a/{{ id }}">
-    <a href="//imgur.com/a/{{ id }}"></a></blockquote
-></span>
+<blockquote
+  *ngIf="tag === 'imgur'"
+  class="imgur-embed-pub"
+  lang="en"
+  data-id="a/{{ id }}"
+>
+  <a href="http://imgur.com/a/{{ id }}">View on Imgur</a>
+</blockquote>
+<div *ngIf="tag === 'instagram'">
+  <a href="https://www.instagram.com/p/{{ id }}/">
+    <img src="https://instagram.com/p/{{ id }}/media/?size=m" /><br />
+    View on Instagram
+  </a>
+</div>

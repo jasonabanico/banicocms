@@ -12,6 +12,7 @@ import { ProfileService } from "../../services/profile.service";
 })
 export class OrganizationFormComponent implements OnInit {
   private profile: OrganizationProfile;
+  private isSectioned: boolean;
   private sub: any;
   public organizationProfileForm: FormGroup = this.fb.group({
     alias: ["", Validators.required],
@@ -31,15 +32,28 @@ export class OrganizationFormComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       var alias = this.authService.getUserName();
       var type = "in";
-      if (params["alias"]) {
-        alias = params["alias"];
-      }
       if (params["type"]) {
         type = params["type"];
       }
-      this.profileService.getPersonProfile(alias);
-      //.subscribe(profile => this.setProfile(profile));
+      if (params["alias"]) {
+        alias = params["alias"];
+        this.profileService.getPersonProfile(alias);
+        //.subscribe(profile => this.setProfile(profile));
+      } else {
+        var contentSectionItems = params["path"];
+        if (contentSectionItems) {
+          this.isSectioned = true;
+          this.setSection(contentSectionItems);
+        }
+      }
     });
+  }
+
+  private setSection(contentSectionItems: string) {
+    this.organizationProfileForm.patchValue({
+      sectionItems: contentSectionItems
+    });
+    //this.cancelLink = "/forum/" + contentSectionItems;
   }
 
   public setProfile(organizationProfile: OrganizationProfile) {

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { PersonProfile } from "../../entities/person-profile";
 import { ProfileService } from "../../services/profile.service";
 import { AuthService } from "../../../../../shared/services/auth.service";
-import { ShellService } from '../../../../../shared/services/shell.service';
+import { ShellService } from "../../../../../shared/services/shell.service";
 
 @Component({
   selector: "app-plugins-profile-person-view",

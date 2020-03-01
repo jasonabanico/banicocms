@@ -70,7 +70,7 @@ export class ForumTopicComponent implements OnInit {
         .subscribe(posts => (this.posts = posts));
     }
 
-    this.shellService.setTitle(this.topic.title);
+    this.shellService.setTitle(this.topic.title + " | Forum");
   }
 
   public addPost(post: Post) {

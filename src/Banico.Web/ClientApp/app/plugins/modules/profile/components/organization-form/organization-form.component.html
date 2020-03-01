@@ -9,6 +9,18 @@
         novalidate
         (ngSubmit)="save()"
       >
+        <div class="form-group" *ngIf="isSectioned">
+          <div class="col-md-10">
+            <input
+              class="form-control"
+              id="sectionItems"
+              name="sectionItems"
+              type="text"
+              formControlName="sectionItems"
+              disabled
+            />
+          </div>
+        </div>
         <div class="form-group">
           <div class="col-md-10">
             <input

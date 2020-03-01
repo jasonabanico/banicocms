@@ -11,16 +11,22 @@ import { AuthGuard } from "../../../shared/auth/auth.guard";
 
 const PROFILE_ROUTES: Routes = [
   {
+    path: "new/org/:path",
+    component: OrganizationFormComponent,
+    canActivate: [AuthGuard],
+    data: { module: "profile-org/manage" }
+  },
+  {
     path: "edit/in/:alias",
     component: PersonFormComponent,
     canActivate: [AuthGuard],
-    data: { module: "profile/manage" }
+    data: { module: "profile-in/manage" }
   },
   {
     path: "edit/org/:alias",
     component: OrganizationFormComponent,
     canActivate: [AuthGuard],
-    data: { module: "profile/manage" }
+    data: { module: "profile-org/manage" }
   },
   {
     path: "in/:alias",

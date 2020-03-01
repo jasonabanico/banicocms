@@ -64,7 +64,7 @@
     </div>
     <h5 class="card-title">{{ topic?.title }}</h5>
 
-    <div class="card-text" markdown [data]="topic?.text"></div>
+    <app-shell-rich-text [text]="topic?.text"></app-shell-rich-text>
     <!--
       <div>
           <span class="badge badge-primary mr-2">tag1</span>

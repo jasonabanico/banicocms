@@ -64,7 +64,7 @@ export class ForumSubforumComponent implements OnInit {
       this.subforum.topicCount / this.topicService.pageSize
     );
 
-    this.shellService.setTitle(this.subforum.name);
+    this.shellService.setTitle(this.subforum.name + " | Forum");
   }
 
   public edit() {
