@@ -57,6 +57,7 @@ namespace Banico.Core.Entities
                     // strip tags
                     // output = Markdown.ToHtml(output);
                     output = Regex.Replace(output, @"<[^>]+>|&nbsp;", "").Trim();
+                    output = Regex.Replace(output, @"{{[^>]+}}|&nbsp;", "").Trim();
 
                     // strip extra whitespace
                     output = Regex.Replace(output, @"\s{2,}", " ");
