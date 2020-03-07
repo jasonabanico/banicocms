@@ -26,13 +26,17 @@
     </blockquote>
   </div>
   <div *ngIf="tag === 'instagram'">
-    <a
-      href="https://www.instagram.com/p/{{
-        id
-      }}/?utm_source=ig_web_button_share_sheet"
-    >
-      <img src="https://instagram.com/p/{{ id }}/media/?size=m" /><br />
-      View on Instagram
-    </a>
+    <iframe
+      [src]="
+        sanitizer.bypassSecurityTrustResourceUrl(
+          'https://www.instagram.com/p/' + id + '/embed'
+        )
+      "
+      width="400"
+      height="480"
+      frameborder="0"
+      scrolling="no"
+      allowtransparency="true"
+    ></iframe>
   </div>
 </div>
