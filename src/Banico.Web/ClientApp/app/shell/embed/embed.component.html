@@ -1,29 +1,36 @@
 <div class="text-center">
-  <iframe
-    *ngIf="tag === 'youtube'"
-    width="560"
-    height="315"
-    [src]="
-      sanitizer.bypassSecurityTrustResourceUrl(
-        'https://www.youtube.com/embed/' + id
-      )
-    "
-    frameborder="0"
-    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  ></iframe>
-  <blockquote
-    *ngIf="tag === 'imgur'"
-    class="imgur-embed-pub"
-    lang="en"
-    [attr.data-id]="'a/' + id"
-    [attr.data-context]="false"
-  >
-    <br />
-    <a href="http://imgur.com/a/{{ id }}">View on Imgur</a>
-  </blockquote>
+  <div *ngIf="tag === 'youtube'">
+    <iframe
+      width="560"
+      height="315"
+      [src]="
+        sanitizer.bypassSecurityTrustResourceUrl(
+          'https://www.youtube.com/embed/' + id
+        )
+      "
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <div *ngIf="tag === 'imgur'">
+    <blockquote
+      *ngIf="tag === 'imgur'"
+      class="imgur-embed-pub"
+      lang="en"
+      [attr.data-id]="'a/' + id"
+      [attr.data-context]="false"
+    >
+      <br />
+      <a href="https://imgur.com/a/{{ id }}">View on Imgur</a>
+    </blockquote>
+  </div>
   <div *ngIf="tag === 'instagram'">
-    <a href="https://www.instagram.com/p/{{ id }}/">
+    <a
+      href="https://www.instagram.com/p/{{
+        id
+      }}/?utm_source=ig_web_button_share_sheet"
+    >
       <img src="https://instagram.com/p/{{ id }}/media/?size=m" /><br />
       View on Instagram
     </a>

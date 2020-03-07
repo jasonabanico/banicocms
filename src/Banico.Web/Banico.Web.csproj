@@ -7,6 +7,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerComposeProjectPath>docker-compose.dcproj</DockerComposeProjectPath>
     <RestoreFallbackFolders>clear</RestoreFallbackFolders>
+    <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
   <ItemGroup>
     <!-- New Meta Package has SpaServices in It -->
