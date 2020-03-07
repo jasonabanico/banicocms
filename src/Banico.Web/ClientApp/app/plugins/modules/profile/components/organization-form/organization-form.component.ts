@@ -12,7 +12,7 @@ import { ProfileService } from "../../services/profile.service";
 })
 export class OrganizationFormComponent implements OnInit {
   private profile: OrganizationProfile;
-  private isSectioned: boolean;
+  public isSectioned: boolean;
   private sub: any;
   public organizationProfileForm: FormGroup = this.fb.group({
     alias: ["", Validators.required],
