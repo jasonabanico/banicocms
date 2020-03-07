@@ -64,10 +64,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let topic of topics">
-      <td>
-        <a href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a>
-      </td>
-      <td>
+      <td colspan="2">
+        <strong
+          ><a href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a></strong
+        >
         <a href="/forum/topic/{{ topic.id }}">{{ topic.snippet }}</a>
       </td>
       <td>
