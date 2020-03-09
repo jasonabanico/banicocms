@@ -1,8 +1,9 @@
 ﻿import { Component, OnInit, OnDestroy, Inject } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { OrganizationProfile } from "../../entities/organization-profile";
+import { SectionBarService } from "../../../../../shared/services/section-bar.service";
 import { ProfileService } from "../../services/profile.service";
 import { AuthService } from "../../../../../shared/services/auth.service";
+import { OrganizationProfile } from "../../entities/organization-profile";
 
 @Component({
   selector: "app-plugins-profile-organization-view",
@@ -14,6 +15,7 @@ export class OrganizationViewComponent implements OnInit {
   public canEdit: boolean;
 
   constructor(
+    private sectionBarService: SectionBarService,
     private profileService: ProfileService,
     private authService: AuthService,
     private route: ActivatedRoute,
@@ -35,6 +37,12 @@ export class OrganizationViewComponent implements OnInit {
         if (profile.ownerUserIds.includes(username) || isAdmin) {
           this.canEdit = true;
         }
+        this.sectionBarService.initialize(
+          "profile",
+          profile.sectionItems,
+          "",
+          "/profile"
+        );
       });
     });
   }

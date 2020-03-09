@@ -76,7 +76,7 @@ export class OrganizationFormComponent implements OnInit {
     this.profile.type = "org";
     this.profile.alias = this.organizationProfileForm.value["alias"];
     this.profile.sectionItems = this.organizationProfileForm.value[
-      "sectionItem"
+      "sectionItems"
     ];
     this.profile.headline = this.organizationProfileForm.value["headline"];
     this.profile.content = this.organizationProfileForm.value["content"];

@@ -8,6 +8,7 @@ export class PersonProfile {
   name: string;
   alias: string;
   content: string;
+  snippet: string;
   createdDate: string;
   updatedDate: string;
   avatarHash: string;
@@ -27,6 +28,7 @@ export class PersonProfile {
       this.alias = contentItem.alias;
       this.type = contentItem.type;
       this.content = contentItem.content;
+      this.snippet = contentItem.snippet;
       this.createdDate = contentItem.createdDate;
       this.updatedDate = contentItem.updatedDate;
       this.avatarHash = contentItem.attribute01;

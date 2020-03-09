@@ -8,6 +8,7 @@ export class OrganizationProfile {
   name: string;
   alias: string;
   content: string;
+  snippet: string;
   sectionItems: string;
   createdDate: string;
   updatedDate: string;
@@ -28,6 +29,7 @@ export class OrganizationProfile {
       this.alias = contentItem.alias;
       this.type = contentItem.type;
       this.content = contentItem.content;
+      this.snippet = contentItem.snippet;
       this.sectionItems = contentItem.sectionItems;
       this.createdDate = contentItem.createdDate;
       this.updatedDate = contentItem.updatedDate;
