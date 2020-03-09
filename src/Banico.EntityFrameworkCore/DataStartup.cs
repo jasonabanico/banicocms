@@ -63,7 +63,7 @@ namespace Banico.EntityFrameworkCore
       services.AddScoped<IConfigRepository, ConfigRepository>();
     }
 
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
       {

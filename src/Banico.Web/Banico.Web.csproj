@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
@@ -12,21 +12,21 @@
   <ItemGroup>
     <!-- New Meta Package has SpaServices in It -->
     <PackageReference Include="AspNetCore.RouteAnalyzer" Version="0.5.3" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="7.3.3" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.1" />
     <PackageReference Include="graphiql" Version="1.1.0" />
     <PackageReference Include="GraphQL" Version="2.4.0" />
     <PackageReference Include="kedzior.io.ConnectionStringConverter" Version="1.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All">
-      <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
-      <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
-    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="0.1.1646902" />
     <PackageReference Include="Nager.PublicSuffix" Version="1.4.0" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" /> 
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.4" /> 
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.2" /> 
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
     <PackageReference Include="WebEssentials.AspNetCore.PWA" Version="1.0.33" />
   </ItemGroup>
 

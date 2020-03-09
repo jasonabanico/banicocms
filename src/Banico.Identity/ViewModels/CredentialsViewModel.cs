@@ -1,10 +1,10 @@
 ﻿
 using Banico.Identity.ViewModels.Validations;
-using FluentValidation.Attributes;
+//using FluentValidation.Attributes;
 
 namespace Banico.Identity.ViewModels
 {
-    [Validator(typeof(CredentialsViewModelValidator))]
+    //[Validator(typeof(CredentialsViewModelValidator))]
     public class CredentialsViewModel
     {
         public string UserName { get; set; }

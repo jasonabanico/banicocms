@@ -2,16 +2,17 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading.Tasks;
 
 namespace Banico.Web.Controllers
 {
     public class HomeController : Controller {
-        protected readonly IHostingEnvironment HostingEnvironment;
+        protected readonly IWebHostEnvironment HostingEnvironment;
         protected readonly IConfiguration _configuration;
         public HomeController(
-            IHostingEnvironment hostingEnv,
+            IWebHostEnvironment hostingEnv,
             IConfiguration configuration
         )
         {

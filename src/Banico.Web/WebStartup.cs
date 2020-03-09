@@ -1,44 +1,35 @@
-using System;
-using System.Net;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AspNetCore.RouteAnalyzer;
+using Banico.Api;
+using Banico.EntityFrameworkCore;
+using Banico.Identity;
+using Banico.Services;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using FluentValidation.AspNetCore;
-using AspNetCore.RouteAnalyzer;
-using Banico.Core.Entities;
-using Banico.EntityFrameworkCore;
-using Banico.EntityFrameworkCore.Settings;
-using Banico.Api;
-using Banico.Identity;
-using Banico.Identity.Extensions;
-using Banico.Services;
-using Banico.Services.Interfaces;
-using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Banico.Web
 {
     public class WebStartup
     {
         private bool developmentEnvironment = false;
-        private IHostingEnvironment CurrentEnvironment{ get; set; } 
-
+        private IWebHostEnvironment CurrentEnvironment{ get; set; } 
         private IdentityStartup identityStartup;
         private DataStartup dataStartup;
         private ApiStartup apiStartup;
         private ServicesStartup servicesStartup;
 
-        public void Init(IConfiguration configuration, IHostingEnvironment env)
+        public void Init(IConfiguration configuration, IWebHostEnvironment env)
         {
             this.Configuration = configuration;
             this.CurrentEnvironment = env;
@@ -91,12 +82,15 @@ namespace Banico.Web
             // {
             //     opts.Filters.AddService(typeof(AngularAntiforgeryCookieResultFilter));
             // })
-            services.AddMvc()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>())
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(
-                    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                )
+            services.AddMvc(
+                options => options.EnableEndpointRouting = false
+            )
+                .AddFluentValidation(fv => {
+                    fv.RegisterValidatorsFromAssemblyContaining<IdentityStartup>();
+                    fv.RegisterValidatorsFromAssemblyContaining<Startup>();
+                })
+                //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
                 .AddApplicationPart(typeof(ApiStartup).Assembly)
                 .AddApplicationPart(typeof(IdentityStartup).Assembly);
             // services.AddTransient<AngularAntiforgeryCookieResultFilter>();
@@ -113,7 +107,7 @@ namespace Banico.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
             IApplicationBuilder app, 
-            IHostingEnvironment env, 
+            IWebHostEnvironment env, 
             IAntiforgery antiforgery,
             IServiceProvider services)
         {

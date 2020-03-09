@@ -59,7 +59,7 @@ namespace Banico.Api
       //.AddUserContextBuilder(httpContext => new GraphQLUserContext { User = httpContext.User });
     }
 
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       // add http for Schema at default url /graphql
       app.UseGraphQL<ISchema>("/graphql");

@@ -25,7 +25,7 @@ namespace Banico.Web.Server.Helpers {
                 "/",
                 request.HttpContext.RequestServices.GetRequiredService<INodeServices>(),
                 new System.Threading.CancellationTokenSource().Token,
-                new JavaScriptModuleExport(request.HttpContext.RequestServices.GetRequiredService<IHostingEnvironment>().ContentRootPath + "/ClientApp/dist/main-server"),
+                new JavaScriptModuleExport(request.HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>().ContentRootPath + "/ClientApp/dist/main-server"),
                 $"{request.Scheme}://{request.Host}{request.HttpContext.Features.Get<IHttpRequestFeature>().RawTarget}",
                 request.HttpContext.Features.Get<IHttpRequestFeature>().RawTarget,
                 // ** TransferData concept **
