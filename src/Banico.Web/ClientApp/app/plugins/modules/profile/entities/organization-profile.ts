@@ -5,8 +5,10 @@ export class OrganizationProfile {
   id: string;
   owners: string;
   ownerUserIds: string;
+  name: string;
   alias: string;
   content: string;
+  sectionItems: string;
   createdDate: string;
   updatedDate: string;
   avatarHash: string;
@@ -22,9 +24,11 @@ export class OrganizationProfile {
       this.id = contentItem.id;
       this.owners = contentItem.owners;
       this.ownerUserIds = contentItem.ownerUserIds;
+      this.name = contentItem.name;
       this.alias = contentItem.alias;
       this.type = contentItem.type;
       this.content = contentItem.content;
+      this.sectionItems = contentItem.sectionItems;
       this.createdDate = contentItem.createdDate;
       this.updatedDate = contentItem.updatedDate;
       this.avatarHash = contentItem.attribute01;
@@ -38,9 +42,11 @@ export class OrganizationProfile {
     output.module = "profile";
     output.id = this.id;
     output.owners = this.owners;
+    output.name = this.name;
     output.alias = this.alias;
     output.type = this.type;
     output.content = this.content;
+    output.sectionItems = this.sectionItems;
     output.attribute01 = this.avatarHash;
     output.attribute02 = this.headline;
 

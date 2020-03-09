@@ -15,7 +15,9 @@ export class OrganizationFormComponent implements OnInit {
   public isSectioned: boolean;
   private sub: any;
   public organizationProfileForm: FormGroup = this.fb.group({
+    name: ["", Validators.required],
     alias: ["", Validators.required],
+    sectionItems: ["", Validators.required],
     headline: ["", Validators.required],
     content: ["", Validators.required]
   });
@@ -37,9 +39,11 @@ export class OrganizationFormComponent implements OnInit {
       }
       if (params["alias"]) {
         alias = params["alias"];
-        this.profileService.getPersonProfile(alias);
-        //.subscribe(profile => this.setProfile(profile));
+        this.profileService
+          .getOrganizationProfile(alias)
+          .subscribe(profile => this.setProfile(profile));
       } else {
+        this.profile = new OrganizationProfile(null);
         var contentSectionItems = params["path"];
         if (contentSectionItems) {
           this.isSectioned = true;
@@ -59,25 +63,30 @@ export class OrganizationFormComponent implements OnInit {
   public setProfile(organizationProfile: OrganizationProfile) {
     this.profile = organizationProfile;
     this.organizationProfileForm.patchValue({
+      name: organizationProfile.name,
       alias: organizationProfile.alias,
+      sectionItems: organizationProfile.sectionItems,
       headline: organizationProfile.headline,
       content: organizationProfile.content
     });
   }
 
   public save() {
-    this.profile.content = this.organizationProfileForm.value["content"];
+    this.profile.name = this.organizationProfileForm.value["name"];
+    this.profile.type = "org";
+    this.profile.alias = this.organizationProfileForm.value["alias"];
+    this.profile.sectionItems = this.organizationProfileForm.value[
+      "sectionItem"
+    ];
     this.profile.headline = this.organizationProfileForm.value["headline"];
-    // this.profileService.addOrUpdate(this.organizationProfile).subscribe(
-    //   result => {
-    //     this.router.navigate([
-    //       "/profile/" +
-    //         this.organizationProfile.type +
-    //         "/" +
-    //         this.organizationProfile.alias
-    //     ]);
-    //   }
-    //   //errors =>  this.errors = errors
-    // );
+    this.profile.content = this.organizationProfileForm.value["content"];
+    this.profileService.addOrUpdateOrganizationProfile(this.profile).subscribe(
+      result => {
+        this.router.navigate([
+          "/profile/" + this.profile.type + "/" + this.profile.alias
+        ]);
+      }
+      //errors =>  this.errors = errors
+    );
   }
 }

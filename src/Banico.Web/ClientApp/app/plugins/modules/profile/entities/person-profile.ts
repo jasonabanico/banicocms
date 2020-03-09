@@ -5,6 +5,7 @@ export class PersonProfile {
   id: string;
   owners: string;
   ownerUserIds: string;
+  name: string;
   alias: string;
   content: string;
   createdDate: string;
@@ -22,6 +23,7 @@ export class PersonProfile {
       this.id = contentItem.id;
       this.owners = contentItem.owners;
       this.ownerUserIds = contentItem.ownerUserIds;
+      this.name = contentItem.name;
       this.alias = contentItem.alias;
       this.type = contentItem.type;
       this.content = contentItem.content;

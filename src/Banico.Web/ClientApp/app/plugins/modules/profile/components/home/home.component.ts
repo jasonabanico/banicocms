@@ -35,7 +35,6 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
     this.authService
       .canAccess("profile-org/manage", "", false)
       .subscribe(result => {
-        alert("profile-org/manage " + result);
         this.canManageProfile = result;
       });
 
