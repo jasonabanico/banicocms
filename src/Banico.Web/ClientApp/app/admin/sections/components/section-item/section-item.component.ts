@@ -70,7 +70,8 @@ export class AdminSectionsSectionItemComponent implements OnInit {
         "",
         pathUrl,
         section,
-        "/admin/sections"
+        "/admin/sections",
+        true
       );
     });
   }

@@ -44,7 +44,13 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
   private initializeProfiles() {
     this.sub = this.route.params.subscribe(params => {
       this.path = params["path"];
-      this.sectionBarService.initialize("profile", this.path, "", "/profile");
+      this.sectionBarService.initialize(
+        "profile",
+        this.path,
+        "",
+        "/profile",
+        true
+      );
 
       if (this.path) {
         this.profileService

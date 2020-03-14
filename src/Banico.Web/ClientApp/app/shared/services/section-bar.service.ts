@@ -24,7 +24,8 @@ export class SectionBarService {
     module: string,
     inputPathUrl: string,
     adminSection: string,
-    pathRoot: string
+    pathRoot: string,
+    defaultExpanded: boolean
   ) {
     this.isAdmin = false;
     this.inputPathUrl = inputPathUrl;
@@ -44,7 +45,7 @@ export class SectionBarService {
         .toPromise();
     }
 
-    this.initializeSectionBarItems(sections);
+    this.initializeSectionBarItems(sections, defaultExpanded);
 
     for (let i = 0; i < sections.length; i++) {
       this.setup(this.sectionBarItems[i]);
@@ -52,11 +53,14 @@ export class SectionBarService {
   }
 
   // Initializes each nav bar
-  private initializeSectionBarItems(sections: Section[]) {
+  private initializeSectionBarItems(
+    sections: Section[],
+    defaultExpanded: boolean
+  ) {
     for (var i: number = 0; i < sections.length; i++) {
       var sectionBarItem = new SectionBarItem();
       sectionBarItem.showDropdown = false;
-      sectionBarItem.childrenVisible = false;
+      sectionBarItem.childrenVisible = defaultExpanded;
       sectionBarItem.section = sections[i];
       sectionBarItem.sectionItem = new SectionItem();
       sectionBarItem.childSectionItems = new Array<SectionItem>();
@@ -191,6 +195,16 @@ export class SectionBarService {
         }
       }
     }
+
+    sectionItems.sort(function(a, b) {
+      if (a.name > b.name) {
+        return 1;
+      }
+      if (b.name > a.name) {
+        return -1;
+      }
+      return 0;
+    });
 
     return sectionItems;
   }

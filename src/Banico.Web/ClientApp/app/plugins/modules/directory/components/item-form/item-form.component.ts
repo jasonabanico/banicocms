@@ -48,7 +48,8 @@ export class DirectoryItemFormComponent implements OnInit {
       "directory",
       sectionItems,
       "",
-      "/directory"
+      "/directory",
+      true
     );
     this.isEdit = true;
   }

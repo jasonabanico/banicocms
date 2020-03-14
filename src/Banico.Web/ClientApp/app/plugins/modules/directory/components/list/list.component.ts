@@ -36,7 +36,8 @@ export class DirectoryListComponent implements OnInit, OnDestroy {
         "directory",
         this.path,
         "",
-        "/directory"
+        "/directory",
+        true
       );
 
       if (this.path) {

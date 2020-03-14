@@ -41,7 +41,8 @@ export class OrganizationViewComponent implements OnInit {
           "profile",
           profile.sectionItems,
           "",
-          "/profile"
+          "/profile",
+          true
         );
       });
     });

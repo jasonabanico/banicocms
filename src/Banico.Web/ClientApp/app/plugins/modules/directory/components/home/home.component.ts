@@ -31,7 +31,8 @@ export class DirectoryHomeComponent implements OnInit, OnDestroy {
         "directory",
         this.path,
         "",
-        "/directory"
+        "/directory",
+        true
       );
 
       this.directoryService

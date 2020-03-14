@@ -32,7 +32,13 @@ export class DirectorySearchComponent implements OnInit, OnDestroy {
 
     this.sub = this.route.params.subscribe(params => {
       var search = params["search"];
-      this.sectionBarService.initialize("directory", "", "", "/directory");
+      this.sectionBarService.initialize(
+        "directory",
+        "",
+        "",
+        "/directory",
+        true
+      );
 
       if (search) {
         this.directoryService

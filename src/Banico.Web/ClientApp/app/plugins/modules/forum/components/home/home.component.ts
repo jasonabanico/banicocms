@@ -54,7 +54,7 @@ export class ForumHomeComponent implements OnInit, OnDestroy {
   private initializeForumsByPath() {
     this.sub = this.route.params.subscribe(params => {
       this.path = params["path"];
-      this.sectionBarService.initialize("forum", this.path, "", "/forum");
+      this.sectionBarService.initialize("forum", this.path, "", "/forum", true);
 
       if (this.path) {
         this.subforumService

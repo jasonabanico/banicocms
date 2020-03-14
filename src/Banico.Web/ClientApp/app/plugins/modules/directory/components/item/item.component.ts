@@ -47,7 +47,8 @@ export class DirectoryItemComponent implements OnInit, OnDestroy {
       "directory",
       sectionItems,
       "",
-      "/directory"
+      "/directory",
+      true
     );
   }
 
