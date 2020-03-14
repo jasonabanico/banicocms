@@ -393,6 +393,7 @@ namespace Banico.Identity.Controllers
                 }
 
                 var user = new AppUser { UserName = model.Username, Email = model.Email, Inviter = inviter };
+                user.Id = Guid.NewGuid().ToString();
 
                 if (_configuration["DomainAsTenant"] == "y")
                 {
