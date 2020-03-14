@@ -32,7 +32,7 @@ export class SectionsFileService {
     //console.log(JSON.stringify(inputString));
     var lines = inputString.split("\n");
     var line = lines[0].split(",");
-    //console.log("PROCESSING LINE: " + line);
+    console.log("PROCESSING LINE: " + line);
     var name = line[0];
     var alias = line[1];
     line.splice(0, 2);
@@ -217,7 +217,7 @@ export class SectionsFileService {
       var line = remainingLines[0].split(",");
       const name = line[0];
       const alias = line[1];
-      // console.log("PROCESSING LINE: " + line);
+      console.log("PROCESSING LINE: " + line);
       line.splice(0, 2);
       remainingLines.splice(0, 1);
       this.Process(
