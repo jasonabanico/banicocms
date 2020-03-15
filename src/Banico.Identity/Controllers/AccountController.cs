@@ -112,10 +112,13 @@ namespace Banico.Identity.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public JsonResult IsInviteOnly()
+        public bool IsInviteOnly()
         {
             string inviteOnly = _configuration["InviteOnly"];
-            return new JsonResult(inviteOnly);
+            if (inviteOnly == "true") {
+                return true;
+            }
+            return false;
         }
 
         [AllowAnonymous]

@@ -32,7 +32,7 @@ export class IdentityAccountRegisterComponent {
     private fb: FormBuilder
   ) {
     let isInviteOnly = this.accountService.isInviteOnly().subscribe(result => {
-      this.inviteOnly = result === "y";
+      this.inviteOnly = result.includes("true");
     });
   }
 
