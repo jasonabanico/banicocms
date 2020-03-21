@@ -12,28 +12,16 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authentication;
 
-using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-//using Microsoft.Extensions.Logging.AzureAppServices;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 
-//using Microsoft.ApplicationInsights.AspNetCore;
-using Microsoft.AspNetCore.NodeServices;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 using System.Security.Claims;
 using Banico.Core.Entities;
-using System.IdentityModel.Tokens.Jwt;
-// using AspNet.Security.OAuth.LinkedIn;
-
-// using Microsoft.AspNetCore.Http;
-// using Microsoft.Extensions.Configuration;
-// using Microsoft.Extensions.DependencyInjection;
-// using Microsoft.Extensions.DependencyInjection.Abstractions;
 
 namespace Banico.Services
 {

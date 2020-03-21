@@ -4,9 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Http;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using GraphQL;
 using GraphQL.Http;
@@ -18,7 +16,6 @@ using Banico.Api.Models;
 namespace Banico.Api.Controllers
 {
     [Route("/api/[controller]")] 
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Authorize(Policy = "AnonymousOrJwt")]
     public class GraphQLController : Controller
     {

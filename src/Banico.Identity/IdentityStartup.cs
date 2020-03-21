@@ -174,6 +174,7 @@ namespace Banico.Identity
         });
         
       services.AddAutoMapper();
+
       // builder = new IdentityBuilder(builder.UserType, typeof(AppRole), builder.Services);
     }
 
@@ -194,26 +195,21 @@ namespace Banico.Identity
       var roleCheck = await RoleManager.RoleExistsAsync("Admin");
       if (!roleCheck)              
       {
-      //create the roles and seed them to the database
-      roleResult = await RoleManager.CreateAsync(new AppRole("Admin"));
+        //create the roles and seed them to the database
+        var adminRole = new AppRole("Admin");
+        adminRole.Id = Guid.NewGuid().ToString();
+        roleResult = await RoleManager.CreateAsync(adminRole);
       }
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider services)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services)
     {
       using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
       {
         var context = serviceScope.ServiceProvider.GetRequiredService<AppIdentityDbContext>();
         context.Database.Migrate();
       }
-
-      app.UseMvc(routes =>
-      {
-          routes.MapRoute(
-              name: "api",
-              template: "api/{controller}/{action=Index}");
-      });
 
       this.CreateUserRoles(services).Wait();
     }

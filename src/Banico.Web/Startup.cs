@@ -1,30 +1,28 @@
-﻿using System;
-using System.IO;
+﻿using AspNetCore.RouteAnalyzer;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.SpaServices.Webpack;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Net.Http.Headers;
-using AspNetCore.RouteAnalyzer;
-using Swashbuckle.AspNetCore.Swagger;
-using WebEssentials.AspNetCore.Pwa;
-using Banico.EntityFrameworkCore;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
+using System;
+using WebEssentials.AspNetCore.Pwa;
 
-namespace Banico.Web 
+namespace Banico.Web
 {
     public class Startup 
     {
         private WebStartup webStartup;
 
-        public Startup (IConfiguration configuration, IHostingEnvironment env) 
+        public Startup (IConfiguration configuration, IWebHostEnvironment env) 
         {
             this.webStartup = new WebStartup();
             this.webStartup.Init(configuration, env);
@@ -44,17 +42,17 @@ namespace Banico.Web
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen (c => {
-                c.SwaggerDoc ("v1", new Info { Title = "Banico", Version = "v1" });
+                c.SwaggerDoc ("v1", new OpenApiInfo { Title = "Banico", Version = "v1" });
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure (
             IApplicationBuilder app, 
-            IHostingEnvironment env, 
+            IWebHostEnvironment env, 
             ILoggerFactory loggerFactory, 
             IAntiforgery antiforgery, 
-            IApplicationLifetime applicationLifetime, // Add
+            IHostApplicationLifetime applicationLifetime, // Add
             IRouteAnalyzer routeAnalyzer,
             IServiceProvider services) {
             // move to Program.cs - loggerFactory.AddConsole (this.Configuration.GetSection ("Logging"));

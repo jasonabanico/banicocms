@@ -33,7 +33,13 @@ export class DirectoryItemFormComponent implements OnInit {
           .subscribe(directoryItem => this.set(directoryItem));
       }
       if (path) {
-        this.sectionBarService.initialize("directory", path, "", "/directory", true);
+        this.sectionBarService.initialize(
+          "directory",
+          path,
+          "",
+          "/directory",
+          true
+        );
         this.directoryItem.sectionItems = path;
       }
     });

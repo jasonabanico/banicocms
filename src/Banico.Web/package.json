@@ -76,7 +76,7 @@
     "ngrx-data": "^6.1.0-beta.3",
     "ngx-bootstrap": "^3.2.0",
     "ngx-markdown": "^8.2.1",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "preboot": "^7.0.0",
     "prismjs": "^1.17.1",
     "raw-loader": "^1.0.0",
@@ -92,7 +92,7 @@
     "zone.js": "^0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.13.3",
+    "@angular-devkit/build-angular": "^0.900.6",
     "@angular/cli": "~7.3.3",
     "@angular/compiler-cli": "^8.2.14",
     "@fortawesome/fontawesome-free": "^5.8.1",

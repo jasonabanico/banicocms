@@ -35,7 +35,7 @@ public class Program {
             //.UseConfiguration(configuration)
             .ConfigureAppConfiguration((context, config) =>
             {
-                IHostingEnvironment env = context.HostingEnvironment;
+                IWebHostEnvironment env = context.HostingEnvironment;
 
                 var settingsPath = Path.Combine(Directory.GetCurrentDirectory(), "Config");
                 config
