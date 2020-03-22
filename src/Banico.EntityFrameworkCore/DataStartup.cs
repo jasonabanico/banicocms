@@ -36,12 +36,14 @@ namespace Banico.EntityFrameworkCore
           case "mssql":
               services.AddDbContext<AppDbContext>(options =>
                   options.UseSqlServer(appDbContextConnectionString,
-                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
+                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")),
+                  ServiceLifetime.Transient);
               break;
           case "mysql":
               services.AddDbContext<AppDbContext>(options =>
                   options.UseMySql(appDbContextConnectionString,
-                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
+                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")),
+                  ServiceLifetime.Transient);
               break;
           case "sqlite":
               if (string.IsNullOrEmpty(appDbContextConnectionString))
@@ -51,7 +53,8 @@ namespace Banico.EntityFrameworkCore
               }
               services.AddDbContext<AppDbContext>(options =>
                   options.UseSqlite(appDbContextConnectionString,
-                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")));
+                  optionsBuilder => optionsBuilder.MigrationsAssembly("Banico.EntityFrameworkCore")),
+                  ServiceLifetime.Transient);
               break;
       }
 
