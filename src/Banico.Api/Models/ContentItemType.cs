@@ -53,10 +53,10 @@ namespace Banico.Api.Models
 
             Field<ListGraphType<ContentSectionItemType>, IEnumerable<ContentSectionItem>> ()
                 .Name("ContentSectionItems")
-                .ResolveAsync(async x => {
+                .Resolve(x => {
                     if (x != null)
                     {
-                        return await contentItemRepository.GetContentSectionItemsByContentItemId(x.Source.Id);
+                        return contentItemRepository.GetContentSectionItemsByContentItemId(x.Source.Id).Result;
                     }
                     else
                     {
