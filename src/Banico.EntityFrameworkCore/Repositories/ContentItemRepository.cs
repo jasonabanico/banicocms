@@ -480,7 +480,6 @@ namespace Banico.EntityFrameworkCore.Repositories
             {
                 if (!string.IsNullOrEmpty(sectionItemsArray[i]))
                 {
-                    IQueryable<SectionItem> sectionQuery = null;
                     var sectionFields = sectionItemsArray[i].Split(TYPE_DELIM);
                     var section = sectionFields[0];
                     var sectionValue = sectionFields[1];

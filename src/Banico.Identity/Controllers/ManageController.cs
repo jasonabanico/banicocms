@@ -30,7 +30,7 @@ namespace Banico.Identity.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly string _externalCookieScheme;
+        //private readonly string _externalCookieScheme;
         private readonly IEmailSenderService _emailSender;
         private readonly ISmsSenderService _smsSender;
         private readonly ILogger _logger;

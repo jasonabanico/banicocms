@@ -115,17 +115,17 @@ namespace Banico.Web
             }
 
             // display all routes
-            applicationLifetime.ApplicationStarted.Register(() =>
-            {
-                var infos = routeAnalyzer.GetAllRouteInformations();
-                Console.WriteLine("======== ALL ROUTE INFORMATION ========");
-                foreach (var info in infos)
-                {
-                    Console.WriteLine(info.ToString());
-                }
-                Console.WriteLine("");
-                Console.WriteLine("");
-            });
+            //applicationLifetime.ApplicationStarted.Register(() =>
+            //{
+            //    var infos = routeAnalyzer.GetAllRouteInformations();
+            //    Console.WriteLine("======== ALL ROUTE INFORMATION ========");
+            //    foreach (var info in infos)
+            //    {
+            //        Console.WriteLine(info.ToString());
+            //    }
+            //    Console.WriteLine("");
+            //    Console.WriteLine("");
+            //});
 
             app.UseSpa(spa =>
             {

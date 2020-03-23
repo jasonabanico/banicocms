@@ -8,7 +8,7 @@ namespace Banico.Api.Models
 {
     public class BanicoQuery : ObjectGraphType
     {
-        private IConfiguration _configuration;
+        //private IConfiguration _configuration;
 
         public BanicoQuery(
             IAccessService accessService,

@@ -22,7 +22,7 @@ namespace Banico.Api.Controllers
         private readonly ISchema _schema;
         private readonly IDocumentExecuter _executer;
         private readonly IDocumentWriter _writer;
-        private readonly IDictionary<string, string> _namedQueries;
+        private readonly IDictionary<string, string> _namedQueries = new Dictionary<string, string>();
 
         public GraphQLController(
             IDocumentExecuter executer,

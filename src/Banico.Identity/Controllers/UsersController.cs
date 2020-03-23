@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -37,7 +37,7 @@ namespace Banico.Web
 
 
         [HttpGet]
-        public async Task<List<AppUser>> GetAll()
+        public List<AppUser> GetAll()
         {
             var result = userManager.Users.ToList();
             return result;

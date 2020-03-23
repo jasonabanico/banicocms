@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -32,7 +32,7 @@ namespace Banico.Identity.Controllers
         }
 
         [HttpGet]
-        public async Task<List<AppRole>> GetAll()
+        public List<AppRole> GetAll()
         {
             var result = roleManager.Roles.ToList();
             return result;

@@ -45,7 +45,7 @@ namespace Banico.Identity.Controllers
         private readonly ISmsSenderService _smsSender;
         private readonly ILogger _logger;
         private readonly IInviteService _inviteService;
-        private readonly string _externalCookieScheme;
+        //private readonly string _externalCookieScheme;
         private readonly IConfiguration _configuration;
         private readonly IJwtFactory _jwtFactory;
         private readonly JwtIssuerOptions _jwtOptions;
