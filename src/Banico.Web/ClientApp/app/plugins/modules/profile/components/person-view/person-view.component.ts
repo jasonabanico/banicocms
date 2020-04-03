@@ -30,11 +30,11 @@ export class PersonViewComponent implements OnInit {
         alias = params["alias"];
       }
       const isAdmin = this.authService.isAdmin();
-      const username = this.authService.getUserName();
+      const userId = this.authService.getUserId();
       this.profileService.getPersonProfile(alias).subscribe(profile => {
         this.profile = profile;
         this.shellService.setTitle(this.profile.alias);
-        if (profile.ownerUserIds.includes(username) || isAdmin) {
+        if (profile.ownerUserIds.includes(userId) || isAdmin) {
           this.canEdit = true;
         }
       });
