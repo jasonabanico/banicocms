@@ -26,7 +26,7 @@ export class EmbedComponent {
     {
       site: "youtube",
       regex:
-        "(?:https?:/{2})?(?:w{3}.)?youtu(?:be)?.(?:com|be)(?:/watch?v=|/)([^s&]+)",
+        "(?:https?:/{2})?(?:w{3}.)?youtu(?:be)?.(?:com|be)(?:/watch?v=|/)([^&]+)",
       index: 1
     },
     {
