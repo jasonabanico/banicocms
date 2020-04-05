@@ -14,6 +14,7 @@ import { Router } from "@angular/router";
 import { ConfigsService } from "./configs.service";
 import { map } from "rxjs/operators";
 
+@Injectable()
 export class AuthService extends BaseService {
   public loginDataChanged = new EventEmitter<any>();
 

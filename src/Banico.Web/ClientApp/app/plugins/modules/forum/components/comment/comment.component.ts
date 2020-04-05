@@ -33,7 +33,7 @@ export class ForumCommentComponent {
     this.isAdmin = this.authService.isAdmin();
   }
 
-  @ViewChild("deleteModal", { static: false }) deleteModal;
+  @ViewChild("deleteModal") deleteModal;
 
   @Input()
   set id(id: string) {

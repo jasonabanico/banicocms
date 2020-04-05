@@ -38,7 +38,7 @@ export class ForumSubforumComponent implements OnInit {
     this.isAdmin = authService.isAdmin();
   }
 
-  @ViewChild("deleteModal", { static: false }) deleteModal;
+  @ViewChild("deleteModal") deleteModal;
 
   ngOnInit() {
     this.topicService.setPageSize(15);

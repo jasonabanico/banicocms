@@ -17,7 +17,6 @@ import { ForumSubforumService } from "./services/subforum.service";
 import { ForumTopicService } from "./services/topic.service";
 import { ForumPostService } from "./services/post.service";
 import { ForumCommentService } from "./services/comment.service";
-//import { ForumStoreModule } from './store/forum-store.module';
 
 @NgModule({
   imports: [

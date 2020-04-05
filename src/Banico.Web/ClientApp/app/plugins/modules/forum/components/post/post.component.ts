@@ -42,7 +42,7 @@ export class ForumPostComponent implements OnInit {
     this.isAdmin = authService.isAdmin();
   }
 
-  @ViewChild("deleteModal", { static: false }) deleteModal;
+  @ViewChild("deleteModal") deleteModal;
 
   @Input()
   set id(id: string) {
