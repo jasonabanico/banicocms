@@ -1,7 +1,6 @@
 ﻿import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MarkdownModule } from "ngx-markdown";
 import { ShellModule } from "../../../shell/shell.module";
 import { ProfileRoutingModule } from "./profile.routing";
 import { ProfileComponent } from "./components/profile.component";
@@ -18,7 +17,6 @@ import { ProfileService } from "./services/profile.service";
     FormsModule,
     ReactiveFormsModule,
     ProfileRoutingModule,
-    MarkdownModule.forChild(),
     ShellModule
   ],
   declarations: [

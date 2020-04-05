@@ -109,7 +109,7 @@ namespace Banico.Api.Models
                 resolve: context =>
                 {
                     var id = context.GetArgument<String>("id");
-                    if (!this.checkTenant(id).Result)
+                    if (!this.checkTenant(id))
                     {
                         throw new UnauthorizedAccessException("Deletion of content item is not allowed.");
                     }
@@ -167,9 +167,9 @@ namespace Banico.Api.Models
             }
         }
 
-        private async Task<bool> checkTenant(string id)
+        private bool checkTenant(string id)
         {
-            var item = (await _contentItemRepository.Get("", id, "", "", "", "", "", "", "", "", "", 
+            var item = (_contentItemRepository.Get("", id, "", "", "", "", "", "", "", "", "", 
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
             "", 0, 1, 0))
                 .FirstOrDefault();

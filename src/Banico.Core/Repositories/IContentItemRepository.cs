@@ -11,7 +11,7 @@ namespace Banico.Core.Repositories
     {
         MaxPageSize GetMaxPageSize();
 
-        Task<ContentItemsCount> GetCount(
+        ContentItemsCount GetCount(
             string tenant,
             string id,
             string name,
@@ -46,7 +46,7 @@ namespace Banico.Core.Repositories
             bool includeParents
         );
 
-        Task<List<ContentItem>> Get(
+        List<ContentItem> Get(
             string tenant,
             string id,
             string name,
@@ -85,7 +85,7 @@ namespace Banico.Core.Repositories
             int offset
         );
 
-        Task<IEnumerable<ContentSectionItem>> GetContentSectionItemsByContentItemId(string id);
+        IEnumerable<ContentSectionItem> GetContentSectionItemsByContentItemId(string id);
         Task<ContentItem> AddOrUpdate(ContentItem item, string userId, bool isAdmin);
         Task<ContentItem> Add(ContentItem item);
         Task<bool> AliasExists(ContentItem item);

@@ -47,7 +47,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             return result;
         }
 
-        public async Task<ContentItemsCount> GetCount(
+        public ContentItemsCount GetCount(
             string tenant,
             string id,
             string name,
@@ -213,14 +213,14 @@ namespace Banico.EntityFrameworkCore.Repositories
                 // }
             }
 
-            int count = await contentItems.CountAsync();          
+            int count = contentItems.Count();          
             ContentItemsCount result = new ContentItemsCount();
             result.Count = count;
 
             return result;
         }
 
-        public async Task<List<ContentItem>> Get(
+        public List<ContentItem> Get(
             string tenant,
             string id,
             string name,
@@ -467,7 +467,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                 }
             }
 
-            return await contentItems.ToListAsync();
+            return contentItems.ToList();
         }
 
         private IQueryable<ContentItem> MatchSectionItems(
@@ -583,7 +583,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         //     return contentItems;
         // }
 
-        public async Task<IEnumerable<ContentSectionItem>> GetContentSectionItemsByContentItemId(string id)
+        public IEnumerable<ContentSectionItem> GetContentSectionItemsByContentItemId(string id)
         {
             if (!string.IsNullOrEmpty(id))
             {
@@ -591,7 +591,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                                             where contentSectionItem.ContentItemId == id
                                             select contentSectionItem;
 
-                return await contentSectionItems.ToListAsync();
+                return contentSectionItems.ToList();
             }
 
             return new List<ContentSectionItem>();
@@ -704,7 +704,7 @@ namespace Banico.EntityFrameworkCore.Repositories
 
         public async Task<ContentItem> Update(ContentItem item, string userId, bool isAdmin)
         {
-            var updateItem = (await this.Get("", item.Id, "", "", "", "", "", "", "", "", "", "", "",
+            var updateItem = (this.Get("", item.Id, "", "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
             "", 0, 1, 0))
                 .FirstOrDefault();
@@ -761,7 +761,7 @@ namespace Banico.EntityFrameworkCore.Repositories
 
         public async Task<ContentItem> Delete(string id, string userId, bool isAdmin)
         {
-            var item = (await this.Get("", id, "", "", "", "", "", "", "", "", "", "", "",
+            var item = (this.Get("", id, "", "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
             "", 0, 1, 0))
                 .FirstOrDefault();
@@ -794,7 +794,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             string alias, 
             string email)
         {
-            var profileItems = await this.Get(tenant, "", "", alias, "profile", "in", "", userId, "",
+            var profileItems = this.Get(tenant, "", "", alias, "profile", "in", "", userId, "",
                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", "", false, false, "", 0, 1, 0);
 

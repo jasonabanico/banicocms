@@ -56,7 +56,7 @@ namespace Banico.Api.Models
                 .Resolve(x => {
                     if (x != null)
                     {
-                        return contentItemRepository.GetContentSectionItemsByContentItemId(x.Source.Id).Result;
+                        return contentItemRepository.GetContentSectionItemsByContentItemId(x.Source.Id);
                     }
                     else
                     {

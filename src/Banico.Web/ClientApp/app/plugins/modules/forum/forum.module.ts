@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { MarkdownModule } from "ngx-markdown";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ForumRoutingModule } from "./forum.routing";
 import { ShellModule } from "../../../shell/shell.module";
@@ -26,7 +25,6 @@ import { ForumCommentService } from "./services/comment.service";
     FormsModule,
     ReactiveFormsModule,
     ForumRoutingModule,
-    MarkdownModule.forChild(),
     ShellModule
     //ForumStoreModule
   ],
