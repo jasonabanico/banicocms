@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item active" aria-current="page">
-      <a href="/admin">admin</a>
+      <a routerLinkActive="active" routerLink="/admin">admin</a>
     </li>
   </ol>
 </nav>
@@ -9,7 +9,11 @@
 <h1>User Admin</h1>
 
 <div class="btn-group">
-  <a href="/admin/users/add" class="btn btn-primary">
+  <a
+    routerLinkActive="active"
+    routerLink="/admin/users/add"
+    class="btn btn-primary"
+  >
     <i class="glyphicon glyphicon-plus"></i> Add User
   </a>
 </div>
@@ -29,16 +33,10 @@
       <td>{{ user.userName }}</td>
       <td>{{ user.email }}</td>
       <td>
-        <a
-          href="/admin/users/edit/{{ user.id }}"
-          class="btn btn-primary"
-        >
+        <a href="/admin/users/edit/{{ user.id }}" class="btn btn-primary">
           <i class="fas fa-pencil-alt"></i> Edit
         </a>
-        <a
-          href="/admin/users/delete/{{ user.id }}"
-          class="btn btn-danger"
-        >
+        <a href="/admin/users/delete/{{ user.id }}" class="btn btn-danger">
           <i class="fas fa-trash-alt"></i> Delete
         </a>
       </td>

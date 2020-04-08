@@ -1,7 +1,11 @@
 <p class="h4">Forum</p>
 
 <div *ngIf="canManageSubforum" class="btn-group">
-  <a href="/forum/sub/new/{{ path }}" class="btn btn-primary">
+  <a
+    routerLinkActive="active"
+    routerLink="/forum/sub/new/{{ path }}"
+    class="btn btn-primary"
+  >
     <i class="glyphicon glyphicon-plus"></i> New Subforum
   </a>
 </div>
@@ -14,7 +18,10 @@
   >
     <div class="card-body">
       <h5 class="card-title">
-        <a href="/forum/sub/{{ subforum.alias }}/{{ path }}">
+        <a
+          routerLinkActive="active"
+          routerLink="/forum/sub/{{ subforum.alias }}/{{ path }}"
+        >
           {{ subforum.name }}
         </a>
         <span class="small">({{ subforum.topicCount }})</span>

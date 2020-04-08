@@ -1,11 +1,17 @@
 <h3>
-  {{listSet.name}}
+  {{ listSet.name }}
 </h3>
 
 <p>
-  {{listSet.description}}
+  {{ listSet.description }}
 </p>
 
-<a href="/list/list-set/edit/{{listSet.id}}">Edit List Set</a>
-<a href="/list/list-item/new/{{listSet.id}}">Add List Item</a>
-<a href="/list/list/new/{{listSet.id}}">Add List</a>
+<a routerLinkActive="active" routerLink="/list/list-set/edit/{{ listSet.id }}"
+  >Edit List Set</a
+>
+<a routerLinkActive="active" routerLink="/list/list-item/new/{{ listSet.id }}"
+  >Add List Item</a
+>
+<a routerLinkActive="active" routerLink="/list/list/new/{{ listSet.id }}"
+  >Add List</a
+>

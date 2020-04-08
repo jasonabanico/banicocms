@@ -19,9 +19,11 @@
   <div class="card">
     <div class="card-block">
       <h5>
-        <a href="/directory/item/{{ directoryItem.id }}">{{
-          directoryItem.name
-        }}</a>
+        <a
+          routerLinkActive="active"
+          routerLink="/directory/item/{{ directoryItem.id }}"
+          >{{ directoryItem.name }}</a
+        >
       </h5>
       <p>{{ directoryItem.snippet }}</p>
       <p>

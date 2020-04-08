@@ -1,7 +1,11 @@
 <p class="h4">Profiles</p>
 
 <div *ngIf="canManageProfile" class="btn-group">
-  <a href="/profile/org/new/{{ path }}" class="btn btn-primary">
+  <a
+    routerLinkActive="active"
+    routerLink="/profile/org/new/{{ path }}"
+    class="btn btn-primary"
+  >
     <i class="glyphicon glyphicon-plus"></i> New Profile
   </a>
 </div>
@@ -11,11 +15,17 @@
     <tr *ngFor="let profile of profiles">
       <td>
         <strong
-          ><a href="/profile/org/{{ profile.alias }}"
+          ><a
+            routerLinkActive="active"
+            routerLink="/profile/org/{{ profile.alias }}"
             >{{ profile.name }}.</a
           ></strong
         >&nbsp;
-        <a href="/profile/org/{{ profile.alias }}">{{ profile.snippet }}</a>
+        <a
+          routerLinkActive="active"
+          routerLink="/profile/org/{{ profile.alias }}"
+          >{{ profile.snippet }}</a
+        >
       </td>
     </tr>
   </tbody>

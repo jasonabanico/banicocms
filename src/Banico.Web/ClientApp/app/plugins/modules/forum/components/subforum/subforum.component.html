@@ -1,7 +1,13 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item active" aria-current="page">
-      / <a href="/forum/{{ subforum?.sectionItems }}">forum</a> /
+      /
+      <a
+        routerLinkActive="active"
+        routerLink="/forum/{{ subforum?.sectionItems }}"
+        >forum</a
+      >
+      /
       {{ subforum?.alias }}
     </li>
   </ol>
@@ -66,17 +72,21 @@
     <tr *ngFor="let topic of topics">
       <td colspan="2">
         <strong
-          ><a href="/forum/topic/{{ topic.id }}">{{ topic.title }}.</a></strong
+          ><a routerLinkActive="active" routerLink="/forum/topic/{{ topic.id }}"
+            >{{ topic.title }}.</a
+          ></strong
         >&nbsp;
-        <a href="/forum/topic/{{ topic.id }}">{{ topic.snippet }}</a>
+        <a routerLinkActive="active" routerLink="/forum/topic/{{ topic.id }}">{{
+          topic.snippet
+        }}</a>
       </td>
       <td>
-        <a href="/forum/topic/{{ topic.id }}"
+        <a routerLinkActive="active" routerLink="/forum/topic/{{ topic.id }}"
           >{{ topic.formattedDate() }} ({{ topic.fromNow() }})</a
         >
       </td>
       <td>
-        <a href="/forum/topic/{{ topic.id }}">
+        <a routerLinkActive="active" routerLink="/forum/topic/{{ topic.id }}">
           {{ topic.postCount }}
         </a>
       </td>

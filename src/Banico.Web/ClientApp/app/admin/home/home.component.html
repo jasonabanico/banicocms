@@ -11,19 +11,29 @@
 
       <div *ngIf="isInitialized">
         <p *ngIf="isSuperAdmin">
-          <a href="/admin/set-tenant"><i class="fas fa-home"></i> Set Tenant</a>
+          <a routerLinkActive="active" routerLink="/admin/set-tenant"
+            ><i class="fas fa-home"></i> Set Tenant</a
+          >
         </p>
         <p *ngIf="configsAllowed">
-          <a href="/admin/configs"><i class="fas fa-cogs"></i> Configs</a>
+          <a routerLinkActive="active" routerLink="/admin/configs"
+            ><i class="fas fa-cogs"></i> Configs</a
+          >
         </p>
         <p *ngIf="sectionsAllowed">
-          <a href="/admin/sections"><i class="fas fa-sitemap"></i> Sections</a>
+          <a routerLinkActive="active" routerLink="/admin/sections"
+            ><i class="fas fa-sitemap"></i> Sections</a
+          >
         </p>
         <p *ngIf="rolesAllowed">
-          <a href="/admin/roles"><i class="fas fa-user-tag"></i> Roles</a>
+          <a routerLinkActive="active" routerLink="/admin/roles"
+            ><i class="fas fa-user-tag"></i> Roles</a
+          >
         </p>
         <p *ngIf="usersAllowed">
-          <a href="/admin/users"><i class="fas fa-users"></i> Users</a>
+          <a routerLinkActive="active" routerLink="/admin/users"
+            ><i class="fas fa-users"></i> Users</a
+          >
         </p>
       </div>
     </div>

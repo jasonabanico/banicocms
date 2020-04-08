@@ -10,7 +10,10 @@
       </p>
 
       <p>
-        <a href="/profile/in/edit/{{ username }}">
+        <a
+          routerLinkActive="active"
+          routerLink="/profile/in/edit/{{ username }}"
+        >
           <i class="fas fa-address-card"></i> Set / Update Your Personal Profile
         </a>
       </p>
@@ -18,7 +21,7 @@
       <hr />
 
       <p>
-        <a href="/manage/change-password">
+        <a routerLinkActive="active" routerLink="/manage/change-password">
           <i class="fas fa-key"></i> Change Password
         </a>
       </p>

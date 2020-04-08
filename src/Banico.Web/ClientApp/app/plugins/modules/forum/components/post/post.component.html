@@ -23,7 +23,10 @@
             />
           </div>
           <div class="ml-2">
-            <a href="/profile/in/{{ post?.username }}" class="h5 m-0"
+            <a
+              routerLinkActive="active"
+              routerLink="/profile/in/{{ post?.username }}"
+              class="h5 m-0"
               >@{{ post?.username }}</a
             >
           </div>

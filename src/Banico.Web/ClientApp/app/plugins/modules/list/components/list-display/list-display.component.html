@@ -1,12 +1,15 @@
 <h3>
-  {{list.name}}
+  {{ list.name }}
 </h3>
 
 <p>
-  {{list.description}}
+  {{ list.description }}
 </p>
 
 <p *ngFor="let listItem of listItems; index as i">
-  <a href="/list/list-item/{{listItem.alias}}/?list={{list.id}}">{{listItem.name}}</a>
-</p>  
-
+  <a
+    routerLinkActive="active"
+    routerLink="/list/list-item/{{ listItem.alias }}/?list={{ list.id }}"
+    >{{ listItem.name }}</a
+  >
+</p>

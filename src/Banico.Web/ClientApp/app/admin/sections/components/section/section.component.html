@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item active" aria-current="page">
-      <a href="/admin">admin</a>
+      <a routerLinkActive="active" routerLink="/admin">admin</a>
     </li>
   </ol>
 </nav>
@@ -10,9 +10,11 @@
 
 <ul>
   <li *ngFor="let section of sections">
-    <a href="/admin/sections/section-item/{{ section.name }}">{{
-      section.name
-    }}</a>
+    <a
+      routerLinkActive="active"
+      routerLink="/admin/sections/section-item/{{ section.name }}"
+      >{{ section.name }}</a
+    >
   </li>
 </ul>
 

@@ -1,9 +1,11 @@
 <h3>
-  {{listItem.name}}
+  {{ listItem.name }}
 </h3>
 
-<a href="/list/list/{{list.id}}">Return to {{list.name}}</a>
+<a routerLinkActive="active" routerLink="/list/list/{{ list.id }}"
+  >Return to {{ list.name }}</a
+>
 
 <p>
-  {{listItem.description}}
+  {{ listItem.description }}
 </p>

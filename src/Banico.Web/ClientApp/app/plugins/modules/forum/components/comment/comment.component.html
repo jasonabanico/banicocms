@@ -19,7 +19,9 @@
     />
     <div class="media-body text-md-left ml-md-3 ml-0">
       <p class="small">
-        <a href="/profile/in/{{ comment?.username }}"
+        <a
+          routerLinkActive="active"
+          routerLink="/profile/in/{{ comment?.username }}"
           >@{{ comment?.username }}</a
         >
         {{ comment?.text }}<br />
@@ -27,7 +29,11 @@
           <a href="javascript:;" (click)="edit()">Edit</a>
           &bull;
         </span>
-        <span *ngIf="userId && (comment?.ownerUserIds.includes(userId + ' ') || isAdmin)">
+        <span
+          *ngIf="
+            userId && (comment?.ownerUserIds.includes(userId + ' ') || isAdmin)
+          "
+        >
           <a href="javascript:;" (click)="delete()">Delete</a>
           &bull;
         </span>
