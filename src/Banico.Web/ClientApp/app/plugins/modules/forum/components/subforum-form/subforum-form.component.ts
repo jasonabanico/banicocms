@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Subforum } from "../../entities/subforum";
-import { SubforumEntityService } from "../../services/subforum-entity.service";
 import { ForumSubforumService } from "../../services/subforum.service";
 
 @Component({
