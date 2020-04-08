@@ -33,10 +33,18 @@
       <td>{{ user.userName }}</td>
       <td>{{ user.email }}</td>
       <td>
-        <a href="/admin/users/edit/{{ user.id }}" class="btn btn-primary">
+        <a
+          routerLinkActive="active"
+          routerLink="/admin/users/edit/{{ user.id }}"
+          class="btn btn-primary"
+        >
           <i class="fas fa-pencil-alt"></i> Edit
         </a>
-        <a href="/admin/users/delete/{{ user.id }}" class="btn btn-danger">
+        <a
+          routerLinkActive="active"
+          routerLink="/admin/users/delete/{{ user.id }}"
+          class="btn btn-danger"
+        >
           <i class="fas fa-trash-alt"></i> Delete
         </a>
       </td>

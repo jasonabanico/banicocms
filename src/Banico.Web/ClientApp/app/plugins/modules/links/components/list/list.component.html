@@ -10,7 +10,8 @@
 </span>
 
 <p *ngFor="let link of links; index as i">
-  <a href="{{ link.url }}">{{ i }} - {{ link.name }}</a
+  <a routerLinkActive="active" routerLink="{{ link.url }}"
+    >{{ i }} - {{ link.name }}</a
   ><br />
   {{ link.description }}
 </p>

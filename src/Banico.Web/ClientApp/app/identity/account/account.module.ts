@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { HttpClientXsrfModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
 import { RecaptchaModule, RecaptchaFormsModule } from "ng-recaptcha";
 
 import { SharedModule } from "../../shared/modules/shared.module";
@@ -24,6 +25,7 @@ import { MDBBootstrapModule } from "angular-bootstrap-md";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     RecaptchaModule,
     RecaptchaFormsModule,
     AccountRoutingModule,

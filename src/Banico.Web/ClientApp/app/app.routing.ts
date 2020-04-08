@@ -14,11 +14,14 @@ const APP_ROUTES: Routes = [
   },
   {
     path: "admin",
-    loadChildren: "./admin/admin.module#AdminModule"
+    loadChildren: () => import("./admin/admin.module").then(m => m.AdminModule)
   },
   {
     path: "manage",
-    loadChildren: "./identity/manage/manage.module#IdentityManageModule"
+    loadChildren: () =>
+      import("./identity/manage/manage.module").then(
+        m => m.IdentityManageModule
+      )
   }
 
   //,

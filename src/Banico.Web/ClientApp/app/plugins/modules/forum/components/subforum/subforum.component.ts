@@ -5,7 +5,6 @@ import { ForumTopicService } from "../../services/topic.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { Topic } from "../../entities/topic";
-import { SubforumEntityService } from "../../services/subforum-entity.service";
 import { AuthService } from "../../../../../shared/services/auth.service";
 import { ShellService } from "../../../../../shared/services/shell.service";
 

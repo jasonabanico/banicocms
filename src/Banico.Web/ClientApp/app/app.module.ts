@@ -9,6 +9,7 @@ import {
   PathLocationStrategy,
   CommonModule
 } from "@angular/common";
+import { Routes, RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HttpXhrBackend } from "@angular/common/http";
 import { TransferHttpCacheModule } from "@nguniversal/common";
@@ -40,6 +41,7 @@ import { IdentityAccountModule } from "./identity/account/account.module";
     TransferHttpCacheModule,
     BrowserTransferStateModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     ApolloModule,
     HttpLinkModule,

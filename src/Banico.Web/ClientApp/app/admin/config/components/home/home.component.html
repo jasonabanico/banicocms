@@ -35,10 +35,18 @@
       <td>{{ config.name }}</td>
       <td>{{ config.value }}</td>
       <td>
-        <a href="/admin/configs/edit/{{ config.id }}" class="btn btn-primary">
+        <a
+          routerLinkActive="active"
+          routerLink="/admin/configs/edit/{{ config.id }}"
+          class="btn btn-primary"
+        >
           <i class="fas fa-pencil-alt"></i> Edit
         </a>
-        <a href="/admin/configs/delete/{{ config.id }}" class="btn btn-danger">
+        <a
+          routerLinkActive="active"
+          routerLink="/admin/configs/delete/{{ config.id }}"
+          class="btn btn-danger"
+        >
           <i class="fas fa-trash-alt"></i> Delete
         </a>
       </td>
