@@ -7,6 +7,7 @@ import { PageRoutingModule } from "./page.routing";
 import { PageComponent } from "./components/page.component";
 import { PageItemComponent } from "./components/item/item.component";
 import { PageFormComponent } from "./components/form/form.component";
+import { PageService } from "./services/page.service";
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { PageFormComponent } from "./components/form/form.component";
     PageRoutingModule
   ],
   declarations: [PageComponent, PageItemComponent, PageFormComponent],
+  providers: [PageService],
   bootstrap: [PageComponent]
 })
 export class PageModule {}

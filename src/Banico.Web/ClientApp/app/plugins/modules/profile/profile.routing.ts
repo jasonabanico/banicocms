@@ -11,46 +11,52 @@ import { AuthGuard } from "../../../shared/auth/auth.guard";
 
 const PROFILE_ROUTES: Routes = [
   {
-    path: "org/new/:path",
-    component: OrganizationFormComponent,
-    canActivate: [AuthGuard],
-    data: { module: "profile-org/manage" }
-  },
-  {
-    path: "in/edit/:alias",
-    component: PersonFormComponent,
-    canActivate: [AuthGuard],
-    data: { module: "profile-in/manage" }
-  },
-  {
-    path: "org/edit/:alias",
-    component: OrganizationFormComponent,
-    canActivate: [AuthGuard],
-    data: { module: "profile-org/manage" }
-  },
-  {
-    path: "in/:alias",
-    component: PersonViewComponent,
-    canActivate: [AuthGuard],
-    data: { module: "profile/view" }
-  },
-  {
-    path: "org/:alias",
-    component: OrganizationViewComponent,
-    canActivate: [AuthGuard],
-    data: { module: "profile/view" }
-  },
-  {
-    path: ":path",
-    component: ProfileHomeComponent,
-    canActivate: [AuthGuard],
-    data: { module: "profile-home/view" }
-  },
-  {
-    path: "",
-    component: ProfileHomeComponent,
-    canActivate: [AuthGuard],
-    data: { module: "profile-home/view" }
+    path: "profile",
+    component: ProfileComponent,
+    children: [
+      {
+        path: "org/new/:path",
+        component: OrganizationFormComponent,
+        canActivate: [AuthGuard],
+        data: { module: "profile-org/manage" }
+      },
+      {
+        path: "in/edit/:alias",
+        component: PersonFormComponent,
+        canActivate: [AuthGuard],
+        data: { module: "profile-in/manage" }
+      },
+      {
+        path: "org/edit/:alias",
+        component: OrganizationFormComponent,
+        canActivate: [AuthGuard],
+        data: { module: "profile-org/manage" }
+      },
+      {
+        path: "in/:alias",
+        component: PersonViewComponent,
+        canActivate: [AuthGuard],
+        data: { module: "profile/view" }
+      },
+      {
+        path: "org/:alias",
+        component: OrganizationViewComponent,
+        canActivate: [AuthGuard],
+        data: { module: "profile/view" }
+      },
+      {
+        path: ":path",
+        component: ProfileHomeComponent,
+        canActivate: [AuthGuard],
+        data: { module: "profile-home/view" }
+      },
+      {
+        path: "",
+        component: ProfileHomeComponent,
+        canActivate: [AuthGuard],
+        data: { module: "profile-home/view" }
+      }
+    ]
   }
 ];
 

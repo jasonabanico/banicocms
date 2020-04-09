@@ -11,46 +11,52 @@ import { AuthGuard } from "../../../shared/auth/auth.guard";
 
 const DIRECTORY_ROUTES: Routes = [
   {
-    path: "new/:path",
-    component: DirectoryItemFormComponent,
-    canActivate: [AuthGuard],
-    data: { module: "directory/manage" }
-  },
-  {
-    path: "search/:search",
-    component: DirectorySearchComponent,
-    canActivate: [AuthGuard],
-    data: { module: "directory/view" }
-  },
-  {
-    path: "item/:id",
-    component: DirectoryItemComponent,
-    canActivate: [AuthGuard],
-    data: { module: "directory/view" }
-  },
-  {
-    path: "edit/:id",
-    component: DirectoryItemFormComponent,
-    canActivate: [AuthGuard],
-    data: { module: "directory/manage" }
-  },
-  {
-    path: ":path",
-    component: DirectoryListComponent,
-    canActivate: [AuthGuard],
-    data: { module: "directory/view" }
-  },
-  {
-    path: "",
-    component: DirectoryHomeComponent,
-    canActivate: [AuthGuard],
-    data: { module: "directory/view" }
-  },
-  {
-    path: "**",
-    component: DirectoryListComponent,
-    canActivate: [AuthGuard],
-    data: { module: "directory/view" }
+    path: "directory",
+    component: DirectoryComponent,
+    children: [
+      {
+        path: "new/:path",
+        component: DirectoryItemFormComponent,
+        canActivate: [AuthGuard],
+        data: { module: "directory/manage" }
+      },
+      {
+        path: "search/:search",
+        component: DirectorySearchComponent,
+        canActivate: [AuthGuard],
+        data: { module: "directory/view" }
+      },
+      {
+        path: "item/:id",
+        component: DirectoryItemComponent,
+        canActivate: [AuthGuard],
+        data: { module: "directory/view" }
+      },
+      {
+        path: "edit/:id",
+        component: DirectoryItemFormComponent,
+        canActivate: [AuthGuard],
+        data: { module: "directory/manage" }
+      },
+      {
+        path: ":path",
+        component: DirectoryListComponent,
+        canActivate: [AuthGuard],
+        data: { module: "directory/view" }
+      },
+      {
+        path: "",
+        component: DirectoryHomeComponent,
+        canActivate: [AuthGuard],
+        data: { module: "directory/view" }
+      },
+      {
+        path: "**",
+        component: DirectoryListComponent,
+        canActivate: [AuthGuard],
+        data: { module: "directory/view" }
+      }
+    ]
   }
 ];
 
