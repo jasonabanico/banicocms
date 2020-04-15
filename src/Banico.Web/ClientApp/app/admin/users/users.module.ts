@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { HttpClientXsrfModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
 import { AdminUsersFormComponent } from "./components/form/form.component";
 import { AdminUsersHomeComponent } from "./components/home/home.component";
 import { UsersService } from "./services/users.service";
@@ -11,6 +12,7 @@ import { UsersService } from "./services/users.service";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     HttpClientXsrfModule.withOptions({
       cookieName: "XSRF-TOKEN",
       headerName: "X-XSRF-Token"

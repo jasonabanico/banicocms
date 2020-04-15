@@ -2,3 +2,6 @@ src/Banico.EntityFrameworkCore/banico.db
 .vs/
 .vs/Banico/xs/UserPrefs.xml
 .vs/Banico/xs/UserPrefs.xml
+src/Banico.Web/Config/appsettings.json
+src/Banico.Web/banico.db-shm
+src/Banico.Web/banico.db-wal

@@ -13,6 +13,7 @@ import { LinksModule } from "./modules/links/links.module";
 import { ListModule } from "./modules/list/list.module";
 import { PageModule } from "./modules/page/page.module";
 import { ProfileModule } from "./modules/profile/profile.module";
+import { VideosModule } from "./modules/videos/videos.module";
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ProfileModule } from "./modules/profile/profile.module";
     LinksModule,
     ListModule,
     PageModule,
-    ProfileModule
+    ProfileModule,
+    VideosModule
   ],
   providers: [ContentItemService]
 })

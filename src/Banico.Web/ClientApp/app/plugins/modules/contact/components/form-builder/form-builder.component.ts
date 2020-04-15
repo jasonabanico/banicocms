@@ -101,7 +101,7 @@ export class ContactFormBuilderComponent implements OnInit {
     this.contact.content = JSON.stringify(this.contact.fields);
     this.contactService
       .addOrUpdate(this.contact)
-      .subscribe(contact => this.saveContactSuccess(contact));
+      .subscribe(id => this.saveContactSuccess(this.contact));
   }
 
   private saveContactSuccess(contact: Contact) {

@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col">
+    <div class="border border-light p-5 mt-4">
+      <p class="h4">Video</p>
+
+      <form class="mt-4" [formGroup]="videoForm" novalidate (ngSubmit)="save()">
+        <input
+          class="form-control"
+          id="channelId"
+          name="channelId"
+          type="hidden"
+          formControlName="channelId"
+          disabled
+        />
+
+        <div class="form-group">
+          <div class="col-md-10">
+            <input
+              class="form-control"
+              id="url"
+              name="url"
+              type="text"
+              formControlName="url"
+              required
+              placeholder="URL"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <button type="submit" class="btn btn-primary" value="save">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

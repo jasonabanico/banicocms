@@ -63,13 +63,13 @@ export class DirectoryItemFormComponent implements OnInit {
   public save() {
     this.directoryService
       .addOrUpdate(this.directoryItem)
-      .subscribe(directoryItem => this.saveDirectoryItemSuccess(directoryItem));
+        .subscribe(directoryItemId => this.saveDirectoryItemSuccess(directoryItemId));
   }
 
-  private saveDirectoryItemSuccess(directoryItem: DirectoryItem) {
-    if (directoryItem.id !== "0") {
+  private saveDirectoryItemSuccess(directoryItemId: string) {
+    if (directoryItemId !== "0") {
       alert("Saved.");
-      this.router.navigateByUrl("directory/item/" + directoryItem.id);
+      this.router.navigateByUrl("directory/item/" + directoryItemId);
     } else {
       alert("Save failed.");
     }

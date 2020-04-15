@@ -17,5 +17,5 @@
     },
     { Text: "About Us", Url: "https://github.com/jasebanico", Style: "success" }
   ];
-  public static SIGNED_IN_HOME_MODULE = "/forum";
+  public static SIGNED_IN_HOME_MODULE = "/home";
 }

@@ -11,8 +11,7 @@ export class AdminRolesHomeComponent {
     public roles: Role[];
 
     constructor(
-        @Inject(RolesService) public rolesService: RolesService
-    ) {
+        @Inject(RolesService) public rolesService: RolesService) {
     }
 
     ngOnInit() {

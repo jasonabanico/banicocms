@@ -267,7 +267,7 @@ export class ContentItemService {
     return items;
   }
 
-  public addOrUpdate(contentItem: ContentItem): Observable<any> {
+  public addOrUpdate(contentItem: ContentItem): Observable<string> {
     var result = this.apollo
       .mutate({
         mutation: AddOrUpdateContentItemMutation,
@@ -314,7 +314,7 @@ export class ContentItemService {
     //});
   }
 
-  public delete(id: string): Observable<any> {
+  public delete(id: string): Observable<string> {
     var result = this.apollo
       .mutate({
         mutation: DeleteContentItemMutation,

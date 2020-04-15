@@ -63,11 +63,11 @@ export class DirectoryService extends PluginService {
         }));
     }
 
-    public addOrUpdate(directoryItem: DirectoryItem): Observable<DirectoryItem> {
+    public addOrUpdate(directoryItem: DirectoryItem): Observable<string> {
         let contentItem: ContentItem = directoryItem.toContentItem();
-        return this.contentItemService.addOrUpdate(contentItem).pipe(
-            map(contentItem => new DirectoryItem(contentItem)),
-            catchError(this.handleError));
+        return this.contentItemService
+            .addOrUpdate(contentItem)
+            .pipe(catchError(this.handleError));
     }
 
     // public delete(directoryItem: DirectoryItem): Observable<{}> {

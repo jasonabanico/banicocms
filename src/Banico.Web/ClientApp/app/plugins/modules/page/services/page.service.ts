@@ -24,12 +24,11 @@ export class PageService extends PluginService {
     );
   }
 
-  public addOrUpdate(page: Page): Observable<Page> {
+  public addOrUpdate(page: Page): Observable<string> {
     let contentItem: ContentItem = page.toContentItem();
-    return this.contentItemService.addOrUpdate(contentItem).pipe(
-      map(contentItem => new Page(contentItem)),
-      catchError(this.handleError)
-    );
+      return this.contentItemService
+          .addOrUpdate(contentItem)
+          .pipe(catchError(this.handleError));
   }
 
   // public delete(page: Page): Observable<boolean> {

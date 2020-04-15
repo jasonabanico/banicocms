@@ -38,6 +38,7 @@ import { AuthService } from "../shared/services/auth.service";
     SectionBarComponent,
     TopBarComponent,
     BottomBarComponent,
+    EmbedComponent,
     RichTextComponent
   ],
   providers: [AuthService]

@@ -24,12 +24,11 @@ export class ContactService extends PluginService {
     );
   }
 
-  public addOrUpdate(contact: Contact): Observable<Contact> {
+  public addOrUpdate(contact: Contact): Observable<string> {
     let contentItem: ContentItem = contact.toContentItem();
-    return this.contentItemService.addOrUpdate(contentItem).pipe(
-      map(contentItem => new Contact(contentItem)),
-      catchError(this.handleError)
-    );
+      return this.contentItemService
+          .addOrUpdate(contentItem)
+          .pipe(catchError(this.handleError));
   }
 
   // public deleteContact(contact: Contact): Observable<{}> {

@@ -48,6 +48,11 @@ const PLUGIN_ROUTES: Routes = [
   //   path: "profile",
   //   loadChildren: () =>
   //     import("./modules/profile/profile.module").then(m => m.ProfileModule)
+  // },
+  // {
+  //   path: "videos",
+  //   loadChildren: () =>
+  //     import("./modules/videos/videos.module").then(m => m.VideosModule)
   // }
 ];
 

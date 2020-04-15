@@ -1,0 +1,66 @@
+<app-shell-modal
+  #deleteModal
+  id="{{ channel?.id }}"
+  title="Delete"
+  body="Are you sure you want to delete this subforum?"
+  button="Delete"
+  (actioned)="deleteConfirmed()"
+>
+</app-shell-modal>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="ml-2">
+          <div class="h5 m-0 mb-2">{{ channel?.name }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <app-shell-rich-text [text]="channel?.description"></app-shell-rich-text>
+  </div>
+
+  <div
+    *ngIf="userId && (subforum?.ownerUserIds.includes(userId + ' ') || isAdmin)"
+    class="card-footer"
+  >
+    <a href="javascript:;" (click)="edit()" class="card-link"
+      ><i class="fas fa-pencil-alt"></i> Edit</a
+    >
+    <a href="javascript:;" (click)="delete()" class="card-link">
+      <i class="fas fa-trash-alt"></i> Delete</a
+    >
+  </div>
+</div>
+
+<p class="h4">Videos</p>
+
+<div *ngIf="canManageVideos" class="btn-group">
+  <a
+    routerLinkActive="active"
+    routerLink="/videos/video/new/{{ channel.id }}"
+    class="btn btn-primary"
+  >
+    <i class="glyphicon glyphicon-plus"></i> New Video
+  </a>
+</div>
+
+<table class="table table-hover">
+  <tbody>
+    <tr *ngFor="let video of videos">
+      <td>
+        <strong
+          ><a
+            routerLinkActive="active"
+            routerLink="/videos/video/{{ video.id }}"
+            >{{ video.title }}</a
+          ></strong
+        ><br />
+        {{ video.snippet }}
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -78,7 +78,14 @@
       "profile/manage,canActivate,user",
       "profile-home/view,canActivate,user",
       "profile-in/manage,canActivate,user",
-      "profile-org/manage,canActivate,user"
+      "profile-org/manage,canActivate,user",
+      "videos,isEnabled,n",
+      "videos,withSections,n",
+      "videos-home/view,canActivate,user",
+      "videos-channel/view,canActivate,user",
+      "videos-channel/manage,canActivate,admin",
+      "videos-video/view,canActivate,user",
+      "videos-video/manage,canActivate,admin"
     ]
   },
   "Content": {

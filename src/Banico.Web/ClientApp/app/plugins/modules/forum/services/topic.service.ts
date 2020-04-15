@@ -64,7 +64,7 @@ export class ForumTopicService extends PluginService {
     subforumId: string,
     title: string,
     text: string
-  ): Observable<boolean> {
+  ): Observable<string> {
     let topic: Topic = new Topic(null);
 
     topic.id = id;

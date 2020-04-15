@@ -38,12 +38,11 @@ export class FaqService extends PluginService {
     return output;
   }
 
-  public addOrUpdate(faq: Faq): Observable<Faq> {
+  public addOrUpdate(faq: Faq): Observable<string> {
     let contentItem: ContentItem = faq.toContentItem();
-    return this.contentItemService.addOrUpdate(contentItem).pipe(
-      map(contentItem => new Faq(contentItem)),
-      catchError(this.handleError)
-    );
+      return this.contentItemService
+          .addOrUpdate(contentItem)
+          .pipe(catchError(this.handleError));
   }
 
   // public delete(faq: Faq): Observable<{}> {

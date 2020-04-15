@@ -1,0 +1,30 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="text-center">
+      <div class="h1 m-0 mb-3">{{ video?.title }}</div>
+    </div>
+
+    <hr />
+
+    <span *ngIf="canEdit">
+      <a
+        routerLinkActive="active"
+        routerLink="/videos/video/edit/{{ video?.id }}"
+        class="btn btn-primary"
+      >
+        <i class="fas fa-pencil-alt"></i> Edit</a
+      >
+      <br />
+    </span>
+
+    <app-shell-embed [tagId]="video?.url"></app-shell-embed>
+
+    <br />
+
+    <app-shell-rich-text
+      [text]="video?.description"
+      fontFamily="serif"
+      fontSize="19px"
+    ></app-shell-rich-text>
+  </div>
+</div>
