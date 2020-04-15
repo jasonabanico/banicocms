@@ -12,7 +12,8 @@ export class Channel {
   sectionItems: string;
   createdDate: string;
   updatedDate: string;
-  type: string;
+    type: string;
+    thumbnailUrl: string;
 
   constructor(private contentItem: ContentItem) {
     if (

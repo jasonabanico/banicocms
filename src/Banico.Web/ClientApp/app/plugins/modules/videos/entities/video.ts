@@ -13,10 +13,10 @@ export class Video {
   createdDate: string;
   updatedDate: string;
   type: string;
-    url: string;
-    thumbnailUrl: string;
-    thumbnailHeight: string;
-    thumbnailWidth: string;
+  url: string;
+  thumbnailUrl: string;
+  thumbnailHeight: string;
+  thumbnailWidth: string;
 
   constructor(private contentItem: ContentItem) {
     if (
@@ -35,10 +35,10 @@ export class Video {
       this.snippet = contentItem.snippet;
       this.createdDate = contentItem.createdDate;
       this.updatedDate = contentItem.updatedDate;
-        this.url = contentItem.attribute01;
-        this.thumbnailUrl = contentItem.attribute02;
-        this.thumbnailHeight = contentItem.attribute03;
-        this.thumbnailWidth = contentItem.attribute04;
+      this.url = contentItem.attribute01;
+      this.thumbnailUrl = contentItem.attribute02;
+      this.thumbnailHeight = contentItem.attribute03;
+      this.thumbnailWidth = contentItem.attribute04;
     }
   }
 
@@ -53,10 +53,10 @@ export class Video {
     output.name = this.title;
     output.alias = this.alias;
     output.content = this.description;
-      output.attribute01 = this.url;
-      output.attribute02 = this.thumbnailUrl;
-      output.attribute03 = this.thumbnailHeight;
-      output.attribute04 = this.thumbnailWidth;
+    output.attribute01 = this.url;
+    output.attribute02 = this.thumbnailUrl;
+    output.attribute03 = this.thumbnailHeight;
+    output.attribute04 = this.thumbnailWidth;
 
     return output;
   }

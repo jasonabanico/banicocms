@@ -1,5 +1,3 @@
-<p class="h4">Channels</p>
-
 <div *ngIf="canManageVideos" class="btn-group">
   <a
     routerLinkActive="active"
@@ -10,19 +8,17 @@
   </a>
 </div>
 
-<table class="table table-hover">
-  <tbody>
-    <tr *ngFor="let channel of channels">
-      <td>
-        <strong
-          ><a
-            routerLinkActive="active"
-            routerLink="/videos/channel/{{ channel.alias }}"
-            >{{ channel.name }}</a
-          ></strong
-        ><br />
-        {{ channel.snippet }}
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="d-flex flex-wrap">
+    <div *ngFor="let channel of channels" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="card">
+            <img class="card-img-top"
+                 src="{{ channel.thumbnailUrl }}" />
+            <div class="card-body">
+                <a routerLinkActive="active"
+                   routerLink="/videos/channel/{{ channel.alias }}">
+                    <h5 class="card-title">{{ channel.name }}</h5>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "../../../../../shared/services/auth.service";
 import { Video } from "../../entities/video";
 import { VideosService } from "../../services/videos.service";
-import { VideoOEmbedService } from '../../services/video-oembed.service';
+import { VideoOEmbedService } from "../../services/video-oembed.service";
 
 @Component({
   selector: "app-plugins-videos-channel-form",
@@ -16,12 +16,13 @@ export class VideoFormComponent implements OnInit {
   private sub: any;
   public videoForm: FormGroup = this.fb.group({
     channelId: ["", Validators.required],
-    url: ["", Validators.required]
+    url: ["", Validators.required],
+    oEmbed: [""]
   });
 
   public constructor(
-      private videosService: VideosService,
-      private videoOembedService: VideoOEmbedService,
+    private videosService: VideosService,
+    private videoOembedService: VideoOEmbedService,
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
@@ -52,13 +53,24 @@ export class VideoFormComponent implements OnInit {
 
   public save() {
     this.video.channelId = this.videoForm.value["channelId"];
-      this.video.url = this.videoForm.value["url"];
+    this.video.url = this.videoForm.value["url"];
+    const oEmbed = this.videoForm.value["oEmbed"];
 
-      this.videoOembedService.getOEmbed(this.video).then(
-          video => this.videosService.addOrUpdateVideo(video).subscribe(
-              result => this.router.navigate(["/videos/video/" + result])
-              //errors =>  this.errors = errors
-          )
-      );
+    if (oEmbed != "") {
+      const json = JSON.parse(oEmbed);
+      this.video = this.videoOembedService.setOEmbedValues(this.video, json);
+    }
+
+    //this.videoOembedService.getOEmbed(this.video).then(
+    //    video => this.videosService.addOrUpdateVideo(video).subscribe(
+    //        result => this.router.navigate(["/videos/video/" + result])
+    //        //errors =>  this.errors = errors
+    //    )
+    //);
+
+    this.videosService.addOrUpdateVideo(this.video).subscribe(
+      result => this.router.navigate(["/videos/video/" + result])
+      //errors =>  this.errors = errors
+    );
   }
 }

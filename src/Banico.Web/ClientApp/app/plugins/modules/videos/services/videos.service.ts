@@ -93,6 +93,7 @@ export class VideosService extends PluginService {
     contentItemSearch.module = "videos";
     contentItemSearch.type = "video";
       contentItemSearch.parentId = channelId;
+      contentItemSearch.page = 0;
       contentItemSearch.pageSize = 1;
 
     return this.contentItemService.getAll(contentItemSearch).pipe(
