@@ -32,9 +32,11 @@ export class VideosHomeComponent implements OnInit, OnDestroy {
 
     this.initializeChannels();
 
-    this.authService.canAccess("videos/manage", "", false).subscribe(result => {
-      this.canManageVideos = result;
-    });
+    this.authService
+      .canAccess("videos-channel/manage", "", false)
+      .subscribe(result => {
+        this.canManageVideos = result;
+      });
 
     this.shellService.setTitle("Videos");
   }
