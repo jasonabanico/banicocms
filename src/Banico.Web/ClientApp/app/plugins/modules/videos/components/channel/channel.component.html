@@ -1,20 +1,23 @@
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">
-            /
-            <a routerLinkActive="active"
-               routerLink="/videos/{{ channel?.sectionItems }}">channels</a>
-            /
-            {{ subforum?.alias }}
-        </li>
-    </ol>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">
+      /
+      <a
+        routerLinkActive="active"
+        routerLink="/videos/{{ channel?.sectionItems }}"
+        >channels</a
+      >
+      /
+      {{ channel?.alias }}
+    </li>
+  </ol>
 </nav>
 
 <app-shell-modal
   #deleteModal
   id="{{ channel?.id }}"
   title="Delete"
-  body="Are you sure you want to delete this subforum?"
+  body="Are you sure you want to delete this channel?"
   button="Delete"
   (actioned)="deleteConfirmed()"
 >
@@ -36,7 +39,7 @@
   </div>
 
   <div
-    *ngIf="userId && (subforum?.ownerUserIds.includes(userId + ' ') || isAdmin)"
+    *ngIf="userId && (channel?.ownerUserIds.includes(userId + ' ') || isAdmin)"
     class="card-footer"
   >
     <a href="javascript:;" (click)="edit()" class="card-link"
@@ -49,25 +52,27 @@
 </div>
 
 <div *ngIf="canManageVideos">
-    <a routerLinkActive="active"
-       routerLink="/videos/video/new/{{ channel.id }}"
-       class="btn btn-primary">
-        <i class="glyphicon glyphicon-plus"></i> New Video
-    </a>
+  <a
+    routerLinkActive="active"
+    routerLink="/videos/video/new/{{ channel.id }}"
+    class="btn btn-primary"
+  >
+    <i class="glyphicon glyphicon-plus"></i> New Video
+  </a>
 </div>
 
 <div class="d-flex flex-wrap">
-    <div *ngFor="let video of videos" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <div class="card">
-            <img 
-                class="card-img-top"
-                src="{{ video.thumbnailUrl }}" />
-            <div class="card-body">
-                <a routerLinkActive="active"
-                    routerLink="/videos/video/{{ video.id }}">
-                    <h5 class="card-title">{{ video.title }}</h5>
-                </a>
-            </div>
-        </div>
+  <div
+    *ngFor="let video of videos"
+    class="col-lg-4 col-md-4 col-sm-4 col-xs-12"
+  >
+    <div class="card">
+      <img class="card-img-top" src="{{ video.thumbnailUrl }}" />
+      <div class="card-body">
+        <a routerLinkActive="active" routerLink="/videos/video/{{ video.id }}">
+          <h5 class="card-title">{{ video.title }}</h5>
+        </a>
+      </div>
     </div>
+  </div>
 </div>

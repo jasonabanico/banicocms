@@ -18,55 +18,55 @@ const VIDEOS_ROUTES: Routes = [
             path: "channel/new",
             component: ChannelFormComponent,
         canActivate: [AuthGuard],
-            data: { module: "videos/manage" }
+            data: { module: "videos-channel/manage" }
     },
       {
         path: "channel/new/:path",
         component: ChannelFormComponent,
         canActivate: [AuthGuard],
-        data: { module: "videos/manage" }
+        data: { module: "videos-channel/manage" }
       },
       {
         path: "channel/edit/:alias",
         component: ChannelFormComponent,
         canActivate: [AuthGuard],
-        data: { module: "videos/manage" }
+        data: { module: "videos-channel/manage" }
       },
         {
             path: "channel/:alias",
             component: ChannelComponent,
             canActivate: [AuthGuard],
-            data: { module: "videos/view" }
+            data: { module: "videos-channel/view" }
         },
         {
             path: "video/new/:channelId",
             component: VideoFormComponent,
             canActivate: [AuthGuard],
-            data: { module: "videos/manage" }
+            data: { module: "videos-video/manage" }
         },
         {
             path: "video/edit/:id",
             component: VideoFormComponent,
             canActivate: [AuthGuard],
-            data: { module: "videos/view" }
+            data: { module: "videos-video/manage" }
         },
       {
         path: "video/:id",
         component: VideoComponent,
         canActivate: [AuthGuard],
-        data: { module: "videos/view" }
+        data: { module: "videos-video/view" }
       },
       {
         path: ":path",
         component: VideosHomeComponent,
         canActivate: [AuthGuard],
-        data: { module: "videos/view" }
+        data: { module: "videos-home/view" }
       },
       {
         path: "",
         component: VideosHomeComponent,
         canActivate: [AuthGuard],
-        data: { module: "videos/view" }
+        data: { module: "videos-home/view" }
       }
     ]
   }

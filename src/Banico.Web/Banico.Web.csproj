@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.8</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerComposeProjectPath>docker-compose.dcproj</DockerComposeProjectPath>

@@ -11,11 +11,13 @@ import { ShellService } from "../../../../../shared/services/shell.service";
   templateUrl: "./channel.component.html"
 })
 export class ChannelComponent implements OnInit {
+  public userId: string;
+  public isAdmin: boolean;
   public channel: Channel;
   public videos: Video[];
   private sub: any;
-    public canEdit: boolean;
-    public canManageVideos: boolean;
+  public canEdit: boolean;
+  public canManageVideos: boolean;
 
   constructor(
     private videosService: VideosService,
@@ -23,35 +25,38 @@ export class ChannelComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private shellService: ShellService
-  ) {}
+  ) {
+    this.userId = this.authService.getUserId();
+    this.isAdmin = this.authService.isAdmin();
+  }
 
   @ViewChild("deleteModal") deleteModal;
 
   ngOnInit() {
     this.channel = new Channel(null);
     this.sub = this.route.params.subscribe(params => {
-        var alias = params["alias"];
-        if (alias) {
-            this.videosService.getChannelByAlias(alias).subscribe(channel => {
-                this.channel = channel;
-                this.shellService.setTitle(this.channel.name);
-                const isAdmin = this.authService.isAdmin();
-                const userId = this.authService.getUserId();
-                if (channel.ownerUserIds.includes(userId) || isAdmin) {
-                    this.canEdit = true;
-                }
-                this.videosService.getVideos(channel.id).subscribe(videos => {
-                    this.videos = videos;
-                });
-            });
-        }
+      var alias = params["alias"];
+      if (alias) {
+        this.videosService.getChannelByAlias(alias).subscribe(channel => {
+          this.channel = channel;
+          this.shellService.setTitle(this.channel.name);
+          const isAdmin = this.authService.isAdmin();
+          const userId = this.authService.getUserId();
+          if (channel.ownerUserIds.includes(userId) || isAdmin) {
+            this.canEdit = true;
+          }
+          this.videosService.getVideos(channel.id).subscribe(videos => {
+            this.videos = videos;
+          });
+        });
+      }
     });
 
     this.authService
-        .canAccess("videos-video/manage", "", false)
-        .subscribe(result => {
-            this.canManageVideos = result;
-        });
+      .canAccess("videos-video/manage", "", false)
+      .subscribe(result => {
+        this.canManageVideos = result;
+      });
   }
 
   edit() {}
