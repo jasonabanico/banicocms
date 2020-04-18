@@ -324,6 +324,9 @@ namespace Banico.Api.Models
                     new QueryArgument<StringGraphType> { 
                         Name = "orderBy" 
                     },
+                    new QueryArgument<StringGraphType> { 
+                        Name = "thenBy" 
+                    },
                     new QueryArgument<IntGraphType> { 
                         Name = "page" 
                     },
@@ -371,6 +374,7 @@ namespace Banico.Api.Models
                         context.GetArgument<bool>("includeChildren"),
                         context.GetArgument<bool>("includeParents"),
                         context.GetArgument<string>("orderBy"),
+                        context.GetArgument<string>("thenBy"),
                         context.GetArgument<int>("page"),
                         context.GetArgument<int>("pageSize"),
                         context.GetArgument<int>("offset")

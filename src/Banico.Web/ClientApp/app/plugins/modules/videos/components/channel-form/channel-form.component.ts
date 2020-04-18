@@ -20,7 +20,8 @@ export class ChannelFormComponent implements OnInit {
     name: ["", Validators.required],
     alias: ["", Validators.required],
       description: ["", Validators.required],
-      sectionItems: [""]
+      sectionItems: [""],
+      order: [""]
   });
 
   public constructor(
@@ -54,7 +55,8 @@ export class ChannelFormComponent implements OnInit {
     this.channelForm.patchValue({
       name: channel.name,
       alias: channel.alias,
-      description: channel.description
+        description: channel.description,
+      order: channel.order
     });
   }
 
@@ -70,6 +72,7 @@ export class ChannelFormComponent implements OnInit {
     this.channel.name = this.channelForm.value["name"];
         this.channel.alias = this.channelForm.value["alias"];
         this.channel.description = this.channelForm.value["description"];
+        this.channel.order = this.channelForm.value["order"];
         this.videosService.addOrUpdateChannel(this.channel).subscribe(
       result => {
                 this.router.navigate(["/videos/channel/" + this.channel.alias]);

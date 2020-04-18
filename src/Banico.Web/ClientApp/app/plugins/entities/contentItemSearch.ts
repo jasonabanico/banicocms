@@ -31,6 +31,7 @@ export class ContentItemSearch {
   includeChildren: boolean = false;
   includeParents: boolean = false;
   orderBy: string = "";
+  thenBy: string = "";
   page: number = 0;
   pageSize: number = 0;
   offset: number = 0;

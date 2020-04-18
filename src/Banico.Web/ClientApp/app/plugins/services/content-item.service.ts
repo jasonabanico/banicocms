@@ -236,6 +236,7 @@ export class ContentItemService {
           includeChildren: contentItemSearch.includeChildren,
           includeParents: contentItemSearch.includeParents,
           orderBy: contentItemSearch.orderBy,
+          thenBy: contentItemSearch.thenBy,
           page: contentItemSearch.page,
           pageSize: contentItemSearch.pageSize,
           offset: contentItemSearch.offset
@@ -244,7 +245,8 @@ export class ContentItemService {
       .valueChanges.pipe(
         map(result => {
           const items = result.data.contentItems;
-          return this.order(items, contentItemSearch.orderBy.toLowerCase());
+          //return this.order(items, contentItemSearch.orderBy.toLowerCase());
+          return items;
         })
       );
     return result;

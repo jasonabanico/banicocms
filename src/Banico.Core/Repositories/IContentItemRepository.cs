@@ -80,6 +80,7 @@ namespace Banico.Core.Repositories
             bool includeChildren,
             bool includeParents,
             string orderBy,
+            string thenBy,
             int page,
             int pageSize,
             int offset

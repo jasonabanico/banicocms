@@ -67,12 +67,12 @@
     class="col-lg-4 col-md-4 col-sm-4 col-xs-12"
   >
     <div class="card">
-      <img class="card-img-top" src="{{ video.thumbnailUrl }}" />
-      <div class="card-body">
-        <a routerLinkActive="active" routerLink="/videos/video/{{ video.id }}">
+      <a routerLinkActive="active" routerLink="/videos/video/{{ video.id }}">
+        <img class="card-img-top" src="{{ video.thumbnailUrl }}" />
+        <div class="card-body">
           <h5 class="card-title">{{ video.title }}</h5>
-        </a>
-      </div>
+        </div>
+      </a>
     </div>
   </div>
 </div>

@@ -106,6 +106,7 @@ export const ContentItemsQuery = gql`
     $includeChildren: Boolean
     $includeParents: Boolean
     $orderBy: String
+    $thenBy: String
     $page: Int
     $pageSize: Int
     $offset: Int
@@ -143,6 +144,7 @@ export const ContentItemsQuery = gql`
       includeChildren: $includeChildren
       includeParents: $includeParents
       orderBy: $orderBy
+      thenBy: $thenBy
       page: $page
       pageSize: $pageSize
       offset: $offset

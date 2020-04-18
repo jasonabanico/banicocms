@@ -12,7 +12,8 @@ export class Video {
   snippet: string;
   createdDate: string;
   updatedDate: string;
-  type: string;
+    type: string;
+    order: string;
   url: string;
   thumbnailUrl: string;
   thumbnailHeight: string;
@@ -34,11 +35,12 @@ export class Video {
       this.description = contentItem.content;
       this.snippet = contentItem.snippet;
       this.createdDate = contentItem.createdDate;
-      this.updatedDate = contentItem.updatedDate;
-      this.url = contentItem.attribute01;
-      this.thumbnailUrl = contentItem.attribute02;
-      this.thumbnailHeight = contentItem.attribute03;
-      this.thumbnailWidth = contentItem.attribute04;
+        this.updatedDate = contentItem.updatedDate;
+        this.order = contentItem.attribute01;
+      this.url = contentItem.attribute02;
+      this.thumbnailUrl = contentItem.attribute03;
+      this.thumbnailHeight = contentItem.attribute04;
+      this.thumbnailWidth = contentItem.attribute05;
     }
   }
 
@@ -52,11 +54,12 @@ export class Video {
     output.owners = this.owners;
     output.name = this.title;
     output.alias = this.alias;
-    output.content = this.description;
-    output.attribute01 = this.url;
-    output.attribute02 = this.thumbnailUrl;
-    output.attribute03 = this.thumbnailHeight;
-    output.attribute04 = this.thumbnailWidth;
+      output.content = this.description;
+      output.attribute01 = this.order;
+    output.attribute02 = this.url;
+    output.attribute03 = this.thumbnailUrl;
+    output.attribute04 = this.thumbnailHeight;
+    output.attribute05 = this.thumbnailWidth;
 
     return output;
   }

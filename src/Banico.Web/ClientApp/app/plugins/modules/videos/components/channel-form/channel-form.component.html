@@ -3,68 +3,68 @@
     <div class="border border-light p-5 mt-4">
       <p class="h4">Channel</p>
 
-      <form
-        class="mt-4"
-        [formGroup]="channelForm"
-        novalidate
-        (ngSubmit)="save()"
-      >
-        <div class="form-group">
-          <div class="col-md-10">
-            <input
-              class="form-control"
-              id="sectionItems"
-              name="sectionItems"
-              type="text"
-              formControlName="sectionItems"
-              disabled
-            />
+      <form class="mt-4"
+            [formGroup]="channelForm"
+            novalidate
+            (ngSubmit)="save()">
+          <div class="form-group">
+              <div class="col-md-10">
+                  <input class="form-control"
+                         id="sectionItems"
+                         name="sectionItems"
+                         type="text"
+                         formControlName="sectionItems"
+                         disabled />
+              </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-10">
-            <input
-              class="form-control"
-              id="name"
-              name="name"
-              type="text"
-              formControlName="name"
-              placeholder="Name"
-            />
+          <div class="form-group">
+              <div class="col-md-10">
+                  <input class="form-control"
+                         id="name"
+                         name="name"
+                         type="text"
+                         formControlName="name"
+                         placeholder="Name" />
+              </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-10">
-            <input
-              class="form-control"
-              id="alias"
-              name="alias"
-              type="text"
-              formControlName="alias"
-              placeholder="Alias"
-            />
+          <div class="form-group">
+              <div class="col-md-10">
+                  <input class="form-control"
+                         id="alias"
+                         name="alias"
+                         type="text"
+                         formControlName="alias"
+                         placeholder="Alias" />
+              </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-10">
-            <textarea
-              class="form-control"
-              id="description"
-              name="description"
-              type="text"
-              formControlName="description"
-              required
-              placeholder="Description"
-              rows="5"
-            >
+          <div class="form-group">
+              <div class="col-md-10">
+                  <textarea class="form-control"
+                            id="description"
+                            name="description"
+                            type="text"
+                            formControlName="description"
+                            required
+                            placeholder="Description"
+                            rows="5">
             </textarea>
+              </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <button type="submit" class="btn btn-primary" value="save">
-            Save
-          </button>
-        </div>
+          <div class="form-group">
+              <div class="col-md-10">
+                  <input class="form-control"
+                         id="order"
+                         name="order"
+                         type="text"
+                         formControlName="order"
+                         placeholder="Order" />
+              </div>
+          </div>
+          <div class="form-group row">
+              <button type="submit" class="btn btn-primary" value="save">
+                  Save
+              </button>
+          </div>
       </form>
     </div>
   </div>

@@ -17,7 +17,9 @@ export class VideoFormComponent implements OnInit {
   public videoForm: FormGroup = this.fb.group({
     channelId: ["", Validators.required],
     url: ["", Validators.required],
-    oEmbed: [""]
+    oEmbed: [""],
+    description: [""],
+      order: [""]
   });
 
   public constructor(
@@ -47,7 +49,8 @@ export class VideoFormComponent implements OnInit {
     this.video = video;
     this.videoForm.patchValue({
       channelId: video.channelId,
-      url: video.url
+        url: video.url,
+      order: video.order
     });
   }
 
@@ -55,6 +58,8 @@ export class VideoFormComponent implements OnInit {
     this.video.channelId = this.videoForm.value["channelId"];
     this.video.url = this.videoForm.value["url"];
     const oEmbed = this.videoForm.value["oEmbed"];
+      this.video.description = this.videoForm.value["description"];
+      this.video.order = this.videoForm.value["order"];
 
     if (oEmbed != "") {
       const json = JSON.parse(oEmbed);

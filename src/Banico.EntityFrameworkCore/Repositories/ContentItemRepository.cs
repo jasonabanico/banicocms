@@ -254,6 +254,7 @@ namespace Banico.EntityFrameworkCore.Repositories
             bool includeChildren,
             bool includeParents,
             string orderBy,
+            string thenBy,
             int page,
             int pageSize,
             int offset
@@ -390,49 +391,137 @@ namespace Banico.EntityFrameworkCore.Repositories
                 // }
             }
 
-            Expression<Func<ContentItem, object>> sort = null;
-            bool isDescending = false;
+            Expression<Func<ContentItem, object>> orderBySort = c => c.ChildCount;
+            bool orderByIsDescending = true;
 
             switch(orderBy.ToLower()) 
             {
                 case "name":
-                    sort = c => c.Name;
+                    orderBySort = c => c.Name;
+                    orderByIsDescending = false;
                     break;
                 case "name asc":
-                    sort = c => c.Name;
+                    orderBySort = c => c.Name;
+                    orderByIsDescending = false;
                     break;
                 case "name desc":
-                    sort = c => c.Name;
-                    isDescending = true;
+                    orderBySort = c => c.Name;
+                    orderByIsDescending = true;
                     break;
                 case "createddate":
-                    sort = c => c.CreatedDate;
+                    orderBySort = c => c.CreatedDate;
+                    orderByIsDescending = false;
                     break;
                 case "createddate asc":
-                    sort = c => c.CreatedDate;
+                    orderBySort = c => c.CreatedDate;
+                    orderByIsDescending = false;
                     break;
                 case "createddate desc":
-                    sort = c => c.CreatedDate;
-                    isDescending = true;
+                    orderBySort = c => c.CreatedDate;
+                    orderByIsDescending = true;
+                    break;
+                case "attribute01":
+                    orderBySort = c => c.Attribute01;
+                    orderByIsDescending = false;
+                    break;
+                case "attribute01 asc":
+                    orderBySort = c => c.Attribute01;
+                    orderByIsDescending = false;
+                    break;
+                case "attribute01 desc":
+                    orderBySort = c => c.Attribute01;
+                    orderByIsDescending = true;
                     break;
                 case "childcount":
-                    sort = c => c.ChildCount;
+                    orderBySort = c => c.ChildCount;
+                    orderByIsDescending = false;
                     break;
                 case "childcount asc":
-                    sort = c => c.ChildCount;
+                    orderBySort = c => c.ChildCount;
+                    orderByIsDescending = false;
                     break;
                 case "childcount desc":
-                    sort = c => c.ChildCount;
-                    isDescending = true;
+                    orderBySort = c => c.ChildCount;
+                    orderByIsDescending = true;
                     break;
             }
 
-            if (sort != null) 
+            IOrderedQueryable<ContentItem> orderedContentItems = null;
+            if (orderBySort != null) 
             {
-                if (!isDescending)
-                    contentItems = contentItems.OrderBy(sort);
+                if (!orderByIsDescending)
+                    orderedContentItems = contentItems.OrderBy(orderBySort);
                 else
-                    contentItems = contentItems.OrderByDescending(sort);
+                    orderedContentItems = contentItems.OrderByDescending(orderBySort);
+            }
+            else
+            {
+                orderedContentItems = contentItems.OrderBy(c => c.Id);
+            }
+
+            Expression<Func<ContentItem, object>> thenBySort = c => c.CreatedDate;
+            bool thenByIsDescending = true;
+
+            switch(thenBy.ToLower()) 
+            {
+                case "name":
+                    thenBySort = c => c.Name;
+                    thenByIsDescending = false;
+                    break;
+                case "name asc":
+                    thenBySort = c => c.Name;
+                    thenByIsDescending = false;
+                    break;
+                case "name desc":
+                    thenBySort = c => c.Name;
+                    thenByIsDescending = true;
+                    break;
+                case "createddate":
+                    thenBySort = c => c.CreatedDate;
+                    thenByIsDescending = false;
+                    break;
+                case "createddate asc":
+                    thenBySort = c => c.CreatedDate;
+                    thenByIsDescending = false;
+                    break;
+                case "createddate desc":
+                    thenBySort = c => c.CreatedDate;
+                    thenByIsDescending = true;
+                    break;
+                case "attribute01":
+                    thenBySort = c => c.Attribute01;
+                    thenByIsDescending = false;
+                    break;
+                case "attribute01 asc":
+                    thenBySort = c => c.Attribute01;
+                    thenByIsDescending = false;
+                    break;
+                case "attribute01 desc":
+                    thenBySort = c => c.Attribute01;
+                    thenByIsDescending = true;
+                    break;
+                case "childcount":
+                    thenBySort = c => c.ChildCount;
+                    thenByIsDescending = false;
+                    break;
+                case "childcount asc":
+                    thenBySort = c => c.ChildCount;
+                    thenByIsDescending = false;
+                    break;
+                case "childcount desc":
+                    thenBySort = c => c.ChildCount;
+                    thenByIsDescending = true;
+                    break;
+            }
+
+            if ((orderedContentItems != null) && (thenBySort != null))
+            {
+                if (!thenByIsDescending) {
+                    orderedContentItems = orderedContentItems.ThenBy(thenBySort);
+                }
+                else {
+                    orderedContentItems = orderedContentItems.ThenByDescending(thenBySort);
+                }
             }
 
             if ((pageSize == 0) || (pageSize > _maxPageSize))
@@ -442,16 +531,17 @@ namespace Banico.EntityFrameworkCore.Repositories
 
             int skipRows = 0;
 
+            IQueryable<ContentItem> pagedContentItems = orderedContentItems;
             if (offset > 0)
             {
                 if (page > 0)
                 {
                     skipRows = (page - 1) * pageSize + offset;
-                    contentItems = contentItems.Skip(skipRows).Take(pageSize);
+                    pagedContentItems = pagedContentItems.Skip(skipRows).Take(pageSize);
                 }
                 else
                 {
-                    contentItems = contentItems.Take(offset);
+                    pagedContentItems = pagedContentItems.Take(offset);
                 }
             }
             else
@@ -459,15 +549,15 @@ namespace Banico.EntityFrameworkCore.Repositories
                 if (page > 0)
                 {
                     skipRows = page * pageSize;
-                    contentItems = contentItems.Skip(skipRows).Take(pageSize);
+                    pagedContentItems = pagedContentItems.Skip(skipRows).Take(pageSize);
                 }
                 else
                 {
-                    contentItems = contentItems.Take(pageSize);
+                    pagedContentItems = pagedContentItems.Take(pageSize);
                 }
             }
 
-            return contentItems.ToList();
+            return pagedContentItems.ToList();
         }
 
         private IQueryable<ContentItem> MatchSectionItems(
@@ -706,7 +796,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         {
             var updateItem = (this.Get("", item.Id, "", "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
-            "", 0, 1, 0))
+            "", "", 0, 1, 0))
                 .FirstOrDefault();
 
             if (updateItem != null)
@@ -763,7 +853,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         {
             var item = (this.Get("", id, "", "", "", "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
-            "", 0, 1, 0))
+            "", "", 0, 1, 0))
                 .FirstOrDefault();
             if (item != null)
             {
@@ -796,7 +886,7 @@ namespace Banico.EntityFrameworkCore.Repositories
         {
             var profileItems = this.Get(tenant, "", "", alias, "profile", "in", "", userId, "",
                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", false, false, "", 0, 1, 0);
+                "", "", "", "", "", false, false, "", "", 0, 1, 0);
 
             if (profileItems.Count == 0)
             {

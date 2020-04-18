@@ -13,6 +13,7 @@ export class Channel {
   createdDate: string;
   updatedDate: string;
     type: string;
+    order: string;
     thumbnailUrl: string;
 
   constructor(private contentItem: ContentItem) {
@@ -31,7 +32,8 @@ export class Channel {
       this.snippet = contentItem.snippet;
       this.sectionItems = contentItem.sectionItems;
       this.createdDate = contentItem.createdDate;
-      this.updatedDate = contentItem.updatedDate;
+        this.updatedDate = contentItem.updatedDate;
+        this.order = contentItem.attribute01;
     }
   }
 
@@ -45,7 +47,8 @@ export class Channel {
     output.name = this.name;
     output.alias = this.alias;
     output.content = this.description;
-    output.sectionItems = this.sectionItems;
+      output.sectionItems = this.sectionItems;
+      output.attribute01 = this.order;
 
     return output;
   }

@@ -171,7 +171,7 @@ namespace Banico.Api.Models
         {
             var item = (_contentItemRepository.Get("", id, "", "", "", "", "", "", "", "", "", 
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", false, false,
-            "", 0, 1, 0))
+            "", "", 0, 1, 0))
                 .FirstOrDefault();
 
             if (item != null)

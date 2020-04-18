@@ -1,7 +1,7 @@
 <div class="card mb-3">
   <div class="card-body">
     <div class="text-center">
-      <div class="h1 m-0 mb-3">{{ video?.title }}</div>
+      <div class="h2 m-0 mb-3">{{ video?.title }}</div>
     </div>
 
     <hr />
@@ -19,7 +19,7 @@
 
     <app-shell-embed [tagId]="video?.url"></app-shell-embed>
 
-    <br />
+    <hr />
 
     <app-shell-rich-text
       [text]="video?.description"

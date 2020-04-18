@@ -56,7 +56,8 @@ export class VideosService extends PluginService {
     var contentItemSearch = new ContentItemSearch();
     contentItemSearch.module = "videos";
     contentItemSearch.type = "channel";
-    contentItemSearch.sectionItems = sectionItems;
+      contentItemSearch.sectionItems = sectionItems;
+      contentItemSearch.orderBy = "attribute01";
 
     return this.contentItemService.getAll(contentItemSearch).pipe(
       map(contentItems => {
@@ -75,6 +76,7 @@ export class VideosService extends PluginService {
     contentItemSearch.module = "videos";
     contentItemSearch.type = "video";
     contentItemSearch.parentId = channelId;
+      contentItemSearch.orderBy = "attribute01";
 
     return this.contentItemService.getAll(contentItemSearch).pipe(
       map(contentItems => {
@@ -95,6 +97,7 @@ export class VideosService extends PluginService {
       contentItemSearch.parentId = channelId;
       contentItemSearch.page = 0;
       contentItemSearch.pageSize = 1;
+      contentItemSearch.orderBy = "attribute01";
 
     return this.contentItemService.getAll(contentItemSearch).pipe(
         map(contentItems => {
