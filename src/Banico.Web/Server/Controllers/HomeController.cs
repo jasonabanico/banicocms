@@ -22,6 +22,20 @@ namespace Banico.Web.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Index () {
+            // SSR ERROR:
+            // Microsoft.AspNetCore.NodeServices.HostingModels.NodeInvocationException: Injector has already been destroyed.
+            // Error: Injector has already been destroyed.
+            //     at R3Injector.assertNotDestroyed (/www/ClientApp/dist/main-server.js:545:2392)
+            //     at R3Injector.get (/www/ClientApp/dist/main-server.js:545:1383)
+            //     at NgModuleRef$1.get (/www/ClientApp/dist/main-server.js:1105:812)
+            //     at /www/ClientApp/dist/main-server.js:3891:3211
+            //     at step (/www/ClientApp/dist/main-server.js:1497:2909)
+            //     at Object.next (/www/ClientApp/dist/main-server.js:1497:2194)
+            //     at fulfilled (/www/ClientApp/dist/main-server.js:1497:1712)
+            //     at ZoneDelegate.invoke (/www/ClientApp/dist/vendor.js:3726:7504)
+            //     at Zone.run (/www/ClientApp/dist/vendor.js:3726:2464)
+            //     at /www/ClientApp/dist/vendor.js:3733:3352
+
             // var prerenderResult = await this.Request.BuildPrerender ();
 
             // this.ViewData["SpaHtml"] = prerenderResult.Html; // our <app-root /> from Angular
