@@ -22,6 +22,7 @@ namespace Banico.Web.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Index () {
+            // https://github.com/angular/universal/issues/1587
             // SSR ERROR:
             // Microsoft.AspNetCore.NodeServices.HostingModels.NodeInvocationException: Injector has already been destroyed.
             // Error: Injector has already been destroyed.
