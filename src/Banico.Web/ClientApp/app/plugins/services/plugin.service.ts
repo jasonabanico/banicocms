@@ -7,12 +7,14 @@ import {
 } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { Apollo } from "apollo-angular";
 import { BaseService } from "../../shared/services/base.service";
 import { ConfigsService } from "../../shared/services/configs.service";
 import { ContentItemService } from "./content-item.service";
 import { WindowRefService } from "../../shared/services/windowref.service";
 import { ContentItem } from "../../entities/content-item";
 import { Config } from "../../entities/config";
+import { OEmbedQuery } from "./oembed.queries";
 
 @Injectable()
 export class PluginService extends BaseService {
@@ -29,7 +31,8 @@ export class PluginService extends BaseService {
     @Inject(PLATFORM_ID) platformId: Object,
     @Inject("BASE_URL") protected baseUrl: string,
     protected configsService: ConfigsService,
-    protected contentItemService: ContentItemService
+    protected contentItemService: ContentItemService,
+    private apollo: Apollo
   ) {
     super(windowRefService, platformId);
     this.accountUrl = `${this.baseUrl}api/Account`;
@@ -55,6 +58,19 @@ export class PluginService extends BaseService {
     });
 
     return output;
+  }
+
+  public getOEmbed(service: string, url: string): Observable<any> {
+    const result = this.apollo
+      .watchQuery<string>({
+        query: OEmbedQuery,
+        variables: {
+          service: service,
+          url: url
+        }
+      })
+      .valueChanges.pipe(map(result => result.data));
+    return result;
   }
 
   protected extractData(res: Response) {

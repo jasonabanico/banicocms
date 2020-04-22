@@ -15,7 +15,8 @@ namespace Banico.Api.Models
             ISectionRepository sectionRepository,
             ISectionItemRepository sectionItemRepository,
             IContentItemRepository contentItemRepository,
-            IConfigRepository configRepository)
+            IConfigRepository configRepository,
+            IOEmbedService oEmbedService)
         {
             Name = "Query";
 
@@ -399,6 +400,25 @@ namespace Banico.Api.Models
                     context.GetArgument<string>("module"),
                     context.GetArgument<string>("name")
                     ));
+
+            Field<StringGraphType>(
+                "oEmbed",
+                arguments: new QueryArguments(
+                    new QueryArgument<StringGraphType> { 
+                        Name = "service" 
+                    },
+                    new QueryArgument<StringGraphType> { 
+                        Name = "url" 
+                    }
+                ),
+                resolve: context => 
+                {
+                    return oEmbedService.GetOEmbed(
+                        context.GetArgument<string>("service"),
+                        context.GetArgument<string>("url")
+                        );
+
+                });
         }
     }
 }

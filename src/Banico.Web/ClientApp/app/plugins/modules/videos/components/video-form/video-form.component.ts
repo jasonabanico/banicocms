@@ -19,7 +19,7 @@ export class VideoFormComponent implements OnInit {
     url: ["", Validators.required],
     oEmbed: [""],
     description: [""],
-      order: [""]
+    order: [""]
   });
 
   public constructor(
@@ -49,7 +49,7 @@ export class VideoFormComponent implements OnInit {
     this.video = video;
     this.videoForm.patchValue({
       channelId: video.channelId,
-        url: video.url,
+      url: video.url,
       order: video.order
     });
   }
@@ -58,20 +58,20 @@ export class VideoFormComponent implements OnInit {
     this.video.channelId = this.videoForm.value["channelId"];
     this.video.url = this.videoForm.value["url"];
     const oEmbed = this.videoForm.value["oEmbed"];
-      this.video.description = this.videoForm.value["description"];
-      this.video.order = this.videoForm.value["order"];
+    this.video.description = this.videoForm.value["description"];
+    this.video.order = this.videoForm.value["order"];
 
     if (oEmbed != "") {
       const json = JSON.parse(oEmbed);
       this.video = this.videoOembedService.setOEmbedValues(this.video, json);
     }
 
-    //this.videoOembedService.getOEmbed(this.video).then(
-    //    video => this.videosService.addOrUpdateVideo(video).subscribe(
-    //        result => this.router.navigate(["/videos/video/" + result])
-    //        //errors =>  this.errors = errors
-    //    )
-    //);
+    this.videoOembedService.getOEmbed(this.video).then(video =>
+      this.videosService.addOrUpdateVideo(video).subscribe(
+        result => this.router.navigate(["/videos/video/" + result])
+        //errors =>  this.errors = errors
+      )
+    );
 
     this.videosService.addOrUpdateVideo(this.video).subscribe(
       result => this.router.navigate(["/videos/video/" + result])

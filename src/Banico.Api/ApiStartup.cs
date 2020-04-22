@@ -27,6 +27,7 @@ namespace Banico.Api
       services.AddSingleton<IDocumentWriter, DocumentWriter>();
       
       services.AddSingleton<IAccessService, AccessService>();
+      services.AddSingleton<IOEmbedService, OEmbedService>();
       services.AddSingleton<BanicoQuery>();
       services.AddSingleton<BanicoMutation>();
       services.AddSingleton<SectionType>();
