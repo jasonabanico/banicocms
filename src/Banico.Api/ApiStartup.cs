@@ -22,6 +22,7 @@ namespace Banico.Api
   {
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddHttpClient();
       services.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
       services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
       services.AddSingleton<IDocumentWriter, DocumentWriter>();
@@ -39,6 +40,7 @@ namespace Banico.Api
       services.AddSingleton<ContentSectionItemType>();
       services.AddSingleton<ContentItemInputType>();
       services.AddSingleton<MaxPageSizeType>();
+      services.AddSingleton<OEmbedType>();
       services.AddSingleton<ConfigType>();
       services.AddSingleton<ConfigInputType>();
       var sp = services.BuildServiceProvider();

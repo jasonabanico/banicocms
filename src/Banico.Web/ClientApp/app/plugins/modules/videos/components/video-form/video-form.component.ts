@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "../../../../../shared/services/auth.service";
 import { Video } from "../../entities/video";
 import { VideosService } from "../../services/videos.service";
-import { VideoOEmbedService } from "../../services/video-oembed.service";
 
 @Component({
   selector: "app-plugins-videos-channel-form",
@@ -24,7 +23,6 @@ export class VideoFormComponent implements OnInit {
 
   public constructor(
     private videosService: VideosService,
-    private videoOembedService: VideoOEmbedService,
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
@@ -61,21 +59,16 @@ export class VideoFormComponent implements OnInit {
     this.video.description = this.videoForm.value["description"];
     this.video.order = this.videoForm.value["order"];
 
-    if (oEmbed != "") {
-      const json = JSON.parse(oEmbed);
-      this.video = this.videoOembedService.setOEmbedValues(this.video, json);
-    }
+    // if (oEmbed != "") {
+    //   const json = JSON.parse(oEmbed);
+    //   this.video = this.videoOembedService.setOEmbedValues(this.video, json);
+    // }
 
-    this.videoOembedService.getOEmbed(this.video).then(video =>
+    this.videosService.getOEmbedVideo("youtube", this.video).subscribe(video =>
       this.videosService.addOrUpdateVideo(video).subscribe(
         result => this.router.navigate(["/videos/video/" + result])
         //errors =>  this.errors = errors
       )
-    );
-
-    this.videosService.addOrUpdateVideo(this.video).subscribe(
-      result => this.router.navigate(["/videos/video/" + result])
-      //errors =>  this.errors = errors
     );
   }
 }

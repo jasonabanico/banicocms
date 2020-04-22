@@ -128,18 +128,24 @@ export class VideosService extends PluginService {
       .pipe(catchError(this.handleError));
   }
 
-  public async getOEmbedVideo(service: string, video: Video): Promise<Video> {
+  public getOEmbedVideo(service: string, video: Video): Observable<Video> {
     if (video.url) {
-      var json = await this.getOEmbed(service, video.url);
-      if (json != null) {
-        return this.setOEmbedValues(video, json);
-      }
+      return this.getOEmbed(service, video.url).pipe(
+        map(json => {
+          if (json != null) {
+            return this.setOEmbedValues(video, json);
+          } else {
+            return video;
+          }
+        })
+      );
     }
 
-    return Promise.resolve(video);
+    return null;
   }
 
-  public setOEmbedValues(video: Video, json: any) {
+  public setOEmbedValues(video: Video, jsonStr: string) {
+    const json = JSON.parse(jsonStr);
     video.title = json.title;
     video.thumbnailUrl = json.thumbnail_url;
     video.thumbnailHeight = json.thumbnail_height.toString();

@@ -15,6 +15,7 @@ import { WindowRefService } from "../../shared/services/windowref.service";
 import { ContentItem } from "../../entities/content-item";
 import { Config } from "../../entities/config";
 import { OEmbedQuery } from "./oembed.queries";
+import { OEmbedQueryResult } from './oembed-query-result';
 
 @Injectable()
 export class PluginService extends BaseService {
@@ -60,16 +61,18 @@ export class PluginService extends BaseService {
     return output;
   }
 
-  public getOEmbed(service: string, url: string): Observable<any> {
+  public getOEmbed(service: string, url: string): Observable<string> {
     const result = this.apollo
-      .watchQuery<string>({
+      .watchQuery<OEmbedQueryResult>({
         query: OEmbedQuery,
         variables: {
           service: service,
           url: url
         }
       })
-      .valueChanges.pipe(map(result => result.data));
+        .valueChanges.pipe(map(result => {
+            return result.data.oEmbed.response;
+        }));
     return result;
   }
 

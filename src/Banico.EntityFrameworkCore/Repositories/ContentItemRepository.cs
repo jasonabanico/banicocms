@@ -459,7 +459,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                 orderedContentItems = contentItems.OrderBy(c => c.Id);
             }
 
-            Expression<Func<ContentItem, object>> thenBySort = c => c.CreatedDate;
+            Expression<Func<ContentItem, object>> thenBySort = null;
             bool thenByIsDescending = true;
 
             switch(thenBy.ToLower()) 

@@ -401,7 +401,7 @@ namespace Banico.Api.Models
                     context.GetArgument<string>("name")
                     ));
 
-            Field<StringGraphType>(
+            Field<OEmbedType>(
                 "oEmbed",
                 arguments: new QueryArguments(
                     new QueryArgument<StringGraphType> { 

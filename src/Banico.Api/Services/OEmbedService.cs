@@ -1,3 +1,4 @@
+using Banico.Core.Entities;
 using Banico.Services.Interfaces;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -13,13 +14,14 @@ namespace Banico.Api.Services
             _clientFactory = clientFactory;
         }
 
-        public async Task<string> GetOEmbed(string service, string url)
+        public async Task<OEmbed> GetOEmbed(string service, string url)
         {
+            OEmbed result = new OEmbed();
             string oEmbedUrl = string.Empty;
 
             if (service == "youtube")
             {
-                oEmbedUrl = "youtube.com/oembed?url=" + url;
+                oEmbedUrl = "https://youtube.com/oembed?url=" + url;
             }
 
             if (!string.IsNullOrEmpty(oEmbedUrl))
@@ -32,11 +34,11 @@ namespace Banico.Api.Services
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsStringAsync();
+                    result.Response = await response.Content.ReadAsStringAsync();
                 }
             }
 
-            return string.Empty;
+            return result;
         }
     }
 }

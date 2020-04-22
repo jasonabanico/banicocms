@@ -9,7 +9,7 @@ export const OEmbedQuery = gql`
       service: $service
       url: $url
     ) {
-      result
+      response
     }
   }
 `;
