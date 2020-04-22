@@ -10,7 +10,6 @@ import { ChannelFormComponent } from "./components/channel-form/channel-form.com
 import { VideoComponent } from "./components/video/video.component";
 import { VideoFormComponent } from "./components/video-form/video-form.component";
 import { VideosService } from "./services/videos.service";
-import { VideoOEmbedService } from "./services/video-oembed.service";
 
 @NgModule({
   imports: [
@@ -20,14 +19,14 @@ import { VideoOEmbedService } from "./services/video-oembed.service";
     VideosRoutingModule,
     ShellModule
   ],
-    declarations: [
-        VideosComponent,
-        VideosHomeComponent,
-        ChannelComponent,
-        ChannelFormComponent,
-        VideoComponent,
-        VideoFormComponent
-    ],
-  providers: [VideosService, VideoOEmbedService]
+  declarations: [
+    VideosComponent,
+    VideosHomeComponent,
+    ChannelComponent,
+    ChannelFormComponent,
+    VideoComponent,
+    VideoFormComponent
+  ],
+  providers: [VideosService]
 })
 export class VideosModule {}

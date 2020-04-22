@@ -16,7 +16,6 @@ export class VideoFormComponent implements OnInit {
   public videoForm: FormGroup = this.fb.group({
     channelId: ["", Validators.required],
     url: ["", Validators.required],
-    oEmbed: [""],
     description: [""],
     order: [""]
   });
@@ -55,14 +54,8 @@ export class VideoFormComponent implements OnInit {
   public save() {
     this.video.channelId = this.videoForm.value["channelId"];
     this.video.url = this.videoForm.value["url"];
-    const oEmbed = this.videoForm.value["oEmbed"];
     this.video.description = this.videoForm.value["description"];
     this.video.order = this.videoForm.value["order"];
-
-    // if (oEmbed != "") {
-    //   const json = JSON.parse(oEmbed);
-    //   this.video = this.videoOembedService.setOEmbedValues(this.video, json);
-    // }
 
     this.videosService.getOEmbedVideo("youtube", this.video).subscribe(video =>
       this.videosService.addOrUpdateVideo(video).subscribe(

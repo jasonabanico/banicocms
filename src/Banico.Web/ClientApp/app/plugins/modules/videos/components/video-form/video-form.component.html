@@ -4,70 +4,64 @@
       <p class="h4">Video</p>
 
       <form class="mt-4" [formGroup]="videoForm" novalidate (ngSubmit)="save()">
-          <input class="form-control"
-                 id="channelId"
-                 name="channelId"
-                 type="hidden"
-                 formControlName="channelId"
-                 disabled />
+        <input
+          class="form-control"
+          id="channelId"
+          name="channelId"
+          type="hidden"
+          formControlName="channelId"
+          disabled
+        />
 
-          <div class="form-group">
-              <div class="col-md-10">
-                  <input class="form-control"
-                         id="url"
-                         name="url"
-                         type="text"
-                         formControlName="url"
-                         required
-                         placeholder="URL" />
-              </div>
+        <div class="form-group">
+          <div class="col-md-10">
+            <input
+              class="form-control"
+              id="url"
+              name="url"
+              type="text"
+              formControlName="url"
+              required
+              placeholder="URL"
+            />
           </div>
+        </div>
 
-          <div class="form-group">
-              <div class="col-md-10">
-                  <textarea class="form-control"
-                            id="oEmbed"
-                            name="oEmbed"
-                            type="text"
-                            formControlName="oEmbed"
-                            required
-                            placeholder="OEmbed"
-                            rows="5">
-                </textarea>
-              </div>
+        <div class="form-group">
+          <div class="col-md-10">
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              type="text"
+              formControlName="description"
+              required
+              placeholder="Description"
+              rows="5"
+            >
+            </textarea>
           </div>
+        </div>
 
-          <div class="form-group">
-              <div class="col-md-10">
-                  <textarea class="form-control"
-                            id="description"
-                            name="description"
-                            type="text"
-                            formControlName="description"
-                            required
-                            placeholder="Description"
-                            rows="5">
-                </textarea>
-              </div>
+        <div class="form-group">
+          <div class="col-md-10">
+            <input
+              class="form-control"
+              id="order"
+              name="order"
+              type="text"
+              formControlName="order"
+              required
+              placeholder="Order"
+            />
           </div>
+        </div>
 
-          <div class="form-group">
-              <div class="col-md-10">
-                  <input class="form-control"
-                         id="order"
-                         name="order"
-                         type="text"
-                         formControlName="order"
-                         required
-                         placeholder="Order" />
-              </div>
-          </div>
-
-          <div class="form-group row">
-              <button type="submit" class="btn btn-primary" value="save">
-                  Save
-              </button>
-          </div>
+        <div class="form-group row">
+          <button type="submit" class="btn btn-primary" value="save">
+            Save
+          </button>
+        </div>
       </form>
     </div>
   </div>
