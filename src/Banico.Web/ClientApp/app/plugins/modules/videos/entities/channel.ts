@@ -12,9 +12,11 @@ export class Channel {
   sectionItems: string;
   createdDate: string;
   updatedDate: string;
-    type: string;
-    order: string;
-    thumbnailUrl: string;
+  type: string;
+  order: string;
+  thumbnailUrl: string;
+  thumbnailHeight: string;
+  thumbnailWidth: string;
 
   constructor(private contentItem: ContentItem) {
     if (
@@ -32,8 +34,11 @@ export class Channel {
       this.snippet = contentItem.snippet;
       this.sectionItems = contentItem.sectionItems;
       this.createdDate = contentItem.createdDate;
-        this.updatedDate = contentItem.updatedDate;
-        this.order = contentItem.attribute01;
+      this.updatedDate = contentItem.updatedDate;
+      this.order = contentItem.attribute01;
+      this.thumbnailUrl = contentItem.attribute02;
+      this.thumbnailHeight = contentItem.attribute03;
+      this.thumbnailWidth = contentItem.attribute04;
     }
   }
 
@@ -47,8 +52,11 @@ export class Channel {
     output.name = this.name;
     output.alias = this.alias;
     output.content = this.description;
-      output.sectionItems = this.sectionItems;
-      output.attribute01 = this.order;
+    output.sectionItems = this.sectionItems;
+    output.attribute01 = this.order;
+    output.attribute02 = this.thumbnailUrl;
+    output.attribute03 = this.thumbnailHeight;
+    output.attribute04 = this.thumbnailWidth;
 
     return output;
   }
