@@ -58,6 +58,7 @@ export class VideosService extends PluginService {
     contentItemSearch.type = "channel";
     contentItemSearch.sectionItems = sectionItems;
     contentItemSearch.orderBy = "attribute01";
+    contentItemSearch.includeChildren = true;
 
     return this.contentItemService.getAll(contentItemSearch).pipe(
       map(contentItems => {
