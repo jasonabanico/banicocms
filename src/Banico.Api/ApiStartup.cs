@@ -24,7 +24,7 @@ namespace Banico.Api
     {
       services.AddHttpClient();
       services.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
-      services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
+      services.AddSingleton<IDocumentExecuter, EfDocumentExecuter>();
       services.AddSingleton<IDocumentWriter, DocumentWriter>();
       
       services.AddSingleton<IAccessService, AccessService>();
