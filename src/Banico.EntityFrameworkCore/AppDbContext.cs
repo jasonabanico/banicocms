@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 using Banico.Core.Entities;
 using Banico.EntityFrameworkCore.Settings;
 using kedzior.io.ConnectionStringConverter;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Banico.EntityFrameworkCore
 {
@@ -85,15 +84,15 @@ namespace Banico.EntityFrameworkCore
             });
             
             // Customize the ASP.NET Identity model and override the defaults if needed.
-                         // For example, you can rename the ASP.NET Identity table names and more.
-                         // Add your customizations after calling base.OnModelCreating(builder);
-                         // builder.Entity<AppUser>(i => {
-                         //     i.HasKey(x => x.Id);
-                         // });
+            // For example, you can rename the ASP.NET Identity table names and more.
+            // Add your customizations after calling base.OnModelCreating(builder);
+            // builder.Entity<AppUser>(i => {
+            //     i.HasKey(x => x.Id);
+            // });
 
             // builder.Entity<IdentityUserRole<int>>()
             //     .HasKey(p => new { p.UserId, p.RoleId});
-
+                
             // builder.Entity<AppUser>()
             //     .HasMany(e => e.Claims)
             //     .WithOne()
