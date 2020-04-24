@@ -91,24 +91,6 @@ export class VideosService extends PluginService {
     );
   }
 
-  public getFirstVideo(channelId: string): Observable<Video> {
-    var contentItemSearch = new ContentItemSearch();
-    contentItemSearch.module = "videos";
-    contentItemSearch.type = "video";
-    contentItemSearch.parentId = channelId;
-    contentItemSearch.page = 0;
-    contentItemSearch.pageSize = 1;
-    contentItemSearch.orderBy = "attribute01";
-
-    return this.contentItemService.getAll(contentItemSearch).pipe(
-      map(contentItems => {
-        if (contentItems.length > 0) {
-          var video = new Video(contentItems[0]);
-          return video;
-        } else return null;
-      })
-    );
-  }
   public addOrUpdateChannel(channel: Channel): Observable<string> {
     let contentItem: ContentItem = channel.toContentItem();
     return this.contentItemService

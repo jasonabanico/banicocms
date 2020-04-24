@@ -55,18 +55,9 @@ export class VideosHomeComponent implements OnInit, OnDestroy {
       if (this.path) {
         this.videosService
           .getChannelsBySectionItems(this.path)
-          .subscribe(channels => this.setChannels(channels));
+          .subscribe(channels => (this.channels = channels));
       }
     });
-  }
-
-  private setChannels(channels: Channel[]) {
-    this.channels = channels;
-    for (let i = 0; i < channels.length; i++) {
-      this.videosService.getFirstVideo(this.channels[i].id).subscribe(video => {
-        this.channels[i].thumbnailUrl = video.thumbnailUrl;
-      });
-    }
   }
 
   ngOnDestroy() {

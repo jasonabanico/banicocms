@@ -38,4 +38,18 @@ export class VideoComponent implements OnInit {
       });
     });
   }
+
+  setChannelThumbnail() {
+    this.videosService.getChannel(this.video.channelId).subscribe(
+        channel => {
+        channel.thumbnailUrl = this.video.thumbnailUrl;
+        channel.thumbnailHeight = this.video.thumbnailHeight;
+        channel.thumbnailWidth = this.video.thumbnailWidth;
+        this.videosService.addOrUpdateChannel(channel).subscribe(
+          result => {
+            return true;}
+        )
+      }
+    )
+  }
 }
