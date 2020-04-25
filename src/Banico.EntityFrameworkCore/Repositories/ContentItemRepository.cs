@@ -616,7 +616,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                                     si.Section == section &&
                                     ((si.PathUrl == pathUrl &&
                                         si.Alias == alias) ||
-                                    (si.PathUrl.Contains(childrenPathUrl)))
+                                    (si.PathUrl.StartsWith(childrenPathUrl)))
                                 select ci;
                         }
                     }

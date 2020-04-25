@@ -271,7 +271,7 @@ export class ContentItemService {
 
   public addOrUpdate(contentItem: ContentItem): Observable<string> {
     var result = this.apollo
-      .mutate({
+      .mutate<any>({
         mutation: AddOrUpdateContentItemMutation,
         variables: {
           id: contentItem.id,
@@ -318,7 +318,7 @@ export class ContentItemService {
 
   public delete(id: string): Observable<string> {
     var result = this.apollo
-      .mutate({
+      .mutate<any>({
         mutation: DeleteContentItemMutation,
         variables: {
           id: id
