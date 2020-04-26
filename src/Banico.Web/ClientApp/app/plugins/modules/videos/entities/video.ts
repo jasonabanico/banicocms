@@ -8,6 +8,7 @@ export class Video {
   alias: string;
   description: string;
   snippet: string;
+  createdBy: string;
   createdDate: string;
   updatedDate: string;
   type: string;
@@ -30,6 +31,7 @@ export class Video {
       this.type = contentItem.type;
       this.description = contentItem.content;
       this.snippet = contentItem.snippet;
+      this.createdBy = contentItem.createdBy;
       this.createdDate = contentItem.createdDate;
       this.updatedDate = contentItem.updatedDate;
       this.order = contentItem.attribute01;

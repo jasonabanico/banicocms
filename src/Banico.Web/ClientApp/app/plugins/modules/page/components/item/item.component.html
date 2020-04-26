@@ -4,7 +4,7 @@
 
     <hr />
 
-    <p *ngIf="(userId && page?.ownerUserIds.includes(userId + ' ')) || isAdmin">
+    <p *ngIf="(userId && page?.createdBy === userId) || isAdmin">
       <a
         routerLinkActive="active"
         routerLink="/page/edit/{{ page.alias }}"

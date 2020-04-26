@@ -43,10 +43,12 @@ export class ForumCommentService extends PluginService {
   }
 
   public setCommentUser(comment: Comment) {
-    this.contentItemService.getProfileById(comment.userId).subscribe(user => {
-      comment.username = user.alias;
-      comment.avatarHash = user.attribute01;
-    });
+    this.contentItemService
+      .getProfileById(comment.createdBy)
+      .subscribe(user => {
+        comment.username = user.alias;
+        comment.avatarHash = user.attribute01;
+      });
   }
 
   public addOrUpdate(

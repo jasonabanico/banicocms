@@ -31,10 +31,10 @@ export class OrganizationViewComponent implements OnInit {
         alias = params["alias"];
       }
       const isAdmin = this.authService.isAdmin();
-      const username = this.authService.getUserName();
+      const userId = this.authService.getUserId();
       this.profileService.getOrganizationProfile(alias).subscribe(profile => {
         this.profile = profile;
-        if (profile.ownerUserIds.includes(username) || isAdmin) {
+        if (profile.createdBy === userId || isAdmin) {
           this.canEdit = true;
         }
         this.sectionBarService.initialize(

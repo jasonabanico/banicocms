@@ -7,8 +7,6 @@ namespace Banico.Core.Entities
 {
     public class RoleContent
     {
-        [Key]
-        public string Id { get; set; }
         public string RoleId { get; set; }
         public RoleId Role { get; set; }
         public string ContentItemId { get; set; }

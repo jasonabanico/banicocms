@@ -25,15 +25,11 @@
           >@{{ comment?.username }}</a
         >
         {{ comment?.text }}<br />
-        <span *ngIf="userId && comment?.ownerUserIds.includes(userId + ' ')">
+        <span *ngIf="userId && comment?.createdBy === userId">
           <a href="javascript:;" (click)="edit()">Edit</a>
           &bull;
         </span>
-        <span
-          *ngIf="
-            userId && (comment?.ownerUserIds.includes(userId + ' ') || isAdmin)
-          "
-        >
+        <span *ngIf="userId && (comment?.createdBy === userId || isAdmin)">
           <a href="javascript:;" (click)="delete()">Delete</a>
           &bull;
         </span>
@@ -47,7 +43,7 @@
   [id]="comment?.id"
   [postId]="comment?.postId"
   [text]="comment?.text"
-  [userId]="comment?.userId"
+  [userId]="comment?.createdBy"
   [username]="comment?.username"
   [createdDate]="comment?.createdDate"
   (saved)="onSave($event)"

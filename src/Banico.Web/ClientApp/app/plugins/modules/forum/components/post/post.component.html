@@ -58,14 +58,14 @@
     </div>
     <div class="card-footer">
       <a
-        *ngIf="userId && post?.ownerUserIds.includes(userId + ' ')"
+        *ngIf="userId && post?.createdBy === userId"
         href="javascript:;"
         (click)="edit()"
         class="card-link"
         ><i class="fas fa-pencil-alt"></i> Edit</a
       >
       <a
-        *ngIf="userId && (post?.ownerUserIds.includes(userId + ' ') || isAdmin)"
+        *ngIf="userId && (post?.createdBy === userId || isAdmin)"
         href="javascript:;"
         (click)="delete()"
         class="card-link"

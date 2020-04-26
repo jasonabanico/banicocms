@@ -64,10 +64,12 @@ export class ForumSubforumService extends PluginService {
   }
 
   public setSubforumUser(subforum: Subforum) {
-    this.contentItemService.getProfileById(subforum.userId).subscribe(user => {
-      subforum.username = user.alias;
-      subforum.avatarHash = user.attribute01;
-    });
+    this.contentItemService
+      .getProfileById(subforum.createdBy)
+      .subscribe(user => {
+        subforum.username = user.alias;
+        subforum.avatarHash = user.attribute01;
+      });
   }
 
   public addOrUpdate(

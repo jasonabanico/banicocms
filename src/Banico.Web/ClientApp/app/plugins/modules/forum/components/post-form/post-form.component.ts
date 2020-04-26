@@ -86,7 +86,7 @@ export class ForumPostFormComponent implements OnInit {
     this.post.id = id;
     this.post.topicId = topicId;
     this.post.text = text;
-    this.post.userId = this.authService.getUserId();
+    this.post.createdBy = this.authService.getUserId();
     this.post.username = this.authService.getUserName();
 
     this.postService.addOrUpdate(id, topicId, text).subscribe(

@@ -42,7 +42,7 @@ export class ChannelComponent implements OnInit {
           this.shellService.setTitle(this.channel.name);
           const isAdmin = this.authService.isAdmin();
           const userId = this.authService.getUserId();
-          if (channel.ownerUserIds.includes(userId) || isAdmin) {
+          if (channel.createdBy === userId || isAdmin) {
             this.canEdit = true;
           }
           this.videosService.getVideos(channel.id).subscribe(videos => {

@@ -32,7 +32,7 @@ export class VideoComponent implements OnInit {
         this.shellService.setTitle(this.video.title);
         const isAdmin = this.authService.isAdmin();
         const userId = this.authService.getUserId();
-        if (video.ownerUserIds.includes(userId) || isAdmin) {
+        if (video.createdBy === userId || isAdmin) {
           this.canEdit = true;
         }
       });
@@ -40,16 +40,13 @@ export class VideoComponent implements OnInit {
   }
 
   setChannelThumbnail() {
-    this.videosService.getChannel(this.video.channelId).subscribe(
-        channel => {
-        channel.thumbnailUrl = this.video.thumbnailUrl;
-        channel.thumbnailHeight = this.video.thumbnailHeight;
-        channel.thumbnailWidth = this.video.thumbnailWidth;
-        this.videosService.addOrUpdateChannel(channel).subscribe(
-          result => {
-            return true;}
-        )
-      }
-    )
+    this.videosService.getChannel(this.video.channelId).subscribe(channel => {
+      channel.thumbnailUrl = this.video.thumbnailUrl;
+      channel.thumbnailHeight = this.video.thumbnailHeight;
+      channel.thumbnailWidth = this.video.thumbnailWidth;
+      this.videosService.addOrUpdateChannel(channel).subscribe(result => {
+        return true;
+      });
+    });
   }
 }

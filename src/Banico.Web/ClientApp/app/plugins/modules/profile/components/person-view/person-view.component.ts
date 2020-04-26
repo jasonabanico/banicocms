@@ -34,7 +34,7 @@ export class PersonViewComponent implements OnInit {
       this.profileService.getPersonProfile(alias).subscribe(profile => {
         this.profile = profile;
         this.shellService.setTitle(this.profile.alias);
-        if (profile.ownerUserIds.includes(userId) || isAdmin) {
+        if (profile.createdBy === userId || isAdmin) {
           this.canEdit = true;
         }
       });

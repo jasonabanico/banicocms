@@ -3,8 +3,7 @@ import * as moment from "moment";
 
 export class OrganizationProfile {
   id: string;
-  owners: string;
-  ownerUserIds: string;
+  createdBy: string;
   name: string;
   alias: string;
   content: string;
@@ -23,8 +22,7 @@ export class OrganizationProfile {
       contentItem.type === "org"
     ) {
       this.id = contentItem.id;
-      this.owners = contentItem.owners;
-      this.ownerUserIds = contentItem.ownerUserIds;
+      this.createdBy = contentItem.createdBy;
       this.name = contentItem.name;
       this.alias = contentItem.alias;
       this.type = contentItem.type;
@@ -43,7 +41,7 @@ export class OrganizationProfile {
 
     output.module = "profile";
     output.id = this.id;
-    output.owners = this.owners;
+    output.createdBy = this.createdBy;
     output.name = this.name;
     output.alias = this.alias;
     output.type = this.type;

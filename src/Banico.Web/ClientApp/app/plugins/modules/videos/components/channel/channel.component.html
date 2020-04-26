@@ -39,7 +39,7 @@
   </div>
 
   <div
-    *ngIf="userId && (channel?.ownerUserIds.includes(userId + ' ') || isAdmin)"
+    *ngIf="userId && (channel?.createdBy === userId || isAdmin)"
     class="card-footer"
   >
     <a href="javascript:;" (click)="edit()" class="card-link"

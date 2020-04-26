@@ -3,14 +3,16 @@ using System;
 using Banico.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Banico.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200426045134_Groups")]
+    partial class Groups
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,8 +55,8 @@ namespace Banico.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c492cde5-22a0-4edc-ae0b-c74f2bff0994",
-                            CreatedDate = new DateTimeOffset(new DateTime(2020, 1, 20, 6, 13, 46, 874, DateTimeKind.Unspecified).AddTicks(4620), new TimeSpan(0, 0, 0, 0, 0)),
+                            Id = "a2934466-e4bc-48eb-b4c6-43dd4371914a",
+                            CreatedDate = new DateTimeOffset(new DateTime(2020, 4, 26, 4, 51, 33, 490, DateTimeKind.Unspecified).AddTicks(3590), new TimeSpan(0, 0, 0, 0, 0)),
                             Module = "",
                             Name = "initialized",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -62,8 +64,8 @@ namespace Banico.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = "0e8337e8-a159-4454-87a3-43a6137d3de3",
-                            CreatedDate = new DateTimeOffset(new DateTime(2020, 1, 20, 6, 13, 46, 876, DateTimeKind.Unspecified).AddTicks(4470), new TimeSpan(0, 0, 0, 0, 0)),
+                            Id = "1c24417b-ff58-46fb-9e15-0c38eba16de3",
+                            CreatedDate = new DateTimeOffset(new DateTime(2020, 4, 26, 4, 51, 33, 493, DateTimeKind.Unspecified).AddTicks(7460), new TimeSpan(0, 0, 0, 0, 0)),
                             Module = "admin",
                             Name = "canActivate",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -153,7 +155,8 @@ namespace Banico.EntityFrameworkCore.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GroupId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("VARCAR")
+                        .HasMaxLength(255);
 
                     b.Property<string>("Module")
                         .HasColumnType("TEXT");

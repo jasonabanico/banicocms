@@ -3,12 +3,11 @@ import * as moment from "moment";
 
 export class PersonProfile {
   id: string;
-  owners: string;
-  ownerUserIds: string;
   name: string;
   alias: string;
   content: string;
   snippet: string;
+  createdBy: string;
   createdDate: string;
   updatedDate: string;
   avatarHash: string;
@@ -22,8 +21,7 @@ export class PersonProfile {
       contentItem.type === "in"
     ) {
       this.id = contentItem.id;
-      this.owners = contentItem.owners;
-      this.ownerUserIds = contentItem.ownerUserIds;
+      this.createdBy = contentItem.createdBy;
       this.name = contentItem.name;
       this.alias = contentItem.alias;
       this.type = contentItem.type;
@@ -41,7 +39,7 @@ export class PersonProfile {
 
     output.module = "profile";
     output.id = this.id;
-    output.owners = this.owners;
+    output.createdBy = this.createdBy;
     output.alias = this.alias;
     output.type = this.type;
     output.content = this.content;

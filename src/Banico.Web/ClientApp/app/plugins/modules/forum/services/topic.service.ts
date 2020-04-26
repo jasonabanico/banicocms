@@ -19,7 +19,7 @@ export class ForumTopicService extends PluginService {
 
   public setTopicUser(topic: Topic) {
     var user = this.contentItemService
-      .getProfileById(topic.userId)
+      .getProfileById(topic.createdBy)
       .subscribe(user => {
         topic.username = user.alias;
         topic.avatarHash = user.attribute01;

@@ -3,12 +3,12 @@ import * as moment from "moment";
 
 export class Channel {
   id: string;
-  owners: string;
   name: string;
   alias: string;
   description: string;
   snippet: string;
   sectionItems: string;
+  createdBy: string;
   createdDate: string;
   updatedDate: string;
   type: string;
@@ -24,13 +24,13 @@ export class Channel {
       contentItem.type === "channel"
     ) {
       this.id = contentItem.id;
-      this.owners = contentItem.owners;
       this.name = contentItem.name;
       this.alias = contentItem.alias;
       this.type = contentItem.type;
       this.description = contentItem.content;
       this.snippet = contentItem.snippet;
       this.sectionItems = contentItem.sectionItems;
+      this.createdBy = contentItem.createdBy;
       this.createdDate = contentItem.createdDate;
       this.updatedDate = contentItem.updatedDate;
       this.order = contentItem.attribute01;
@@ -46,7 +46,7 @@ export class Channel {
     output.module = "videos";
     output.type = "channel";
     output.id = this.id;
-    output.owners = this.owners;
+    output.createdBy = this.createdBy;
     output.name = this.name;
     output.alias = this.alias;
     output.content = this.description;

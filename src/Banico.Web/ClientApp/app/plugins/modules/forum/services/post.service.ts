@@ -43,7 +43,7 @@ export class ForumPostService extends PluginService {
   }
 
   public setPostUser(post: Post) {
-    this.contentItemService.getProfileById(post.userId).subscribe(user => {
+    this.contentItemService.getProfileById(post.createdBy).subscribe(user => {
       post.username = user.alias;
       post.avatarHash = user.attribute01;
     });

@@ -280,7 +280,6 @@ export class ContentItemService {
           module: contentItem.module,
           type: contentItem.type,
           parentId: contentItem.parentId,
-          owners: contentItem.owners,
           sectionItems: contentItem.sectionItems,
           content: contentItem.content,
           tags: contentItem.tags,

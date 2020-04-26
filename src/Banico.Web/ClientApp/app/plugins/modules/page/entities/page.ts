@@ -2,8 +2,7 @@ import { ContentItem } from "../../../../entities/content-item";
 
 export class Page {
   id: string;
-  owners: string;
-  ownerUserIds: string;
+  createdBy: string;
   title: string;
   content: string;
   createdDate: string;
@@ -13,8 +12,7 @@ export class Page {
   constructor(private contentItem: ContentItem) {
     if (contentItem && contentItem.module === "page") {
       this.id = contentItem.id;
-      this.owners = contentItem.owners;
-      this.ownerUserIds = contentItem.ownerUserIds;
+      this.createdBy = contentItem.createdBy;
       this.title = contentItem.name;
       this.content = contentItem.content;
       this.createdDate = contentItem.createdDate;

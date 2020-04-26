@@ -7,9 +7,8 @@ export class Topic {
   text: string;
   snippet: string;
   subforumId: string;
-  ownerUserIds: string;
-  userId: string;
   username: string;
+  createdBy: string;
   avatarHash: string;
   createdDate: string;
   createdDateTicks: number;
@@ -27,8 +26,7 @@ export class Topic {
       this.title = contentItem.name;
       this.text = contentItem.content;
       this.snippet = contentItem.snippet;
-      this.ownerUserIds = contentItem.ownerUserIds;
-      this.userId = contentItem.createdBy;
+      this.createdBy = contentItem.createdBy;
       this.subforumId = contentItem.parentId;
       this.createdDate = contentItem.createdDate;
       this.createdDateTicks = contentItem.createdDateTicks;

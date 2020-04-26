@@ -101,7 +101,7 @@ export class ForumCommentFormComponent implements OnInit {
       comment.id = this.commentForm.value["id"];
       comment.text = this.commentForm.value["text"];
       comment.postId = this.commentForm.value["postId"];
-      comment.userId = this.commentForm.value["userId"];
+      comment.createdBy = this.commentForm.value["userId"];
       comment.username = this.commentForm.value["username"];
       comment.avatarHash = this.commentForm.value["avatarHash"];
       comment.createdDate = this.commentForm.value["createdDate"];

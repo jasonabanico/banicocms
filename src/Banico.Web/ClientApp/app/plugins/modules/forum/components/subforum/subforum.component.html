@@ -39,7 +39,7 @@
   </div>
 
   <div
-    *ngIf="userId && (subforum?.ownerUserIds.includes(userId + ' ') || isAdmin)"
+    *ngIf="userId && (subforum?.createdBy === userId || isAdmin)"
     class="card-footer"
   >
     <a href="javascript:;" (click)="edit()" class="card-link"
