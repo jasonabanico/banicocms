@@ -14,8 +14,6 @@ namespace Banico.EntityFrameworkCore.Migrations
                     Id = table.Column<string>(nullable: false),
                     Tenant = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Owners = table.Column<string>(nullable: true),
-                    OwnerUserIds = table.Column<string>(nullable: true),
                     CreatedBy = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTimeOffset>(nullable: false),
                     UpdatedBy = table.Column<string>(nullable: true),
@@ -29,14 +27,118 @@ namespace Banico.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Follows",
+                columns: table => new
+                {
+                    Follower = table.Column<string>(nullable: true),
+                    Following = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Groups",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Tenant = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    UpdatedBy = table.Column<string>(nullable: true),
+                    UpdatedDate = table.Column<DateTimeOffset>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Groups", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Invites",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Inviter = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Code = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invites", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RoleId",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleId", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SectionItems",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Tenant = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    UpdatedBy = table.Column<string>(nullable: true),
+                    UpdatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    ParentId = table.Column<string>(nullable: true),
+                    ChildCount = table.Column<int>(nullable: false),
+                    Section = table.Column<string>(nullable: true),
+                    PathUrl = table.Column<string>(nullable: true),
+                    PathName = table.Column<string>(nullable: true),
+                    Alias = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SectionItems", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sections",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Tenant = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    UpdatedBy = table.Column<string>(nullable: true),
+                    UpdatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    Modules = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sections", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserId",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserId", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ContentItems",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
                     Tenant = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Owners = table.Column<string>(nullable: true),
-                    OwnerUserIds = table.Column<string>(nullable: true),
                     CreatedBy = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTimeOffset>(nullable: false),
                     UpdatedBy = table.Column<string>(nullable: true),
@@ -47,6 +149,7 @@ namespace Banico.EntityFrameworkCore.Migrations
                     Module = table.Column<string>(nullable: true),
                     Type = table.Column<string>(nullable: true),
                     SectionItems = table.Column<string>(nullable: true),
+                    GroupId = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
                     Tags = table.Column<string>(nullable: true),
                     Attribute01 = table.Column<string>(nullable: true),
@@ -73,66 +176,37 @@ namespace Banico.EntityFrameworkCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ContentItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ContentItems_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Invites",
+                name: "UserGroups",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    Inviter = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Code = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: false),
+                    GroupId = table.Column<string>(nullable: false),
+                    IsAdmin = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Invites", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SectionItems",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Tenant = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Owners = table.Column<string>(nullable: true),
-                    OwnerUserIds = table.Column<string>(nullable: true),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    CreatedDate = table.Column<DateTimeOffset>(nullable: false),
-                    UpdatedBy = table.Column<string>(nullable: true),
-                    UpdatedDate = table.Column<DateTimeOffset>(nullable: false),
-                    ParentId = table.Column<string>(nullable: true),
-                    ChildCount = table.Column<int>(nullable: false),
-                    Section = table.Column<string>(nullable: true),
-                    PathUrl = table.Column<string>(nullable: true),
-                    PathName = table.Column<string>(nullable: true),
-                    Alias = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SectionItems", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Sections",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Tenant = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Owners = table.Column<string>(nullable: true),
-                    OwnerUserIds = table.Column<string>(nullable: true),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    CreatedDate = table.Column<DateTimeOffset>(nullable: false),
-                    UpdatedBy = table.Column<string>(nullable: true),
-                    UpdatedDate = table.Column<DateTimeOffset>(nullable: false),
-                    Modules = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sections", x => x.Id);
+                    table.PrimaryKey("PK_UserGroups", x => new { x.UserId, x.GroupId });
+                    table.ForeignKey(
+                        name: "FK_UserGroups_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserGroups_UserId_UserId",
+                        column: x => x.UserId,
+                        principalTable: "UserId",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -218,6 +292,58 @@ namespace Banico.EntityFrameworkCore.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "RoleContents",
+                columns: table => new
+                {
+                    RoleId = table.Column<string>(nullable: false),
+                    ContentItemId = table.Column<string>(nullable: false),
+                    Read = table.Column<bool>(nullable: false),
+                    Write = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleContents", x => new { x.RoleId, x.ContentItemId });
+                    table.ForeignKey(
+                        name: "FK_RoleContents_ContentItems_ContentItemId",
+                        column: x => x.ContentItemId,
+                        principalTable: "ContentItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoleContents_RoleId_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "RoleId",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserContents",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    ContentItemId = table.Column<string>(nullable: false),
+                    Read = table.Column<bool>(nullable: false),
+                    Write = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserContents", x => new { x.UserId, x.ContentItemId });
+                    table.ForeignKey(
+                        name: "FK_UserContents_ContentItems_ContentItemId",
+                        column: x => x.ContentItemId,
+                        principalTable: "ContentItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserContents_UserId_UserId",
+                        column: x => x.UserId,
+                        principalTable: "UserId",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Configs",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "OwnerUserIds", "Owners", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
@@ -229,6 +355,11 @@ namespace Banico.EntityFrameworkCore.Migrations
                 values: new object[] { "0e8337e8-a159-4454-87a3-43a6137d3de3", null, new DateTimeOffset(new DateTime(2020, 1, 20, 6, 13, 46, 876, DateTimeKind.Unspecified).AddTicks(4470), new TimeSpan(0, 0, 0, 0, 0)), "admin", "canActivate", null, null, null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ContentItems_GroupId",
+                table: "ContentItems",
+                column: "GroupId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ContentSectionItems_ContentItemId",
                 table: "ContentSectionItems",
                 column: "ContentItemId");
@@ -237,6 +368,21 @@ namespace Banico.EntityFrameworkCore.Migrations
                 name: "IX_ContentSectionItems_SectionItemId",
                 table: "ContentSectionItems",
                 column: "SectionItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleContents_ContentItemId",
+                table: "RoleContents",
+                column: "ContentItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserContents_ContentItemId",
+                table: "UserContents",
+                column: "ContentItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserGroups_GroupId",
+                table: "UserGroups",
+                column: "GroupId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -257,16 +403,37 @@ namespace Banico.EntityFrameworkCore.Migrations
                 name: "ContentSectionItems");
 
             migrationBuilder.DropTable(
+                name: "Follows");
+
+            migrationBuilder.DropTable(
                 name: "Invites");
+
+            migrationBuilder.DropTable(
+                name: "RoleContents");
 
             migrationBuilder.DropTable(
                 name: "Sections");
 
             migrationBuilder.DropTable(
-                name: "ContentItems");
+                name: "UserContents");
+
+            migrationBuilder.DropTable(
+                name: "UserGroups");
 
             migrationBuilder.DropTable(
                 name: "SectionItems");
+
+            migrationBuilder.DropTable(
+                name: "RoleId");
+
+            migrationBuilder.DropTable(
+                name: "ContentItems");
+
+            migrationBuilder.DropTable(
+                name: "UserId");
+
+            migrationBuilder.DropTable(
+                name: "Groups");
         }
     }
 }
