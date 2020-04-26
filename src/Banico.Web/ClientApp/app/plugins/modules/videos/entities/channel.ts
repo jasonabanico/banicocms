@@ -4,7 +4,6 @@ import * as moment from "moment";
 export class Channel {
   id: string;
   owners: string;
-  ownerUserIds: string;
   name: string;
   alias: string;
   description: string;
@@ -26,7 +25,6 @@ export class Channel {
     ) {
       this.id = contentItem.id;
       this.owners = contentItem.owners;
-      this.ownerUserIds = contentItem.ownerUserIds;
       this.name = contentItem.name;
       this.alias = contentItem.alias;
       this.type = contentItem.type;

@@ -3,18 +3,40 @@ using System;
 using Banico.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Banico.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200425234204_Groups")]
+    partial class Groups
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.2");
+
+            modelBuilder.Entity("Banico.Core.Entities.AppRoleId", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRoleId");
+                });
+
+            modelBuilder.Entity("Banico.Core.Entities.AppUserId", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUserId");
+                });
 
             modelBuilder.Entity("Banico.Core.Entities.Config", b =>
                 {
@@ -31,6 +53,12 @@ namespace Banico.EntityFrameworkCore.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OwnerUserIds")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Owners")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Tenant")
@@ -52,8 +80,8 @@ namespace Banico.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f22233d0-5234-479b-8ac2-47759aae149e",
-                            CreatedDate = new DateTimeOffset(new DateTime(2020, 4, 26, 0, 36, 3, 482, DateTimeKind.Unspecified).AddTicks(5949), new TimeSpan(0, 0, 0, 0, 0)),
+                            Id = "1a1677fd-0b93-4547-a741-ff4c5f705c60",
+                            CreatedDate = new DateTimeOffset(new DateTime(2020, 4, 25, 23, 42, 3, 629, DateTimeKind.Unspecified).AddTicks(83), new TimeSpan(0, 0, 0, 0, 0)),
                             Module = "",
                             Name = "initialized",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -61,8 +89,8 @@ namespace Banico.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = "ab74929d-9f0f-449d-ba76-8212a2d781ed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2020, 4, 26, 0, 36, 3, 484, DateTimeKind.Unspecified).AddTicks(2125), new TimeSpan(0, 0, 0, 0, 0)),
+                            Id = "6d4519a7-2ad1-4db8-afb9-4956f6b6ca91",
+                            CreatedDate = new DateTimeOffset(new DateTime(2020, 4, 25, 23, 42, 3, 630, DateTimeKind.Unspecified).AddTicks(5058), new TimeSpan(0, 0, 0, 0, 0)),
                             Module = "admin",
                             Name = "canActivate",
                             UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -157,6 +185,12 @@ namespace Banico.EntityFrameworkCore.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OwnerUserIds")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Owners")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ParentId")
@@ -283,6 +317,12 @@ namespace Banico.EntityFrameworkCore.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("OwnerUserIds")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Owners")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Tenant")
                         .HasColumnType("TEXT");
 
@@ -318,36 +358,28 @@ namespace Banico.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Banico.Core.Entities.RoleContent", b =>
                 {
-                    b.Property<string>("RoleId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ContentItemId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ContentId")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("Read")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("RoleId")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("Write")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("RoleId", "ContentItemId");
-
-                    b.HasIndex("ContentItemId");
-
-                    b.ToTable("RoleContents");
-                });
-
-            modelBuilder.Entity("Banico.Core.Entities.RoleId", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
-                    b.ToTable("RoleId");
+                    b.HasIndex("ContentId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("RoleContent");
                 });
 
             modelBuilder.Entity("Banico.Core.Entities.Section", b =>
@@ -365,6 +397,12 @@ namespace Banico.EntityFrameworkCore.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OwnerUserIds")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Owners")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Tenant")
@@ -404,6 +442,12 @@ namespace Banico.EntityFrameworkCore.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("OwnerUserIds")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Owners")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ParentId")
                         .HasColumnType("TEXT");
 
@@ -432,28 +476,33 @@ namespace Banico.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Banico.Core.Entities.UserContent", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ContentItemId")
+                    b.Property<string>("ContentId")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("Read")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("Write")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("UserId", "ContentItemId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ContentItemId");
+                    b.HasIndex("ContentId");
 
-                    b.ToTable("UserContents");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserContent");
                 });
 
             modelBuilder.Entity("Banico.Core.Entities.UserGroup", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GroupId")
@@ -462,21 +511,16 @@ namespace Banico.EntityFrameworkCore.Migrations
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("UserId", "GroupId");
-
-                    b.HasIndex("GroupId");
-
-                    b.ToTable("UserGroups");
-                });
-
-            modelBuilder.Entity("Banico.Core.Entities.UserId", b =>
-                {
-                    b.Property<string>("Id")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserId");
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserGroup");
                 });
 
             modelBuilder.Entity("Banico.Core.Entities.ContentItem", b =>
@@ -526,47 +570,35 @@ namespace Banico.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Banico.Core.Entities.RoleContent", b =>
                 {
-                    b.HasOne("Banico.Core.Entities.ContentItem", "ContentItem")
+                    b.HasOne("Banico.Core.Entities.ContentItem", "Content")
                         .WithMany("Roles")
-                        .HasForeignKey("ContentItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ContentId");
 
-                    b.HasOne("Banico.Core.Entities.RoleId", "Role")
+                    b.HasOne("Banico.Core.Entities.AppRoleId", "Role")
                         .WithMany("ContentItems")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoleId");
                 });
 
             modelBuilder.Entity("Banico.Core.Entities.UserContent", b =>
                 {
-                    b.HasOne("Banico.Core.Entities.ContentItem", "ContentItem")
+                    b.HasOne("Banico.Core.Entities.ContentItem", "Content")
                         .WithMany("Users")
-                        .HasForeignKey("ContentItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ContentId");
 
-                    b.HasOne("Banico.Core.Entities.UserId", "User")
+                    b.HasOne("Banico.Core.Entities.AppUserId", "User")
                         .WithMany("ContentItems")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Banico.Core.Entities.UserGroup", b =>
                 {
                     b.HasOne("Banico.Core.Entities.Group", "Group")
                         .WithMany("Users")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GroupId");
 
-                    b.HasOne("Banico.Core.Entities.UserId", "User")
+                    b.HasOne("Banico.Core.Entities.AppUserId", "User")
                         .WithMany("Groups")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

@@ -71,8 +71,35 @@ namespace Banico.EntityFrameworkCore
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // Resetting EF
+            // https://weblog.west-wind.com/posts/2016/jan/13/resetting-entity-framework-migrations-to-a-clean-slate
+            
             base.OnModelCreating(builder);
 
+            builder.Entity<RoleContent>()
+                .HasKey(rc => new { rc.RoleId, rc.ContentItemId });
+            builder.Entity<RoleContent>()
+                .HasOne(rc => rc.Role)
+                .WithMany(r => r.ContentItems);
+            builder.Entity<RoleContent>()
+                .HasOne(rc => rc.ContentItem)
+                .WithMany(c => c.Roles);
+            builder.Entity<UserContent>()
+                .HasKey(uc => new { uc.UserId, uc.ContentItemId });
+            builder.Entity<UserContent>()
+                .HasOne(uc => uc.User)
+                .WithMany(u => u.ContentItems);
+            builder.Entity<UserContent>()
+                .HasOne(uc => uc.ContentItem)
+                .WithMany(c => c.Users);
+            builder.Entity<UserGroup>()
+                .HasKey(ug => new { ug.UserId, ug.GroupId });
+            builder.Entity<UserGroup>()
+                .HasOne(ug => ug.User)
+                .WithMany(u => u.Groups);
+            builder.Entity<UserGroup>()
+                .HasOne(ug => ug.Group)
+                .WithMany(g => g.Users);
             builder.Entity<ContentItemTag>(i => {
                 i.HasKey(x => new { x.ContentItemId, x.Tag });
             });
@@ -82,7 +109,10 @@ namespace Banico.EntityFrameworkCore
             builder.Entity<ContentItemReactionCount>(i => {
                 i.HasKey(x => new { x.ContentItemId, x.Reaction });
             });
-            
+            builder.Entity<Follow>(i => {
+                i.HasNoKey();
+            });
+
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
@@ -92,7 +122,7 @@ namespace Banico.EntityFrameworkCore
 
             // builder.Entity<IdentityUserRole<int>>()
             //     .HasKey(p => new { p.UserId, p.RoleId});
-                
+
             // builder.Entity<AppUser>()
             //     .HasMany(e => e.Claims)
             //     .WithOne()
@@ -150,5 +180,10 @@ namespace Banico.EntityFrameworkCore
         public DbSet<ContentItemTag> ContentItemTags { get; set; }
         public DbSet<Config> Configs { get; set; }
         public DbSet<Invite> Invites { get; set; }
+        public DbSet<UserContent> UserContents { get; set; }
+        public DbSet<RoleContent> RoleContents { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<UserGroup> UserGroups { get; set; }
+        public DbSet<Follow> Follows { get; set; }
     }
 }

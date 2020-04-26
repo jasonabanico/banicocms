@@ -13,6 +13,7 @@ namespace Banico.Core.Entities
         public string Module { get; private set; }
         public string Type {get; private set; }
         public string SectionItems { get; set; }
+        public Group Group { get; set; }
         public IEnumerable<ContentSectionItem> ContentSectionItems { get; set; }
         public string Content { get; set; }
 
@@ -42,6 +43,9 @@ namespace Banico.Core.Entities
         public string Attribute18 { get; set; }
         public string Attribute19 { get; set; }
         public string Attribute20 { get; set; }
+
+        public ICollection<UserContent> Users { get; set; }
+        public ICollection<RoleContent> Roles { get; set; }
 
         public string Snippet
         {
@@ -102,8 +106,6 @@ namespace Banico.Core.Entities
             this.SectionItems = item.SectionItems;
             this.ContentSectionItems = item.ContentSectionItems;
 
-            this.Owners = item.Owners;
-            this.OwnerUserIds = item.OwnerUserIds;
             this.CreatedBy = item.CreatedBy;
             this.CreatedDate = item.CreatedDate;
             this.UpdatedBy = item.UpdatedBy;

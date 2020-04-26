@@ -711,13 +711,15 @@ namespace Banico.EntityFrameworkCore.Repositories
             item.Id = Guid.NewGuid().ToString();
             item.ContentSectionItems = await this.ToContentSectionItems(item.SectionItems);
 
-            if (string.IsNullOrEmpty(item.Owners))
-            {
-                item.Owners = " " + item.CreatedBy + "";
-            }
-
             _dbContext.ContentItems.Add(item);
             this.UpdateChildCount(item.ParentId, 1);
+
+            UserContent userContent = new UserContent();
+            userContent.UserId = item.CreatedBy;
+            userContent.ContentItemId = item.Id;
+            userContent.Write = true;
+            _dbContext.UserContents.Add(userContent);
+
             var result = await _dbContext.SaveChangesAsync();
 
             if (result > 0)
@@ -801,7 +803,7 @@ namespace Banico.EntityFrameworkCore.Repositories
 
             if (updateItem != null)
             {
-                if (!item.OwnerUserIds.Contains(userId) && !isAdmin)
+                if (!item.Users.Any(uc => uc.Write && uc.User.Id == userId) && !isAdmin)
                 {
                     throw new UnauthorizedAccessException("Not authorized to update " + item.Id + ".");
                 }
@@ -834,8 +836,6 @@ namespace Banico.EntityFrameworkCore.Repositories
                 updateItem.Attribute18 = item.Attribute18;
                 updateItem.Attribute19 = item.Attribute19;
                 updateItem.Attribute20 = item.Attribute20;
-                updateItem.Owners = item.Owners;
-                updateItem.OwnerUserIds = item.OwnerUserIds;
                 updateItem.UpdatedBy = item.UpdatedBy;
                 updateItem.UpdatedDate = item.UpdatedDate;
                 var result = await _dbContext.SaveChangesAsync();
@@ -857,7 +857,7 @@ namespace Banico.EntityFrameworkCore.Repositories
                 .FirstOrDefault();
             if (item != null)
             {
-                if (!item.OwnerUserIds.Contains(userId) && !isAdmin)
+                if (!item.Users.Any(uc => uc.Write && uc.User.Id == userId) && !isAdmin)
                 {
                     throw new UnauthorizedAccessException("Not authorized to delete " + id + ".");
                 }
@@ -895,8 +895,6 @@ namespace Banico.EntityFrameworkCore.Repositories
                 profileItem.Id = Guid.NewGuid().ToString();
                 profileItem.Alias = alias;
 
-                profileItem.Owners = alias + " ";
-                profileItem.OwnerUserIds = userId + " ";
                 profileItem.CreatedBy = userId;
                 profileItem.CreatedDate = DateTimeOffset.UtcNow;
                 profileItem.UpdatedDate = DateTimeOffset.UtcNow;

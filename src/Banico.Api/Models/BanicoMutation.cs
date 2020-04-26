@@ -135,22 +135,6 @@ namespace Banico.Api.Models
         private async Task StampItem(Item item) 
         {
             string user = _accessService.GetUserId();
-            string username = _accessService.GetUsername();
-
-            if (!string.IsNullOrEmpty(item.Owners))
-            {
-                item.Owners = item.Owners.Trim() + " ";
-                if (!item.Owners.Contains(username + " "))
-                {
-                    item.Owners = item.Owners + username + " ";
-                }
-            }
-            else
-            {
-                item.Owners = username + " ";
-            }
-            
-            item.OwnerUserIds = await _accessService.OwnersToOwnerUserIds(username);
 
             if (string.IsNullOrEmpty(item.Id)) 
             {
@@ -159,7 +143,7 @@ namespace Banico.Api.Models
                 item.UpdatedBy = user;
                 item.UpdatedDate = DateTimeOffset.UtcNow;
                 item.Tenant = _accessService.DomainTenant();
-            } 
+            }
             else
             {
                 item.UpdatedBy = user;
