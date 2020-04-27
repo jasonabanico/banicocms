@@ -31,7 +31,6 @@ export const AddOrUpdateContentItemMutation = gql`
     $attribute18: String
     $attribute19: String
     $attribute20: String
-    $owners: String
   ) {
     addOrUpdateContentItem(
       contentItem: {
@@ -64,7 +63,6 @@ export const AddOrUpdateContentItemMutation = gql`
         attribute18: $attribute18
         attribute19: $attribute19
         attribute20: $attribute20
-        owners: $owners
       }
     ) {
       id

@@ -346,13 +346,13 @@ namespace Banico.EntityFrameworkCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Configs",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "OwnerUserIds", "Owners", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
-                values: new object[] { "c492cde5-22a0-4edc-ae0b-c74f2bff0994", null, new DateTimeOffset(new DateTime(2020, 1, 20, 6, 13, 46, 874, DateTimeKind.Unspecified).AddTicks(4620), new TimeSpan(0, 0, 0, 0, 0)), "", "initialized", null, null, null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "n" });
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
+                values: new object[] { "c492cde5-22a0-4edc-ae0b-c74f2bff0994", null, new DateTimeOffset(new DateTime(2020, 1, 20, 6, 13, 46, 874, DateTimeKind.Unspecified).AddTicks(4620), new TimeSpan(0, 0, 0, 0, 0)), "", "initialized", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "n" });
 
             migrationBuilder.InsertData(
                 table: "Configs",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "OwnerUserIds", "Owners", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
-                values: new object[] { "0e8337e8-a159-4454-87a3-43a6137d3de3", null, new DateTimeOffset(new DateTime(2020, 1, 20, 6, 13, 46, 876, DateTimeKind.Unspecified).AddTicks(4470), new TimeSpan(0, 0, 0, 0, 0)), "admin", "canActivate", null, null, null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin" });
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Module", "Name", "Tenant", "UpdatedBy", "UpdatedDate", "Value" },
+                values: new object[] { "0e8337e8-a159-4454-87a3-43a6137d3de3", null, new DateTimeOffset(new DateTime(2020, 1, 20, 6, 13, 46, 876, DateTimeKind.Unspecified).AddTicks(4470), new TimeSpan(0, 0, 0, 0, 0)), "admin", "canActivate", null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ContentItems_GroupId",
