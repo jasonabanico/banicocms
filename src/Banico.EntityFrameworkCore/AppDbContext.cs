@@ -180,6 +180,8 @@ namespace Banico.EntityFrameworkCore
         public DbSet<ContentItemTag> ContentItemTags { get; set; }
         public DbSet<Config> Configs { get; set; }
         public DbSet<Invite> Invites { get; set; }
+        public DbSet<UserId> UserId { get; set; }
+        public DbSet<RoleId> RoleId { get; set; }
         public DbSet<UserContent> UserContents { get; set; }
         public DbSet<RoleContent> RoleContents { get; set; }
         public DbSet<Group> Groups { get; set; }

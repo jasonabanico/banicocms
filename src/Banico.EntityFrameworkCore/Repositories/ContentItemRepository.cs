@@ -699,6 +699,15 @@ namespace Banico.EntityFrameworkCore.Repositories
             }
         }
 
+        private async Task<UserId> GetUserId(string id)
+        {
+            var userIds = from userId in _dbContext.UserId
+                            where userId.Id == id
+                            select userId;
+
+            return userIds.FirstOrDefault();
+        }
+
         // Returns no. of objects saved, ie., 1
         public async Task<ContentItem> Add(ContentItem item)
         {
@@ -714,6 +723,13 @@ namespace Banico.EntityFrameworkCore.Repositories
             _dbContext.ContentItems.Add(item);
             this.UpdateChildCount(item.ParentId, 1);
 
+            var userId = await this.GetUserId(item.CreatedBy);
+            if (userId == null)
+            {
+                userId = new UserId();
+                userId.Id = item.CreatedBy;
+                _dbContext.UserId.Add(userId);
+            }
             UserContent userContent = new UserContent();
             userContent.UserId = item.CreatedBy;
             userContent.ContentItemId = item.Id;
@@ -803,7 +819,8 @@ namespace Banico.EntityFrameworkCore.Repositories
 
             if (updateItem != null)
             {
-                if (!item.Users.Any(uc => uc.Write && uc.User.Id == userId) && !isAdmin)
+                if (!(item.Users != null && item.Users.Any(uc => uc.Write && uc.UserId == userId)) && 
+                    updateItem.CreatedBy != userId && !isAdmin)
                 {
                     throw new UnauthorizedAccessException("Not authorized to update " + item.Id + ".");
                 }
