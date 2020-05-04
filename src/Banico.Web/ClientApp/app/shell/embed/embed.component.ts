@@ -12,6 +12,7 @@ export class EmbedComponent {
   public type: string;
   public id: string;
   public tag: string;
+  public extensionTag: string = "";
   public imgurEmbedCount: number = 0;
 
   constructor(
@@ -71,5 +72,10 @@ export class EmbedComponent {
         }
       }
     }
+  }
+
+  @Input()
+  set extension(extension: string) {
+    this.extensionTag = extension;
   }
 }

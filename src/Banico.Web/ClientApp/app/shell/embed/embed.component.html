@@ -1,5 +1,24 @@
 <div class="text-center">
-  <div *ngIf="tag === 'youtube'">
+  <div
+    class="col-md-12"
+    *ngIf="tag === 'youtube' && extensionTag === 'responsive'"
+  >
+    <div class="vid">
+      <iframe
+        width="560"
+        height="315"
+        [src]="
+          sanitizer.bypassSecurityTrustResourceUrl(
+            'https://www.youtube.com/embed/' + id
+          )
+        "
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+  <div *ngIf="tag === 'youtube' && extensionTag === ''">
     <iframe
       width="560"
       height="315"

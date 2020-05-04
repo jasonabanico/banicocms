@@ -34,28 +34,32 @@ export class ChannelComponent implements OnInit {
 
   ngOnInit() {
     this.channel = new Channel(null);
-    this.sub = this.route.params.subscribe(params => {
-      var alias = params["alias"];
-      if (alias) {
-        this.videosService.getChannelByAlias(alias).subscribe(channel => {
-          this.channel = channel;
-          this.shellService.setTitle(this.channel.name);
-          const isAdmin = this.authService.isAdmin();
-          const userId = this.authService.getUserId();
-          if (channel.createdBy === userId || isAdmin) {
-            this.canEdit = true;
-          }
-          this.videosService.getVideos(channel.id).subscribe(videos => {
-            this.videos = videos;
-          });
-        });
-      }
-    });
-
     this.authService
       .canAccess("videos-video/manage", "", false)
       .subscribe(result => {
         this.canManageVideos = result;
+
+        this.sub = this.route.params.subscribe(params => {
+          var alias = params["alias"];
+          if (alias) {
+            this.videosService.getChannelByAlias(alias).subscribe(channel => {
+              this.channel = channel;
+              this.shellService.setTitle(this.channel.name);
+              const isAdmin = this.authService.isAdmin();
+              const userId = this.authService.getUserId();
+              if (channel.createdBy === userId || isAdmin) {
+                this.canEdit = true;
+              }
+              this.videosService.getVideos(channel.id).subscribe(videos => {
+                this.videos = videos;
+
+                if (!this.canManageVideos && this.videos.length == 1) {
+                  this.router.navigate(["/videos/video/" + videos[0].id]);
+                }
+              });
+            });
+          }
+        });
       });
   }
 

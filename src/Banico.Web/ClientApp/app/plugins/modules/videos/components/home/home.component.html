@@ -9,16 +9,20 @@
 </div>
 
 <div class="d-flex flex-wrap">
-    <div *ngFor="let channel of channels" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <div class="card">
-            <img class="card-img-top"
-                 src="{{ channel.thumbnailUrl }}" />
-            <div class="card-body">
-                <a routerLinkActive="active"
-                   routerLink="/videos/channel/{{ channel.alias }}">
-                    <h5 class="card-title">{{ channel.name }}</h5>
-                </a>
-            </div>
-        </div>
+  <div
+    *ngFor="let channel of channels"
+    class="col-lg-4 col-md-4 col-sm-4 col-xs-12"
+  >
+    <div class="card">
+      <div class="card-body">
+        <img class="card-img-top" src="{{ channel.thumbnailUrl }}" />
+        <a
+          routerLinkActive="active"
+          routerLink="/videos/channel/{{ channel.alias }}"
+        >
+          <h5 class="card-title">{{ channel.name }}</h5>
+        </a>
+      </div>
     </div>
+  </div>
 </div>
