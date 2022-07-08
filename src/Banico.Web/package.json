@@ -65,7 +65,7 @@
     "jquery": "^3.3.1",
     "json-loader": "^0.5.7",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng-recaptcha": "^5.0.0",
     "ngx-bootstrap": "^3.2.0",
     "ngx-markdown": "^8.2.1",
