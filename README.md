@@ -1,5 +1,5 @@
 # Inactive/Discontinued
-This project is inactive/discontinued. he ideas for this CMS have been continued in a new project.
+This project is inactive/discontinued. The ideas for this CMS have been continued in a new project.
 Check out CivicSpace at https://github.com/CivicSpaceAu/CivicSpace
 
 # Banico CMS is a lean modular system for building content, communication, collaboration, commerce, and community platforms, with ASP.Net Core, Angular, and Bootstrap.
