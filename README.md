@@ -1,6 +1,5 @@
 # Inactive/Discontinued
-This project is inactive/discontinued. The ideas for this CMS have been continued in a new project.
-Check out BlazorWorld at https://github.com/blazorworld/blazorworld.
+This project is inactive/discontinued.
 
 # Banico CMS is a lean modular system for building content, communication, collaboration, commerce, and community platforms, with ASP.Net Core, Angular, and Bootstrap.
 
